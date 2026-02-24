@@ -1,7 +1,7 @@
 API in Alphabetical Order
 =========================
 
-All functions and classes listed here are part of the ``Kokkos::`` namespace.
+All functions and クラス listed here are part of the ``Kokkos::`` namespace.
 
 Algorithms
 ----------
