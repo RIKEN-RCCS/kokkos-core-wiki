@@ -90,7 +90,7 @@
 
 - ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_　におけるのと同様。
 
-- ``ラベル``: デバッグ目的で内部の並列カーネルに名付けるために使用
+- ``ラベル``: デバッグ目的で実装カーネルに名付けるために使用
 
   - 1　について、 デフォルト文字列は、: "Kokkos::copy_n_if_iterator_api_default"
 
