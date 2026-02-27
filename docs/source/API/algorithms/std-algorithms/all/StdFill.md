@@ -43,35 +43,35 @@ void fill(const std::string& label, const ExecutionSpace& exespace,          (4)
   - 実行空間インスタンス
 - `ラベル`:
   - デバッグ目的で実装カーネルに名付けるために使用
-  - for 1, the default string is: "Kokkos::fill_iterator_api_default"
-  - for 3, the default string is: "Kokkos::fill_view_api_default"
+  - 1　について、 デフォルト文字列は、: "Kokkos::fill_iterator_api_default"
+  - 3　について、 デフォルト文字列は、: "Kokkos::fill_view_api_default"
 - `first, last`:
-  - range of elements to assign to
-  - must be *random access iterators*, e.g., `Kokkos::Experimental::begin/end`
-  - must represent a valid range, i.e., `last >= first` (checked in debug mode)
-  - must be accessible from `exespace`
+  - 割当先の要素の範囲
+  - 例えば、 `Kokkos::Experimental::begin/end`　など、*ランダムアクセスイテレータ*　でなければなりません。
+  - 有効な範囲、つまり、``last_from >= first_from`` を表さなければなりません。 (デバッグモードで確認済み)
+  - `exespace`　からアクセス可能でなければなりません。
 - `view`:
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - `exespace`　からアクセス可能でなければなりません。
 - `value`:
-  - value to assign to each element
+  - 各要素に割り当てる値
 
 
-## Return
+## 戻り値
 
-None
+無し
 
-## Example
+## 例
 
 ```c++
-namespace KE = Kokkos::Experimental;
+名前空間 KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
 
 KE::fill(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a), 4.);
 
-// passing the view directly
+// ビューを直接渡します
 KE::fill(Kokkos::DefaultExecutionSpace(), a, 22.);
 
-// explicitly set execution space (assuming active)
+// 明示的に実行空間を設定します（アクティブと仮定）
 KE::fill(Kokkos::OpenMP(), KE::begin(a), KE::end(a), 14.);
 ```
