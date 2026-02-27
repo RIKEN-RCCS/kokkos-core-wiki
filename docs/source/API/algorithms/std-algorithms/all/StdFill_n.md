@@ -33,41 +33,41 @@ auto fill_n(const std::string& label, const ExecutionSpace& exespace,           
 
 # ディスクリプション
 
-Copy-assigns `value` to the first `n` elements in the range starting at `first` (overloads 1,2)
-or the first `n` elements in `view` (overloads 3,4).
+ `first` 　で始まる範囲内の最初の　`n`　個の要素　(オーバーロード 1,2)　または
+`view` 内の最初の　`n`　個の要素　(オーバーロード 3,4)　に　`値` をコピー割り当てします。
 
-## Parameters and Requirements
+## パラメータおよび要件
 
-- `exespace`,  `first`, `view`, `value`: same as in [`fill`](./StdFill)
-- `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1, the default string is: "Kokkos::fill_n_iterator_api_default"
-  - for 3, the default string is: "Kokkos::fill_n_view_api_default"
+- `exespace`,  `first`, `view`, `value`: same as in [`fill`](./StdFill)　内と同様。
+- `ラベル`:
+  - バッグ目的で実装カーネルに名付けるために使用。
+  - 1　について、デフォルト文字列は、: "Kokkos::fill_n_iterator_api_default"
+  - 3　について、デフォルト文字列は、: "Kokkos::fill_n_view_api_default"
 - `n`:
-  - number of elements to modify (must be non-negative)
+  - 変更する要素数　（0以上でなければなりません）
 
 
-## Return
+## 戻り値
 
-If `n > 0`, returns an iterator to the element *after* the last element assigned.
+ `n > 0`　であれば、 最後の要素がコピーされた *後*　の宛先へのイテレータを返します。
 
-Otherwise, it returns `first` (for 1,2) or `Kokkos::begin(view)` (for 3,4).
+そうでなければ、それは、`first` (1,2について) または、`Kokkos::begin(view)` (3,4について)　を返します。
 
 
-## Example
+## 例
 
 ```c++
-namespace KE = Kokkos::Experimental;
+名前空間 KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
-// do something with a
+//  a　を使って、何かを行います
 // ...
 
 const double newValue{4};
 KE::fill_n(Kokkos::DefaultExecutionSpace(), KE::begin(a), 10, newValue);
 
-// passing the view directly
+// passing the view directly　ビューを直接渡します。
 KE::fill_n(Kokkos::DefaultExecutionSpace(), a, 10, newValue);
 
-// explicitly set execution space (assuming active)
+// 明示的に実行空間を設定します。 (アクティブを仮定)
 KE::fill_n(Kokkos::OpenMP(), KE::begin(a), 10, newValue);
 ```
