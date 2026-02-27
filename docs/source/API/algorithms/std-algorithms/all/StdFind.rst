@@ -2,116 +2,114 @@
 ``find``
 ========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Returns an iterator to the *first* element in a range or rank-1 ``View``
-that equals a target value. Equality is checked using ``operator==``.
+対象値と等しい範囲またはランク1のビューにおける *first* 要素への反復子を返します。  ``operator==``　を使用して.
+等価性が確認されます。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class InputIterator, class T>
+   テンプレート <class ExecutionSpace, class InputIterator, class T>
    InputIterator find(const ExecutionSpace& exespace,                                   (1)
 		      InputIterator first, InputIterator last,
 		      const T& value);
 
-   template <class ExecutionSpace, class InputIterator, class T>
+   テンプレート <class ExecutionSpace, class InputIterator, class T>
    InputIterator find(const std::string& label, const ExecutionSpace& exespace,         (2)
 		      InputIterator first, InputIterator last,
 		      const T& value);
 
-   template <class ExecutionSpace, class DataType, class... Properties, class T>
+   テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
    auto find(const ExecutionSpace& exespace,                                            (3)
 	     const Kokkos::View<DataType, Properties...>& view,
 	     const T& value);
 
-   template <class ExecutionSpace, class DataType, class... Properties, class T>
-   auto find(const std::string& label, const ExecutionSpace& exespace,                  (4)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
+   自動 find(const std::string& label, const ExecutionSpace& exespace,                  (4)
 	     const Kokkos::View<DataType, Properties...>& view,
 	     const T& value);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class InputIterator, class T>
+   テンプレート <class TeamHandleType, class InputIterator, class T>
    KOKKOS_FUNCTION
    InputIterator find(const TeamHandleType& teamHandle,                                 (5)
 		      InputIterator first, InputIterator last,
 		      const T& value);
 
-   template <class TeamHandleType, class DataType, class... Properties, class T>
+   テンプレート <class TeamHandleType, class DataType, class... Properties, class T>
    KOKKOS_FUNCTION
-   auto find(const TeamHandleType& teamHandle,                                          (6)
+   自動 find(const TeamHandleType& teamHandle,                                          (6)
 	     const Kokkos::View<DataType, Properties...>& view,
 	     const T& value);
 
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``ラベル``: デバッグ目的で内部の並列カーネルに名付けるために使用
 
-  - for 1, the default string is: "Kokkos::find_iterator_api_default"
+  - 1　について、 デフォルト文字列は、: "Kokkos::find_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::find_view_api_default"
+  - 3　について、 デフォルト文字列は、: "Kokkos::find_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first, last``: range of elements to search in
+- ``first, last``: 検索する要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  -  例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されるなど、*ランダムアクセスイテレータ*　でなければなりません。 
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効範囲、つまり、 ``last >= first``　を表さなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view``: view to search in
+- ``view``: 探索するビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-- (1,2,5): ``InputIterator`` instance pointing to the first element that equals ``value``,
-  or ``last`` if no element is found
+- (1,2,5): 何の要素も見つからない場合、``value``　または ``last`` に等しい最初の要素を指している　``InputIterator`` インスタンス
 
-- (3,4,6): iterator to the first element that equals ``value``,
-  or ``Kokkos::Experimental::end(view)`` if no element is found
+- (3,4,6):  何の要素も見つからない場合、``value``　または　``Kokkos::Experimental::end(view)``　に等し最初の要素へのイテレータ
 
 
-Example
+例
 -------
 
 .. code-block:: cpp
 
-   namespace KE = Kokkos::Experimental;
-   auto exespace = Kokkos::DefaultExecutionSpace;
-   using view_type = Kokkos::View<exespace, int*>;
+   名前空間 KE = Kokkos::Experimental;
+   自動 exespace = Kokkos::DefaultExecutionSpace;
+   view_type = Kokkos::View<exespace, int*>　を使用;
    view_type a("a", 15);
-   // fill "a" somehow
+   // 何らかの方法で、 "a" を満たす
 
-   auto exespace = Kokkos::DefaultExecutionSpace;
-   auto it1 = KE::find(exespace, KE::cbegin(a), KE::cend(a), 5);
+   自動 exespace = Kokkos::DefaultExecutionSpace;
+   自動 it1 = KE::find(exespace, KE::cbegin(a), KE::cend(a), 5);
 
-   // assuming OpenMP is enabled and "a" is host-accessible, you can also do
-   auto it2 = KE::find(Kokkos::OpenMP(), KE::begin(a), KE::end(a), 5);
+   // OpenMPが有効化されており、 "a" がホストからアクセス可能であると仮定すれば、以下も可能です。
+   自動 it2 = KE::find(Kokkos::OpenMP(), KE::begin(a), KE::end(a), 5);
