@@ -129,49 +129,45 @@
 
 - ``first, last``: 検索する要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - 例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されるなど、*ランダムアクセスイテレータ*　でなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効範囲、つまり、 ``last >= first``　を表さなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``s_first, s_last``: range of elements that you want to search for
+- ``s_first, s_last``: 探索を望む要素の範囲
 
-  - same requirements as ``first, last``
+  -  ``first, last``と同じ要件
 
-- ``view``, ``s_view``: views to search in and for, respectively
+- ``view``, ``s_view``: 検索対象および検索条件、それぞれのビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``pred``: *binary* functor returning ``true`` if two arguments should be considered "equal".
+- ``pred``: 2つの引数が、 "等しい"　とみなされる場合、 ``真`` を返す　*二項* ファンクタ。
 
-  ``pred(a,b)`` must be valid to be called from the execution space passed, or
-  the execution space associated with the team handle, and convertible to bool
-  for every pair of arguments ``a,b`` of type ``ValueType1`` and ``ValueType2``,
-  respectively, where ``ValueType1`` and ``ValueType{1,2}`` are the value types of
-  ``IteratorType{1,2}`` or ``(s_)view``, and must not modify ``a,b``.
+  ``pred(a,b)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして、それぞれ、 型　　``a,b``　および　``ValueType2``　の引数のすべてのペアについて、bool型に変換可能で、そこでは、``ValueType1`` および ``ValueType{1,2}``　が、``IteratorType{1,2}``　の値型、または ``(s_)view``であり、 　``a,b``　を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-     template <class ValueType1, class ValueType2 = ValueType1>
-     struct IsEqualFunctor {
+     テンプレート <class ValueType1, class ValueType2 = ValueType1>
+     構造体 IsEqualFunctor {
       KOKKOS_INLINE_FUNCTION
-      bool operator()(const ValueType1& a, const ValueType2& b) const {
+      ブール operator()(const ValueType1& a, const ValueType2& b) const {
         return (a == b);
       }
      };
 
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Iterator to the beginning of the last occurrence of the sequence ``[s_first, s_last)``
-in range ``[first, last)``, or the last occurrence of ``s_view`` in ``view``.
+範囲 ``[first, last)``　における シーケンス ``[s_first, s_last)``　の最後の発生の始め、または
+  ``ビュー``　における　``s_view``　の最後の発生へのイテレータ。
 
-If ``[s_first, s_last)`` or ``[first, last)`` is empty, ``last`` is returned.
+``[s_first, s_last)`` または ``[first, last)`` が空である場合、 ``last`` が返されます。
 
-If ``view`` or ``s_view`` is empty, ``Kokkos::Experimental::end(view)`` is returned.
+``view`` または ``s_view`` が空である場合、 ``Kokkos::Experimental::end(view)`` が返されます。
