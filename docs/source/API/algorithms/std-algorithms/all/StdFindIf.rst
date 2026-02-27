@@ -72,81 +72,76 @@
 
   - 3　について、デフォルト文字列は、 the default string is: "Kokkos::find_if_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first, last``: range of elements to search in
+- ``first, last``: 検索する要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - 例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されるなど、*ランダムアクセスイテレータ*　でなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効範囲、つまり、 ``last >= first``　を表さなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view``: view to search in
+- ``view``: 検索対象のビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``pred``: unary predicate which returns ``true`` for the required element;
+- ``pred``: 必要な要素について ``真`` を返す一項述語;
 
-  ``pred(a)`` must be valid to be called from the execution space passed, or
-  the execution space associated with the team handle, and convertible to bool for every
-  argument ``a`` of type (possible const) ``value_type``, where ``value_type`` is the value
-  type of ``InputIterator`` or ``view``, and must not modify ``a``.
+  ``pred(a)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 (可能性のあるconst)　value_type　の引数　``a``　のすべてのペアについて、bool型に変換可能で、そこでは、``value_type``が、``IteratorType``　の値型、または ``view``であり、  ``a``　を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
     .. code-block:: cpp
 
-       struct Predicate
+       構造体　述語
        {
 	  KOKKOS_INLINE_FUNCTION
-	  bool operator()(const /*type needed */ & operand) const { return /* ... */; }
+	  ブール operator()(const /*type needed */ & operand) const { return /* ... */; }
 
-	  // or, also valid
+	  // または、また有効
 
 	  KOKKOS_INLINE_FUNCTION
-	  bool operator()(/*type needed */ operand) const { return /* ... */; }
+	  ブール operator()(/*type needed */ operand) const { return /* ... */; }
        };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-- (1,2,5): ``InputIterator`` instance pointing to the first element
-  where the predicate evaluates to true, or ``last`` if no such element is found
+- (1,2,5): そのような要素が見つからない場合、述語が真を評価する最初の要素を指している ``InputIterator`` インスタンス、または ``last`` 
 
-- (3,4,6): iterator to the first element where the predicate evaluates to ``true``,
-  or ``Kokkos::Experimental::end(view)`` if no such element is found
+- (3,4,6): そのような要素が見つからない場合、述語が　``真``　を評価する最初の要素へのイテレータ、または ``Kokkos::Experimental::end(view)`` 
 
-Example
+例
 -------
 
 .. code-block:: cpp
 
-   namespace KE = Kokkos::Experimental;
+   名前空間 KE = Kokkos::Experimental;
 
-   template<class ValueType>
-   struct EqualsValue
+   テンプレート　<class ValueType>
+   構造体 EqualsValue
    {
      const ValueType m_value;
      EqualsValFunctor(ValueType value) : m_value(value){}
 
      KOKKOS_INLINE_FUNCTION
-     bool operator()(const ValueType & operand) const {
+     ブール operator()(const ValueType & operand) const {
        return operand == m_value;
      }
    };
 
-   auto exespace = Kokkos::DefaultExecutionSpace;
-   using view_type = Kokkos::View<exespace, int*>;
+   自動 exespace = Kokkos::DefaultExecutionSpace;
+   view_type = Kokkos::View<exespace, int*>　を使用；
    view_type a("a", 15);
-   // fill "a" somehow
+   // 何らかの方法で "a" を満たす
 
-   // create predicate
+   // 述語を作成する
    EqualsValue<int> p(5);
 
-   auto it1 = KE::find_if(exespace, KE::begin(a), KE::end(a), p);
+   自動 it1 = KE::find_if(exespace, KE::begin(a), KE::end(a), p);
 
-   // assuming OpenMP is enabled, then you can also explicitly call
-   auto it2 = KE::find_if(Kokkos::OpenMP(), KE::begin(a), KE::end(a), p);
+   // OpenMPが有効になっていると仮定すれば、明示的に以下のように呼び出すことも可能です
+   自動 it2 = KE::find_if(Kokkos::OpenMP(), KE::begin(a), KE::end(a), p);
