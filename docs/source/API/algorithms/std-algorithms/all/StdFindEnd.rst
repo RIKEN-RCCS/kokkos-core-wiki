@@ -2,95 +2,94 @@
 ``find_end``
 ============
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Searches a given range or rank-1 ``View`` for the *last* occurrence
-of a target sequence or ``View`` of values.
+指定された範囲またはランク1の　``ビュー``　において、対象となるシーケンスまたは値の　``ビュー``　の　*最後の*　出現箇所を検索します。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType1 find_end(const ExecutionSpace& exespace,                                (1)
                           IteratorType1 first, IteratorType1 last,
 			  IteratorType2 s_first, IteratorType2 s_last);
 
-   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType1 find_end(const std::string& label, const ExecutionSpace& exespace,
 			  IteratorType1 first, IteratorType1 last,                       (2)
 			  IteratorType2 s_first, IteratorType2 s_last);
 
-   template <class ExecutionSpace, class DataType1, class... Properties1,
+   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
-   auto find_end(const ExecutionSpace& exespace,
+   自動 find_end(const ExecutionSpace& exespace,
 		 const ::Kokkos::View<DataType1, Properties1...>& view,                  (3)
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
-   template <class ExecutionSpace, class DataType1, class... Properties1,
+   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
-   auto find_end(const std::string& label, const ExecutionSpace& exespace,
+   自動 find_end(const std::string& label, const ExecutionSpace& exespace,
 		 const ::Kokkos::View<DataType1, Properties1...>& view,                  (4)
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
-   template <class ExecutionSpace, class IteratorType1, class IteratorType2,
+   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
    IteratorType1 find_end(const ExecutionSpace& exespace,                                (5)
                           IteratorType1 first, IteratorType1 last,
 			  IteratorType2 s_first, IteratorType2 s_last,
 			  const BinaryPredicateType& pred);
 
-   template <class ExecutionSpace, class IteratorType1, class IteratorType2,
+   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
    IteratorType1 find_end(const std::string& label, const ExecutionSpace& exespace,      (6)
 			  IteratorType1 first, IteratorType1 last,
 			  IteratorType2 s_first, IteratorType2 s_last,
 			  const BinaryPredicateType& pred);
 
-   template <class ExecutionSpace, class DataType1, class... Properties1,
+   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2, class BinaryPredicateType>
-   auto find_end(const ExecutionSpace& exespace,                                         (7)
+   自動 find_end(const ExecutionSpace& exespace,                                         (7)
 		 const ::Kokkos::View<DataType1, Properties1...>& view,
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view,
 		 const BinaryPredicateType& pred);
 
-   template <class ExecutionSpace, class DataType1, class... Properties1,
+   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2, class BinaryPredicateType>
-   auto find_end(const std::string& label, const ExecutionSpace& exespace,               (8)
+   自動 find_end(const std::string& label, const ExecutionSpace& exespace,               (8)
 		 const ::Kokkos::View<DataType1, Properties1...>& view,
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view,
 		 const BinaryPredicateType& pred);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType1, class IteratorType2>
+   テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
    IteratorType1 find_end(const TeamHandleType& teamHandle,                              (9)
                           IteratorType1 first, IteratorType1 last,
 			  IteratorType2 s_first, IteratorType2 s_last);
 
-   template <class TeamHandleType, class DataType1, class... Properties1,
+   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   auto find_end(const TeamHandleType& teamHandle,                                      (10)
+   自動 find_end(const TeamHandleType& teamHandle,                                      (10)
 		 const ::Kokkos::View<DataType1, Properties1...>& view,
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
-   template <class TeamHandleType, class IteratorType1, class IteratorType2,
+   テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
    KOKKOS_FUNCTION
    IteratorType1 find_end(const TeamHandleType& teamHandle,                             (11)
@@ -98,37 +97,35 @@ Overload set accepting a team handle
 			  IteratorType2 s_first, IteratorType2 s_last,
 			  const BinaryPredicateType& pred);
 
-   template <class TeamHandleType, class DataType1, class... Properties1,
+   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2, class BinaryPredicateType>
    KOKKOS_FUNCTION
-   auto find_end(const TeamHandleType& teamHandle,                                      (12)
+    find_end(const TeamHandleType& teamHandle,                                      (12)
 		 const ::Kokkos::View<DataType1, Properties1...>& view,
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view,
 		 const BinaryPredicateType& pred);
 
-Overload Set Detailed Description
+オーバーロードセット詳細ディスクリプション
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- 1,2,5,6: searches for the last occurrence of the sequence ``[s_first, s_last)``
-  in the range ``[first, last)`` comparing elements via ``operator ==`` (1,2) or via ``pred`` (5,6)
+- 1,2,5,6:  ``operator ==`` (1,2) 経由または via ``pred`` (5,6)　経由で要素を比較する範囲　``[first, last)``　内のシーケンス ``[s_first, s_last)``　の最後の発生について検索します。
 
-- 3,4,7,8: searches for the last occurrence of the ``s_view`` in ``view``
-  comparing elements via ``operator ==`` (3,4 or via ``pred`` (7,8)
+- 3,4,7,8: ``operator ==`` (3,4) 経由または ``pred`` (7,8)　経由で要素を比較する ``ビュー``　内の ``s_view`` の最後の発生について検索します。
 
-Parameters and Requirements
+パラメータおよび要件
 ---------------------------
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1,5: The default string is "Kokkos::find_end_iterator_api_default".
+  - 1,5: デフォルト文字列は、 "Kokkos::find_end_iterator_api_default".
 
-  - 3,7: The default string is "Kokkos::find_end_view_api_default".
+  - 3,7: デフォルト文字列は、 "Kokkos::find_end_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
 - ``first, last``: range of elements to search in
 
