@@ -88,9 +88,9 @@
 .. _コピー: ./StdCopy.html
 
 
-- ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_
+- ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_　におけるのと同様。
 
-- ``label``: used to name the implementation kernels for debugging purposes
+- ``ラベル``: used to name the implementation kernels for debugging purposes
 
   - for 1, the default string is: "Kokkos::copy_n_if_iterator_api_default"
 
