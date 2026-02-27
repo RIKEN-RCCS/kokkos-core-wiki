@@ -1,37 +1,37 @@
 
 # `fill_n`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-namespace Kokkos{
-namespace Experimental{
+名前空間 Kokkos{
+名前空間 Experimental{
 
-template <class ExecutionSpace, class IteratorType, class SizeType, class T>
+テンプレート <class ExecutionSpace, class IteratorType, class SizeType, class T>
 IteratorType fill_n(const ExecutionSpace& exespace,                             (1)
                     IteratorType first,
                     SizeType n, const T& value);
 
-template <class ExecutionSpace, class IteratorType, class SizeType, class T>
+テンプレート <class ExecutionSpace, class IteratorType, class SizeType, class T>
 IteratorType fill_n(const std::string& label, const ExecutionSpace& exespace,   (2)
                     IteratorType first,
                     SizeType n, const T& value);
 
-template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class T>
+テンプレート <class ExecutionSpace, class DataType, class... Properties, class SizeType, class T>
 auto fill_n(const ExecutionSpace& exespace,                                     (3)
             const Kokkos::View<DataType, Properties...>& view,
             SizeType n, const T& value);
 
-template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class T>
+テンプレート <class ExecutionSpace, class DataType, class... Properties, class SizeType, class T>
 auto fill_n(const std::string& label, const ExecutionSpace& exespace,           (4)
             const Kokkos::View<DataType, Properties...>& view,
             SizeType n, const T& value);
 
-} //end namespace Experimental
-} //end namespace Kokkos
+} //　終了　名前空間 実験的
+} //　終了　名前空間 Kokkos
 ```
 
-## Description
+# ディスクリプション
 
 Copy-assigns `value` to the first `n` elements in the range starting at `first` (overloads 1,2)
 or the first `n` elements in `view` (overloads 3,4).
