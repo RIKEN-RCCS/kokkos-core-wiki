@@ -90,20 +90,20 @@
 
 - ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_　におけるのと同様。
 
-- ``ラベル``: used to name the implementation kernels for debugging purposes
+- ``ラベル``: デバッグ目的で内部の並列カーネルに名付けるために使用
 
-  - for 1, the default string is: "Kokkos::copy_n_if_iterator_api_default"
+  - 1　について、 デフォルト文字列は、: "Kokkos::copy_n_if_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::copy_n_if_view_api_default"
+  - 3　について、 デフォルト文字列は、: "Kokkos::copy_n_if_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``n``: number of elements to copy (must be non-negative)
+- ``n``:  コピーする要素数　(0以上でなければならない)
 
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-If ``n>0``, returns an iterator to the destination element *after* the last element copied.
+　``n>0``　の場合、 最後の要素がコピーされた　*後*　宛先要素に、イテレータを返します。
 
-Otherwise, returns ``first_to`` (for 1,2,5) or ``Kokkos::begin(view_to)`` (for 3,4,6).
+そうでない場合には、 ``first_to`` (1,2,5について)　または、 ``Kokkos::begin(view_to)`` (3,4,6について) を返します。
