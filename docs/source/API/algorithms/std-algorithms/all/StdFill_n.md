@@ -27,8 +27,8 @@ auto fill_n(const std::string& label, const ExecutionSpace& exespace,           
             const Kokkos::View<DataType, Properties...>& view,
             SizeType n, const T& value);
 
-} //　終了　名前空間 実験的
-} //　終了　名前空間 Kokkos
+} //　エンド　名前空間 実験的
+} //　エンド　名前空間 Kokkos
 ```
 
 # ディスクリプション
