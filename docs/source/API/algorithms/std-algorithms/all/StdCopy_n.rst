@@ -1,91 +1,91 @@
 ``copy_n``
 ==========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Copies the first ``n`` elements from a source range or rank-1 ``View`` to another range or rank-1 ``View``.
+ソース範囲またはランク1の ``ビュー`` から最初の ``n`` 個の要素を、別の範囲またはランク1の ``ビュー``にコピーします。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-  template <
-    class ExecutionSpace, class InputIteratorType,
-    class SizeType, class OutputIteratorType>
+  テンプレート <
+    クラス ExecutionSpace, class InputIteratorType,
+    クラス SizeType, class OutputIteratorType>
   OutputIteratorType copy_n(const ExecutionSpace& exespace,                    (1)
                             InputIteratorType first_from,
                             SizeType n,
                             OutputIteratorType first_to);
 
-  template <
-    class ExecutionSpace, class InputIteratorType,
-    class SizeType, class OutputIteratorType>
+  テンプレート <
+    クラス ExecutionSpace, class InputIteratorType,
+    クラス SizeType, class OutputIteratorType>
   OutputIteratorType copy_n(const std::string & label,
                             const ExecutionSpace& exespace,                    (2)
                             InputIteratorType first_from,
                             SizeType n,
                             OutputIteratorType first_to);
 
-  template <
-    class ExecutionSpace,
-    class DataType1, class... Properties1,
-    class SizeType,
-    class DataType2, class... Properties2>
-  auto copy_n(const ExecutionSpace& exespace,                                  (3)
+  テンプレート <
+    クラス ExecutionSpace,
+    クラス DataType1, class... Properties1,
+    クラス SizeType,
+    クラス DataType2, class... Properties2>
+  自動 copy_n(const ExecutionSpace& exespace,                                  (3)
               const Kokkos::View<DataType1, Properties1...>& view_from,
               SizeType n,
               const Kokkos::View<DataType2, Properties2...>& view_to);
 
-  template <
-    class ExecutionSpace,
-    class DataType1, class... Properties1,
-    class SizeType,
-    class DataType2, class... Properties2>
-  auto copy_n(const std::string& label, const ExecutionSpace& exespace,        (4)
+  テンプレート <
+    クラス ExecutionSpace,
+    クラス DataType1, class... Properties1,
+    クラス SizeType,
+    クラス DataType2, class... Properties2>
+  自動 copy_n(const std::string& label, const ExecutionSpace& exespace,        (4)
               const Kokkos::View<DataType1, Properties1...>& view_from,
               SizeType n,
               const Kokkos::View<DataType2, Properties2...>& view_to);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロード
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-  template <
-    class TeamHandleType, class InputIteratorType,
-    class SizeType, class OutputIteratorType>
+  テンプレート <
+    クラス TeamHandleType, class InputIteratorType,
+    クラス SizeType, class OutputIteratorType>
   KOKKOS_FUNCTION
   OutputIteratorType copy_n(const TeamHandleType& teamHandle,                 (5)
                             InputIteratorType first_from,
                             SizeType n,
 			    OutputIteratorType first_to);
 
-  template <
-    class TeamHandleType,
-    class DataType1, class... Properties1, class SizeType,
-    class DataType2, class... Properties2>
+  テンプレート <
+    クラス TeamHandleType,
+    クラス DataType1, class... Properties1, class SizeType,
+    クラス DataType2, class... Properties2>
   KOKKOS_FUNCTION
-  auto copy_n(const TeamHandleType& teamHandle,                               (6)
+  自動 copy_n(const TeamHandleType& teamHandle,                               (6)
               const ::Kokkos::View<DataType1, Properties1...>& view_from,
 	      SizeType n,
               ::Kokkos::View<DataType2, Properties2...>& view_to);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |copy| replace:: ``copy``
-.. _copy: ./StdCopy.html
+.. |コピー| 置換:: ``コピー``
+.. _コピー: ./StdCopy.html
 
 
 - ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_
