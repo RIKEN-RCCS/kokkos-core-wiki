@@ -2,75 +2,75 @@
 ``find_if``
 ===========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Returns an iterator to the *first* element in a range or a ``View`` that satisfies a custom predicate.
+範囲内の　*最初*　の要素、またはカスタム述語を満たす　``ビュー``　へのイテレータを返します。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. :: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class InputIterator, class PredicateType>
+   テンプレート <class ExecutionSpace, class InputIterator, class PredicateType>
    InputIterator find_if(const ExecutionSpace& exespace,                                (1)
 			 InputIterator first, InputIterator last,
 			 PredicateType pred);
 
-   template <class ExecutionSpace, class InputIterator, class PredicateType>
+   テンプレート <class ExecutionSpace, class InputIterator, class PredicateType>
    InputIterator find_if(const std::string& label, const ExecutionSpace& exespace,      (2)
 			 InputIterator first, InputIterator last,
 			 PredicateType pred);
 
-   template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-   auto find_if(const ExecutionSpace& exespace,
+   テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+   自動 find_if(const ExecutionSpace& exespace,
 		const Kokkos::View<DataType, Properties...>& view,                      (3)
 		PredicateType pred);
 
-   template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-   auto find_if(const std::string& label, const ExecutionSpace& exespace,
+   テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+   自動 find_if(const std::string& label, const ExecutionSpace& exespace,
 		const Kokkos::View<DataType, Properties...>& view,                      (4)
 		PredicateType pred);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class InputIterator, class PredicateType>
+   テンプレート <class TeamHandleType, class InputIterator, class PredicateType>
    KOKKOS_FUNCTION
    InputIterator find_if(const TeamHandleType& teamHandle,                              (5)
 			 InputIterator first, InputIterator last,
 			 PredicateType pred);
 
-   template <class TeamHandleType, class DataType, class... Properties, class PredicateType>
+   テンプレート <class TeamHandleType, class DataType, class... Properties, class PredicateType>
    KOKKOS_FUNCTION
-   auto find_if(const TeamHandleType& teamHandle,
+   自動 find_if(const TeamHandleType& teamHandle,
 		const Kokkos::View<DataType, Properties...>& view,                      (6)
 		PredicateType pred);
 
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - for 1, the default string is: "Kokkos::find_if_iterator_api_default"
+  - 1　について、デフォルト文字列は、: "Kokkos::find_if_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::find_if_view_api_default"
+  - 3　について、デフォルト文字列は、 the default string is: "Kokkos::find_if_view_api_default"
 
   - NOTE: overloads accepting a team handle do not use a label internally
 
