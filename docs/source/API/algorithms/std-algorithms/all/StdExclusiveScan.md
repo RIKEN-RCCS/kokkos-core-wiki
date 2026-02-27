@@ -127,7 +127,7 @@ OutputIteratorType exclusive_scan(const std::string& label,                     
   - `exespace`　からアクセス可能でなければなりません。
 - `bin_op`:
   - 要素のペアを組み合わせる演算を表す　*二項* ファンクタ。
-  Must be valid to be called from the execution space passed引数を引き渡された実行空間から呼び出されるために、有効でなければならず、, and callable with
+  引数を引き渡された実行空間から呼び出されるために、有効でなければならず、
 　型 (constの可能性) `value_type`　の2つの引数 `a,b`　を使って、呼び出し可能でなければなりません。そこでは、`value_type`　が　`InputIteratorType` (1,2,5,6　について) または、  `view_from` (3,4,7,8について)　の値型であり、 ``a,b``　を変更してはいけません。
 
   - 以下に一致しなければなりません:
