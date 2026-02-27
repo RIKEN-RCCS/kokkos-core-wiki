@@ -2,36 +2,36 @@
 ``copy_if``
 ===========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Copies the elements for which a predicate returns ``true`` from source range or ``View`` to
-another range or ``View``
+ソース範囲またはビューから、述語が ``真`` を返す要素を
+別の範囲または ``ビュー``にコピーします。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-  template <
-    class ExecutionSpace, class InputIteratorType,
-    class OutputIteratorType, class UnaryPredicateType>
+  テンプレート <
+    クラス ExecutionSpace, class InputIteratorType,
+    クラス OutputIteratorType, class UnaryPredicateType>
   OutputIteratorType copy_if(const ExecutionSpace& exespace,                   (1)
                              InputIteratorType first_from,
                              InputIteratorType last_from,
                              OutputIteratorType first_to,
                              UnaryPredicateType pred);
 
-  template <
-    class ExecutionSpace, class InputIteratorType,
-    class OutputIteratorType, class UnaryPredicateType>
+  テンプレート <
+    クラス ExecutionSpace, class InputIteratorType,
+    クラス OutputIteratorType, class UnaryPredicateType>
   OutputIteratorType copy_if(const std::string& label,
                              const ExecutionSpace& exespace,                   (2)
                              InputIteratorType first_from,
@@ -39,39 +39,39 @@ Overload set accepting execution space
                              OutputIteratorType first_to,
                              UnaryPredicateType pred);
 
-  template <
-    class ExecutionSpace,
-    class DataType1, class... Properties1,
-    class DataType2, class... Properties2,
-    class UnaryPredicateType
+  テンプレート <
+    クラス ExecutionSpace,
+    クラス DataType1, class... Properties1,
+    クラス DataType2, class... Properties2,
+    クラス UnaryPredicateType
   >
-  auto copy_if(const ExecutionSpace& exespace,                                 (3)
+  自動 copy_if(const ExecutionSpace& exespace,                                 (3)
                const Kokkos::View<DataType1, Properties1...>& view_from,
                const Kokkos::View<DataType2, Properties2...>& view_to,
                UnaryPredicateType pred);
 
-  template <
-    class ExecutionSpace,
-    class DataType1, class... Properties1,
-    class DataType2, class... Properties2,
-    class UnaryPredicateType
+  テンプレート <
+    クラス ExecutionSpace,
+    クラス DataType1, class... Properties1,
+    クラス DataType2, class... Properties2,
+    クラス UnaryPredicateType
   >
-  auto copy_if(const std::string& label, const ExecutionSpace& exespace,       (4)
+  自動 copy_if(const std::string& label, const ExecutionSpace& exespace,       (4)
                const Kokkos::View<DataType1, Properties1...>& view_from,
                const Kokkos::View<DataType2, Properties2...>& view_to,
                UnaryPredicateType pred);
 
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-  template <
-    class TeamHandleType, class InputIteratorType,
-    class OutputIteratorType, class UnaryPredicateType>
+  テンプレート <
+    クラス TeamHandleType, class InputIteratorType,
+    クラス OutputIteratorType, class UnaryPredicateType>
   KOKKOS_FUNCTION
   OutputIteratorType copy_if(const TeamHandleType& teamHandle,                 (5)
                              InputIteratorType first_from,
@@ -91,44 +91,42 @@ Overload set accepting a team handle
                UnaryPredicateType pred);
 
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |copy| replace:: ``copy``
+.. |copy| 置換:: ``copy``
 .. _copy: ./StdCopy.html
 
-- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_
+- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_におけるのと同様
 
-- ``label``:
+- ``ラベル``:
 
-  - for 1, the default string is: "Kokkos::copy_if_iterator_api_default"
+  - 1　について、デフォルト文字列は、: "Kokkos::copy_if_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::copy_if_view_api_default"
+  - 3　について、デフォルト文字列は、: "Kokkos::copy_if_view_api_default"
 
-- ``pred``: unary predicate which returns ``true`` for the required element to copy
+- ``pred``:コピー対象の必須要素について ``真`` を返す一項述語
 
-  - ``pred(v)`` must be valid to be called from the execution space passed or the execution
-    space associated with the team handle, and convertible to bool for every
-    argument ``v`` of type (possible const) ``value_type``, where ``value_type``
-    is the value type of ``InputIteratorType`` or of ``view_from``, and must not modify ``v``.
+  - ``pred(v)``  は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型　value_type　の引数　``v``　（constの可能性）のすべてのペアについて、bool型に変換可能で、そこでは、``value_type``が、``InputIteratorType``　の値型、または ``view_from``であり、  ``v``　を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-   struct Predicate
+   構造体　述語
    {
       KOKKOS_INLINE_FUNCTION
-      bool operator()(const value_type & v) const { return /* ... */; }
+      ブール operator()(const value_type & v) const { return /* ... */; }
 
-      // or, also valid
+      // または、また有効
 
       KOKKOS_INLINE_FUNCTION
-      bool operator()(value_type v) const { return /* ... */; }
+      ブール operator()(value_type v) const { return /* ... */; }
    };
 
 
-Return Value
+返し値
 ~~~~~~~~~~~~
 
-Iterator to the destination element *after* the last element copied.
+最後の要素がコピーされた *後*　の宛先へのイテレータ。
+
