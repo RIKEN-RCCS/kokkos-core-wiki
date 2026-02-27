@@ -2,115 +2,115 @@
 ``copy_backward``
 =================
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Copies the elements in reverse order from range ``[first_from, last_from)`` to another
-range *ending* at ``last_to`` or from a source view ``view_from`` to a destination
-view ``view_to``. The relative order is preserved.
+範囲 ``[first_from, last_from)`` の要素を逆順で、
+``last_to`` で　*終了する*　もう一つの範囲、またはソースビュー ``view_from`` から宛先ビュー ``view_to`` へコピーします。　相対的な順序は保たれています。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-  template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
+  テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
   OutputIteratorType copy_backward(const ExecutionSpace& exespace,                (1)
                                    InputIteratorType first_from,
                                    InputIteratorType last_from,
                                    OutputIteratorType last_to);
 
-  template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
+  テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
   OutputIteratorType copy_backward(const std::string& label,
                                    const ExecutionSpace& exespace,                (2)
                                    InputIteratorType first_from,
                                    InputIteratorType last_from,
                                    OutputIteratorType last_to);
 
-  template <
+  テンプレート <
     class ExecutionSpace,
     class DataType1, class... Properties1,
     class DataType2, class... Properties2
   >
-  auto copy_backward(const ExecutionSpace& exespace,                              (3)
+  自動 copy_backward(const ExecutionSpace& exespace,                              (3)
                      const Kokkos::View<DataType1, Properties1...>& view_from,
                      const Kokkos::View<DataType2, Properties2...>& view_to);
 
-  template <
-    class ExecutionSpace,
-    class DataType1, class... Properties1,
-    class DataType2, class... Properties2
+  テンプレート <
+    クラス ExecutionSpace,
+    クラス DataType1, class... Properties1,
+    クラス DataType2, class... Properties2
   >
-  auto copy_backward(const std::string& label, const ExecutionSpace& exespace,    (4)
+  自動 copy_backward(const std::string& label, const ExecutionSpace& exespace,    (4)
                      const Kokkos::View<DataType1, Properties1...>& view_from,
                      const Kokkos::View<DataType2, Properties2...>& view_to);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-  template <class TeamHandleType, class InputIteratorType, class OutputIteratorType>
+  テンプレート <class TeamHandleType, class InputIteratorType, class OutputIteratorType>
   KOKKOS_FUNCTION
   OutputIteratorType copy_backward(const TeamHandleType& teamHandle,             (5)
                                    InputIteratorType first_from,
                                    InputIteratorType last_from,
 			           OutputIteratorType last_to);
 
-  template <
-    class TeamHandleType,
-    class DataType1, class... Properties1,
-    class DataType2, class... Properties2>
+  テンプレート <
+    クラス TeamHandleType,
+    クラス DataType1, class... Properties1,
+    クラス DataType2, class... Properties2>
   KOKKOS_FUNCTION
-  auto copy_backward(const TeamHandleType& teamHandle,                           (6)
+  自動 copy_backward(const TeamHandleType& teamHandle,                           (6)
                      const ::Kokkos::View<DataType1, Properties1...>& view_from,
                      ::Kokkos::View<DataType2, Properties2...>& view_to);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``:  team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``:  TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: used to name the implementation kernels for debugging purposes
+- ``ラベル``: デバッグ目的で内部の並列カーネルに名付けるために使用
 
-  - for 1, the default string is: "Kokkos::copy_backward_iterator_api_default"
+  - 1　について、 デフォルト文字列は、 : "Kokkos::copy_backward_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::copy_backward_view_api_default"
+  - 3　について、 デフォルト文字列は、: "Kokkos::copy_backward_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first_from, last_from``: range of elements to copy from
+- ``first_from, last_from``: コピー元の要素範囲
 
-  - must be *random access iterators*
+  - *ランダムアクセスイテレータ*　でなければなりません。
 
-  - must represent a valid range, i.e., ``last_from >= first_from`` (checked in debug mode)
+  - 有効な範囲、つまり、``last_from >= first_from``を表す必要があります。（デバッグモードで確認済み）
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``last_to``: iterator past the last element of the range to copy to
+- ``last_to``: コビー先への範囲の最後の要素を過ぎたイテレータ
 
-  - must be a *random access iterator*
+  - *ランダムアクセスイテレータ*　でなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view_from``, ``view_to``: source and destination views to copy elements from and to
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+- ``view_from``, ``view_to``: 要素のコピー元およびコピー先である、ソースおよび宛先
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-Return Value
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+
+返し値
 ~~~~~~~~~~~~
 
-Iterator to the last element copied.
+コピーされた最後の要素へのイテレータ
