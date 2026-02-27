@@ -1,28 +1,28 @@
 
 # `fill`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-namespace Kokkos{
-namespace Experimental{
+名前空間 Kokkos{
+名前空間 Experimental{
 
-template <class ExecutionSpace, class IteratorType, class T>
+テンプレート <class ExecutionSpace, class IteratorType, class T>
 void fill(const ExecutionSpace& exespace,                                    (1)
           IteratorType first, IteratorType last,
           const T& value);
 
-template <class ExecutionSpace, class IteratorType, class T>
+テンプレート <class ExecutionSpace, class IteratorType, class T>
 void fill(const std::string& label, const ExecutionSpace& exespace,          (2)
           IteratorType first, IteratorType last,
           const T& value);
 
-template <class ExecutionSpace, class DataType, class... Properties, class T>
+テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
 void fill(const ExecutionSpace& exespace,                                    (3)
           const Kokkos::View<DataType, Properties...>& view,
           const T& value);
 
-template <class ExecutionSpace, class DataType, class... Properties, class T>
+テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
 void fill(const std::string& label, const ExecutionSpace& exespace,          (4)
           const Kokkos::View<DataType, Properties...>& view,
           const T& value);
@@ -31,18 +31,18 @@ void fill(const std::string& label, const ExecutionSpace& exespace,          (4)
 } //end namespace Kokkos
 ```
 
-## Description
+## ディスクリプション
 
-Copy-assigns `value` to each element in the range `[first, last)` (overloads 1,2)
-or in `view` (overloads 3,4).
+範囲 `[first, last)` (オーバーロード 1,2)　内、または
+ `ビュー` (オーバーロード 3,4)　内に、各要素を代入します。
 
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance
-- `label`:
-  - used to name the implementation kernels for debugging purposes
+  - 実行空間インスタンス
+- `ラベル`:
+  - デバッグ目的で実装カーネルに名付けるために使用
   - for 1, the default string is: "Kokkos::fill_iterator_api_default"
   - for 3, the default string is: "Kokkos::fill_view_api_default"
 - `first, last`:
