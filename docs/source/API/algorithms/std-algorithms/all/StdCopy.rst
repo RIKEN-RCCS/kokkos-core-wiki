@@ -77,7 +77,7 @@ Parameters and Requirements
 
 - ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
 
-- ``label``:  used to name the implementation kernels for debugging purposes
+- ``label``:  デバッグ目的で実装カーネルに名付けるために使用
 
   - for 1, the default string is: "Kokkos::copy_iterator_api_default"
 
