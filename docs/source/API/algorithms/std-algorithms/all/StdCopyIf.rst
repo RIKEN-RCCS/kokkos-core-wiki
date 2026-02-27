@@ -94,10 +94,10 @@
 パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |copy| 置換:: ``copy``
-.. _copy: ./StdCopy.html
+.. |copy| 置換:: ``コピー``
+.. _コピー: ./StdCopy.html
 
-- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_におけるのと同様
+- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_　におけるのと同様。
 
 - ``ラベル``:
 
