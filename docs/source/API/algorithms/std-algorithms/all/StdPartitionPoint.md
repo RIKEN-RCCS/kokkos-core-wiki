@@ -1,56 +1,56 @@
 
 # `partition_point`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-namespace Kokkos{
-namespace Experimental{
+名前空間 Kokkos{
+名前空間 実験的{
 
-template <class ExecutionSpace, class IteratorType, class PredicateType>
+テンプレート <class ExecutionSpace, class IteratorType, class PredicateType>
 IteratorType partition_point(const ExecutionSpace& exespace,                   (1)
                              IteratorType first, IteratorType last,
                              PredicateType pred);
 
-template <class ExecutionSpace, class IteratorType, class PredicateType>
+テンプレート <class ExecutionSpace, class IteratorType, class PredicateType>
 IteratorType partition_point(const std::string& label,                         (2)
                              const ExecutionSpace& exespace,
                              IteratorType first, IteratorType last,
                              PredicateType pred);
 
-template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-auto partition_point(const ExecutionSpace& exespace,
+テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+自動 partition_point(const ExecutionSpace& exespace,
                      const ::Kokkos::View<DataType, Properties...>& view,      (3)
                      PredicateType pred);
 
-template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-auto partition_point(const std::string& label,                                 (4)
+テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+自動 partition_point(const std::string& label,                                 (4)
                      const ExecutionSpace& exespace,
                      const ::Kokkos::View<DataType, Properties...>& view,
                      PredicateType pred);
 
-} //end namespace Experimental
-} //end namespace Kokkos
+} //エンド 名前空間 実験的
+} //エンド 名前空間 Kokkos
 ```
 
-## Description
+## ディスクリプション
 
-Examines the range `[first, last)` or `view` and locates the
-first element that does not satisfy `pred`.
+範囲 `[first, last)` または `ビュー` を調べ、
+`pred` を満たさない最初の要素を位置付けます。
 
-Assumes the range (or the view) already to be partitioned.
+範囲（またはビュー）は既にパーティション分割済みであると仮定します。
 
 
-## Parameters and Requirements
+## パラメータおよび要件
 
-- `exespace`, `first`, `last`, `view`, `pred`: same as in [`is_partitioned`](./StdIsPartitioned)
-  - execution space instance
-- `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1, the default string is: "Kokkos::partition_point_iterator_api_default"
-  - for 3, the default string is: "Kokkos::partition_point_view_api_default"
+- `exespace`, `first`, `last`, `view`, `pred`:  [`is_partitioned`](./StdIsPartitioned)　と同様。
+  - 実行空間インスタンス
+- `ラベル`:
+  - デバッグ目的の実装カーネルに名付けるために使用されます。
+  - 1について、デフォルト文字列は、 : "Kokkos::partition_point_iterator_api_default"
+  - 3について、デフォルト文字列は、 : "Kokkos::partition_point_view_api_default"
 
-## Return
+## 返し
 
-Iterator to the element *after* the last element in the first partition,
-or `last` if all elements satisfy `pred`.
+最初のパーテーションにおける、最後の要素の *後*　の要素へのイテレータ、またはすべての要素が
+ `pred`　を満たす場合、`last`　へのイテレータ。
