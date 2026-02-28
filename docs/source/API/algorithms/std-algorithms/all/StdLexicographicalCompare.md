@@ -65,8 +65,8 @@
 
 ## ディスクリプション
 
-Returns `true` for (1,2,5,6) if the first range [first1, last1) is lexicographically less than the second range [first2, last2).
-Returns `true` for (3,4,7,8) if elements in `view1` are lexicographically less than elements in `view2`.
+第1の範囲 [first1, last1) が、第2の範囲 [first2, last2)　よりも順序の上で、小さい場合に、(1,2,5,6) について、`真`　を返します。
+`view1` の要素が `view2`における要素よりも順序の上で、小さい場合に、(3,4,7,8) について、`真`　を返します。
 Elements (1,2,3,4) are compared using the `<` operator.
 Elements (5,6,7,8) are compared using `comp`.
 
