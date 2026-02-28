@@ -79,13 +79,13 @@
                              OutputIteratorType first_to,
                              UnaryPredicateType pred);
 
-  template <
-    class TeamHandleType,
-    class DataType1, class... Properties1,
-    class DataType2, class... Properties2,
-    class UnaryPredicateType>
+  テンプレート <
+    クラス TeamHandleType,
+    クラス DataType1, class... Properties1,
+    クラス DataType2, class... Properties2,
+    クラス UnaryPredicateType>
   KOKKOS_FUNCTION
-  auto copy_if(const TeamHandleType& teamHandle,                              (6)
+  自動 copy_if(const TeamHandleType& teamHandle,                              (6)
                const Kokkos::View<DataType1, Properties1...>& view_from,
                const Kokkos::View<DataType2, Properties2...>& view_to,
                UnaryPredicateType pred);
