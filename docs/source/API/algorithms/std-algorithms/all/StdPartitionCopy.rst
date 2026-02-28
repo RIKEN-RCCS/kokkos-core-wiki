@@ -130,47 +130,47 @@
 
   - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view_from``: source view of elements to copy from
+- ``view_from``: コピー元の要素のソースビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view_dest_true``: destination view to copy the elements that satisfy ``pred`` to
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+- ``view_dest_true``: ``pred`` を満たす要素をコピーするデスティネーションビュー
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-- ``view_dest_false``: destination view to copy the elements that do NOT satisfy ``pred`` to
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+
+- ``view_dest_false``: ``pred`` を満たさない要素をコピーするデスティネーションビュー
+
+  - ``必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+
 
 - ``pred``:
 
-  - *unary* predicate returning ``true`` for the required element to replace; ``pred(v)``
-    must be valid to be called from the execution space passed, and convertible to bool for every
-    argument ``v`` of type (possible const) ``value_type``, where ``value_type``
-    is the value type of ``InputIteratorType`` (for 1,2) or the value type of ``view_from`` (for 3,4),
-    and must not modify ``v``.
+  -　置換するために必要な要素について、 ``真`` を返す *一項* 述語;  ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型　value_type　のすべての引数　``v``　（constの可能性）について、bool型に変換可能で、そこでは、``value_type``が、``InputIteratorType``　 (1,2について) の値型、または ``ビュー`` (3,4について)　の値型であり、  ``v``　を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-     struct Predicate
+     構造体 述語
      {
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const { return /* ... */; }
 
-       // or, also valid
+       // or, also validまたは、また有効
 
        KOKKOS_INLINE_FUNCTION
        bool operator()(value_type v) const { return /* ... */; }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Returns a ``Kokkos::pair`` containing the iterators to the end of two destination ranges (or views)
+イテレータを含む ``Kokkos::pair`` を、2つのデスティネーション範囲（またはビュー）の最後に返します。
