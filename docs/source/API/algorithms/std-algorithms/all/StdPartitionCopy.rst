@@ -1,24 +1,24 @@
 ``partition_copy``
 ==================
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``Kokkos_StdAlgorithms.hpp``
 
-Description
+ディスクリプション
 -----------
 
-Copies from a range or a rank-1 ``View`` the elements that satisfy the predicate ``pred`` to ``to_first_true`` or ``view_true``, while the others are copied to ``to_first_false`` or ``view_false``.
+範囲またはランク1の　``ビュー`` から、述語　``pred``　を満たす要素を　``to_first_true`` または　``view_true``　にコピーし、一方で、その他は、 ``to_first_false`` または ``view_false``　にコピーされます。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace,
+   テンプレート <class ExecutionSpace,
              class InputIteratorType,
              class OutputIteratorTrueType,
              class OutputIteratorFalseType,
@@ -31,7 +31,7 @@ Overload set accepting execution space
                   OutputIteratorFalseType to_first_false,
                   PredicateType pred);
 
-   template <class ExecutionSpace,
+   テンプレート <class ExecutionSpace,
              class InputIteratorType,
              class OutputIteratorTrueType,
              class OutputIteratorFalseType,
@@ -45,37 +45,37 @@ Overload set accepting execution space
                   OutputIteratorFalseType to_first_false,
                   PredicateType pred);
 
-   template <class ExecutionSpace,
+   テンプレート <class ExecutionSpace,
              class DataType1, class... Properties1,
              class DataType2, class... Properties2,
              class DataType3, class... Properties3,
              class PredicateType>
-   auto partition_copy(const ExecutionSpace& exespace,                             (3)
+   自動 partition_copy(const ExecutionSpace& exespace,                             (3)
                        const ::Kokkos::View<DataType1, Properties1...>& view_from,
                        const ::Kokkos::View<DataType2, Properties2...>& view_dest_true,
                        const ::Kokkos::View<DataType3, Properties3...>& view_dest_false,
                        PredicateType pred);
 
-   template <class ExecutionSpace,
+   テンプレート <class ExecutionSpace,
              class DataType1, class... Properties1,
              class DataType2, class... Properties2,
              class DataType3, class... Properties3,
              class PredicateType>
-   auto partition_copy(const std::string& label,                                   (4)
+   自動 partition_copy(const std::string& label,                                   (4)
                        const ExecutionSpace& exespace,
                        const ::Kokkos::View<DataType1, Properties1...>& view_from,
                        const ::Kokkos::View<DataType2, Properties2...>& view_dest_true,
                        const ::Kokkos::View<DataType3, Properties3...>& view_dest_false,
                        PredicateType pred);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class InputIteratorType,
+   テンプレート <class TeamHandleType, class InputIteratorType,
              class OutputIteratorTrueType, class OutputIteratorFalseType,
              class PredicateType>
    KOKKOS_FUNCTION
@@ -85,50 +85,50 @@ Overload set accepting a team handle
                OutputIteratorTrueType to_first_true,
                OutputIteratorFalseType to_first_false, PredicateType pred);
 
-   template <class TeamHandleType, class DataType1, class... Properties1,
+   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
        class DataType2, class... Properties2, class DataType3,
        class... Properties3, class PredicateType>
    KOKKOS_FUNCTION
-   auto partition_copy(const TeamHandleType& teamHandle,                           (6)
+   自動 partition_copy(const TeamHandleType& teamHandle,                           (6)
        const ::Kokkos::View<DataType1, Properties1...>& view_from,
        const ::Kokkos::View<DataType2, Properties2...>& view_dest_true,
        const ::Kokkos::View<DataType3, Properties3...>& view_dest_false,
        PredicateType pred);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicy　使用時に、並列領域内部で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::partition_copy_iterator_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::partition_copy_iterator_api_default".
 
-  - 3: The default string is "Kokkos::partition_copy_view_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::partition_copy_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``from_first, from_last``: range of elements to copy from
+- ``from_first, from_last``: コピー元の要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ*　である必要があり、例えば、``Kokkos::Experimental::(c)begin/(c)end``から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲を表す必要があり、つまり、``last >= first`` でなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``to_first_true``: beginning of the range to copy the elements that satisfy ``pred`` to
+- ``to_first_true``:  ``pred`` を満たす要素をコピーする範囲の始め
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - ``*ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``to_first_false``: beginning of the range to copy the elements that do NOT satisfy ``pred`` to
+- ``to_first_false``: ``pred`` を満たさない要素をコピーする範囲の始め
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ*　である必要があり、例えば、``Kokkos::Experimental::(c)begin/(c)end``から返されなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``view_from``: source view of elements to copy from
 
