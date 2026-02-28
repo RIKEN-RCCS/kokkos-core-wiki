@@ -2,111 +2,110 @@
 ``none_of``
 ===========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Returns ``true`` if no element in a range or rank-1 ``View`` satisfies a target unary predicate.
+範囲またはランク1の ``ビュー``　内の要素が、ターゲットの単項述語を満たさない場合に、 ``真`` を返します。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class IteratorType, class Predicate>
-   bool none_of(const ExecutionSpace& exespace,                              (1)
+   テンプレート <class ExecutionSpace, class IteratorType, class Predicate>
+   ブール none_of(const ExecutionSpace& exespace,                              (1)
 		IteratorType first, IteratorType last,
 		Predicate predicate);
 
-   template <class ExecutionSpace, class IteratorType, class Predicate>
-   bool none_of(const std::string& label, const ExecutionSpace& exespace,    (2)
+   テンプレート <class ExecutionSpace, class IteratorType, class Predicate>
+   ブール none_of(const std::string& label, const ExecutionSpace& exespace,    (2)
 		IteratorType first, IteratorType last,
 		Predicate predicate);
 
-   template <class ExecutionSpace, class DataType, class... Properties,      (3)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties,      (3)
 	     class Predicate>
-   bool none_of(const ExecutionSpace& exespace,
+   ブール none_of(const ExecutionSpace& exespace,
 		const ::Kokkos::View<DataType, Properties...>& v,
 		Predicate predicate);
 
-   template <class ExecutionSpace, class DataType, class... Properties,
+   テンプレート <class ExecutionSpace, class DataType, class... Properties,
 	     class Predicate>
-   bool none_of(const std::string& label, const ExecutionSpace& exespace,    (4)
+    none_of(const std::string& label, const ExecutionSpace& exespace,    (4)
 		const ::Kokkos::View<DataType, Properties...>& v,
 		Predicate predicate);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType, class Predicate>
+   テンプレート <class TeamHandleType, class IteratorType, class Predicate>
    KOKKOS_FUNCTION
-   bool none_of(const TeamHandleType& teamHandle,                            (5)
+   ブール none_of(const TeamHandleType& teamHandle,                            (5)
 		IteratorType first, IteratorType last,
 		Predicate predicate);
 
-   template <class TeamHandleType, class DataType, class... Properties,
+   テンプレート <class TeamHandleType, class DataType, class... Properties,
 	     class Predicate>
    KOKKOS_FUNCTION
-   bool none_of(const TeamHandleType& teamHandle,                           (6)
+   ブール none_of(const TeamHandleType& teamHandle,                           (6)
 		const ::Kokkos::View<DataType, Properties...>& v,
 		Predicate predicate);
 
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::none_of_iterator_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::none_of_iterator_api_default".
 
-  - 3: The default string is "Kokkos::none_of_view_api_default"
+  - 3: デフォルト文字列は、 "Kokkos::none_of_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first, last``: range of elements to search in
+- ``first, last``: 検索対象の要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲を表す必要があり、つまり、 ``last >= first``　でなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view``:
+- ``ビュー``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``pred``: *unary* functor such that ``pred(v)`` must be valid to be called from the execution space passed,
-  or the execution space associated with the team handle, and convertible to bool for every argument ``v``
-  of type ``value_type``, where ``value_type`` is the value type of ``IteratorType`` or ``view``
-  and must not modify ``v``.
+- ``pred``: ``pred(v)`` が、引数として渡された実行空間、またはチームハンドルに関連付けられた実行空間から呼び出されるために、有効でなければならず、
+  型 ``value_type``　のあらゆる引数 ``v``についてブール型に変換可能である *一項* ファンクタであり、ここで ``value_type`` は、``IteratorType`` または ``view``の値型であり、
+  ``v``を変更してはなりません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-     struct CustomPredicate{
+     構造体 CustomPredicate{
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const;
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Returns ``true`` if no elements in the range or ``view`` satisfy the unary predicate,
-or if the range or ``view`` are empty. Returns ``false`` otherwise.
+範囲またはビュー内の要素が単項述語を満たさない場合、
+あるいは範囲または　``ビュー`` が空の場合、 ``真``  を返します。それ以外の場合は  ``偽``　を返します。
