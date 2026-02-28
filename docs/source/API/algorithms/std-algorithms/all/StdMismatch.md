@@ -107,7 +107,7 @@ Kokkos::pair<IteratorType1, IteratorType2> mismatch(const std::string& label,
   };
  ```
 
-## Return
+## 返し
 
 - (1,2) - Kokkos::pair, ここでは、 `.first` および `.second` が `operator==` が偽に評価されるIteratorType1 および IteratorType2 インスタンスです。 
 - (3,4) - Kokkos::pair, ここでは、 `.first` および `.second` が `pred` が偽に評価され IteratorType1 およに IteratorType2  インスタンスです。
