@@ -142,7 +142,7 @@ OutputIteratorType inclusive_scan(const std::string& label,                     
  `first_dest` (1,2) の範囲の始め、または `view_dest` (3,4)　に結果を書き込みます。
 
 - 5,6,7,8: 二つの要素を結合するために、二項演算子 `bin_op` を用いて、範囲 `[first_from, last_from)` (5,6) に対して、
-- あるいは view_from` (7,8) に対して、インクルーシブプレフィックススキャンを計算し、
+- あるいは view_from` (7,8) 　に対して、インクルーシブプレフィックススキャンを計算し、
  `first_dest` (5,6) の範囲の始め、または `view_dest` (7,8)　に結果を書き込みます。
 
 - 9,10,11,12: 二つの要素および初期値としての `init`　を結合するために、二項演算子 `bin_op` を用いて、範囲 `[first_from, last_from)` (9,10) に対して、
