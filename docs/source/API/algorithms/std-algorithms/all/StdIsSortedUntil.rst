@@ -1,118 +1,119 @@
 ``is_sorted_until``
 ===================
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``Kokkos_StdAlgorithms.hpp``
 
-Description
+ディスクリプション
 -----------
 
-Finds the largest range beginning at ``first`` or at ``Kokkos::Experimental::begin(view)`` in which the elements are sorted in non-descending order. Comparison between elements is done via ``operator<`` or the binary functor ``comp``.
+``first`` または ``Kokkos::Experimental::begin(view)`` から始まる範囲の中で、要素が降順でない順序でソートされている最大の範囲を見つけます。 要素間の比較は、``operator<`` または二項ファンクタ ``comp`` 経由で行われます。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class IteratorType>
+   テンプレート <class ExecutionSpace, class IteratorType>
    IteratorType is_sorted_until(const ExecutionSpace& exespace,                     (1)
                                 IteratorType first, IteratorType last);
 
-   template <class ExecutionSpace, class IteratorType>
+   テンプレート <class ExecutionSpace, class IteratorType>
    IteratorType is_sorted_until(const std::string& label,                           (2)
                                 const ExecutionSpace& exespace,
                                 IteratorType first, IteratorType last);
 
-   template <class ExecutionSpace, class IteratorType, class ComparatorType>
+   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
    IteratorType is_sorted_until(const ExecutionSpace& exespace,                     (3)
                                 IteratorType first, IteratorType last,
                                 ComparatorType comp);
 
-   template <class ExecutionSpace, class IteratorType, class ComparatorType>
+   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
    IteratorType is_sorted_until(const std::string& label,                           (4)
                                 const ExecutionSpace& exespace,
                                 IteratorType first, IteratorType last,
                                 ComparatorType comp);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
-   auto is_sorted_until(const ExecutionSpace& exespace,                             (5)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   自動 is_sorted_until(const ExecutionSpace& exespace,                             (5)
                         const Kokkos::View<DataType, Properties...>& view);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
-   auto is_sorted_until(const std::string& label,                                   (6)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   自動 is_sorted_until(const std::string& label,                                   (6)
                         const ExecutionSpace& exespace,
                         const Kokkos::View<DataType, Properties...>& view);
 
-   template <
-      class ExecutionSpace,
-      class DataType, class... Properties, class ComparatorType>
-   auto is_sorted_until(const ExecutionSpace& exespace,                             (7)
+   テンプレート <
+      クラス ExecutionSpace,
+      クラス DataType, class... Properties, class ComparatorType>
+   自動 is_sorted_until(const ExecutionSpace& exespace,                             (7)
                         const Kokkos::View<DataType, Properties...>& view,
                         ComparatorType comp);
 
-   template <
-      class ExecutionSpace,
-      class DataType, class... Properties, class ComparatorType>
-   auto is_sorted_until(const std::string& label, const ExecutionSpace& exespace,   (8)
+   テンプレート <
+      クラス ExecutionSpace,
+      クラス DataType, class... Properties, class ComparatorType>
+   自動 is_sorted_until(const std::string& label, const ExecutionSpace& exespace,   (8)
                         const Kokkos::View<DataType, Properties...>& view,
                         ComparatorType comp);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType>
+   テンプレート <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType is_sorted_until(const TeamHandleType& teamHandle,                   (9)
                                 IteratorType first, IteratorType last);
 
-   template <class TeamHandleType, class DataType, class... Properties>
+   テンプレート <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
-   auto is_sorted_until(const TeamHandleType& teamHandle,                           (10)
+   自動 is_sorted_until(const TeamHandleType& teamHandle,                           (10)
                         const Kokkos::View<DataType, Properties...>& view);
 
-   template <class TeamHandleType, class IteratorType, class ComparatorType>
+   テンプレート <class TeamHandleType, class IteratorType, class ComparatorType>
    KOKKOS_FUNCTION
    IteratorType is_sorted_until(const TeamHandleType& teamHandle,                   (11)
                                 IteratorType first, IteratorType last,
                                 ComparatorType comp);
 
-   template <
-      class TeamHandleType,
-      class DataType, class... Properties, class ComparatorType>
+   テンプレート <
+      クラス TeamHandleType,
+      クラス DataType, class... Properties, class ComparatorType>
    KOKKOS_FUNCTION
-   auto is_sorted_until(const TeamHandleType& teamHandle,                           (12)
+   自動 is_sorted_until(const TeamHandleType& teamHandle,                           (12)
                         const Kokkos::View<DataType, Properties...>& view,
                         ComparatorType comp);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |IsSorted| replace:: ``is_sorted``
+.. |IsSorted| 置換:: ``is_sorted``
 .. _IsSorted: ./StdIsSorted.html
 
-- ``exespace``, ``teamHandle``, ``first``, ``last``, ``view``, ``comp``: same as in |IsSorted|_
+- ``exespace``, ``teamHandle``, ``first``, ``last``, ``view``, ``comp``:  |IsSorted|_　と同様。
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace``
+  - ``exespace``　からアクセス可能でなければなりません。
 
-  - 1 & 3: The default string is "Kokkos::is_sorted_until_iterator_api_default"
+  - 1 & 3: デフォルト文字列は、 "Kokkos::is_sorted_until_iterator_api_default"
 
-  - 5 & 7: The default string is "Kokkos::is_sorted_until_view_api_default"
+  - 5 & 7: デフォルト文字列は、 "Kokkos::is_sorted_until_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-Return Value
+
+戻り値
 ~~~~~~~~~~~~
 
-- The last iterator ``it`` for which range ``[first, it)`` is sorted and where the following is true: ``std::is_same_v<decltype(it), IteratorType>``, or for which range ``[Kokkos::Experimental::begin(view), it)`` is sorted. For this second case, note that ``it`` is computed as: ``Kokkos::Experimental::begin(view) + increment`` where ``increment`` is found in the algorithm.
+- 範囲 ``[first, it)`` がソートされる最後のイテレータ ``it``およびかつ以下の条件が真である場合: ``std::is_same_v<decltype(it), IteratorType>``、または範囲　``[Kokkos::Experimental::begin(view), it)``　がソートされている場合。 この2番目の事例については、以下の通りに``it``　が計算されることに注意してください: ``Kokkos::Experimental::begin(view) + ``、ここで  ``increment`` は、アルゴリズム内に認められます。
