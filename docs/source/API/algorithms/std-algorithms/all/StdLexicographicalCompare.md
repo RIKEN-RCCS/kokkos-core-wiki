@@ -70,26 +70,26 @@
 Elements (1,2,3,4) are compared using the `<` operator.
 Elements (5,6,7,8) are compared using `comp`.
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance
+  - execution space instance実行空間インスタンス
 
-- `label`:
-    - 1,5: The default string is "Kokkos::lexicographical_compare_iterator_api_default".
-    - 3,7: The default string is "Kokkos::lexicographical_compare_view_api_default".
+- `ラベル`:
+    - 1,5: デフォルト文字列は、 "Kokkos::lexicographical_compare_iterator_api_default".
+    - 3,7: デフォルト文字列は、 "Kokkos::lexicographical_compare_view_api_default".
 
 - `first1`, `last1`, `first2`, `last2`:
-  - range of elements to compare
-  - must be *random access iterators*
-  - must represent valid ranges, i.e., `last1 >= first1` and `last2 >= first2` 
-  - must be accessible from `exespace`
+  - 比較対象の要素の範囲
+  - *ランダムアクセスイテレータ*　でなければなりません。
+  - 有効な範囲、つまり `last1 >= first1` および `last2 >= first2`　を表さなければなりません。
+  - `exespace`からアクセス可能でなければなりません。
 
 - `view1`, `view2`:
-  - views to compare
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - 比較対象のビュー
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - ``exespace`からアクセス可能でなければなりません。
 
-- `pred` - similar to [`equal`](./StdEqual)
+- `pred` -  [`equal`](./StdEqual)　と同様。
 
 
