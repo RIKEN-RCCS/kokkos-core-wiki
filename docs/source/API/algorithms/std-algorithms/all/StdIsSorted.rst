@@ -115,35 +115,32 @@
 
   - 有効範囲、つまり、 ``last >= first``　を表さなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view``:
+- ``ビュー``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``comp``:
 
-  - *binary* functor returning ``true`` if the first argument is *less than* the second argument;
-    ``comp(a,b)`` must be valid to be called from the execution space passed,
-    and convertible to bool for every pair of arguments ``a,b`` of type ``value_type``,
-    where ``value_type`` is the value type of ``IteratorType`` (for 1,2,5,6)
-    or the value type of ``view`` (for 3,4,7,8) and must not modify ``a,b``.
+  - *二項*　ファンクタで、最初の引数が、2番目の引数　*より小さい*　場合に、``真``を返します;
+    ``comp(a,b)``は、 渡された実行空間から呼び出されるためには有効である必要があり、そして、 型　``value_type``　の引数　``a,b``　のすべてのペアについて、bool型に変換可能で、そこでは、``value_type``　が ``IteratorType`` (for 1,2,5,6について)　の値型、または ``ビュー`` (3,4,7,8について)　の値型であり、 ``a,b``　を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-     struct Comparator
+     構造体 コンパレータ
      {
        KOKKOS_INLINE_FUNCTION
-       bool operator()(const value_type & a, const value_type & b) const {
+       ブール operator()(const value_type & a, const value_type & b) const {
          return /* true if a is less than b, based on your logic of "less than" */;
        }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Returns ``true`` if the elements are sorted in descending order.
+要素が降順でソートされる場合に、 ``真``　を返します。
