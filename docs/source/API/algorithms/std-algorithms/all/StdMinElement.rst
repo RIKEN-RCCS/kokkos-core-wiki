@@ -1,183 +1,180 @@
 ``min_element``
 ===============
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Finds the smallest element in a range or in a rank-1 ``View`` using either ``operator<`` to compare two elements or a user-provided comparison operator.
+2つの要素の比較には、``operator<``　を使用するか、ユーザーが提供する比較演算子を使用して、範囲内またはランク1の ``ビュー`` 内で最小の要素を検索します。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class IteratorType>
-   auto min_element(const ExecutionSpace& exespace,                        (1)
+   テンプレート <class ExecutionSpace, class IteratorType>
+   自動 min_element(const ExecutionSpace& exespace,                        (1)
                     IteratorType first, IteratorType last);
 
-   template <class ExecutionSpace, class IteratorType>
-   auto min_element(const std::string& label,                              (2)
+   テンプレート <class ExecutionSpace, class IteratorType>
+   自動 min_element(const std::string& label,                              (2)
                     const ExecutionSpace& exespace,
                     IteratorType first, IteratorType last);
 
-   template <class ExecutionSpace, class IteratorType, class ComparatorType>
-   auto min_element(const ExecutionSpace& exespace,                        (3)
+   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
+   自動 min_element(const ExecutionSpace& exespace,                        (3)
                     IteratorType first, IteratorType last,
                     ComparatorType comp);
 
-   template <class ExecutionSpace, class IteratorType, class ComparatorType>
-   auto min_element(const std::string& label,                              (4)
+   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
+   自動 min_element(const std::string& label,                              (4)
                     const ExecutionSpace& exespace,
                     IteratorType first, IteratorType last,
                     ComparatorType comp);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
-   auto min_element(const ExecutionSpace& exespace,                        (5)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   自動 min_element(const ExecutionSpace& exespace,                        (5)
                     const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
-   auto min_element(const std::string& label,                              (6)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   自動 min_element(const std::string& label,                              (6)
                     const ExecutionSpace& exespace,
                     const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
-   auto min_element(const ExecutionSpace& exespace,                        (7)
+   テンプレート <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
+   自動 min_element(const ExecutionSpace& exespace,                        (7)
                     const ::Kokkos::View<DataType, Properties...>& view,
                     ComparatorType comp);
 
-   template <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
-   auto min_element(const std::string& label,                              (8)
+   テンプレート <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
+   自動 min_element(const std::string& label,                              (8)
                     const ExecutionSpace& exespace,
                     const ::Kokkos::View<DataType, Properties...>& view,
                     ComparatorType comp);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType>
+   テンプレート <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
-   auto min_element(const TeamHandleType& teamHandle,                      (9)
+   自動 min_element(const TeamHandleType& teamHandle,                      (9)
                     IteratorType first, IteratorType last);
 
-   template <class TeamHandleType, class DataType, class... Properties>
+   テンプレート <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
-   auto min_element(const TeamHandleType& teamHandle,                      (10)
+   自動 min_element(const TeamHandleType& teamHandle,                      (10)
                     const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class TeamHandleType, class IteratorType, class ComparatorType>
+   テンプレート <class TeamHandleType, class IteratorType, class ComparatorType>
    KOKKOS_FUNCTION
-   auto min_element(const TeamHandleType& teamHandle,                      (11)
+   自動 min_element(const TeamHandleType& teamHandle,                      (11)
                     IteratorType first, IteratorType last,
                     ComparatorType comp);
 
-   template <class TeamHandleType, class DataType, class ComparatorType,
+   テンプレート <class TeamHandleType, class DataType, class ComparatorType,
              class... Properties>
    KOKKOS_FUNCTION
    auto min_element(const TeamHandleType& teamHandle,                      (12)
                     const ::Kokkos::View<DataType, Properties...>& view,
                     ComparatorType comp);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1 and 3: The default string is "Kokkos::min_element_iterator_api_default".
+  - 1 および 3: デフォルト文字列は、 "Kokkos::min_element_iterator_api_default".
 
-  - 5 and 7: The default string is "Kokkos::min_element_view_api_default".
+  - 5 および 7: デフォルト文字列は、 "Kokkos::min_element_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first``, ``last``: range of elements to examine
+- ``first``, ``last``: 検証対象の要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - 例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されるなど、*ランダムアクセスイテレータ*　でなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first`` (checked in debug mode)
+  - 有効範囲、つまり、 ``last >= first``　を表さなければなりません。（デバッグモードで確認済み）
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view``: Kokkos view to examine
+- ``ビュー``: 検証対象の　Kokkos ビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``comp``:
 
-  - *binary* functor returning ``true`` if the first argument is *less than* the second argument;
-    ``comp(a,b)`` must be valid to be called from the execution space passed,
-    and convertible to bool for every pair of arguments ``a,b`` of type
-    ``value_type``, where ``value_type`` is the value type of ``IteratorType`` (for 1,2,3,4)
-    or the value type of ``view`` (for 5,6,7,8) and must not modify ``a,b``.
+  - 第1の引数が、第2の引数　*より小さい*　場合に　``真``を返す*二項*　ファンクタ;
+    ``comp(a,b)``は、 渡された実行空間から呼び出されるためには有効である必要があり、そして、 型　``value_type``　の引数　``a,b``　のすべてのペアについて、bool型に変換可能で、そこでは、``value_type``　が ``IteratorType`` (1,2,3,4について)　の値型、または ``ビュー`` (5,6,7,8について)　の値型であり、 ``a,b``　を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-     struct Comparator
+     構造体 コンパレータ
      {
        KOKKOS_INLINE_FUNCTION
-       bool operator()(const value_type & a, const value_type & b) const {
-         return /* true if a is less than b, based on your logic of "less than" */;
+       ブール operator()(const value_type & a, const value_type & b) const {
+         返し /*/　"より小さい"　という論理に基づき、a　が　b　より小さい場合;
        }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Returns iterator to the smallest element.
+イテレータを最小要素に返します。
 
-The following special cases apply:
+以下の特例が適用されます:
 
-- if several elements are equivalent to the smallest element, it returns the iterator to the *first* such element.
+- 複数の要素が最小の要素と同等である場合、そのような要素のうち *最初* の要素へのイテレータを返します。
 
-- if the range ``[first, last)`` is empty it returns ``last``.
+- 範囲 ``[first, last)`` が空である場合、それは ``last``　を返します。
 
-- if ``view`` is empty, it returns ``Kokkos::Experimental::end(view)``.
+- ``ビュー`` が空である場合、 それは ``Kokkos::Experimental::end(view)``　を返します。
 
-Example
+
+例
 ~~~~~~~
 
 .. code-block:: cpp
 
-   namespace KE = Kokkos::Experimental;
+   名前空間 KE = Kokkos::Experimental;
    Kokkos::View<double*> a("a", 13);
-   // fill a somehow
+   // a を何らかの方法で満たす
 
-   auto res = KE::min_element(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a));
+    res = KE::min_element(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a));
 
-   // passing the view directly
-   auto res = KE::min_element(Kokkos::DefaultExecutionSpace(), a);
+   // ビューを直接渡す
+    res = KE::min_element(Kokkos::DefaultExecutionSpace(), a);
 
 
-   // using a custom comparator
-   template <class ValueType1, class ValueType2 = ValueType1>
-   struct CustomLessThanComparator {
+   // カスタムコンパレータを使用
+   テンプレート <class ValueType1, class ValueType2 = ValueType1>
+   構造体 CustomLessThanComparator {
      KOKKOS_INLINE_FUNCTION
-     bool operator()(const ValueType1& a,
+      operator()(const ValueType1& a,
                      const ValueType2& b) const {
-       // here we use < but one can put any custom logic to return true if a is less than b
-       return a < b;
+       // ここでは　<　を使用していますが、a　が　b　より小さい場合に、 a < b　を返すような任意のカスタムロジックを実装することも可能です。;
      }
 
      KOKKOS_INLINE_FUNCTION
      CustomLessThanComparator() {}
    };
 
-   // passing the view directly
-   auto res = KE::min_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanComparator<double>());
+   // ビューを直接渡す
+   自動 res = KE::min_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanComparator<double>());
