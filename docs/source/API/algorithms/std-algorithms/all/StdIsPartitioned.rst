@@ -1,83 +1,85 @@
 ``is_partitioned``
 ==================
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Returns ``true`` if all elements in a range or in a rank-1 ``View`` satisfying
-the predicate ``pred`` appear *before* all elements that don't.
-If the range or the ``view`` is empty, returns ``true``.
+範囲内の全要素、またはランク1の ``View`` 内の全要素が
+述語　``pred`` を満たす場合、 その　*前に* 述語を満たさない要素が存在すれば、`true`を返します。
+範囲または　``ビュー``　が空である場合、 ``真``　を返します。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class InputIterator, class PredicateType>
-   bool is_partitioned(const ExecutionSpace& exespace,                              (1)
+   テンプレート <class ExecutionSpace, class InputIterator, class PredicateType>
+   ブール is_partitioned(const ExecutionSpace& exespace,                              (1)
                        InputIterator first, InputIterator last,
                        PredicateType pred);
 
-   template <class ExecutionSpace, class InputIterator, class PredicateType>
-   bool is_partitioned(const std::string& label, const ExecutionSpace& exespace,    (2)
+   テンプレート <class ExecutionSpace, class InputIterator, class PredicateType>
+   ブール is_partitioned(const std::string& label, const ExecutionSpace& exespace,    (2)
                        InputIterator first, InputIterator last,
                        PredicateType pred);
 
-   template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-   auto is_partitioned(const ExecutionSpace& exespace,
+   テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+   自動 is_partitioned(const ExecutionSpace& exespace,
                        const ::Kokkos::View<DataType, Properties...>& view,         (3)
                        PredicateType pred);
 
-   template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-   auto is_partitioned(const std::string& label, const ExecutionSpace& exespace,
+   テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+   自動 is_partitioned(const std::string& label, const ExecutionSpace& exespace,
                        const ::Kokkos::View<DataType, Properties...>& view,         (4)
                        PredicateType pred);
 
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType, class PredicateType>
+   テンプレート <class TeamHandleType, class IteratorType, class PredicateType>
    KOKKOS_FUNCTION
-   bool is_partitioned(const TeamHandleType& teamHandle, IteratorType first,        (5)
+   ブール is_partitioned(const TeamHandleType& teamHandle, IteratorType first,        (5)
                        IteratorType last, PredicateType pred);
 
-   template <class TeamHandleType, class PredicateType, class DataType,
+   テンプレート <class TeamHandleType, class PredicateType, class DataType,
              class... Properties>
    KOKKOS_FUNCTION
-   bool is_partitioned(const TeamHandleType& teamHandle,                            (6)
+   ブール is_partitioned(const TeamHandleType& teamHandle,                            (6)
                        const ::Kokkos::View<DataType, Properties...>& view,
                        PredicateType pred);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
 
-  - 1: The default string is "Kokkos::is_partitioned_iterator_api_default".
 
-  - 3: The default string is "Kokkos::is_partitioned_view_api_default".
+- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 1:デフォルト文字列は、"Kokkos::is_partitioned_iterator_api_default".
 
-- ``first, last``: range of elements to search in
+  - 3:デフォルト文字列は、"Kokkos::is_partitioned_view_api_default".
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
+
+- ``first, last``: 検索対象となる要素の範囲
+
+  - *ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``から返されなければなりません。
 
   - must represent a valid range, i.e., ``last >= first``
 
