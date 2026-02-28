@@ -1,88 +1,89 @@
 
 # `for_each`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```cpp
-namespace Kokkos{
-namespace Experimental{
+名前空間 Kokkos{
+名前空間 Experimental{
 
-template <class ExecutionSpace, class InputIterator, class UnaryFunctorType>
+テンプレート <class ExecutionSpace, class InputIterator, class UnaryFunctorType>
 void for_each(const ExecutionSpace& exespace,                            (1)
               InputIterator first, InputIterator last,
               UnaryFunctorType functor);
 
-template <class ExecutionSpace, class InputIterator, class UnaryFunctorType>
+テンプレート <class ExecutionSpace, class InputIterator, class UnaryFunctorType>
 void for_each(const std::string& label, const ExecutionSpace& exespace,  (2)
               InputIterator first, InputIterator last,
               UnaryFunctorType functor);
 
-template <class ExecutionSpace, class DataType, class... Properties, class UnaryFunctorType>
+テンプレート <class ExecutionSpace, class DataType, class... Properties, class UnaryFunctorType>
 void for_each(const ExecutionSpace& exespace,
               const Kokkos::View<DataType, Properties...>& view,                      (3)
               UnaryFunctorType functor);
 
-template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
 void for_each(const std::string& label, const ExecutionSpace& exespace,
               const Kokkos::View<DataType, Properties...>& view,                      (4)
               UnaryFunctorType func);
 
-} //end namespace Experimental
-} //end namespace Kokkos
+} //エンド 名前空間 実験的
+} //エンド 名前空間 Kokkos
 ```
 
-## Description
+## ディスクリプション
 
-Applies the UnaryFunctorType `func` to the result of dereferencing each iterator in `[first,last)` for (1,2) and to the view elements in (3,4).
+UnaryFunctorType `func` を、`[first,last)` の各イテレータの参照解除結果（(1,2) の場合）およびビュー要素（(3,4) の場合）に適用します。
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance
+  - 実行空間インスタンス
 
 - `label`:
-  - for 1, the default string is: "Kokkos::for_each_iterator_api_default"
-  - for 3, the default string is: "Kokkos::for_each_view_api_default"
+  - 1　について、デフォルト文字列は、: "Kokkos::for_each_iterator_api_default"
+  - 3　について、デフォルト文字列は、: "Kokkos::for_each_view_api_default"
 
 - `first, last`:
-  - range of elements to operate on
-  - must be *random access iterators*
-  - must represent a valid range, i.e., `last >= first` (this condition is checked in debug mode)
-  - must be accessible from `exespace`
+  - 演算対象の要素の範囲
+  - *ランダムアクセスイテレータ*　でなければなりません。
+  - 有効な範囲、つまり `last >= first` を表さなければなりません　(この条件は、デバッグモード内で確認されます)
+  - `exespace` からアクセス可能でなければなりません。
 
 - `view`:
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - `exespace`　からアクセス可能でなければなりません。
 
 - `func`:
-  - function object called on the all the elements;
-  - The signature of the function should be `func(v)`.
-  - Must be valid to be called from the execution space passed, and must accept every argument `v` of type (possible const) `value_type`, where `value_type` is the value type of `InputIterator`, and must not modify `v`.
-  - must conform to:
+  - すべての要素上で呼び出される関数オブジェクト;
+  - 関数のシグネチャは `func(v)` である必要があります。
+  - 渡された実行空間から呼び出されるためには有効である必要があり、型 `value_type`（定数である可能性があります）の引数 `v` をすべて受け入れる必要がありますが、Must be valid to be called from the execution space passed, and must accept every argument `v` of type (possible const) `value_type`, ここでは、 `value_type` は、`InputIterator`　の値型であり、  `v`を変更してはいけません。
+    
+  - 以下に一致しなければなりません:
   ```cpp
-  struct func
+  構造体 func
   {
      KOKKOS_INLINE_FUNCTION
      void operator()(const /*type needed */ & operand) const { /* ... */; }
 
-     // or, also valid
+     // または、また有効
 
      KOKKOS_INLINE_FUNCTION
      void operator()(/*type needed */ operand) const { /* ... */; }
   };
   ```
 
-## Return
+## 戻り値
 
-(nothing)
+(無し)
 
 
 ## Example
 ```cpp
-namespace KE = Kokkos::Experimental;
+名前空間 KE = Kokkos::Experimental;
 
-template<class ValueType>
-struct IncrementValsFunctor
+テンプレート<class ValueType>
+構造体 IncrementValsFunctor
 {
   const ValueType m_value;
   IncrementValsFunctor(ValueType value) : m_value(value){}
@@ -93,17 +94,17 @@ struct IncrementValsFunctor
   }
 };
 
-auto exespace = Kokkos::DefaultExecutionSpace;
-using view_type = Kokkos::View<exespace, int*>;
+自動 exespace = Kokkos::DefaultExecutionSpace;
+view_type = Kokkos::View<exespace, int*>　を使用;
 view_type a("a", 15);
-// fill "a" somehow
+// 何らかの方法で "a" を満たす
 
-// create functor
+// create functorファンクタを作成
 IncrementValsFunctor<int> p(5);
 
-// Increment each element in "a" by 5.
+//  "a" における各要素を　5 増す。
 KE::for_each(exespace, KE::begin(a), KE::end(a), p);
 
-// assuming OpenMP is enabled, then you can also explicitly call
+// OpenMPが有効になっていると仮定すれば、明示的に以下のように呼び出すことも可能です
 KE::for_each(Kokkos::OpenMP(), KE::begin(a), KE::end(a), p);
 ```
