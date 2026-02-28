@@ -81,65 +81,63 @@
 
   - *ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲を表す必要があり、つまり、 ``last >= first``　でなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+
 
 - ``view``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``pred``:
 
-  - *unary* predicate returning ``true`` for the required element to replace; ``pred(v)``
-    must be valid to be called from the execution space passed, and convertible to bool for every
-    argument ``v`` of type (possible const) ``value_type``, where ``value_type``
-    is the value type of ``IteratorType`` (for 1,2) or the value type of ``view`` (for 3,4),
-    and must not modify ``v``.
+  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型　value_type　の引数　``v``　（constの可能性）のすべてのペアについて、bool型に変換可能で、そこでは、``value_type``が、``InputIteratorType``　 (1,2について) の値型、または ``ビュー`` (3,4について)　の値型であり、  ``v``　を変更してはいけません。
 
-  - must conform to:
+
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-     struct Predicate
+     構造体 述語
      {
        KOKKOS_INLINE_FUNCTION
-       bool operator()(const value_type & v) const { return /* ... */; }
+       ブール operator()(const value_type & v) const { return /* ... */; }
 
-       // or, also valid
+       // または、また有効
 
        KOKKOS_INLINE_FUNCTION
-       bool operator()(value_type v) const { return /* ... */; }
+       ブール operator()(value_type v) const { return /* ... */; }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-- ``true``: if range is partitioned according to ``pred`` or if range is empty
-- ``false``: otherwise
+- ``真``: 範囲が``pred``に従って分割されている場合、または範囲が空の場合
+- ``偽``: その他の場合
 
-Example
+例
 ~~~~~~~
 
 .. code-block:: cpp
 
-   namespace KE = Kokkos::Experimental;
+   名前空間 KE = Kokkos::Experimental;
 
-   template<class ValueType>
-   struct IsNegative
+   テンプル<class ValueType>
+   構造体 IsNegative
    {
      KOKKOS_INLINE_FUNCTION
-     bool operator()(const ValueType & operand) const {
+     ブール operator()(const ValueType & operand) const {
        constexpr auto zero = static_cast<ValueType>(0);
-       return (operand < zero);
+       返し (operand < zero);
      }
    };
 
-   using view_type = Kokkos::View<int*>;
+   view_type = Kokkos::View<int*>　を使用;
    view_type a("a", 15);
-   // fill a somehow
+   // fill a somehow何らかの方法で　a を満たす
 
-   auto exespace  = Kokkos::DefaultExecutionSpace;
-   const auto res = KE::is_partitioned(exespace, KE::cbegin(a), KE::cend(a), IsNegative<int>());
+   自動 exespace  = Kokkos::DefaultExecutionSpace;
+   const 自動 res = KE::is_partitioned(exespace, KE::cbegin(a), KE::cend(a), IsNegative<int>());
