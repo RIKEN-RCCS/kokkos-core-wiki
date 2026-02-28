@@ -70,7 +70,7 @@
 
   - 1　について、デフォルト文字列は、: "Kokkos::find_if_iterator_api_default"
 
-  - 3　について、デフォルト文字列は、 the default string is: "Kokkos::find_if_view_api_default"
+  - 3　について、デフォルト文字列は、: "Kokkos::find_if_view_api_default"
 
   - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
