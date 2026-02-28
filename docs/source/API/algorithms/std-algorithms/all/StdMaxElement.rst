@@ -96,7 +96,7 @@
 
 .. |min_element_link| replace:: ``min_element``
 
-- ``exespace``, ``first``, ``last``, ``view``, ``comp``:  |min_element_link|_　におけるのと同様。
+- ``exespace``, ``first``, ``last``, ``view``, ``comp``:  |min_element_link|_　と同様。
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. _min_element_link: ./StdMinElement.html
