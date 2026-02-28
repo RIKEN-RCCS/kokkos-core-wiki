@@ -2,117 +2,118 @@
 ``is_sorted``
 =============
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Checks if the elements in a range or in a rank-1 ``View`` are sorted in non-descending order using either ``operator<`` to compare two elements or a user-provided comparison operator.
+範囲またはランク1の　``ビュー`` 内の要素が、2つの要素を比較する ``operator<`` またはユーザーが提供した比較演算子を用いて、降順でない順序でソートされているかどうかを確認します。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class IteratorType>
-   bool is_sorted(const ExecutionSpace& exespace,                              (1)
+   テンプレート <class ExecutionSpace, class IteratorType>
+   ブール is_sorted(const ExecutionSpace& exespace,                              (1)
                   IteratorType first, IteratorType last);
 
-   template <class ExecutionSpace, class IteratorType>
-   bool is_sorted(const std::string& label,                                    (2)
+   テンプレート <class ExecutionSpace, class IteratorType>
+   ブール is_sorted(const std::string& label,                                    (2)
                   const ExecutionSpace& exespace,
                   IteratorType first, IteratorType last);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
-   bool is_sorted(const ExecutionSpace& exespace,                              (3)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   ブール is_sorted(const ExecutionSpace& exespace,                              (3)
                   const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
-   bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (4)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   ブール is_sorted(const std::string& label, const ExecutionSpace& exespace,    (4)
                   const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class ExecutionSpace, class IteratorType, class ComparatorType>
-   bool is_sorted(const ExecutionSpace& exespace,                              (5)
+   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
+   ブール is_sorted(const ExecutionSpace& exespace,                              (5)
                   IteratorType first, IteratorType last,
                   ComparatorType comp);
 
-   template <class ExecutionSpace, class IteratorType, class ComparatorType>
-   bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (6)
+   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
+   ブール is_sorted(const std::string& label, const ExecutionSpace& exespace,    (6)
                   IteratorType first, IteratorType last,
                   ComparatorType comp);
 
-   template <class ExecutionSpace, class DataType, class... Properties,
+   テンプレート <class ExecutionSpace, class DataType, class... Properties,
              class ComparatorType>
-   bool is_sorted(const ExecutionSpace& exespace,                              (7)
+   ブール is_sorted(const ExecutionSpace& exespace,                              (7)
                   const ::Kokkos::View<DataType, Properties...>& view,
                   ComparatorType comp);
 
-   template <class ExecutionSpace, class DataType, class... Properties,
+   テンプレート <class ExecutionSpace, class DataType, class... Properties,
              class ComparatorType>
-   bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (8)
+   ブール is_sorted(const std::string& label, const ExecutionSpace& exespace,    (8)
                   const ::Kokkos::View<DataType, Properties...>& view,
                   ComparatorType comp);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType>
+   テンプレート <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
-   bool is_sorted(const TeamHandleType& teamHandle,                            (9)
+   ブール is_sorted(const TeamHandleType& teamHandle,                            (9)
                   IteratorType first, IteratorType last);
 
-   template <class TeamHandleType, class DataType, class... Properties>
+   テンプレート <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
-   bool is_sorted(const TeamHandleType& teamHandle,                            (10)
+   ブール is_sorted(const TeamHandleType& teamHandle,                            (10)
                   const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class TeamHandleType, class IteratorType, class ComparatorType>
+   テンプレート <class TeamHandleType, class IteratorType, class ComparatorType>
    KOKKOS_FUNCTION
-   bool is_sorted(const TeamHandleType& teamHandle,                            (11)
+   ブール is_sorted(const TeamHandleType& teamHandle,                            (11)
                   IteratorType first, IteratorType last,
                   ComparatorType comp);
 
-   template <class TeamHandleType, class DataType, class... Properties,
+   テンプレート <class TeamHandleType, class DataType, class... Properties,
              class ComparatorType>
    KOKKOS_FUNCTION
-   bool is_sorted(const TeamHandleType& teamHandle,                            (12)
+   ブール is_sorted(const TeamHandleType& teamHandle,                            (12)
                   const ::Kokkos::View<DataType, Properties...>& view,
                   ComparatorType comp);
 
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
 
-  - 1: The default string is "Kokkos::is_sorted_iterator_api_default".
+- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 3: The default string is "Kokkos::is_sorted_view_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::is_sorted_iterator_api_default".
 
-  - 5: The default string is "Kokkos::is_sorted_iterator_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::is_sorted_view_api_default".
 
-  - 7: The default string is "Kokkos::is_sorted_view_api_default".
+  - 5: デフォルト文字列は、 "Kokkos::is_sorted_iterator_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 7: デフォルト文字列は、 "Kokkos::is_sorted_view_api_default".
 
-- ``first, last``: range of elements to search in
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+- ``first, last``: 検索対象の要素の範囲
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されるなど、*ランダムアクセスイテレータ*　でなければなりません。
+
+  - 有効範囲、つまり、 ``last >= first``　を表さなければなりません。
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
