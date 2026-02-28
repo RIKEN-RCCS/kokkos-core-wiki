@@ -65,38 +65,37 @@
 パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ````: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - for 1, the default string is: "Kokkos::move_backward_iterator_api_default"
+  - 1　について、デフォルト文字列は、: "Kokkos::move_backward_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::move_backward_view_api_default"
+  - 3　について、デフォルト文字列は、: "Kokkos::move_backward_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first``, ``last``, ``d_last``: range of elements to move from and to in a reverse order
+- ``first``, ``last``, ``d_last``: 逆順での移動元および移動先の要素の範囲
 
-  - must be *random access iterator*
+  - *ランダムアクセスイテレータ*　でなければなりません
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲を表す必要があり、つまり、 ``last >= first``　でなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``source``, ``dest``: views to move from and to in a reverse order
+- ``source``, ``dest``: 逆順での移動元および移動先へのビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります
 
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-- 1,3,5: an iterator equal to ``d_last - Kokkos::Experimental::distance(first, last)``
+- 1,3,5: ``d_last - Kokkos::Experimental::distance(first, last)``　に等しいイテレータ。
 
-- 2,4,6: an iterator equal to
-  ``Kokkos::Experimental::end(dest) -
-  Kokkos::Experimental:distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))``
+- 2,4,6: ``Kokkos::Experimental::end(dest) -
+  Kokkos::Experimental:distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))``　に等しいイテレータ。
