@@ -38,9 +38,7 @@
    テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
    自動 find(const std::string& label, const ExecutionSpace& exespace,                  (4)
 	     const Kokkos::View<DataType, Properties...>& view,
-	     const T& value);
-
-チームハンドルを受け入れるオーバーロードセット
+	     const T& valuにおけるの
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
