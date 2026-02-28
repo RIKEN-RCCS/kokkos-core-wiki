@@ -2,67 +2,67 @@
 ``move_backward``
 =================
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Moves the elements from the range or from a rank-1 ``View`` in reverse order
-to the range beginning at ``d_last`` or to a target rank-1 ``View``.
+範囲内の要素、またはランク1の　``ビュー``　から、
+``d_last``　で始まる範囲、またはターゲットとなるランク1の ``ビュー``へ、逆順で移動します。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType2 move_backward(const ExecutionSpace& ex, IteratorType1 first,          (1)
                                IteratorType1 last, IteratorType2 d_last);
 
-   template <class ExecutionSpace, class DataType1, class... Properties1,
+   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   auto move_backward(const ExecutionSpace& ex,                                        (2)
+   自動 move_backward(const ExecutionSpace& ex,                                        (2)
                       const ::Kokkos::View<DataType1, Properties1...>& source,
                       ::Kokkos::View<DataType2, Properties2...>& dest);
 
 
-   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType2 move_backward(const std::string& label, const ExecutionSpace& ex,     (3)
                                IteratorType1 first, IteratorType1 last,
                                IteratorType2 d_last);
 
-   template <class ExecutionSpace, class DataType1, class... Properties1,
+   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   auto move_backward(const std::string& label, const ExecutionSpace& ex,              (4)
+   自動 move_backward(const std::string& label, const ExecutionSpace& ex,              (4)
                       const ::Kokkos::View<DataType1, Properties1...>& source,
                       ::Kokkos::View<DataType2, Properties2...>& dest);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType1, class IteratorType2>
+   テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
    IteratorType2 move_backward(const TeamHandleType& teamHandle, IteratorType1 first,  (5)
                                IteratorType1 last, IteratorType2 d_last);
 
-   template <class TeamHandleType, class DataType1, class... Properties1,
+   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   auto move_backward(const TeamHandleType& teamHandle,                                (6)
+   自動 move_backward(const TeamHandleType& teamHandle,                                (6)
                       const ::Kokkos::View<DataType1, Properties1...>& source,
                       ::Kokkos::View<DataType2, Properties2...>& dest);
 
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - ``exespace``: execution space instance
