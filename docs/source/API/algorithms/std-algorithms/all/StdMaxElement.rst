@@ -126,7 +126,7 @@
 
 - 範囲 ``[first, last)`` が空である場合、それは ``last``　を返します。
 
-- if ``ビュー`` が空である場合、 それは ``Kokkos::Experimental::end(view)``　を返します。
+- ``ビュー`` が空である場合、 それは ``Kokkos::Experimental::end(view)``　を返します。
 
 例
 ~~~~~~~
