@@ -135,7 +135,7 @@ OutputIteratorType inclusive_scan(const std::string& label,                     
 } //エンド 名前空間 Kokkos
 ```
 
-## Descriptionディスクリプション
+## ディスクリプション
 
 - 1,2,3,4: 二つの要素を結合するために、二項演算子 `bin_op` を用いて、範囲 `[first_from, last_from)` (1,2) に対して、
 - あるいは view_from` (3,4) に対して、インクルーシブプレフィックススキャンを計算し、
@@ -151,7 +151,7 @@ OutputIteratorType inclusive_scan(const std::string& label,                     
 
 インクルーシブとは、i番目の入力要素が、i番目の和に含まれることを意味します。
 
-## Parameters and Requirementsパラメータおよび要件
+## パラメータおよび要件
 
 - `exespace`, `first_from`, `first_last`, `first_dest`, `view_from`, `view_dest`, `bin_op`:
   -  [`exclusive_scan`](./StdExclusiveScan)　と同様。
