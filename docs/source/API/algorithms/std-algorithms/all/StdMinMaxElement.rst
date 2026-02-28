@@ -1,155 +1,154 @@
 ``minmax_element``
 ==================
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Finds the smallest and largest elements in a range or in a rank-1 ``View`` using either ``operator<`` to compare two elements or a user-provided comparison operator.
+2つの要素の比較には、``operator<``　を使用するか、ユーザーが提供する比較演算子を使用して、範囲内またはランク1の ``ビュー`` 内で最小および最大の要素を検索します。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class IteratorType>
-   auto minmax_element(const ExecutionSpace& exespace,                        (1)
+   テンプレート <class ExecutionSpace, class IteratorType>
+   自動 minmax_element(const ExecutionSpace& exespace,                        (1)
                        IteratorType first, IteratorType last);
 
-   template <class ExecutionSpace, class IteratorType>
-   auto minmax_element(const std::string& label,                              (2)
+   テンプレート <<class ExecutionSpace, class IteratorType>
+   自動 minmax_element(const std::string& label,                              (2)
                        const ExecutionSpace& exespace,
                        IteratorType first, IteratorType last);
 
-   template <class ExecutionSpace, class IteratorType, class ComparatorType>
-   auto minmax_element(const ExecutionSpace& exespace,                        (3)
+   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
+   自動 minmax_element(const ExecutionSpace& exespace,                        (3)
                        IteratorType first, IteratorType last,
                        ComparatorType comp);
 
-   template <class ExecutionSpace, class IteratorType, class ComparatorType>
-   auto minmax_element(const std::string& label,                              (4)
+   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
+   自動 minmax_element(const std::string& label,                              (4)
                        const ExecutionSpace& exespace,
                        IteratorType first, IteratorType last,
                        ComparatorType comp);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
-   auto minmax_element(const ExecutionSpace& exespace,                        (5)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   自動 minmax_element(const ExecutionSpace& exespace,                        (5)
                        const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
-   auto minmax_element(const std::string& label,                              (6)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   自動 minmax_element(const std::string& label,                              (6)
                        const ExecutionSpace& exespace,
                        const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
-   auto minmax_element(const ExecutionSpace& exespace,                        (7)
+   テンプレート <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
+   自動 minmax_element(const ExecutionSpace& exespace,                        (7)
                        const ::Kokkos::View<DataType, Properties...>& view,
                        ComparatorType comp);
 
-   template <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
-   auto minmax_element(const std::string& label,                              (8)
+   テンプレート <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
+    minmax_element(const std::string& label,                              (8)
                        const ExecutionSpace& exespace,
                        const ::Kokkos::View<DataType, Properties...>& view,
                        ComparatorType comp);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType>
+   テンプレート <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
-   auto minmax_element(const TeamHandleType& teamHandle,                      (9)
+   自動 minmax_element(const TeamHandleType& teamHandle,                      (9)
                        IteratorType first, IteratorType last);
 
-   template <class TeamHandleType, class IteratorType, class ComparatorType>
+   テンプレート <class TeamHandleType, class IteratorType, class ComparatorType>
    KOKKOS_FUNCTION
-   auto minmax_element(const TeamHandleType& teamHandle,                      (10)
+   自動 minmax_element(const TeamHandleType& teamHandle,                      (10)
                        IteratorType first, IteratorType last,
                        ComparatorType comp);
 
-   template <class TeamHandleType, class DataType, class... Properties>
+   テンプレート <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
-   auto minmax_element(const TeamHandleType& teamHandle,                      (11)
+   自動 minmax_element(const TeamHandleType& teamHandle,                      (11)
                        const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class TeamHandleType, class DataType, class ComparatorType,
+   テンプレート <class TeamHandleType, class DataType, class ComparatorType,
              class... Properties>
    KOKKOS_FUNCTION
-   auto minmax_element(const TeamHandleType& teamHandle,                      (12)
+   自動 minmax_element(const TeamHandleType& teamHandle,                      (12)
                        const ::Kokkos::View<DataType, Properties...>& view,
                        ComparatorType comp);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. _min_element_link: ./StdMinElement.html
 
 .. |min_element_link| replace:: ``min_element``
 
-- ``exespace``, ``first``, ``last``, ``view``, ``comp``: same as in |min_element_link|_
+- ``exespace``, ``first``, ``last``, ``view``, ``comp``: same as in |min_element_link|_　と同様。
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス。
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1 and 3: The default string is "Kokkos::minmax_element_iterator_api_default".
+  - 1 および 3: デフォルト文字列は、 "Kokkos::minmax_element_iterator_api_default"。
 
-  - 5 and 7: The default string is "Kokkos::minmax_element_view_api_default".
+  - 5 および 7: デフォルト文字列は、 "Kokkos::minmax_element_view_api_default"。
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-A Kokkos pair of iterators to the smallest and largest elements in that order.
+その順序における、最小要素および最大要素へのイテレータの　Kokkos　ペア。
 
-The following special cases apply:
+以下の特例が適用されます:
 
-- if the range ``[first, last)`` is empty it returns ``Kokkos::pair(first, first)``.
+- 範囲 ``[first, last)`` が空である場合、それは ``Kokkos::pair(first, first)``　を返します。
 
-- if ``view`` is empty, it returns ``Kokkos::pair(Kokkos::Experimental::begin(view), Kokkos::Experimental::begin(view))``.
+- ``ビュー`` が空である場合、 それは ``Kokkos::pair(Kokkos::Experimental::begin(view), Kokkos::Experimental::begin(view))``　を返します。
 
-- if several elements are equivalent to the smallest element, the iterator to the *first* such element is returned.
+- 複数の要素が最小の要素と同等である場合、そのような要素のうち *最初* の要素へのイテレータを返します。
 
-- if several elements are equivalent to the largest element, the iterator to the *last* such element is returned.
+- 複数の要素が最大の要素と同等である場合、そのような要素のうち *最後* の要素へのイテレータを返します。
 
-Example
+例
 ~~~~~~~
 
 .. code-block:: cpp
 
-   namespace KE = Kokkos::Experimental;
+   名前空間 KE = Kokkos::Experimental;
    Kokkos::View<double*> a("a", 11);
 
-   auto itPair = KE::minmax_element(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a));
+    itPair = KE::minmax_element(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a));
 
-   // passing the view directly
-   auto itPair = KE::minmax_element(Kokkos::DefaultExecutionSpace(), a);
+   // ビューを直接渡す
+    itPair = KE::minmax_element(Kokkos::DefaultExecutionSpace(), a);
 
 
-   // using a custom comparator
-   template <class ValueType1, class ValueType2 = ValueType1>
-   struct CustomLessThanComparator {
+   // カスタムコンパレータを使用
+   テンプレート <class ValueType1, class ValueType2 = ValueType1>
+   構造体 CustomLessThanComparator {
      KOKKOS_INLINE_FUNCTION
-     bool operator()(const ValueType1& a,
+     ブール operator()(const ValueType1& a,
                      const ValueType2& b) const {
-       // here we use < but one can put any custom logic to return true if a is less than b
-       return a < b;
+       // ここでは　<　を使用していますが、a　が　b　より小さい場合に、a < b　を返すような任意のカスタムロジックを実装することも可能です;
      }
 
      KOKKOS_INLINE_FUNCTION
      CustomLessThanComparator() {}
    };
 
-   // passing the view directly
-   auto res = KE::minmax_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanComparator<double>());
+   // ビューを直接渡す
+   自動 res = KE::minmax_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanComparator<double>());
