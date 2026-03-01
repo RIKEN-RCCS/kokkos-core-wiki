@@ -1,105 +1,105 @@
 ``remove``
 ==========
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``Kokkos_StdAlgorithms.hpp``
 
-Description
+ディスクリプション
 -----------
 
-Removes all elements equal to ``value`` by shifting via move assignment the elements in a range or in ``View`` such that the elements not to be removed appear in the beginning of the range or in the beginning of ``View``. Relative order of the elements that remain is preserved and the physical size of the container is unchanged.
+削除されない要素が、範囲の先頭、または　``View`` の先頭に配置されるという条件で、指定された範囲または　``View`　`内の要素を、移動代入によってシフトし、``value``　と等しい要素をすべて削除します。 相対的な順序は保持され、コンテナの物理的なサイズは変更されません。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class Iterator, class ValueType>
-   Iterator remove(const ExecutionSpace& exespace,                       (1)
+   テンプレート <class ExecutionSpace, class Iterator, class ValueType>
+   イテレータ remove(const ExecutionSpace& exespace,                       (1)
                    Iterator first, Iterator last,
                    const ValueType& value);
 
-   template <class ExecutionSpace, class Iterator, class ValueType>
-   Iterator remove(const std::string& label,                             (2)
+   テンプレート <class ExecutionSpace, class Iterator, class ValueType>
+   イテレータ remove(const std::string& label,                             (2)
                    const ExecutionSpace& exespace,
                    Iterator first, Iterator last,
                    const ValueType& value);
 
-   template <
-     class ExecutionSpace,
-     class DataType, class... Properties,
-     class ValueType>
-   auto remove(const ExecutionSpace& exespace,                           (3)
+   テンプレート <
+     クラス ExecutionSpace,
+     クラス DataType, class... Properties,
+     クラス ValueType>
+   自動 remove(const ExecutionSpace& exespace,                           (3)
                const Kokkos::View<DataType, Properties...>& view,
                const ValueType& value);
 
-   template <
-     class ExecutionSpace,
-     class DataType, class... Properties,
-     class ValueType>
-   auto remove(const std::string& label,                                 (4)
+   テンプレート <
+     クラス ExecutionSpace,
+     クラス DataType, class... Properties,
+     クラス ValueType>
+   自動 remove(const std::string& label,                                 (4)
                const ExecutionSpace& exespace,
                const Kokkos::View<DataType, Properties...>& view,
                const ValueType& value);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class Iterator, class ValueType>
+   テンプレート <class TeamHandleType, class Iterator, class ValueType>
    KOKKOS_FUNCTION
    Iterator remove(const TeamHandleType& teamHandle,                     (5)
                    Iterator first, Iterator last,
                    const ValueType& value);
 
-   template <
-     class TeamHandleType,
-     class DataType, class... Properties,
-     class ValueType>
+   テンプレート <
+     クラス TeamHandleType,
+     クラス DataType, class... Properties,
+     クラス ValueType>
    KOKKOS_FUNCTION
-   auto remove(const TeamHandleType& teamHandle,                         (6)
+   自動 remove(const TeamHandleType& teamHandle,                         (6)
                const Kokkos::View<DataType, Properties...>& view,
                const ValueType& value);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::remove_iterator_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::remove_iterator_api_default".
 
-  - 3: The default string is "Kokkos::remove_view_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::remove_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first, last``: range of elements to modify
+- ``first, last``: 変更対象の要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - 例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されるなど、*ランダムアクセスイテレータ*　でなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - ``last >= first``有効範囲、つまり、 ``last >= first``　を表さなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``value``: target value to remove
+- ``value``: 削除の対象値
 
-- ``view``: view of elements to modify
+- ``view``: 変更対象の要素のビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Iterator to the element *after* the new logical end.
+新たな論理上の終了 *後*　の要素へのイテレータ。
