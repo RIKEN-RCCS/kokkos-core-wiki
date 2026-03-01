@@ -1,16 +1,16 @@
 
 # `replace_copy_if`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-namespace Kokkos{
-namespace Experimental{
+名前空間 Kokkos{
+名前空間 Experimental{
 
-template <
-  class ExecutionSpace,
-  class InputIteratorType, class OutputIteratorType,
-  class UnaryPredicateType, class T
+テンプレート <
+  クラス ExecutionSpace,
+  クラス InputIteratorType, class OutputIteratorType,
+  クラス UnaryPredicateType, class T
 >
 OutputIteratorType replace_copy_if(const ExecutionSpace& exespace,              (1)
                                    InputIteratorType first_from,
@@ -18,10 +18,10 @@ OutputIteratorType replace_copy_if(const ExecutionSpace& exespace,              
                                    OutputIteratorType first_to,
                                    UnaryPredicateType pred, const T& new_value);
 
-template <
-  class ExecutionSpace,
-  class InputIteratorType,  class OutputIteratorType,
-  class UnaryPredicateType, class T
+テンプレート <
+  クラス ExecutionSpace,
+  クラス InputIteratorType,  class OutputIteratorType,
+  クラス UnaryPredicateType, class T
 >
 OutputIteratorType replace_copy_if(const std::string& label,                    (2)
                                    const ExecutionSpace& exespace,
@@ -30,34 +30,34 @@ OutputIteratorType replace_copy_if(const std::string& label,                    
                                    OutputIteratorType first_to,
                                    UnaryPredicateType pred, const T& new_value);
 
-template <
-  class ExecutionSpace,
-  class DataType1, class... Properties1,
-  class DataType2, class... Properties2,
-  class UnaryPredicateType, class T
+テンプレート <
+  クラス ExecutionSpace,
+  クラス DataType1, class... Properties1,
+  クラス DataType2, class... Properties2,
+  クラス UnaryPredicateType, class T
 >
-auto replace_copy_if(const ExecutionSpace& exespace,                            (3)
+自動 replace_copy_if(const ExecutionSpace& exespace,                            (3)
                      const Kokkos::View<DataType1, Properties1...>& view_from,
                      const Kokkos::View<DataType2, Properties2...>& view_to,
                      UnaryPredicateType pred, const T& new_value);
 
-template <
-  class ExecutionSpace,
-  class DataType1, class... Properties1,
-  class DataType2, class... Properties2,
-  class UnaryPredicateType, class T
+テンプレート <
+  クラス ExecutionSpace,
+  クラス DataType1, class... Properties1,
+  クラス DataType2, class... Properties2,
+  クラス UnaryPredicateType, class T
 >
-auto replace_copy_if(const std::string& label,                                  (4)
+自動 replace_copy_if(const std::string& label,                                  (4)
                      const ExecutionSpace& exespace,
                      const Kokkos::View<DataType1, Properties1...>& view_from,
                      const Kokkos::View<DataType2, Properties2...>& view_to,
                      UnaryPredicateType pred, const T& new_value);
 
-} //end namespace Experimental
-} //end namespace Kokkos
+} //エンド 名前空間 Experimental
+} //エンド 名前空間 Kokkos
 ```
 
-## Description
+## ディスクリプション
 
 Copies the elements from range `[first_from, last_from)` to another range
 beginning at `first_to` (overloads 1,2) or from `view_from` to `view_to`
