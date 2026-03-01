@@ -1,7 +1,7 @@
 ``remove_if``
 =============
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``Kokkos_StdAlgorithms.hpp``
 
 ディスクリプション
 -----------
