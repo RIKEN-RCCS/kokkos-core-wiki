@@ -47,13 +47,13 @@ OutputIteratorType replace_copy(const std::string& label,                     (2
 } //エンド 名前空間 Kokkos
 ```
 
-## Description
+## ディスクリプション
 
 `old_value` と等しいすべての要素を `new_value` で置換して、範囲 `[first_from, last_from)` の要素を、別の範囲
 `first_to` から始まる範囲（オーバーロード 1,2）または `view_from` から `view_to` までの範囲
 （オーバーロード 3,4）にコピーします。`operator==`　を使用して、要素間の比較を実行します。
 
-## Parameters and Requirementsパラメータおよび要件
+## パラメータおよび要件
 
 - `exespace`:
   - 実行空間インスタンス
