@@ -96,52 +96,48 @@ ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      
 
 - オーバーロードセット A (1,2,3,4): 範囲 `[first, last)` (1,2) または `ビュー` (3,4)　における要素の還元を実行します。
 
-- オーバーロードセット B (5,6,7,8): 初期値 `init_reduction_value`performs a reduction of the elements
-  in the range `[first, last)` (5,6) or in `view` (7,8) accounting for
-  the initial value.
+- オーバーロードセット B (5,6,7,8): 初期値 `init_reduction_value`　を説明する、範囲 `[first, last)` (5,6) または `ビュー` (7,8) における要素の還元を実行します。
 
-- Overload set C (9,10,11,12): performs a reduction of the elements
-  in the range `[first, last)` (9,10)
-  or in `view` (11,12) accounting for the initial value `init_reduction_value`
-  using the functor  `joiner` to join operands during the reduction operation.
+- オーバーロードセット C (9,10,11,12): 還元演算の間にオペランドを結合するための、ファンクタ　`ジョイナー`　を使って、初期値 `init_reduction_value`　を説明する、範囲　`[first, last)` (9,10)　または `ビュー` (11,12) における要素の還元を実行します。
 
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance
-- `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1,5,9 the default string is: "Kokkos::reduce_iterator_api_default"
-  - for 3,7,11 the default string is: "Kokkos::reduce_view_api_default"
+  - 実行空間インスタンス
+- `ラベル`デバッグ目的の実装カーネルに名付けるために使用されます。
+  - デバッグ目的の実装カーネルに名付けるために使用されます。
+  - 1,5,9について、デフォルト文字列は、: "Kokkos::reduce_iterator_api_default"
+  - 3,7,11について、デフォルト文字列は、: "Kokkos::reduce_view_api_default"
 - `first`, `last`:
-  - range of elements to reduce over
-  - must be *random access iterators*
-  - must represent a valid range, i.e., `last >= first` (checked in debug mode)
-  - must be accessible from `exespace`
-- `view`:
-  - view to reduce
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - 還元する要素の範囲
+  - *ランダムアクセスイテレータ*　でなければなりません。
+  - 有効な範囲を表す必要があり、つまり、 ``last >= first``　でなければなりません　（デバッグモードで確認済）。
+  -  `exespace`　からアクセス可能でなければなりません。
+- `ビュー`:
+  - 還元対象のビュー
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - `exespace`　からアクセス可能でなければなりません。
+- `ビュー`:
 - `init_reduction_value`:
-  - initial reduction value to use
-- `joiner`:
-  - *binary* functor performing the desired operation to join two elements.
-  Must be valid to be called from the execution space passed, and callable with
-  two arguments `a,b` of type (possible const) `ValueType`, and must not modify `a,b`.
-  - Must conform to:
+  - 使用する初期還元値
+- `ジョイナー`:
+  -  *二項*　ファンクタであり、2つの要素を結合するために望ましい演算を実行します。
+  引数として渡された実行空間、またはチームハンドルに関連付けられた実行空間から呼び出されるために、有効でなければならず、 型 (可能性のあるconst)　`ValueType`　の2つの引数　で呼び出し可能であり、 `a,b`　を変更してはいけません。
+
+  - 以下に一致しなければなりません:
   ```c++
-  struct JoinFunctor {
+  構造体 JoinFunctor {
 	KOKKOS_FUNCTION
 	constexpr ValueType operator()(const ValueType& a, const ValueType& b) const {
 	  return /* ... */
 	}
   };
   ```
-  - The behavior is non-deterministic if the `joiner` operation
-  is not associative or not commutative.
+  - `join`　演算が、結合法則または交換法則を満たさない場合、
+その動作は非決定的です
 
 
-## Return
+## 戻し
 
-The reduction result.
+還元結果。
