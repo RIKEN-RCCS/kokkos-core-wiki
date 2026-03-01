@@ -59,27 +59,23 @@ OutputIteratorType replace_copy_if(const std::string& label,                    
 
 ## ディスクリプション
 
-Copies the elements from range `[first_from, last_from)` to another range
-beginning at `first_to` (overloads 1,2) or from `view_from` to `view_to`
-(overloads 3,4) replacing with `new_value` all elements for which `pred` returns `true`.
+`pred` が `真`　を返すすべての要素を `new_value` と置換して、 範囲 `[first_from, last_from)` の要素を、別の範囲
+`first_to` から始まる範囲（オーバーロード 1,2）または `view_from` から `view_to` までの範囲
+（オーバーロード 3,4）にコピーします。
 
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`, `first_from`, `last_from`, `first_to`, `view_from`, `view_to`, `new_value`:
-  - same as in [`replace_copy`](./StdReplaceCopy)
+  -  [`replace_copy`](./StdReplaceCopy)　と同様。
 - `label`:
-  - for 1, the default string is: "Kokkos::replace_copy_if_iterator_api_default"
-  - for 3, the default string is: "Kokkos::replace_copy_if_view_api_default"
+  - 1　について、デフォルト文字列は、: "Kokkos::replace_copy_if_iterator_api_default"
+  - 3　について、デフォルト文字列は、: "Kokkos::replace_copy_if_view_api_default"
 - `pred`:
-  - unary predicate which returns `true` for the required element; `pred(v)`
-  must be valid to be called from the execution space passed, and convertible to bool for every
-  argument `v` of type (possible const) `value_type`, where `value_type`
-  is the value type of `InputIteratorType` (for 1,2) or of `view_from` (for 3,4),
-  and must not modify `v`.
-  - should have the same API as that shown for [`replace_if`](./StdReplaceIf)
+  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならず、そ 型　value_type　すべての引数　``v``　（constの可能性）について、bool型に変換可能で、そこでは、``value_type``　が、　 `InputIteratorType`  (1,2,について) の値型、または `view_from` (3,4について)　の値型であり、  ``v``　を変更してはいけません。
+  -  [`replace_if`](./StdReplaceIf)　について示されたのと同じAPIを持つ必要があります。
 
 
-## Return
+## 返し
 
-Iterator to the element *after* the last element copied.
+コピーされた最後の要素の *後* の要素へのイテレータ。
