@@ -1,84 +1,83 @@
 
 # `replace_copy`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-namespace Kokkos{
-namespace Experimental{
+名前空間 Kokkos{
+名前空間 Experimental{
 
-template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class T>
+テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class T>
 OutputIteratorType replace_copy(const ExecutionSpace& exespace,               (1)
                                 InputIteratorType first_from,
                                 InputIteratorType last_from,
                                 OutputIteratorType first_to,
                                 const T& old_value, const T& new_value);
 
-template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class T>
+テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class T>
 OutputIteratorType replace_copy(const std::string& label,                     (2)
                                 const ExecutionSpace& exespace,
                                 OutputIteratorType first_to,
                                 const T& old_value, const T& new_value);
 
-template <
-  class ExecutionSpace,
-  class DataType1, class... Properties1,
-  class DataType2, class... Properties2,
-  class T
+テンプレート <
+  クラス ExecutionSpace,
+  クラス DataType1, class... Properties1,
+  クラス DataType2, class... Properties2,
+  クラス T
 >
-auto replace_copy(const ExecutionSpace& exespace,                             (3)
+自動 replace_copy(const ExecutionSpace& exespace,                             (3)
                   const Kokkos::View<DataType1, Properties1...>& view_from,
                   const Kokkos::View<DataType2, Properties2...>& view_to,
                   const T& old_value, const T& new_value);
 
-template <
-  class ExecutionSpace,
-  class DataType1, class... Properties1,
-  class DataType2, class... Properties2,
-  class T
+テンプレート <
+  クラス ExecutionSpace,
+  クラス DataType1, class... Properties1,
+  クラス DataType2, class... Properties2,
+  クラス T
 >
-auto replace_copy(const std::string& label,
+自動 replace_copy(const std::string& label,
                   const ExecutionSpace& exespace,                             (4)
                   const Kokkos::View<DataType1, Properties1...>& view_from,
                   const Kokkos::View<DataType2, Properties2...>& view_to,
                   const T& old_value, const T& new_value);
 
-} //end namespace Experimental
-} //end namespace Kokkos
+} //エンド 名前空間 Experimental
+} //エンド 名前空間 Kokkos
 ```
 
 ## Description
 
-Copies the elements from range `[first_from, last_from)` to another range
-beginning at `first_to` (overloads 1,2) or from `view_from` to `view_to`
-(overloads 3,4) replacing with `new_value` all elements that equal `old_value`.
-Comparison between elements is done using `operator==`.
+`old_value` と等しいすべての要素を `new_value` で置換して、範囲 `[first_from, last_from)` の要素を、別の範囲
+`first_to` から始まる範囲（オーバーロード 1,2）または `view_from` から `view_to` までの範囲
+（オーバーロード 3,4）にコピーします。`operator==`　を使用して、要素間の比較を実行します。
 
-## Parameters and Requirements
+## Parameters and Requirementsパラメータおよび要件
 
 - `exespace`:
-  - execution space instance
+  - 実行空間インスタンス
 - `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1, the default string is: "Kokkos::replace_copy_iterator_api_default"
-  - for 3, the default string is: "Kokkos::replace_copy_view_api_default"
+  - デバッグ目的で実装カーネルに名付けるために使用。
+  - 1　について、デフォルト文字列は、: "Kokkos::replace_copy_iterator_api_default"
+  - 3　について、デフォルト文字列は、: "Kokkos::replace_copy_view_api_default"
 - `first_from, last_from`:
-  - range of elements to copy from
-  - must be *random access iterators*
-  - must represent a valid range, i.e., `last_from >= first_from` (checked in debug mode)
-  - must be accessible from `exespace`
+  - コピー元への要素の範囲
+  - *ランダムアクセスイテレータ*　でなければなりません。
+  - 有効範囲、つまり、 ``last >= first``　を表さなければなりません。 (デバッグモードで確認済み)
+  - `exespace`　からアクセス可能でなければなりません。
 - `first_to`:
-  - beginning of the range to copy to
-  - must be a *random access iterator*
-  - must be accessible from `exespace`
+  - コピー先への範囲の始め
+  - *ランダムアクセスイテレータ*　でなければなりません。
+  - `exespace`　からアクセス可能でなければなりません。
 - `view_from`, `view_to`:
-  - source and destination views
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - ソースおよび宛先のビュー
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - `exespace`　からアクセス可能でなければなりません。
 - `old_value`, `new_value`:
-  - self-explanatory
+  - 説明を要しません。
 
 
-## Return
+## 返し
 
-Iterator to the element *after* the last element copied.
+コピーされた最後の要素の *後* の要素へのイテレータ。
