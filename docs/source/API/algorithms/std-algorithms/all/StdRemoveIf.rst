@@ -89,29 +89,24 @@ Description
 
 - ``pred``:
 
-  - 置換が必要な要素について、``真`` を返す*一項* 述語; ``pred(v)``
-    must be valid to be called from the execution space passed or the execution space
-    associated with the team handle, and convertible to bool for every argument ``v``
-    of type (possible const) ``value_type``, where ``value_type`` is the value type
-    of ``Iterator`` (for 1,2,5) or the value type of ``view`` (for 3,4,6),
-    and must not modify ``v``.
+  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型　value_type　すべての引数　``v``　（constの可能性）について、bool型に変換可能で、そこでは、``value_type``　が、　``Iterator`` (1,2,5について) の値型、または ``view`` (3,4,6について)　の値型であり、  ``v``　を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-     struct Predicate
+     構造体 述語
      {
        KOKKOS_INLINE_FUNCTION
-       bool operator()(const value_type & v) const { return /* ... */; }
+       ブール operator()(const value_type & v) const { return /* ... */; }
 
-       // or, also valid
+       // または、また有効
 
        KOKKOS_INLINE_FUNCTION
-       bool operator()(value_type v) const { return /* ... */; }
+       ブール operator()(value_type v) const { return /* ... */; }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Iterator to the element *after* the new logical end.
+コピーされた最後の要素の *後* の要素へのイテレータ。
