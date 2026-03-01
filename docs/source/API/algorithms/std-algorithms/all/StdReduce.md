@@ -1,105 +1,104 @@
 
 # `reduce`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-namespace Kokkos{
-namespace Experimental{
+名前空間 Kokkos{
+名前空間　実験的 {
 
 //
-// overload set A
+// オーバーロードセット A
 //
-template <class ExecutionSpace, class IteratorType>
-typename IteratorType::value_type reduce(const ExecutionSpace& exespace,        (1)
+テンプレート <class ExecutionSpace, class IteratorType>
+型名 IteratorType::value_type reduce(const ExecutionSpace& exespace,        (1)
                                          IteratorType first,
                                          IteratorType last);
 
-template <class ExecutionSpace, class IteratorType>
-typename IteratorType::value_type reduce(const std::string& label,              (2)
+テンプレート <class ExecutionSpace, class IteratorType>
+型名 IteratorType::value_type reduce(const std::string& label,              (2)
                                          const ExecutionSpace& exespace,
                                          IteratorType first,
                                          IteratorType last);
 
-template <class ExecutionSpace, class DataType, class... Properties>
-auto reduce(const ExecutionSpace& exespace,                                     (3)
+テンプレート <class ExecutionSpace, class DataType, class... Properties>
+自動 reduce(const ExecutionSpace& exespace,                                     (3)
             const ::Kokkos::View<DataType, Properties...>& view);
 
-template <class ExecutionSpace, class DataType, class... Properties>
-auto reduce(const std::string& label, const ExecutionSpace& exespace,           (4)
+テンプレート <class ExecutionSpace, class DataType, class... Properties>
+自動 reduce(const std::string& label, const ExecutionSpace& exespace,           (4)
             const ::Kokkos::View<DataType, Properties...>& view);
 
 //
-// overload set B
+// オーバーロードセット B
 //
-template <class ExecutionSpace, class IteratorType, class ValueType>
+テンプレート <class ExecutionSpace, class IteratorType, class ValueType>
 ValueType reduce(const ExecutionSpace& exespace,                                (5)
                  IteratorType first, IteratorType last,
                  ValueType init_reduction_value);
 
-template <class ExecutionSpace, class IteratorType, class ValueType>
+テンプレート <class ExecutionSpace, class IteratorType, class ValueType>
 ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      (6)
                  IteratorType first, IteratorType last,
                  ValueType init_reduction_value);
 
-template <class ExecutionSpace, class DataType, class... Properties, class ValueType>
+テンプレート <class ExecutionSpace, class DataType, class... Properties, class ValueType>
 ValueType reduce(const ExecutionSpace& exespace,                                (7)
                  const ::Kokkos::View<DataType, Properties...>& view,
                  ValueType init_reduction_value);
 
-template <class ExecutionSpace, class DataType, class... Properties, class ValueType>
+テンプレート <class ExecutionSpace, class DataType, class... Properties, class ValueType>
 ValueType reduce(const std::string& label,                                      (8)
                  const ExecutionSpace& exespace,
                  const ::Kokkos::View<DataType, Properties...>& view,
                  ValueType init_reduction_value);
 
 //
-// overload set C
+// オーバーロードセット C
 //
-template <
-  class ExecutionSpace, class IteratorType, class ValueType,
-  class BinaryOp>
+テンプレート <
+  クラス ExecutionSpace, class IteratorType, class ValueType,
+  クラス BinaryOp>
 ValueType reduce(const ExecutionSpace& exespace,                                (9)
                  IteratorType first, IteratorType last,
                  ValueType init_reduction_value,
                  BinaryOp joiner);
 
-template <
-  class ExecutionSpace, class IteratorType, class ValueType,
-  class BinaryOp>
+テンプレート <
+  クラス ExecutionSpace, class IteratorType, class ValueType,
+  クラス BinaryOp>
 ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      (10)
                  IteratorType first, IteratorType last,
                  ValueType init_reduction_value,
                  BinaryOp joiner);
 
-template <
-  class ExecutionSpace, class DataType, class... Properties,
-  class ValueType, class BinaryOp>
+テンプレート <
+  クラス ExecutionSpace, class DataType, class... Properties,
+  クラス ValueType, class BinaryOp>
 ValueType reduce(const ExecutionSpace& exespace,                                (11)
                  const ::Kokkos::View<DataType, Properties...>& view,
                  ValueType init_reduction_value,
                  BinaryOp joiner);
 
-template <
-  class ExecutionSpace, class DataType, class... Properties,
-  class ValueType, class BinaryOp>
+テンプレート <
+  クラス ExecutionSpace, class DataType, class... Properties,
+  クラス ValueType, class BinaryOp>
 ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      (12)
                  const ::Kokkos::View<DataType, Properties...>& view,
                  ValueType init_reduction_value,
                  BinaryOp joiner);
 
-} //end namespace Experimental
-} //end namespace Kokkos
+} //エンド　名前空間 実験的
+} //エンド　名前空間 Kokkos
 ```
 
-## Description
+## ディスクリプション
 
-- Overload set A (1,2,3,4): performs a reduction of the elements
-  in the range `[first, last)` (1,2) or in `view` (3,4).
+- オーバーロードセット A (1,2,3,4): 範囲 `[first, last)` (1,2) または `ビュー` (3,4)　における要素の還元を実行します。
 
-- Overload set B (5,6,7,8): performs a reduction of the elements
+- オーバーロードセット B (5,6,7,8): 初期値 `init_reduction_value`performs a reduction of the elements
   in the range `[first, last)` (5,6) or in `view` (7,8) accounting for
-  the initial value `init_reduction_value`.
+  the initial value.
 
 - Overload set C (9,10,11,12): performs a reduction of the elements
   in the range `[first, last)` (9,10)
