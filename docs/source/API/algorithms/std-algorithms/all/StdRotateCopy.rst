@@ -6,26 +6,26 @@ Header: ``Kokkos_StdAlgorithms.hpp``
 Description
 -----------
 
-Copies the elements from the range ``[first_from, last_from)`` to the range starting at ``first_to`` or from ``view_from`` to ``view_dest`` in such a way that the element ``n_first`` or ``view(n_location)`` becomes the first element of the new range and ``n_first - 1`` becomes the last element.
+要素 ``n_first`` または ``view(n_location)`` が新しい範囲の最初の要素となり、``n_first - 1`` が最後の要素となるように、範囲 ``[first_from, last_from)`` の要素を、範囲 ``first_to`` から始まる範囲、または ``view_from`` から ``view_dest`` までの範囲にコピーします。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class InputIterator, class OutputIterator>
+   テンプレート <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator rotate_copy(const ExecutionSpace& exespace,                   (1)
                               InputIterator first_from,
                               InputIterator n_first,
                               InputIterator last_from,
                               OutputIterator first_to);
 
-   template <class ExecutionSpace, class InputIterator, class OutputIterator>
+   テンプレート <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator rotate_copy(const std::string& label,                         (2)
                               const ExecutionSpace& exespace,
                               InputIterator first_from,
@@ -33,7 +33,7 @@ Overload set accepting execution space
                               InputIterator last_from,
                               OutputIterator first_to);
 
-   template <
+   テンプレート <
      class ExecutionSpace,
      class DataType1, class... Properties1,
      class DataType2, class... Properties2>
@@ -42,24 +42,24 @@ Overload set accepting execution space
                     std::size_t n_location,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-   template <
+   テンプレート <
      class ExecutionSpace,
      class DataType1, class... Properties1,
      class DataType2, class... Properties2>
-   auto rotate_copy(const std::string& label,                                   (4)
+   自動 rotate_copy(const std::string& label,                                   (4)
                     const ExecutionSpace& exespace,
                     const Kokkos::View<DataType1, Properties1...>& source,
                     std::size_t n_location,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class InputIterator, class OutputIterator>
+   テンプレート <class TeamHandleType, class InputIterator, class OutputIterator>
    KOKKOS_FUNCTION
    OutputIterator rotate_copy(const TeamHandleType& teamHandle,                 (5)
                               InputIterator first_from,
@@ -67,62 +67,63 @@ Overload set accepting a team handle
                               InputIterator last_from,
                               OutputIterator first_to);
 
-   template <
+   テンプレート <
      class TeamHandleType,
      class DataType1, class... Properties1,
      class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   auto rotate_copy(const TeamHandleType& teamHandle,                           (6)
+   自動 rotate_copy(const TeamHandleType& teamHandle,                           (6)
                     const Kokkos::View<DataType1, Properties1...>& source,
                     std::size_t n_location,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::rotate_copy_iterator_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::rotate_copy_iterator_api_default".
 
-  - 3: The default string is "Kokkos::rotate_copy_view_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::rotate_copy_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first_from, last_from``: range of elements to copy from
+- ``first_from, last_from``: コピー元の要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲を表す必要があり、つまり、 ``last >= first``　でなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``first_to``: beginning of the range to copy to
+- ``first_to``: コピー先の範囲の始め
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``n_first``: iterator to element that should be the first of the rotated range
+- ``n_first``: 回転範囲の最初であるべき要素へのイテレータ。
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されなければなりません。
 
-  - must be such that ``[first_from, n_first)`` and ``[n_first, last_from)`` are valid ranges.
+  -  ``[first_from, n_first)`` および ``[n_first, last_from)`` は、有効な範囲となるようにしなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+
 
 - ``source, dest``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``n_location``: integer value identifying the element to rotate about
+- ``n_location``: 回転の中心となる要素を識別する整数値
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Iterator to the element *after* the last element copied.
+コピーした最後の要素の　*後*　要素へのイテレータ。
