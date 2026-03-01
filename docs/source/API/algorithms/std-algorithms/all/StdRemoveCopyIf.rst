@@ -1,13 +1,13 @@
 ``remove_copy_if``
 ==================
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``Kokkos_StdAlgorithms.hpp``
 
-Description
+ディスクリプション
 -----------
 
 Copies the elements from a range to a new range starting at ``first_to`` or from ``view_from``
-to ``view_dest`` omitting those for which ``pred`` returns ``true``.
+to ``view_dest`` omitting those for which ``pred`` returns ``true``.``pred``　が  ``真``　を返す要素は除外して、範囲から、``first_to`` から始まる新たな範囲、または ``view_from``　から ``view_dest`` への新しい範囲にコピーします。
 
 Interface
 ---------
