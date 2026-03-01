@@ -107,7 +107,7 @@
 
 - ``pred``:
 
-  - *unary* predicate returning ``true`` for the required element to replace; ``pred(v)`` must be valid to be called from the execution space passed, and convertible to bool for every argument ``v`` of type (possible const) ``value_type``, where ``value_type`` is the value type of ``InputIterator`` (for 1,2,5) or the value type of ``view`` (for 3,4,6), and must not modify ``v``.*一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型　value_type　すべての引数　``v``　（constの可能性）について、bool型に変換可能で、そこでは、``value_type``　が、``InputIteratorType``　 (1,2,5について) の値型、または ``view`` (3,4,6について)　の値型であり、  ``v``　を変更してはいけません。
+  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型　value_type　すべての引数　``v``　（constの可能性）について、bool型に変換可能で、そこでは、``value_type``　が、``InputIteratorType``　 (1,2,5について) の値型、または ``view`` (3,4,6について)　の値型であり、  ``v``　を変更してはいけません。
 
   - 以下に一致しなければなりません:
 
