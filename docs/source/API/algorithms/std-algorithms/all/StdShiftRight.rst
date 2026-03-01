@@ -1,86 +1,88 @@
 ``shift_right``
 ===============
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``Kokkos_StdAlgorithms.hpp``
 
-Description
+ディスクリプション
 -----------
 
-Shifts the elements in a range or in ``view`` by ``n`` positions towards the end of the range or the view.
+ 終りに向けて、``n``　位置により、範囲または ``view``　内において、要素をシフトします。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class IteratorType>
+   テンプレート <class ExecutionSpace, class IteratorType>
    IteratorType shift_right(const ExecutionSpace& exespace,                  (1)
                             IteratorType first, IteratorType last,
                             typename IteratorType::difference_type n);
 
-   template <class ExecutionSpace, class IteratorType>
+   テンプレート <class ExecutionSpace, class IteratorType>
    IteratorType shift_right(const std::string& label,                        (2)
                             const ExecutionSpace& exespace,
                             IteratorType first, IteratorType last,
                             typename IteratorType::difference_type n);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
    auto shift_right(const ExecutionSpace& exespace,                          (3)
                     const Kokkos::View<DataType, Properties...>& view,
                     typename decltype(begin(view))::difference_type n);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
    auto shift_right(const std::string& label,                                (4)
                     const ExecutionSpace& exespace,
                     const Kokkos::View<DataType, Properties...>& view,
                     typename decltype(begin(view))::difference_type n);
 
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType>
+   テンプレート <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType shift_right(const TeamHandleType& teamHandle,                (5)
                             IteratorType first, IteratorType last,
                             typename IteratorType::difference_type n);
 
-   template <class TeamHandleType, class DataType, class... Properties>
+   テンプレート <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
-   auto shift_right(const TeamHandleType& teamHandle,                        (6)
+   自動 shift_right(const TeamHandleType& teamHandle,                        (6)
                     const Kokkos::View<DataType, Properties...>& view,
                     typename decltype(begin(view))::difference_type n);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. |ShiftLeft| replace:: ``shift_left``
 .. _ShiftLeft: ./StdShiftLeft.html
 
-- ``exespace`` ``teamHandle``, ``first``, ``last``, ``view``: same as in |ShiftLeft|_
+- ``exespace`` ``teamHandle``, ``first``, ``last``, ``view``:  |ShiftLeft|_　と同様。
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::shift_right_iterator_api_default"
+  - 1: デフォルト文字列は、 "Kokkos::shift_right_iterator_api_default"
 
-  - 3: The default string is "Kokkos::shift_right_view_api_default"
+  - 3: デフォルト文字列は、 "Kokkos::shift_right_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``n``: the number of positions to shift
 
-  - must be non-negative
+- ``n``: シフトする位置の数
 
-Return Value
+  - 0以上でなければなりません。
+
+戻り値
 ~~~~~~~~~~~~
 
-The beginning of the resulting range. If ``n`` is less than ``last - first``, returns ``first + n``. Otherwise, returns ``last``.
+結果の範囲の始め。 ``n`` が ``last - first``よりも小さい場合には、 ``first + n`` を返します。 そうでなければ　``last``　を返します。
+
