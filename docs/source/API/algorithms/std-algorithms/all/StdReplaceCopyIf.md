@@ -72,7 +72,7 @@ OutputIteratorType replace_copy_if(const std::string& label,                    
   - 1　について、デフォルト文字列は、: "Kokkos::replace_copy_if_iterator_api_default"
   - 3　について、デフォルト文字列は、: "Kokkos::replace_copy_if_view_api_default"
 - `pred`:
-  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならず、そ 型　value_type　すべての引数　``v``　（constの可能性）について、bool型に変換可能で、そこでは、``value_type``　が、　 `InputIteratorType`  (1,2,について) の値型、または `view_from` (3,4について)　の値型であり、  ``v``　を変更してはいけません。
+  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならず、 型　value_type　すべての引数　``v``　（constの可能性）について、bool型に変換可能で、そこでは、``value_type``　が、　 `InputIteratorType`  (1,2,について) の値型、または `view_from` (3,4について)　の値型であり、  ``v``　を変更してはいけません。
   -  [`replace_if`](./StdReplaceIf)　について示されたのと同じAPIを持つ必要があります。
 
 
