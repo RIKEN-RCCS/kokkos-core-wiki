@@ -6,89 +6,90 @@ Header: ``Kokkos_StdAlgorithms.hpp``
 Description
 -----------
 
-Removes all elements for which ``pred`` returns ``true``, by shifting via move assignment the elements in a range or in ``View`` such that the elements not to be removed appear in the beginning of the range or in the beginning of ``View``. Relative order of the elements that remain is preserved and the physical size of the container is unchanged.
+削除対象外の要素が範囲の先頭または ``View`` の先頭に配置されるように、範囲または ``View`` 内の要素を移動代入によってシフトすることにより、 ``pred`` が ``true`` を返す要素をすべて削除します。残存する要素の相対的な順序は保持され、コンテナの物理的なサイズは変更されません。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class Iterator, class UnaryPredicate>
-   Iterator remove_if(const ExecutionSpace& exespace,                           (1)
+   テンプレート <class ExecutionSpace, class Iterator, class UnaryPredicate>
+   イテレータ remove_if(const ExecutionSpace& exespace,                           (1)
                       Iterator first, Iterator last,
                       UnaryPredicate pred);
 
-   template <class ExecutionSpace, class Iterator, class UnaryPredicate>
-   Iterator remove_if(const std::string& label,                                 (2)
+   テンプレート <class ExecutionSpace, class Iterator, class UnaryPredicate>
+   イテレータ remove_if(const std::string& label,                                 (2)
                       const ExecutionSpace& exespace,
                       Iterator first, Iterator last,
                       UnaryPredicate pred);
 
-   template <
-     class ExecutionSpace,
-     class DataType, class... Properties,
-     class UnaryPredicate>
-   auto remove_if(const ExecutionSpace& exespace,                               (3)
+   テンプレート <
+   　クラス ExecutionSpace,
+     クラス DataType, class... Properties,
+     クラス UnaryPredicate>
+   自動 remove_if(const ExecutionSpace& exespace,                               (3)
                   const Kokkos::View<DataType, Properties...>& view,
                   UnaryPredicate pred);
 
-   template <
-     class ExecutionSpace,
-     class DataType, class... Properties,
-     class UnaryPredicate>
-   auto remove_if(const std::string& label,                                     (4)
+   テンプレート <
+     クラス ExecutionSpace,
+     クラス DataType, class... Properties,
+     クラス UnaryPredicate>
+   自動 remove_if(const std::string& label,                                     (4)
                   const ExecutionSpace& exespace,
                   const Kokkos::View<DataType, Properties...>& view,
                   UnaryPredicate pred);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class Iterator, class UnaryPredicate>
+   テンプレート <class TeamHandleType, class Iterator, class UnaryPredicate>
    KOKKOS_FUNCTION
-   Iterator remove_if(const TeamHandleType& teamHandle,                         (5)
+   イテレータ remove_if(const TeamHandleType& teamHandle,                         (5)
                       Iterator first, Iterator last,
                       UnaryPredicate pred);
 
-   template <
-     class TeamHandleType,
-     class DataType, class... Properties,
-     class UnaryPredicate>
+   テンプレート <
+     クラス TeamHandleType,
+     クラス DataType, class... Properties,
+     クラス UnaryPredicate>
    KOKKOS_FUNCTION
-   auto remove_if(const TeamHandleType& teamHandle,                             (6)
+   自動 remove_if(const TeamHandleType& teamHandle,                             (6)
                   const Kokkos::View<DataType, Properties...>& view,
                   UnaryPredicate pred);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. |remove| replace:: ``remove``
 .. _remove: ./StdRemove.html
 
-- ``exespace``, ``first``, ``last``, ``view``: same as in |remove|_
+- ``exespace``, ``first``, ``last``, ``view``:  |remove|_　と同様。
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::remove_if_iterator_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::remove_if_iterator_api_default".
 
-  - 3: The default string is "Kokkos::remove_if_view_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::remove_if_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません
 
 - ``pred``:
 
-  - *unary* predicate returning ``true`` for the required element to replace; ``pred(v)``
+  - 置換が必要な要素について、``真`` を返す*一項* 述語; ``pred(v)``
     must be valid to be called from the execution space passed or the execution space
     associated with the team handle, and convertible to bool for every argument ``v``
     of type (possible const) ``value_type``, where ``value_type`` is the value type
