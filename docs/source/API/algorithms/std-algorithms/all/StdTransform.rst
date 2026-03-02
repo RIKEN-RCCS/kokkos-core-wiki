@@ -203,4 +203,4 @@
 戻り値
 ~~~~~~~~~~~~
 
-Iterator to the element *after* the last element transformed.
+変換された最後の *後* の要素へのイテレータ
