@@ -1,15 +1,15 @@
 
 # `transform_inclusive_scan`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-namespace Kokkos{
-namespace Experimental{
+名前空間 Kokkos{
+名前空間 Experimental{
 
-template <
-  class ExecutionSpace, class InputIteratorType,
-  class OutputIteratorType, class BinaryOpType, class UnaryOpType>
+テンプレート <
+  クラス ExecutionSpace, class InputIteratorType,
+  クラス OutputIteratorType, class BinaryOpType, class UnaryOpType>
 OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,       (1)
                                             InputIteratorType first_from,
                                             InputIteratorType last_from,
@@ -17,9 +17,9 @@ OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,     
                                             BinaryOpType binary_op,
                                             UnaryOpType unary_op);
 
-template <
-  class ExecutionSpace, class InputIteratorType,
-  class OutputIteratorType, class BinaryOpType, class UnaryOpType>
+テンプレート <
+  クラス ExecutionSpace, class InputIteratorType,
+  クラス OutputIteratorType, class BinaryOpType, class UnaryOpType>
 OutputIteratorType transform_inclusive_scan(const std::string& label,             (2)
                                             const ExecutionSpace& exespace,
                                             InputIteratorType first_from,
@@ -28,33 +28,33 @@ OutputIteratorType transform_inclusive_scan(const std::string& label,           
                                             BinaryOpType binary_op,
                                             UnaryOpType unary_op);
 
-template <
-  class ExecutionSpace,
-  class DataType1, class... Properties1,
-  class DataType2, class... Properties2,
-  class BinaryOpType, class UnaryOpType>
-auto transform_inclusive_scan(const ExecutionSpace& exespace,                     (3)
+テンプレート <
+  クラス ExecutionSpace,
+  クラス DataType1, class... Properties1,
+  クラス DataType2, class... Properties2,
+  クラス BinaryOpType, class UnaryOpType>
+自動 transform_inclusive_scan(const ExecutionSpace& exespace,                     (3)
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               BinaryOpType binary_op,
                               UnaryOpType unary_op);
 
-template <
-  class ExecutionSpace,
-  class DataType1, class... Properties1,
-  class DataType2, class... Properties2,
+テンプレート <
+  クラス ExecutionSpace,
+  クラス DataType1, class... Properties1,
+  クラス DataType2, class... Properties2,
   class BinaryOpType, class UnaryOpType>
-auto transform_inclusive_scan(const std::string& label,                           (4)
+自動 transform_inclusive_scan(const std::string& label,                           (4)
                               const ExecutionSpace& exespace,
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               BinaryOpType binary_op,
                               UnaryOpType unary_op);
 
-template <
-  class ExecutionSpace, class InputIteratorType,
-  class OutputIteratorType, class BinaryOpType, class UnaryOpType,
-  class ValueType>
+テンプレート <
+  クラス ExecutionSpace, class InputIteratorType,
+  クラス OutputIteratorType, class BinaryOpType, class UnaryOpType,
+  クラス ValueType>
 OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,       (5)
                                             InputIteratorType first_from,
                                             InputIteratorType last_from,
@@ -63,10 +63,10 @@ OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,     
                                             UnaryOpType unary_op,
                                             ValueType init_value);
 
-template <
-  class ExecutionSpace, class InputIteratorType,
-  class OutputIteratorType, class BinaryOpType, class UnaryOpType,
-  class ValueType>
+テンプレート <
+  クラス ExecutionSpace, class InputIteratorType,
+  クラス OutputIteratorType, class BinaryOpType, class UnaryOpType,
+  クラス ValueType>
 OutputIteratorType transform_inclusive_scan(const std::string& label,             (6)
                                             const ExecutionSpace& exespace,
                                             InputIteratorType first_from,
@@ -76,38 +76,38 @@ OutputIteratorType transform_inclusive_scan(const std::string& label,           
                                             UnaryOpType unary_op,
                                             ValueType init_value);
 
-template <
-  class ExecutionSpace,
-  class DataType1, class... Properties1,
-  class DataType2, class... Properties2,
-  class BinaryOpType, class UnaryOpType, class ValueType>
-auto transform_inclusive_scan(const ExecutionSpace& exespace,                     (7)
+テンプレート <
+  クラス ExecutionSpace,
+  クラス DataType1, class... Properties1,
+  クラス DataType2, class... Properties2,
+  クラス BinaryOpType, class UnaryOpType, class ValueType>
+自動 transform_inclusive_scan(const ExecutionSpace& exespace,                     (7)
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               BinaryOpType binary_op, UnaryOpType unary_op,
                               ValueType init_value);
 
-template <
-  class ExecutionSpace,
-  class DataType1, class... Properties1,
-  class DataType2, class... Properties2,
-  class BinaryOpType, class UnaryOpType, class ValueType>
-auto transform_inclusive_scan(const std::string& label,                           (8)
+テンプレート <
+  クラス ExecutionSpace,
+  クラス DataType1, class... Properties1,
+  クラス DataType2, class... Properties2,
+  クラス BinaryOpType, class UnaryOpType, class ValueType>
+自動 transform_inclusive_scan(const std::string& label,                           (8)
                               const ExecutionSpace& exespace,
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               BinaryOpType binary_op, UnaryOpType unary_op,
                               ValueType init_value);
 
-} //end namespace Experimental
-} //end namespace Kokkos
+} //エンド 名前空間 実験的
+} //エンド 名前空間 Kokkos
 ```
 
-## Description
+## ディスクリプション
 
 - 1,2: transforms each element in the range `[first_from, last_from)`
 with `unary_op`, then computes an inclusive prefix scan operation using `binary_op`
-over the resulting range, and writes the results to the range beginning at `first_dest`.
+over the resulting range, and writes the results to the range beginning at `first_dest`. unary_op 演算子を用いて変換し、次に 範囲 [first_from, last_from)　内の各要素を、 結果の範囲に対してbinary_op を使用してプレフィックススキャン演算を計算し、 init を初期値として使用して、 first_dest　で始まる範囲に結果を書き込みます。 i番目の入力要素を意味する　"exclusive" は、i番目の和には含まれません。
 
 - 3,4: same as (1,2) except that the elements are read from `view_from`
 and written to `view_dest`
