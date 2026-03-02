@@ -5,73 +5,73 @@
 ``DynamicView``
 ===============
 
-Header file: ``<Kokkos_DynamicView.hpp>``
+ヘッダーファイル: ``<Kokkos_DynamicView.hpp>``
 
 
-Description
+ディスクリプション
 -----------
 
 .. cpp:class:: template<typename DataType , typename ... P> DynamicView : public Kokkos::ViewTraits<DataType , P ...>
 
-    A potentially reference-counted rank 1 array, without layout, that can be dynamically resized on the host.
+    ホスト上で動的にサイズ変更可能であり、レイアウトを持たない、参照カウント可能なランク1配列。
 
-    .. rubric:: Public Member Variables
+    .. rubric:: パブリックメンバー変数
 
-    .. cpp:member:: static constexpr bool reference_type_is_lvalue_reference
+    .. cpp:member:: 静的 constexpr ブール reference_type_is_lvalue_reference
 
-        Whether the reference type is a C++ lvalue reference.
+       レファレンス型が、 C++ lvalueレファレンスかどうか。
 
-    .. rubric:: Public Nested Typedefs
+    .. rubric:: パブリックネスティッド型定義
 
-    .. cpp:type:: Kokkos::ViewTraits< DataType , P ... > traits
+    .. cpp:type:: Kokkos::ViewTraits< DataType , P ... > 特性
 
-        ``Kokkos::ViewTraits`` parent class type.
+        ``Kokkos::ViewTraits`` 親クラス型。
 
     .. cpp:type:: array_type
 
-        ``DynamicView`` type templated on ``traits::data_type`` and ``traits::device_type``.
+        　``traits::data_type`` および ``traits::device_type``　上にテンプレートされた ``DynamicView`` 型。
 
     .. cpp:type:: const_type
 
-        ``DynamicView`` type templated on ``traits::const_data_type`` and ``traits::device_type``.
+        　``traits::const_data_type`` および ``traits::device_type``　上にテンプレートされた ``DynamicView`` 型。
 
     .. cpp:type:: non_const_type
 
-        ``DynamicView`` type templated on ``traits::non_const_data_type`` and ``traits::device_type``.
+        　``traits::non_const_data_type`` および ``traits::device_type``　上にテンプレートされた ``DynamicView`` 型。
 
     .. cpp:type:: HostMirror
 
-        The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+        ホストアクセス可能メモリ空間に格納された、同一の　``DataType``　および　``LayoutType``　を持つ互換性のあるビュータイプ。
 
-    .. rubric:: Public Data Handle Types
+    .. rubric:: パブリックデータハンドル型
 
     .. cpp:type:: reference_type
 
-        The return type of the view access operators.
+        ビューアクセス演算子の戻り値型。
 
     .. cpp:type:: pointer_type
 
-        The pointer to scalar type.
+        スカラー型へのポインタ。
 
-    .. rubric:: Constructors
+    .. rubric:: コンストラクタ
 
     .. cpp:function:: DynamicView()
 
-        The default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
+        デフォルトコンストラクタ。割り当ては行われず、参照カウントも発生しません。 すべてのエクステントはゼロであり、そのデータポインタは　NULL　です。
 
     .. cpp:function:: DynamicView(const DynamicView<RT, RP...>& rhs)
 
-        The copy constructor from a compatible View. Follows View assignment rules.
+        互換性のある　View　からのコピーコンストラクタ。View　代入ルールに従ってください。
 
     .. cpp:function:: DynamicView(DynamicView&& rhs)
 
-        The move constructor.
+        移動コンストラクタ。
 
     .. cpp:function:: DynamicView(const std::string & arg_label, \
 			    const unsigned min_chunk_size,  \
 			    const unsigned max_extent)
 
-        The standard allocating constructor.
+        標準割り当てコンストラクタ。
 
         :param arg_label: a user-provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
         :param min_chunk_size: a user-provided minimum chunk size needed for memory allocation, will be raised to nearest power-of-two for more efficient memory access operations.
