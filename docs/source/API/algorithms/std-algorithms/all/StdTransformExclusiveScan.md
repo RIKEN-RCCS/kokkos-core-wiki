@@ -60,8 +60,8 @@ auto transform_exclusive_scan(const ExecutionSpace& exespace,                   
 
 ## ディスクリプション
 
-- 1,2: 範囲 `[first_from, last_from)` `unary_op` 演算子を用いて変換し、次に 内の各要素を、
-結果の範囲に対して`binary_op` を使用してプレフィックススキャン演算を計算し、
+- 1,2:`unary_op` 演算子を用いて変換し、次に、  範囲 `[first_from, last_from)` 内の各要素を、
+結果の範囲に対して`binary_op` を使用して、プレフィックススキャン演算を計算し、
  `init` を初期値として使用して、 `first_dest`　で始まる範囲に結果を書き込みます。
 i番目の入力要素を意味する　"exclusive" は、i番目の和には含まれません。
 
