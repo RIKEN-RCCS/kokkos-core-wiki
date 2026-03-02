@@ -67,7 +67,7 @@ i番目の入力要素を意味する　"exclusive" は、i番目の和には含
 
 - 3,4: 要素が `view_from`　から読み込まれ、 `view_dest`　に書き込まれた要素である場合を除き、 (1,2) と同様です。
 
-## Parameters and Requirementsパラメータおよび要件
+## パラメータおよび要件
 
 - `exespace`, `first_from`, `first_last`, `first_dest`, `view_from`, `view_dest`:
   -  [`exclusive_scan`](./StdExclusiveScan)　と同様。
