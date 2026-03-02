@@ -233,13 +233,10 @@ ValueType transform_reduce(const std::string& label,                            
 
 - `unary_transformer`:
   - 要素に対して所望の演算を実行する　*一項* ファンクタ。
-  Must be valid to be called from the execution space passed, and callable with
-  an arguments `v` of type (possible const) `value_type`,
-  where `value_type` is the value type of `first1` (for 9,10)
-  or the value type of `first_view` (for 11,12), and must not modify `v`.
-  - Must conform to:
+  引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst)　value_type　の引数　`v`　を使って呼び出し可能で、そこでは、value_type``　が、 `first1` (9,10について)　の値型、または  `first_view` (11,12について)　であり、`v` を変更してはいけません。
+  - 以下に一致しなければなりません:
   ```c++
-  struct UnaryTransformer {
+  構造体 UnaryTransformer {
 	KOKKOS_FUNCTION
 	constexpr value_type operator()(const value_type & v) const {
 	  return /* ... */
@@ -247,6 +244,6 @@ ValueType transform_reduce(const std::string& label,                            
   };
   ```
 
-## Return
+## 返し
 
-The reduction result.
+還元結果。
