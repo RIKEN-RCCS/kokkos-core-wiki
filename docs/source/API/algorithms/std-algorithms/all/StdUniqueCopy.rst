@@ -1,184 +1,184 @@
 ``unique_copy``
 ===============
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``Kokkos_StdAlgorithms.hpp``
 
-Description
+ディスクリプション
 -----------
 
-Copies the elements from a range or a ``source`` view to a range starting at ``first_to`` or a ``dest`` view such that there are no consecutive equal elements. It returns an iterator to the element *after* the last element copied in the destination or destination view. Equivalence is checked using ``operator==`` or the binary predicate ``pred``.
+連続する同一要素が存在しないように、範囲または ``source`` ビューから要素をコピーし、 ``first_to``　で始まる範囲または　``dest``　ビューに配置します。それは、目的の場所または目的のビューにコピーされた最後の要素の　*後の*　要素へのイテレータを返します。等価性は、``operator==`` または二項述語 ``pred`` を使用して、確認されます。Equivalence is checked using ``operator==`` or the binary predicate ``pred``
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class InputIterator, class OutputIterator>
+   テンプレート <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator unique_copy(const ExecutionSpace& exespace,                 (1)
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to);
 
-   template <class ExecutionSpace, class InputIterator, class OutputIterator>
+   テンプレート <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator unique_copy(const std::string& label,                       (2)
                               const ExecutionSpace& exespace,
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to);
 
-   template <
+   テンプレート <
      class ExecutionSpace,
      class DataType1, class... Properties1,
      class DataType2, class... Properties2>
-   auto unique_copy(const ExecutionSpace& exespace,                           (3)
+   自動 unique_copy(const ExecutionSpace& exespace,                           (3)
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-   template <
-     class ExecutionSpace,
-     class DataType1, class... Properties1,
-     class DataType2, class... Properties2>
-   auto unique_copy(const std::string& label,                                 (4)
+   テンプレート <
+     クラス ExecutionSpace,
+     クラス DataType1, class... Properties1,
+     クラス DataType2, class... Properties2>
+   自動 unique_copy(const std::string& label,                                 (4)
                     const ExecutionSpace& exespace,
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-   template <
-     class ExecutionSpace,
-     class InputIterator, class OutputIterator,
-     class BinaryPredicate>
+   テンプレート <
+     クラス ExecutionSpace,
+     クラス InputIterator, class OutputIterator,
+     クラス BinaryPredicate>
    OutputIterator unique_copy(const ExecutionSpace& exespace,                 (5)
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to,
                               BinaryPredicate pred);
 
-   template <
-     class ExecutionSpace,
-     class InputIterator, class OutputIterator,
-     class BinaryPredicate>
+   テンプレート <
+     クラス ExecutionSpace,
+     クラス InputIterator, class OutputIterator,
+     クラス BinaryPredicate>
    OutputIterator unique_copy(const std::string& label,                       (6)
                               const ExecutionSpace& exespace,
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to,
                               BinaryPredicate pred);
 
-   template <
-     class ExecutionSpace,
-     class DataType1, class... Properties1,
-     class DataType2, class... Properties2,
-     class BinaryPredicate>
-   auto unique_copy(const ExecutionSpace& exespace,                           (7)
+   テンプレート <
+     クラス ExecutionSpace,
+     クラス DataType1, class... Properties1,
+     クラス DataType2, class... Properties2,
+     クラス BinaryPredicate>
+   自動 unique_copy(const ExecutionSpace& exespace,                           (7)
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest,
                     BinaryPredicate pred);
 
-   template <
-     class ExecutionSpace,
-     class DataType1, class... Properties1,
-     class DataType2, class... Properties2,
-     class BinaryPredicate>
-   auto unique_copy(const std::string& label,                                 (8)
+   テンプレート <
+     クラス ExecutionSpace,
+     クラス DataType1, class... Properties1,
+     クラス DataType2, class... Properties2,
+     クラス BinaryPredicate>
+   自動 unique_copy(const std::string& label,                                 (8)
                     const ExecutionSpace& exespace,
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest,
                     BinaryPredicate pred);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class InputIterator, class OutputIterator>
+   テンプレート <class TeamHandleType, class InputIterator, class OutputIterator>
    KOKKOS_FUNCTION
    OutputIterator unique_copy(const TeamHandleType& teamHandle,               (9)
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to);
 
-   template <
-     class TeamHandleType,
-     class DataType1, class... Properties1,
-     class DataType2, class... Properties2>
+   テンプレート <
+     クラス TeamHandleType,
+     クラス DataType1, class... Properties1,
+     クラス DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   auto unique_copy(const TeamHandleType& teamHandle,                         (10)
+   自動 unique_copy(const TeamHandleType& teamHandle,                         (10)
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-   template <
-     class TeamHandleType,
-     class InputIterator, class OutputIterator,
-     class BinaryPredicate>
+   テンプレート <
+     クラス TeamHandleType,
+     クラス InputIterator, class OutputIterator,
+     クラス BinaryPredicate>
    KOKKOS_FUNCTION
    OutputIterator unique_copy(const TeamHandleType& teamHandle,               (11)
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to,
                               BinaryPredicate pred);
 
-   template <
-     class TeamHandleType,
-     class DataType1, class... Properties1,
-     class DataType2, class... Properties2,
-     class BinaryPredicate>
+   テンプレート <
+     クラス TeamHandleType,
+     クラス DataType1, class... Properties1,
+     クラス DataType2, class... Properties2,
+     クラス BinaryPredicate>
    KOKKOS_FUNCTION
-   auto unique_copy(const TeamHandleType& teamHandle,                         (12)
+   自動 unique_copy(const TeamHandleType& teamHandle,                         (12)
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest,
                     BinaryPredicate pred);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1, 5: The default string is "Kokkos::unique_copy_iterator_api_default".
+  - 1, 5: について、デフォルト文字列は、 "Kokkos::unique_copy_iterator_api_default".
 
-  - 3, 7: The default string is "Kokkos::unique_copy_view_api_default".
+  - 3, 7: について、デフォルト文字列は、 "Kokkos::unique_copy_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first_from, last_from``, ``first_to``: iterators to source range ``{first,last}_from``
-  and destination range ``first_to``
+- ``first_from, last_from``, ``first_to``: iterators to ソース範囲 ``{first,last}_from``
+  および宛先範囲 ``first_to``　へのイテレータ
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - ``有効な範囲を表す必要があり、つまり、 ``last >= first``　でなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``source``, ``dest``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``pred``:
 
-  - *unary* predicate returning ``true`` for the required element to replace; ``pred(v)`` must be valid to be called from the execution space passed, and convertible to bool for every argument ``v`` of type (possible const) ``value_type``, where ``value_type`` is the value type of ``InputIterator`` (for 1,2,5,6,9,11) or the value type of ``view`` (for 3,4,7,8,10,12), and must not modify ``v``.
+  - 　*一項* 述語：置換対象の必須要素に対して，　``真``　を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならず、 型　value_type　すべての引数　``v``　（constの可能性）について、bool型に変換可能で、そこでは、``value_type``　が、　 ``InputIterator`` (1,2,5,6,9,11について) の値型、または  ``view`` (3,4,7,8,10,12について)　の値型であり、  ``v``　を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-     struct Predicate
+     構造体 述語
      {
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const { return /* ... */; }
 
-       // or, also valid
+       // または、また有効
 
        KOKKOS_INLINE_FUNCTION
-       bool operator()(value_type v) const { return /* ... */; }
+       ブール operator()(value_type v) const { return /* ... */; }
      };
 
 Return Value
 ~~~~~~~~~~~~
 
-Iterator to the element *after* the last element copied in the destination range or view.
+宛先範囲またはビュー内にコピーされる最後の要素の 　*後の* 要素へのイテレータ。
