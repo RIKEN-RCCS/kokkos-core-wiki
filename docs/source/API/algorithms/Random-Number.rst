@@ -1,44 +1,44 @@
-Random-Number
+乱数
 =============
 
-.. role:: cpp(code)
+.. ロール:: cpp(code)
     :language: cpp
 
 Rand
 ----
 
-Header Files: ``<Kokkos_Core.hpp>``, ``<Kokkos_Random.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``, ``<Kokkos_Random.hpp>``
 
 .. code-block:: cpp
 
    template<class Generator>
-   struct rand<Generator, gen_data_type>
+   構造体 rand<Generator, gen_data_type>
    {
      KOKKOS_INLINE_FUNCTION
-     static gen_func_type max(){
-       return type_value;
+      gen_func_type max(){
+       返し type_value;
      }
 
      KOKKOS_INLINE_FUNCTION
-     static gen_func_type draw(Generator& gen){
-       return gen_data_type((gen.rand()&gen_return_value)
+     静的 gen_func_type draw(Generator& gen){
+       返し gen_data_type((gen.rand()&gen_return_value)
      }
 
      KOKKOS_INLINE_FUNCTION
-     static gen_func_type draw(Generator& gen,
+     静的 gen_func_type draw(Generator& gen,
                                const gen_data_type& range){
-       return gen_data_type((gen.rand(range));
+       返し gen_data_type((gen.rand(range));
      }
 
      KOKKOS_INLINE_FUNCTION
-     static gen_func_type draw(Generator& gen,
+     静的 gen_func_type draw(Generator& gen,
                                const gen_data_type& start,
 			       const gen_data_type& end){
-       return gen_data_type(gen.rand(start,end));
+        gen_data_type(gen.rand(start,end));
      }
 
-Function specializations for ``gen_data_type``, ``gen_func_type`` and ``type_value``.
-All functions and classes listed here are part of the ``Kokkos::`` namespace.
+``gen_data_type``、 ``gen_func_type``および``type_value``は、機能仕様です。
+この一覧にあるすべての関数およびクラスは、 Kokkos:: ``Kokkos::`` の一部です。
 
 +-------------------+-------------------+---------------------------+-----------------------+
 | gen_data_type     | gen_func_type     | type_value                | gen_return_value      |
@@ -68,39 +68,38 @@ All functions and classes listed here are part of the ``Kokkos::`` namespace.
 | complex<double>   | complex<double>   | 1.0,1.0                   |  ?                    |
 +-------------------+-------------------+---------------------------+-----------------------+
 
-where the maximum values of the XorShift function values are given by the following enums.
+ここで、XorShift関数の値の最大値が、以下の列挙型によって与えられる。
 
 * enum {MAX_URAND = 0xffffffffU};
 * enum {MAX_URAND64 = 0xffffffffffffffffULL-1};
 * enum {MAX_RAND = static_cast<int>(0xffffffffU/2)};
 * enum {MAX_RAND64 = static_cast<int64_t>(0xffffffffffffffffULL/2-1)};
 
-Generator
+ジェネレータ
 =========
 
-Header Files: ``<Kokkos_Core.hpp>`` ``<Kokkos_Random.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>`` ``<Kokkos_Random.hpp>``
 
-Synopsis
+シノプシス
 --------
 
-Kokkos_Random provides the structure necessary for pseudorandom number generators. These generators are based on Vigna, Sebastiano (2014). [*"An experimental exploration of Marsaglia's xorshift generators, scrambled." See: http://arxiv.org/abs/1402.6246*].
+Kokkos_Randomは、擬似乱数ジェネレータに必要な構造を提供します。 これらのジェネレータは、Vigna, Sebastiano (2014) に基づいています。[*"マルサーリアのXORシフト生成器に関する実験的探求、スクランブル処理されています。" 以下を参照: http://arxiv.org/abs/1402.6246*]  
 
-The Random number generators themselves have two components:
-a state-pool and the actual generator. A state-pool manages
-a number of generators so that each active thread is able
-to grab its own. This allows the generation of random numbers
-which are independent between threads. Note that in contrast
-to **CuRAND**, none of the functions of the pool (or the generator)
-are collectives, i.e. all functions can be called inside conditionals.
+乱数生成器自体には、ステートプールと実際のジェネレータの二つの構成要素があります:
+ステートプールは複数のジェネレータを管理し、各アクティブなスレッドが自身のジェネレータを取得できるようにします。
+各アクティブなスレッドが自身のジェネレータを取得できるようにします。
+これにより、スレッド間で独立した乱数を生成することが可能になります。
+ **CuRAND**　とは対照的に、プール（またはジェネレータ）の関数はいずれも集合関数ではないことに注意してください。
+つまり、すべての関数は条件式内で呼び出すことができます。
 
 .. code-block:: cpp
 
     template<class DeviceType>
-    class Pool {
-      public:
+    クラス  {
+      パブリック:
 
-      using device_type = DeviceType;
-      using generator_type = Generator<DeviceType>;
+      device_type = DeviceType　を使用;
+      using generator_type = Generator<DeviceType>　を使用;
 
       Pool();
       Pool(uint64_t seed);
@@ -113,36 +112,36 @@ are collectives, i.e. all functions can be called inside conditionals.
       void free_state(generator_type Gen);
     }
 
-Construction and Initialization
+構築および初期化
 -------------------------------
 
-A Pool of Generators are initialized using a starting seed and establishing
-a pool_size of num_states. The Random_XorShift64 generator is used in serial
-to initialize all states making the initialization process platform independent
-and deterministic. Requesting a generator locks its state guaranteeing that
-each thread has a private (independent) generator. (Note, getting a state on a Cuda
-device involves atomics, making it non-deterministic!)
-Upon completion, a generator is returned to the state pool, unlocking
-it, and upon updating of it's status, once again becomes available
-within the pool.
+ジェネレータのプールでは、開始シードおよび、num_states の　pool_size　の設定を使い、初期化されます。
+ジェネレータはすべての状態を初期化するために、シリアルで使用され、
+初期化プロセスをプラットフォームに依存せず
+かつ決定論的です。ジェネレータを要求するとその状態がロックされ、
+各スレッドが専用の（独立した）ジェネレータを保証されます。
+（Cudaデバイス上で状態を取得するにはアトミック操作が必要であり、非決定的になることにご注意ください！）
+完了後、ジェネレータはstateプールに戻され、それを解除し、
+その状態のアップデート時に再び、
+プール内で利用可能になります。
 
-Pool constructors that do not take an execution space instance are synchronous, and use the default execution space instance of the provided `DeviceType`.
-Pool constructors that take an execution space instance are asynchronous.
+実行空間インスタンスを選択しないプールジェネレータは同期的であり、指定された　`DeviceType`　のデフォルトの実行スペースインスタンスを使用します。
+実行空間インスタンスを選択するプールコンストラクタは非同期的です
 
-Use
+使用例
 ---
 
-Given a pool and selection of a generator from within that pool,
-the next step is development of a functor that will draw random
-numbers, of the desired type, using the generator.
+プールおよびそのプール内でのジェネレータの選択を前提とすれば、
+次の段階で、ジェネレータを使用して、所望する型の乱数を生成するファンクターを
+開発します。
 
 .. code-block:: cpp
 
     template<class Device>
-    class Generator {
-      public:
+    クラス ジェネレータ {
+      パブリック:
 
-      typedef DeviceType device_type;
+      型定義 DeviceType device_type;
 
       //Max return values of respective [X]rand[S]() functions (XorShift).
       enum {MAX_URAND = 0xffffffffU};
@@ -150,30 +149,31 @@ numbers, of the desired type, using the generator.
       enum {MAX_RAND = static_cast<int>(0xffffffffU/2)};
       enum {MAX_RAND64 = static_cast<int64_t>(0xffffffffffffffffULL/2-1)};
 
-      //Init with a state and the idx with respect to pool. Note: in serial the
-      //Generator can be used by just giving it the necessary state arguments
+      //状態を伴うInit および pool　に関するidx。 注意事項: 順次に、
+      //ジェネレータは、必要な状態引数を渡すだけで利用可能です。
       KOKKOS_INLINE_FUNCTION
       Generator (STATE_ARGUMENTS, int state_idx = 0);
 
-      //Draw a equidistributed uint32_t in the range [0,MAX_URAND)
+      //[0,MAX_URAND)の範囲で等間隔に分布したuint32_tを1つ生成します。
       KOKKOS_INLINE_FUNCTION
       uint32_t urand();
 
-      //Draw a equidistributed uint32_t in the range [0,range)
+      //[0, range) の範囲で等間隔に分布した uint32_t を生成します。
       KOKKOS_INLINE_FUNCTION
       uint32_t urand(const uint32_t& range);
 
-      //Draw a equidistributed uint32_t in the range [start,end)
+      //[start,end)　の範囲で等間隔に分布した uint32_t を生成します。
       KOKKOS_INLINE_FUNCTION
       uint32_t urand(const uint32_t& start, const uint32_t& end );
     }
 
-For the selected 32-bit unsigned integer type, three range options are shown: [0,MAX_URAND), [0,range) and [start,end).
-The first, and default, option selects unsigned integers over max possible range for that data type. The defined value of MAX_URAND is shown above as an enum. (And also shown is maX_URAND for a 64-bit unsigned integer.) The latter two options cover a user-defined range of integers.
+選択された32ビット符号なし整数型に対して、3つの範囲オプションが表示されます: [0,MAX_URAND), 
+[0,range) および [start,end)。
+最初の（デフォルトの）オプションは、そのデータ型の最大可能な範囲を超える符号なし整数を選択します。MAX_URAND の定義値は、上記の列挙型として示されています 。(And also shown is maX_URAND for a 64-bit unsigned integer.) また64ビット符号なし整数用のmaX_URANDも示されてます。) 後者の2つのオプションは、ユーザー定義の整数の範囲をカバーします。
 
-More for other data types: Scalar, uint64_t, int, int32_t, int64_t, float, double; also normal distribution and a View-fill option for the [0, range) and [start, end) options.
+他のデータ型についての詳細情報: Scalar, uint64_t, int, int32_t, int64_t, float, double; また正規分布と、[0, range) および [start, end) オプション用のView-fillオプション。
 
-Example
+例
 -------
 
 .. code-block:: cpp
@@ -191,13 +191,13 @@ Example
         Kokkos::parallel_reduce(
             "approximate_pi", total,
             KOKKOS_LAMBDA(int, int& local_count) {
-                // acquire the state of the random number generator engine
+                // 乱数生成エンジンの状態を取得
                 auto generator = random_pool.get_state();
 
                 double x = generator.drand(0., 1.);
                 double y = generator.drand(0., 1.);
 
-                // do not forget to release the state of the engine
+                // エンジン状態の解放を忘れない
                 random_pool.free_state(generator);
 
                 if (x * x + y * y <= 1.) {
