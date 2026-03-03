@@ -119,7 +119,7 @@ OutputIteratorType exclusive_scan(const std::string& label,                     
 - `first_from`, `last_from`, `first_dest`:
   - 読み取り (`*_from`) および書き込む (`first_dest`)　要素の範囲
   -  *ランダムアクセスイテレータ*　でなければなりません。
-  - 有効な範囲、つまり、 `last_from >= first_from` (デバッグモード確認済み)　を表さなければなりません。
+  - 有効な範囲、つまり、 `last_from >= first_from` (デバッグモード確認済み)　を表す必要があります。
   -  `exespace`　からアクセス可能でなければなりません。
 - `view_from`, `view_dest`:
   - `view_from` から要素を読み取り、 `view_dest`　にそれらを書き込むためのビュー。
