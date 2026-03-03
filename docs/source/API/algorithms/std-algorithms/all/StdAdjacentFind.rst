@@ -2,102 +2,102 @@
 ``adjacent_find``
 =================
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Searches a given range or rank-1 ``View`` for two consecutive equal elements.
+指定された範囲またはランク1の　``ビュー``　において、連続する2つの等しい要素を検索します。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class IteratorType>
+   テンプレート <class ExecutionSpace, class IteratorType>
    IteratorType adjacent_find(const ExecutionSpace& exespace,                              (1)
 		              IteratorType first, IteratorType last);
 
-   template <class ExecutionSpace, class IteratorType>
+   テンプレート <class ExecutionSpace, class IteratorType>
    IteratorType adjacent_find(const std::string& label, const ExecutionSpace& exespace,    (2)
 			      IteratorType first, IteratorType last);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
    auto adjacent_find(const ExecutionSpace& exespace,                                      (3)
 		      const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
-   auto adjacent_find(const std::string& label, const ExecutionSpace& exespace,            (4)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   自動 adjacent_find(const std::string& label, const ExecutionSpace& exespace,            (4)
 		      const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
+   テンプレート <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
    IteratorType adjacent_find(const ExecutionSpace& exespace,                              (5)
 		              IteratorType first, IteratorType last,
 			      BinaryPredicateType pred);
 
-   template <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
+   テンプレート <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
    IteratorType adjacent_find(const std::string& label, const ExecutionSpace& exespace,    (6)
 			      IteratorType first, IteratorType last,
 			      BinaryPredicateType pred);
 
-   template <class ExecutionSpace, class DataType, class... Properties,
+   テンプレート <class ExecutionSpace, class DataType, class... Properties,
 	     class BinaryPredicateType>
-   auto adjacent_find(const ExecutionSpace& exespace,
+   自動 adjacent_find(const ExecutionSpace& exespace,
 		      const ::Kokkos::View<DataType, Properties...>& view,                 (7)
 		      BinaryPredicateType pred);
 
-   template <class ExecutionSpace, class DataType, class... Properties,
+   テンプレート <class ExecutionSpace, class DataType, class... Properties,
 	     class BinaryPredicateType>
-   auto adjacent_find(const std::string& label, const ExecutionSpace& exespace,            (8)
+   自動 adjacent_find(const std::string& label, const ExecutionSpace& exespace,            (8)
 		      const ::Kokkos::View<DataType, Properties...>& view,
 		      BinaryPredicateType pred);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType>
+   テンプレート <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType adjacent_find(const TeamHandleType& teamHandle,                            (9)
 		              IteratorType first, IteratorType last);
 
-   template <class TeamHandleType, class DataType, class... Properties>
+   テンプレート <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
    auto adjacent_find(const TeamHandleType& teamHandle,                                   (10)
 		      const ::Kokkos::View<DataType, Properties...>& view);
 
-   template <class TeamHandleType, class IteratorType, class BinaryPredicateType>
+   テンプレート <class TeamHandleType, class IteratorType, class BinaryPredicateType>
    KOKKOS_FUNCTION
    IteratorType adjacent_find(const TeamHandleType& teamHandle,                           (11)
 		              IteratorType first, IteratorType last,
 			      BinaryPredicateType pred);
 
-   template <class TeamHandleType, class DataType, class... Properties,
+   テンプレート <class TeamHandleType, class DataType, class... Properties,
 	     class BinaryPredicateType>
    KOKKOS_FUNCTION
-   auto adjacent_find(const TeamHandleType& teamHandle,
+   自動 adjacent_find(const TeamHandleType& teamHandle,
 		      const ::Kokkos::View<DataType, Properties...>& view,                (12)
 		      BinaryPredicateType pred);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1,5: The default string is "Kokkos::adjacent_find_iterator_api_default".
+  - 1,5: デフォルト文字列は、  "Kokkos::adjacent_find_iterator_api_default".
 
   - 3,7: The default string is "Kokkos::adjacent_find_view_api_default".
 
