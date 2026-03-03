@@ -97,52 +97,49 @@
 
 - ``label``デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1,5: デフォルト文字列は、  "Kokkos::adjacent_find_iterator_api_default".
+  - 1,5: デフォルト文字列は、 "Kokkos::adjacent_find_iterator_api_default"。
 
-  - 3,7: The default string is "Kokkos::adjacent_find_view_api_default".
+  - 3,7: デフォルト文字列は、 "Kokkos::adjacent_find_view_api_default"。
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first, last``: range of elements to search in
+- ``first, last``: 検索対象となる要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - 　*ランダムアクセスイテレータ*である必要があり、例えば、``Kokkos::Experimental::(c)begin/(c)end``　から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  -  ``last >= first``有効な範囲、つまり、``last >= first`` でなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``view``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``、 ``LayoutRight``、または ``LayoutStride``を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``pred``: *binary* functor returning ``true`` if two arguments should be considered "equal".
+- ``pred``: 二つの引数が　"等しい"　と見なされる場合に　``真``　を返す　*二項*　ファンクタで、。
 
-  ``pred(a,b)`` must be valid to be called from the execution space passed, or
-  the execution space associated with the team handle, and convertible to bool
-  for every pair of arguments ``a,b`` of type ``value_type``, where ``value_type``
-  is the value type of ``IteratorType`` or ``view`` and must not modify ``a,b``.
+  pred(a,b)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型　value_type　の引数　``a,b``　のすべてのペアについて、bool型に変換可能で、そこでは、``value_type``　が、　``IteratorType``　の値型、または　``view``　であり、 　``a,b``　を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-     struct Comparator{
+     構造体 Comparator{
        KOKKOS_INLINE_FUNCTION
-       bool operator()(const value_type & a, const value_type & b) const {
-         return /* true if a should be considered equal to b */;
+       ブール operator()(const value_type & a, const value_type & b) const {
+         返し / *a が b */　に等しいとみなされる場合に真* ;
        }
      };
 
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-- 1,2,9: returns the first iterator ``it`` such that ``*it == *(it+1)`` is true
-- 5,6,11: returns the first iterator ``it`` such that ``pred(*it, *it+1)`` returns true
-- 3,4,10: returns the first Kokkos iterator ``it`` such that ``view(it) == view(it+1)`` is true
-- 7,8,12: returns the first Kokkos iterator ``it``, such that ``pred(view(it), view(it+1))`` returns true
+- 1,2,9:  ``*it == *(it+1)`` が真となるように、第一イテレータ ``it``　を返します。
+- 5,6,11: ``pred(*it, *it+1)`` が真を返すように、第一イテレータ ``it``　を返します。
+- 3,4,10: ``view(it) == view(it+1)`` が真となるように、第一　Kokkos　イテレータ ``it``　を返します。
+- 7,8,12: ``pred(view(it), view(it+1))`` が真を返すように、第一　Kokkos　イテレータ ``it``　を返します。
 
-If no such element is found, it returns ``last`` for all overloads accepting iterators,
-and ``Kokkos::Experimental::end(view)`` for all overloads acceptings a view.
+該当する要素が見つからない場合、イテレータを受け入れるすべてのオーバーロードに対しては ``last`` を返し、
+ビューを受け入れるすべてのオーバーロードについては、 ``Kokkos::Experimental::end(view)`` を返します。
