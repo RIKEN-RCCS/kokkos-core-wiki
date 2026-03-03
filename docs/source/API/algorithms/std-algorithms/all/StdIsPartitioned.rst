@@ -68,7 +68,6 @@
 - ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
 
-
 - ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
 
   - 1:デフォルト文字列は、"Kokkos::is_partitioned_iterator_api_default".
@@ -81,7 +80,7 @@
 
   - *ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されなければなりません。
 
-  - 有効な範囲を表す必要があり、つまり、 ``last >= first``　でなければなりません。
+  - 有効な範囲、つまり、 ``last >= first``　を表す必要があります。
 
   - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
@@ -137,7 +136,7 @@
 
    view_type = Kokkos::View<int*>　を使用;
    view_type a("a", 15);
-   // fill a somehow何らかの方法で　a を満たす
+   // 何らかの方法で　a を満たす
 
    自動 exespace  = Kokkos::DefaultExecutionSpace;
    const 自動 res = KE::is_partitioned(exespace, KE::cbegin(a), KE::cend(a), IsNegative<int>());
