@@ -97,7 +97,7 @@
 
 - ``exespace``, ``teamHandle``, ``first_from, last_from``, ``first_to``, ``view_from``, ``view_dest``: |RemoveCopy|_　と同様。
 
-- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
   - 1: デフォルト文字列は、 "Kokkos::remove_copy_if_iterator_api_default"。
 
