@@ -2,89 +2,89 @@
 ``count_if``
 ============
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Returns the number of elements in a range or in rank-1 ``View`` that satisfy a given unary prediate.
+指定された一項述語を満たす範囲またはランク1の　``ビュー``　内の要素数を返します。
 
-Interface
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class IteratorType, class Predicate>
-   typename IteratorType::difference_type count_if(const ExecutionSpace& exespace,
+   テンプレート <class ExecutionSpace, class IteratorType, class Predicate>
+   型名 IteratorType::difference_type count_if(const ExecutionSpace& exespace,
 						   IteratorType first,
 						   IteratorType last,                   (1)
 						   Predicate pred);
 
 
-   template <class ExecutionSpace, class IteratorType, class Predicate>
-   typename IteratorType::difference_type count_if(const std::string& label,
+   テンプレート <class ExecutionSpace, class IteratorType, class Predicate>
+   型名 IteratorType::difference_type count_if(const std::string& label,
 						   const ExecutionSpace& exespace,
 						   IteratorType first,                  (2)
 						   IteratorType last,
 						   Predicate pred);
 
-   template <class ExecutionSpace, class DataType, class... Properties,
-	     class Predicate>
-   auto count_if(const ExecutionSpace& exespace,
+   テンプレート <class ExecutionSpace, class DataType, class... Properties,
+	     クラス Predicate>
+   自動 count_if(const ExecutionSpace& exespace,
 		 const ::Kokkos::View<DataType, Properties...>& view,                   (3)
 		 Predicate pred);
 
-   template <class ExecutionSpace, class DataType, class... Properties,
-	     class Predicate>
-   auto count_if(const std::string& label, const ExecutionSpace& exespace,
+   テンプレート <class ExecutionSpace, class DataType, class... Properties,
+	     クラス Predicate>
+   自動 count_if(const std::string& label, const ExecutionSpace& exespace,
 		 const ::Kokkos::View<DataType, Properties...>& view,                   (4)
 		 Predicate pred);
 
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType, class Predicate>
+   テンプレート <class TeamHandleType, class IteratorType, class Predicate>
    KOKKOS_FUNCTION
    typename IteratorType::difference_type count_if(const TeamHandleType& teamHandle,
 						   IteratorType first,
 						   IteratorType last,                   (5)
 						   Predicate pred);
 
-   template <class TeamHandleType, class DataType, class... Properties,
+   テンプレート <class TeamHandleType, class DataType, class... Properties,
 	     class Predicate>
    KOKKOS_FUNCTION
-   auto count_if(const TeamHandleType& teamHandle,
+   自動 count_if(const TeamHandleType& teamHandle,
 		 const ::Kokkos::View<DataType, Properties...>& view,                   (6)
 		 Predicate pred);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::count_if_iterator_api_default".
+  - 1: デフォルト文字列は、　"Kokkos::count_if_iterator_api_default".
 
-  - 3: The default string is "Kokkos::count_if_view_api_default".
+  - 3: デフォルト文字列は、　"Kokkos::count_if_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first, last``: range of elements to search in
+- ``first, last``: 検索対象となる要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``　から返されなければなりません。
 
   - must represent a valid range, i.e., ``last >= first``
 
