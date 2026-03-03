@@ -90,7 +90,7 @@
 		      const ::Kokkos::View<DataType1, Properties1...>& view,
 		      const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
-   // オーバーロードセット 2: binary predicate passed引き渡された二項述語
+   // オーバーロードセット 2: 引き渡された二項述語
    テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2,
 	     クラス BinaryPredicateType>
    KOKKOS_FUNCTION
@@ -150,7 +150,7 @@
 
 - ``pred``: 2つの引数が、 "等しい"　とみなされる場合、 ``真`` を返す　*二項* ファンクタ。
 
-  ``pred(a,b)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして、それぞれ、 型　　 ``ValueType1`` および　``ValueType2``　の引数　``a,b``　のすべてのペアについて、bool型に変換可能で、そこでは、``ValueType1`` および ``ValueType{1,2}``　が、``IteratorType{1,2}``　の値型、または ``(s_)view``　であり、 　``a,b``　を変更してはいけません。
+  ``pred(a,b)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして、それぞれ、 型　　 ``ValueType1`` および　``ValueType2``　の引数　``a,b``　のすべてのペアについて、ブール型に変換可能で、そこでは、``ValueType1`` および ``ValueType{1,2}``　が、``IteratorType{1,2}``　の値型、または ``(s_)view``　であり、 　``a,b``　を変更してはいけません。
 
   - 以下に一致しなければなりません:
 
