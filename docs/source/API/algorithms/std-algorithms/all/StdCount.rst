@@ -1,84 +1,85 @@
 ``count``
 =========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-Returns the number of elements in a range or in rank-1 ``View`` that are equal to a target value.
+範囲内、またはランク1の　``ビュー``　において、指定されたターゲット値と等しい要素の数を返します。
 
-Interface
+
+インターフェイス
 ---------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. 警告:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
+実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   template <class ExecutionSpace, class IteratorType, class T>
-   typename IteratorType::difference_type count(const ExecutionSpace& exespace,
+   テンプレート <class ExecutionSpace, class IteratorType, class T>
+   型名 IteratorType::difference_type count(const ExecutionSpace& exespace,
 						IteratorType first,
 						IteratorType last,                      (1)
 						const T& value);
 
-   template <class ExecutionSpace, class IteratorType, class T>
-   typename IteratorType::difference_type count(const std::string& label,
+   テンプレート <class ExecutionSpace, class IteratorType, class T>
+   型名 IteratorType::difference_type count(const std::string& label,
 						const ExecutionSpace& exespace,
 						IteratorType first,
 						IteratorType last,                      (2)
 						const T& value);
 
-   template <class ExecutionSpace, class DataType, class... Properties, class T>
-   auto count(const ExecutionSpace& exespace,                                           (3)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
+   自動 count(const ExecutionSpace& exespace,                                           (3)
 	      const ::Kokkos::View<DataType, Properties...>& view, const T& value);
 
-   template <class ExecutionSpace, class DataType, class... Properties, class T>
-   auto count(const std::string& label, const ExecutionSpace& exespace,                 (4)
+   テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
+    count(const std::string& label, const ExecutionSpace& exespace,                 (4)
 	      const ::Kokkos::View<DataType, Properties...>& view,
 	      const T& value);
 
-Overload set accepting a team handle
+チームハンドルを受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
 .. code-block:: cpp
 
-   template <class TeamHandleType, class IteratorType, class T>
+   テンプレート <class TeamHandleType, class IteratorType, class T>
    KOKKOS_FUNCTION
-   typename IteratorType::difference_type count(const TeamHandleType& teamHandle,
+   型名 IteratorType::difference_type count(const TeamHandleType& teamHandle,
 						IteratorType first,
 						IteratorType last,                      (5)
 						const T& value);
 
-   template <class TeamHandleType, class DataType, class... Properties, class T>
+   テンプレート <class TeamHandleType, class DataType, class... Properties, class T>
    KOKKOS_FUNCTION
-   auto count(const TeamHandleType& teamHandle,                                         (6)
+   自動 count(const TeamHandleType& teamHandle,                                         (6)
 	      const ::Kokkos::View<DataType, Properties...>& view,
 	      const T& value);
 
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::count_iterator_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::count_iterator_api_default".
 
-  - 3: The default string is "Kokkos::count_view_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::count_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-- ``first, last``: range of elements to search in
+- ``first, last``: range of elements to search in検索対象となる要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - `*ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``から返されなければなりません。
 
   - must represent a valid range, i.e., ``last >= first``
 
