@@ -105,7 +105,7 @@ ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      
 
 - `exespace`:
   - 実行空間インスタンス
-- `ラベル`デバッグ目的の実装カーネルに名付けるために使用されます。
+- `label`: デバッグ目的の実装カーネルに名付けるために使用されます。
   - デバッグ目的の実装カーネルに名付けるために使用されます。
   - 1,5,9について、デフォルト文字列は、: "Kokkos::reduce_iterator_api_default"
   - 3,7,11について、デフォルト文字列は、: "Kokkos::reduce_view_api_default"
