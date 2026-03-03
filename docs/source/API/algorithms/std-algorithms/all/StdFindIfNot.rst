@@ -58,7 +58,7 @@ Descriptionディスクリプション
 		    const Kokkos::View<DataType, Properties...>& view,
 		    PredicateType pred);
 
-Parameters and Requirementsパラメータおよび要件
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - ``exespace``: 実行空間インスタンス
@@ -81,15 +81,15 @@ Parameters and Requirementsパラメータおよび要件
 
   - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view``: view to search in
+- ``view``: 探索対象のビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
   - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``pred``: 必要な要素について ``真`` を返す一項述語;
 
-  ``pred(a)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 (可能性のあるconst)　value_type　の引数　``a``　のすべてのペアについて、bool型に変換可能で、そこでは、``value_type``　が、``IteratorType``　の値型、または ``view``　であり、  ``a``　を変更してはいけません。
+  ``pred(a)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 (可能性のあるconst)　value_type　の引数　``a``　のすべてのペアについて、ブール型に変換可能で、そこでは、``value_type``　が、``IteratorType``　の値型、または ``view``　であり、  ``a``　を変更してはいけません。
 
   - 以下に一致しなければなりません:
 
