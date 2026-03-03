@@ -46,7 +46,7 @@ void replace(const std::string& label, const ExecutionSpace& exespace,       (4)
 - `first, last`:
   - 検索対象の要素の範囲
   - 例えば、 ``Kokkos::Experimental::begin/end``　から返されるなど、*ランダムアクセスイテレータ*　でなければなりません。
-  - 有効範囲、つまり、 ``last >= first``　を表さなければなりません。（この条件はデバッグモードで確認されます）。
+  - 有効範囲、つまり、 ``last >= first``　を表す必要があります。（この条件はデバッグモードで確認されます）。
   - `exespace`　からアクセス可能でなければなりません。
 - `view`:
   - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
