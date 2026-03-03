@@ -112,7 +112,7 @@ OutputIteratorType exclusive_scan(const std::string& label,                     
 
 - `exespace`:
   - 実行空間インスタンス
-- `ラベル`:
+- `label`:
   - デバッグ目的で内部の並列カーネルに名付けるために使用
   - 1,2　について、デフォルト文字列は、: "Kokkos::exclusive_scan_iterator_api_default"
   - 5,6 について、デフォルト文字列は、: "Kokkos::exclusive_scan_view_api_default"
