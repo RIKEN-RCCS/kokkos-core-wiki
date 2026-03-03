@@ -96,22 +96,22 @@
 
   - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``pred``: *unary* functor returning ``true`` if an argument satisfies the desired condition.
+- ``pred``: 引数が所望の条件を満たす場合に　``真``　を返す　*一項*　ファンクタ。
 
   ``pred(v)``  は、引数として渡された実行空間から呼び出されるために、有効でなければならず、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型　value_type　の引数　``v``　のすべてのペアについて、bool型に変換可能で、そこでは、``value_type``　が、``IteratorType``　の値型、または ``view``　であり、  ``v``　を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-     struct CustomPredicate{
+     構造体 CustomPredicate{
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const {
-         return /* true if v satisfies your desired condition */;
+          /* vが所望の条件を満たす場合に真 */;
        }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Returns the number of elements in the range ``first,last`` or in ``view`` for which the predicate is true.
+範囲 first, last の中、または述語が真である ``ビュー``　内にある要素数を返します。  
