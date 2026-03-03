@@ -77,21 +77,21 @@
 
   - 注意事項: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-- ``first, last``: range of elements to search in検索対象となる要素の範囲
+- ``first, last``: 検索対象となる要素の範囲
 
   - `*ランダムアクセスイテレータ*　である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end``から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲、つまり、 last >= first　を表す必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``view``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Returns the number of elements in the range ``first, last`` or in ``view`` that are equal to ``value``.
+範囲 ``first, last`` または ``値``　に等しい ``ビュー`` の中にある要素数を返します。
