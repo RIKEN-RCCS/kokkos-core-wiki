@@ -143,5 +143,5 @@
 
    自動 it1 = KE::find_if(exespace, KE::begin(a), KE::end(a), p);
 
-   // OpenMPが有効になっていると仮定すれば、明示的に以下のように呼び出すことも可能です
+   // OpenMP　が有効になっていると仮定すれば、明示的に以下のように呼び出すことも可能です
    自動 it2 = KE::find_if(Kokkos::OpenMP(), KE::begin(a), KE::end(a), p);
