@@ -6,7 +6,7 @@
 
 Specific implementation of `ReducerConcept <ReducerConcept.html>`_ performing bitwise ``AND`` operation
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 Usage
 -----
