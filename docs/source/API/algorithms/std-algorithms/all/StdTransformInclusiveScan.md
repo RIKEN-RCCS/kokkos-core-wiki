@@ -127,4 +127,4 @@ OutputIteratorType transform_inclusive_scan(const std::string& label,           
 
 ## 返し
 
-書き込まれた最後の要素 *後* の要素へのイテレータ。
+書き込まれた最後の要素 *後の* 要素へのイテレータ。
