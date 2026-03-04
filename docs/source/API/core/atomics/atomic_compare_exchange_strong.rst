@@ -1,39 +1,39 @@
 ``atomic_compare_exchange_strong``
 ==================================
 
-.. warning::
-   Deprecated since Kokkos 4.5,
-   use `atomic_compare_exchange <atomic_compare_exchange.html>`_ instead.
+.. 警告::
+   Kokkos 4.5以降非推奨
+   代わりに　`atomic_compare_exchange <atomic_compare_exchange.html>`_ を使ってください。
 
 .. role:: cpp(code)
    :language: cpp
 
-Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
+ ``<Kokkos_Core.hpp>``　に含まれている、ヘッダー ``<Kokkos_Atomic.hpp>`` に定義されています。`
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
 
    bool was_exchanged = atomic_compare_exchange_strong(&obj, expected, desired);
 
-Atomically compares the current value of ``obj`` with ``expected``
-and replaces its value with ``desired`` if equal.
-The function returns ``true`` if the exchange has happened, ``false`` otherwise.
+原子的に、 ``obj`` の現在値を ``expected``　と比較し、
+そして、等しければその値を　``desired``　値に置き換えます。
+交換が起こった場合には、関数は　``true``　を返しますが、そうでなければ、``false`` を返します。
 
-Description
+ディスクリプション
 -----------
 
 .. cpp:function:: template<class T> bool atomic_compare_exchange_strong(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 
-   Atomically compares ``*ptr`` with ``expected``, and if those are bitwise-equal, replaces the former with ``desired``.
-   If ``desired`` is written into ``*ptr`` then ``true`` is returned.
+   原子的に、 ``*ptr``　を ``expected``　と比較し、 それらがビット単位で等しい場合には、 前者を ``desired``　と置換します。
+   If ``desired`` is written into ``*ptr`` then ``true`` is returned.そして、呼び出し前に　``ptr``が指していた実際の値を常に返します。
 
-   ``if (*ptr == expected) { *ptr = desired; return true; } else return false;``
+   `` (*ptr == expected) { *ptr = desired; return true; } 以外の場合には、 偽を返します;``
 
-   :param ptr: address of the object to test and to modify
-   :param expected: value expected to be found in the object
-   :param desired: the value to store in the object if as expected
+   :param ptr: テストし、変更するオブジェクトのアドレス
+   :param expected: オブジェクト内で見つかると予想される値
+   :param desired: 予想通りである場合にオブジェクトに格納する値
    :returns: the result of the comparison, ``true`` if ``*ptr`` was equal to ``expected``, ``false`` otherwise
 
    .. deprecated:: 4.5
