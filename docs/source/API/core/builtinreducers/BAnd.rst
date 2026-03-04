@@ -4,11 +4,11 @@
 .. role:: cpp(code)
     :language: cpp
 
-Specific implementation of `ReducerConcept <ReducerConcept.html>`_ performing bitwise ``AND`` operation
+ビット単位の　``AND``　演算を実行する `ReducerConcept <ReducerConcept.html>`_ の具体的な実装
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
@@ -16,7 +16,7 @@ Usage
     T result;
     parallel_reduce(N,Functor,BAnd<T,S>(result));
 
-Synopsis
+シノプシス
 --------
 
 .. code-block:: cpp
@@ -24,9 +24,9 @@ Synopsis
     template<class Scalar, class Space>
     class BAnd{
         public:
-            typedef BAnd reducer;
-            typedef typename std::remove_cv<Scalar>::type value_type;
-            typedef Kokkos::View<value_type, Space> result_view_type;
+            型定義 BAnd リデューサー;
+            型定義 型名 std::remove_cv<Scalar>::type value_type;
+            型定義 Kokkos::View<value_type, Space> result_view_type;
 
             KOKKOS_INLINE_FUNCTION
             void join(value_type& dest, const value_type& src) const;
@@ -47,61 +47,61 @@ Synopsis
             BAnd(const result_view_type& value_);
     };
 
-Interface
+インターフェイス
 ---------
 
 .. cpp:class:: template<class Scalar, class Space> BAnd
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: reducer
+   .. cpp:type:: リデューサー
 
-      The self type
+      自己型
 
    .. cpp:type:: value_type
 
-      The reduction scalar type.
+      還元スカラー型。
 
    .. cpp:type:: result_view_type
 
-      A ``Kokkos::View`` referencing the reduction result
+      還元結果を参照する ``Kokkos::View`` 
 
-   .. rubric:: Constructors
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION BAnd(value_type& value_);
 
-      Constructs a reducer which references a local variable as its result location.
+      結果の保存先としてローカル変数を参照するリデューサを構築します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION BAnd(const result_view_type& value_);
 
-      Constructs a reducer which references a specific view as its result location.
+      特定のビューを結果の保存先として参照するリデューサーを構築します。
 
-   .. rubric:: Public Member Functions
+   .. rubric:: パブリックメンバー関数
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-      Store bitwise ``and`` of ``src`` and ``dest`` into ``dest``:  ``dest = src & dest;``.
+       ``src``　の ``and``　および　``dest`` を ``dest``:  ``dest = src & dest;``　にビット単位で格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-      Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::land()`` method. The default implementation sets ``val=~(0)``.
+       ``Kokkos::reduction_identity<Scalar>::land()`` メソッドを使用して、``val``　を初期化します。 デフォルト実装は、``val=~(0)``　を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
-      Returns a reference to the result provided in class constructor.
+      クラスコンストラクタで提供された結果への参照を返します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
 
-      Returns a view of the result place provided in class constructor.
+      クラスコンストラクタで提供された結果の保存先のビューを返します。
 
 
-Additional Information
+追加情報
 ~~~~~~~~~~~~~~~~~~~~~~
 
-* ``BAnd<T,S>::value_type`` is non-const ``T``
+* ``BAnd<T,S>::value_type`` は、非定数 ``T``　です。
 
-* ``BAnd<T,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
+* ``BAnd<T,S>::result_view_type`` は　``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。　S(メモリ空間)は結果が存在する空間と同じでなければならないことに、ご注意ください。
 
-* Requires: ``Scalar`` has ``operator =`` and ``operator &`` defined. ``Kokkos::reduction_identity<Scalar>::band()`` is a valid expression.
+* 必要条件: ``Scalar`` は、 定義した　``operator =`` および ``operator &`` を持ちます。``Kokkos::reduction_identity<Scalar>::band()`` は有効な式です。
 
-* In order to use BAnd with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
+* BAnd をカスタム型で使用するには、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート仕様を定義する必要があります。詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ をご参照ください。
