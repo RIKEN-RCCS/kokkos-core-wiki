@@ -1,14 +1,14 @@
 ``Max``
 =======
 
-.. role:: cpp(code)
+.. :: cpp(code)
     :language: cpp
 
-Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing the maximum value
+最大値を格納する `ReducerConcept <ReducerConcept.html>`_ の具体的
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
@@ -16,17 +16,17 @@ Usage
    T result;
    parallel_reduce(N,Functor,Max<T,S>(result));
 
-Synopsis
+シノプシス
 --------
 
 .. code-block:: cpp
 
    template<class Scalar, class Space>
-   class Max{
-     public:
-       typedef Max reducer;
-       typedef typename std::remove_cv<Scalar>::type value_type;
-       typedef Kokkos::View<value_type, Space> result_view_type;
+   クラス Max{
+     パブリック:
+       型定義 Max リデューサー;
+       型定義 型名 std::remove_cv<Scalar>::type value_type;
+       型定義 Kokkos::View<value_type, Space> result_view_type;
 
        KOKKOS_INLINE_FUNCTION
        void join(value_type& dest, const value_type& src) const;
@@ -47,30 +47,30 @@ Synopsis
        Max(const result_view_type& value_);
    };
 
-Interface
+インターフェイス
 ---------
 
 .. cpp:class:: template<class Scalar, class Space> Max
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: reducer
+   .. cpp:type:: リデューサー
 
-      The self type.
+      自己型。
 
    .. cpp:type:: value_type
 
-      The reduction scalar type.
+      還元スカラー型。
 
    .. cpp:type:: result_view_type
 
-      A ``Kokkos::View`` referencing the reduction result
+    　還元結果を参照する ``Kokkos::View``
 
-   .. rubric:: Constructors
+   .. rubric:: コンストラク
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION Max(value_type& value_);
 
-      Constructs a reducer which references a local variable as its result location.
+      結果の保存先としてローカル変数を参照するリデューサを構築します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION Max(const result_view_type& value_);
 
