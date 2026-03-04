@@ -1,7 +1,7 @@
 ``atomic_store``
 ================
 
-.. role:: cpp(code)
+.. ロール:: cpp(code)
     :language: cpp
 
 Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
