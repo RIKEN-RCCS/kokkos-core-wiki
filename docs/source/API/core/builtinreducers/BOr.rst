@@ -97,7 +97,7 @@ Header File: ``<Kokkos_Core.hpp>``
 追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* ``BOr<T,S>::value_type`` は、 non-const ``T``
+* ``BOr<T,S>::value_type`` は、 非定数 ``T``
 
 * ``BOr<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。　S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
