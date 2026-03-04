@@ -4,7 +4,7 @@
 .. :: cpp(code)
     :language: cpp
 
-最大値を格納する `ReducerConcept <ReducerConcept.html>`_ の具体的
+最大値を格納する `ReducerConcept <ReducerConcept.html>`_ の具体的な実装
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
