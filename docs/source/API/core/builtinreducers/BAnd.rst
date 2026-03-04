@@ -98,7 +98,7 @@
 追加情報
 ~~~~~~~~~~~~~~~~~~~~~~
 
-* ``BAnd<T,S>::value_type`` は、non-const ``T``　です。
+* ``BAnd<T,S>::value_type`` は、非定数 ``T``　です。
 
 * ``BAnd<T,S>::result_view_type`` は　``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。　S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
