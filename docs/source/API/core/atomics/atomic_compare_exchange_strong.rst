@@ -27,14 +27,14 @@
 .. cpp:function:: template<class T> bool atomic_compare_exchange_strong(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 
    原子的に、 ``*ptr``　を ``expected``　と比較し、 それらがビット単位で等しい場合には、 前者を ``desired``　と置換します。
-   If ``desired`` is written into ``*ptr`` then ``true`` is returned.そして、呼び出し前に　``ptr``が指していた実際の値を常に返します。
+   ``desired`` が、``*ptr`` に書き込まれれば、 ``true`` が返されます。
 
    `` (*ptr == expected) { *ptr = desired; return true; } 以外の場合には、 偽を返します;``
 
    :param ptr: テストし、変更するオブジェクトのアドレス
    :param expected: オブジェクト内で見つかると予想される値
    :param desired: 予想通りである場合にオブジェクトに格納する値
-   :returns: the result of the comparison, ``true`` if ``*ptr`` was equal to ``expected``, ``false`` otherwise
+   :returns: 比較の結果であり、 ``*ptr`` が ``expected``　であれば、``true`` であり、それ以外は　``false``
 
-   .. deprecated:: 4.5
-      Prefer :cpp:expr:`expected == atomic_compare_exchange(&obj, expected, desired)`
+   .. 非推奨:: 4.5
+      :cpp:expr:`expected == atomic_compare_exchange(&obj, expected, desired)`　を推奨します。
