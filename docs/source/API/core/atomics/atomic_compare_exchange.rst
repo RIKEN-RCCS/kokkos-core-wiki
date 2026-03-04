@@ -26,7 +26,7 @@ Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.
 
    :param ptr: テストし、変更するオブジェクトのアドレス
    :param expected: オブジェクト内で見つかると予想される値
-   :param desired: the value to store in the object if as expected予想通りである場合に、オブジェクトに格納する値
+   :param desired: 予想通りである場合に、オブジェクトに格納する値
    :returns:  ``ptr``　が指すオブジェクトが以前に保持していた値
 
 
