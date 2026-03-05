@@ -71,7 +71,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION LAnd(value_type& value_);
 
-      結果の保存先としてローカル変数を参照するリデューサを構築します。
+      クラスコンストラクタで提供された結果への参照を返します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION LAnd(const result_view_type& value_);
 
