@@ -81,7 +81,7 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-      Store minimum with index of ``src`` and ``dest`` into ``dest``:  ``dest = (src.val < dest.val) ? src :dest;``.
+      ``dest``:  ``dest = (src.val < dest.val) ? src :dest;``に、 ``src`` および ``dest`` のインデックスを伴う最小値を格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
