@@ -107,4 +107,4 @@
 
 * 必要条件: ``Index`` は、定義した ``operator =`` を持ちます。 ``Kokkos::reduction_identity<Index>::min()``  は、有効な式です。
 
-* MaxLoc を ``Scalar`` または ``Index``　いずれかのカスタム型を伴って使用するために、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、`Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください
+* MaxLoc を ``Scalar`` または ``Index``　いずれかのカスタム型で使用するために、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、`Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください
