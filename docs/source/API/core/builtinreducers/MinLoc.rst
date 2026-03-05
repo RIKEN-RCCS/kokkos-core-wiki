@@ -81,48 +81,48 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-      ``dest``:  ``dest = (src.val < dest.val) ? src :dest;``に、 ``src`` および ``dest`` のインデックスを伴う最小値を格納します。
+      ``dest``:  ``dest = (src.val < dest.val) ? src :dest;``に、 ``src`` および ``dest`` のインデックスを持つ最小値を格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-      Initialize ``val.val`` using the ``Kokkos::reduction_identity<Scalar>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
-      Initialize ``val.loc`` using the ``Kokkos::reduction_identity<Index>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
+      Initialize using the ``Kokkos::reduction_identity<Scalar>::min()`` メソッドを使って、 ``val.val`` を初期化します。　デフォルト実装は、The default implementation sets ``val=<TYPE>_MAX``　を設定します。
+      Initialize using the ``Kokkos::reduction_identity<Index>::min()``  メソッドを使って、 ``val.loc`` を初期化します。　デフォルト実装は、 ``val=<TYPE>_MAX``　を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
-      Returns a reference to the result provided in class constructor.
+      クラスコンストラクタで提供された結果への参照を返します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
 
-      Returns a view of the result place provided in class constructor.
+      特定のビューを結果の保存先として参照するリデューサーを構築します。
 
-Additional Information
+追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* ``MinLoc<T,I,S>::value_type`` is Specialization of ValLocScalar on non-const ``T`` and non-const ``I``
+* ``MinLoc<T,I,S>::value_type`` は、 非定数 ``T`` および 非定数 ``I``　上の ValLocScalar の特殊化です。
 
-* ``MinLoc<T,I,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
+* ``MinLoc<T,I,S>::result_view_type`` は ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
-* Requires: ``Scalar`` has ``operator =`` and ``operator <`` defined. ``Kokkos::reduction_identity<Scalar>::min()`` is a valid expression.
+* 必要条件: ``Scalar`` は、定義された ``operator =`` および　``operator <`` を持ちます。 ``Kokkos::reduction_identity<Scalar>::min()``  は有効な式です。
 
-* Requires: ``Index`` has ``operator =`` defined. ``Kokkos::reduction_identity<Index>::min()`` is a valid expression.
+* 必要条件: ``Index`` は、定義された ``operator =`` を持ちます。 ``Kokkos::reduction_identity<Index>::min()`` は有効な式です。
 
-* In order to use MinLoc with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
+*  ``Scalar`` または ``Index``のいずれかのカスタム型で  MinLoc を使用するために、``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
 
-Example
+例
 -------
 
 .. code-block:: cpp
 
   #include <Kokkos_Core.hpp>
-  struct Idx3D_t {
+  構造体 Idx3D_t {
     int value[3];
     int& operator[](int i) { return value[i]; }
     const int& operator[](int i) const { return value[i]; }
   };
-  template <>
-  struct Kokkos::reduction_identity<Idx3D_t> {
-    static constexpr Idx3D_t min() { return {0, 0, 0}; }
+  テンプレート <>
+  構造体 Kokkos::reduction_identity<Idx3D_t> {
+    静的 constexpr Idx3D_t min() { return {0, 0, 0}; }
   };
   int main(int argc, char* argv[]) {
     Kokkos::initialize(argc, argv);
@@ -130,8 +130,8 @@ Example
       Kokkos::View<double***> a("A", 5, 5, 5);
       Kokkos::deep_copy(a, 10);
       a(2, 3, 1)        = 5;
-      using MinLoc_t    = Kokkos::MinLoc<double, Idx3D_t>;
-      using MinLocVal_t = typename MinLoc_t::value_type;
+      MinLoc_t    = Kokkos::MinLoc<double, Idx3D_t>　を使用;
+      MinLocVal_t = typename MinLoc_t::value_type　を使用;
       MinLocVal_t result;
       Kokkos::parallel_reduce(
           Kokkos::MDRangePolicy<Kokkos::Rank<3>>({0, 0, 0}, {5, 5, 5}),
