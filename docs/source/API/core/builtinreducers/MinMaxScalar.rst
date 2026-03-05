@@ -4,10 +4,9 @@
 .. role::cpp(code)
     :language: cpp
 
-:cpp:struct:`MinMaxScalar` is a class template that stores both a minimum and a
-maximum value as a single, convenient unit. It is primarily designed to hold
-the result of :cpp:func:`parallel_reduce` operations using the
-:cpp:class:`MinMax` builtin reducer.
+:cpp:struct:`MinMaxScalar` は、
+単一の便利な単位として、最小値および最大値は、クラステンプレートです。主に、:cpp:class:`MinMax` builtin リデューサーを使って :cpp:func:`parallel_reduce` 演算の結果保持を目的として設計されています。
+
 
 It is generally recommended to get this type by using the reducer's
 ``::value_type`` member (e.g., ``MinMax<Scalar,Space>::value_type``) to ensure
