@@ -17,7 +17,7 @@
 
  ``<Kokkos_Core.hpp>``に含まれる ヘッダー　 |KokkosBitManipulation|_ に定義。
 
-標準ライブラリヘッダー |StandardLibraryHeaderBit|_ から関数テンプレートを提供します(C++20　以降)。
+標準ライブラリヘッダー |StandardLibraryHeaderBit|_ から関数テンプレートを提供します( C++20　以降)。
 
 Kokkos 4.1ビット演算関数テンプレートは、Kokkos 4.1以降、Kokkos:: 名前空間で定義されています。
 
