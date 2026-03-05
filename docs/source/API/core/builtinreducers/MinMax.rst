@@ -64,19 +64,19 @@
 
    .. cpp:type:: result_view_type
 
-      A ``Kokkos::View`` referencing the reduction result
+      還元結果を参照する ``Kokkos::View`` 
 
-   .. rubric:: Constructors
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION MinMax(value_type& value_);
 
-      Constructs a reducer which references a local variable as its result location.
+      結果の保存先としてローカル変数を参照するリデューサを構築します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION MinMax(const result_view_type& value_);
 
-      Constructs a reducer which references a specific view as its result location.
+      特定のビューを結果の保存先として参照するリデューサーを構築します。
 
-   .. rubric:: Public Member Functions
+   .. rubric:: パブリックメンバー関数
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
