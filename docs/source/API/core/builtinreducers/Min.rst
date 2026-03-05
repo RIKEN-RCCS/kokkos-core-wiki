@@ -4,11 +4,11 @@
 .. role:: cpp(code)
     :language: cpp
 
-Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing the minimum value
+最小値を格納する `ReducerConcept <ReducerConcept.html>`_ の具体的な実装
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
@@ -16,17 +16,17 @@ Usage
    T result;
    parallel_reduce(N,Functor,Min<T,S>(result));
 
-Synopsis
+シノプシス
 --------
 
 .. code-block:: cpp
 
    template<class Scalar, class Space>
-   class Min{
-     public:
-       typedef Min reducer;
-       typedef typename std::remove_cv<Scalar>::type value_type;
-       typedef Kokkos::View<value_type, Space> result_view_type;
+   クラス Min{
+     パブリック:
+       型定義 Min reducer;
+       型定義 型名 std::remove_cv<Scalar>::type value_type;
+       型定義 Kokkos::View<value_type, Space> result_view_type;
 
        KOKKOS_INLINE_FUNCTION
        void join(value_type& dest, const value_type& src) const;
@@ -47,44 +47,44 @@ Synopsis
        Min(const result_view_type& value_);
    };
 
-Interface
+インターフェイス
 ---------
 
 .. cpp:class:: template<class Scalar, class Space> Min
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: reducer
+   .. cpp:type:: リデューサー
 
-      The self type
+      自己型。
 
    .. cpp:type:: value_type
 
-      The reduction scalar type.
+      還元スカラー型。
 
    .. cpp:type:: result_view_type
 
-      A ``Kokkos::View`` referencing the reduction result
+      還元結果を参照する ``Kokkos::View`` 
 
-   .. rubric:: Constructors
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION Min(value_type& value_);
 
-      Constructs a reducer which references a local variable as its result location.
+       結果の保存先としてローカル変数を参照するリデューサを構築します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION Min(const result_view_type& value_);
 
       Constructs a reducer which references a specific view as its result location.
 
-   .. rubric:: Public Member Functions
+   .. rubric:: パブリックメンバー関数
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-      Store minimum of ``src`` and ``dest`` into ``dest``:  ``dest = (src < dest) ? src :dest;``.
+       ``dest``:  ``dest = (src < dest) ? src :dest;`` に、 ``src`` および ``dest`` の最小値を格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-      Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
+       ``Kokkos::reduction_identity<Scalar>::min()`` メソッドを使って.  ``val`` を初期化します。　デフォルト実装は、 ``val=<TYPE>_MAX``　を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
