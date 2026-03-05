@@ -4,18 +4,18 @@
 .. role::cpp(code)
     :language: cpp
 
-Defined in header ``<Kokkos_Core.hpp>``
+ヘッダー ``<Kokkos_Core.hpp>``　に定義。
 
-Interface
+インターフェイス
 ---------
 
-.. cpp:function:: bool is_initialized() noexcept
+.. cpp:function::  is_initialized() noexcept
 
-   Queries the initialization status of Kokkos and returns ``true`` if Kokkos is initialized and ``false`` if Kokkos is not initialized. This function can be called prior or after Kokkos initialization or finalization.
+   Kokkos　の初期化ステータスを照会し、Kokkos　を初期化している場合は、``true``　を、初期化していない場合は、``false``　を返します。 Kokkos の初期化または最終処理完了前後に、この関数を呼び出すことが可能です。  
 
-   :return: ``true`` if :cpp:func:`initialize` has been called; `false` otherwise. 
+   :return:  `initialize`　が呼び出されている場合には、 ``true`` ; そうでない場合には、`false` 。
 
-Examples
+例
 --------
 
 .. code-block:: cpp
@@ -31,7 +31,7 @@ Examples
         assert(!Kokkos::is_initialized());
     }    
 
-See also
+以下も参照
 --------
 
 * `Kokkos::InitializationSettings <InitializationSettings.html#kokkosInitializationSettings>`_
