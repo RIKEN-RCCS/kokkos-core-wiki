@@ -103,4 +103,4 @@
 
 * 必要条件: ``Scalar`` は、 定義した ``operator =`` および ``operator <`` を持ちます。 ``Kokkos::reduction_identity<Scalar>::min()`` は、有効な式です。
 
-*  Min をカスタム型で使用するためには、with a custom type,   ``Kokkos::reduction_identity<CustomType>`` のテンプレート仕様を定義する必要があります。 See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
+*  Min をカスタム型で使用するためには、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
