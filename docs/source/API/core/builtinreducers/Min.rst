@@ -101,6 +101,6 @@
 
 * ``Min<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
-* 必要条件: ``Scalar`` には、 定義した ``operator =`` および ``operator <`` が定義されます。 ``Kokkos::reduction_identity<Scalar>::min()`` は、有効な式です。
+* 必要条件: ``Scalar`` には、 ``operator =`` および ``operator <`` が定義されます。 ``Kokkos::reduction_identity<Scalar>::min()`` は、有効な式です。
 
 *  Min をカスタム型で使用するためには、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
