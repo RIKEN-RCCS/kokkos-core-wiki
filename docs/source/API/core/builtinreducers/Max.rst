@@ -66,11 +66,11 @@
 
     　還元結果を参照する ``Kokkos::View``
 
-   .. rubric:: コンストラク
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION Max(value_type& value_);
 
-      結果の保存先としてローカル変数を参照するリデューサを構築します。
+      クラスコンストラクタで提供された結果への参照を返します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION Max(const result_view_type& value_);
 
