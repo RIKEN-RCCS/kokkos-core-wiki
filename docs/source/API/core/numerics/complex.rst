@@ -4,35 +4,35 @@
 .. role:: cpp(code)
     :language: cpp
 
-Defined in header ``<Kokkos_Complex.hpp>`` which is included from ``<Kokkos_Core.hpp>``
+ ``<Kokkos_Core.hpp>`` に含まれる ヘッダー ``<Kokkos_Complex.hpp>`` に定義。
 
-Description
+ディスクリプション
 -----------
 
-``complex`` is a class template for representing and manipulating complex numbers.
+``complex`` は、複素数を表し操作するためのクラステンプレートです。
 
-* This is intended as a replacement for ``std::complex<T>``.
-* Note: If ``z`` has type ``Kokkos::complex<T>``, casting such as ``reinterpret_cast<T(&)[2]>(z)`` leads to undefined behavior (this differs from ``std::complex``).
+* これは、　std::complex<T　の代替を目的としています。
+* 注意事項: もし ``z`` が、Kokkos::complex<T>　型を持つ場合、　``reinterpret_cast<T(&)[2]>(z)``　のようなキャストは未定義の挙動を引き起こします　(これはstd::complexとは異なります)。
 
-Interface
+インターフェイス
 ---------
 
 .. cpp:class:: template<class T> complex
 
 
-  :tparam T: The type of the real and imaginary components.
+  :tparam T: 実数成分と虚数成分の型。
 
-  * :cpp:any:`T` must be a floating point type (``float``, ``double``, ``long double``) or an extended floating point type.
+  * :cpp:any:`T` は浮動小数点型　(``float``, ``double``, ``long double``)　か拡張浮動小数点型でなければなりません。
 
-  * :cpp:any:`T` cannot be ``const`` and/or ``volatile`` qualified.
+  * :cpp:any:`T` は、 ``const`` および/または ``volatile`` に適することはできません。
 
-  * Some types might not work with a specific backend (such as ``long double`` on CUDA or SYCL).
+  * 特定のバックエンド(CUDA　や　SYCL　の``long double`` 等）では動作しないタイプもあります。
 
-  .. rubric:: Public Types:
+  .. rubric:: パブリック型:
 
   .. cpp:type:: value_type = T
 
-  .. rubric:: Constructors & Assignment Operators:
+  .. rubric:: コンストラクタおよび代入演算子:
 
   .. cpp:function:: complex()
 
