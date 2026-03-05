@@ -1,21 +1,20 @@
 ``ValLocScalar``
 ================
 
-.. role::cpp(code)
+.. ロール::cpp(code)
     :language: cpp
 
-:cpp:struct:`ValLocScalar` is a class template that stores a **value** and its
-corresponding **location** (index) as a single, convenient unit. It is
-primarily designed to hold the result of :cpp:func:`parallel_reduce` operations
-using the :cpp:class:`MinLoc` and :cpp:class:`MaxLoc` builtin reducers.
+:cpp:struct:`ValLocScalar` は、 **value** およびそれに対応する　 **location** (インデックス)  
+適切な単一単位として、格納するクラステンプレートです。
+それは、主に :cpp:class:`MinLoc` および :cpp:class:`MaxLoc` 組み込みリデューサーを使用する　
+:cpp:func:`parallel_reduce` 演算の結果を保持するように設計されています。
 
-It is generally recommended to get this type by using the reducer's
-``::value_type`` member (e.g., ``MaxLoc<Scalar,Index,Space>::value_type``) to
-ensure the correct template parameters are used.
+一般的には、正確なテンプレートパラメータが使用されることを確証するために、リデューサーの　``::value_type``　メンバー　（例えば、　``MaxLoc<Scalar,Index,Space>::value_type``）
+を使用して、この型を取得することを推奨します。
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
@@ -25,21 +24,21 @@ Usage
     T resultValue = result.val;
     I resultIndex = result.loc;
 
-Interface
+インターフェイス
 ---------
 
 .. cpp:struct::  template<class Scalar, class Index> ValLocScalar
 
-   :tparam Scalar: The data type of the value being reduced (e.g., ``double``, ``int``).
+   :tparam Scalar: 還元されている値のデータ型 (例えば、 ``double``、 ``int``)。
 
-   :tparam Index: The data type of the location or iteration index (e.g., ``int``, ``long long``).
+   :tparam Index: 保存先またはイテレーションインデックスのデータ型 (例えば、 ``int``、 ``long long``)。
 
-   .. rubric:: Data members
+   .. rubric:: データメンバー
 
-   .. cpp:var:: Scalar val
+   .. cpp:var:: スカラー val
 
-      The reduced value.
+      還元値。
 
-   .. cpp:var:: Index loc
+   .. cpp:var:: インデックス loc
 
-      The location (iteration index) of the reduced value
+      還元値の保存先（イテレーションインデックス）
