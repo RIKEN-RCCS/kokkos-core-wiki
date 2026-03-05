@@ -18,90 +18,90 @@
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType sum()
 
-      :returns: `Sum`組み込みリデューサー用の中立要素 :cpp:class:`Sum`
+      :returns: `Sum`組み込みリデューサー :cpp:class:`Sum`用の中立要素
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType prod()
 
-      :returns: 組み込みリデューサー用の中立要素 :cpp:class:`Prod`
+      :returns: 組み込みリデューサー :cpp:class:`Prod`用の中立要素
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType min()
 
-      :returns: `Min`組み込みリデューサー用の中立要素 :cpp:class:`Min`:
+      :returns: `Min`組み込みリデューサー :cpp:class:`Min`:用の中立要素
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType max()
 
-      :returns: 組み込みリデューサー用の中立要素 :cpp:class:`Max`
+      :returns: 組み込みリデューサー :cpp:class:`Max`用の中立要素
    
    .. rubric:: 整数型に利用可能な静的メンバー:
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType land()
 
-      :returns: Neutral element for built-in reducer :cpp:class:`LAnd` (Logical AND)
+      :returns:  :cpp:class:`LAnd` (論理的 AND)の中立要素
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType lor()
 
-      :returns: Neutral element for built-in reducer :cpp:class:`LOr` (Logical OR)
+      :returns: 組み込みリデューサー :cpp:class:`LOr` (論理的 OR)　の中立要素
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType band()
 
-      :returns: Neutral element for built-in reducer :cpp:class:`BAnd` (Bitwise AND)
+      :returns: 組み込みリデューサー  :cpp:class:`BAnd` (ビット単位 AND)　の中立要素
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType bor()
 
-      :returns: Neutral element for built-in reducer :cpp:class:`BOr` (Bitwise OR)
+      :returns: 組み込みリデューサー :cpp:class:`BOr` (ビット単位 OR)　の中立要素
 
-Description
+ディスクリプション
 -----------
 
-The ``reduction_identity`` struct provides the identity element (also known as
-the neutral element) for various common reduction operations. In the context of
-a parallel reduction, the identity element is the starting value for the
-reduction variable on each thread. When combined with any other value using the
-reduction operation, it does not change the other value. For example, for a sum
-reduction, the identity is :math:`0`, because :math:`x+0=x`. For a product
-reduction, the identity is :math:`1`, because :math:`x \times 1 = x`.
+　``reduction_identity``　構造体は、様々な一般的な還元演算における  
+単位元（中立要素とも呼ばれる）を提供します。並列還元において、恒等要素は各スレッドにおける
+還元変数の開始値となる。
+他の値と還元演算を用いて組み合わせた場合、
+他の値を変化させません。
+例えば、和の還元については、:math:`x+0=x`　であるため、恒等は、 :math:`0`です。プロダクト還元については、 、  
+:math:`x \times 1 = x`　であるため恒等は、 :math:`1`です。
 
-Kokkos' built-in reducers (e.g., :doc:`Sum`, :doc:`Prod`, :doc:`Min`,
-:doc:`Max`) implicitly use specializations of ``reduction_identity`` to
-initialize the thread-local reduction accumulators.
+Kokkos　の組み込みリデューサー　（例えば、 :doc:`Sum`, :doc:`Prod`, :doc:`Min`,
+:doc:`Max`) は、暗示的に　``reduction_identity``　の特殊化を使用して、
+スレッドローカルな還元アキュムレータを初期化します。
 
-Kokkos provides specializations for all arithmetic types (i.e. integral and
-floating-point types) as well as for :cpp:class:`complex\<T\> <complex>`.
+Kokkosは、`complex\<T\> <complex>`　だけでなく、すべての算術型（つまり整数型および浮動小数点型）
+に対して特殊化を提供します。
 
-.. note::
+.. 注意事項::
 
-   ``Kokkos::reduction_identity`` is not intended for direct use in your
-   application code. Instead, it serves as a customization point within the
-   Kokkos framework. You should only specialize reduction_identity when you
-   need to enable Kokkos's built-in reducers (like ``Kokkos::Sum``,
-   ``Kokkos::Min``, ``Kokkos::Max``, etc.) to work seamlessly with your own
-   user-defined data types.  This allows Kokkos to correctly determine the
-   initial "identity" value for your custom type during parallel reduction
-   operations.
+   ``Kokkos::reduction_identity`` は、アプリケーションコードでの直接使用することを
+目的としたものではありません。その代わりに、 これは、Kokkos　フレームワーク内の
+カスタマイズポイントとして機能します。
+Kokkosの組み込みリデューサー（`Kokkos::Sum`、`Kokkos::Min`、`Kokkos::Max`等）
+をユーザー定義のデータ型とシームレスに動作させる必要がある場合のみ、
+`reduction_identity`を特化させる必要があります。これにより、
+Kokkosは並列削減処理中に
+カスタム型の初期 "identity" 値を、正確に決定できます。
 
-Custom Scalar Types
+カスタムスカラ－型
 -------------------
 
-For custom (user-defined) ``ScalarType``\s to be used with Kokkos' built-in
-reducers, a template specialization of
-``Kokkos::reduction_identity<CustomType>`` must be defined.  This
-specialization must provide static member functions corresponding to the
-desired reduction operations. These functions should return an instance of
-``CustomType`` initialized with the appropriate identity value.
+Kokkosの組み込みリデューサーで使用するカスタム（ユーザー定義）
+``ScalarType``については、``Kokkos::reduction_identity<CustomType>``
+　のテンプレート特化型を定義する必要があります。  この
+特殊化により、要求される削減演算に対応する
+静的メンバ関数を提供しなければならない。 これらの関数は、適切な識別値で初期化された
+``CustomType`` のインスタンスを返す必要があります。
 
-Example: Specializing ``reduction_identity`` for a Custom Array Type
+例: カスタム配列型のための ``reduction_identity`` を特化
 --------------------------------------------------------------------
 
-Consider a custom struct ``array_type`` that holds an an array of integers, for
-which we want to perform a sum reduction.
+整数の配列を保持するカスタム構造体 ``array_type`` を考慮し、
+この配列に対して和の還元の実行を望みます。
 
 .. code-block:: cpp
 
     #include <Kokkos_Core.hpp>
  
-    namespace sample {
-    template <class ScalarType, int N>
-    struct array_type {
+    名前空間 サンプル {
+    テンプレート <class ScalarType, int N>
+    構造体 array_type {
       ScalarType the_array[N] = {};
  
       KOKKOS_FUNCTION
@@ -109,21 +109,21 @@ which we want to perform a sum reduction.
         for (int i = 0; i < N; ++i) {
           the_array[i] += src.the_array[i];
         }
-        return *this;
+         *これを返す;
       }
     };
  
-    using ValueType = array_type<int, 4>;
-    } // namespace sample
+    ValueType = array_type<int, 4>　を使用;
+    } // 名前空間 サンプル
  
-    // Specialization of Kokkos::reduction_identity for sample::ValueType
-    template <>
-    struct Kokkos::reduction_identity<sample::ValueType> {
+    // Kokkos::reduction_identity for sample::ValueType　の特殊化
+    テンプレート <>
+    構造体 Kokkos::reduction_identity<sample::ValueType> {
       KOKKOS_FUNCTION static sample::ValueType sum() {
-        return sample::ValueType(); // Default constructor initializes to zeros
+        返し sample::ValueType(); // デフォルトコンストラクタは、0に初期化します。
       }
-      // If other reduction types were needed (e.g., min, max, prod),
-      // their respective identity functions would also be defined here.
+      // 他の削減タイプ（例：min、max、prod）が必要となる場合、
+      // それらの各恒等関数もまた、ここで定義されます。
     };
  
     int main(int argc, char* argv[]) {
@@ -146,16 +146,16 @@ which we want to perform a sum reduction.
                tr.the_array[0], tr.the_array[1], tr.the_array[2],
                tr.the_array[3]);
  
-        // Expected values:
+        // 予想値:
         // [0]: E = 100
         // [1]: sum(0..99) = 99*100/2 = 4950
         // [2]: sum(0..99) of i*i = 99*(99+1)*(2*99+1)/6 = 328350
         // [3]: sum(0..99) of i*i*i = (99*100/2)^2 = 4950^2 = 24502500
  
-        printf("Expected result for %d is {%d, %d, %d, %d}\n", E,
+        printf(" %dの予想結果は、 {%d, %d, %d, %d}\n", E,
                100, 4950, 328350, 24502500);
       }
       Kokkos::finalize();
-      return 0;
+      返し 0;
     }
 
