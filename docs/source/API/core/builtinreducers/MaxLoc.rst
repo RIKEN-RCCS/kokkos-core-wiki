@@ -67,7 +67,7 @@
 
       還元結果を参照する ``Kokkos::View`` 
 
-   .. rubric:: コンストラク
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION MaxLoc(value_type& value_);
 
