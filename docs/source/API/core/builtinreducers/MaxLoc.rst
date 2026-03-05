@@ -4,11 +4,11 @@
 .. role:: cpp(code)
     :language: cpp
 
-Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing the maximum value
+最大値を格納する `ReducerConcept <ReducerConcept.html>`_ の具体的な実装
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
@@ -16,18 +16,18 @@ Usage
    MaxLoc<T,I,S>::value_type result;
    parallel_reduce(N,Functor,MaxLoc<T,I,S>(result));
 
-Synopsis
+シノプシス
 --------
 
 .. code-block:: cpp
 
    template<class Scalar, class Index, class Space>
-   class MaxLoc{
-     public:
-       typedef MaxLoc reducer;
-       typedef ValLocScalar<typename std::remove_cv<Scalar>::type,
+   クラス MaxLoc{
+     パブリック:
+       型定義 MaxLoc リデューサー;
+       型定義 ValLocScalar<typename std::remove_cv<Scalar>::type,
                                typename std::remove_cv<Index>::type > value_type;
-       typedef Kokkos::View<value_type, Space> result_view_type;
+       型定義 Kokkos::View<value_type, Space> result_view_type;
 
        KOKKOS_INLINE_FUNCTION
        void join(value_type& dest, const value_type& src) const;
@@ -48,63 +48,63 @@ Synopsis
        MaxLoc(const result_view_type& value_);
    };
 
-Interface
+インターフェイス
 ---------
 
 .. cpp:class:: template<class Scalar, class Index, class Space> MaxLoc
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: reducer
+   .. cpp:type:: リデューサー
 
-      The self type.
+      自己型。
 
    .. cpp:type:: value_type
 
-      The reduction scalar type (specialization of `ValLocScalar <ValLocScalar.html>`_)
+      還元スカラー型 ( `ValLocScalar <ValLocScalar.html>`_　の特殊化)
 
    .. cpp:type:: result_view_type
 
-      A ``Kokkos::View`` referencing the reduction result
+      還元結果を参照する ``Kokkos::View`` 
 
-   .. rubric:: Constructors
+   .. rubric:: コンストラク
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION MaxLoc(value_type& value_);
 
-      Constructs a reducer which references a local variable as its result location.
+      結果の保存先としてローカル変数を参照するリデューサを構築します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION MaxLoc(const result_view_type& value_);
 
-      Constructs a reducer which references a specific view as its result location.
+      特定のビューを結果の保存先として参照するリデューサーを構築します。
 
-   .. rubric:: Public Member Functions
+   .. rubric:: パブリックメンバー関数
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-      Store maximum with index of ``src`` and ``dest`` into ``dest``: ``dest = (src.val > dest.val) ? src :dest;``.
+       ``dest``: ``dest = (src.val > dest.val) ? src :dest;``　に、 ``src`` および ``dest`` のインデックスを持つ最大値を格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-      Initialize ``val.val`` using the ``Kokkos::reduction_identity<Scalar>::max()`` method. The default implementation sets ``val=<TYPE>_MIN``.
-      Initialize ``val.loc`` using the ``Kokkos::reduction_identity<Index>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
+       ``Kokkos::reduction_identity<Scalar>::max()`` メソッドを使って、 ``val.val`` を初期化します。 デフォルト実装は、 ``val=<TYPE>_MIN``　を設定します。
+       ``Kokkos::reduction_identity<Index>::min()``  メソッドを使って、 ``val.loc`` を初期化します。 デフォルト実装は、  ``val=<TYPE>_MAX`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
-      Returns a reference to the result provided in class constructor.
+      クラスコンストラクタで提供された結果への参照を返します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
 
-      Returns a view of the result place provided in class constructor.
+      クラスコンストラクタで提供された結果の保存先のビューを返します。
 
-Additional Information
+追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* ``MaxLoc<T,I,S>::value_type`` is Specialization of ValLocScalar on non-const ``T`` and non-const ``I``
+* ``MaxLoc<T,I,S>::value_type`` は  非定数 ``T`` および 非定数 ``I``　上の ValLocScalar の特殊化です。
 
-* ``MaxLoc<T,I,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
+* ``MaxLoc<T,I,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。  S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
-* Requires: ``Scalar`` has ``operator =`` and ``operator >`` defined. ``Kokkos::reduction_identity<Scalar>::max()`` is a valid expression.
+* 必要条件:  ``Scalar`` は、 定義した ``operator =`` and  ``operator >``  を持ちます。 ``Kokkos::reduction_identity<Scalar>::max()`` は、有効な式です。
 
-* Requires: ``Index`` has ``operator =`` defined. ``Kokkos::reduction_identity<Index>::min()`` is a valid expression.
+* 必要条件: ``Index`` は、定義した ``operator =`` を持ちます。 ``Kokkos::reduction_identity<Index>::min()``  は、有効な式です。
 
-* In order to use MaxLoc with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
+* MaxLoc を ``Scalar`` または ``Index``　いずれかのカスタム型を伴って使用するために、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、`Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください
