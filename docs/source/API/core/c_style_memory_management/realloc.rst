@@ -1,18 +1,18 @@
 ``kokkos_realloc``
 ==================
 
-.. role:: cpp(code)
+.. ロール:: cpp(code)
     :language: cpp
 
-Defined in header ``<Kokkos_Core.hpp>``
+Defined in ヘッダー ``<Kokkos_Core.hpp>``　に定義。
 
 .. _Kokkos_kokkos_malloc: malloc.html
 
-.. |Kokkos_kokkos_malloc| replace:: ``Kokkos::kokkos_malloc()``
+.. |Kokkos_kokkos_malloc| 置換:: ``Kokkos::kokkos_malloc()``
 
 .. _Kokkos_kokkos_realloc: realloc.html
 
-.. |Kokkos_kokkos_realloc| replace:: ``Kokkos::kokkos_realloc()``
+.. |Kokkos_kokkos_realloc| 置換:: ``Kokkos::kokkos_realloc()``
 
 .. _MemorySpace: ../memory_spaces.html
 
@@ -20,27 +20,26 @@ Defined in header ``<Kokkos_Core.hpp>``
 
 .. _Kokkos_kokkos_free: free.html
 
-.. |Kokkos_kokkos_free| replace:: ``Kokkos::kokkos_free()``
+.. |Kokkos_kokkos_free| 置換:: ``Kokkos::kokkos_free()``
 
-Reallocates the given area of memory. It must be previously allocated by |Kokkos_kokkos_malloc|_ or |Kokkos_kokkos_realloc|_
-on the same memory space |MemorySpace|_ and not yet freed with |Kokkos_kokkos_free|_, otherwise, the results are undefined.
+指定されたメモリ領域を再割り当てします。それは、同じメモリースペース |MemorySpace|_　上で、以前に |Kokkos_kokkos_malloc|_ または |Kokkos_kokkos_realloc|_　により割り当てられる必要があり、
+まだ |Kokkos_kokkos_free|_ で解放されておらず、そうでない場合には、結果は未定義となる。
 
-.. warning::
+.. ::
 
-   Calling any function that manipulates the behavior of the memory (e.g. ``memAdvise``)
-   on memory managed by ``Kokkos`` results in undefined behavior.
+   Kokkos　の管理対象外であるメモリに対して、メモリの動作を操作する関数（例：memAdvise）を呼び出すと、未定義の動作を引き起こします。
 
-Description
+ディスクリプション
 -----------
 
 .. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_realloc(void* ptr, size_t new_size);
 
-  :tparam MemorySpace: Controls the storage location. If omitted the memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``).
+  :tparam MemorySpace: ストレージ先をコントロールします。　省略された場合、デフォルトの実行領域のメモリ領域が使用されます (つまり、``Kokkos::DefaultExecutionSpace::memory_space``)。
 
-  :param ptr: The pointer to the memory area to be reallocated.
+  :param ptr:　再割り当てされるべきメモリ領域へのポインタ
 
-  :param new_size: The new size in bytes.
+  :param new_size: 新たなバイト数。
 
-  :returns: On success, returns a pointer to the beginning of the newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with |Kokkos_kokkos_free|_, the original pointer ``ptr`` is invalidated and any access to it is undefined behavior (even if reallocation was in-place). On failure, returns a null pointer. The original pointer ptr remains valid and may need to be deallocated with |Kokkos_kokkos_free|_.
+  :返し: 成功した場合、新たに割り当てられたメモリの先頭へのポインタを返します。 メモリリークを避けるため、返されたポインタは |Kokkos_kokkos_free|_ で解放する必要があり、To avoid a memory leak, the returned pointer must be deallocated with |Kokkos_kokkos_free|_, 元のポインタ　 ``ptr`` は無効化され、それへのアクセスは未定義動作となります（再割り当てがインプレースで行われた場合でも）。失敗した場合には、ヌルポインタを返します。 元のポインタ ptr　 |Kokkos_kokkos_free|_　で再割り当てする必要があるかもしれません。
 
-  :throws: On failure, throws ``Kokkos::Experimental::RawMemoryAllocationFailure``.
+  :スロー: 失敗した場合、``Kokkos::Experimental::RawMemoryAllocationFailure`` をスローします。
