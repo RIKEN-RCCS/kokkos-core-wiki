@@ -74,7 +74,7 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION Min(const result_view_type& value_);
 
-      Constructs a reducer which references a specific view as its result location.
+      特定のビューを結果の保存先として参照するリデューサーを構築します。
 
    .. rubric:: パブリックメンバー関数
 
