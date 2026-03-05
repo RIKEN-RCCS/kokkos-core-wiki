@@ -1,14 +1,14 @@
 ``MinLoc``
 ==========
 
-.. role:: cpp(code)
+.. ロール:: cpp(code)
     :language: cpp
 
-Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing the minimum value with an index
+インデックスを伴って最小値を格納する `ReducerConcept <ReducerConcept.html>`_ の具体的な実装
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
@@ -16,18 +16,18 @@ Usage
    MinLoc<T,I,S>::value_type result;
    parallel_reduce(N,Functor,MinLoc<T,I,S>(result));
 
-Synopsis
+シノプシス
 --------
 
 .. code-block:: cpp
 
    template<class Scalar, class Index, class Space>
-   class MinLoc{
-     public:
-       typedef MinLoc reducer;
-       typedef ValLocScalar<typename std::remove_cv<Scalar>::type,
+   クラス MinLoc{
+     パブリック:
+       型定義 MinLoc リデューサー;
+       型定義 ValLocScalar<typename std::remove_cv<Scalar>::type,
                             typename std::remove_cv<Index>::type > value_type;
-       typedef Kokkos::View<value_type, Space> result_view_type;
+       型定義 Kokkos::View<value_type, Space> result_view_type;
 
        KOKKOS_INLINE_FUNCTION
        void join(value_type& dest, const value_type& src) const;
@@ -48,16 +48,16 @@ Synopsis
        MinLoc(const result_view_type& value_);
    };
 
-Interface
+インターフェイス
 ---------
 
 .. cpp:class:: template<class Scalar, class Index, class Space> MinLoc
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: reducer
+   .. cpp:type:: リデューサー
 
-      The self type.
+      自己型。
 
    .. cpp:type:: value_type
 
