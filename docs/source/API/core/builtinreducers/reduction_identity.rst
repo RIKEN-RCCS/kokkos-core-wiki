@@ -4,35 +4,35 @@
 .. role:: cpp(code)
     :language: cpp
 
-Defined in header ``<Kokkos_Core.hpp>``
+ ヘッダー ``<Kokkos_Core.hpp>``　に定義
 
 .. cpp:namespace:: Kokkos
 
 .. cpp:struct:: template <typename ScalarType> reduction_identity
    :no-index-entry:
 
-   The ``reduction_identity`` class template provides static member functions
-   that return the identity value for various reduction types.
+    ``reduction_identity`` クラステンプレートは、
+様々な還元型に対する恒等値を返す静的メンバ関数を提供します。
 
-   .. rubric:: Static members available for integral and floating-point types:
+   .. rubric:: 整数型および浮動小数点型の両方で利用可能な静的メンバ:
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType sum()
 
-      :returns: Neutral element for built-in reducer :cpp:class:`Sum`
+      :returns: `Sum`組み込みリデューサー用の中立要素 :cpp:class:`Sum`
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType prod()
 
-      :returns: Neutral element for built-in reducer :cpp:class:`Prod`
+      :returns: 組み込みリデューサー用の中立要素 :cpp:class:`Prod`
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType min()
 
-      :returns: Neutral element for built-in reducer :cpp:class:`Min`
+      :returns: `Min`組み込みリデューサー用の中立要素 :cpp:class:`Min`:
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType max()
 
-      :returns: Neutral element for built-in reducer :cpp:class:`Max`
+      :returns: 組み込みリデューサー用の中立要素 :cpp:class:`Max`
    
-   .. rubric:: Static members available for integral types:
+   .. rubric:: 整数型に利用可能な静的メンバー:
 
    .. cpp:function:: KOKKOS_FUNCTION static ScalarType land()
 
