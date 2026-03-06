@@ -139,14 +139,14 @@ CTAD コンストラクタ (4.3以降):
    DefaultExecutionSpace des;      // 同様に変換
    SomeExecutionSpace ses;         // DefaultExecutionSpaceとは異なります
 
-   // RangePolicy<>　に演繹
+   // RangePolicy<>　に演繹します
    RangePolicy rp0;
    RangePolicy rp1(work_begin, work_end);
    RangePolicy rp2(work_begin, work_end, cs);
    RangePolicy rp3(des, work_begin, work_end);
    RangePolicy rp4(des, work_begin, work_end, cs);
 
-   // RangePolicy<SomeExecutionSpace>　に演繹
+   // RangePolicy<SomeExecutionSpace>　に演繹します
    RangePolicy rp5(ses, work_begin, work_end);
    RangePolicy rp6(ses, work_begin, work_end, cs);
 
