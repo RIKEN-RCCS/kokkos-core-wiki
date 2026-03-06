@@ -4,134 +4,129 @@
 .. role:: cpp(code)
     :language: cpp
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-TeamHandleConcept defines the concept for the ``member_type`` of ``TeamPolicy`` and ``TeamTask``.
-The actual type is defined through the policies, but meets the following API.
-Note that the specific classes are only part of the public API as provided by ``TeamPolicy`` and
-``TeamTask`` and only their parts as defined by the ``TeamHandleConcept``.
-The actual name of the class, as well as potential template parameters, existing
-constructors, member functions going beyond the concept, etc., are NOT part of the public Kokkos API
-and are thus subject to change.
+TeamHandleConcept　は、　``TeamPolicy``と ``TeamTask``　の ``member_type`` の概念を定義しています。 実際のタイプはポリシーで定義されますが、以下の　API　を満たしています。 特定のクラスは、``TeamPolicy`` および
+``TeamTask`` が提供する公開　API　の一部であり、 ``TeamHandleConcept``　で定義された部分のみであることに、注意してください。 
+クラスの実際の名称やテンプレートパラメータ、既存のコンストラクタ、概念を超えたメンバー関数などは公開された　Kokkos API　の一部ではないため、変更の対象となります。
 
 
-Description
+ディスクリプション
 -----------
 
 .. cpp:class:: TeamHandleConcept
 
 
-   .. rubric:: Public nested aliases
+   .. rubric:: 公開ネストエイリアス
 
    .. cpp:type:: execution_space
 
-      Specifies the `execution space <https://kokkos.github.io/kokkos-core-wiki/API/core/execution_spaces.html>`_ associated to the team
+     チームに関連付けられた実行空間 <https://kokkos.github.io/kokkos-core-wiki/API/core/execution_spaces.html>`_　を特定します。
 
    .. cpp:type:: scratch_memory_space
 
-      The scratch memory space associated to this team's execution space
+      このチームの実行空間に関連するスクラッチメモリ空間
 
-   .. rubric:: Constructors
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: TeamHandleConcept() = default
 
-      Default constructor.
+      デフォルトコンストラクタ。
 
    .. cpp:function:: TeamHandleConcept( TeamHandleConcept && ) = default
 
-      Move constructor.
+      移動コンストラクタ。
 
    .. cpp:function:: TeamHandleConcept( TeamHandleConcept const & ) = default
 
-      Copy constructor.
+      コピコンストラクタ。
 
    .. cpp:function:: ~TeamHandleConcept() = default
 
-      Destructor.
+      デストラクタ。
 
-   .. rubric:: Assignment
+   .. rubric:: 代入
 
    .. cpp:function:: TeamHandleConcept & operator = ( TeamHandleConcept && ) = default
 
-      Move assignment.
+      移動代入。
 
    .. cpp:function:: TeamHandleConcept & operator = ( TeamHandleConcept const & ) = default
 
-      Assignment operators. Returns: ``*this``.
+      代入演算子。 返し: ``*this``.
 
-   .. rubric:: Index Queries
+   .. rubric:: インデックス照会
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION int team_rank() const noexcept ;
 
-      Returns: the index ``i`` of the calling thread within the team with ``0 <= i < team_size()``
+      返し:  ``0 <= i < team_size()``　を使って、チーム内の呼び出しスレッドのインデックス 　``i``　
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION int team_size() const noexcept ;
 
-      Returns: the number of threads associated with the team.
+      返し: チームに関連付けられたスレッド数。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION int league_rank() const noexcept ;
 
-      Returns: the index ``i`` of the calling team within the league with ``0 <= i < league_size()``
+      返し:  ``0 <= i < league_size()``を使って、リーグ内の呼び出しスレッドのインデックス 　``i``
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION int league_size() const noexcept ;
 
-      Returns: the number of teams/workitems launched in the kernel.
+      返し: the number of teams/workitems launched in the kernel.カーネル内で起動したチーム/ワークアイテムの数
 
 
-   .. rubric:: Scratch Space Control
+   .. rubric:: スクラッチ空間コントロール
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION const scratch_memory_space & team_shmem() const ;
 
-      Equivalent to calling ``team_scratch(0)``.
+       ``team_scratch(0)``　呼び出しに匹敵します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION const scratch_memory_space & team_scratch(int level) const ;
 
-      This function returns a scratch memory handle shared by all threads in a team, which allows access to scratch memory.
-      This handle can be given as the first argument to a ``Kokkos::View`` to make it use scratch memory.
-      The handle is automatically incremented by the size of the ``Kokkos::View`` allocation.
+      この関数はチーム内のすべてのスレッドが共有するスクラッチメモリのハンドルを返し、スクラッチメモリへのアクセスを可能にします。
+      本ハンドルは、 ``Kokkos::View``の最初の引数として与えられ、スクラッチメモリとして使用することができます。
+      ハンドルは、 ``Kokkos::View`` 割り当てのサイズに応じて、自動的に増加します。
 
-      - ``level``: The level of requested scratch memory is either ``0`` or ``1``.
+      - ``level``: 要求されたスクラッチメモリのレベルは、 ``0`` または ``1``　のいずれかです。
 
-      - Returns: a scratch memory handle to the team shared scratch memory specified by level.
+      - リターン: レベルにより特定されたチームで共有するスクラッチメモリへのスクラッチメモリハンドル。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION const scratch_memory_space & thread_scratch(int level) const ;
 
-      This function returns a scratch memory handle specific to the calling thread,
-      which allows access to its private scratch memory. This handle can be given as the
-      first argument to a ``Kokkos::View`` to make it use scratch memory.
-
-      - ``level``: The level of requested scratch memory is either ``0`` or ``1``.
-
-      - Returns: a scratch memory handle to the thread scratch memory specified by level.
+      本関数は、呼び出しスレッド固有のスクラッチメモリハンドルを返し、それにより、プライベートなスクラッチメモリへのアクセスが可能になります。 本ハンドルは、 ``Kokkos::View`` の最初の引数として与えられ、スクラッチメモリとして、それを使用することができます。
 
 
-   .. rubric:: Team Collective Operations
+      - ``level``: 要求されたスクラッチメモリのレベルは、 ``0`` または ``1``　のいずれかです。
 
-   The following functions must be called collectively by all members of a team.
-   These calls must be lexically the same call, i.e. it is not legal to have some members of a team call
-   a collective in one branch and the others in another branch of the code (see example).
+      - Returns: レベルにより特定されたチームで共有するスクラッチメモリへのスクラッチメモリハンドル。
+
+
+   .. rubric:: チーム集合演算子
+
+   以下の関数は、チームの全メンバーがまとめて呼び出さなければなりません。
+   これらの呼び出しは語彙的に同一でなければならず、つまりチームの一部が、一方のブランチでコレクティブを呼び、他のメンバーが別のブランチで呼び出すことは、合法ではありません　(例を参照)。
+
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void team_barrier() const noexcept ;
 
-      All members of the team wait at the barrier, until the whole team arrived. This also issues a memory fence.
+      チーム全員が、全員が到着するまでバリアで待機します。これもまた、メモリーフェンスを発行します。
 
    .. cpp:function:: template<typename T> KOKKOS_INLINE_FUNCTION void team_broadcast( T & value , const int source_team_rank ) const noexcept;
 
-      After this call ``var`` contains for every member of the team the value of ``var`` from the thread for which ``team_rank() == source_team_rank``.
+      本呼び出しの後、 ``var`` は、チームの全メンバーに対して、``team_rank() == source_team_rank``　であるスレッドからの　``var``　の値を含みます。
 
-      - ``var``: a variable of type ``T`` which gets overwritten by the value of ``var`` from the source rank.
+      - ``var``: ``T``　の変数で、ソースランクの ``var`` の値によって、上書きされます。
 
-      - ``source_team_rank``: identifies the broadcasting member of the team.
+      - ``source_team_rank``: チームのブロードキャストメンバーを特定します。
 
    .. cpp:function:: template<class Closure, typename T> KOKKOS_INLINE_FUNCTION void team_broadcast( Closure const & f , T & value , const int source_team_rank) const noexcept;
 
-      After this call ``var`` contains for every member of the team the value of ``var`` from the thread for which ``team_rank() == source_team_rank`` after applying ``f``.
+      本呼び出しの後、 ``f`` 適用後に、``var`` は、チームの全メンバーに対して、``team_rank() == source_team_rank``　であるスレッドからの　``var``　の値を含みます。
 
-      - ``f``: a function object with an ``void operator() ( T & )`` which is applied to ``var`` before broadcasting it.
+      - ``f``: ブロードキャスト前に ``var`` に適用された　``void operator() ( T & )`` を伴う関数オブジェクト。
 
-      - ``var``: a variable of type ``T`` which gets overwritten by the value of ``f(var)`` from the source rank.
+      - ``var``: ''T'' 型の変数で、元のランクの値  ``f(var)``  によって、上書きされます。
 
-      - ``source_team_rank``: identifies the broadcasting member of the team.
+      - ``source_team_rank``: チームのブロードキャストメンバーを特定します。
 
    .. cpp:function:: template< typename ReducerType> KOKKOS_INLINE_FUNCTION void team_reduce( ReducerType const & reducer ) const noexcept;
 
@@ -139,19 +134,18 @@ Description
 
    .. cpp:function:: template< typename T > KOKKOS_INLINE_FUNCTION T team_scan( T const & value , T * const global = 0 ) const noexcept;
 
-      Performs an exclusive scan over the ``var`` provided by the team members. Let ``t = team_rank()`` and ``VALUES[t]`` the value of ``var`` from thread ``t``.
+      チームメンバーが提供する ``var`` に対して、エクスクルーシブスキャンを行います。  ``t = team_rank()`` および ``VALUES[t]``　を、 the value of from スレッド ``t``　からの　``var`` の値とします。
 
-      - Returns: ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[t-1]`` or zero for ``t==0``.
+      - リターン: ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[t-1]`` または ``t==0``　の0。
 
-      - ``global`` if provided will be set to ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[team_size()-1]``,
-	must be the same pointer for every team member.
+      - ``global`` が指定されている場合は、 ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[team_size()-1]``に設定され、すべてのチームメンバーについて、同じポインタでなければなりません。
 
-Examples
+例
 --------
 
 .. code-block:: cpp
 
-    typedef TeamPolicy<...> policy_type;
+    型定義 TeamPolicy<...> policy_type;
     parallel_for(policy_type(N,TEAM_SIZE).set_scratch_size(PerTeam(0,4096)),
                 KOKKOS_LAMBDA (const typename policy_type::member_type& team_handle) {
         int ts = team_handle.team_size(); // returns TEAM_SIZE
@@ -161,16 +155,16 @@ Examples
 
         int value = tid * 5;
         team_handle.team_broadcast(value, 3);
-        // value==15 on every thread
+        // あらゆるスレッド上で、value==15 
         value += tid;
         team_handle.team_broadcast([&] (int & var) { var*=2 }, value, 2);
         // value==34 on every thread
         int global;
         int scan = team_handle.team_scan(tid+1, &global);
-        // scan == tid*(tid+1)/2 on every thread
-        // global == ts*(ts-1)/2 on every thread
-        // The view does not require the Unmanaged trait, since team_handle.team_scratch(0) decays to a pointer,
-        // but it is added for clarity here. The View constructor that creates an unmanaged view is triggered by the pointer passed.
+        // あらゆるスレッド上で、scan == tid*(tid+1)/2 
+        // あらゆるスレッド上で、global == ts*(ts-1)/2 
+        //  team_handle.team_scratch(0) がポインタに減衰するため、本ビューは、管理対象外特性を必要としません。
+        // しかし、ここでは明確にするために追加しています。渡されたポインタが、管理対象外ビューを作成するビュー構造体の引き金となります。
         Kokkos::View<int*, policy_type::execution_space::scratch_memory_space, Kokkos::MemoryTraits<Kokkos::Unmanaged>>
         a(team_handle.team_scratch(0), 1024);
 
