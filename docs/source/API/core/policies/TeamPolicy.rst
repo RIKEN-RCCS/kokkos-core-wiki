@@ -4,9 +4,9 @@
 .. role:: cpp(code)
     :language: cpp
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
@@ -16,20 +16,20 @@ Usage
     Kokkos::TeamPolicy<>(Space, league_size, team_size [, vector_length])
     Kokkos::TeamPolicy<ARGS>(Space, league_size, team_size [, vector_length])
 
-Execution policy for a 1D iteration space starting at begin and going to end with an open interval.
+開始から始まり、開区間で終わる、1次元反復空間の実行ポリシー。
 
-See also: `TeamMember <TeamHandleConcept.html>`_
+以下も参照: `TeamMember <TeamHandleConcept.html>`_
 
-Description
+ディスクリプション
 -----------
 
 .. cpp:class:: template<class ...Args> TeamPolicy
 
-   .. rubric:: Template Arguments
+   .. rubric:: テンプレート引数
 
-   Valid template arguments for TeamPolicy are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
+TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Policies.html#common-arguments-for-all-execution-policies>`_　に説明されています。
 
-   .. rubric:: Public nested typedefs
+   .. rubric:: パブリックネスト型定義
 
    .. cpp:type:: execution_space
    .. cpp:type:: schedule_type
@@ -40,51 +40,43 @@ Description
    .. cpp:type:: member_type
 
 
-   .. rubric:: Constructors
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: TeamPolicy()
 
-      Default constructor uninitialized policy.
+      デフォルトコンストラクタ非初期化ポリシー。
 
    .. cpp:function:: TeamPolicy(const TeamPolicy&) = default;
 
-      Copy constructor
+      コピーコンストラクタ
 
    .. cpp:function:: TeamPolicy(TeamPolicy&&) = default;
 
-      Move constructor
+      移動コンストラクタ
 
    .. cpp:function:: TeamPolicy(index_type league_size, index_type team_size, index_type vector_length=1)
 
-      Request to launch ``league_size`` work items, each of which is assigned to a team of threads
-      with ``team_size`` threads, using a vector length of ``vector_length``. If the team size is not possible when
-      calling a parallel policy, that kernel launch may throw.
+       ``league_size``　ワークアイテムの起動リクエストで、 ``vector_length``　のベクトル長を使用して、それぞれが ``team_size``スレッドで、スレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。
 
    .. cpp:function:: TeamPolicy(index_type league_size, Impl::AUTO_t, index_type vector_length=1)
 
-      Request to launch ``league_size`` work items, each of which is assigned to a team of threads of a
-      size determined by Kokkos, using a vector length of ``vector_length``. The team size may be determined
-      lazily at launch time, taking into account properties of the functor.
+      ``league_size``　ワークアイテムの起動リクエストで、 ``vector_length``　のベクトル長を使用して、それぞれが　Kokkos　が決定したサイズのスレッドチームに代入されます。 チームの規模は、ファンクタの性質を考慮して起動時に遅れて決定することができます。
 
    .. cpp:function:: TeamPolicy(execution_space space, index_type league_size, index_type team_size, index_type vector_length=1)
 
-      Request to launch ``league_size`` work items, each of which is assigned to a team of threads with ``team_size`` threads,
-      using a vector length of ``vector_length``. If the team size is not possible when calling a parallel policy,
-      that kernel launch may throw. Use the provided execution space instance during a kernel launch.
+        ``league_size``　ワークアイテムの起動リクエストで、 ``vector_length``　のベクトル長を使用して、それぞれが　Kokkos　が決定したサイズのスレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。カーネル起動時に提供された実行空間インスタンスを使用します。
 
    .. cpp:function:: TeamPolicy(execution_space space, index_type league_size, Impl::AUTO_t, index_type vector_length=1)
 
-      Request to launch ``league_size`` work items, each of which is assigned to a team of threads of a size determined by Kokkos,
-      using a vector length of ``vector_length``. The team size may be determined lazily at launch time, taking into
-      account properties of the functor. Use the provided execution space instance during a kernel launch.
+       ``league_size``　ワークアイテムの起動リクエストで、 ``vector_length``　のベクトル長を使用して、それぞれが　Kokkos　が決定したサイズのスレッドチームに代入されます。チームの規模は、ファンクタの性質を考慮して起動時に遅れて決定することができます。カーネル起動時に提供された実行空間インスタンスを使用します。
 
-   .. rubric:: Runtime Settings
+   .. rubric:: 実行時設定
 
    .. cpp:function:: inline TeamPolicy& set_chunk_size(int chunk);
 
-      Set the chunk size. Each physical team of threads will get assigned ``chunk`` consecutive teams. Default is 1.
+      チャンクサイズを設定します。各物理的なスレッドチームには、連続した　``chunk``　チームが代入されます。デフォルトは　1　です。
 
-      Returns: reference to ``*this``
+      Returns:  ``*this``　を参照。
 
    .. cpp:function:: inline TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team);
 
@@ -94,18 +86,17 @@ Description
 
    .. cpp:function:: inline TeamPolicy& set_scratch_size(const int& level, const Impl::PerThreadValue& per_thread, const Impl::PerTeamValue& per_team);
 
-      Set the per team and per thread scratch size.
+      チームごとのスクラッチサイズとスレッドごとのスクラッチサイズを設定します。
 
-      - ``level``: set the storage level. 0 is closest cache. 1 is closest storage (e.g. high bandwidth memory)
+      - ``level``: ストレージのレベルを設定してください。0　は最も近いキャッシュです。1　は最も近いストレージ(例:高帯域幅メモリ)です。
+      - ``per_team``: スクラッチのバイト単位のチームごとのサイズのラッパーです。関数 ``PerTeam(int)``　で返されます。
 
-      - ``per_team``: wrapper for the per team size of scratch in bytes. Returned by the function ``PerTeam(int)``.
+      - ``per_thread``: スレッドごとのスクラッチサイズ(バイト単位)のラッパーです。関数　``PerThread(int)``　で返されます。
 
-      - ``per_thread``: wrapper for the per thread size of scratch in bytes. Returned by the function ``PerThread(int)``.
+      One can set the scratch size for level 0 and 1 independently by calling the function twice. Subsequent calls with the same level overwrite the previous value.関数を　2回呼び出すことで、レベル　0　と　1　のスクラッチサイズを独立して設定できます。 同じレベルでの後続の呼び出しは、前の値を上書きします。
+      Returns: 　``*this``　を参照
 
-      One can set the scratch size for level 0 and 1 independently by calling the function twice. Subsequent calls with the same level overwrite the previous value.
-      Returns: reference to ``*this``
-
-   .. rubric:: Query Limits of Runtime Settings
+   .. rubric:: 実行時設定の参照制限
 
    .. _parallelFor: ../parallel-dispatch/parallel_for.html
 
@@ -119,58 +110,55 @@ Description
 
    .. cpp:function:: template<class FunctorType> int team_size_max(const FunctorType& f, const ParallelReduceTag&) const;
 
-      Query the maximum team size possible given a specific functor. The tag denotes whether this is for a |parallelFor|_ or a |parallelReduce|_.
-      Note: this is not a static function! The function will take into account settings for vector length and scratch size of ``*this``. Using a value larger than the return value will result in dispatch failure. If the value returned is non-positive, no valid team size could be found. A common reason is that too much scratch cache memory was requested.
-      Returns: The maximum value for ``team_size`` allowed to be given to be used with an otherwise identical ``TeamPolicy`` for dispatching the functor ``f``.
+      特定のファンクタが与えられた場合、最大チームサイズを参照します。タグは、これが、　|parallelFor|_　か　|parallelReduce|_　かを示します。
+      注意事項:  これは静的な関数ではありません!　関数は、ベクター長と ``*this``　のスクラッチサイズの設定を考慮します。 戻り値より大きい値を使うと、ディスパッチ失敗になります。 戻り値が正でない場合、有効なチームサイズは見つかりません。 一般的な理由は、スクラッチキャッシュメモリへの要求が過剰であったことです。
+      返し:  ``f``　をディスパッチするために、他に同一の　``TeamPolicy`` と組み合わせて使用できることを可能にした``team_size``　の最大値。
 
    .. cpp:function:: template<class FunctorType> int team_size_recommended(const FunctorType& f, const ParallelForTag&) const;
 
    .. cpp:function:: template<class FunctorType> int team_size_recommended(const FunctorType& f, const ParallelReduceTag&) const;
 
-      Query the recommended team size for the specific functor ``f``. The tag denotes whether this is for a |parallelFor|_ or a |parallelReduce|_.
-      Note: this is not a static function! The function will take into account settings for vector length and scratch size of ``*this``. If the value returned is non-positive, no valid team size could be found. A common reason is that too much scratch cache memory was requested.
-      Returns: The recommended value for ``team_size`` to be given to be used with an otherwise identical ``TeamPolicy`` for dispatching the functor ``f``.
+      特定のファンクタ　``f``　について推奨されるチームサイズを照会します。タグは、これが　|parallelFor|_  か　|parallelReduce|_　かを示します。
+      注意事項: これは静的な関数ではありません! 関数は、ベクター長と ``*this``　のスクラッチサイズの設定を考慮します。 戻り値が正でない場合、有効なチームサイズは見つかりません。 一般的な理由は、スクラッチキャッシュメモリへの要求が過剰であったことです。
+      返し:  ``f``　をディスパッチするために、他に同一の　``TeamPolicy`` と組み合わせて使用できることを可能にした``team_size``　の最大値。
 
    .. cpp:function:: static int vector_length_max();
 
-      Returns: the maximum valid value for vector length.
+      Returns: ベクトル長の最大有効値。
 
-   .. cpp:function:: static int scratch_size_max(int level);
+   .. cpp:function:: 静的 int scratch_size_max(int level);
 
-      Returns: the maximum total scratch size in bytes, for the given level.
-      Note: If a kernel performs team-level reductions or scan operations, not all of this memory will be
-      available for dynamic user requests. Some of that maximal scratch size is being used for internal operations.
-      The actual size of these internal allocations depends on the value type used in the reduction or scan.
+      返し: 指定のレベルについて、最大総スクラッチサイズ(バイト単位)。
+      注意事項: カーネルがチームレベルの削減やスキャン演算を行う場合、このメモリのすべてが、動的ユーザーリクエストについて、利用可能になるわけではありません。 これらの最大スクラッチサイズの一部は、内部演算に使われています。これらの内部割り当ての実際のサイズは、還元またはスキャンで使用される値の型によって異なります。
 
-   .. rubric:: Query Runtime Settings
+   .. rubric:: 照会実行時設定
 
    .. cpp:function:: int team_size() const;
 
-      Returns: the requested team size.
+      返し: 要求されたチームサイズ。
 
    .. cpp:function:: int league_size() const;
 
-      Returns: the requested league size.
+      返し: 要求されたリーグサイズ。
 
    .. cpp:function:: int scratch_size(int level, int team_size_ = -1) const;
 
-      This function returns the total scratch size requested. If ``team_size`` is not provided, the team size
-      for the calculation is used from the internal setting (i.e. the result of calling ``this->team_size()``). Otherwise, the provided team size is used.
-      Returns: the value for the total scratch size in bytes in the specified scratch level.
+      本関数は、要求されたスクラッチサイズの合計を返します。 ``team_size`` が提供されていない場合は、内部設定から計算用のチームサイズ(すなわち、``this->team_size()``　を呼び出した結果)が使われます。 それ以外の場合は、提供されたチームサイズが使用されます。
+      返し: 特定されたスクラッチレベルでのチームあたりの総スクラッチサイズ(バイト単位)の値。
 
    .. cpp:function:: int team_scratch_size(int level) const;
 
-      Returns: the value for the per team scratch size in bytes in the specified scratch level.
+      返し: 特定されたスクラッチレベルでのチームあたりのスクラッチサイズ(バイト単位)の値。
 
    .. cpp:function:: int thread_scratch_size(int level) const;
 
-      Returns: the value for the per thread scratch size in bytes in the specified scratch level.
+      返し: 特定されたスクラッチレベルでのスレッドあたりのスクラッチサイズ(バイト単位)の値。
 
    .. cpp:function:: int chunk_size() const;
 
-      Returns: the chunk size, set via ``set_chunk_size()``.
+      返し:  ``set_chunk_size()``　経由で設定された、チャンクサイズ。
 
-Examples
+例
 --------
 
 .. code-block:: cpp
@@ -183,23 +171,23 @@ Examples
 
 .. code-block:: cpp
 
-    using team_handle = TeamPolicy<>::member_type;
+    team_handle = TeamPolicy<>::member_type　を使用;
     parallel_for(TeamPolicy<>(N,AUTO), KOKKOS_LAMBDA (const team_handle& team) {
 
-        // each team initializes a row of A
+        // 各チームが、Aの列を初期化します
         int n = team.league_rank();
         parallel_for(TeamThreadRange(team,M), [&] (const int& i) {
             A(n,i) = B(n) + i;
         });
         team.team_barrier();
 
-        // Compute the sum of the nth row of matrix A, stored as a rank-2 view
+        // ランク-2ビューとして格納されている、行列　A　の　n　行目の合計を計算
         int team_sum;
         parallel_reduce(TeamThreadRange(team,M), [&] (const int& i, int& lsum) {
             lsum += A(n,i);
         },team_sum);
         
-        // store the sum of the row in corresponding entry of A_rowsum vector
+        //  A_rowsum ベクトルの対応する入力における列の合計を格納
         single(PerTeam(team),[&] () {
             A_rowsum(n) = team_sum;
         });
