@@ -37,7 +37,7 @@ TeamVectorMDRange は、階層的並列処理の内部で使用される `nested
 
 	  .. code-block:: cpp
 
-	     TeamVectorMDRange(team, 4);               // NOT OK, violates i>=2
+	     TeamVectorMDRange(team, 4);               // OKではありません violates i>=2　に違反します。
 
 	     TeamVectorMDRange(team, 4,5);             // OK
 	     TeamVectorMDRange(team, 4,5,6);           // OK
