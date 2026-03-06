@@ -36,43 +36,43 @@
 
   .. cpp:function:: complex()
 
-    Default constructor zero initializes the real and imaginary components.
+    デフォルトの構成子ゼロは実成分と虚成分を初期化します。
 
   .. cpp:function:: template<class U> complex(complex<U> z) noexcept
 
-    Conversion constructor initializes the real component to ``static_cast<T>(z.real())`` and the imaginary component to ``static_cast<T>(z.imag())``.
+     変換コンストラクタは、実成分を　``static_cast<T>(z.real())`` に、虚数成分を ``static_cast<T>(z.imag())``　に初期化します。
 
-    Constraints: ``U`` is convertible to ``T``.
+    制約: ``U`` は、 ``T`　に変換可能です。
 
   .. cpp:function:: complex(std::complex<T> z) noexcept
   .. cpp:function:: complex& operator=(std::complex<T> z) noexcept
 
-    Implicit conversion from ``std::complex`` initializes the real component to ``z.real()`` and the imaginary component to ``z.imag()``.
+    ``std::complex`` からの暗示的変換は、実成分を ``z.real()`` に、虚数成分を ``z.imag()`` に初期化します。
 
   .. cpp:function:: constexpr complex(T r) noexcept
   .. cpp:function:: constexpr complex& operator=(T r) noexcept
 
-    Initializes the real component to ``r`` and zero initializes the imaginary component.
+    実成分を　``r`` に初期化  し、ゼロは虚成分を初期化します。
 
   .. cpp:function:: constexpr complex(T r, T i) noexcept
 
-    Initializes the real component to ``r`` and the imaginary component to ``i``.
+    実成分を　``r`` に、虚成分を　``i``　に初期化します。
 
   .. cpp:function:: template<class U> complex(const volatile complex<U>&) noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: void operator=(const complex&) volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: volatile complex& operator=(const volatile complex&) volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: complex& operator=(const volatile complex&) noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: void operator=(const volatile T&) noexcept
   
@@ -80,35 +80,35 @@
 
   .. cpp:function:: void operator=(const T&) volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
-    .. note::
+    .. 注意事項::
       
-      Some of the deprecated assignment operators have templated implementations so as not to be copy assignment operators.
+      一部の非推奨の割り当て演算子は、コピー割り当て演算子にならないようにテンプレート化された実装になっています。
 
-  .. rubric:: Public Member Functions:
+  .. rubric:: パブリックメンバー関数:
 
-  .. cpp:function:: operator std::complex<T>() const noexcept
+  .. cpp:function:: 演算子 std::complex<T>() const noexcept
 
-    Conversion operator to ``std::complex``.
+     ``std::complex``　への変換演算子
 
   .. cpp:function:: constexpr T& real() noexcept
   .. cpp:function:: constexpr T real() const noexcept
 
-    :return: The value of the real component.
+    :return: 実成分の値。
 
   .. cpp:function:: constexpr void real(T r) noexcept
 
-    Assigns ``r`` to the real component.
+    Assigns ``r`` を実成分に代入します。
 
   .. cpp:function:: constexpr T& imag() noexcept
   .. cpp:function:: constexpr T imag() const noexcept
 
-    :return: The value of the imaginary component.
+    :return: 虚数成分の値。
 
   .. cpp:function:: constexpr void imag(T i) noexcept
 
-    Assigns ``i`` to the imaginary component.
+    虚数成分に　``i`` を代入します。
 
   .. cpp:function:: constexpr complex& operator+=(complex v) noexcept
   .. cpp:function:: constexpr complex& operator+=(T v) noexcept
@@ -118,68 +118,68 @@
   .. cpp:function:: constexpr complex& operator-=(complex v) noexcept
   .. cpp:function:: constexpr complex& operator-=(T v) noexcept
 
-    Subtracts the complex value ``complex(v)`` from the complex value ``*this`` and stores the difference in ``*this``.
+     複素値 ''complex(v)''  を複素値 '*this'' に加え、その和を '*this' に保存します。
 
   .. cpp:function:: constexpr complex& operator*=(complex v) noexcept
   .. cpp:function:: constexpr complex& operator*=(T v) noexcept
 
-    Multiplies the complex value ``complex(v)`` by the complex value ``*this`` and stores the product in ``*this``.
+    複素値 '*this'' から　``complex(v)`` を差し引き、差分を '*this' に格納します。
 
   .. cpp:function:: constexpr complex& operator/=(complex v) noexcept
   .. cpp:function:: constexpr complex& operator/=(T v) noexcept
 
-    Divides the complex value ``complex(v)`` into the complex value ``*this`` and stores the quotient in ``*this``.
+    複素値 ``complex(v)`` に複素値を``*this`` 掛け、積を ``*this``　に格納します。
 
   .. cpp:function:: volatile T& real() volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: T real() const volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: volatile T& imag() volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: T imag() const volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: void operator+=(const volatile complex& v) volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: void operator+=(const volatile T& v) volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: void operator-=(const volatile complex& v) volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: void operator-=(const volatile T& v) volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: void operator*=(const volatile complex& v) volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: void operator*=(const volatile T& v) volatile noexcept
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: void operator/=(const volatile complex& v) volatile noexcept(noexcept(T{}/T{}))
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
   .. cpp:function:: void operator/=(const volatile T& v) volatile noexcept(noexcept(T{}/T{}))
   
-    .. deprecated:: 4.0.0
+    .. 非推奨:: 4.0.0
 
 
-  .. rubric:: Non-Member Functions:
+  .. rubric:: 非メンバー関数:
 
   .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, T2 y) noexcept
@@ -187,7 +187,7 @@
   .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, std::complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> bool operator==(std::complex<T1> x, complex<T2> y) noexcept
 
-    :return: ``true`` if and only if the real component of ``complex(x)`` equals the real component of ``complex(y)`` and the imaginary component of ``complex(x)`` equals the imaginary component of ``complex(y)``.
+    :返し: ``true``　とは、 ``complex(x)`` の実成分が ``complex(y)`` の実成分に等しく、``complex(x)``　の虚成分が ``complex(y)``　の虚成分に等しい場合に限ります。
 
   .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, T2 y) noexcept
@@ -195,52 +195,52 @@
   .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, std::complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> bool operator!=(std::complex<T1> x, complex<T2> y) noexcept
 
-    :return: ``!(x == y)``
+    :返し: ``!(x == y)``
 
   .. cpp:function:: template<typename T> complex<T> operator+(complex<T> x) noexcept
 
-    :return: ``x``
+    :返し: ``x``
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(T1 x, complex<T2> y) noexcept
 
-    :return: The complex value ``complex(x)`` added to the complex value ``complex(y)``.
+    :返し: 複素値　``complex(x)`` は複素値 ``complex(y)``　に加算されます。
 
   .. cpp:function:: template<typename T> complex<T> operator-(complex<T> x) noexcept
 
-    :return: ``complex(-x.real(), -x.imag())``
+    :返し: ``complex(-x.real(), -x.imag())``
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(T1 x, complex<T2> y) noexcept
 
-    :return: The complex value ``complex(y)`` subtracted from the complex value ``complex(x)``.
+    :返し: 複素値 ``complex(y)`` は複素値「complex(x)」 ``complex(x)``　から差し引かれます。
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(T1 x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(std::complex<T1> x, complex<T2> y) noexcept
 
-    :return: The complex value ``complex(x)`` multiplied by the complex value ``complex(y)``.
+    :返し: 複素値 ``complex(x)`` に複素値 ``complex(y)``　を掛けたものです。
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(T1 x, complex<T2> y) noexcept
 
-    :return: The complex value ``complex(y)`` divided into the complex value ``complex(x)``.
+    :返し: 複素値 ``complex(y)`` は複素値 ``complex(x)``　に分割されます。
 
   .. cpp:function:: template<typename T> std::istream& operator>>(std::ostream& i, complex<T>& x)
 
-    Extracts a complex number `x` of the form: ``u``, ``(u)`` or ``(u,v)`` where ``u`` is the real part and ``v`` is the imaginary part and returns ``i``.
+    複素数 'x'  を抽出:'u',  '(u)' または   ``(u,v)`` の形で、ここで ``u``  は実部、''v'' は虚数部で、 ``i``　を返します。
 
   .. cpp:function:: template<typename T> std::ostream& operator<<(std::ostream& o, complex<T> x)
 
-    :return: ``o << std::complex(x)``
+    :返し: ``o << std::complex(x)``
 
   .. cpp:function:: template<typename T> T real(complex<T> x) noexcept
 
-    :return: ``x.real()``.
+    :返し: ``x.real()``.
 
   .. cpp:function:: template<typename T> T imag(complex<T> x) noexcept
 
@@ -248,98 +248,96 @@
 
   .. cpp:function:: template<typenmame T> complex<T> polar(T rho, T theta = T())
 
-    :return: The ``complex`` value corresponding to a complex number whose magnitude  is ``rho`` and whose phase angle is ``theta``.
+    :返し: ``complex``の値は、大きさが　``rho``　、位相角が　``theta``　である複素数に対応します。
 
   .. cpp:function:: template<typename T> T abs(complex<T> x)
 
-    :return: The magnitude of ``x``.
+    :return:  ``x``　の大きさ
 
   .. cpp:function:: template<typename T1, typename T2> complex<U> pow(complex<T1> x, complex<T2> y)
   .. cpp:function:: template<typename T1, typename T2> complex<U> pow(complex<T1> x, T2 y)
   .. cpp:function:: template<typename T1, typename T2> complex<U> pow(T1 x, complex<T2> y)
 
-    :return: The complex power of base ``x`` raised to the ``y``-th power,
-             defined as ``exp(y * log(x))``.
-             ``U`` is ``float`` if ``T1`` and ``T2`` are ``float``;
-             otherwise ``U`` is ``long double`` if ``T1`` or ``T2`` is ``long double``;
-             otherwise ``U`` is ``double``.
+    :return: The complex power of baseraised to the-th power,
+             defined as.底数 ``x`` の複素冪を ``y``　の乗に上げると、 ``exp(y * log(x))``　と定義されます。
+             ``U`` は ``float`` であり、 ``T1`` と　``T2`` が ``float``　である場合、 そうでなければ、は` `long double`` であり、``T1``　または　``T2``　が ``long double``　である場合に使われます。 そうでなければ ``U`` は ``double``　となります。
 
   .. cpp:function:: template<typename T> complex<T> sqrt(complex<T> x)
 
-    :return: The complex square root of ``x``, in the range of the right half-plane.
+    :返し: 右半平面の域にある複素平方根  ``x``　。
 
   .. cpp:function:: template<typename T> complex<T> conj(complex<T> x) noexcept
 
-    :return: The complex conjugate of ``x``.
+    :返し: 複素共役 ``x``。
 
   .. cpp:function:: template<typename T> complex<T> exp(complex<T> x)
   .. cpp:function:: template<typename T> complex<T> exp(std::complex<T> x)
 
-    :return: The complex base-e exponential of ``complex(x)``.
+    :返し: 複素 e 底指数関数  ``complex(x)``.
 
   .. cpp:function:: template<typename T> complex<T> log(complex<T> x)
 
-    :return: The complex natural (base-e) logarithm of x.
+    :返し:  x　の複素自然対数(基数e)。
 
   .. cpp:function:: template<typename T> complex<T> log10(complex<T> x)
 
-    :return: The complex common (base-10) logarithm of ``x``, defined as ``log(x) / log(10)``.
+    :返し: ``x``　の複素共通(10進底)対数は ``log(x) / log(10)``と定義されます。
 
   .. cpp:function:: template<typename T> complex<T> sin(complex<T> x)
 
-    :return: The complex sine of ``x``.
+    :返し:  ``x``の複素正弦。
 
   .. cpp:function:: template<typename T> complex<T> cos(complex<T> x)
 
-    :return: The complex cosine of ``x``.
+    :返し:  ``x``　の複素余弦。　
 
   .. cpp:function:: template<typename T> complex<T> tan(complex<T> x)
 
-    :return: The complex tangent of ``x``.
+    :返し:  ``x``　の複素接線。
 
   .. cpp:function:: template<typename T> complex<T> sinh(complex<T> x)
 
-    :return: The complex hyperbolic sine of ``x``.
+    :返し: ``x``　の複素双曲正弦。
 
   .. cpp:function:: template<typename T> complex<T> cosh(complex<T> x)
 
-    :return: The complex hyperbolic cosine of ``x``.
+    :返し:  ``x``　の複素双曲余弦。
 
   .. cpp:function:: template<typename T> complex<T> tanh(complex<T> x)
 
-    :return: The complex hyperbolic tangent of ``x``.
+    :返し:  ``x``　の複素双曲接線。
 
   .. cpp:function:: template<typename T> complex<T> asinh(complex<T> x)
 
-    :return: The complex arc hyperbolic sine of ``x``.
+    :返し:  ``x``　の複素弧双曲正弦。
 
   .. cpp:function:: template<typename T> complex<T> acosh(complex<T> x)
 
-    :return: The complex arc hyperbolic cosine of ``x``.
+    :返し:  ``x``　の複素弧双曲余弦。
 
   .. cpp:function:: template<typename T> complex<T> atanh(complex<T> x)
 
-    :return: The complex arc hyperbolic tangent of ``x``.
+    :返し:  ``x``　の複素弧の双曲接線。
 
   .. cpp:function:: template<typename T> complex<T> asin(complex<T> x)
 
-    :return: The complex arc sine of ``x``.
+    :返し:  ``x``　の複素弧正弦。
 
   .. cpp:function:: template<typename T> complex<T> acos(complex<T> x)
 
-    :return: The complex arc cosine of ``x``.
+    :返し:  ``x``　の複素弧余弦。
 
   .. cpp:function:: template<typename T> complex<T> atan(complex<T> x)
 
-    :return: The complex arc tangent of ``x``.
+    :返し:  ``x``　の複素弧接線。
 
   .. cpp:function:: template<size_t I, typename T> constexpr T& get(complex<T>& z) noexcept
   .. cpp:function:: template<size_t I, typename T> constexpr T&& get(complex<T>&& z) noexcept
   .. cpp:function:: template<size_t I, typename T> constexpr const T& get(const complex<T>& z) noexcept
   .. cpp:function:: template<size_t I, typename T> constexpr const T&& get(complex<T>&& z) noexcept
 
-    Tuple protocol / structured binding support.
+   タプルプロトコル/構造化バインディングサポート。
 
-    :return: A reference to the real part of ``z`` if ``I == 0`` is ``true``;
-             a reference to the imaginary part of ``z`` if ``I == 1`` is ``true``.
+    :返し: 　``I == 0`` が ``true``　である場合、``z``  の実部への参照;
+             これは　``I == 0`` が　``true``　である場合に　``z`` の虚部への参照です。
 
