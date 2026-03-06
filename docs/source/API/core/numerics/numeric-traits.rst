@@ -1,41 +1,39 @@
-Numeric traits
+数値特性
 ==============
 
-.. role::cpp(code)
+.. ロール::cpp(code)
     :language: cpp
 
-.. role:: strike
-    :class: strike
+.. ロール:: ストライク
+    :クラス: ストライク
 
 .. _KokkosNumericTraits: https://github.com/kokkos/kokkos/blob/3.5.00/core/src/Kokkos_NumericTraits.hpp
 
-.. |KokkosNumericTraits| replace:: ``<Kokkos_NumericTraits.hpp>``
+.. |KokkosNumericTraits| 置換:: ``<Kokkos_NumericTraits.hpp>``
 
-Defined in header |KokkosNumericTraits|_ which is included from ``<Kokkos_Core.hpp>``
+ ``<Kokkos_Core.hpp>``　に含まれる ヘッダー |KokkosNumericTraits|_　に定義。
 
 .. _NumericLimits: https://en.cppreference.com/w/cpp/types/numeric_limits
 
-.. |NumericLimits| replace:: ``numeric_limits`` from the standard library header ``<limits>``
+.. |NumericLimits| 置換:: 標準ライブラリヘッダー ``<limits>``　からの ``numeric_limits``。
 
 .. _P1841 : http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p1841r2.pdf
 
-.. |P1841| replace:: P1841
+.. |P1841| 置換:: P1841
 
-Provides a replacement for |NumericLimits|_. Implements a new facility that is being added to the C++23 standard library and that
-breaks the monolithic ``numeric_limits`` class template apart into individual
-trait templates. For details, please refer to |P1841|_.
+ |NumericLimits|_　の代替えを提供します。  C++23標準ライブラリに追加される新しい機能を実装し、モノリシックな ``numeric_limits`` クラステンプレートを個別のトレイトテンプレートに分割します。 詳細については、標準ライブラリヘッダー からの |P1841|_.numeric_limit　を参照してください。
 
-Numeric traits are defined in the ``Kokkos::Experimental`` namespace since Kokkos 3.5
+Numeric traits are defined in the  since Kokkos 3.5数値特性は、Kokkos 3.5以降に、``Kokkos::Experimental`` namespace　で定義されています。
 
-See below the list of available traits.
+以下に利用可能な特性のリストを記載します。
 
 ------------
 
-``trait*`` denotes traits that were added in Kokkos 3.6  
+　Kokkos 3.6 に追加された``特性*`` を示しています。
 
-:strike:`trait*` denotes traits that were removed in Kokkos 4.0
+:strike:`trait*` は、 Kokkos 4.0　において削除された特性を示しています。
 
-**Numeric distinguished value traits**
+**数値的顕著価値**
 ``infinity``
 ``finite_min``
 ``finite_max``
@@ -47,7 +45,7 @@ See below the list of available traits.
 ``quiet_NaN*``
 ``signaling_NaN*``
 
-**Numeric characteristics traits**
+**数値的特徴トレイト**
 ``digits``
 ``digits10``
 ``max_digits10``
@@ -60,7 +58,7 @@ See below the list of available traits.
 ------------
 
 +---------------------------------------------------------+------------------------------------------------+
-| Standard library                                        | Kokkos with C++17                              |
+| 標準ライブラリ                                        | 　　C++17  を伴うKokkos                            |
 +=========================================================+================================================+
 | ``std::numeric_limits<Integral>::min()``                | ``finite_min_v<Integral>``                     |
 +---------------------------------------------------------+------------------------------------------------+
@@ -76,11 +74,11 @@ See below the list of available traits.
 +---------------------------------------------------------+------------------------------------------------+
 | ``std::numeric_limits<FloatingPoint>::infinity()``      | ``infinity_v<FloatingPoint>``                  |
 +---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::quiet_NaN()``     | ``quiet_NaN_v<FloatingPoint>`` (since 3.6)     |
+| ``std::numeric_limits<FloatingPoint>::quiet_NaN()``     | ``quiet_NaN_v<FloatingPoint>`` (バージョン 3.6以降)     |
 +---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::signaling_NaN()`` | ``signaling_NaN_v<FloatingPoint>`` (since 3.6) |
+| ``std::numeric_limits<FloatingPoint>::signaling_NaN()`` | ``signaling_NaN_v<FloatingPoint>`` (バージョン 3.6以降) |
 +---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::denorm_min()``    | ``denorm_min_v<FloatingPoint>`` (since 3.6)    |
+| ``std::numeric_limits<FloatingPoint>::denorm_min()``    | ``denorm_min_v<FloatingPoint>`` (バージョン　3.6以降)    |
 +---------------------------------------------------------+------------------------------------------------+
 | ``std::numeric_limits<Arithmetic>::digits``             | ``digits_v<Arithmetic>``                       |
 +---------------------------------------------------------+------------------------------------------------+
@@ -99,15 +97,15 @@ See below the list of available traits.
 | ``std::numeric_limits<FloatingPoint>::max_exponent10``  | ``max_exponent10_v<FloatingPoint>``            |
 +---------------------------------------------------------+------------------------------------------------+
 
-Individual traits have ``value`` member constant that can be used with C++14 (e.g. ``epsilon<float>::value``).
+個々の特性には、C++14　で使用できる値メンバー定数があります  (例:  ``epsilon<float>::value``)。
 
 ------------
 
-Individual traits are SFINAE-friendly, you can detect value presence/absence.
+個々の特性は、SFINAE　に配慮した、価値の存在/不在を検出できます。
 
 .. code-block:: cpp
 
-    template <class T>
+    テンプレート <class T>
     constexpr auto has_infinity(T)
             -> decltype(Kokkos::Experimental::infinity<T>::value, std::true_type{}) {
         return {};
@@ -115,21 +113,21 @@ Individual traits are SFINAE-friendly, you can detect value presence/absence.
 
     constexpr std::false_type has_infinity(...) { return {}; }
 
-    template <class T>
+    テンプレート <クラス T>
     KOKKOS_FUNCTION constexpr std::enable_if_t<has_infinity(T{}), T>
     legacy_std_numeric_limits_infinity() {
         return Kokkos::Experimental::infinity<T>::value;
     }
 
-    template <class T>
+    テンプレート <class T>
     KOKKOS_FUNCTION constexpr std::enable_if_t<!has_infinity(T{}), T>
     legacy_std_numeric_limits_infinity() {
-        return T();
+        返し T();
     }
 
 ------------
 
-**See also**
+**以下も参照**
 
 .. _MathematicalConstants : mathematical-constants.html
 
@@ -137,7 +135,7 @@ Individual traits are SFINAE-friendly, you can detect value presence/absence.
 
 .. _CommonMathematicalFunctions : mathematical-functions.html 
 
-.. |CommonMathematicalFunctions| replace:: Common mathematical functions
+.. |CommonMathematicalFunctions| 置換:: 一般数学関数
 
 |MathematicalConstants|_
 
