@@ -46,21 +46,21 @@ TeamVectorMDRange は、階層的並列処理の内部で使用される `nested
 制約
 ------------
 
-Note that when used in `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_, the reduction is limited to a sum.
+ `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_　において使用される場合には、 還元は、合計に限定されることに注意してください。
 
-Examples
+例
 --------
 
 .. code-block:: cpp
 
-   using TeamHandle = TeamPolicy<>::member_type;
+   TeamHandle = TeamPolicy<>::member_type　を使用;
 
    parallel_for(TeamPolicy<>(N,AUTO),
      KOKKOS_LAMBDA(TeamHandle const& team) {
 
        int leagueRank = team.league_rank();
 
-       auto range = TeamVectorMDRange<Rank<4>, TeamType>(team, n0, n1, n2, n3);
+       自動 範囲 = TeamVectorMDRange<Rank<4>, TeamType>(team, n0, n1, n2, n3);
 
        parallel_for(range,
          [=](int i0, int i1, int i2, int i3) {
