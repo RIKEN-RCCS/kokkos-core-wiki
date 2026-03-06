@@ -37,13 +37,13 @@ TeamVectorMDRange は、階層的並列処理の内部で使用される `nested
 
 	  .. code-block:: cpp
 
-	     TeamVectorMDRange(team, 4);               // OKではありません violates i>=2　に違反します。
+	     TeamVectorMDRange(team, 4);               // OKではありません i>=2　に違反します。
 
 	     TeamVectorMDRange(team, 4,5);             // OK
 	     TeamVectorMDRange(team, 4,5,6);           // OK
-	     TeamVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK, max num of extents allowed
+	     TeamVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK、 範囲の最大値は認められます
 
-Restrictions
+制約
 ------------
 
 Note that when used in `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_, the reduction is limited to a sum.
