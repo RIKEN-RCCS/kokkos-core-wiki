@@ -4,70 +4,67 @@
 .. role::cpp(code)
     :language: cpp
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Description
+ディスクリプション
 -----------
 
-TeamThreadMDRange is a `nested execution policy <./NestedPolicies.html>`_  used inside of hierarchical parallelism.
+TeamThreadMDRange　は、階層的並列処理の中で使用される、`ネストされた実行ポリシーです。
 
 
-Interface
+インターフェイス
 ---------
 
-.. cpp:class:: template <class Rank, typename TeamHandle> TeamThreadMDRange
+.. cpp:class:: テンプレート <class Rank, typename TeamHandle> TeamThreadMDRange
 
-   .. rubric:: Constructor
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: TeamThreadMDRange(team, extent_1, extent_2, ...);
 
-      Splits the index range ``0`` to ``extent`` over the threads of the team,
-      where ``extent`` is the backend-dependent rank that will be threaded
+      チームのスレッド全体でインデックスレンジ ``0`` を ``extent`` に分割します。ここで、 ``extent``　はスレッドされるバックエンド依存のランクです
 
-      :param team: TeamHandle to the calling team execution context
+      :param team: 呼び出しチーム実行コンテキストへの　TeamHandle 
 
-      :param extent_1, extent_2, ...: index range lengths of each rank
+      :param extent_1, extent_2, ...: 各ランクのインデックス範囲長
 
 
-      * **Requirements**
+      * **必要要件**
 
-	* ``TeamHandle`` is a type that models `TeamHandle <./TeamHandleConcept.html>`_
+	* ``TeamHandle`` 「TeamHandle <./TeamHandleConcept.html>'_　をモデル化する型です。
 
-	* ``extent_1, extent_2, ...`` are ints
+	* ``extent_1, extent_2, ...`` は、ints　です。
 
-	* Every member thread of ``team`` must call the operation in the same branch,
-	  i.e. it is not legal to have some threads call this function in one branch,
-	  and the other threads of ``team`` call it in another branch
+	*  ``team``　のすべてのメンバースレッドは同じブランチで操作を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。
 
-	* ``extent_i`` is such that ``i >= 2 && i <= 8`` is true.
+	* ``extent_i`` is such that ``i >= 2 && i <= 8`` は、真です。
 	  For example:
 
 	  .. code-block:: cpp
 
-	     TeamThreadMDRange(team, 4);               // NOT OK, violates i>=2
+	     TeamThreadMDRange(team, 4);               // OKではありません、 violates i>=2　に違反する
 
 	     TeamThreadMDRange(team, 4,5);             // OK
 	     TeamThreadMDRange(team, 4,5,6);           // OK
-	     TeamThreadMDRange(team, 4,5,6,2,3,4,5,6); // OK, max num of extents allowed
+	     TeamThreadMDRange(team, 4,5,6,2,3,4,5,6); // OK, 範囲の最大値は認められます
 
-Restrictions
+制約
 ------------
 
-Note that when used in `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_, the reduction is limited to a sum.
+ `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_　において使用される場合には、 還元は、合計に限定されることに注意してください。
 
-Examples
+例
 --------
 
 .. code-block:: cpp
 
-   using TeamHandle = TeamPolicy<>::member_type;
+   TeamHandle = TeamPolicy<>::member_type　を使用;
 
    parallel_for(TeamPolicy<>(N,AUTO),
      KOKKOS_LAMBDA (TeamHandle const& team) {
 
        int leagueRank = team.league_rank();
 
-       auto range = TeamThreadMDRange<Rank<4>, TeamHandle>(team, n0, n1, n2, n3);
+       自動　範囲 = TeamThreadMDRange<Rank<4>, TeamHandle>(team, n0, n1, n2, n3);
 
        parallel_for(range, [=](int i0, int i1, int i2, int i3) {
          A(leagueRank, i0, i1, i2, i3) = B(leagueRank, i1) + C(i1, i2, i3);
