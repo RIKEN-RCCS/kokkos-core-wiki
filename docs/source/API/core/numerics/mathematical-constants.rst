@@ -1,4 +1,4 @@
-Mathematical constants
+数学定数
 ======================
 
 .. role::cpp(code)
@@ -8,18 +8,18 @@ Mathematical constants
 
 .. |text| replace:: ``<Kokkos_MathematicalConstants.hpp>``
 
-Defined in header |text|_
-which is included from ``<Kokkos_Core.hpp>``
+ヘッダー |text|_　に定義。
+ ``<Kokkos_Core.hpp>``　に含まれます。
 
 .. _text2: https://en.cppreference.com/w/cpp/numeric/constants
 
-.. |text2| replace:: ``<numbers>``
+.. |text2| 置換:: ``<numbers>``
 
-Provides all mathematical constants from |text2|_ (since C++20).
+ |text2|_ ( C++20　以降)　からのすべての数学定数を提供します。
 
-All constants are defined in the ``Kokkos::numbers::`` namespace since version 4.0, in ``Kokkos::Experimental`` in previous versions.
+すべての定数は  バージョン4.0以降の　Kokkos::numbers:: namespace　で定義されており、以前のバージョンでは、　Kokkos::Experimental　で定義されています。
 
-**Mathematical constants**
+**数学定数**
 
 ``e``
 ``log2e``
@@ -37,12 +37,12 @@ All constants are defined in the ``Kokkos::numbers::`` namespace since version 4
 
 ------------
 
-Notes
+注意事項
 -----
 
 .. _KnownIssues: ../../../known-issues.html#mathematical-constants
 
-.. |KnownIssues| replace:: known issues
+.. |KnownIssues| 置換:: known issues
 
 * The mathematical constants are available in ``Kokkos::Experimental::`` since Kokkos 3.6
 * They were "promoted" to the ``Kokkos::numbers`` namespace in 4.0 and removed from ``Kokkos::Experimental::`` in 4.3
@@ -52,7 +52,7 @@ Notes
 
 ------------
 
-Example
+例
 -------
 
 .. code-block:: cpp
