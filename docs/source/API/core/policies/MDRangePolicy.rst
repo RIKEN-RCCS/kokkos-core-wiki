@@ -11,10 +11,10 @@
 
 .. code-block:: cpp
 
-    Kokkos::MDRangePolicy<..., Rank<N>, ...>(begin, end)
-    Kokkos::MDRangePolicy<..., Rank<N>, ...>(Space, begin, end)
-    Kokkos::MDRangePolicy<..., Rank<N>, ...>(begin, end, tiling)
-    Kokkos::MDRangePolicy<..., Rank<N>, ...>(Space, begin, end, tiling)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(開始, 終了)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(空間, 開始, 終了)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(開始, 終了, タイリング)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(空間, 開始, 終了, タイリング)
 
 　``MDRangePolicy`` は、 ``開始`` タプルから開区間で ``終わる`` 多次元反復空間の実行ポリシーを定義しています。反復空間はタイルされ、ユーザーはオプションでタイルサイズを設定できます。
 
@@ -82,11 +82,11 @@ CTAD コンストラクタ ( 4.3以降)
    DefaultExecutionSpace des;
    SomeExecutionSpace ses; // different from DefaultExecutionSpace
 
-   // MDRangePolicy<Rank<3>> に結論を導かれます
+   // MDRangePolicy<Rank<3>> に演繹します
    MDRangePolicy pl0({0, 0, 0}, {4, 5, 10}};
    MDRangePolicy pl1({0, 0, 0}, {4, 5, 10}, {3, 3, 3}};
 
-   // MDRangePolicy<SomeExecutionSpace, Rank<3>> に結論を導かれます
+   // MDRangePolicy<SomeExecutionSpace, Rank<3>> に演繹します
    MDRangePolicy pl4(ses, {0, 0, 0}, {4, 5, 10}};
    MDRangePolicy pl5(ses, {0, 0, 0}, {4, 5, 10}, {3, 3, 3}};
 
@@ -94,13 +94,13 @@ CTAD コンストラクタ ( 4.3以降)
    int cend[3];
    int64_t ctiling[3];
 
-   // MDRangePolicy<Rank<3>> に結論を導かれます
+   // MDRangePolicy<Rank<3>> に演繹します
    MDRangePolicy pc0(cbegin, cend);
    MDRangePolicy pc1(cbegin, cend, ctiling);
    MDRangePolicy pc2(des, cbegin, cend);
    MDRangePolicy pc3(des, cbegin, cend, ctiling);
 
-   // Deduces to MDRangePolicy<SomeExecutionSpace, Rank<3>> に結論を導かれます
+   // MDRangePolicy<SomeExecutionSpace, Rank<3>> に演繹します
    MDRangePolicy pc4(ses, cbegin, cend);
    MDRangePolicy pc5(ses, cbegin, cend, ctiling);
 
@@ -108,13 +108,13 @@ CTAD コンストラクタ ( 4.3以降)
    Array<int, 2> aend;
    Array<int, 2> atiling;
 
-   // Deduces to MDRangePolicy<Rank<2>> に結論を導かれます
+   // MDRangePolicy<Rank<2>> に演繹します
    MDRangePolicy pa0(abegin, aend);
    MDRangePolicy pa1(abegin, aend, atiling);
    MDRangePolicy pa2(des, abegin, aend);
    MDRangePolicy pa3(des, abegin, aend, atiling);
 
-   // Deduces to MDRangePolicy<SomeExecutionSpace, Rank<2>> に結論を導かれます
+   // MDRangePolicy<SomeExecutionSpace, Rank<2>> に演繹します
    MDRangePolicy pa4(ses, abegin, aend);
    MDRangePolicy pa5(ses, abegin, aend, atiling);
 
