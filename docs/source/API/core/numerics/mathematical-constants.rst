@@ -66,6 +66,6 @@
 以下も参照
 --------
 
-`共通数学関数 <mathematical-functions.html>`_
+`一般数学関数 <mathematical-functions.html>`_
 
 `数値特性 <numeric-traits.html>`_
