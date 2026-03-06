@@ -4,41 +4,41 @@
 .. role::cpp(code)
     :language: cpp
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
 
-    Kokkos::parallel_reduce(name, policy, functor, reducer...);
-    Kokkos::parallel_reduce(name, policy, functor, result...);
-    Kokkos::parallel_reduce(name, policy, functor);
-    Kokkos::parallel_reduce(policy, functor, reducer...);
-    Kokkos::parallel_reduce(policy, functor, result...);
-    Kokkos::parallel_reduce(policy, functor);
+    Kokkos::parallel_reduce(名前, ポリシー, ファンクタ, リデューサー...);
+    Kokkos::parallel_reduce(名前, ポリシー, ファンクタ, 結果...);
+    Kokkos::parallel_reduce(名前, ポリシー, ファンクタ);
+    Kokkos::parallel_reduce(ポリシー, ファンクタ, リデューサー...);
+    Kokkos::parallel_reduce(ポリシー, ファンクタ, 結果...);
+    Kokkos::parallel_reduce(ポリシー, ファンクタ);
 
-Dispatches parallel work defined by ``functor`` according to the *ExecutionPolicy* and performs a reduction of the contributions provided by workers as defined by the execution policy. The optional label name is used by profiling and debugging tools. The reduction type is either a ``sum``, is defined by the ``reducer`` or is deduced from an optional ``join`` operator on the functor. The reduction result is stored in ``result``, or through the ``reducer`` handle. It is also provided to the ``functor.final()`` function if such a function exists. Multiple ``reducers`` can be used in a single ``parallel_reduce`` and thus, it is possible to compute the ``min`` and the ``max`` values in a single ``parallel_reduce``.
+``functor``　で定義された並列作業を、*ExecutionPolicy*　に従ってディスパッチし、実行ポリシーで定義されたワーカーからの貢献を削減します。オプションのラベル名は、プロファイリングおよびデバッグツールで使用されます。 還元型は、``sum``　であるか、``reducer``　によって定義されるか、あるいはファンクタ上のオプションの　``join``　演算子から演繹されます。削減結果は、``result``　に格納されるか、``reducer``　ハンドルを通じて格納されます。 また、そのような関数が存在する場合、``functor.final()``　関数にも提供されます。 単一の　``parallel_reduce``　内で複数の　``reducers``　を使用できるため、単一の　``parallel_reduce``　内で　``min``　値と　``max``　値を計算することが可能です。
 
-Interface
+インターフェイス
 ---------
 
 .. code-block:: cpp
 
-    template <class ExecPolicy, class FunctorType>
+    テンプレート <class ExecPolicy, class FunctorType>
     Kokkos::parallel_reduce(const std::string& name,
                             const ExecPolicy& policy,
                             const FunctorType& functor);
 
 .. code-block:: cpp
 
-    template <class ExecPolicy, class FunctorType>
+    テンプレート <class ExecPolicy, class FunctorType>
     Kokkos::parallel_reduce(const ExecPolicy& policy,
                             const FunctorType& functor);
 
 .. code-block:: cpp
 
-    template <class ExecPolicy, class FunctorType, class... ReducerArgument>
+    テンプレート <class ExecPolicy, class FunctorType, class... ReducerArgument>
     Kokkos::parallel_reduce(const std::string& name,
                             const ExecPolicy& policy,
                             const FunctorType& functor,
@@ -46,14 +46,14 @@ Interface
 
 .. code-block:: cpp
 
-    template <class ExecPolicy, class FunctorType, class... ReducerArgument>
+    テンプレート <class ExecPolicy, class FunctorType, class... ReducerArgument>
     Kokkos::parallel_reduce(const ExecPolicy& policy,
                             const FunctorType& functor,
                             const ReducerArgument&... reducer);
 
 .. code-block:: cpp
 
-    template <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
+    テンプレート <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
     Kokkos::parallel_reduce(const std::string& name,
                             const ExecPolicy& policy,
                             const FunctorType& functor,
@@ -61,35 +61,35 @@ Interface
 
 .. code-block:: cpp
 
-    template <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
+    テンプレート <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
     Kokkos::parallel_reduce(const ExecPolicy& policy,
                             const FunctorType& functor,
                             ReducerArgumentNonConst&... reducer);
 
-Parameters:
+パラメータ:
 ~~~~~~~~~~~
 
-* ``name``: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks.
+* ``name``: ユーザーが提供した文字列で、Kokkos Profiling Hooksを介してプロファイリングおよびデバッグツールで使用されます。
 * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
 
-  - ``IntegerType``: defines a 1D iteration range, starting from 0 and going to a count.
-  - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range.
-  - `MDRangePolicy <../policies/MDRangePolicy.html>`_: defines a multi-dimensional iteration space.
-  - `TeamPolicy <../policies/TeamPolicy.html>`_: defines a 1D iteration range, each of which is assigned to a thread team.
-  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-  - `TeamVectorMDRange <../policies/TeamVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-  - `TeamThreadMDRange <../policies/TeamThreadMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-  - `ThreadVectorMDRange <../policies/ThreadVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-* FunctorType: A valid functor with (at minimum) an ``operator()`` with a matching signature for the ``ExecPolicy`` combined with the reduced type.
-* ReducerArgument: Either a class fulfilling the "Reducer" concept or a ``Kokkos::View``.
-* ReducerArgumentNonConst: A scalar type or an array type; see below for functor requirements.
+  - ``IntegerType``: 1D反復範囲を定義し、0からカウント値までを範囲とします。
+  - `RangePolicy <../policies/RangePolicy.html>`_: 1次元反復範囲を定義します。
+  - `MDRangePolicy <../policies/MDRangePolicy.html>`_: 次元反復空間を定義します。
+  - `TeamPolicy <../policies/TeamPolicy.html>`_: 1次元反復範囲を定義し、それぞれがスレッドチームに代入されます。
+  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: スレッドチームによって実行される1次元の反復範囲を定義します。 ``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です
+  - `TeamVectorMDRange <../policies/TeamVectorMDRange.html>`_: チーム内のスレッドにより実行されるべき多次元反復範囲を定義します。
+  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: チーム内のスレッドにより実行されるべき1次元反復範囲を定義します。``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
+  - `TeamThreadMDRange <../policies/TeamThreadMDRange.html>`_: チーム内のスレッドにより実行されるべき多次元反復範囲を定義します。``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
+  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき1次元反復範囲を定義します。 ``TeamPolicy``　または  ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
+  - `ThreadVectorMDRange <../policies/ThreadVectorMDRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき多次元反復範囲を定義します。``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
+* FunctorType: 有効なファンクタで、（少なくとも）　``ExecPolicy``　と縮小型との組み合わせに対応するシグネチャを持つ　``operator()`` を備えるもの。
+* ReducerArgument: ``Reducer``　の概念を満たすクラス、または ``Kokkos::View`` のいずれか。
+* ReducerArgumentNonConst: スカラー型または配列型; ファンクタの要件については以下を参照してください。
 
-Requirements:
+必要要件:
 ~~~~~~~~~~~~~
 
-* If ``ExecPolicy`` is not ``MDRangePolicy``, the ``functor`` has a member function of the form ``operator() (const HandleType& handle, ReducerValueType& value) const`` or ``operator() (const WorkTag, const HandleType& handle, ReducerValueType& value) const``.
+* ``ExecPolicy`` が ``MDRangePolicy``　ではない場合、 ``functor`` は、 ``operator() (const HandleType& handle, ReducerValueType& value) const`` または ``operator() (const WorkTag, const HandleType& handle, ReducerValueType& value) const``　の形式のメンバー関数を持ちます。
 
   - If ``ExecPolicy::work_tag`` is ``void`` or if ``ExecPolicy`` is an ``IntegerType``, the overload without a ``WorkTag`` argument is used.
   - ``HandleType`` is an ``IntegerType`` if ``ExecPolicy`` is an ``IntegerType`` else it is ``ExecPolicy::member_type``.
