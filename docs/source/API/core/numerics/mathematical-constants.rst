@@ -44,11 +44,10 @@
 
 .. |KnownIssues| 置換:: known issues
 
-* The mathematical constants are available in ``Kokkos::Experimental::`` since Kokkos 3.6
-* They were "promoted" to the ``Kokkos::numbers`` namespace in 4.0 and removed from ``Kokkos::Experimental::`` in 4.3
-* Passing mathematical constants by reference or taking their address in device code is not supported by some toolchains and hence not portable.  (See |KnownIssues|_)
-* Support for quadruple precision floating-point ``__float128`` can be enabled
-  via ``-DKokkos_ENABLE_LIBQUADMATH=ON``.
+* 	数学定数は ``Kokkos::Experimental::`` において、Kokkos 3.6以降利用可能です。
+* 	4.0では``Kokkos::numbers``　namespace　に「昇格」"昇格"し、4.3では、　``Kokkos::Experimental::``　から削除されています。
+* 　数学定数を参照で渡す、またはデバイスコード内でアドレスを取得することは、一部のツールチェーンではサポートされておらず、したがって移植性がありません。 (参照 |KnownIssues|_)。
+* 　四重精密浮動小数点 ``__float128``　のサポートは、-DKokkos_ENABLE_LIBQUADMATH=ON　により、有効化できます。
 
 ------------
 
@@ -64,9 +63,9 @@
 
 ------------
 
-See also
+以下も参照
 --------
 
-`Common mathematical functions <mathematical-functions.html>`_
+`共通数学関数 <mathematical-functions.html>`_
 
-`Numeric traits <numeric-traits.html>`_
+`数値特性 <numeric-traits.html>`_
