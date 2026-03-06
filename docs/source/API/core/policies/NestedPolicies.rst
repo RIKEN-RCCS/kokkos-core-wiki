@@ -45,8 +45,8 @@
 
 .. code-block:: cpp
 
-    parallel_for(TeamThreadRange(team,begin,end), [=] (int i) {});
-    parallel_for(ThreadVectorRange(team,begin,end), [=] (int i) {});
+    parallel_for(TeamThreadRange(チーム,開始,終了), [=] (int i) {});
+    parallel_for(ThreadVectorRange(チーム,開始,終了), [=] (int i) {});
     single(PerTeam(team), [=] () {});
     single(PerThread(team), [=] () {});
 
