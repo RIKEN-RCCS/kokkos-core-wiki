@@ -1,100 +1,100 @@
 ``MemoryTraits``
 ================
 
-:cpp:struct:`MemoryTraits` is the last template parameter of :cpp:class:`View`.
+:cpp:struct:`MemoryTraits` は、is the last template parameter of :cpp:class:`View`　の最後のテンプレートパラメータです。
 
-Struct Interface
+構造体インターフェイス
 ----------------
 
-.. cpp:struct:: template <unsigned N> MemoryTraits
+.. cpp:struct:: テンプレート <unsigned N> MemoryTraits
 
-  When provided to a multidimensional View, ``MemoryTraits`` allow passing extra information about the treatment of the allocation. The template argument is expected to be a bitwise OR of enumeration values described below.
+  多次元ビューに提供された場合、 ``MemoryTraits`` は、割り当て処理に関する追加情報を渡すことを許可します。 テンプレート引数は、下記の列挙型値のビット単位の論理和であることが想定されます。
 
-.. rubric:: Nested type
+.. rubric:: ネストされた型
 
 .. cpp:type::  memory_traits
 
-  A tag type signifying the memory access trait(s) denoted by ``N``.
+  ``N``で示されるメモリアクセス特性（複数可）を表すタグタイプ。
 
-.. rubric:: Member Variables
+.. rubric:: メンバー変数
 
 .. cpp:member::  static constexpr bool is_unmanaged
 
-  A boolean that indicates whether the Unmanaged trait is enabled.
+  管理対象外トレイトが有効かどうかを示すブール値
 
 .. cpp:member::  static constexpr bool is_random_access
 
-  A boolean that indicates whether the RandomAccess trait is enabled.
+ 　RandomAccessトレイトが有効かどうかを示すブール値。
 
 .. cpp:member::  static constexpr bool is_atomic
 
-  A boolean that indicates whether the Atomic trait is enabled.
+  原始的トレイトが有効かどうかを示すブール値。
 
 .. cpp:member::  static constexpr bool is_restrict
 
-  A boolean that indicates whether the Restrict trait is enabled.
+  制約トレイトが有効かどうかを示すブール値。
 
 .. cpp:member::  static constexpr bool is_aligned
 
-  A boolean that indicates whether the Aligned trait is enabled.
+  整列トレイトが有効かどうかを示すブール値。
 
 .. _MemoryAccessTraits: ../../../ProgrammingGuide/View.html#memory-access-traits
 
-.. |MemoryAccessTraits| replace:: memory access traits
+.. |MemoryAccessTraits| 置換:: メモリアクセストレイト
 
 .. _UnmanagedViews: ../../../ProgrammingGuide/View.html#unmanaged-views
 
-.. |UnmanagedViews| replace:: unmanaged views
+.. |UnmanagedViews| 置換:: unmanaged views管理対象外ビュー
 
-Non-Member Enums
+非メンバー列挙型
 ^^^^^^^^^^^^^^^^
 
-The following enumeration values are used to specify the memory access traits. Check the sub-section on |MemoryAccessTraits|_ in the Programming Guide for further information about how these traits can be used in practice.
+以下の列挙値は、メモリアクセス特性指定に使用されます。これらの特性が実際にどのように使用できるかについての詳細については、プログラミングガイドの　|MemoryAccessTraits|_　のサブセクションを確認してください。
 
 .. cpp:enum:: MemoryTraitsFlags
 
-  The following enumeration values are defined in this enumeration type.
+この列挙型では、以下の列挙値が定義されています。
 
-.. cpp:enumerator:: Unmanaged
+.. cpp:enumerator:: 管理対象外
 
-  This traits means that Kokkos does neither reference counting nor automatic deallocation for such Views. This trait can be associated with memory allocated in any memory space. For example, an *unmanaged view* can be created by wrapping raw pointers of allocated memory, while also specifying the execution or memory space accordingly.
+  この特性は、　Kokkos　がこのような　View　に対して参照カウントも自動解放も行わないことを意味します。 この特性は、任意のメモリ空間に割り当てられたメモリに関連付けることができます。例えば、 *非管理ビュー*　は、割り当てられたメモリの生ポインタをラップすることで作成でき、同時に実行領域またはメモリ空間を適切に指定することもできます。
 
 .. cpp:enumerator:: RandomAccess
 
-  Views that are going to be accessed irregularly (e.g., non-sequentially) can be declared as random access. 
+ 不規則にアクセスされるビュー（例：非順次アクセス）は、ランダムアクセスとして宣言できます。
 
-.. cpp:enumerator:: Atomic
+.. cpp:列挙子:: 原始的
 
-  In such a view, every access (read or write) to any element will be atomic. 
+  このようなビューでは、あらゆる要素へのアクセス（読み取りまたは書き込み）はすべてアトミックである。
 
 .. cpp:enumerator:: Restrict
 
-  This trait indicates that the memory of this view doesn't alias/overlap with another data structure in the current scope. 
+  本特性は、このビューのメモリが現在のスコープ内の他のデータ構造の別名ではない/重複していないことを示します。
 
 .. cpp:enumerator:: Aligned
 
-  This trait provides additional information to the compiler that the memory allocation in this ``View`` has an alignment of 64. 
+  本特性は、この　``View``　におけるメモリ割り当てが、64バイト単位でアラインメントされていることをコンパイラに追加で通知します。
 
-Non-Member Type aliases
+非メンバー型エイリアス
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The following type aliases are also available in the ``Kokkos`` namespace.
+以下の型エイリアスも、``Kokkos``　名前空間で利用可能です。
 
 .. cpp:type:: MemoryManaged = Kokkos::MemoryTraits<>;
 .. cpp:type:: MemoryUnmanaged = Kokkos::MemoryTraits<Kokkos::Unmanaged>;
 .. cpp:type:: MemoryRandomAccess = Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>;
 
-.. deprecated:: 4.7
-  Managed memory as an explicit memory trait (i.e., ``using MemoryManaged = Kokkos::MemoryTraits<>;``) has been deprecated in Kokkos 4.7. Also, in earlier versions of Kokkos, the enumeration value of ``0`` had to be explicitly mentioned, i.e., ``Kokkos::MemoryTraits<0>``. Check the sub-section on |UnmanagedViews|_ for a discussion about this.
+.. 非推奨:: 4.7
+  明示的なメモリ特性としての管理対象メモリ（例：　``MemoryManaged = Kokkos::MemoryTraits<>　を使用;``　）は、　Kokkos 4.7 で非推奨となりました。 また、以前のバージョンのKokkosでも、列挙値の　``0``　を明示的に指定する必要がありました。つまり、``Kokkos::MemoryTraits<0>``　のように記述する必要があったのです。 これに関する詳細は、　|UnmanagedViews|_　の項目を参照してください。
 
-Note that in order to use a managed View in a random access manner, the memory trait should be specified as ``Kokkos::MemoryTraits<Kokkos::RandomAccess>`` and not ``Kokkos::MemoryRandomAccess``.
+管理下にあるビューをランダムアクセス方式で使用するには、メモリ特性として、 ``Kokkos::MemoryTraits<Kokkos::RandomAccess>`` を指定する必要があり、　``Kokkos::MemoryRandomAccess`` としては指定しないことに注意してください。
 
-Examples
+例
 ^^^^^^^^
 
 .. code-block:: cpp
 
    Kokkos::View<DayaType, LayoutType, MemorySpace, Kokkos::MemoryTraits<SomeFlag | SomeOtherFlag> > my_view;
 
-Example MemoryTraits type: ``Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>``
+MemoryTraits 型の例: ``Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>``
 
