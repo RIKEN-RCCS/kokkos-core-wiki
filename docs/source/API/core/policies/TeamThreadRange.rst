@@ -17,7 +17,7 @@
     parallel_scan(TeamThreadRange(team,begin,end),
         [=] (lint i, double& lsum, bool final) {...},sum);
 
-TeamThreadRangeは  、階層的並列処理内で使われる、 `nested execution policy <./NestedPolicies.html>`_です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは関数として実装されており、チームハンドルを通じて実行空間タイプに、暗示的にテンプレート化することが可能になります。
+TeamThreadRangeは  、階層的並列処理内で使われる、 `nested execution policy <./NestedPolicies.html>`_です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
 
 シノプシス
 --------
