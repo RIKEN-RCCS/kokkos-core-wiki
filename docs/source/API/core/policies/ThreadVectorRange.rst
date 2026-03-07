@@ -64,34 +64,34 @@
    /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 
-Splits the index range ``begin`` to ``end-1`` over the vector lanes of the calling thread. 
+呼び出しスレッドのベクトルレーン全体で、インデックスレンジ ``begin``　から  ``end-1`` までを分割します。
 
-*  **Arguments**
+*  **引数**
 
-   * ``team``: a handle to the calling team execution context.
+   * ``team``: 呼び出しチーム実行コンテキストへのハンドル
 
-   * ``begin``: index range begin. 
+   * ``begin``: インデックス範囲開始。
 
-   * ``end``: index range end.
+   * ``end``: インデックス範囲終了。
 
-*  **Returns**
+*  **返し**
 
    * Implementation defined type.
 
 * **Requirements**:
 
-  * ``TeamMemberType`` is a type that models `TeamHandle <TeamHandleConcept.html>`__   
+  * ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept.html>`__  をモデル化する型です 
   
-  * ``std::is_integral<iType1>::value`` is true.
+  * ``std::is_integral<iType1>::value`` は、真です。
 
-  * ``std::is_integral<iType2>::value`` is true.
+  * ``std::is_integral<iType2>::value`` は、真です。
 
-  * ``end >= begin`` is true;
+  * ``end >= begin`` は、真です;
 
   * This function can not be called inside a parallel operation dispatched using a `TeamVectorRange <TeamVectorRange.html>`__ policy or ``ThreadVectorRange`` policy.
 
   
-Examples
+例
 --------
 
 .. code-block:: cpp
