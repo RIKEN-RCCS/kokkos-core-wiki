@@ -51,21 +51,21 @@
 制約
 ------------
 
-Note that when used in `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_, the reduction is limited to a sum.
+ <../parallel-dispatch/parallel_reduce.html>`_　において使用される場合には、 還元は、合計に限定されることに注意してください。
 
-Examples
+例
 --------
 
 .. code-block:: cpp
 
-   using TeamHandle = TeamPolicy<>::member_type;
+   using TeamHandle = TeamPolicy<>::member_type　を使用;
 
    parallel_for(TeamPolicy<>(N, Kokkos::AUTO),
      KOKKOS_LAMBDA(TeamHandle const& team) {
        int leagueRank = team.league_rank();
 
-       auto teamThreadRange = TeamThreadRange(team, n0);
-       auto threadVectorMDRange =
+       自動 teamThreadRange = TeamThreadRange(team, n0);
+       自動 threadVectorMDRange =
            ThreadVectorMDRange<Rank<3>, TeamHandle>(
                team, n1, n2, n3);
 
