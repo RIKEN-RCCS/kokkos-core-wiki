@@ -5,28 +5,28 @@
     :language: cpp
 
 ..
-  The (public header) file the user will include in their code
+  ユーザーがそのコードを含む (パブリックヘッダー) ファイル
 
-Defined in header ``<Kokkos_Array.hpp>`` which is included from ``<Kokkos_Core.hpp>``
+``<Kokkos_Core.hpp>``　に含まれる、ヘッダー ``<Kokkos_Array.hpp>`` に定義。
 
 ..
-  High-level, human-language summary of what the thing does, and if possible, brief statement about why it exists (2 - 3 sentences, max);
+  物事が行うこと、そして可能であれば、それがなぜ存在するかについての短い説明についての、高レベルの、人間の言語の概要 (2 - 3 文、最大);
 
-Description
+ディスクリプション
 -----------
 
-``Array`` is a contiguous aggregate owning container storing a fixed size sequence of objects (models holding exactly N elements).
+``Array`` は、連続した集合を所有するコンテナで、固定サイズのオブジェクト列（正確にN個の要素を持つモデル）を格納します。
 
-* This is intended as a replacement for ``std::array<T, N>``.
-* This container is an owning container (the data is embedded in the container itself).
-* This container is an aggregate type with the same semantics as a struct holding a C-style array ``T[N]`` as its only non-static data member when ``N > 0``; otherwise, it is an empty container.
-* Unlike a C-style array, it doesn't decay to ``T*`` automatically.
-* As an aggregate type, it can be initialized with aggregate-initialization given at most ``N`` initializers that are convertible to ``T``: ``Kokkos::Array<int, 3> a = { 1, 2, 3 };``.
+* これは、``std::array<T, N>``　の代替として設計されています。
+* このコンテナは所有コンテナです（データはコンテナ自体に埋め込まれています）。
+* このコンテナは、この場合 ``N > 0`` であるため、Cスタイル配列 ``T[N]`` を唯一の非静的データメンバーとして保持する構造体と同一の意味論を持つ集合型です；そうでない場合には、それは空のコンテナです。
+* Cスタイルの配列とは異なり、自動的に　``T*``　に型変換されることはありません。
+* 集合型として、それは、 ``T``: ``Kokkos::Array<int, 3> a = { 1, 2, 3 };``　に変換可能な、最大で　``N``　個の初期化子による集合初期化で初期化できます。
 
 ..
-  The API of the entity.
+  エンティティのAPI。
 
-Interface
+インターフェイス
 ---------
 
 .. versionchanged:: 4.4.0
@@ -34,15 +34,15 @@ Interface
 .. cpp:struct:: template <class T, size_t N> Array
 
   ..
-    Template parameters (if applicable)
-    Omit template parameters that are just used for specialization/are deduced/ and/or should not be exposed to the user.
+    テンプレートパラメータ (該当する場合)
+    特殊化専用に使用される／演鐸される／および／またはユーザーに公開すべきでないテンプレートパラメータは省略します。
 
-  .. rubric:: Template Parameters
+  .. rubric:: テンプレートパラメータ
 
-  :tparam T: The type of the element being stored.
-  :tparam N: The number of elements being stored.
+  :tparam T: 格納されているエレメント型。
+  :tparam N: 格納されているエレメント数。
 
-  .. rubric:: Public Types
+  .. rubric:: パブリック型
 
   .. cpp:type:: value_type = T
   .. cpp:type:: pointer = T*
@@ -52,61 +52,61 @@ Interface
   .. cpp:type:: size_type = size_t
   .. cpp:type:: difference_type = ptrdiff_t
 
-  .. rubric:: Public Member Functions
+  .. rubric:: パブリックメンバー関数
 
-  .. cpp:function:: static constexpr bool empty() noexcept
+  .. cpp:function:: 静的 constexpr ブール empty() noexcept
 
-    :return: ``N == 0``
-    :since: ``noexcept`` since 5.0
+    :返し: ``N == 0``
+    :since: ``非定数`` 5.0以降　
 
-  .. cpp:function:: static constexpr size_type size() noexcept
+  .. cpp:function:: 静的 constexpr size_type size() noexcept
   .. cpp:function:: constexpr size_type max_size() const noexcept
 
     :return: ``N``
-    :since: ``noexcept`` since 5.0
+    :since: ``非定数`` 5.0以降
 
   .. cpp:function:: constexpr reference operator[](size_t i)
   .. cpp:function:: constexpr const_reference operator[](size_t i) const
 
-    :return: A reference to the ``i``-th element of the array.
-    :since: No longer requires the argument to be of an integral type or an unscoped enum type. (since 5.1)
+    :返し: 配列の ``i``　番目の要素への参照。
+    :since: 引数が整数型、またはスコープのない列挙型である必要はありません。 ( 5.1以降)
 
   .. cpp:function:: constexpr pointer data() noexcept
   .. cpp:function:: constexpr const_pointer data() const noexcept
 
-    :return: A pointer to the first element of the array.  If ``N == 0``, the return value is unspecified and not dereferenceable.
-    :since: ``noexcept`` since 5.0
+    :リターン: 配列の最初の要素へのポインタ。  If ``N == 0``　である場合、戻り値は、 特定されておらず、間接参照できません。
+    :since: ``非定数`` 5.0以降
 
   .. cpp:function:: constexpr pointer begin() noexcept
   .. cpp:function:: constexpr const_pointer begin() const noexcept
   .. cpp:function:: constexpr const_pointer cbegin() const  noexcept
 
     :return: ``data()``
-    :since: since 5.0
+    :since: 5.0以降
 
   .. cpp:function:: constexpr pointer end() noexcept
   .. cpp:function:: constexpr const_pointer end() const noexcept
   .. cpp:function:: constexpr const_pointer cend() const noexcept
 
-    :return: ``data() + size()``. The return value is not dereferenceable. If ``N == 0``, the return value will be equal to ``begin()``.
-    :since: since 5.0
+    :return: ``data() + size()``。　戻り値は、間接参照できません。されていません。  ``N == 0``　である場合、 戻り値は、 ``begin()``　に等しくなります。
+    :since: 5.0以降
 
 
-Deduction Guides
+演鐸ガイド
 ----------------
 
 .. cpp:function:: template<class T, class... U> Array(T, U...) -> Array<T, 1 + sizeof...(U)>
 
-Non-Member Functions
+非メンバー関数
 --------------------
 
 ..
-  These should only be listed here if they are closely related. E.g. friend operators. However,
-  something like view_alloc shouldn't be here for view
+  これらは密接に関連している場合にのみ、ここに記載されるべきです。例えば、 フレンド演算子。しかしながら、
+  view_alloc　のようなものは、 ビューのためにはここに存在すべきではありません。
 
 .. cpp:function:: template<class T, size_t N> constexpr bool operator==(const Array<T, N>& l, const Array<T, N>& r) noexcept
 
-   :return: ``true`` if and only if ∀ the elements in ``l`` and ``r`` compare equal.
+   :return:  ``l`` および　``r`` の ∀ 要素がすべて等しい場合に限り、　``true`` 
 
 .. cpp:function:: template<class T, size_t N> constexpr bool operator!=(const Array<T, N>& l, const Array<T, N>& r) noexcept
 
@@ -114,45 +114,45 @@ Non-Member Functions
 
 .. cpp:function:: template<class T, size_t N> constexpr kokkos_swap(Array<T, N>& l, Array<T, N>& r) noexcept(N == 0 || is_nothrow_swappable_V<T>)
 
-   :return: If ``T`` is swappable or ``N == 0``, each of the elements in `l` and `r` are swapped via ``kokkos_swap``.
+   :return: ``T``　が交換可能、または  ``N == 0``　の場合、  `l` および `r` の中のそれぞれの要素は、 ``kokkos_swap``　を通じて交換されます。
 
 .. cpp:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_array(T (&a)[N])
 .. cpp:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_array(T (&&a)[N])
 
-   :return: An ``Array`` containing the elements copied/moved from ``a``.
+   :return: ``a``　からコピー/移動した要素を含む ``Array``
 
 .. cpp:function:: template<size_t I, class T, size_t N> constexpr T& get(Array<T, N>& a) noexcept
 .. cpp:function:: template<size_t I, class T, size_t N> constexpr const T& get(const Array<T, N>& a) noexcept
 
-   :return: ``a[I]`` for (tuple protocol / structured binding support)
+   :return: （タプルプロトコル／構造化バインディングのサポート）についての　``a[I]`` 
 
 .. cpp:function:: template<size_t I, class T, size_t N> constexpr T&& get(Array<T, N>&& a) noexcept
 .. cpp:function:: template<size_t I, class T, size_t N> constexpr const T&& get(const Array<T, N>&& a) noexcept
 
-   :return: ``std::move(a[I])`` (for tuple protocol / structured binding support)
+   :return: （タプルプロトコル／構造化バインディングのサポート）についての　　``std::move(a[I])``
 
 .. cpp:function:: template<class T, size_t N> constexpr T* begin(Array<T, N>& a) noexcept
 .. cpp:function:: template<class T, size_t N> constexpr const T* begin(const Array<T, N>& a) noexcept
 
-   :return: ``a.data()``
+   :返し: ``a.data()``
 
 .. cpp:function:: template<class T, size_t N> constexpr T* end(Array<T, N>& a) noexcept
 .. cpp:function:: template<class T, size_t N> constexpr const T* end(const Array<T, N>& a) noexcept
 
-   :return: ``a.data() + a.size()``
+   :返し: ``a.data() + a.size()``
 
-Deprecated Interface
+非推奨インターフェイス
 --------------------
-.. deprecated:: 4.4.00
+.. 非推奨:: 4.4.00
 
 .. cpp:struct:: template<class T = void, size_t N = KOKKOS_INVALID_INDEX, class Proxy = void> Array
 
-* The primary template was an contiguous aggregate owning container of exactly ``N`` elements of type ``T``.
-* This container did not support move semantics.
+* 一次テンプレートは、型 ``T``　の要素　``N`` 個からなる完全な連続集合を保持するコンテナでした。
+* 本コンテナは、移動セマンティクスをサポートしていませんでした。
 
 .. cpp:struct:: template<class T, class Proxy> Array<T, 0, Proxy>
 
-* This container was an empty container.
+* 本コンテナは、空のコンテナでした。
 
 .. cpp:struct:: template<class T> Array<T, KOKKOS_INVALID_INDEX, Array<>::contiguous>
 
@@ -164,22 +164,22 @@ Deprecated Interface
 
 .. cpp:struct:: template<class T> Array<T, KOKKOS_INVALID_INDEX, Array<>::strided>
 
-* This container was a non-owning container.
-* This container had its size and stride determined at construction time.
-* This container could be assigned from any ``Array<T, N , Proxy>``.
-* Assignment did not change the size or stride of this container.
-* This container did not support move semantics.
+* 本コンテナは、非所有コンテナです。
+* 本コンテナのサイズは、構築時に決定されました。
+* 本コンテナは、任意の　``Array<T, N , Proxy>``　から割り当てられる可能性があります。
+* 代入により、このコンテナーのサイズは変更されませんでした。
+* 本コンテナは、移動セマンティクスをサポートしていませんでした。
 
 .. cpp:struct:: template<> Array<void, KOKKOS_INVALID_INDEX, void>
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: contiguous
-   .. cpp:type:: stided
+   .. cpp:type:: 隣接
+   .. cpp:type:: 一定間隔
 
-* This specialization defined the embedded tag types: ``contiguous`` and ``strided``.
+* 本仕様は、は、埋め込みタグの種類を定義した型: ``contiguous`` および　``strided``　。
 
-Examples
+例
 ________
 
 .. code-block:: cpp
@@ -194,7 +194,7 @@ ________
  #include <type_traits>
  #include <utility>
 
- // creates a constexpr array of string_view's
+ // string_view's　の　constexpr　配列を作成
  constexpr auto w1n = Kokkos::to_array<std::string_view>(
      {"Mary", "Patricia", "Linda", "Barbara", "Elizabeth", "Jennifer"});
  static_assert(
@@ -205,48 +205,48 @@ ________
  int Main(int /* argc */, char const *const /* argv */[]) {
    Kokkos::ScopeGuard _;
 
-   // Construction uses aggregate initialization
+   // 構築には集合体の初期化が使用されます
    [[maybe_unused]] Kokkos::Array<int, 3> a1{
-       {1, 2, 3}}; // Double-braces required in C++11
-                   // and still allowed in C++14 and beyond
+       {1, 2, 3}}; // C++11では、ダブルブレースが必要で
+                   // C++14 およびそれ以降においてもまだ、認められています
 
-   Kokkos::Array<int, 3> a2 = {1, 2, 3}; // Double braces never required after =
+   Kokkos::Array<int, 3> a2 = {1, 2, 3}; //  =　の後に決して必要のないダブルブレース
 
-   // Output is 3 2 1
+   // 出力は、 3 2 1
    std::reverse_copy(std::data(a2), end(a2),
                      std::ostream_iterator<int>(std::cout, " "));
    std::cout << '\n';
 
-   // Ranged for loop is supported
-   // Output is E Ǝ
+   // ループの範囲指定をサポートしています
+   // 出力は、 E Ǝ
    Kokkos::Array<std::string, 2> a3{"E", "\u018E"};
    for (const auto &s : a3)
      std::cout << s << ' ';
    std::cout << '\n';
 
-   // Deduction guide for array creation
+   // 配列作成のための演鐸ガイド
    [[maybe_unused]] Kokkos::Array a4{3.0, 1.0, 4.0}; // Kokkos::Array<double, 3>
 
-   // Behavior of unspecified elements is the same as with built-in arrays
-   [[maybe_unused]] Kokkos::Array<int, 2> a5; // No list init, a5[0] and a5[1]
-                                              // are default initialized
+   // 特定されていない要素のビヘイビアは、組み込み配列と同様
+   [[maybe_unused]] Kokkos::Array<int, 2> a5; // init　のリストはなく, a5[0] および a5[1]　の
+                                              // デフォルトは、初期化されています。
    [[maybe_unused]] Kokkos::Array<int, 2>
-       a6{}; // List init, both elements are value
-             // initialized, a6[0] = a6[1] = 0
+       a6{}; // init　のリストで、両方の要素が、初期化された値で、
+             //  a6[0] = a6[1] = 0
    [[maybe_unused]] Kokkos::Array<int, 2> a7{
-       1}; // List init, unspecified element is value
-           // initialized, a7[0] = 1, a7[1] = 0
+       1}; // init　のリストで、 非特定要素は、初期化された値で、
+           //  a7[0] = 1, a7[1] = 0
 
-   // copies a string literal
+   // 文字列リテラルをコピー
    auto t1 = Kokkos::to_array("foo");
    static_assert(t1.size() == 4);
 
-   // deduces both element type and length
+   // 要素の型および長さ両方を演鐸
    auto t2 = Kokkos::to_array({0, 2, 1, 3});
    static_assert(std::is_same_v<decltype(t2), Kokkos::Array<int, 4>>);
 
-   // deduces length with element type specified
-   // implicit conversion happens
+   // 特定された要素の型を使って、長さを演鐸
+   // implicit conversion happens暗示的変換が発生
    auto t3 = Kokkos::to_array<long>({0, 1, 3});
    static_assert(std::is_same_v<decltype(t3), Kokkos::Array<long, 3>>);
 
@@ -254,11 +254,11 @@ ________
        {{3, 0.0f}, {4, 0.1f}, {4, 0.1e23f}});
    static_assert(t4.size() == 3);
 
-   // creates a non-copyable Kokkos::Array
+   // コピー不可能な Kokkos::Array　を作成
    auto t5 = Kokkos::to_array({std::make_unique<int>(3)});
    static_assert(t5.size() == 1);
 
-   // error: copying multidimensional arrays is not supported
+   // エラー: 多次元配列のコピーは、サポート対象外
    // char s[2][6] = {"nice", "thing"};
    // auto t6 = Kokkos::to_array(s);
 
