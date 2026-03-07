@@ -45,11 +45,10 @@
 	     ThreadVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK, 範囲の最大値は認められます
 
 
-	* The constructor can not be called inside a parallel operation dispatched using a
-	  ``TeamVectorRange`` policy, ``TeamVectorRange`` policy, ``TeamVectorMDRange`` policy
-	  or ``ThreadVectorMDRange`` policy.
+	* 　``TeamVectorRange`` ポリシー、 ``TeamVectorRange`` ポリシー、 ``TeamVectorMDRange`` ポリシー
+	  または、 ``ThreadVectorMDRange`` ポリシーを使用して、ディスパッチされた並列演算内で、コンストラクタを呼び出すことは出来ません。
 
-Restrictions
+制約
 ------------
 
 Note that when used in `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_, the reduction is limited to a sum.
