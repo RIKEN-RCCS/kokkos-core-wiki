@@ -4,9 +4,9 @@
 .. role::cpp(code)
     :language: cpp
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Description
+ディスクリプション
 -----------
 
 ThreadVectorMDRange is a `nested execution policy <./NestedPolicies.html>`_  used inside of hierarchical parallelism.
