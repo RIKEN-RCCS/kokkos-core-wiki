@@ -88,7 +88,7 @@
 
   * ``end >= begin`` は、真です;
 
-  * This function can not be called inside a parallel operation dispatched using a `TeamVectorRange <TeamVectorRange.html>`__ policy or ``ThreadVectorRange`` policy.
+  * 本関数を、`TeamVectorRange <TeamVectorRange>`__ ポリシーまたは、 ``ThreadVectorRange`` ポリシーを使用してディスパッチされた並列演算内で呼び出すことはできません。
 
   
 例
@@ -96,7 +96,7 @@
 
 .. code-block:: cpp
 
-    typedef TeamPolicy<>::member_type team_handle;
+    型定義 TeamPolicy<>::member_type team_handle;
     parallel_for(TeamPolicy<>(N,AUTO,4), KOKKOS_LAMBDA (const team_handle& team) {
      int n = team.league_rank();
      parallel_for(TeamThreadRange(team,M), [&] (const int i) {
