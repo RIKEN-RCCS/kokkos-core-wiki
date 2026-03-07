@@ -55,7 +55,7 @@
 
    * ``count >= 0`` は、真です;
 
-   * This function can not be called inside a parallel operation dispatched using a `TeamVectorRange <TeamVectorRange>`__ policy or ``ThreadVectorRange`` policy.
+   * 本関数を、 `TeamVectorRange <TeamVectorRange>`__ ポリシー または ``ThreadVectorRange`` ポリシーを使用してディスパッチされた、並列演算内で呼び出すことはできません。
 
 
 .. code-block:: cpp
