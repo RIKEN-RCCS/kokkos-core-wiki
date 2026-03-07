@@ -12,15 +12,15 @@
 
 ホストバックエンドのみが有効な場合は、システム上で利用可能なデバイスの数、または　``-1``を返します。
 
-Notes注意事項
+注意事項
 -----
 
-``Kokkos::num_devices()`` may be used to determine the number of devices that
-are available to Kokkos for execution.
-It is one of the few runtime functions that may be called before
-``Kokkos::initialize()`` or after ``Kokkos::finalize()``.
+``Kokkos::num_devices()`` は、Kokkosが実行に利用できるデバイスの数を
+決定するために使用される場合があります。
+これは、``Kokkos::initialize()`` の前または ``Kokkos::finalize()`` の後に
+呼び出される可能性のある数少ないランタイム関数の1つです。
 
-Example
+例
 -------
 
 .. code-block:: cpp
@@ -30,40 +30,40 @@ Example
 
    int main(int argc, char* argv[]) {
      if (Kokkos::num_devices() == 0) {
-       std::cerr << "no device available for execution\n";
-       return 1;
+       std::cerr << "execution\nについて、利用可能なデバイスはありません";
+       返し 1;
      }
      Kokkos::initialize(argc, argv);
-     // do stuff
+     // 何かを実行
      Kokkos::finalize();
-     return 0;
+     返し 0;
    }
 
 
 ----
 
-**See also**
+**以下も参照**
 
 .. _device_id : device_id.html
 
-.. |device_id| replace:: ``device_id``
+.. |device_id| 置換:: ``device_id``
 
 .. _num_threads : num_threads.html
 
-.. |num_threads| replace:: ``num_threads``
+.. |num_threads| 置換:: ``num_threads``
 
 .. _initialize: ../initialize_finalize/initialize.html
 
-.. |initialize| replace:: ``initialize``
+.. |initialize| 置換:: ``initialize``
 
 .. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
 
-.. |InitializationSettings| replace:: ``InitializationSettings``
+.. |InitializationSettings| :: ``InitializationSettings``
 
-|device_id|_: returns the id of the device used by Kokkos
+|device_id|_: Kokkos　により使用されるデバイスの　id を返します。
 
-|num_threads|_: returns the number of threads used by Kokkos
+|num_threads|_: Kokkos　により使用されるスレッド数を返します。
 
-|initialize|_: initializes the Kokkos execution environment
+|initialize|_: Kokkos 実行環境を初期化します。
 
-|InitializationSettings|_: settings for initializing Kokkos
+|InitializationSettings|_: Kokkos　初期化の設定
