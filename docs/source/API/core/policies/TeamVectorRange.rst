@@ -4,9 +4,9 @@
 .. role::cpp(code)
    :language: cpp
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
@@ -15,12 +15,9 @@ Usage
    parallel_reduce(TeamVectorRange(team,begin,end),
        [=] (int i, double& lsum) {...},sum);
 
-TeamVectorRange is a `nested execution policy <NestedPolicies.html>`_ used inside hierarchical parallelism.
-In contrast to global policies, the public interface for nested policies is implemented
-as functions, in order to enable implicit templating on the execution space type via
-the team handle.
+階層的並列処理の中で使われる `nested execution policy <NestedPolicies.html>`_ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、関数として実装されており、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になります。
 
-Synopsis
+シノプシス
 --------
 
 .. code-block:: cpp
@@ -30,53 +27,52 @@ Synopsis
    template<class TeamMemberType, class iType1, class iType2>
    /* implementation defined */ TeamVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
-Description
+ディスクリプション
 -----------
 
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType>
-   /* implementation defined */ TeamVectorRange(TeamMemberType team, iType count);
+   /* 定義された実装 */ TeamVectorRange(TeamMemberType team, iType count);
 
-Splits the index range ``0`` to ``count-1`` over the threads of the team and their vector lanes.
+チームのスレッドとベクトルレーンのインデックス範囲 ``0``  から ``count-1`` まで分割します。
 
-* **Arguments**
-    - ``team``: a handle to the calling team execution context.
-    - ``count``: index range length.
+* **引数**
+    - ``team``: 呼び出しチーム実行コンテキストへのハンドルです。
+    - ``count``: インデックス範囲長。
 
-* **Returns**
-    - Implementation defined type.
+* **リターン**
+    - 実装定義型。
 
-* **Requirements**
-    - ``TeamMemberType`` is a type that models `TeamHandle <TeamHandleConcept.html>`_
-    - ``std::is_integral<iType>::value`` is true.
-    - Every member thread of ``team`` must call the operation in the same branch, i.e. it is not legal to have some
-        threads call this function in one branch, and the other threads of ``team`` call it in another branch.
-    - ``count >= 0`` is true;
+* **必要要件**
+    - ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept.html>`_　をモデル化する型です。
+    - ``std::is_integral<iType>::value`` は、真です。
+    - ``team`` のすべてのメンバースレッドは同じブランチで操作を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。
+    - ``count >= 0`` は、真です;
 
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType1, class iType2>
    /* implementation defined */ TeamVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
-Splits the index range ``begin`` to ``end-1`` over the threads of the team and their vector lanes.
+チームのスレッドとベクトルレーンのインデックス範囲 ``begin`` から``end-1`` まで分割します。
 
-* **Arguments**
-    - ``team``: a handle to the calling team execution context.
-    - ``begin``: index range begin.
-    - ``end``: index range end.
+* **引数**
+    - ``team``: 呼び出しチーム実行コンテキストへのハンドル
+    - ``begin``: インデックス範囲開始。
+    - ``end``: インデックス範囲終了。
 
-* **Returns**
-    - Implementation defined type.
+* **返し**
+    - 実装定義型。
 
-* **Requirements**
-    - ``TeamMemberType`` is a type that models `TeamHandle <TeamHandleConcept.html>`_
-    - ``std::is_integral<iType1>::value`` is true.
-    - ``std::is_integral<iType2>::value`` is true.
-    - Every member thread of ``team`` must call the operation in the same branch, i.e. it is not legal to have some threads call this function in one branch, and the other threads of ``team`` call it in another branch..
-    - ``end >= begin`` is true;
+* **必要要件**
+    - ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept.html>`_　をモデル化する型です。
+    - ``std::is_integral<iType1>::value`` は、真です。
+    - ``std::is_integral<iType2>::value`` は、真です。
+    - ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。
+    - ``end >= begin`` は、真です;
 
-Examples
+例
 --------
 
 .. code-block:: cpp
