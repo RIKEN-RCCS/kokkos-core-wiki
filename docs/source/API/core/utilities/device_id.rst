@@ -1,42 +1,42 @@
 ``Kokkos::device_id``
 =====================
 
-.. role:: cpp(code)
+.. ロール:: cpp(code)
     :language: cpp
 
-Defined in header ``<Kokkos_Core.hpp>``
+ ヘッダー ``<Kokkos_Core.hpp>``　に定義
 
 .. code-block:: cpp
 
-    [[nodiscard]] int device_id() noexcept;  // (since 4.1)
+    [[nodiscard]] int device_id() noexcept;  // ( 4.1以降)
 
-Returns the id of the device that is used by ``DefaultExecutionSpace`` or
-``-1`` if only host backends are enabled.
+ホストバックエンドのみが有効な場合、 ``DefaultExecutionSpace`` または　``-1`` により使用されるデバイスの
+id　を返します。
 
 ----
 
-**See also**
+**以下も参照**
 
 .. _num_devices : num_devices.html
 
-.. |num_devices| replace:: ``num_devices``
+.. |num_devices| 置換:: ``num_devices``
 
 .. _num_threads : num_threads.html
 
-.. |num_threads| replace:: ``num_threads``
+.. |num_threads| 置換:: ``num_threads``
 
 .. _initialize: ../initialize_finalize/initialize.html
 
-.. |initialize| replace:: ``initialize``
+.. |initialize| 置換:: ``initialize``
 
 .. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
 
-.. |InitializationSettings| replace:: ``InitializationSettings``
+.. |InitializationSettings| 置換:: ``InitializationSettings``
 
-|num_devices|_: returns the number of devices available to Kokkos
+|num_devices|_: Kokkos　に利用可能なデバイスの数を返します。
 
-|num_threads|_: returns the number of threads used by Kokkos
+|num_threads|_: Kokkos　が使用するスレッド数を返します。
 
-|initialize|_: initializes the Kokkos execution environment
+|initialize|_: Kokkos 実行環境を初期化します。
 
-|InitializationSettings|_: settings for initializing Kokkos
+|InitializationSettings|_: Kokkos　を初期化するための設定
