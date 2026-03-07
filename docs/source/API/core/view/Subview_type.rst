@@ -8,20 +8,20 @@
 
 .. |subviewfunc| replace:: ``Kokkos::subview()``
 
-Header File: ``Kokkos_Core.hpp``
+ヘッダー ``<Kokkos_Core.hpp>``　に定義。
 
-Description
+ディスクリプション
 -----------
 
-Alias template to deduce the type that is returned by a call to the |subviewfunc|_ function with given arguments.
+|subviewfunc|_　関数を、指定の引数により呼び出した際に、返される型を演鐸するためのエイリアステンプレートです。
 
-Interface
+インターフェイス
 ---------
 
 .. code-block:: cpp
 
    template <class ViewType, class... Args>
-   using Subview = IMPL_DETAIL; // deduce subview type from source view traits
+   Subview = IMPL_DETAIL　を使用; // deduce subview type from source view traits
 
 Type of the result of ``Kokkos::subview(ViewType view_arg, Args .... args)``
 
