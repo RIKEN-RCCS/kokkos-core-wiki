@@ -15,14 +15,11 @@ Defined in header ``<Kokkos_Profiling_ScopedRegion.hpp>``
 
 
 
-The class ``ScopedRegion`` is a `RAII
-<https://en.cppreference.com/w/cpp/language/raii>`_ wrapper that "pushes" a
-user-defined profiling region when an object is created and properly "pops"
-that region upon destruction when the scope is exited. This is useful in
-particular to profile code that has non-trivial control flow (e.g.  early
-return).
+クラス　``ScopedRegion`` は、`RAIIです。
+オブジェクトが作成された際にユーザー定義のプロファイリング領域を　"プッシュし"、スコープが終了する際にその領域を適切に、"ポップする"　ラッパー
+<https://en.cppreference.com/w/cpp/language/raii><https://en.cppreference.com/w/cpp/language/raii>`_ です。これは特に、重要な制御フロー（例：早期リターン）を持つコードのプロファイリングに有用です。 
 
-The ``ScopedRegion`` class is non-copyable.
+``ScopedRegion`` クラスの is non-copyable.
 
 .. cpp:Function:: ScopedRegion(std::string const& regionName);
 
