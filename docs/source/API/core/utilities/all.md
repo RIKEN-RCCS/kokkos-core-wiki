@@ -1,18 +1,18 @@
 (KokkosALL)=
 # `Kokkos::ALL`
 
-Defined in header `<Kokkos_Core.hpp>`
+ ヘッダー `<Kokkos_Core.hpp>`　に定義。
 
 ```c++
-namespace Kokkos{
+名前空間 Kokkos{
   constexpr UNSPECIFIED-TYPE ALL = IMPLEMENTATION-DETAIL;
 }
 ```
 
-`Kokkos::ALL` is a constant of unspecified type that is used to select all elements in a dimension.
+`Kokkos::ALL` は、指定されていない型の定数であり、次元の全要素を選択するために使用されます。
 
 
-## Examples
+## 例
 
 ```c++
 Kokkos::View<double**[5]> a("A",N0,N1);
