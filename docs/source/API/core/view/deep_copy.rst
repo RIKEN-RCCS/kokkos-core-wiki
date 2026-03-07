@@ -147,7 +147,7 @@ Some Things you can and cannot do
 
             // 現在　h_view_tmp および d_view が互換性のあるレイアウトであるため、h_view_tmp から d_view へのコピーが可能です。
             // If we just compiled for OpenMP this is a no-op since h_view_tmp and d_view　OpenMP用にコンパイルするのであれば、
-            //  h_view_tmp および d_view　が同じデータを参照するであろうから、これは　no-op です。
+            //  h_view_tmp および d_view　が同じデータを参照するでしょうから、これは　no-op です。
             Kokkos::deep_copy(d_view,h_view_tmp);
         }
         Kokkos::finalize();
