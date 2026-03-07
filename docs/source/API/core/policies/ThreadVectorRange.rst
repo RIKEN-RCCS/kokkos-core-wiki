@@ -13,10 +13,7 @@
    parallel_scan(ThreadVectorRange(team,range), 
      [=] (int i, double& lsum, bool final) {...});
 
-ThreadVectorRange is a `nested execution policy <NestedPolicies.html>`__ used inside hierarchical parallelism. 
-In contrast to global policies, the public interface for nested policies is implemented 
-as functions, in order to enable implicit templating on the execution space type via 
-the team handle.
+.階層的並列処理の中で使われる  `nested execution policy <NestedPolicies.html>`__ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
 
 Synopsis 
 --------
