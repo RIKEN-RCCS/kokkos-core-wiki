@@ -4,15 +4,15 @@
 .. role:: cpp(code)
     :language: cpp
 
-Defined in header ``<Kokkos_Core.hpp>``
+ヘッダー ``<Kokkos_Core.hpp>``　に定義。
 
 .. code-block:: cpp
 
-    [[nodiscard]] int num_devices() noexcept;  // (since 4.3)
+    [[nodiscard]] int num_devices() noexcept;  // ( 4.3以降)
 
-Returns the number of available devices on the system or ``-1`` if only host backends are enabled.
+ホストバックエンドのみが有効な場合は、システム上で利用可能なデバイスの数、または　``-1``を返します。
 
-Notes
+Notes注意事項
 -----
 
 ``Kokkos::num_devices()`` may be used to determine the number of devices that
