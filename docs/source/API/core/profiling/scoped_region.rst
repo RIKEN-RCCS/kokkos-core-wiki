@@ -19,12 +19,12 @@ Defined in header ``<Kokkos_Profiling_ScopedRegion.hpp>``
 オブジェクトが作成された際にユーザー定義のプロファイリング領域を　"プッシュし"、スコープが終了する際にその領域を適切に、"ポップする"　ラッパー　
 <https://en.cppreference.com/w/cpp/language/raii><https://en.cppreference.com/w/cpp/language/raii>`_ です。これは特に、重要な制御フロー（例：早期リターン）を持つコードのプロファイリングに有用です。 
 
-``ScopedRegion`` クラスの is non-copyable.
+``ScopedRegion`` クラスのコピーは不可能です。
 
 .. cpp:Function:: ScopedRegion(std::string const& regionName);
 
-   Starts a user-defined region with provided label.
-   Calls ``Profiling::pushRegion(regionName)``
+   Starts a user-defined region with provided label.提供されたラベルで、ユーザーが定義した領域を開始します。
+   Calls ``Profiling::pushRegion(regionName)``　を呼び出します。
 
 .. cpp:Function:: ~ScopedRegion();
 
