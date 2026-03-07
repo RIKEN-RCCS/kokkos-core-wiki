@@ -42,7 +42,8 @@
 
 	     ThreadVectorMDRange(team, 4,5);             // OK
 	     ThreadVectorMDRange(team, 4,5,6);           // OK
-	     ThreadVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK, max num of extents allowed
+	     ThreadVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK, 範囲の最大値は認められます
+
 
 	* The constructor can not be called inside a parallel operation dispatched using a
 	  ``TeamVectorRange`` policy, ``TeamVectorRange`` policy, ``TeamVectorMDRange`` policy
