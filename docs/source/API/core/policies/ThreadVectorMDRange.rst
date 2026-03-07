@@ -20,8 +20,8 @@
 
    .. cpp:function:: ThreadVectorMDRange(team, extent_1, extent_2, ...);
 
-      Splits the index range ``0`` to ``extent`` over the vector lanes of the calling thread,
-      where ``extent`` is the backend-dependent rank that will be vectorized
+      呼び出しスレッドのベクトルレーン上で、インデックス範囲 ``0`` から``extent`` を分割します。
+      ここでは、 ``extent`` は、ベクトル化されるバックエンド依存のランクです。
 
       :param team: TeamHandle to the calling team execution context
 
