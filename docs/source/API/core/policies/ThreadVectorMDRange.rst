@@ -9,14 +9,14 @@
 ディスクリプション
 -----------
 
-ThreadVectorMDRange is a `nested execution policy <./NestedPolicies.html>`_  used inside of hierarchical parallelism.
+階層的並列処理の中で使われる `nested execution policy <NestedPolicies.html>`_ です。 
 
-Interface
+インターフェイス
 ---------
 
-.. cpp:class:: template <class Rank, typename TeamHandle> ThreadVectorMDRange
+.. cpp:class:: テンプレート <class Rank, typename TeamHandle> ThreadVectorMDRange
 
-   .. rubric:: Constructor
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: ThreadVectorMDRange(team, extent_1, extent_2, ...);
 
