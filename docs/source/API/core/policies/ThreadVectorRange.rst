@@ -49,7 +49,7 @@
 
 *  **必要要件**
 
-   * ``TeamMemberType`` is a type that models `TeamHandle <TeamHandleConcept>`__
+   * ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept>`__　をモデル化する型です
 
    * ``std::is_integral<iType>::value`` は、真です。
 
