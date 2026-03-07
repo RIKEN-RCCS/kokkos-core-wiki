@@ -6,7 +6,7 @@
 
 Defined in header ``<Kokkos_Profiling_ScopedRegion.hpp>``
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
