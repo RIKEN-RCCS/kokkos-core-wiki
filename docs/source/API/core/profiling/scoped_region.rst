@@ -23,15 +23,15 @@ Defined in header ``<Kokkos_Profiling_ScopedRegion.hpp>``
 
 .. cpp:Function:: ScopedRegion(std::string const& regionName);
 
-   Starts a user-defined region with provided label.提供されたラベルで、ユーザーが定義した領域を開始します。
-   Calls ``Profiling::pushRegion(regionName)``　を呼び出します。
+   提供されたラベルで、ユーザーが定義した領域を開始します。
+   　``Profiling::pushRegion(regionName)``　を呼び出します。
 
 .. cpp:Function:: ~ScopedRegion();
 
-   Ends the region.
-   Calls ``Profiling::popRegion()``
+   領域を終了します。
+   Calls ``Profiling::popRegion()``　を呼び出します。
 
-Example
+例
 -------
 
 .. code-block:: cpp
@@ -41,9 +41,9 @@ Example
    void do_work_v1() {
      Kokkos::Profiling::pushRegion("MyApp::do_work");
      // <code>
-     if (cond) {
+     if (cond) の場合{
        Kokkos::Profiling::popRegion();  // must remember to pop here as well
-       return;
+       返し;
      }
      // <more code>
      Kokkos::Profiling::popRegion();
@@ -52,7 +52,7 @@ Example
    void do_work_v2() {
      Kokkos::Profiling::ScopedRegion region("MyApp::do_work");
      // <code>
-     if (cond) return;
+     if (cond) を返す場合;
      // <more code>
    }
 
