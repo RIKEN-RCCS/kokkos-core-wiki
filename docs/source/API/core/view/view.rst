@@ -1,53 +1,53 @@
-``View``
+``ビュー``
 ========
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 .. _CppReferenceSharedPtr: https://en.cppreference.com/w/cpp/memory/shared_ptr
 
-.. |CppReferenceSharedPtr| replace:: ``std::shared_ptr``
+.. |CppReferenceSharedPtr| 置換:: ``std::shared_ptr``
 
 .. _ProgrammingGuide: ../../../ProgrammingGuide/View.html#memory-access-traits
 
-.. |ProgrammingGuide| replace:: Programming Guide
+.. |ProgrammingGuide| 置換:: プログラミングガイド
 
-Class Interface
+クラスインターフェイス
 ---------------
 
-.. cpp:class:: template <class DataType, class... Properties> View
+.. cpp:class:: テンプレート <class DataType, class... Properties> View
 
-   Kokkos View is a potentially reference counted multi dimensional array with compile time layouts and memory space.
-   Its semantics are similar to that of |CppReferenceSharedPtr|_.
+   Kokkos View　は、コンパイル時のレイアウトとメモリ空間を持つ、参照カウント可能な多次元配列です。
+   そのセマンティクスは、|CppReferenceSharedPtr|_　のものと同様です。
    
-   :tparam DataType: Defines the fundamental scalar type of the :cpp:class:`View` and its dimensionality.
+   :tparam DataType: `View` の基本スカラー型とその次元性を定義します。
 
-      The basic structure is ``ScalarType STARS BRACKETS`` where the number of ``STARS`` denotes
-      the number of runtime length dimensions and the number of ``BRACKETS`` defines the compile time dimensions.
-      Due to C++ type restrictions runtime dimensions must come first.
-      Examples:
+      基本構造は、　``ScalarType STARS BRACKETS`` であり、ここで　``STARS``　の数は実行時長さの次元数を示し、
+　　　``BRACKETS`` の数はコンパイル時次元数を定義します。
+      Due to C++ type restrictions runtime dimensions must come first.C++の型制限により、実行時の次元は最初に指定されなければなりません。
+      例:
 
-      - :cpp:`double**`: 2D View of :cpp:`double` with 2 runtime dimensions
-      - :cpp:`const int***[5][3]`: 5D View of :cpp:`int` with 3 runtime and 2 compile dimensions. 
-         The data is :cpp:`const`.
-      - :cpp:`Foo[6][2]`: 2D View of a class :cpp:`Foo` with 2 compile time dimensions.
+      - :cpp:`double**`: 2つの実行時次元に持つ :cpp:`double` の2Dビュー
+      - :cpp:`const int***[5][3]`: 3つの実行時次元と2つのコンパイル時次元を持つ　cpp:`int`（）の5D ビュー：
+         データは、:cpp:`const`.
+      - :cpp:`Foo[6][2]`: コンパイル時2次元を持つ :cpp:`Foo` クラスの　2D　ビュー
 
-   :tparam Properties...: Defines various properties of the :cpp:class:`View`, including layout, memory space, and memory traits.
+   :tparam Properties...: レイアウト、メモリ空間、メモリ特性等、:cpp:class:`View` の様々なプロパティを定義します。
    
-      :cpp:class:`View`'s template parameters after ``DataType`` are variadic and optional, but must be specified in order. That means for example that :cpp:any:`LayoutType` can be omitted but if both :cpp:any:`MemorySpace` and :cpp:`MemoryTraits` are specified, :cpp:any:`MemorySpace` must come before :cpp:any:`MemoryTraits`.
+      :cpp:class:`View`　クラスのテンプレートパラメータにおいて、　`DataType`　以降のパラメータは可変長かつオプションですが、必ず指定順序で指定する必要があります。 例えば、:cpp:any:`LayoutType` は省略可能であることを意味しますが、:cpp:any:`MemorySpace` と :cpp:`MemoryTraits` の両方が指定される場合、:cpp:any:`MemorySpace` は :cpp:any:`MemoryTraits` の前に記述されなければならない。
 
       .. code-block:: cpp
-         :caption: The ordering of View template parameters.
+         :caption: ビューテンプレートパラメータの順序付け。
 
-         template <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
-         class View;
+         テンプレート <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
+         クラス　ビュー;
 
-   :tparam LayoutType: Determines the mapping of indices into the underlying 1D memory storage.
+   :tparam LayoutType: インデックスの基盤となる1次元メモリストレージへのマッピングを決定します。
    
-      Kokkos comes with some built-in layouts:
+      Kokkos　には、いくつかの組み込みレイアウトが付属しています:
 
-      - :cpp:struct:`LayoutRight`: strides increase from the right most to the left most dimension.
-         The last dimension has a stride of one.
-         This corresponds to how C multi dimensional arrays (e.g :cpp:`foo[][][]`) are laid out in memory.
+      - :cpp:struct:`LayoutRight`: ストライドは、右端から左端の次元に向かって増加します。
+         最後の次元は、ストライドが　1　です。
+         これはC言語の多次元配列（例：　`foo[][][]`　）がメモリ上に配置される方法に対応しています。
       - :cpp:struct:`LayoutLeft`: strides increase from the left most to the right most dimension.
          The first dimension has a stride of one. This is the layout Fortran uses for its arrays.
       - :cpp:struct:`LayoutStride`: strides can be arbitrary for each dimension.
