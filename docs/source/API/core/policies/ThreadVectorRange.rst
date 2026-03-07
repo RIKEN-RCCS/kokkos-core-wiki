@@ -39,7 +39,7 @@
    
 *  **引数**:
 
-   * ``team``: a handle to the calling team execution context.
+   * ``team``: 呼び出しチーム実行コンテキストへのハンドルです。
 
    * ``count``: インデックス範囲長 
 
@@ -51,9 +51,9 @@
 
    * ``TeamMemberType`` is a type that models `TeamHandle <TeamHandleConcept>`__
 
-   * ``std::is_integral<iType>::value`` is true.
+   * ``std::is_integral<iType>::value`` は、真です。
 
-   * ``count >= 0`` is true;
+   * ``count >= 0`` は、真です;
 
    * This function can not be called inside a parallel operation dispatched using a `TeamVectorRange <TeamVectorRange>`__ policy or ``ThreadVectorRange`` policy.
 
