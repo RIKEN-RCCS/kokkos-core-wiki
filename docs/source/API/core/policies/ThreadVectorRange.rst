@@ -15,24 +15,24 @@
 
 .階層的並列処理の中で使われる  `nested execution policy <NestedPolicies.html>`__ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
 
-Synopsis 
+シノプシス 
 --------
 
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType>
-   /* implementation defined */ ThreadVectorRange(TeamMemberType team, iType count);
+   /* 定義された実装 */ ThreadVectorRange(TeamMemberType team, iType count);
    template<class TeamMemberType, class iType1, class iType2>
-   /* implementation defined */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
+   /* 定義された実装 */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 
-Description
+ディスクリプション
 -----------
 
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType>
-   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType count);
+   /* 定義された実装 */ ThreadVectorRange(TeamMemberType team, iType count);
    
 
 Splits the index range ``0`` to ``count-1`` over the vector lanes of the calling thread.
