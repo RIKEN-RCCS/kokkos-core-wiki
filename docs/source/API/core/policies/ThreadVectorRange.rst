@@ -35,19 +35,19 @@
    /* 定義された実装 */ ThreadVectorRange(TeamMemberType team, iType count);
    
 
-Splits the index range ``0`` to ``count-1`` over the vector lanes of the calling thread.
+チームのスレッドとベクトルレーンのインデックス範囲  ``0`` から ``count-1`` まで分割します。
    
-*  **Arguments**:
+*  **引数**:
 
    * ``team``: a handle to the calling team execution context.
 
-   * ``count``: index range length. 
+   * ``count``: インデックス範囲長 
 
-*  **Returns**:
+*  **返し**:
 
-   * Implementation defined type.
+   * 実装定義型。
 
-*  **Requirements**
+*  **必要要件**
 
    * ``TeamMemberType`` is a type that models `TeamHandle <TeamHandleConcept>`__
 
