@@ -1,140 +1,140 @@
-Detection Idiom
+Detection Idiom検出イディオム
 ===============
 
 .. role:: cpp(code)
     :language: cpp
 
-The Detection Idiom is used to recognize, in an SFINAE-friendly way, the validity of any C++ expression.
+検出イディオムは、SFINAE　に配慮した方法で、あらゆる　C++　式が有効かどうかを認識するために使用されます。
 
-Header File: ``<Kokkos_DetectionIdiom.hpp>``
+ヘッダーファイル: ``<Kokkos_DetectionIdiom.hpp>``
 
-The Kokkos Detection Idiom is based upon the detection idiom from Version 2 of the C++ Extensions for
-Library Fundamentals, ISO/IEC TS 19568:2017, a draft of which can be found `here <https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>`.
+Kokkos 検出イディオムは、ISO/IEC TS 19568:2017、ライブラリ基礎のためのC++拡張のバージョン2の検出イディオムに基づいており、
+そのドラフトは、`here <https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>`　に見られます。
 
-The original C++ proposal can be found at `here <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>`.
+元の C++ プロポーザルは、 `here <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>`　に見られます。
 
 API
 ---
 
 .. code-block:: cpp
 
-    // VOID_T and DETECTOR are exposition-only and not intended to be used directly.
+    // VOID_T および DETECTOR は説明用であり、直接使用を目的としていません。
 
-    // Convenient metafunction to leverage SFINAE
+    // SFINAE　を効果的に活用する便利なメタ関数
     template<class...>
-    using VOID_T = void;
+    VOID_T = void　を使用;
 
-    // Primary template for types not supporting the archetypal Op<Args...>
+    // 典型的な Op<Args...> をサポートしない型のためのプライマリテンプレート
     template<class Default, class /* AlwaysVoid */, template<class...> class /* Op */, class... /* Args */>
-    struct DETECTOR {
-        using value_t = std::false_type;
-        using type    = Default;
+    構造体 DETECTOR {
+        using value_t = std::false_type　を使用;
+        using type    = Default　を使用;
     };
 
-    // Specialization for types supporting the archetypal Op<Args...>
+    // 原型の Op<Args...> をサポートする型向けの特殊化
     template<class Default, template<class...> class Op, class... Args>
     struct DETECTOR<Default, VOID_T<Op<Args...>>, Op, Args...> {
-        using value_t = std::true_type;
-        using type    = Op<Args...>;
+        using value_t = std::true_type　を使用;
+        using type    = Op<Args...>　を使用;
     };
 
 .. code-block:: cpp
 
-    namespace Kokkos {
+    名前空間 Kokkos {
 
-    // Simplification of the type returned by detected_t for types not supporting the archetype provided
-    struct nonesuch {
+    // 提供されたアーキタイプをサポートしない型について、detected_t が返す型の簡略化is_detected は、Op<Args...> が有効な型である場合に std::true_type の別名となります。
+    構造体 nonesuch {
         nonesuch(nonesuch&&) = delete;
         ~nonesuch() = delete;
     };
 
-    // is_detected is an alias for std::true_type if Op<Args...> is a valid type
+    // is_detected は、Op<Args...> が有効な型である場合に std::true_type の別名となります。
     // otherwise, an alias for std::false_type
 
-    template <template <class...> class Op, class... Args>
-    using is_detected =
-        typename DETECTOR<nonesuch, void, Op, Args...>::value_t;
+    テンプレート <template <class...> class Op, class... Args>
+     is_detected =
+        typename DETECTOR<nonesuch, void, Op, Args...>::value_t　を使用;
 
-    // detected_t is an alias for Op<Args...> if Op<Args...> is a valid type
-    //  otherwise, an alias for Kokkos::nonesuch
+    // detected_t は、Op<Args...> が有効な型である場合に Op<Args...> の別名です。
+    //  そうでない場合、 Kokkos::nonesuch　の別名です。
 
-    template <template <class...> class Op, class... Args>
-    using detected_t = typename DETECTOR<nonesuch, void, Op, Args...>::type;
+    テンプレート <template <class...> class Op, class... Args>
+    using detected_t = typename DETECTOR<nonesuch, void, Op, Args...>::type　を使用;
 
-    // detected_or_t is an alias for Op<Args...> if Op<Args...> is a valid type
-    //  otherwise, an alias for Default
+    // detected_or_t は、Op<Args...> が有効な型である場合に  Op<Args...> の別名です。
+    //  そうでない場合、 Default の別名です。
 
-    template <class Default, template <class...> class Op, class... Args>
-    using detected_or_t = typename DETECTOR<Default, void, Op, Args...>::type;
+    テンプレート <class Default, template <class...> class Op, class... Args>
+    detected_or_t = typename DETECTOR<Default, void, Op, Args...>::type　を使用;
 
-    // is_detected_exact is an alias for std::true_type if Op<Args...> is the same type as Expected
-    //  otherwise, an alias for std::false_type
+    // is_detected_exact は、Op<Args...> が、 Expected と同じ型である場合に std::true_type の別名です。
+    //  そうでない場合、std::false_type　の別名です。
 
-    template <class Expected, template <class...> class Op, class... Args>
+    テンプレート <class Expected, template <class...> class Op, class... Args>
     using is_detected_exact = std::is_same<Expected, detected_t<Op, Args...>>;
 
-    // is_detected_convertible is an alias for std::true_type if Op<Args...> is convertible to To
-    //  otherwise, an alias for std::false_type
+    // is_detected_convertible は、Op<Args...> が To へ変換可能な場合に std::true_type の別名となります。
+    //  そうでない場合、std::false_type　の別名です。
 
-    template <class To, template <class...> class Op, class... Args>
+    テンプレート <class To, template <class...> class Op, class... Args>
     using is_detected_convertible =
-        std::is_convertible<detected_t<Op, Args...>, To>;
+        std::is_convertible<detected_t<Op, Args...>, To>　を使用;
 
-    // C++17 or later convenience variables
+    // C++17 またはそれ以降の便利変数
 
-    template <template <class...> class Op, class... Args>
+    テンプレート <template <class...> class Op, class... Args>
     inline constexpr bool is_detected_v = is_detected<Op, Args...>::value;
 
-    template <class Expected, template <class...> class Op, class... Args>
+    テンプレート <class Expected, template <class...> class Op, class... Args>
     inline constexpr bool is_detected_exact_v =
         is_detected_exact<Expected, Op, Args...>::value;
 
-    template <class Expected, template <class...> class Op, class... Args>
+    テンプレート <class Expected, template <class...> class Op, class... Args>
     inline constexpr bool is_detected_convertible_v =
 
-    } // Kokkos namespace
+    } // Kokkos 名前空間
 
-Examples
+例
 --------
 
-Detecting an expression
+式を検出
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Suppose we needed to write a type trait to detect if a given type ``T`` is copy assignable. First we write an archetype helper alias:
+ある型 ``T`` がコピー代入可能かどうかを検出する型特性を記述する必要があると仮定します。 まず、アーキタイプヘルパーエイリアスを記述します:
 
 .. code-block:: cpp
 
     template<class T>
-    using copy_assign_t = decltype(std::declval<T&>() = std::declval<T const&>());
+    using copy_assign_t = decltype(std::declval<T&>() = std::declval<T const&>())　を使用;
 
-Then the trait can be easily expressed as:
-
-.. code-block:: cpp
-
-    template<class T>
-    using is_copy_assignable = Kokkos::is_detected<copy_assign_t, T>;
-
-If we also wanted to check that the return type of the copy assignment is ``T&``, we would use:
+次に、その特性は簡単に次のように表現できます:
 
 .. code-block:: cpp
 
     template<class T>
-    using is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>;
+    using is_copy_assignable = Kokkos::is_detected<copy_assign_t, T>　を使用;
 
-Detecting a nested typedef
+コピー代入の戻り値の型が ``T&`` であることを確認したい場合、以下を使用します:
+
+.. code-block:: cpp
+
+    template<class T>
+    using is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>　を使用;
+
+ネストされた型定義を検出
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Suppose we want to use a nested ``MyType::difference_type`` if it exists, otherwise, we want to use ``std::ptrdiff_t``:
+ネストされた``MyType::difference_type``　が存在する場合には、それを使用したいと仮定し、そうでない場合には、``std::ptrdiff_t``　の使用を所望します:
 
-First we write an archetype helper alias:
+まず、アーキタイプヘルパーエイリアスを記述します:
 
 .. code-block:: cpp
 
     template<class T>
     using diff_t = typename T::difference_type;
 
-Then we can declare our type:
+その後、型を宣言することができます:
 
 .. code-block:: cpp
 
-    using our_difference_type = Kokkos::detected_or_t<std::ptrdiff_t, diff_t, MyType>;
+    using our_difference_type = Kokkos::detected_or_t<std::ptrdiff_t, diff_t, MyType>　を使用;
