@@ -1,9 +1,9 @@
 ``ThreadVectorRange``
 =====================
 
-Header File: ``Kokkos_Core.hpp``
+ヘッダーファイル: ``Kokkos_Core.hpp``
 
-Usage: 
+使用例: 
 
 .. code-block:: cpp
 
