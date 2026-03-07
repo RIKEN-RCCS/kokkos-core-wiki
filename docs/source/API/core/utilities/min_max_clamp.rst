@@ -1,75 +1,75 @@
-Minimum/maximum operations
+最小/最大 演算子
 ==========================
 
-.. role:: cpp(code)
+.. ロール:: cpp(code)
     :language: cpp
 
 .. _StandardLibraryHeaderAlgorithm: https://en.cppreference.com/w/cpp/header/algorithm
 
-.. |StandardLibraryHeaderAlgorithm| replace:: ``<algorithm>``
+.. |StandardLibraryHeaderAlgorithm| 置換:: ``<algorithm>``
 
-Defined in header ``<Kokkos_Core.hpp>``
+ ヘッダー ``<Kokkos_Core.hpp>``　に定義
 
-Provides minimum/maximum and related operations from the standard library header |StandardLibraryHeaderAlgorithm|_.
+標準ライブラリヘッダー |StandardLibraryHeaderAlgorithm|_ から最小値/最大値および関連する操作を提供します。
 
-The min/max and clamp function templates are defined in the ``Kokkos::`` namespace since Kokkos 3.7
+min/max および clamp 関数テンプレートは、Kokkos 3.7 以降、``Kokkos::`` 名前空間で定義されています。
 
 .. _min: https://en.cppreference.com/w/cpp/algorithm/min
 
-.. |min| replace:: ``min``
+.. |min| 置換:: ``min``
 
 .. _max: https://en.cppreference.com/w/cpp/algorithm/max
 
-.. |max| replace:: ``max``
+.. |max| 置換:: ``max``
 
 .. _minmax: https://en.cppreference.com/w/cpp/algorithm/minmax
 
-.. |minmax| replace:: ``minmax``
+.. |minmax| 置換:: ``minmax``
 
 .. _clamp: https://en.cppreference.com/w/cpp/algorithm/clamp
 
-.. |clamp| replace:: ``clamp``
+.. |clamp| 置換:: ``clamp``
 
 
 ========== ============================================================
-|min|_     returns the smaller of the given values
-|max|_     returns the greater of the given values
-|minmax|_  returns the smaller and larger of the given values
-|clamp|_   clamps a value between a pair of boundary values
+|min|_     規定値の小さい方を返します。
+|max|_     規定値の大きい方を返します。
+|minmax|_  規定値の小さい方と大きい方を返します。
+|clamp|_   値を一対の境界値の間に収めます。
 ========== ============================================================
 
-Notes
+注意事項
 -----
 
 .. _KokkosClamp: https://github.com/kokkos/kokkos/blob/4.3.00/core/src/Kokkos_Clamp.hpp
 
-.. |KokkosClamp| replace:: ``<Kokkos_Clamp.hpp>``
+.. |KokkosClamp| 置換:: ``<Kokkos_Clamp.hpp>``
 
 .. _KokkosMinMax: https://github.com/kokkos/kokkos/blob/4.3.00/core/src/Kokkos_MinMax.hpp
 
-.. |KokkosMinMax| replace:: ``<Kokkos_MinMax.hpp>``
+.. |KokkosMinMax| :: ``<Kokkos_MinMax.hpp>``
 
-* Since version 4.3, one may include |KokkosClamp|_ and |KokkosMinMax|_ respectively to make these functions available.
+* バージョン4.3より、 これらの関数を利用可能にするには、それぞれ |KokkosClamp|_ および |KokkosMinMax|_ が含まれる場合があります。
 
 ----
 
-See also
+以下も参照
 --------
 
 .. _min_element: ../../algorithms/std-algorithms/all/StdMinElement.html
 
-.. |min_element| replace:: ``min_element``
+.. |min_element| 置換:: ``min_element``
 
 .. _max_element: ../../algorithms/std-algorithms/all/StdMaxElement.html
 
-.. |max_element| replace:: ``max_element``
+.. |max_element| 置換:: ``max_element``
 
 .. _minmax_element: ../../algorithms/std-algorithms/all/StdMinMaxElement.html
 
-.. |minmax_element| replace:: ``minmax_element``
+.. |minmax_element| :: ``minmax_element``
 
-|min_element|_: returns the smallest element in a range
+|min_element|_: 範囲内で、最小要素を返します。
 
-|max_element|_: returns the largest element in a range
+|max_element|_: 範囲内で、最大要素を返します。
 
-|minmax_element|_: returns the smallest and the largest elements in a range
+|minmax_element|_: 範囲内で、最小及び最大要素を返します。
