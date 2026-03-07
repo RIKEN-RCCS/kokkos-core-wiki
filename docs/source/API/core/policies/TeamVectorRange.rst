@@ -15,7 +15,7 @@
    parallel_reduce(TeamVectorRange(team,begin,end),
        [=] (int i, double& lsum) {...},sum);
 
-階層的並列処理の中で使われる `nested execution policy <NestedPolicies.html>`_ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、関数として実装されており、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になります。
+階層的並列処理の中で使われる `nested execution policy <NestedPolicies.html>`_ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
 
 シノプシス
 --------
