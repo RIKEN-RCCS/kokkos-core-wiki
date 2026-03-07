@@ -33,12 +33,12 @@
 
 	* ``extent_1, extent_2, ...`` は、intsです。
 
-	* ``extent_i`` is such that ``i >= 2 && i <= 8`` is true.
-	  For example:
+	* ``extent_i`` の条件は、 ``i >= 2 && i <= 8`` が真であることです。
+	  例えば:
 
 	  .. code-block:: cpp
 
-	     ThreadVectorMDRange(team, 4);               // NOT OK, violates i>=2
+	     ThreadVectorMDRange(team, 4);               // OKではありません、 i>=2　に違反します
 
 	     ThreadVectorMDRange(team, 4,5);             // OK
 	     ThreadVectorMDRange(team, 4,5,6);           // OK
