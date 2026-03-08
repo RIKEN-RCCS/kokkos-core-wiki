@@ -1,13 +1,13 @@
-Parallel Execution/Dispatch
+並列実行/ディスパッチ
 ===========================
 
-Parallel patterns
+並列パターン
 -----------------
 
-Parallel execution patterns for composing algorithms.
+アルゴリズムを構成するための並列実行パターン。
 
-.. list-table::
-   :widths: 25 75
+.. リスト表::
+   :幅: 25 75
    :header-rows: 1
 
    * - Function
