@@ -1,32 +1,31 @@
-# Custom Reducers
+# カスタムリデューサー
 
-Custom arbitrary reductions are implemented using a reduction class and a "reduced" class.  The "reduced" class is much like the custom scalar type used with [Built-In Reducers with Custom Scalar Types](Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types) and the reduction class implements the [ReducerConcept](../API/core/builtinreducers/ReducerConcept)
+カスタムの任意の還元は、還元クラスと　"還元"　クラスを用いて実装されます。 "reduced"　クラスは、 [Built-In Reducers with Custom Scalar Types](Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types)　で使われるカスタムスカラータイプに非常に似ており、リダクションクラスは、[ReducerConcept](../API/core/builtinreducers/ReducerConcept)　を実装しています。
 
-The following requirements must be fulfilled for the "reduced" class
+ "reduced" クラスについては、以下の要件を満たす必要があります
      
-   * Operators required for applied reduction class must be implemented.
-   * The class / struct must either use the default copy constructor or have a specific copy constructor 
-     implemented. 
+   * 適用還元クラスに必要な演算子を実装する必要があります
+   * クラス/構造体はデフォルトのコピーコンストラクタを使用するか、特定のコピーコンストラクタを実装している必要があります。
 
-The following requirements must be fulfilled for the reduction class
+還元クラスについては、以下の要件を満たす必要があります
      
-   * Typedefs reducer, value_type and result_view_type must be defined.  see the [ReducerConcept](../API/core/builtinreducers/ReducerConcept) for details.
-   * The reducer concept methods must be implemented
-   * The exposed result_view_type must be defined in the memory space where the object is used 
+   * 型定義リデューサー、value_type および　result_view_type　は、定義される必要があります。詳細については、 [ReducerConcept](../API/core/builtinreducers/ReducerConcept) を参照してください。
+   * リデューサーの概念手法は、実装される必要があります。
+   * 露出　result_view_type　は、オブジェクトが使用されるメモリ空間内で、定義されなければなりません 
 
-Note: Even for tagged reductions, i.e., when specifying a tag in the policy, potential `init`/`join`/`final` member functions must not take a `WorkTag` argument.
+注意事項: タグ付き還元の場合でも、すなわちポリシー内でタグを指定する場合であっても、潜在的な `init`/`join`/`final` メンバ関数は `WorkTag` 引数を選択してははいけません。
 
-## Example
+## 例
 
-This example performs a custom reduction on an array using a custom class and reducer. 
+本例では、カスタムクラスとリデューサーを使って、配列上でカスタム還元を実行します。
 
 ```c++
 #include <Kokkos_Core.hpp>
 
-namespace sample {
+名前空間 sample {
 
-template <class ScalarType, int N>
-struct array_type {
+テンプレート <class ScalarType, int N>
+構造体 array_type {
   ScalarType myArray[N];
 
   KOKKOS_INLINE_FUNCTION
@@ -52,27 +51,27 @@ struct array_type {
     for (int i = 0; i < N; i++) {
       myArray[i] += src.myArray[i];
     }
-    return *this;
+     *これを返します;
   }
 };
 
-template <class T, class Space, int N>
-struct SumMyArray {
+テンプレート <class T, class Space, int N>
+構造体 SumMyArray {
  public:
-  // Required
+  // 必要とされます
   typedef SumMyArray reducer;
   typedef array_type<T, N> value_type;
   typedef Kokkos::View<value_type*, Space, Kokkos::MemoryUnmanaged>
       result_view_type;
 
- private:
+ プライベート:
   value_type& value;
 
- public:
+ パブリック:
   KOKKOS_INLINE_FUNCTION
   SumMyArray(value_type& value_) : value(value_) {}
 
-  // Required
+  // 必要とされます
   KOKKOS_INLINE_FUNCTION
   void join(value_type& dest, const value_type& src) const {
     dest += src;
@@ -90,7 +89,7 @@ struct SumMyArray {
   KOKKOS_INLINE_FUNCTION
   bool references_scalar() const { return true; }
 };
-}  // namespace sample
+}  // 名前空間サンプル
 
 int main(int argc, char* argv[]) {
   Kokkos::initialize(argc, argv);
@@ -110,7 +109,7 @@ int main(int argc, char* argv[]) {
         },
         ArraySumResult(tr));
 
-    // Output result.
+    // 出力結果。
     printf("  Computed result %d, %d, %d, %d \n", tr.myArray[0], tr.myArray[1],
            tr.myArray[2], tr.myArray[3]);
   }
