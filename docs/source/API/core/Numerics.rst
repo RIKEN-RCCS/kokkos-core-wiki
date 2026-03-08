@@ -1,4 +1,4 @@
-Numerics
+数値計算
 =========
 
 .. toctree::
@@ -6,24 +6,22 @@ Numerics
 
    numerics/mathematical-constants.md
 
-The header ``<Kokkos_MathematicalConstants.hpp>`` is a backport of the C++20 standard library header ``<numbers>`` and
-provides several mathematical constants, such as ``pi`` or ``sqrt2``.
+ヘッダー ``<Kokkos_MathematicalConstants.hpp>`` は、 C++20 標準ライブラリヘッダー ``<numbers>`` のバックポートであり、 ``pi`` または ``sqrt2``　等いくつかの数学定数を提供します。
 
 .. toctree::
    :maxdepth: 1
 
    numerics/mathematical-functions.md
 
-The header ``<Kokkos_MathematicalFunctions.hpp>`` provides a consistent and portable overload set for standard C
-library mathematical functions, such as ``fabs``, ``sqrt``, and ``sin``.
+ ヘッダー ``<Kokkos_MathematicalFunctions.hpp>`` は、``fabs``, ``sqrt``　および ``sin``　等の、標準Cライブラリの数学関数に対して、一貫性と移植性を備えたオーバーロードのセットを提供します。
 
 .. toctree::
    :maxdepth: 1
 
    numerics/numeric-traits.md
 
-The header ``<Kokkos_NumericTraits.hpp>`` implements a new facility that is being added to the C++23 standard library and
-is intended as a replacement for ``std::numeric_limits``.
+ヘッダー ``<Kokkos_BitManipulation.hpp>`` は、 C++20 標準ライブラリヘッダー ``<bit>`` のバックポートであり、
+個々のビットおよびビットシーケンスにアクセス、操作および処理するためのいくつかの関数テンプレートを提供します。
 
 .. toctree::
    :maxdepth: 1
@@ -36,6 +34,6 @@ provides several function templates to access, manipulate, and process individua
 .. toctree::
    :maxdepth: 1
 
-   Complex number arithmetic <numerics/complex>
+   複素数演算 <numerics/complex>
 
-The header ``<Kokkos_Complex.hpp>`` provides a Kokkos-compatible implementation of complex numbers, mirroring the functionality of ``std::complex``.
+ヘッダー　``<Kokkos_Complex.hpp>``　は、 複素数の　Kokko　互換実装を提供し、``std::complex``　の機能性を反映します。
