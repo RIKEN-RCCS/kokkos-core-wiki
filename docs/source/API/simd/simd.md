@@ -77,7 +77,7 @@
   * `simd operator<<(const simd& lhs, const simd& rhs)`
   * `simd operator<<(const simd& lhs, int rhs)`
 
-### Compound Assignment Operators
+### 複合代入演算子
   * `simd operator+=(simd& lhs, const simd& rhs)`
   * `simd operator-=(simd& lhs, const simd& rhs)`
   * `simd operator*=(simd& lhs, const simd& rhs)`
@@ -88,7 +88,7 @@
   * `simd operator>>=(simd& lhs, const simd& rhs)`
   * `simd operator<<=(simd& lhs, const simd& rhs)`
 
-### 複合代入演算子
+### 比較演算子
   * `mask_type operator==(const simd& lhs, const simd& rhs)`
   * `mask_type operator!=(const simd& lhs, const simd& rhs)`
   * `mask_type operator>=(const simd& lhs, const simd& rhs)`
@@ -106,7 +106,7 @@
   * `simd Kokkos::min(const simd& lhs, const simd& rhs)`
   * `simd Kokkos::max(const simd& lhs, const simd& rhs)`
 
-### Reductions 
+### 還元 
   * `T Kokkos::Experimental::reduce(const simd& lhs, const simd_mask& mask)`
   * `T Kokkos::Experimental::reduce(const simd& lhs, Op binary_op)`
   * `T Kokkos::Experimental::reduce_min(const simd& lhs, const simd_mask& mask)`
