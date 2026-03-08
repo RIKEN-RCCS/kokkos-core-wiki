@@ -1,27 +1,27 @@
-Custom Reductions
+カスタムリダクション
 =================
 
-As described previously Kokkos reductions perform a "sum" reduction by default. But while that is the most common type of reduction it is not the only one required by more complex applications. Kokkos provides the "Reducer" concept to accommodate custom reductions. 
+前述の通り、Kokkos　還元はデフォルトで "sum" 還元を行います。 しかし、これが最も一般的な還元方法である一方で、より複雑な応用について必要とされる唯一の方法ではありません。 Kokkos はカスタムリダクションに対応するための "Reducer" コンセプトを提供しています。
 
-A Reducer is a class which provides the necessary information to join (reduce) two values, knows how to initialize thread private variables and where to store the final result of a reduction. Depending on your situation, you may need to write more or less code specialization for a custom reduction. 
+リデューサーは、2つの値を結合(還元)するための必要な情報を提供し、スレッドのプライベート変数の初期化方法や、リダクションの最終結果をどこに格納するかを知っているクラスです。 状況によっては、カスタム還元について、コードの特化の書き込みを増やす、または減らす必要があるかもしれません。
 
 .. toctree::
     :maxdepth: 1
 
     Custom-Reductions-Built-In-Reducers
 
-To perform a common operation, such as finding the minimum for an intrinsic C++ type, no custom code is required. Kokkos::complex is also supported with Built-in reducers without any custom additions. Click the heading for more detail.
+一般演算、例えば、イントリック　C++　型の最小値を求める場合には、カスタムコードは不要です。 Kokkos::complex はカスタム追加なしで組み込みリデューサーでもまた、サポートされています。詳細については、ヘッダーをクリックしてください。
 
 .. toctree::
     :maxdepth: 1
 
     Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types
 
-If your application requires a custom scalar types, the scalar type must be copy constructible and provide the necessary operators for the reduction (for example comparison operators are required for minmax-reductions). A specialization of the reduction_identity class is also required.  Click the heading for more detail. 
+アプリケーションが、カスタムスカラー型を必要とする場合、そのスカラー型はコピー構成可能で、還元に必要な演算子　(例えば。最小最大還元には比較演算子が必要です)　を提供しなければなりません。 reduction_identity　クラスの特殊化も必要です。詳細については、ヘッダーをクリックしてください。
 
 .. toctree::
     :maxdepth: 1
 
     Custom-Reductions-Custom-Reducers
 
-For completely arbitrary reductions, you must provide an implementation of a Reducer class. Click the heading for more detail and an example.
+任意の還元を完全に実行する場合は、Reducer　クラスの実装を提供する必要があります。詳細と例を見るにはヘッダーをクリックしてください。
