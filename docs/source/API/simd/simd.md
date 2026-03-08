@@ -45,7 +45,7 @@
 
   * `simd()`: デフォルトコンストラクタ。 本コンストラクタではベクトル値は初期化されません。
   * `テンプレート <class U> simd(U&&)`: 単一値コンストラクタです。引数は、`value_type`　型に変換され、ベクトル内の全ての値がその値に設定されます。
-  * `テンプレート <class G> simd(G&& gen)`: ジェネレータコンストラクタ。ジェネレータ `gen` は、`std::integral_constant<std::size_t, i>()` を引数として受け取り、`value_type` に変換可能な値を返すことができる呼び出し可能型（例：ファンクタ）である必要があります。 ベクトルレーン `i` は、`gen(std::integral_constant<std::size_t, i>())` の値で初期化されます。
+  * `テンプレート <class G> simd(G&& gen)`: ジェネレータコンストラクタ。ジェネレータ `gen` は、`std::integral_constant<std::size_t, i>()` を引数として受け取り、`value_type` に変換可能な値を返すことができる呼び出し可能型（例：ファンクタ）である必要があります。 ベクトルレーン `i` は、`gen(std::integral_constant<std::size_t, i>())` の値に初期化されます。
 
 ### 負荷/格納メソッド
 
