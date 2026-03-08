@@ -1,21 +1,20 @@
-# Hierarchical Parallelism
+# 階層的並列処理
 
-This chapter explains how to use Kokkos to exploit multiple levels of shared-memory parallelism. These levels include thread teams, threads within a team, and vector lanes. You may nest these levels of parallelism, and execute [`parallel_for()`](../API/core/parallel-dispatch/parallel_for), [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce), or [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan) at each level. The syntax differs only by the execution policy,
-which is the first argument to the `parallel_*` operation. Kokkos also exposes a "scratch pad" memory which provides thread private and team private allocations.
+本章では、Kokkos　を使用して複数のレベルの共有メモリ並列性を活用する方法について説明します。　これらのレベルには、スレッドチーム、チーム内のスレッド、およびベクトルレーンが含まれます。 これらの並列処理レベルをネストし、[`parallel_for()`](../API/core/parallel-dispatch/parallel_for)　および　[`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan)　を実行できます。各レベルで　[`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce)　または　[`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan)　を実行できます。 構文は実行ポリシーのみが異なり、これは　`parallel_*`　演算の最初の引数です。Kokkos　は、また "scratch pad" メモリを公開しており、スレッド固有およびチーム固有の割り当てを提供します。
 
-## Motivation
+## モチベーション
 
-Node architectures on modern high-performance computers are characterized by ever more _hierarchical parallelism_.
-A level in the hierarchy is determined by the hardware resources which are shared between compute units at that level.
-Higher levels in the hierarchy also have access to all resources in its branch at lower levels of the hierarchy.
-This concept is orthogonal to the concept of heterogeneity. For example, a node in a typical CPU-based cluster consists of a number of multicore CPUs.  Each core supports one or more hyper-threads, and each hyper-thread can execute vector instructions. This means there are 4 levels in the hierarchy of parallelism:
+現代の高性能コンピュータにおけるノードアーキテクチャは、ますます高度化する _階層的並列処理_　によって特徴づけられます。
+階層内のレベルは、そのレベルにある演算ユニット間で共有されるハードウェアリソースによって決定されます。
+階層の上位レベルは、その階層の下位レベルにあるブランチ内の全リソースにもアクセス権を持ちます。
+この概念は、異質性の概念とは直交する。例えば、典型的なCPUベースのクラスターにおけるノードは、複数のマルチコア　CPU　で構成されます。 各コアは1つ以上のハイパースレッドをサポートし、各ハイパースレッドはベクトル命令を実行できます。 これは、並列性の階層構造に4つのレベルがあることを意味します:
 
-1. CPU sockets share access to the same memory and network resources,
-1. cores within a socket typically have a shared last level cache (LLC),
-1. hyper-threads on the same core have access to a shared L1 (and L2) cache and they submit instructions to the same execution units, and
-1. vector units execute a shared instruction on multiple data items.
+1. CPU　ソケットは同じメモリおよびネットワークリソースへのアクセスを共有し、
+1. ソケット内のコアは通常、共有の最終レベルキャッシュ（LLC）を備えており、
+1. 同一コア上のハイパースレッドは共有L1（およびL2）キャッシュにアクセス可能であり、同じ実行ユニットに命令を送信し、そして
+1. ベクトル演算ユニットは、複数のデータ項目に対して共有命令を実行します。
 
-GPU-based systems also have a hierarchy of 4 levels:
+GPU　ベースのシステムも、4レベルの階層構造を持ちます:
 
 1. multiple GPUs in the same node share access to the same host memory and network resources,
 1. core clusters (e.g. the SMs on an NVIDIA GPU) have a shared cache and access to the same high bandwidth memory on a single GPU,
