@@ -26,7 +26,7 @@
  - `std::uint32_t`
  - `std::uint64_t`
 
-The second template parameter `Abi` is one of the pre-defined ABI types in the namespace `Kokkos::Experimental::simd_abi`. This type determines the size of the vector and what architecture-specific intrinsics will be used. The following types are always available in that namespace:
+2つ目のテンプレートパラメータ `Abi` は、名前空間 Kokkos::Experimental::simd_abi 内で事前定義された ABI 型のいずれかです。This type determines the size of the vector and what architecture-specific intrinsics will be used. The following types are always available in that namespace:
  - `scalar`: a fallback ABI which always has vector size of 1 and uses no special intrinsics.
  - `native`: the "best" ABI for the architecture for which Kokkos was compiled. (deprecated since Kokkos 4.6)
 
