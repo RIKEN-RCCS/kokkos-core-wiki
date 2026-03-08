@@ -1,23 +1,23 @@
-API in Alphabetical Order
+アルファベット順のAPI
 =========================
 
-All functions and クラス listed here are part of the ``Kokkos::`` namespace.
+ここに列挙されているすべての関数とクラスは、``Kokkos::`` 名前空間の一部です。
 
-Algorithms
+アルゴリズム
 ----------
 
 +--------------------------+-----------+---------------+----------------------------------------------------------------+
-| Name                     | Library   | Category      | Description                                                    |
+| 名前                     | ライブラリ   | カテゴリー      | ディスクリプション                                                    |
 +==========================+===========+===============+================================================================+
-| Rand                     | Algorithm | Random Number | Generator Type (12), draw options (3)                          |
+| Rand                     | アルゴリズム | ランダムナンバー | ジェネレータ (12), 図表オプション (3)                          |
 +--------------------------+-----------+---------------+----------------------------------------------------------------+
-| Random_XorShift64_Pool   | Algorithm | Random Number | Random Number Generator, pool for threads                      |
+| Random_XorShift64_Pool   | アルゴリズム | Random Number | Random Number Generator, pool for threads                      |
 +--------------------------+-----------+---------------+----------------------------------------------------------------+
-| Random_XorShift64        | Algorithm | Random Number | Random Number Generator for 12 types, plus normal distribution |
+| Random_XorShift64        | アルゴリズム | Random Number | Random Number Generator for 12 types, plus normal distribution |
 +--------------------------+-----------+---------------+----------------------------------------------------------------+
-| init                     | Algorithm | Random Number | Initialize state using seed for Random_XorShift64_Pool         |
+| init                     | アルゴリズム | Random Number | Initialize state using seed for Random_XorShift64_Pool         |
 +--------------------------+-----------+---------------+----------------------------------------------------------------+
-| Random_XorShift1024_Pool | Algorithm | Random Number | Random Number Generator, 1024 bit, pool for threads            |
+| Random_XorShift1024_Pool | アルゴリズム | Random Number | Random Number Generator, 1024 bit, pool for threads            |
 +--------------------------+-----------+---------------+----------------------------------------------------------------+
 | Random_XorShift1024      | Algorithm | Random Number | Random Number Generator for 12 types, plus normal distribution |
 +--------------------------+-----------+---------------+----------------------------------------------------------------+
