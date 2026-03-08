@@ -1,35 +1,34 @@
-Graphs
+グラフ
 ======
 
-Usage
+使用例
 -----
 
-:cpp:`Kokkos::Graph` is an abstraction that describes
-asynchronous workloads organised as a direct acyclic graph (DAG).
+:cpp:`Kokkos::Graph` は、非同期ワークロードを直接非巡回グラフ(DAG)として組織化した抽象化です。
 
-Once defined, the graph can be executed many times.
+一度定義されれば、グラフは何度も実行可能です
 
-:cpp:`Kokkos::Graph` is specialized for some backends:
+:cpp:`Kokkos::Graph` は一部のバックエンドに特化しています:
 
 * :cpp:`Cuda`
 * :cpp:`HIP`
 * :cpp:`SYCL`
 
-On these backends, the :cpp:`Kokkos::Graph` specialisations map to the native graph API, namely, the CUDA Graph API, the HIP Graph API, and the SYCL (command) Graph API, respectively.
+これらのバックエンドでは、:cpp:'Kokkos::Graph'　の特殊化はネイティブのグラフ　API、すなわち、CUDA Graph API、HIP Graph API、およびSYCL(コマンド)グラフAPIに、それぞれマッピングされます。
 
-For other backends, :cpp:`Kokkos::Graph` provides a defaulted implementation.
 
-Execution space instance versus graph
+
+他のバックエンドについては、:cpp:'Kokkos::Graph'　がデフォルトの実装を提供します。
+
+実行空間インスタンスとグラフの比較
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Workloads submitted on :cpp:`Kokkos` execution space instances execute *eagerly*, *i.e.*,
-once the :cpp:`Kokkos::parallel_` function is called, the workload is immediately launched on the device.
+Workloads submitted onexecution space instances execute *eagerly*, *i.e.*,
+once the :cpp:`Kokkos::parallel_` function is called, the workload is immediately launched on the device. :cpp:`Kokkos` の実行空間インスタンス上に提出されたワークロード は、*熱心に*　実行されます。*すなわち*、:cpp:'Kokkos::p arallel_'　関数が呼び出されると、デバイス上で即座にワークロードが起動されます。 
 
-By contrast, the :cpp:`Kokkos::Graph` abstraction follows *lazy* execution,
-*i.e*, workloads added to a :cpp:`Kokkos::Graph` are **not** executed *until*
-the whole graph is ready and submitted.
+対照的に、:cpp:'Kokkos::Graph' 抽象化は、*怠惰*　な実行に従い、*すなわち*　　:cpp:`Kokkos::Graph`　に追加されたワークロードは、グラフ全体が準備できて提出される　*まで*　実行されません。
 
-Always in 3 phases
+常に3段階で
 ~~~~~~~~~~~~~~~~~~
 
 Typically, 3 phases are needed:
