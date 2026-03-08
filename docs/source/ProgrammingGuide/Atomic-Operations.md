@@ -4,7 +4,7 @@
 
 * アトミック演算は、書き込み競合を解決するために使用。
 * フリー関数の使用方法。
-* How to use the Atomic memory trait.
+* アトミックメモリ特性の使用方法。
 * 散布図の追加パターンに　[ScatterView](../API/containers/ScatterView)　を使用。
 
 ## 書き込み競合およびそのアトミック演算による解決
