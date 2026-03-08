@@ -16,8 +16,8 @@
 
 GPU　ベースのシステムも、4レベルの階層構造を持ちます:
 
-1. multiple GPUs in the same node share access to the same host memory and network resources,
-1. core clusters (e.g. the SMs on an NVIDIA GPU) have a shared cache and access to the same high bandwidth memory on a single GPU,
+1. 同一ノード内の複数　GPU　が、同じホストメモリとネットワークリソースへのアクセスを共有し、
+1. GPU　コアクラスタ（例：NVIDIA GPU　上の　SM　）は共有キャッシュを持ち、単一　GPU　上で同じ高帯域メモリにアクセスし、
 1. threads running on the same core cluster have access to the same L1 cache and scratch memory and
 1. they are grouped in so-called Warps or Wave Fronts within which threads are always synchronous and can collaborate more closely, for example via direct register swapping.
 
