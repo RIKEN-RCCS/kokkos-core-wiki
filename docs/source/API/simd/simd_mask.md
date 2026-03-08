@@ -1,24 +1,24 @@
 # `Experimental::simd_mask`
 
-Header File: `Kokkos_SIMD.hpp`
+ヘッダーファイル: `Kokkos_SIMD.hpp`
 
-Usage: 
+使用例: 
 
-`Kokkos::Experimental::simd_mask` is an abstraction over platform-specific vector masks and calls platform-specific vector intrinsics.
-It is based on the `simd_mask` type proposed for ISO C++ in [this document](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/n4808.pdf)
+　`Kokkos::Experimental::simd_mask` は、プラットフォーム固有のベクトルマスクを抽象化したものであり、プラットフォーム固有のベクトル固有関数を呼び出します。
+これは、 [this document](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/n4808.pdf)　における　ISO C++　向けに提案された　`simd_mask`　型に基づいています。
 
-## Interface
+## インターフェイス
 
 ```c++
-namespace Experimental {
-template <class T, class Abi>
-class basic_simd_mask;
+名前空間 実験的 {
+テンプレート <class T, class Abi>
+クラス basic_simd_mask;
 }
 ```
 
-### Template Parameters
+### テンプレートパラメータ
 
-The first template parameter `T` should be a C++ fundamental type for which the current platform supports vector intrinsics. Kokkos supports the following types for `T`:
+最初のテンプレート引数 `T` は、現在のプラットフォームがベクトル組み込み関数をサポートする C++ の基本型である必要があります。 Kokkos は、 `T`　について、以下の型をサポートしています:
  - `float`
  - `double`
  - `std::int32_t`
