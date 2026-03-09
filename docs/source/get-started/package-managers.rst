@@ -1,4 +1,4 @@
-Package Managers
+パッケージマネージャー
 ================
 
 Use your favorite package manager to install Kokkos.
