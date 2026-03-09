@@ -1,83 +1,83 @@
 パッケージマネージャー
 ================
 
-Use your favorite package manager to install Kokkos.
+好みのパッケージマネージャーを使って、Kokkos　をインストールしてください。
 
-System package managers
+システムパッケージマネージャー
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 DNF
 ---
 
-You may use the Fedora Project package manager to install Kokkos
+ Kokkos　をインストールするには、Fedora Project　パッケージマネージャーを使うことができます 
 https://packages.fedoraproject.org/pkgs/kokkos/
 
-Other package managers
+他のパッケージマネージャー
 ~~~~~~~~~~~~~~~~~~~~~~
 
 `Spack <https://spack.io>`_
 ---------------------------
 
-Spack is a popular package manager for HPC.  Spack comes with installation recipes for Kokkos.
+ Kokkos.は　HPC向けの、有名なパッケージマネージャーです。  Spack　には、　Kokkos　のインストールレシピが付属しています。
 
-The `Kokkos recipe webpage <https://packages.spack.io/package.html?name=kokkos>`_ summarizes the available versions of Kokkos
-and their options.
+ `Kokkos レシピウェブページ <https://packages.spack.io/package.html?name=kokkos>`_ には  、Kokkosの利用可能なバージョンとそのオプションがまとめられています。
 
-Most of the time, Spack Kokkos' variants follow the same options as the Kokkos `CMake options <./configuration-guide.html>`_.
-List of available variants can be found by running
+ほとんどの場合、Spack Kokkos　のバリアントは、Kokkosの　`CMake options <./configuration-guide.html>`_. と同じオプションに従っています。
+利用可能なバリアントのリストは、以下の実行により、見つけることができます
+
 
 .. code-block::
 
-    spack info kokkos
+    スパック情報 kokkos
 
 
-When using Spack, Kokkos hardware autodetection is disabled. That means that the user always has to manually specify the 
-architecture. However, for CPU, Spack already specify the CPU micro-architecture, so it is not needed to specify it again.
-For GPU, no such mechanism exists in Spack and the user always need to specify the correct architecture, using a dedicated
-backend keyword (see next section).
+Spackを使用する場合、Kokkos のハードウェア自動検出は無効です。 つまり、ユーザーが、常に手動でアーキテクチャを指定しなければならないということです。 しかしながら、CPU　の場合、Spack　はすでに　CPU　マイクロアーキテクチャを指定しているため、再度指定する必要はありません。
+GPUに関しては、Spack　にはそのような仕組みは存在せず、ユーザーは専用のバックエンドキーワードを使って、正しいアーキテクチャを指定する必要があります(次の節参照)。
 
 
-Installing Kokkos with Spack
+
+Spack　で　Kokkos　インストール
+
 ++++++++++++++++++++++++++++
 
-To install Kokkos with Spack with default options, run:
+デフォルトのオプションを使って、　Spack　で　Kokkos　をインストールするには、以下を実行してください:
 
 .. code-block::
 
-    spack install kokkos
+    spack インストール kokkos
 
 
-To install Kokkos with CUDA backend enabled, run:
-
-.. code-block::
-
-    spack install kokkos +cuda cuda_arch=90
-
-
-Note that the `cuda_arch` option is specific to the target GPU architecture.  Here, the `cuda_arch` value `90` corresponds
-to the NVIDIA Hopper architecture. With Spack, the architecture must be specified explicitly (no auto-detection).
-
-
-For AMD GPU, the traditional Spack's keyword is `rocm` instead of `hip` in Kokkos' CMake. So to install Kokkos with the HIP backend enable, run:
+ CUDA バックエンドを有効にした状態で、Kokkos　をインストールするには、以下を実行してください:
 
 .. code-block::
 
-    spack install kokkos +rocm amdgpu_target=gfx942
+    spack インストール kokkos +cuda cuda_arch=90
 
 
-Note that the `amdgpu_target` option is specific to the target GPU architecture.
-With Spack, the architecture must be specified explicitly (no auto-detection).
+`cuda_arch`オプションが、ターゲット　GPU　アーキテクチャ専用であることに注意してください。  ここでの `cuda_arch` 値　`90` は、NVIDIA Hopper　アーキテクチャに対応しています。 Spack　ではアーキテクチャを明示的に指定する必要があります　(自動検出なし)。
 
 
-For Intel GPU, using the SYCL backend, run:
+AMD GPU　に関しては、従来の　Spack　のキーワードはKokkosのCMakeでは　`hip` ではなく、`rocm` です。HIP　バックエンドを有効にした　Kokkos　をインストールするには、以下を実行してください:
+
+.. code-block::
+
+    spack インストール kokkos +rocm amdgpu_target=gfx942
+
+
+ `amdgpu_target`　オプションは、対象　GPU　アーキテクチャ固有のものです。
+Spack　ではアーキテクチャを明示的に指定する必要があります(自動検出なし)。
+
+
+
+Intel GPU　に関しては、 SYCL バックエンドを使用して、 以下を実行します:
 
 .. code-block::
 
     spack spec kokkos +sycl intel_gpu_arch=intel_pvc
 
 
-Note that the `intel_gpu_arch` option is specific to the target GPU architecture.
-With Spack, the architecture must be specified explicitly (no auto-detection).
+ `intel_gpu_arch` オプションは、対象のGPU　アーキテクチャ専用であることに、注意してください。
+Spack　ではアーキテクチャを明示的に指定する必要があります(自動検出なし)。
 
 
 To use the installed Kokkos, you can simply load the Kokkos module:
