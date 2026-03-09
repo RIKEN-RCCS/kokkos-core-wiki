@@ -1,21 +1,21 @@
 ..
-  Use the following convention for headings:
+  見出しの表記については、以下の規則を使用してください：
 
-    # with overline, for parts (collections of chapters)
+    # 各部に対して、オーバーラインを使用　（章の集まり）
 
-    * with overline, for chapters
+    * 各部に対して、オーバーラインを使用
 
-    = for sections
+    = 節用
 
-    - for subsections
+    - 小節用
 
-    ^ for subsubsections
+    ^ 小々節用
 
-    " for paragraphs
+    " パラグラフ用
 
 ..
-  Class / method / container name)
-  for free functions that are callable, preserve the naming convention, `view_alloc()`
+  クラス / メソッド / コンテナ名)
+  呼び出し可能なフリー関数について、命名規則を保持、 `view_alloc()`
 
 ``CoolerView``
 ==============
@@ -24,52 +24,52 @@
     :language: cpp
 
 ..
-  The (public header) file the user will include in their code
+  ユーザーがそのコードに含める (パブリックヘッダー) ファイル 
 
-Header File: ``Kokkos_Core.hpp``
+ヘッダーファイル: ``Kokkos_Core.hpp``
 
 ..
-  High-level, human-language summary of what the thing does, and if possible, brief statement about why it exists (2 - 3 sentences, max);
+  そのものが何を行うのかについて、高レベルで、人間が理解しやすい言葉で簡潔にまとめた概要、そして可能であれば、それが存在する理由についての簡潔な説明　（最高で2，3文）；
 
-Description
+ディスクリプション
 -----------
 
 ..
-  The API of the entity.
+  エンティティの　API　。
 
-Interface
+インターフェイス
 ---------
 
 ..
-  The declaration or signature of the entity.
+  エンティティの宣言または署名。
 
 .. cpp:class:: template <class DataType, class... Traits> CoolerView
 
   ..
-    Template parameters (if applicable)
-    Omit template parameters that are just used for specialization/are deduced/ and/or should not be exposed to the user.
+    テンプレートパラメータ (該当すれば)
+     特殊化/演鐸/のためにだけ使用され、 および/または ユーザーに暴露されるべきではない、テンプレートパラメータを省略してください。
 
-  :tparam Foo: Description of the Foo template parameter
+  :tparam Foo: Foo テンプレートパラメータのディスクリプション
 
   ..
-    Parameters (if applicable)
+    パラメータ (該当すれば)
 
-  :param bar: Description of the bar parameter
+  :param bar: バーパラメータのディスクリプション
 
-  .. rubric:: Public Types:
+  .. rubric:: パブリック型:
 
   .. cpp:type:: data_type
 
-    Some interesting description of the type and how to use it.
+    型についての何らかの興味深いディスクリプションおよびその使用方法。
 
-  .. rubric:: Static Public Member Variables:
+  .. rubric:: 静的パブリックメンバー変数:
 
   .. cpp:member:: int some_var = 5;
 
-    Description of some_var
+    some_var　のディスクリプション
 
     ..
-      If you have related info
+      関連情報を持つ場合
 
     .. seealso::
 
