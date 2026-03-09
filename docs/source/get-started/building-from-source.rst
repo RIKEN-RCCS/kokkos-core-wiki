@@ -1,103 +1,86 @@
-Building From Source
+ソースからの構築
 ====================
 
-Getting the Kokkos Source Code
+Kokkos　のソースコード取得
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes how to obtain the Kokkos source code.  We recommend
-downloading a tagged release for most users, as these releases undergo
-extensive testing and are generally more stable.  Development versions are also
-available for advanced users who need the latest features and are comfortable
-with potentially less stable code.
+本セクションでは、Kokkos　のソースコードを取得する方法について説明します。 これらのリリースは広範なテストを経ており、一般的に安定性が高いため、多くのユーザーにタグ付きリリースのダウンロードを推奨します。 最新機能が必要な上級者向けにも、開発版が利用可能で、安定性の低いコードにも対応できる場合があります。
 
-Downloading a Release Archive (Recommended)
+リリースアーカイブのダウンロード(推奨)
 -------------------------------------------
 
-The recommended approach for most users is to download a release archive from GitHub.
+多くのユーザーに推奨されるアプローチは、GitHub　からのリリースアーカイブのダウンロードです。
 
-1.  **Find the Latest Release:**  Go to the `Kokkos releases
-    page <https://github.com/kokkos/kokkos/releases>`_ and find the latest
-    release (or a specific version you need).
+1.  **最新リリースを探す:**   <https://github.com/kokkos/kokkos/releases>`_ にアクセスして最新リリース(または必要な特定のバージョン)を見つけてください。
 
-2.  **Download the Archive and Checksum:** Download both the
-    ``kokkos-X.Y.Z.tar.gz`` archive and the corresponding
-    ``kokkos-X.Y.Z-SHA-256.txt`` checksum file.  It's crucial to verify the
-    integrity of the downloaded archive using the checksum.
+2.  **アーカイブとチェックサムをダウンロードしてください:** ``kokkos-X.Y.Z.tar.gz``アーカイブと対応する　``kokkos-X.Y.Z-SHA-256.txt``　チェックサムファイルの両方をダウンロードしてください。 チェックサムを使ってダウンロードしたアーカイブの整合性を確認することが重要です。
 
-3.  **Verify the Archive Integrity (Important):**  Use the following commands
-    (adjust the version number as needed) to verify the downloaded archive:
+3.  **アーカイブの整合性を確認する(重要):**  ダウンロードされたアーカイブの確認には、以下のコマンドを使用してください(バージョン番号を必要に応じて調整してください):
+
 
     .. code-block:: sh
     
-        export KOKKOS_VERSION=4.5.01  # Replace with the actual version
+        export KOKKOS_VERSION=4.5.01  # 実際のバージョンと置き換えます
         export KOKKOS_DOWNLOAD_URL=https://github.com/kokkos/kokkos/releases/download/${KOKKOS_VERSION}
         curl -sLO ${KOKKOS_DOWNLOAD_URL}/kokkos-${KOKKOS_VERSION}.tar.gz
         curl -sLO ${KOKKOS_DOWNLOAD_URL}/kokkos-${KOKKOS_VERSION}-SHA-256.txt
         grep kokkos-${KOKKOS_VERSION}.tar.gz kokkos-${KOKKOS_VERSION}-SHA-256.txt | shasum -c
 
 
-    The output should be ``kokkos-4.5.01.tar.gz: OK`` (or similar, depending on
-    the version).  If the checksum doesn't match, **do not use the downloaded
-    archive** as it may be corrupted or tampered with.
+出力は、 ``kokkos-4.5.01.tar.gz: OK``  (または同様のもの、バージョンによる)であるべきです。 チェックサムが一致しない場合は、　破損や改ざんされている可能性があるため、**ダウンロードしたアーカイブを使用しないでください**　。
 
-4.  **Extract the Archive:**  Once you've verified the checksum, extract the archive:
+4.  **アーカイブを抽出する:**  チェックサムを確認したら、アーカイブを抽出してください:
 
     .. code-block:: sh
 
         tar -xzvf kokkos-${KOKKOS_VERSION}.tar.gz
 
-Cloning the Git Repository (For Development Versions)
+Gitリポジトリのクローニング (開発バージョン用)
 -----------------------------------------------------
 
-If you need the latest features or want to contribute to Kokkos, you can clone
-the Git repository.
+最新機能が必要な場合、または　Kokkos　に貢献したい場合、Git レポジトリのクローンが可能です
 
-1.  **Clone the Repository:**
+1.  **レポジトリをクローンします:**
 
     .. code-block:: sh
 
         git clone https://github.com/kokkos/kokkos.git
 
-    This will clone the repository into a directory named ``kokkos``.
+    これによりリポジトリは、``kokkos``というディレクトリにクローンされます。
 
-2.  **Check Out a Release Tag (Recommended for Development):**
-    While the ``develop`` branch is generally kept stable, it's still under
-    active development.  For more predictable behavior, check out a specific
-    release tag:
+2.  **リリースタグ(開発推奨)をチェックしてください:**
+    ``開発``　部門は概ね安定していますが、現在も活発に開発が進められています。 より予測可能な動作を求めるなら、特定のリリースタグをチェックしてみてください:
+
 
     .. code-block:: sh
 
         cd kokkos
-        git checkout 4.5.01  # Replace with the desired version tag
+        git チェックアウト 4.5.01  # 所望のバージョンタグを置き換えます
 
-    To see available tags:
-
-    .. code-block:: sh
-
-        git tag
-
-    Or, to stay on the bleeding edge (use with caution):
+    利用可能なタグを見るために:
 
     .. code-block:: sh
 
-        git checkout develop
+        git タグ
+
+   あるいは、最先端を保つために(慎重に使用):
+
+    .. code-block:: sh
+
+        git チェックアウト開発
 
 
-Which Method Should I Use?
+どの方法を使うべきでしょうか?
 --------------------------
 
-* **Tagged Releases:** Use this method unless you have a specific reason to use
-  a development version.  Tagged releases are the most stable and well-tested.
-* **Git Repository (Development Versions):** Use this method if you need the
-  very latest features, want to contribute to Kokkos, or need to debug a
-  specific issue that's been fixed in the development branch.  Be aware that
-  development versions may be less stable than releases.
-
-No matter which method you choose, always verify the integrity of the
-downloaded source code.  This is a crucial security practice.
+* **タグ付きリリース:** 特に開発版を使う理由がない限り、この方法を使ってください。 タグ付きリリースが最も安定していて、十分にテストされています。
+* **Git　リポジトリ(開発バージョン):** 最新の機能が必要な場合、Kokkos　に貢献したい場合、または開発ブランチで修正された特定の問題をデバッグしたい場合に、この方法を使ってください。  開発版は、リリース版よりも安定性が劣る場合がありますので、注意してください。
 
 
-Configuring and Building Kokkos
+どの方法を選ぶにしても、必ずダウンロードしたソースコードの整合性を確認してください。  これは重要なセキュリティプラクティスです。
+
+
+Kokkos　の設定と構築
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This section describes how to configure and build Kokkos.  We assume you are in
@@ -106,49 +89,45 @@ the root directory of the Kokkos source code (or the project embedding Kokkos).
 Configuring Kokkos
 ------------------
 
-Use the following command to configure Kokkos:
+Kokkos　の設定には以下のコマンドを使用します :
 
 .. code-block:: sh
 
     cmake -B builddir [<options...>]
 
 
-``-B builddir`` creates a build directory named ``builddir`` (you can choose a
-different name if you prefer).  Kokkos requires out-of-source builds.  The
-``[<options...>]`` part is where you specify the configuration options.
+``-B builddir''は、　``builddir``　というビルドディレクトリを作成します(別の名前を選んでも構いません)。  Kokkos はソース外ビルドを必要とします。   ``[<options...>]``   の部分は設定オプションを指定する部分です。
 
-**Common CMake Options**
+**一般的な CMake の選択肢**
 
-These options are generally useful for any CMake project:
+これらのオプションは、一般的にはあらゆる　CMake プロジェクトに役立ちます：
 
-* ``-DCMAKE_CXX_COMPILER=<compiler>``: Specifies the full path to the C++
-  compiler. For example, use ``hipcc`` for AMD GPUs, ``icpx`` for Intel GPUs,
-  or ``g++`` or ``clang++`` for CPUs.
+* ``-DCMAKE_CXX_COMPILER=<compiler>``:　CPUs.C++コンパイラへの完全なパスを指定します。例えば、AMD GPUには ``hipcc`` 、  Intel GPUには ``icpx``、   CPUには、 ``g++`` または ``clang++`` を使いましょう。
 
-  Example: ``-DCMAKE_CXX_COMPILER=/path/to/hipcc``
+  例: ``-DCMAKE_CXX_COMPILER=/path/to/hipcc``
  
-* ``-DCMAKE_CXX_STANDARD=<standard>``: Sets the C++ standard. The default is ``20``.
+* ``-DCMAKE_CXX_STANDARD=<standard>``: C++標準を設定します  。デフォルトは、``20``　です。
 
-  Example: ``-DCMAKE_CXX_STANDARD=23``
+  例: ``-DCMAKE_CXX_STANDARD=23``
 
-* ``-DCMAKE_BUILD_TYPE=<type>``: Controls optimization level and debugging
-  information. Common options are ``Debug``, ``Release``, ``RelWithDebInfo``
-  (default), and ``MinSizeRel``.
+* ``-DCMAKE_BUILD_TYPE=<type>``: 最適化レベルとデバッグ情報を制御します。一般的な選択肢は、 ``Debug``、 ``Release``、 ``RelWithDebInfo``(デフォルト)、 および　``MinSizeRel``　です。
 
-  Example: ``-DCMAKE_BUILD_TYPE=Release``
+  例: ``-DCMAKE_BUILD_TYPE=Release``
 
-* ``-DCMAKE_INSTALL_PREFIX=<prefix>``: Specify the directory on disk to which
-  Kokkos will be installed.
+* ``-DCMAKE_INSTALL_PREFIX=<prefix>``: ディスク上のディレクトリを指定します。
+  Kokkos が設置される予定です。
 
-  Example: ``-DCMAKE_INSTALL_PREFIX=/path/to/install/dir``
 
-**Important Kokkos-specific options:**
+  例: ``-DCMAKE_INSTALL_PREFIX=/path/to/install/dir``
 
-* ``-DKokkos_ENABLE_<BACKEND>=ON``: Enables a specific backend for target devices.
-  See :ref:`keywords_backends` for a complete list, including currently open-sourced experimental backends.
-  Common backends:
+**　Kokkos　固有の重要なオプション:**
 
-  * ``OPENMP`` or ``THREADS``: Multithreading on CPUs
+* ``-DKokkos_ENABLE_<BACKEND>=ON``: 現在オープンソース化されている実験的バックエンド等、ターゲットデバイス向けの特定のバックエンドを有効にします。
+   完全なリストについては :ref:'keywords_backends' を参照してください。
+
+  一般的なバックエンド:
+
+  * ``OPENMP`` または ``THREADS``:  CPUs　上でマルチスレッド処理
   
   * ``CUDA``: NVIDIA GPUs
   
@@ -156,19 +135,17 @@ These options are generally useful for any CMake project:
 
   * ``SYCL``: Intel GPUs
     
-  Example: ``-DKokkos_ENABLE_CUDA=ON``
-  Note that ``-DKokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON`` is required when building with CUDA and MSVC on Windows.
+  例: ``-DKokkos_ENABLE_CUDA=ON``
+  Windows  上でCUDAとMSVCを使ったビルドでは、 ``-DKokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``　が必要であることに注意してください。
 
 
 
-  include experimental backends and :ref:`keywords_enable_backend_specific_options`.
+  実験的なバックエンドと :ref:'keywords_enable_backend_specific_options' を含めます。
  
  
-* ``-DKokkos_ARCH_<ARCHITECTURE>=ON``: Specifies the target architecture for
-  code generation. Some backends can auto-detect the architecture, but it's
-  often best to specify it explicitly.
-  See :ref:`keywords_arch` for a complete list.
-  For instance:
+* ``-DKokkos_ARCH_<ARCHITECTURE>=ON``: コード生成のためのターゲットアーキテクチャを指定します。一部のバックエンドはアーキテクチャを自動検出できますが、明示的に指定するのが最適である場合が多いです。
+  完全なリストについては、 :ref:`keywords_arch` for a complete list　を参照してください。
+  例えば:
 
   * ``AMD_GFX90A``: AMD MI210X (Frontier)
 
@@ -176,17 +153,15 @@ These options are generally useful for any CMake project:
 
   * ``AMPERE80``: NVIDIA A100 (Perlmutter)
 
-  Example: ``-DKokkos_ARCH_AMPERE80=ON``
+  例: ``-DKokkos_ARCH_AMPERE80=ON``
  
-* ``-DKokkos_ENABLE_DEPRECATED_CODE_4=ON``: Enables all code marked as
-  deprecated. Setting this to ``OFF`` removes deprecated symbols.
+* ``-DKokkos_ENABLE_DEPRECATED_CODE_4=ON``: 非推奨とマークされた、すべてのコードを有効化します。これを、 ``OFF`` に設定すると、非推奨のシンボルが削除されます。
   
-* ``-DKokkos_ENABLE_DEPRECATION_WARNINGS=ON``: Enables deprecation warnings.
-  This is strongly recommended to avoid surprises in future releases. Don't disable
-  this unless you have a very good reason.
+* ``-DKokkos_ENABLE_DEPRECATION_WARNINGS=ON``: 非推奨警告を有効にします。
+  今後のリリースでサプライズを避けるために、これを強く推奨します。理由がない限り、これを無効にしないでください。
  
 
-**Example Configuration**
+**構成例**
 
 .. code-block:: sh
 
@@ -198,51 +173,44 @@ These options are generally useful for any CMake project:
         -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF
 
 
-Building Kokkos
+ Kokkos 構築
 ---------------
 
-After configuring, build Kokkos using:
+設定後、Kokkos　使用について構築してください:
 
 .. code-block:: sh
 
     cmake --build builddir
 
-This compiles Kokkos.  You can add ``-j<N>`` to use multiple cores for faster
-compilation (replace ``<N>`` with the number of cores).
+これによって、Kokkos　を編集します。  複数コアを使うには、``-j<N>`` を加えることにより、速く編集をできます　( ``<N>``をコア数に置換します)。
 
-Example: ``cmake --build builddir -j8``
+例: ``cmake --build builddir -j8``
 
 
-Installing Kokkos
+ Kokkos　インストール
 -----------------
 
-To install Kokkos (header files and libraries), use:
+Kokkos　のインストール (ヘッダーファイルおよびライブラリ)　のために、以下を使用してください:
 
 .. code-block:: sh
 
     cmake --install builddir [--prefix <prefix>]
 
-The ``--prefix <prefix>`` option specifies the installation directory.  If
-omitted, Kokkos will be installed to a default location, often ``/usr/local``
-(**not recommended**).
+The ``--prefix <prefix>`` オプションはインストールディレクトリを指定します。 省略すると、Kokkos　はデフォルトの場所、多くの場合 ``/usr/local``　(**非推奨**)　にインストールされます。
 
-Optional: Testing your Kokkos Build
+オプション: Kokkos　構築テスト
 -----------------------------------
 
-To verify your Kokkos build and ensure everything is working as expected, you
-can configure and run the internal test suite.
+Kokkos の構築を確認し、すべてが期待通りに動作しているか確認するには、内部テストスイートを設定し、実行できます。
 
-To do this, configure with ``-DKokkos_ENABLE_TESTS=ON``, build, and then run
-the tests with:
+これを行うには、``-DKokkos_ENABLE_TESTS=ON``　を設定および構築し、以下でテストを実行します：
 
 .. code-block:: sh
 
     ctest --test-dir builddir --output-on-failure
 
 
-Advanced: Configuring Against the Build Directory
+上級:ビルドディレクトリに対する設定
 -------------------------------------------------
 
-(For experts only) You can configure your project directly against the
-``<builddir>/cmake_packages/`` directory in the out-of-tree build, similar to
-using an install tree.  This can be useful for development purposes.
+(エキスパート専用)プロジェクトは、インストールツリーを使うのと同様に、ツリー外ビルド内の　``<builddir>/cmake_packages/`` ディレクトリに直接プロジェクトを設定することができます。  これは開発目的において、有用です。
