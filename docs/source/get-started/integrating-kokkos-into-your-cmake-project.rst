@@ -1,14 +1,11 @@
-Integrating Kokkos into Your Project
+Kokkos　をプロジェクトに統合
 ====================================
 
-This document describes how to integrate the Kokkos library into your CMake
-project.
+このドキュメントは、Kokkos　ライブラリを　CMake　プロジェクトに統合する方法を説明しています。
 
-Kokkos provides the ``Kokkos::kokkos`` target, which simplifies the
-process by automatically handling necessary include directories, link
-libraries, compiler options, and other usage requirements.
+Kokkosは、 ``Kokkos::kokkos``　というターゲットを提供しており、必要なディレクトリ、リンクライブラリ、コンパイラオプション、その他の使用要件を自動的に処理することでプロセスを簡素化します。
 
-Here are several integration methods, each with its own advantages:
+以下はそれぞれ利点を持ついくつかの統合方法です：
 
 1. External Kokkos (Recommended for most users)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
