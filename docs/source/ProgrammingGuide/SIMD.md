@@ -1,29 +1,24 @@
-# SIMD Types
+# SIMD 型
 
-## Background
+## 背景
 
-Through the history of high-performance computing using CPUs, there has been a struggle to get software to effectively make use of CPU vector registers and instructions through compiler auto-vectorization.
-An interesting look into this struggle can be found in [this blog](https://pharr.org/matt/blog/2018/04/18/ispc-origins), which gives some insight into how Intel compiler auto-vectorization has drawbacks compared to programming models such a CUDA for NVIDIA GPUs.
-A key quote, attributed to Stanford's Tim Foley, states that "auto-vectorization is not a programming model".
-This is essentially the heart of the issue: auto-vectorization is not a two-way conversation between programmer and machine. It is more like a black box that almost always fails to work.
-The [dissertation](https://www.researchgate.net/profile/Matthias_Kretz2/publication/295253746_Extending_C_for_Explicit_Data-Parallel_Programming_via_SIMD_Vector_Types/links/56c8c99208ae5488f0d6ffa0.pdf) of Matthias Kretz, one of the key driving forces behind SIMD types being proposed to the ISO standard of the C++ language, describes similar motivations.
-Since Kokkos is a programming model that strives to deliver high performance on vector-capable CPUs, it makes sense for it to provide these SIMD types due to the limitations of alternative approaches.
+CPU　を使った高性能計算の歴史の中で、コンパイラの自動ベクトル化を通じて、CPU　ベクトルレジスタや命令を効果的に活用するソフトウェアを得ることは苦労してきました。 この葛藤について興味深い考察はこのブログで見ることができ、Intel　コンパイラの自動ベクトル化がNVIDIA GPUs　用の　CUDA　のようなモデルと比べてどのように欠点があるかを示しています。 スタンフォード大学のティム・フォーリーに帰せられる重要な引用には「自動ベクトル化はプログラミングモデルではない」と記されています。 これが本質的な問題の核心です。自動ベクトル化はプログラマーと機械の間の双方向の対話ではありません。むしろ、ほとんど常に機能しないブラックボックスのようなものです。 SimD　型を推進した主要な推進力の一人である　Matthias Kretzの論文　[dissertation](https://www.researchgate.net/profile/Matthias_Kretz2/publication/295253746_Extending_C_for_Explicit_Data-Parallel_Programming_via_SIMD_Vector_Types/links/56c8c99208ae5488f0d6ffa0.pdf)でも、C++　言語の　ISO　標準 に提案された動機が説明されています。 Kokkos　はベクター対応　CPUで　高性能を追求するプログラミングモデルであり、  代替手法の制約を考慮するとこれらの　SIMD　タイプを提供するのは理にかなっています。
 
-## The Basic Idea
+## 基本理念
 
-The idea behind SIMD types is to step just one layer of abstraction above hand-coding Intel intrinsic calls.
-The design of SIMD types recognizes that the vector intrinsics provided by many CPU vendors are fairly similar and that users would not like to hand-code for one specific vendor at a time.
-As such, the SIMD types are a C++ representation of vector registers and their methods explicitly call vendor-specific vector intrinsic instructions.
-The vendor-specific portions are abstracted away from user code through template parameters.
+SIMD　型の考え方は、Intel　の内在呼び出しを手作業でコーディングする抽象化の層を一段階進めることです。 SIMD　型の設計は、多くのCPUベンダー  が提供するベクトルの本質がかなり似ていること、そしてユーザーが一度に特定のベンダー向けに手作業でコーディングしたくないことを認識しています。 
 
-The reason that SIMD types are so effective at producing high-performance code is that users are directly expressing what the vector parallelism is that they would like, and doing so in a way that is guaranteed to generate the vector instructions they expect.
-When using SIMD types, the compiler cannot fail to auto-vectorize, because auto-vectorization is not part of the picture. 
-Users are more clearly able to reason about the available parallelism in their code in ways that an auto-vectorizer is almost never able to do.
-By allowing users to have direct control of how vectorization is done while protecting them from both vendor lock-in and the odd quirks of different vendor instruction sets, SIMD types allow users to write performance portable code across CPUs and also GPUs.
+したがって、SIMD　型は  ベクトルレジスタの　C++　表現であり、そのメソッドはベンダー固有のベクトル内在命令を明示的に呼び出します。 
+ベンダー固有の部分はテンプレートパラメータを通じてユーザーコードから抽象化されます。
 
-## An Example
+SIMD　型が高性能なコードを生成するのに非常に効果的な理由は、ユーザーが望むベクトル並列性を直接表現し、期待するベクトル命令を確実に生成できる形で行えるからです。
+SIMD　型を使用する場合、コンパイラは自動ベクトル化を失敗することはありません。なぜなら自動ベクトル化は状況の一部ではないためです。 
+ユーザーは、オートベクトリザではほとんどできない方法で、コード内の並列性をより明確に推論できるようになります。 
+ユーザーが、ベンダーロックインや異なるベンダー命令セットの奇妙な特性から守りつつ、ベクトル化の実行方法を直接制御できることで、SIMD　型は　CPU　および　GPU　間で、パフォーマンス用ポータブルコードを書くことを可能にします。
 
-Suppose that we have the following loop that we would like to take advantage of CPU vectorization:
+## 例
+
+CPU　ベクトル化を利用したい次のループがあると仮定します:
 
 ```c++
 double* x;
@@ -36,12 +31,12 @@ for (int i = 0; i < n; ++i) {
 }
 ```
 
-Here is one way to convert such a loop to use Kokkos SIMD types:
+このようなループを　Kokkos　のSIMD　型タイプに変換する方法を、以下に示します:
 
 ```c++
 #include <Kokkos_SIMD.hpp>
 
-using simd_type = Kokkos::Experimental::simd<double>;
+simd_type = Kokkos::Experimental::simd<double>　を使用;
 constexpr int width = int(simd_type::size());
 assert(n % width == 0);
 for (int i = 0; i < n; i += width) {
@@ -53,36 +48,26 @@ for (int i = 0; i < n; i += width) {
 }
 ```
 
-`Kokkos::Experimental::simd<double>` is the basic SIMD type for a vector register
-containing values of 64-bit floating-point type.
-Constructing one given a pointer (and alignment tag) will execute a vectorized load instruction,
-and `copy_to` will generate a vectorized store instruction.
-Often these instructions are the only way to get the full memory bandwidth from your CPU.
-The SIMD type provides the basic math operators, so the three multiplications
-and two additions are guaranteed to turn into vector instructions for multiplication and addition.
-The `Kokkos::sqrt` overload will call a vector instruction for computing the square roots
-of values if the CPU supports it.
+`Kokkos::Experimental::simd<double>は、64ビット浮動小数点型の値を含むベクトルレジスタの基本的なSIMD　型です。 ポインタ(およびアラインメントタグ)　を与えられたものを構成すると、ベクトル化されたロード命令が実行され、copy_to　はベクトル化されたストア命令を生成します。 多くの場合、これらの命令がCPUからメモリ帯域幅をフルに引き出す唯一の方法です。 SIMD　型は  基本的な数学演算子を提供しているため、3回の掛け算と2回の加算は乗算と加算のためのベクトル命令に変換されることが保証されます。  Kokkos::sqrtのオーバーロードは、CPU　が対応すれば値の平方根を計算するためのベクトル命令を呼び出します。
 
-In other words, we now have a C++ code which has no vendor-specific stuff in it but is guaranteed
-to emit exactly the right vendor vector instructions depending on which CPU type Kokkos
-is compiled for (`KOKKOS_ARCH` configurations).
-It is also still fairly readable, especially the portion that deals with the mathematical operations.
+換言すれば、ベンダー固有のものは含まれていませんが、Kokkos　がどの　CPU　型　(　KOKKOS_ARCH　構成)にコンパイルされているかに応じて、正確なベンダーベクター命令を確実に出す　C++　コードが手に入っています。 
+また、特に数学演算を扱う部分はかなり読みやすいです。
 
-If a CPU supports 256-bit vector registers, then this code will process 4 `double`s at a time (width = 4), and get close to 4X speedup depending on the situation.
+CPU　が、256ビットベクトルレジスタをサポートしている場合、このコードは4つのダブル(幅=4)を同時に処理し、状況に応じて約　4X　の高速化を実現します。
 
-## Dealing with the Remainder
+## 剰余の対処
 
-In the above example, we skipped over a troublesome pitfall by asserting that the size of the data `n` that we are operating on is evenly divisible by the vector width.
-There are at least three major approaches to dealing with this issue in general:
+上記の例では、扱うデータ　`n`　のサイズがベクトル幅で均等に割られると主張することで、厄介な落とし穴を一掃ました。 
+この問題に対処するには少なくとも三つの主要なアプローチがあります:
 
-1. Enforce that the data size is always a multiple of the vector width.
-   One way to do this is by padding, which means allocate more than you need until it is a multiple and ignore the extra values.
-   Another way to do this is by storing types which are also the same size, which you can do by using the same SIMD types:
+1. データサイズは常にベクトル幅の倍数であることを強制します。その一つの方法がパディング(padding)で、必要以上に割り当てて倍数になるまで割り当て、余分な値は無視することです。
+   もう一つの方法は、同じサイズの型を保存する方法で、同じ　SIMD　型を使うことで可能です:
+
 
    ```c++
    #include <Kokkos_SIMD.hpp>
    
-   using simd_type = Kokkos::Experimental::simd<double>;
+   simd_type = Kokkos::Experimental::simd<double>　を使用;
    simd_type* x;
    simd_type* y;
    simd_type* z;
@@ -93,16 +78,16 @@ There are at least three major approaches to dealing with this issue in general:
    }
    ```
    
-   Kokkos is working on adding special storage types to further support this use case and allow interoperability with `Kokkos::View`.
+   Kokkos　は、このユースケースをさらにサポートし、　Kokkos::View　との相互運用性を可能にするために特別なストレージタイプを追加しようと取り組んでいます。
 
-   Note that this approach looks cleaner in the example but can have wide-reaching consequences because the data type of the original data has changed, and may need to change in other places throughout a large code base.
+   本アプローチは例の中では見た目がきれいですが、元のデータ型が変更され、大規模なコードベースの他の箇所でも変更が必要になる可能性があるため、広範な影響を及ぼす可能性があります。
 
-2. Handle the remainder differently. For example, use a loop of non-vectorized code to compute the remainder values:
+3. 剰余については、例えば、非ベクトル化コードのループを使って残りの値を計算する等、違う方法で対処しましょう。:
 
    ```c++
    #include <Kokkos_SIMD.hpp>
  
-   using simd_type = Kokkos::Experimental::simd<double>;
+   simd_type = Kokkos::Experimental::simd<double>　を使用;
    constexpr int width = int(simd_type::size());
    for (int i = 0; i + width <= n; i += width) {
      simd_type sx(x + i, Kokkos::Experimental::simd_flag_default);
@@ -116,15 +101,15 @@ There are at least three major approaches to dealing with this issue in general:
    }
    ```
   
-   The main drawback of this approach is the code duplication / repetition.
+   本アプローチの主な欠点は、コードを重複や繰り返しすることです。
 
-3. Use masks in each iteration:
+4. 各イテレーションでマスクを使用:
 
    ```c++
    #include <Kokkos_SIMD.hpp>
  
-   using simd_type = Kokkos::Experimental::simd<double>;
-   using mask_type = Kokkos::Experimental::simd_mask<double>;
+   simd_type = Kokkos::Experimental::simd<double>　を使用;
+   mask_type = Kokkos::Experimental::simd_mask<double>　を使用;
    constexpr int width = int(simd_type::size());
    for (int i = 0; i < n; i += width) {
      mask_type mask([] (std::size_t lane) { return i + int(lane) < n; });
@@ -139,16 +124,14 @@ There are at least three major approaches to dealing with this issue in general:
    }
    ```
   
-   The main drawback of this approach is the slight overhead of using masked loads and stores,
-   but it nicely handles data from sources that have neither padded nor changed their data type
-   without any code repetition.
+   本方法の主な欠点は、マスクされたロードやストアを使う際のわずかなオーバーヘッドですが、パディングも変更もされていないソースからのデータを、コードの繰り返しなしにうまく処理できます。
 
-## Vectorization of Library Code
+## ライブラリコードのベクトル化
 
-By using templating, complex mathematical library code can automatically take full advantage of vectorization without changing:
+テンプレートを使うことで、複雑な数学ライブラリコードも変更せずに、ベクトル化の効果を、自動で最大限に活用できます:
 
 ```c++
-template <class T>
+テンプレート <class T>
 KOKKOS_FUNCTION void quadratic_formula(
     T const& a,
     T const& b,
@@ -156,46 +139,45 @@ KOKKOS_FUNCTION void quadratic_formula(
     T& x1,
     T& x2)
 {
-  T discriminant = b * b - 4 * a * c;
+  T 判別関数 = b * b - 4 * a * c;
   T sqrt_discriminant = Kokkos::sqrt(discriminant);
   x1 = (-b + sqrt_discriminant) / (2 * a);
   x2 = (-b - sqrt_discriminant) / (2 * a);
 }
 ```
 
-When instantiated with `T=double`, this function behaves in the classic, familiar, serial sense.
-If we simply instantiate it with `T=Kokkos::Experimental::simd<double>`, it still compiles just the same but now every mathematical operation is guaranteed to emit a vector instruction and the function can compute 4 quadratic formulas at a time on a 256-bit vector CPU.
+`T=double`　でインスタンス化すると、この関数は古典的で馴染み深い直列的な意味で振る舞います。 もし単に `T=Kokkos::Experimental::simd<double>　でインスタンス化しても、コンパイルはほぼ同じですが、すべての数学演算が必ずベクトル命令を出すことが保証され、関数は256ビットベクトル　CPU　上で同時に4つの二次式を計算できます。
 
-Note that Kokkos takes special care to ensure everything that can be done with `double` can also be done with SIMD types, including the multiplication by integer literals `4` and `2` in this example code.
+Kokkosは、ダブルでできることが、SIMD　型でも実行できること、例えばこの例コードの整数リテラル `4` および `2` による掛け算を含め、すべてが実現できるように特別な配慮を行っていることに注意してください。
 
-## Conditionals
+## 条件文
 
-### Conditional assignment
+### 条件付き代入
 
-One of the more difficult things to do with SIMD types is conditional logic. Consider the following code which is responsible for ensuring that the value `x` is not negative (we will ignore the existence of `max` functions for this discussion because it makes for a nice simple example):
+SIMD　型で扱う中で最も難しいことの一つが条件付き論理です。 次のコードを考えます。これは値 `x` が負でないことを保証する役割を担います(この議論では最大関数の存在は、簡単な例としては無視します):
 
 ```c++
 double x;
 if (x < 0) x = 0;
 ```
 
-We cannot naively use SIMD types in this scenario, because `x < 0` is not a boolean value, instead it is a `simd_mask<double, Abi>` object which represents possibly multiple booleans.
+このシナリオでは、単純に　SIMD　型を使うことはできません。なぜなら、 `x < 0` はブール値ではなく、複数のブール値を表現する　simd_mask<double, Abi>　オブジェクトだからです。
 
 ```c++
 Kokkos::Experimental::simd<double> x;
 if (x < 0 /* <- this is not a boolean */) x = 0;
 ```
 
-The ISO C++ consistent solution is to use `where` expressions as follows:
+ISO C++　の一貫した解決策は、ここで次の式を用いることです:
 
 ```c++
 Kokkos::Experimental::simd<double> x;
 where(x < 0, x) = 0;
 ```
 
-### Ternary operator
+### 三項演算子
 
-At the time of this writing, there is also a common practice of using a function that mimics the behavior of the ternary conditional operator `a ? b : c` in a SIMD sense. This means the following are functionally equivalent:
+この書き込み辞典では、SIMD　の意味での三項条件演算子 `a ? b : c` の挙動を模倣する関数を使うのも一般的な慣行です。 つまり、以下のものは機能的に同値です:
 
 ```c++
 bool a;
@@ -219,13 +201,13 @@ auto d = c;
 where(a, d) = b;
 ```
 
-The roadmap regarding the ternary operator is as follows: ISO C++ will likely add the ability to overload this operator in later versions of the language, and the standard library's SIMD types will overload it.
+三項演算子に関するロードマップは、次の通りです:　ISO C++　は後のバージョンでこの演算子をオーバーロードする機能を追加する可能性が高く、標準ライブラリの　SIMD　型はこれを過負荷にします
 
-It is recommended that programmers use `where` expressions as much as possible for conditional logic when using Kokkos SIMD types, because this is consistent with the library solution currently proposed to ISO C++ without relying on non-standard functions or language features not yet available.
+Kokkos SIMD　型を使用する際は、`条件付き`　ロジックで、できるだけ多くの式を使用することが推奨されます。これは、まだ利用されていない非標準関数や言語機能に依存しない、現在提案されている　ISO C++　のライブラリソリューションと整合しているからです。
 
-### Reductions for performance
+### パフォーマンスのための還元
 
-One frustrating aspect of the solutions for conditional logic above is that computations are not skipped, they are simply masked out. Consider the following serial logic:
+上記の条件付き論理の解法で、厄介な点の一つは、計算がスキップされるのではなく、単にマスクアウトされていることです。次の直列論理を考えます:
 
 ```c++
 bool a;
@@ -233,7 +215,7 @@ double b = 1.0;
 if (a) b = very_expensive_function(c, d, e);
 ```
 
-When using `if` statements, `very_expensive_function` is not executed at all unless `a` is `true`. However, in SIMD mode:
+　`if`　文を使用する場合、  `a` が `真`　でない限り、very_expensive_function　は実行されません。しかし、SIMDモードでは:
 
 ```c++
 Kokkos::Experimental::simd_mask<double> a;
@@ -241,9 +223,9 @@ Kokkos::Experimental::simd<double> b = 1.0;
 where(a, b) = very_expensive_function(c, d, e);
 ```
 
-Now `very_expensive_function` is always being executed. What if the probability of `a` being `true` is very low? We would want to skip the computation of `very_expensive_function` if at all possible.
+今や、`very_expensive_function`　は、常に実行されています。 ある存在が真である確率が非常に低いとしたらどうでしょうか?　可能であれば　`very_expensive_function`　の計算を省略したいと考えています。
 
-For this, we have boolean reductions across masks called `all_of`, `none_of`, and `any_of`:
+このため、マスク間のブール還元を `all_of`, `none_of`, and `any_of`　と呼びます:
 
 ```c++
 Kokkos::Experimental::simd_mask<double> a;
@@ -253,4 +235,4 @@ if (Kokkos::Experimental::any_of(a)) {
 }
 ```
 
-Now `very_expensive_function` will only be executed if any of the boolean values in the mask `a` are `true`. If it is common that all of the boolean values in `a` are `false`, then we will spend a lot less time in `very_expensive_function`.
+マスク `a`　のブール値のいずれかが `真`　である場合にのみ、　`very_expensive_function`　が実行されます。 `a`　のすべてのブール値が、 `偽`　であることが多いのであれば、　`very_expensive_function`　にかかる時間は、はるかに短くなります。
