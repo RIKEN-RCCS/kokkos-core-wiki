@@ -1,4 +1,4 @@
-# Subviews
+# サブビュー
 
 After reading this chapter, you should understand the following:
 
