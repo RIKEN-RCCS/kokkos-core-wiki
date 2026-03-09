@@ -1,28 +1,28 @@
-PRs and Reviews
+PRおよびビュー
 ===============
 
-The goal of a review is to ensure that the proposed change is useful and maintainable over the long run. Submitters should consider and reviewers should evaluate the below criteria.
+レビューの目的は、提案された変更が長期的に有用かつ維持可能であることを保証することです。投稿者は以下の基準を考慮し、査読者は評価すべきです。
 
-PR Description
+PR ディスクリプション
 ---------------
 
-- Have a meaningful title: it's easier when creating the changelog or when searching through old PRs
-- Motivate why we should merge the PR: adding/changing code risks introducing a new bug. IMO one person asking for a nice to have feature doesn't qualify.
-- Explain what the PR does in the description: it makes it easier/faster to review
-- Make the PR as small as possible: it's much easier to review five PRs 200 lines each than one single PR with 1000 lines 
-- If a PR is known to create conflict with other active PRs, try to coordinate, and link to each other
-  - if appropriate, explain the desired review/merge order 
-- For complex changes that will require multiple PRs, create an issue to keep track of what has been done and what's left to do.
-- Is the PR focused on a single bugfix or feature?
-  - consider moving self contained changes to separate PRs 
+- 意味のあるタイトルを付けます：変更履歴を作成したり、古いPRを検索する際に扱い易いです。
+- なぜPRを統合すべきかについて、動機付けを行ってください:コードの追加や変更は新たなバグを引き起こすリスクがあります。 個人的には、1人の方が「あれば嬉しい機能」を要望されるだけでは、条件に満たないと考えます。
+- PRがディスクリプションにおいて、何をするのか説明してください:それによって、レビューの作成が、より簡単かつ迅速になります。
+- PRはできるだけ小規模なものにしてください： 1つのPRで1000行をレビューするよりも、5本(PRs200ライン)をレビューする方が、はるかに簡単です。
+- 他の進行中のPRと競合することがわかっている場合、調整を試み、相互に関連付けを行います。
+　- 適宜、所望の審査/統合の順序を説明してください
+- 複数のPRが必要な複雑な変更については 、何が完了し、何が残っているかを管理するためのイシューを作成します。
+- PRは  単一のバグ修正や機能に焦点を当てているのでしょうか?
+  - 独立した変更を、別々のPRに移すことを検討してください。
 
-Public Interfaces
+パブリックインターフェイス
 -----------------
 
-- are there comprehensive tests
-- does the interface meet the use case - and for that matter is there a use case description
-  - is the usage intuitive
-  - do we really want this as a public interface, and maintain it?
+- 包括的なテストはありますか？
+- インターフェースは、使用事例に合っていますか、また使用事例についての説明はありますか？
+  - 直感による使用ですか？
+  - 本当にこれをパブリックインターフェースとして所望し、維持していますか?
 - is the interface API consistent with existing ones?
   - e.g. if everything else takes execution space instances as the first argument, don't make it the last argument
   - does the naming style match other Kokkos APIs
