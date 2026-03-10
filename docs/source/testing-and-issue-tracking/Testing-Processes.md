@@ -29,38 +29,35 @@ clang　形式のファイルは、 `kokkos/.clang-format`　です。 使用す
 
 ## 夜間テスト
 
-Nightly testing covers a wider range of compilers and configuration of Kokkos
-on an extensive list of platforms.
+夜間テストは、広範なリスト上にある、Kokkos　のコンパイラおよび構成の広範囲をカバーしています。
 
-All participating institutions are invited to perform nightly testing.
-Test configurations are given in `kokkos/scripts/testings/` in institution specific test configuration files.
+参加機関は、毎晩の検査を実施するように、求められています。 
+テスト構成は、機関ごとのテスト設定ファイル内の `kokkos/scripts/testings/` で提供されます。
 
-Each institution designates a test POC, who will report failures to the entire Kokkos team,
-and file github issues with reproduction steps.
+各機関は、テスト　POC　を指定し、失敗を　Kokkos　チーム全体に報告し、再生産手順を含む　GitHub　の課題を提出します。
 
-## Integration Testing (Release Testing)
+## 統合テスト(リリーステスト)
 
-In order for a new Kokkos version to be released integration testing is performed.
-Integration testing configurations are determined and maintained by the customer projects.
+新しい Kokkos バージョンをリリースするためには、統合テストが行われます。
 
-This testing has three components:
+本テストには、3つの要素があります:
 
-### Internal Integration Testing
+#　内部統合テスト
 
-Kokkos team members will perform integration testing with a select number of customer codes, they are directly involved with.
-Currently that includes two code bases:
+Kokkos のチームメンバーは、直接関与している、選定された顧客コードとの統合テストを行います。
+現在、それは2つのコードベースを含んでいます::
 
 - Trilinos
 - ArborX
 
-Trilinos in particular consists of several million lines of code over multiple packages.
-Both codes are tested on the primary hardware platforms, and possibly multiple software stacks (compilers in particular).
-They are also tested with a limited set of configurations during nightly testing, allowing the Kokkos team to catch issues early.
+特に、Trilinos　は、複数のパッケージにまたがる数百万行のコードで構成されています。
+両方のコードは主要なハードウェアプラットフォーム、場合によっては複数のソフトウェアスタック(特にコンパイラ)でテストされます。
+また、夜間のテストでは限られた構成でテストされるため、 Kokkos チームは、早期に問題を発見できます。
 
-### Preferred Customer Testing
+### 優先顧客テスト
 
-Customers funded by the same agencies as Kokkos are explicitly asked to test the release candidate before the actual release, and provide feedback.
 This includes currently NNSA and Office of Science DOE users, specifically:
+Kokkos　と同じ機関から資金提供を受けた顧客には、実際のリリース前に候補をテストし、フィードバックを提供するよう、明確に求められています。 これには現在の　NNSA　(国立科学省)　および　科学局　DOE　の利用者、具体的には、以下の通り含まれております：
 
 - SNL Empire
 - SNL LAMMPS
@@ -69,10 +66,8 @@ This includes currently NNSA and Office of Science DOE users, specifically:
 - ORNL Cabana
 - ANL PETSc
 
-### General Community testing
+### 一般地域試験
 
-The release candidate is publicly available as a GitHub branch, and is advertised on the Kokkos Slack channel.
-Any user of Kokkos is encouraged to test the release candidate and provide feedback.
-The testing phase is at least two weeks.
+リリース候補は、GitHub　のブランチとして公開されており、Kokkos Slack　チャンネル上で宣伝されています。Kokkos　のユーザーには、リリース候補をテストし、フィードバックを提供することを奨励しています。検査段階は、少なくとも2週間です。
 
 
