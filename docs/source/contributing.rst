@@ -1,4 +1,4 @@
-Contributing
+投稿
 ============
 
 .. toctree::
@@ -9,30 +9,26 @@ Contributing
    developer-guides/index
    testing-and-issue-tracking
 
-We are open and try to encourage contributions from external developers.
-To do so please first open an issue describing the contribution and then
-issue a pull request against the develop branch.
-For larger features it may be good to get guidance from
-the core development team first through the github issue.
+私たちは、外部デベロッパーからの貢献を積極的に促す準備ができており、そのように努めています。
+そのためには、まず貢献内容を示すイシューを開き、次に開発ブランチに対するプルリクエストを発行してください。
+大規模な機能については、まず　GitHub　の各号を通じてコア開発チームからガイダンスを得ることをお勧めします。 
 
-Note that Kokkos Core is licensed under standard 3-clause BSD terms of use.
-Which means contributing to Kokkos allows anyone else to use your contributions
-not just for public purposes but also for closed source commercial projects.
-For specifics see the `LICENSE <license.html>`__.
+Kokkos Coreは、標準3条項　BSD　利用規約に基づいて、ライセンスを受けていることに注意してください。 つまり、Kokkos　に貢献することにより、他の誰でも貴方の貢献を公共目的のみならず、 クローズドソースの商用プロジェクトのためにも利用できることを意味します。詳細については、　`LICENSE <license.html>`__　を参照してください。
 
-Open an issue/feature req. `ISSUES <https://github.com/kokkos/kokkos/issues>`_
 
-Contributing Documentation
+号/特集記事 req. `ISSUES <https://github.com/kokkos/kokkos/issues>`_　を開いてください。
+
+文書投稿
 --------------------------
 
-Please see the `README <https://github.com/kokkos/kokkos-core-wiki/blob/main/README.md>`_ for general instructions on building the documentation.
+文書構築に関する指示全般については、`README <https://github.com/kokkos/kokkos-core-wiki/blob/main/README.md>`_ を参照してください。
 
-To make it easier to contribute API documentation, we have a page of documentation templates :doc:`here <templates/index>`
+簡単に　API　文書への投稿ができるように、文書テンプレートを用意しています :doc:`here <templates/index>`
 
-Developers' Corner
+ディベロッパーコーナー
 ------------------
 
-* :doc:`Developer Guide  <developer-guides/index>`
+* :doc:`ディベロッパーガイド  <developer-guides/index>`
 
-* :doc:`Kokkos Panning and Testing <testing-and-issue-tracking>`
+* :doc:`Kokkos 計画および試験 <testing-and-issue-tracking>`
 
