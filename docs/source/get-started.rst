@@ -1,4 +1,4 @@
-Get Started
+それでは始めましょう
 ###########
 
 .. toctree::
@@ -13,39 +13,29 @@ Get Started
    get-started/package-managers
 
 
-Want to try Kokkos right away?  Check it out on `Compiler Explorer
+Want to try Kokkos right away?  Check it out on 今すぐ Kokkos を試してみませんか？ `Compiler Explorer でご確認ください。
 <https://godbolt.org/z/svrE563Kn>`_.
 
-:doc:`Quick Start <get-started/quick-start>`
+:doc:`クイックスタート <get-started/quick-start>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This guide provides the minimal first-steps instructions to get started with a
-CMake project and start writing Kokkos code.
+本ガイドでは、CMake プロジェクトを開始し、Kokkos コードの作成を開始するための最小限の最初の手順を説明します。
 
 :doc:`Integrating Kokkos into Your Project <get-started/integrating-kokkos-into-your-cmake-project>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This guide discusses in details how to setup your project to use Kokkos.
+本ガイドでは、Kokkos を使用するためにプロジェクトを設定する方法について詳しく説明します。
 
 :doc:`Requirements <get-started/requirements>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This page details the supported versions of various components required to
-build and use Kokkos, including build systems, vendor toolchains, compilers,
-C++ standards, and target architectures (both CPU and GPU).  A comprehensive
-table lists compatible combinations of these components.
+本ページでは、Kokkos　のビルドと使用に必要な様々なコンポーネント（ビルドシステム、ベンダーツールチェーン、コンパイラ、C++　標準、ターゲットアーキテクチャ（CPU　および　GPUの両方）など）のサポート対象バージョンについて詳しく説明します。これらのコンポーネントの互換性のある組み合わせを網羅した表も用意しています。
 
 :doc:`Building from Source <get-started/building-from-source>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This guide provides instructions for downloading the Kokkos source code,
-configuring to generate the build system, compiling the library, and installing
-it on your system.
+本ガイドでは、Kokkos ソースコードのダウンロード、ビルドシステムを生成するための構成、ライブラリのコンパイル、システムへのインストールの手順について説明します。
 
 :doc:`Configuration Guide <get-started/configuration-guide>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This page provides a comprehensive reference for all Kokkos configuration
-options, including backend selection for targeting specific hardware setups,
-general and backend-specific CMake options, control over third-party library
-usage, and a complete list of supported CPU and GPU architectures.
+本ページでは、特定のハードウェア設定を対象とするバックエンドの選択、一般およびバックエンド固有の CMake オプション、サードパーティライブラリの使用の制御、サポートされている CPU および GPU アーキテクチャの完全なリストなど、すべての Kokkos 構成オプションに関する包括的なリファレンスを提供します。
 
 :doc:`Package Managers <get-started/package-managers>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This page lists package managers that offer pre-built Kokkos packages,
-providing a convenient alternative to building from source.
+このページには、ソースからビルドする代わりに便利な代替手段として、構築前の Kokkos パッケージを提供するパッケージマネージャーがリストされています。
