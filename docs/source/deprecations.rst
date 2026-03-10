@@ -1,15 +1,15 @@
-Deprecations
+非推奨
 ************
 
-Deprecated in Kokkos 4.x
+Kokkos 4.xにおいて非推奨
 ===========================
 
-Deprecated in Kokkos 4.7
+Kokkos 4.7において非推奨
 ---------------------------
 
 * ``KOKKOS_MEMORY_ALIGNMENT[_THRESHOLD]``
-   * replacement: none
-   * Not intended for non-internal use.
+   * 置換: none
+   * 非内部利用を意図したものではありません。
 
 * ``Kokkos::MemoryManaged``
    * replacement: none
