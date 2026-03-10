@@ -37,46 +37,43 @@ CUDA
 HIP
 ===
 
-- When using `HIPManagedSpace`, the memory migrates between the CPU and the GPU if:
-   - the hardware supports it
-   - the kernel was compiled to support page migration
-   - the environment variable `HSA_XNACK` is set to 1
+-  `HIPManagedSpace`　を使用する場合、以下の条件下では、 メモリは　CPU　と　GPU　の間を移動します:
+   - ハードウェアがそれをサポートする場合
+   - カーネルが、ページ移行をサポートするようにコンパイルされた場合
+   - 環境変数 `HSA_XNACK` が 1 に設定されている場合。
 
-   See `here <https://docs.olcf.ornl.gov/systems/frontier_user_guide.html#enabling-gpu-page-migration>`_ for more explanation.
+   より詳細な説明については、 `here <https://docs.olcf.ornl.gov/systems/frontier_user_guide.html#enabling-gpu-page-migration>`_ を参照してください。
 
-- Compatibility issue between HIP and gcc 8. You may encounter the following error:
+- HIP　および　gcc 8間の互換性の問題。 以下のエラーに遭遇する可能性があります:
 
   .. code-block::
 
-     error: reference to __host__ function 'operator new' in __host__ __device__ function
+     エラー: reference to __host__ function 'operator new' in __host__ __device__ function
 
-  gcc 7, 9, and later do not have this issue.
+  gcc 7, 9, 以降では、この問題は発生していません。
 
 SYCL
 ====
 
-- Several of the Kokkos algorithm functions use third-party libraries like oneDPL.
-  When using these, Kokkos doesn't control the kernel launch and thus the user has to make sure that all arguments
-  that are forwarded to the TPL satisfy the sycl::is_device_copyable trait to avoid compiler errors. This holds true in particular
-  for comparators used with Kokkos::sort in Kokkos versions prior to 4.7 and oneDPL versions prior to 2022.8.0.
-  The best advice to give is to make sure the respective parameters are trivially-copyable, e.g., by using raw pointers instead of Kokkos::Views.
-  If that's not possible and the oneDPL version is at least 2022.8.0, specializing sycl::is_device_copyable provides another workaround.
+- Kokkosアルゴリズムのいくつかの関数は、oneDPL　のようなサードパーティによるライブラリを使用しています。これらを使用する場合、Kokkos　はカーネル起動を制御しませんので、ユーザーは、コンパイラエラーを回避するために、TPLに渡されるすべての引数が`cicl::is_device_copyable`　トレイトを満たしていることを確認する必要があります。これは特に、Kokkos 4.7以前のバージョンおよびoneDPL 2022.8.0以前のバージョンで、　Kokkos::sort　と共に使用される比較関数に当てはまります。 
+例えば、Kokkos::Viewsの代わりに生のポインタを使用するなど、各パラメータが単純にコピー可能であることを確認することを、最も推奨します。
+それが不可能な場合で、oneDPLのバージョンが少なくとも、2022.8.0　であるならば、`sycl::is_device_copyable`　を特化させることで、別の回避策を提供できます。
 
   .. code-block:: cpp
 
      MyComparator my_comparator;
      Kokkos::sort(exec, values, my_comparator);
 
-  would give errors similar to
+  以下と同様のエラーを発生させます
 
   .. code-block:: console
 
-     /usr/bin/compiler/../../include/sycl/types.hpp:2572:17: error: static assertion failed due to requirement 'is_device_copyable_v<(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1816:20)> || detail::IsDeprecatedDeviceCopyable<(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1816:20), void>::value': The specified type is not device copyable
+     /usr/bin/compiler/../../include/sycl/types.hpp:2572:17: error: static assertion failed due to requirement 'is_device_copyable_v<(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1816:20)> || detail::IsDeprecatedDeviceCopyable<(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1816:20), void>::value': 特定の型は、コピー可能なデバイスではありません
       2572 |   static_assert(is_device_copyable_v<FieldT> ||
            |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       2573 |                     detail::IsDeprecatedDeviceCopyable<FieldT>::value,
            |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      /usr/bin/compiler/../../include/sycl/types.hpp:2605:7: note: in instantiation of template class 'sycl::detail::CheckFieldsAreDeviceCopyable<(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83), 4>' requested here
+      /usr/bin/compiler/../../include/sycl/types.hpp:2605:7: note: テンプレートクラスのインスタンス化において'sycl::detail::CheckFieldsAreDeviceCopyable<(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83), 4>' requested here
       2605 |     : CheckFieldsAreDeviceCopyable<FuncT, __builtin_num_fields(FuncT)>,
            |       ^
      /usr/bin/compiler/../../include/sycl/types.hpp:2613:7: note: in instantiation of template class 'sycl::detail::CheckDeviceCopyable<(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>' requested here
@@ -88,7 +85,7 @@ SYCL
      /usr/bin/compiler/../../include/sycl/handler.hpp:1694:5: note: in instantiation of function template specialization 'sycl::handler::unpack<sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::ext::oneapi::experimental::properties<std::tuple<>>, false, (lambda at /usr/bin/compiler/../../include/sycl/handler.hpp:1697:21)>' requested here
       1694 |     unpack<KernelName, KernelType, PropertiesT,
            |     ^
-     /usr/bin/compiler/../../include/sycl/handler.hpp:1293:7: note: in instantiation of function template specialization 'sycl::handler::kernel_parallel_for_wrapper<sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::item<1, true>, sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::ext::oneapi::experimental::properties<std::tuple<>>>' requested here
+     /usr/bin/compiler/../../include/sycl/handler.hpp:1293:7: note:  関数テンプレート特殊化のインスタンス化において 'sycl::handler::kernel_parallel_for_wrapper<sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::item<1, true>, sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::ext::oneapi::experimental::properties<std::tuple<>>>' requested here
       1293 |       kernel_parallel_for_wrapper<KName, TransformedArgType, decltype(Wrapper),
            |       ^
      /usr/bin/compiler/../../include/sycl/handler.hpp:2332:5: note: (skipping 7 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
@@ -96,7 +93,7 @@ SYCL
            |     ^
      [...]
 
-  this is fixed by
+  これは以下によって固定されます
 
   .. code-block:: cpp
 
@@ -104,16 +101,16 @@ SYCL
       : std::true_type {};
 
 
-Mathematical functions
+数学関数
 ======================
 
-- Compatibility issue with using-directives and mathematical functions:
+-  using　ディレクティブと数学関数の互換性問題:
 
 .. code-block:: cpp
 
     #include <Kokkos_Core.hpp>
     
-    using namespace Kokkos;  // avoid using-directives
+    using namespace Kokkos　を使用;  // avoid using　ディレクティブを回避
 
     KOKKOS_FUNCTION void do_math() {
       auto sqrt5 = sqrt(5);  // error: ambiguous ::sqrt or Kokkos::sqrt?
@@ -124,27 +121,24 @@ Mathematical functions
 
 .. |Compatibility| replace:: Kokkos compatibility guidelines
 
-The using-directive ``using namespace Kokkos;`` is highly discouraged (see
-|Compatibility|_) and will cause compilation errors in presence of unqualified
-calls to mathematical functions.  Instead, prefer explicit qualification
-``Kokkos::sqrt`` or an using-declaration ``using Kokkos::sqrt;`` at local
-scope.
+using ディレクティブ   ``using namespace Kokkos;`` の使用は、大いに避けるべきです(
+|Compatibility|_　参照) 。　数学関数への修飾子なしの呼び出しが存在する場合、コンパイルエラーが発生するからです。代わりに、  ローカルスコープでは、明示的な修飾子 ``Kokkos::sqrt`` または、using宣言　``using Kokkos::sqrt;``　を選択してください。
 
-Mathematical constants
+数学定数
 ======================
 
-- Avoid taking the address of mathematical constants in device code.  It is not supported by some toolchains, hence not portable.
+- デバイスコード内での数学定数のアドレス取得は避けてください。 一部のツールチェーンではサポートされていないため、移植性がありません。
 
 .. code-block:: cpp
 
     #include <Kokkos_Core.hpp>
 
     KOKKOS_FUNCTION void do_math() {
-      // complex constructor takes scalar arguments by reference!
+      // 複合コンストラクタは、スカラー引数を参照渡しで受け取ります！
       Kokkos::complex z1(Kokkos::numbers::pi);
-      // error: identifier "Kokkos::numbers::pi" is undefined in device code
+      // エラー: 識別子 "Kokkos::numbers::pi" は、 デバイスコード内で未定義です
 
-      // 1*pi is a temporary
+      // 1*pi は、 一時的なものです
       Kokkos::complex z2(1 * Kokkos::numbers::pi);  // OK
 
       // copy into a local variable
