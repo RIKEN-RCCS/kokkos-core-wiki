@@ -90,7 +90,7 @@ auto adjacent_difference(const std::string& label,                              
    `first_dest + 1` for (2,4)　について、または (6,8)　について `view_dest`　において、範囲の初めに書き込みます。
 
 
-## Parameters and Requirementsパラメータおよび要件
+## パラメータおよび要件
 
 - `exespace`:
   - 実行空間
