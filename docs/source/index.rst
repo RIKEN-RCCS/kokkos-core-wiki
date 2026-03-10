@@ -1,83 +1,83 @@
-.. role:: raw-html-m2r(raw)
+.. ロール:: raw-html-m2r(raw)
    :format: html
 
 .. include:: mydefs.rst
 
-Kokkos: The Programming Model
+Kokkos: プログラミングモデル
 =============================
 
 .. admonition:: :medium:`C++ Performance Portability Programming Model`
     :class: important
 
-    :medium:`Kokkos Core implements a programming model in C++ for writing performance portable applications targeting all major HPC platforms. For that purpose it provides abstractions for both parallel execution of code and data management. Kokkos is designed to target complex node architectures with N-level memory hierarchies and multiple types of execution resources. It currently can use CUDA, HIP, SYCL, HPX, OpenMP and C++ threads as backend programming models with several other backends development.`
+　:medium:`Kokkos Coreは、主要な　HPC　プラットフォームすべてを対象とした、パフォーマンスポータブルなアプリケーションを記述するためのC++　の中に、プログラミングモデルを実装しています。 その目的のために、コードの並列実行とデータ管理の両方に対する抽象化を提供します。 Kokkos　は、N　階層のメモリ階層と複数の種類の実行リソースを備えた複雑なノードアーキテクチャを対象に設計されています。 現在、それは、CUDA、HIP、SYCL、HPX、OpenMP、C++　スレッドを、その他複数のバックエンドの開発を伴って`バックエンドプログラミングモデルとして利用可能です。`
 
-The `Kokkos Ecosystem <https://github.com/kokkos>`_ includes:
+`Kokkos エコシステム <https://github.com/kokkos>`_ includes:
 
-.. list-table::
-   :widths: 30 50 20
-   :header-rows: 1
-   :align: left
+.. リスト表::
+   :幅: 30 50 20
+   :ヘッダー列: 1
+   :配列: 左
 
-   * - Name
-     - Info
+   * - 名前
+     - 情報
      -
 
    * - ``kokkos``
-     - (this library) Programming Model - Parallel Execution and Memory Abstraction
-     - `GitHub link <https://github.com/kokkos/kokkos>`__
+     - (本ライブラリ) プログラミングモデル - 並列実行とメモリ抽象化  
+     - `GitHub リンク <https://github.com/kokkos/kokkos>`__
 
    * - ``kokkos-kernels``
-     - Sparse, dense, batched math kernels
-     - `GitHub link <https://github.com/kokkos/kokkos-kernels>`__
+     - スパース、デンス、バッチ処理された数学カーネル
+     - `GitHub リンク <https://github.com/kokkos/kokkos-kernels>`__
 
    * - ``kokkos-tools``
-     - Profiling and debugging tools
-     - `GitHub link <https://github.com/kokkos/kokkos-tools>`__
+     - プロファイリングおよびデバッグツール
+     - `GitHub リンク <https://github.com/kokkos/kokkos-tools>`__
 
    * - ``pykokkos``
-     - Provides Python bindings to the Kokkos performance portable parallel programming.
-     - `GitHub link <https://github.com/kokkos/pykokkos>`__
+     - パフォーマンスポータブル並列プログラミングへPythonバインディングを提供します。
+     - `GitHub リンク <https://github.com/kokkos/pykokkos>`__
 
    * - ``kokkos-remote-spaces``
-     - Shared memory semantics across multiple processes
-     - `GitHub link <https://github.com/kokkos/kokkos-remote-spaces>`__
+     - 複数プロセスにわたる共有メモリのセマンティクス
+     - `GitHub リンク <https://github.com/kokkos/kokkos-remote-spaces>`__
 
    * - ``kokkos-resilience``
-     - Resilience and Checkpointing Extensions for Kokkos
+     - 　Kokkos　向けレジリエンスとチェックポイント拡張機能
      - `GitHub link <https://github.com/kokkos/kokkos-resilience>`__
 
-Related Work for the C++ standard library
+　C++　標準ライブラリのための関連作業
 -----------------------------------------
 
-Relevant and related efforts include:
+関連および関係する取り組みには以下が含まれます:
 
-.. list-table::
-   :widths: 20 45 20 15
-   :header-rows: 1
-   :align: left
+.. リスト表::
+   :幅: 20 45 20 15
+   :ヘッダー列: 1
+   :配列: 左
 
-   * - Name
-     - Info
-     - Proposal
+   * - 名前
+     - 情報
+     - 提案
      -
 
    * - ``mdspan``
-     - Reference implementation of mdspan targeting C++23
+     -  C++23　を対象とした　mdspan の参照実装
      - `P0009 <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p0009r16.html>`__
      - `GitHub link <https://github.com/kokkos/mdspan>`__
 
    * - ``stdBLAS``
-     - Reference Implementation for stdBLAS
+     -  stdBLAS　についての参照実装
      - `P1673 <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p1673r8.html>`__
      - `GitHub link <https://github.com/kokkos/stdBLAS>`__
 
-Questions?
+質問？
 ----------
 
-Find us on Slack: https://kokkosteam.slack.com or
-open an issue on `github <https://github.com/kokkos/kokkos/issues>`_.
+スラック: https://kokkosteam.slack.com 上で見つけてください、または
+open an issue on `github <https://github.com/kokkos/kokkos/issues>`_　上でイシューを開いてください
 
-Website Content
+ウェブサイトコンテンツ
 ---------------
 
 .. toctree::
