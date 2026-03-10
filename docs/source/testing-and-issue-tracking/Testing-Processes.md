@@ -1,45 +1,33 @@
-# Kokkos Testing Processes and Change Process
+# Kokkos テストプロセスおよび変更プロセス
 
-Kokkos testing falls into three categories:
+Kokkos のテストは、以下の3つのカテゴリーに属します::
 
- - Pull Request Testing
- - Nightly Testing
- - Integration Testing (Release Testing)
+ - プルリクエストテスト 
+ - 夜間テスト
+ - 統合テスト(リリーステスト)
+
+## プルリクエストテスト
+
+Kokkos のすべての変更は、Kokkos の開発 github.com ブランチに対するプルリクエストを通じて導入されます。 プルリクエストは、GitHub Actions　のワークフローや外部のテストサーバーでテストされます。
+
+合併するには2つの条件を満たす必要があります:
+
+1) Automatic testing of the pull request must pass.プルリクエストの自動テストは合格しなければなりません。
+2) Kokkos　のコア開発者2名が、Kokkos　の開発者標準に適合しているか変更を確認した後、プルリクエストを承認しなければなりません。
+
+プルリクエストテストでテストされた構成は主要な展開システムをカバーし、各種機関のジェンキンスやトラビスによって実行されます。
+
+新しいテスト構成は、Kokkos　チームの開発者会議で提案されます。 新しい構成の導入は、テストリソースの可用性、テストパイプライン全体の期間、主要なコンピューティング施設のソフトウェアスタックに基づいて決定されます。
  
-## Pull Request Testing
+プルリクエストテストでは、リポジトリで指定された　clang-format　スタイルがフォーマットに合っているかの検証も含まれます。
 
-All changes to Kokkos are introduced via pull requests against the github.com develop branch of Kokkos. 
-Pull requests are tested using GitHub actions workflows, as well as external testing servers.
+テスト設定はkokkos/jenkins および　`kokkos/.github/workflows/*` ファイルで定義され、公式の主要なソフトウェアスタックサポートを決定します。 テスト済みのコンパイラバージョンもここに掲載しています [here](https://kokkos.github.io/kokkos-core-wiki/requirements.html)。これらのテスト構成は、(ごくわずかに)　)。ハードウェアプラットフォーム(例:　NVIDIA、Intel、および　AMD)、コンパイラ(例:　GCC、Clang、NVC++)、C++標準　(17-23)、Kokkos　のバックエンド　(例:Cuda、OpenMP、HIP)、Kokkos　の設定オプション　(例:Debug、Relocateable Device Code)などのクロス積をカバーしています。
 
-In order to be merged two conditions must be met:
+clang　形式のファイルは、 `kokkos/.clang-format`　です。 使用する　clang　形式のバージョンは、`.clang-format`　の設定ファイルのヘッダー内のコメントとして指定されています。
 
-1) Automatic testing of the pull request must pass.
-2) Two Kokkos core developer must approve the pull request, after checking the changes for alignment with Kokkos developer standards. 
+プルリクエストを統合できるのは主要な　Kokkos　の管理者だけで、実施されたレビューが望ましい徹底度を満たしているかどうかを判断する責任があります。
 
-The tested configurations in Pull Request testing cover the major deployment systems
-and are executed via jenkins and travis at various institutions.
-
-New test configurations are proposed to the Kokkos team in its developer meeting.
-Inclusion of new configurations is decided based on test resource availability,
-duration of the entire testing pipeline, and primary computing facility software stacks.
-
-Pull request testing also includes verification that the formatting meets 
-the clang-format style specified in the repository. 
-
-Test configurations are defined in the `kokkos/.jenkins`, and `kokkos/.github/workflows/*` files and determine the official
-primary software stack support.
-The tested compiler versions are also listed [here](https://kokkos.github.io/kokkos-core-wiki/requirements.html).
-These test configurations (sparsely) cover the cross product of hardware platforms (e.g. NVIDIA. Intel, and AMD),
-compilers (e.g. GCC, Clang, NVC++), C++ standards (17-23), Kokkos backends (e.g. Cuda, OpenMP, and HIP) and Kokkos
-configuration options (e.g. Debug, Relocatable Device Code).
-
-The clang-format style file is `kokkos/.clang-format`. The clang-format version
-to use is specified as a comment in the header of the `.clang-format`
-configuration file.
-
-Only the primary Kokkos maintainers can merge pull requests, they have the responsibility to judge whether conducted reviews meet the desired thoroughness.
-
-## Nightly Testing
+## 夜間テスト
 
 Nightly testing covers a wider range of compilers and configuration of Kokkos
 on an extensive list of platforms.
