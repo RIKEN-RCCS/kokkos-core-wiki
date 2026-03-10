@@ -1,4 +1,4 @@
-Kokkos Planning and Testing
+Kokkos 計画およびテスト
 ###########################
 
 .. toctree::
