@@ -1,45 +1,38 @@
-Known issues
+既知の問題
 ############
 
-.. role:: cpp(code)
+.. ロール:: cpp(code)
     :language: cpp
 
-``Windows.h`` header
+``Windows.h`` ヘッダー
 ====================
 
-When using Kokkos on Windows a program or library might include `windows.h`. This is problematic as this header defines two macros with the names `min` and `max` unless `NOMINMAX` is defined previously.
-The preprocessor replaces strings in the source code with the macros yielding an uninterpretable result and thus compilation fails.
-Therefore, the header `Kokkos_Core.hpp` is protected against these macros, meaning they are undefined at the beginning and redefined at the end of the header file.
-Even though definitions inside `Kokkos_Core.hpp` are protected against the macros, code outside is not.
-Thus, it is on the user to deal with the macros being defined, either by defining `-DNOMINMAX` or `/DNOMINMAX` in the compile line (preferred) or by putting `()` around names that contain `min` or `max`.
+Windows　で　Kokkos　を使用する場合、プログラムやライブラリが　`windows.h`　を含む場合があります。なぜなら、このヘッダーは、事前に　`NOMINMAX`　が定義されなければ、`min`　と　`max`　という名前の2つのマクロを定義するため、問題を含みます。プリプロセッサはソースコード内の文字列をマクロで置換するため、解釈不能な結果となり、コンパイルは失敗に終わります。したがって、ヘッダーファイル `Kokkos_Core.hpp` はこれらのマクロに対して保護されており、つまりそれらはヘッダーファイルの先頭では未定義であり、末尾で再定義されるということです。`Kokkos_Core.hpp`　内の定義はマクロに対して保護されているが、外部からのコードは保護されていません。 したがって、定義されるマクロへの対応として、コンパイルラインで、`-DNOMINMAX` または `/DNOMINMAX` を定義する（推奨）ことによる、あるいは `min` または `max` を含む名前に `()` を付けることによるかは、ユーザー次第である。
 
 CUDA
 ====
 
-- With some MPI versions or when using a legacy NVIDIA GPU, the default allocation mechanism of Kokkos (from version 4.2 to 4.4) for
-  `CudaSpace` can cause issues. For example, MPI may crash with illegal memory accesses, or Kokkos' initialization
-  can report errors like:
+- 一部の　MPI　バージョンまたはレガシー　NVIDIA GPU　を使用する場合、Kokkos（バージョン4.2から4.4）の　`CudaSpace`　に対するデフォルトの割り当てメカニズムが問題を引き起こす可能性があります。例えば、MPI　は不正なメモリアクセスでクラッシュする可能性があり、Kokkos　の初期化では次のようなエラーが報告される場合があります:
 
   .. code-block::
 
-     terminate called after throwing an instance of 'Kokkos::Experimental::CudaRawMemoryAllocationFailure'
+    'Kokkos::Experimental::CudaRawMemoryAllocationFailure'　のインスタンスをスローした後、terminate が呼び出されました。
 
-  A fix is to disable asynchronous memory allocations by adding the following to CMake arguments:
+  フィックスとは、以下の CMake 引数を加えることにより、非同期メモリっ割り当てを無効にすることです:
 
   .. code-block::
 
      -DKokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC=OFF
 
-  A technical explanation of why disabling this policy is helpful for making some MPI implementations work, especially in their low-level layers
-  like UCX, is partly due to the fact that `cudaMallocAsync` uses `cudaMemPool_t,` and the default memory pool
-  does not support interprocess communication (IPC) without tweaking (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#interprocess_communication_support).
-  The user should set up the default memory pool to properly support IPC (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#library_composability).
+このポリシーを無効化することが、特に　UCX　のような低レベル層において、一部の　MPI　実装を機能させるのに役立つ理由は何かについての技術的に説明すると、それは部分的には、`cudaMallocAsync` が、 `cudaMemPool_t,`を使用しており、デフォルトのメモリプールは調整なしではプロセス間通信（IPC）をサポートしないことに起因しています。 (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#interprocess_communication_support)。ユーザーは、IPC　を適切にサポートするためにデフォルトのメモリプールを設定する必要があります (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#library_composability)。
 
-  Therefore, from version 4.5, the default behavior for Kokkos is to preventively disable `cudaMallocAsync.`
+  そのため、バージョン4.5からは、Kokkosのデフォルト動作では、予防上 `cudaMallocAsync.`を無効にします。
 
-- CUDA 11.0 through 11.2 are not compatible with glibc 2.34 librt stubs. That issue is related to how the CMake package handles linking with librt. For more information please look at issue `#7512 <https://github.com/kokkos/kokkos/issues/7512>`_.
+- CUDA 11.0 から 11.2 は、 glibc 2.34 の librt スタブと互換性がありません。そのイシューは、CMakeパッケージが　librt　とのリンクをどのように処理するかに関連しています。詳細については、イシュー　`#7512　をご覧ください。
+<https://github.com/kokkos/kokkos/issues/7512>`_.
 
-- Building an application that uses Kokkos with Microsoft Visual Studio and the `Cuda` backend enabled, requires the use of the CMake language feature, see :ref:`keywords_enable_backend_specific_options`.
+- Microsoft Visual Studio　と　Cuda　バックエンドを有効化した状態で、Kokkos　を利用するアプリケーションを構築するには、CMake　言語機能の使用が必要です。 以下を参照してください
+:ref:`keywords_enable_backend_specific_options`.
 
 HIP
 ===
