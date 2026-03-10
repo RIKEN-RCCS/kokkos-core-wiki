@@ -1,52 +1,43 @@
-Quick Start
+クイックスタート
 ===========
 
-This guide is intended to jump start new Kokkos users (and beginners, in particular).
+このガイドは、新しい　Kokkos　ユーザー(特に初心者)　のジャンプスタートを目的としたものです。
 
 
-Prerequisites
+前提条件
 ~~~~~~~~~~~~~
 
-To complete this tutorial, you'll need:
+このチュートリアルを完了するには、以下の条件が必要です:
 
-* a compatible operating system (e.g. Linux, macOS, Windows).
-* a compatible C++ compiler that supports at least C++20.
-* `CMake <https://cmake.org/>`_ and a compatible build tool for building the
-  project.
-
-  * Compatible build tools include `Make
-    <https://www.gnu.org/software/make/>`_, `Ninja <https://ninja-build.org>`_,
-    and others - see `CMake Generators
-    <https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html>`_ for
-    more information.
-
-See :doc:`requirements` for more information about platforms compatible with
-Kokkos and a list of supported versions of compilers and software development
-kits (SDKs).
-
-If you don’t already have CMake installed, see the `CMake installation guide
-<https://cmake.org/install>`_.
+* 互換性のあるオペレーティングシステム(例: Linux、macOS、Windows)を用意しています。
+* 少なくとも　C++20　をサポートする、互換性のある　C++　コンパイラです。
+* `CMake <https://cmake.org/>`_ とプロジェクト構築のための互換性のある構築ツール。
 
 
-Set up a project
+  * 互換性のある構築ツールには、　`Make
+    <https://www.gnu.org/software/make/>`_, `Ninja <https://ninja-build.org>`_　などがあります - 詳細については、`CMake Generators
+    <https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html>`_ *　を参照してください。
+
+Kokkos 対応プラットフォーム、サポートされたコンパイラおよびソフトウェア開発キット　(SDK)　のバージョン一覧の詳細については、 :doc:`requirements` を参照してください。
+
+ CMake をインストールしていない場合  は、`CMake installation guide
+<https://cmake.org/install>`_.　を参照してください。ください。
+
+
+プロジェクトのセットアップ
 ~~~~~~~~~~~~~~~~
 
-CMake uses a file named ``CMakeLists.txt`` to configure the build system for a
-project. You’ll use this file to set up your project and declare a dependency
-on Kokkos.
+CMakeは、``CMakeLists.txt`` というファイルを使って  プロジェクトの構築システムを設定します。 このファイルを使ってプロジェクトを設定し、Kokkos　への依存を宣言します。
 
-First, create a directory for your project:
+まず、プロジェクト用のディレクトリを作成します:
+
 
 .. code-block:: sh
 
   > mkdir MyProject && cd MyProject
 
-Next, you’ll create the ``CMakeLists.txt`` file and declare a dependency on
-Kokkos. There are many ways to express dependencies in the CMake ecosystem; in
-this tutorial, you’ll use the `FetchContent CMake module
-<https://cmake.org/cmake/help/latest/module/FetchContent.html>`_. To do this,
-in your project directory (``MyProject``), create a file named
-``CMakeLists.txt`` with the following contents:
+次に、``CMakeLists.txt`` ファイルを作成し、Kokkos　への依存を宣言します。 CMake　エコシステムでは、依存関係を表現する方法は多岐にわたります；　このチュートリアルでは、　`FetchContent CMake module
+<https://cmake.org/cmake/help/latest/module/FetchContent.html>`_.　を使用します。 そのために、プロジェクトディレクトリ(``MyProject``)に、　以下の内容を含む　``CMakeLists.txt`` というファイルを作成します：
 
 .. code-block:: cmake
 
@@ -60,23 +51,21 @@ in your project directory (``MyProject``), create a file named
   )
   FetchContent_MakeAvailable(Kokkos)
 
-The above configuration declares a dependency on Kokkos which is downloaded
-from GitHub.
-``5.0.0`` is the Kokkos version to use; we generally recommend using the
-`latest available <https://github.com/kokkos/kokkos/releases/latest>`_.
+上記の設定は、GitHub　からダウンロードした　Kokkos　への依存関係を宣言しています。
+``5.0.0`` は、使用する Kokkos バージョンです; 通常は、
+`latest available <https://github.com/kokkos/kokkos/releases/latest>`_.　の使用を推奨します。
 
-For more information about how to create ``CMakeLists.txt files``, see the
+ ``CMakeLists.txt files``　の作成方法の詳細情報については、 
 `CMake Tutorial
-<https://cmake.org/cmake/help/latest/guide/tutorial/index.html>`_.
+<https://cmake.org/cmake/help/latest/guide/tutorial/index.html>`_　を参照してください。
 
 
-Create and run an executable
+実行ファイルを作成して実行
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-With Kokkos declared as a dependency, you can use Kokkos code within your own
-project.
+Kokkos を依存関係として宣言すれば、自分のプロジェクト内で、Kokkos　のコードを使うことができます。
 
-As an example, create a ``HelloKokkos.cpp`` with the following content:
+例えば、  以下の内容で、 ``HelloKokkos.cpp`` を作成します:
 
 .. code-block:: c++
 
@@ -85,16 +74,16 @@ As an example, create a ``HelloKokkos.cpp`` with the following content:
   int main(int argc, char** argv) {
     Kokkos::initialize(argc, argv);
     {
-      // Allocate a 1-dimensional view of integers
+      // 整数の1次元ビューを割り当てます
       Kokkos::View<int*> v("v", 5);
-      // Fill view with sequentially increasing values v=[0,1,2,3,4]
+      // ビューを連続的に増加する値v=[0,1,2,3,4]　を入力します
       Kokkos::parallel_for("fill", 5, KOKKOS_LAMBDA(int i) { v(i) = i; });
-      // Compute accumulated sum of v's elements r=0+1+2+3+4
+      //  vの要素 r=0+1+2+3+4 の累積和を計算します。
       int r;
       Kokkos::parallel_reduce(
         "accumulate", 5,
         KOKKOS_LAMBDA(int i, int& partial_r) { partial_r += v(i); }, r);
-      // Check the result
+      // 結果を確認してください
       KOKKOS_ASSERT(r == 10);
     }
     Kokkos::printf("Goodbye World\n");
@@ -102,11 +91,9 @@ As an example, create a ``HelloKokkos.cpp`` with the following content:
     return 0;
   }
 
-The above program code includes the main Kokkos header file and demonstrates
-how to initialize and finalize the Kokkos execution environment.
+上記のプログラムコードには、Kokkos　のメインヘッダーファイルが含まれており、Kokkos　の実行環境の初期化および最終処理方法を示しています。
 
-To build the code, add the following couple lines to the end of your
-``CMakeLists.txt`` file:
+コード構築のために、``CMakeLists.txt`` ファイル　の終わりの次の数行を追加します:
 
 .. code-block:: cmake
 
@@ -114,61 +101,55 @@ To build the code, add the following couple lines to the end of your
   target_link_libraries(HelloKokkos Kokkos::kokkos)
 
 
-The above configuration declares the executable you want to build
-(``HelloKokkos``), and links it to Kokkos.
+上記の設定では、構築したい実行ファイル(``HelloKokkos``)　を宣言し、それを　Kokkos　にリンクします
 
-Now you can build and run your Kokkos program.
+これで　Kokkos　のプログラムを構築および実行可能です。
 
-Start with calling ``cmake`` to configure the project and generate a native
-build system:
+まず ``cmake`` を呼び出して、プロジェクトを設定し、ネイティブビルドシステムを生成します:
 
 .. code-block:: sh
 
   MyProject> cmake -B builddir
-  -- The C compiler identification is GNU 13.3.0
-  -- The CXX compiler identification is GNU 13.3.0
+  -- C　コンパイラ識別は、 GNU 13.3.0
+  -- CXX コンパイラ識別は、 GNU 13.3.0
   ...
-  -- Build files have been written to: .../MyProject/builddir
+  -- 構築ファイルは、 .../MyProject/builddir　に書き込まれています：
 
 
-.. note::
-
-  If you want to target a NVIDIA GPU, you will need to pass an extra
-  ``-DKokkos_ENABLE_CUDA=ON`` argument to the cmake command above. For an AMD
-  or an Intel GPU, you would use ``-DKokkos_ENABLE_HIP=ON`` or
-  ``-DKokkos_ENABLE_SYCL=ON`` respectively. For a list of options and variables
-  available at configuration time, see :doc:`configuration-guide`.
+.. 注意事項::
 
 
-Then invoke that build system to actually compile/link the project:
+NVIDIA GPU　をターゲットにしたい場合は、上記の　cmake　コマンド  に、追加 の ``-DKokkos_ENABLE_CUDA=ON`` 引数を渡す必要があります。AMD　または　Intel GPUについては、それぞれ``-DKokkos_ENABLE_HIP=ON`` または
+  ``-DKokkos_ENABLE_SYCL=ON``　と表記します。 設定時に利用可能なオプションや変数の一覧については、:d oc:'configuration-guide'」を参照してください。
+
+
+次に、その構築システムを呼び出して、実際にプロジェクトをコンパイル/リンクします:
 
 .. code-block:: sh
 
   MyProject> cmake --build builddir
-  Scanning dependencies of target ...
+  対象の依存性をスキャン ...
   ...
-  [100%] Built target HelloKokkos
+  [100%] 構築対象 HelloKokkos
 
-Finally try to use the newly built ``HelloKokkos``:
+最後に、新たに構築した ``HelloKokkos``　の使用を試します:
 
 .. code-block:: sh
 
   MyProject> cd builddir
 
   MyProject/builddir> HelloKokkos
-  Goodbye World
+　グッバイワールド
 
-.. note::
+.. 注意事項::
 
-   Depending on your shell, the correct syntax may be ``HelloKokkos``,
-   ``./HelloKokkos`` or ``.\HelloKokkos``.
+   Depending on your shell, the correct syntax may beシェルによっては、正しい構文は、 ``HelloKokkos``、
+   ``./HelloKokkos`` または ``.\HelloKokkos``　といった場合もあります。
 
-Congratulations! You’ve successfully built and run a test binary using Kokkos.
+おめでとうございます!　Kokkos　を使ってテストバイナリを成功裏に構築し実行することに成功しました！
 
 
-Getting help
+ヘルプ
 ~~~~~~~~~~~~
 
-If you need additional help getting started, please join the `Kokkos Slack
-Workspace <https://kokkosteam.slack.com>`_. If you have trouble signing up see the
-:ref:`FAQ entry on how to join <join-slack-workspace>`.
+スタートについて、さらにサポートが必要な場合は、 `Kokkos Slack Workspace に参加してください。 サインアップに問題が生じた場合は、参加方法 <https://kokkosteam.slack.com>`_　上の、:ref:`FAQ:　エントリーをご覧ください。
