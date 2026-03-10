@@ -1,25 +1,26 @@
-Requirements
+必要要件
 ############
 
-Compiler Versions
+Compiler Versionsコンパイラバージョン
 =================
 
-Generally, Kokkos should work with all compiler versions newer than the minimum.
-We also recommend using updated compilers where possible to benefit from improvements.
-However, in complex code, we have to work around compiler bugs. So compiler versions we don't test may have issues we are unaware of.
+一般的に、Kokkos　は最低限のコンパイラバージョンより新しいすべてのコンパイラで動作することになっています。
+また、可能な限り、最新のコンパイラを使用することを推奨します。
+しかし、複雑なコードでは、コンパイラのバグを回避しなければなりません。 そのため、テストしないコンパイラバージョンには、気付かれていない問題があるかもしれません。
 
-Furthermore, compilers not listed here may work too.
+さらに、ここに挙げていないコンパイラも動作する場合があります。
+
 
 Kokkos 5.x
 ----------
 
-.. list-table::
-    :widths: 30 35
-    :header-rows: 1
-    :align: center
+.. リスト表::
+    :幅: 30 35
+    :header-rowsヘッダー列: 1
+    :配列: 中央
 
-    * - Compiler
-      - Minimum version
+    * - コンパイラ
+      - 最小バージョン
 
     * * GCC 
       * 10.4.0
@@ -45,7 +46,7 @@ Kokkos 5.x
     * * NVC++ 
       * 22.3
 
-    * * NVC++ (OpenACC) (experimental) 
+    * * NVC++ (OpenACC) (実験的) 
       * 23.7
 
     * * ROCM 
@@ -60,22 +61,22 @@ Kokkos 5.x
 Kokkos 4.x
 ----------
 
-.. list-table::
-    :widths: 30 35 35
-    :header-rows: 1
-    :align: center
+.. リスト表::
+    :幅: 30 35 35
+    :ヘッダー列: 1
+    :配列: 中央
 
-    * - Compiler
-      - Minimum version
-      - Primary tested versions
+    * - コンパイラ
+      - 最小バージョン
+      - 主要テスト済みバージョン
 
     * * GCC 
       * 8.2.0
-      * 8.4.0, latest
+      * 8.4.0, 最新
 
     * * Clang (CPU)
       * 8.0.0
-      * 8.0.0, latest
+      * 8.0.0, 最新
 
     * * Clang (CUDA)
       * 10.0.0
@@ -85,7 +86,7 @@ Kokkos 4.x
       * 8.0
       * latest
 
-    * * Intel Classic (not recommended)  :red:`[until 4.5]`
+    * * Intel Classic (非推奨)  :red:`[ 4.5まで]`
       * 19.0.5
       * 2021.8.0
 
@@ -105,7 +106,7 @@ Kokkos 4.x
       * 22.3
       * 22.9
 
-    * * NVC++ (OpenACC) (experimental) 
+    * * NVC++ (OpenACC) (実験的) 
       * 23.7
       * 23.7
 
@@ -124,14 +125,14 @@ Kokkos 4.x
 Kokkos 3.x
 ----------
 
-.. list-table::
-    :widths: 30 35 35
-    :header-rows: 1
-    :align: center
+.. リスト表::
+    :幅: 30 35 35
+    :header-rowsヘッダー列: 1
+    :配列: 中央
 
-    * - Compiler
-      - Minimum version
-      - Primary tested versions
+    * - コンパイラ
+      - 最小バージョン
+      - 主要テスト済みバージョン
 
     * * GCC 
       * 5.3.0
@@ -173,17 +174,20 @@ Kokkos 3.x
       * 20.1
       * 20.1
 
-Build system:
+構築システム:
 =============
 
-* CMake >= 3.16: required
-* CMake >= 3.18: Fortran linkage. This does not affect most mixed Fortran/Kokkos builds. See `known build issues <https://github.com/kokkos/kokkos/blob/master/BUILD.md#known-issues>`_.
+* CMake >= 3.16: が必須
+* CMake >= 3.18: Fortranリンク。これは、ほとんどの　Fortran/Kokkos　混合構築には、影響しません。 既知の構築問題<https://github.com/kokkos/kokkos/blob/master/BUILD.md#known-issues>`_　を参照してください。
 * CMake >= 3.21.1 for NVC++
 
 Primary tested compiler are passing in release mode
 with warnings as errors. They also are tested with a comprehensive set of
 backend combinations (i.e. OpenMP, Pthreads, Serial, OpenMP+Serial, ...).
 We are using the following set of flags:
+主要テスト済みコンパイラは、リリースモードにおいて、エラーとして警告を出して、合格しています。 包括的なバックエンドの組み合わせでテストされます（つまり、OpenMP、Pthreads、Serial、OpenMP+Serial　等）。
+以下のフラッグセットを使用しています:
+
 
 * GCC:
 
@@ -218,6 +222,6 @@ We are using the following set of flags:
   -Werror -Wsign-compare -Wtype-limits
   -Wuninitialized
 
-.. note:: 
+.. 注意事項:: 
 
-  Other compilers are tested occasionally, in particular when pushing from develop to master branch. These are tested less rigorously without ``-Werror`` and only for a select set of backends.
+  他のコンパイラも、時折、特に、開発ブランチからマスターブランチへのプッシュ時にテストされます。。 これらは、``-Werror`` なしで、限られたバックエンドに対しては、あまり厳密なテストは行われていません。
