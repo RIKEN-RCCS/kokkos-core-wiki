@@ -1,4 +1,4 @@
-API References
+API 参照
 ##############
 
 .. toctree::
@@ -10,30 +10,32 @@ API References
    API/containers-index
    API/simd-index
    API/alphabetical
-   deprecations
+   非推奨
 
 :doc:`API/core-index`
 ~~~~~~~~~~~~~~~~~~~~~
-The fundamental abstractions for execution (``parallel_for``,
-``parallel_reduce``, ``parallel_scan``) and data (``View``).
+実行の基本抽象化  (``parallel_for``,
+``parallel_reduce``, ``parallel_scan``) およびデータ (``View``).
 
 :doc:`API/algorithms-index`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Utility classes for pseudo-random number generation, sorting algorithms,
-STL-like parallel algorithms.
+擬似生成乱数用のユーティリティ・クラス、ソートアルゴリズム、
+STL様 並列アルゴリズム
 
 :doc:`API/containers-index`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Exotic view-based containers, such as ``DualView``, ``ScatterView``, or ``OffsetView``.
+ ``DualView``、 ``ScatterView``、 または ``OffsetView``　等、異色ビュー型コンテナ
+
 
 :doc:`API/simd-index`
 ~~~~~~~~~~~~~~~~~~~~~
-Data-parallel vector types.
+データ並列ベクトル型。
 
 :doc:`Alphabetical <API/alphabetical>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-List of all library features in alphabetical order.
+アルファベット順のライブラリ機能一覧。
+
 
 :doc:`deprecations`
 ~~~~~~~~~~~~~~~~~~~
-List of obsolete features that have been deprecated and/or removed.
+廃止および/または削除された非推奨機能の一覧。
