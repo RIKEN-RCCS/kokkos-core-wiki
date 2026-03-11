@@ -47,7 +47,7 @@
 
   .. cpp:function:: ビットセット(符号なし arg_size = 0u)
 
-    Host/Device: :cpp:`arg_size` bitsを持つビットセットを構築します。
+    ホスト/デバイス: :cpp:`arg_size` ビットを持つビットセットを構築します。
 
   .. rubric:: データアクセス関数
 
