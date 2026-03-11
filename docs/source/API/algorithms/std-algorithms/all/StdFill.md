@@ -41,7 +41,7 @@ void fill(const std::string& label, const ExecutionSpace& exespace,          (4)
 
 - `exespace`:
   - 実行空間インスタンス
-- `ラベル`:
+- `label`:
   - デバッグ目的で実装カーネルに名付けるために使用
   - 1　について、 デフォルト文字列は、: "Kokkos::fill_iterator_api_default"
   - 3　について、 デフォルト文字列は、: "Kokkos::fill_view_api_default"
