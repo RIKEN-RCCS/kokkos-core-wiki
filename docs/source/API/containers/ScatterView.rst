@@ -69,7 +69,7 @@
 * ``貢献``:
   アトミック使用に貢献するかどうか; defaults to ``Kokkos::Experimental::ScatterAtomics``　のデフォルト、 その他のオプションは、 ``Kokkoss::Experimental::ScatterNonAtomic``.
 
-このインターフェースを使って、デフォルトでない``Operation``, ``Duplication`` または　``Contribution``　を持つ　ScatterView　を作成するのは複雑になることがあります。なぜなら、DataType、Layout、ExecSpace　の正確なタイプを指定する必要があるからです。 そのため、代わりに　Kokkos::Experimental::|create_scatter_view|_　という関数を使うことをお勧めします。
+このインターフェースを使って、デフォルトでない　``Operation``, ``Duplication`` または　``Contribution``　を持つ　ScatterView　を作成するのは複雑になることがあります。なぜなら、DataType、Layout、ExecSpace　の正確なタイプを指定する必要があるからです。 そのため、代わりに　Kokkos::Experimental::|create_scatter_view|_　という関数を使うことをお勧めします。
 
 ディスクリプション
 -----------
@@ -127,14 +127,14 @@
 
     .. cpp:function:: constexpr bool is_allocated() const
 
-        :return: ビューが有効なメモリ領域を指している場合に真となります。この関数は管理対象ビューと管理対象外ビューの両方で機能します。
+        :return: ビューが有効なメモリ領域を指している場合に真となります。この関数は、管理対象ビューと管理対象外ビューの両方で機能します。
 		管理対象外ビューでは、参照されるアドレスが有効である保証はなく、単にヌルポインタであることのみが保証されます。
 
     .. _access:
 
     .. cpp:function:: access() const
 
-       use within a kernel to return a ``ScatterAccess`` member; this member accumulates a given thread's contribution to the reduction.カーネル内で使用し、``ScatterAccess``　メンバーを返します; このメンバーは、指定されたスレッドの削減への貢献度を蓄積します。
+       カーネル内で使用し、``ScatterAccess``　メンバーを返します; このメンバーは、指定されたスレッドの削減への貢献度を蓄積します。
 
     .. cpp:function:: subview() const
 
