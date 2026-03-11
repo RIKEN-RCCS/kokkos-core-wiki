@@ -76,7 +76,7 @@
    * ``reference_type_is_lvalue_reference``: 参照型が　C++　の左辺値参照であるかどうか。
 
 
-   .. rubric:: Public Data Types Typedefsパブリックデータ型 型定義
+   .. rubric:: パブリックデータ型 型定義
 
    .. cpp:type:: data_type
 
@@ -106,8 +106,7 @@
 
    .. cpp:type:: value_type
 
-      配列指定子を削除した　``data_type`` で、つまりビューが参照しているデータの
-スカラー型です (例えば、 ``data_type`` が 　``const int*******``　である場合、 ``value_type`` は ``const int``　です)。
+      配列指定子を削除した　``data_type`` で、つまりビューが参照しているデータのスカラー型です (例えば、 ``data_type`` が 　``const int*******``　である場合、 ``value_type`` は ``const int``　です)。
 
 
    .. cpp:type:: const_value_type
@@ -337,9 +336,7 @@
 
    .. cpp:function:: constexpr size_t span() const
 
-       Return the memory span in elements between the element with the lowest and the highest address.
-       最下位アドレスと最上位アドレスを持つエレメントの間にあるエレメント内のメモリスパンを返します。
-       これはパディングによりエクステントの積よりも大きくなる可能性があり、 またはおよび、例えば ``LayoutStride`` が許容するような、非連続的なデータレイアウトです。
+       最下位アドレスと最上位アドレスを持つエレメントの間にあるエレメント内のメモリスパンを返します。これはパディングによりエクステントの積よりも大きくなる可能性があり、 またはおよび、例えば ``LayoutStride`` が許容するような、非連続的なデータレイアウトです。
 
    .. cpp:function:: constexpr pointer_type data() const
 
@@ -375,9 +372,7 @@
 
    .. cpp:function:: constexpr bool is_allocated() const
 
-       :return: ビューが有効なメモリ領域を指している場合に真となります。
-		この関数は、管理対象ビューと管理対象外ビューの両方で機能します。
-		管理対象外ビューでは、参照されるアドレスが有効である保証はなく、単にヌルポインタでないことのみが保証されます。
+       :return: ビューが有効なメモリ領域を指している場合に真となります。この関数は、管理対象ビューと管理対象外ビューの両方で機能します。管理対象外ビューでは、参照されるアドレスが有効である保証はなく、単にヌルポインタでないことのみが保証されます。
 
 代入ルール
 ----------------
