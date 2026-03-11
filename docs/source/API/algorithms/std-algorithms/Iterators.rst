@@ -1,4 +1,4 @@
-Iterators
+イテレータ
 =========
 
 .. role:: cpp(code)
@@ -7,16 +7,16 @@ Iterators
 ``Kokkos::Experimental::{begin, cbegin, end, cend}``
 ----------------------------------------------------
 
-Header File: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダーファイル: ``<Kokkos_StdAlgorithms.hpp>``
 
 
 .. cpp:function:: template <class DataType, class... Properties> KOKKOS_INLINE_FUNCTION auto begin(const Kokkos::View<DataType, Properties...>& view);
 
-   Returns a Kokkos **random access** iterator to the beginning of ``view``
+   ``view``　の先頭へ　Kokkos **ランダムアクセス** イテレータを返します。
 
 .. cpp:function:: template <class DataType, class... Properties> KOKKOS_INLINE_FUNCTION auto cbegin(const Kokkos::View<DataType, Properties...>& view);
 
-   Returns a Kokkos const-qualified **random access** iterator to the beginning of ``view``
+   ``view``　の先頭へ　Kokkos const修飾　**ランダム** イテレータを返します。
 
 .. cpp:function:: template <class DataType, class... Properties> KOKKOS_INLINE_FUNCTION auto end(const Kokkos::View<DataType, Properties...>& view);
 
