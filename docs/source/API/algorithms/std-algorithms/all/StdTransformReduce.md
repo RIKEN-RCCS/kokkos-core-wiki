@@ -233,7 +233,7 @@ ValueType transform_reduce(const std::string& label,                            
 
 - `unary_transformer`:
   - 要素に対して所望の演算を実行する　*一項* ファンクタ。
-  引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst)　value_type　の引数　`v`　を使って呼び出し可能で、そこでは、value_type``　が、 `first1` (9,10について)　の値型、または  `first_view` (11,12について)　であり、`v` を変更してはいけません。
+  引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst)　`value_type`　の引数　`v`　を使って呼び出し可能で、そこでは、`value_type`　が、 `first1` (9,10について)　の値型、または  `first_view` (11,12について)　であり、`v` を変更してはいけません。
   - 以下に一致しなければなりません:
   ```c++
   構造体 UnaryTransformer {
