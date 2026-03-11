@@ -68,7 +68,7 @@
 - ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
 
-- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
   - 1:デフォルト文字列は、"Kokkos::is_partitioned_iterator_api_default".
 
