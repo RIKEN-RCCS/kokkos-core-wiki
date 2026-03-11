@@ -67,8 +67,8 @@
 
 第1の範囲 [first1, last1) が、第2の範囲 [first2, last2)　よりも順序の上で、小さい場合に、(1,2,5,6) について、`真`　を返します。
 `view1` の要素が `view2`における要素よりも順序の上で、小さい場合に、(3,4,7,8) について、`真`　を返します。
-Elements (1,2,3,4) are compared using the `<` operator.
-Elements (5,6,7,8) are compared using `comp`.
+要素 (1,2,3,4)  `<` operator　を使って、比較されます。
+Elements (5,6,7,8) は、 `comp`　を使って比較されます。
 
 ## パラメータおよび要件
 
