@@ -116,7 +116,7 @@
                 TeamPol(n, Kokkos::AUTO()),
                 KOKKOS_LAMBDA(const TeamMem& t)
                 {
-                    //Sort a row of A using the whole team.
+                    //チーム全体を使って、Ａの列をソートします
                     auto A_row_i = Kokkos::subview(A, t.league_rank(), Kokkos::ALL());
                     Kokkos::Experimental::sort_team(t, A_row_i);
                 });
@@ -159,7 +159,7 @@
 
 .. code-block:: cpp
         
-    A, with each row sorted:
+    A, ソートされた各列を使って:
     0 9 38 68 74 76 83 89 91 95 
     19 41 41 55 65 68 78 92 99 99 
     2 13 16 17 19 40 44 54 96 99 
@@ -171,7 +171,7 @@
     4 19 20 29 42 56 60 63 68 90 
     1 16 16 17 33 39 60 64 78 94 
 
-    A, with each column sorted:
+    A, ソートされた各列を使って:
     0 5 9 13 19 25 33 39 42 81 
     0 6 14 16 20 32 37 40 58 86 
     1 8 15 17 25 38 40 51 60 90 
