@@ -72,7 +72,7 @@ OutputIteratorType replace_copy(const std::string& label,                     (2
   - `exespace`　からアクセス可能でなければなりません。
 - `view_from`, `view_to`:
   - ソースおよび宛先のビュー
-  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
   - `exespace`　からアクセス可能でなければなりません。
 - `old_value`, `new_value`:
   - 説明を要しません。
