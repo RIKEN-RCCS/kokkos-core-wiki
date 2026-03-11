@@ -20,7 +20,7 @@
 
 .. cpp:function:: template<class T> void atomic_store(T* ptr, std::type_identity_t<T> val);
 
-    原子的に、　*ptr``　に　``val``　を書き込みます。
+    原子的に、　``*ptr``　に　``val``　を書き込みます。
 
    ``{ *ptr = val; }``
 
