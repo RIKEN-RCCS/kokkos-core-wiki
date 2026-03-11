@@ -75,7 +75,7 @@ Elements (5,6,7,8) are compared using `comp`.
 - `exespace`:
   - 実行空間インスタンス
 
-- `ラベル`:
+- `label`:
     - 1,5: デフォルト文字列は、 "Kokkos::lexicographical_compare_iterator_api_default".
     - 3,7: デフォルト文字列は、 "Kokkos::lexicographical_compare_view_api_default".
 
