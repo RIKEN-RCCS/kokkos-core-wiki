@@ -104,7 +104,7 @@ auto adjacent_difference(const std::string& label,                              
   - `exespace`　からアクセス可能でなければなりません。
 - `view_from`, `view_dest`:
   - `view_from` から読み取り、`view_dest`　に書き込むためのビュー。
-  - 必ずランク-1であり、`LayoutLeft`, `LayoutRight`, または `LayoutStride`　を持たなければなりません。
+  - 必ずランク1であり、`LayoutLeft`, `LayoutRight`, または `LayoutStride`　を持たなければなりません。
   - `exespace`　からアクセス可能でなければなりません。
 - `bin_op`:
   - 各要素のペアに対して適用する演算を表す　*二項* ファンクタ。
