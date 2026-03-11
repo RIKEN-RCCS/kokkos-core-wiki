@@ -81,7 +81,7 @@
 
 - ``teamHandle``:  TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``ラベル``: デバッグ目的で実装カーネルに名付けるために使用
+- ``label``: デバッグ目的で実装カーネルに名付けるために使用
 
   - 1　について、 デフォルト文字列は、 : "Kokkos::copy_backward_iterator_api_default"
 
