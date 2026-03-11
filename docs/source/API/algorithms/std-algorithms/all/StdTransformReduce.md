@@ -167,7 +167,7 @@ ValueType transform_reduce(const std::string& label,                            
   `init_reduction_value` と共に還元します。
 
 - (7,8): ファンクタ　`binary_transformer` を、
-`first_view` および `second_view`範囲内の各要素のペアに適用し、
+`first_view` および `second_view` 範囲内の各要素のペアに適用し、
   結合演算を *バイナリ* ファンクタ `joiner` を通じて実行して、結果を初期値
   `init_reduction_value` と共に還元します。
 
@@ -196,13 +196,13 @@ ValueType transform_reduce(const std::string& label,                            
   - `exespace`　からアクセス可能でなければなりません。
 - `first_view`, `second_view`:
   - 変換および還元対象のビュー
-  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
   - `exespace`　からアクセス可能でなければなりません。
 - `init_reduction_value`:
   - 使用する初期還元値
 - `joiner`:
   - 2つの要素結合のために所望の変換演算を実行する *二項* ファンクタ。
-  　引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst)　`ValueType`　　　　の2つの引数　`a,b`　を使って、呼び出し可能であり、 `a,b` を変更してはいけません。
+  　引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst)　`ValueType`  の2つの引数　`a,b`　を使って、呼び出し可能であり、 `a,b` を変更してはいけません。
   - 以下に一致しなければなりません:
   ```c++
   構造体 JoinFunctor {
@@ -217,9 +217,9 @@ ValueType transform_reduce(const std::string& label,                            
 
 - `binary_transformer`:
   - 還元 *前* に、要素の各ペアに適用される　*二項* ファンクタ。
-  引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst)　`value_type_a`　および`value_type_b`の2つの引数　`a,b`　を使って、呼び出し可能であり、ここで、
+  引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst)　`value_type_a`　および `value_type_b` の2つの引数　`a,b`　を使って、呼び出し可能であり、ここで、
   `value_type_{a,b}` は、 `first1` および `first2` (1,2,5,6について)　の値型であり、または
- `first_view` および　`second_view` (3,4,7,8について)　の値型であり、 `a,b`. `a,b` を変更してはいけません。
+ `first_view` および　`second_view` (3,4,7,8について)　の値型であり、  `a,b` を変更してはいけません。
   - 以下に一致しなければなりません:
   ```c++
   struct BinaryTransformer {
