@@ -49,7 +49,7 @@ void replace(const std::string& label, const ExecutionSpace& exespace,       (4)
   - 有効範囲、つまり、 ``last >= first``　を表す必要があります。（この条件はデバッグモードで確認されます）。
   - `exespace`　からアクセス可能でなければなりません。
 - `view`:
-  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
   - `exespace`　からアクセス可能でなければなりません。
 - `old_value`, `new_value`:
   - 説明を要しません。
