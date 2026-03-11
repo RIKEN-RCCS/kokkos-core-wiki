@@ -99,7 +99,7 @@
 
 - ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``:  |copy|_　と同様。
 
-- ``ラベル``:
+- ``label``:
 
   - 1　について、デフォルト文字列は、: "Kokkos::copy_if_iterator_api_default"
 
