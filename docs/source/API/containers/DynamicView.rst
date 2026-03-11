@@ -105,7 +105,7 @@
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION size_t size() const noexcept;
 
-        :return: ``resize_serial``　に渡された数値に基づく割当で利用可能なエントリの数。　この数値は``allocation_extent``により制限されます。
+        :return: ``resize_serial``　に渡された数値に基づく割当で利用可能なエントリの数。　この数値　``allocation_extent``により制限されます。
 
     .. cpp:function:: template< typename iType > KOKKOS_INLINE_FUNCTION size_t extent(const iType& dim) const;
 
