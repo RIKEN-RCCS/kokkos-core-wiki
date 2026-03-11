@@ -57,16 +57,16 @@
 
   .. cpp:function:: 符号なし count() const
 
-    Host: return the number of bits which are set to ``1``.
+    ホスト: ``1``　に設定されたビット数を返します。
 
   .. cpp:function:: void set()
 
-    ホスト:  ``1``に設定されたビット数を返します。
+    ホスト:  ``1``　に設定されたビット数を返します。
 
   .. cpp:function:: void reset();
   .. cpp:function:: void clear();
 
-    ホスト/デバイス:  ``0``.すべてのビットを　``0``　に設定します。
+    ホスト/デバイス:  ``0``　。　すべてのビットを　``0``　に設定します。
 
   .. cpp:function:: void set(符号なし i)
 
@@ -108,13 +108,13 @@
 
     :cpp:`pair<ブール, 符号なし>`　を返します。
 
-    :cpp:`result.first`が:cpp:`true` then :cppの場合、:result.second` は検出されたビット位置です。
+    :cpp:`result.first`　が　:cpp:`true` の場合、 :cpp:result.second` は検出されたビット位置です。
 
-    :cpp:`result.first`が:cpp:`false`の場合、その後:cpp:`result.second`は、新しいヒント位置です。
+    :cpp:`result.first`が　:cpp:`false`　の場合、:cpp:`result.second`　は、新しいヒント位置です。
 
-    :cpp:`scan_direction & BIT_SCAN_REVERSE`\の場合、その後、ビットのスキャンはインデックスの降順で行われます;それ以外の場合は、インデックスの昇順で発生します。
+    :cpp:`scan_direction & BIT_SCAN_REVERSE`\　の場合、ビットのスキャンはインデックスの降順で行われます;それ以外の場合は、インデックスの昇順で発生します。
 
-    :cpp:`scan_direction & MOVE_HINT_BACKWARDS`\の場合には、その後新しいヒント位置は :cpp:`hint`\よりも小さいインデックスで発生します; otherwise, それ以外の場合は、:cpp:`hint`より大きいインデックス位置で発生します。
+    :cpp:`scan_direction & MOVE_HINT_BACKWARDS`\　の場合には、その後新しいヒント位置は :cpp:`hint`\　よりも小さいインデックスで発生します; それ以外の場合は、:cpp:`hint`より大きいインデックス位置で発生します。
 
   .. cpp:function:: constexpr bool is_allocated() const
 
