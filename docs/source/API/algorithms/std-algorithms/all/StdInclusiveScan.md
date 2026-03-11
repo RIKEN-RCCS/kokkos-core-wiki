@@ -155,7 +155,7 @@ OutputIteratorType inclusive_scan(const std::string& label,                     
 
 - `exespace`, `first_from`, `first_last`, `first_dest`, `view_from`, `view_dest`, `bin_op`:
   -  [`exclusive_scan`](./StdExclusiveScan)　と同様。
-- `ラベル`:
+- `label`:
   - デバッグ目的で実装カーネルに名付けるために使用
   - 1,5,9　について、デフォルト文字列は、 : "Kokkos::inclusive_scan_iterator_api_default"
   - 3,7,11　について、デフォルト文字列は、 : "Kokkos::inclusive_scan_iterator_api_default"
