@@ -24,7 +24,7 @@
 
 .. cpp:function:: template<class T> void atomic_assign(T* ptr, std::type_identity_t<T> val);
 
-    ``val`` into ``*ptr``　を原子レベルで書き込みます。
+    ``val`` を ``*ptr``　に原子レベルで書き込みます。
 
    ``{ *ptr = val; }``
 
