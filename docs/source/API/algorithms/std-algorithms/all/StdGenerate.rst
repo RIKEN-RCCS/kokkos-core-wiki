@@ -89,7 +89,7 @@
 
 - ``g``:
 
-  - 以下の形式のファンクタであり、ここで　``return_type`` は　``value_type``に代入可能である必要があり、 ``value_type`` としては、 ``IteratorType`` または ``view``　の値の型を使用します。:
+  - 以下の形式のファンクタであり、ここで　``return_type`` は　``value_type``　に代入可能である必要があり、 ``value_type`` としては、 ``IteratorType`` または ``view``　の値の型を使用します。:
 
   .. code-block:: cpp
 
