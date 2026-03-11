@@ -81,7 +81,7 @@ auto adjacent_difference(const std::string& label,                              
 
 - (1,3,5,7): 第一に、 `*first_from` のコピーは、(1,3)　について　`*first_dest` に書き込まれ、
   または、 `view_from(0)` のコピーは、 (5,7)　について `view_dest(0)` に書き込まれます。
-  第二に、それは、(1,3)　について、または、 (5,7)　について `view_from` において、範囲`[first_from, last_from)` の要素の各隣接ペアの二番目及び一番目の *差* を計算し、それらを (1,3)　について、または  (5,7)　について `view_dest``first_dest + 1`　において範囲の初めに書き込みます。 
+  第二に、それは、(1,3)　について、または、 (5,7)　について `view_from` において、範囲　`[first_from, last_from)` の要素の各隣接ペアの二番目及び一番目の *差* を計算し、それらを (1,3)　について、または  (5,7)　について `view_dest``first_dest + 1`　において範囲の初めに書き込みます。 
 
 - (2,4,6,8): 第一に、 `*first_from`  のコピーは、 (2,4)　について　`*first_dest` に書き込まれ、
   または、`view_from(0)` のコピーは、 (6,8)　について `view_dest(0)` に書き込まれます。
@@ -100,7 +100,7 @@ auto adjacent_difference(const std::string& label,                              
 - `first_from`, `last_from`, `first_dest`:
   -  `*_from` から読み取り、`first_dest`　に書き込むための要素の範囲
   -  *ランダムアクセスイテレータ*　でなければなりません
-  -  (有効な範囲、すなわち、`last_from >= first_from` を表す必要があります。（デバッグモードで確認済み）
+  -  有効な範囲、すなわち、`last_from >= first_from` を表す必要があります。（デバッグモードで確認済み）
   - `exespace`　からアクセス可能でなければなりません。
 - `view_from`, `view_dest`:
   - `view_from` から読み取り、`view_dest`　に書き込むためのビュー。
@@ -108,8 +108,7 @@ auto adjacent_difference(const std::string& label,                              
   - `exespace`　からアクセス可能でなければなりません。
 - `bin_op`:
   - 各要素のペアに対して適用する演算を表す　*二項* ファンクタ。
-  渡された実行空間より呼び出され、そこでは `value_type`が
-  `InputIteratorType`の値型 (1,2,3,4について) または、 `view_from`　の値型 (5,6,7,8について)　であり、 `a,b`　を変更してはいけません。
+  渡された実行空間より呼び出され、そこでは `value_type`　が　`InputIteratorType`　の値型 (1,2,3,4について) または、 `view_from`　の値型 (5,6,7,8について)　であり、 `a,b`　を変更してはいけません。
   - 以下に一致しなければなりません:
   ```c++
   構造体 BinaryOp
