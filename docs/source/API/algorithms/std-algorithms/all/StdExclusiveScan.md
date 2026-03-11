@@ -123,7 +123,7 @@ OutputIteratorType exclusive_scan(const std::string& label,                     
   -  `exespace`　からアクセス可能でなければなりません。
 - `view_from`, `view_dest`:
   - `view_from` から要素を読み取り、 `view_dest`　にそれらを書き込むためのビュー。
-  - 必ずランク-1であり、`LayoutLeft`, `LayoutRight`, or `LayoutStride` を持たなければなりません。
+  - 必ずランク1であり、`LayoutLeft`、 `LayoutRight`、 または `LayoutStride` を持たなければなりません。
   - `exespace`　からアクセス可能でなければなりません。
 - `bin_op`:
   - 要素のペアを組み合わせる演算を表す　*二項* ファンクタ。
