@@ -83,7 +83,7 @@
 
 - ``view``: 探索するビュー
 
-  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
   - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
