@@ -148,8 +148,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
         ホストとデバイスの両方でビューオブジェクトを割り当てるコンストラクタ。
        最初の引数は文字列ラベルであり、これは完全に便宜のために用意されています。 (異なる　DualView　オブジェクトは、必要に応じて同じラベルを持つことができます。)
-       以下に示す引数は、Viewオブジェクトの次元です。例えば、Viewが3次元であれば、
-       最初の3つの整数引数はゼロ以外になり、また、続く整数引数は省略できます。
+       以下に示す引数は、Viewオブジェクトの次元です。例えば、Viewが3次元であれば、最初の3つの整数引数はゼロ以外になり、また、続く整数引数は省略できます。
 
     .. cpp:function:: DualView(ALLOC_PROP const& arg_prop, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
