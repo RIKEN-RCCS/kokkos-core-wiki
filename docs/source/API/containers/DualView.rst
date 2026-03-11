@@ -243,8 +243,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
     .. cpp:function:: void resize(const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        両方のビューのサイズを変更し、必要に応じて古い内容を新しいビューにコピーします。このメソッドでは、
-       最後に変更済みとマークされたデバイスの古い内容を新しいViewオブジェクトにのみコピーします。
-　　　　従って、ユーザーはサイズ変更されたオブジェクトを使用する前に　``sync()``　を呼び出す必要があります。
+       最後に変更済みとマークされたデバイスの古い内容を新しいViewオブジェクトにのみコピーします。従って、ユーザーはサイズ変更されたオブジェクトを使用する前に　``sync()``　を呼び出す必要があります。
 
     |
 
