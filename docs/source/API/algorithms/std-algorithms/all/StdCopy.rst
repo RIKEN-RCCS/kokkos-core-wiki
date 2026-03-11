@@ -89,7 +89,7 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 
   - *ランダムアクセスイテレータ*　でなければなりません。
 
-  - ``有効な範囲、つまり、``last_from >= first_from`` を表さなければなりません。
+  - 有効な範囲、つまり、``last_from >= first_from`` を表さなければなりません。
 
   - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
@@ -99,7 +99,7 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 
 - ``view_from``, ``view_to``: 要素のコピー元およびコピー先である、ソースおよび宛先
 
-  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
   - 必ず　``exespace``　またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
