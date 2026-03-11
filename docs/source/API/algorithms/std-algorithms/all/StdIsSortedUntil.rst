@@ -102,7 +102,7 @@
 
 - ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
   - ``exespace``　からアクセス可能でなければなりません。
 
