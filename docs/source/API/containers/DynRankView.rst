@@ -213,7 +213,7 @@
        標準割り当てコンストラクタ。
 
        * ``name``: ユーザーが提供したラベル。プロファイリングおよびデバッグ目的で使用されます。名前は、ユニークである必要はありません。
-       * ``layout``: an instance of a layout class.
+       * ``layout``: レイアウトクラスのインスタンス。
 
    .. cpp:function:: DynRankView(const AllocProperties& prop, const IntType& ... indices)
 
