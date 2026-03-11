@@ -35,7 +35,7 @@ IteratorType partition_point(const std::string& label,                         (
 
 ## ディスクリプション
 
-範囲 `[first, last)` または `ビュー` を調べ、
+範囲 　`[first, last)` または　 `ビュー` を調べ、
 `pred` を満たさない最初の要素を位置付けます。
 
 範囲（またはビュー）は既にパーティション分割済みであると仮定します。
@@ -45,7 +45,7 @@ IteratorType partition_point(const std::string& label,                         (
 
 - `exespace`, `first`, `last`, `view`, `pred`:  [`is_partitioned`](./StdIsPartitioned)　と同様。
   - 実行空間インスタンス
-- `ラベル`:
+- `label`:
   - デバッグ目的の実装カーネルに名付けるために使用されます。
   - 1について、デフォルト文字列は、 : "Kokkos::partition_point_iterator_api_default"
   - 3について、デフォルト文字列は、 : "Kokkos::partition_point_view_api_default"
