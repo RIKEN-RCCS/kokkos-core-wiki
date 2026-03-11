@@ -73,13 +73,13 @@ Elements (5,6,7,8) are compared using `comp`.
 ## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance実行空間インスタンス
+  - 実行空間インスタンス
 
 - `ラベル`:
     - 1,5: デフォルト文字列は、 "Kokkos::lexicographical_compare_iterator_api_default".
     - 3,7: デフォルト文字列は、 "Kokkos::lexicographical_compare_view_api_default".
 
-- `first1`, `last1`, `first2`, `last2`:
+- `first1`, `last1`, `first2`, `last2`　:
   - 比較対象の要素の範囲
   - *ランダムアクセスイテレータ*　でなければなりません。
   - 有効な範囲、つまり `last1 >= first1` および `last2 >= first2`　を表さなければなりません。
@@ -88,7 +88,7 @@ Elements (5,6,7,8) are compared using `comp`.
 - `view1`, `view2`:
   - 比較対象のビュー
   - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
-  - ``exespace`からアクセス可能でなければなりません。
+  - ``exespace``　からアクセス可能でなければなりません。
 
 - `pred` -  [`equal`](./StdEqual)　と同様。
 
