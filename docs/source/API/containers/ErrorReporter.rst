@@ -64,7 +64,7 @@
 
    .. cpp:function:: std::pair<std::vector<int>, std::vector<report_type>> get_reports() const
 
-      :returns: Two ``std::vector`` containing the ids of the reporters, and the reports themselves. The size of the vectors is equal to :cpp:any:`num_reports()`.
+      :returns: レポーターの id を含む2つの ``std::vector`` 　およびレポートそれ自体。 ベクトルサイズは、 :cpp:any:`num_reports()`　に等しいです。
 
    .. cpp:function:: bool full() const
 
