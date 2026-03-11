@@ -116,7 +116,7 @@ ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      
   -  `exespace`　からアクセス可能でなければなりません。
 - `view`:
   - 還元対象のビュー
-  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
   - `exespace`　からアクセス可能でなければなりません。
 - `init_reduction_value`:
   - 使用する初期還元値
