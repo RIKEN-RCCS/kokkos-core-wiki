@@ -87,7 +87,7 @@ Elements (5,6,7,8) are compared using `comp`.
 
 - `view1`, `view2`:
   - 比較対象のビュー
-  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
   - ``exespace``　からアクセス可能でなければなりません。
 
 - `pred` -  [`equal`](./StdEqual)　と同様。
