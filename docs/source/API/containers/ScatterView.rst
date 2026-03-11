@@ -182,8 +182,7 @@
 
 .. cpp:function:: contribute(View<DT1, VP...>& dest, Kokkos::Experimental::ScatterView<DT2, LY, ES, OP, CT, DP> const& src)
 
-    ScatterView　の結果を最終的に結果のViewに還元するための便利関数; 
-|parallelReduce|_　の後に呼び出される場合があります。
+    ScatterView　の結果を最終的に結果のViewに還元するための便利関数; |parallelReduce|_　の後に呼び出される場合があります。
 
 
 例
