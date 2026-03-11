@@ -85,8 +85,7 @@ auto adjacent_difference(const std::string& label,                              
 
 - (2,4,6,8): 第一に、 `*first_from`  のコピーは、 (2,4)　について　`*first_dest` に書き込まれ、
   または、`view_from(0)` のコピーは、 (6,8)　について `view_dest(0)` に書き込まれます。
-  第二に、it calls the binary functor with the second and the first elements
-  of each adjacent pair of elements of the range for (2,4)　について範囲　`[first_from, last_from)` の、または、 (6,8)　について  `view_from`　において、要素の各隣接ペアの二番目及び一番目を使ったバイナリファンクタを呼び出し、それらを
+  第二に、 (2,4)　について範囲　`[first_from, last_from)` の、または、 (6,8)　について  `view_from`　において、要素の各隣接ペアの二番目及び一番目を使ったバイナリファンクタを呼び出し、それらを
    `first_dest + 1` for (2,4)　について、または (6,8)　について `view_dest`　において、範囲の初めに書き込みます。
 
 
@@ -111,7 +110,7 @@ auto adjacent_difference(const std::string& label,                              
   - 各要素のペアに対して適用する演算を表す　*二項* ファンクタ。
   渡された実行空間より呼び出され、そこでは `value_type`が
   `InputIteratorType`の値型 (1,2,3,4について) または、 `view_from`　の値型 (5,6,7,8について)　であり、 `a,b`　を変更してはいけません。
-  - must conform to以下に一致しなければなりません:
+  - 以下に一致しなければなりません:
   ```c++
   構造体 BinaryOp
   {
