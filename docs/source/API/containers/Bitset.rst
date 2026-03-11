@@ -163,7 +163,7 @@
 
   .. cpp:function:: テンプレート <typename DstDevice, typename SrcDevice> void deep_copy(Bitset<DstDevice>& dst, Bitset<SrcDevice> const& src)
 
-    　``SrcDevice``　上の　``src``　から``DstDevice``　上の　``dst``　に　``Bitset``　をコピーします。
+    　``SrcDevice``　上の　``src``　から　``DstDevice``　上の　``dst``　に　``Bitset``　をコピーします。
 
   .. cpp:function:: テンプレート <typename DstDevice, typename SrcDevice> void deep_copy(Bitset<DstDevice>& dst, ConstBitset<SrcDevice> const& src)
 
