@@ -39,7 +39,7 @@ auto fill_n(const std::string& label, const ExecutionSpace& exespace,           
 ## パラメータおよび要件
 
 - `exespace`,  `first`, `view`, `value`: same as in 　[`fill`](./StdFill)　内と同様。
-- `ラベル`:
+- `label`:
   - バッグ目的で実装カーネルに名付けるために使用。
   - 1　について、デフォルト文字列は、: "Kokkos::fill_n_iterator_api_default"
   - 3　について、デフォルト文字列は、: "Kokkos::fill_n_view_api_default"
