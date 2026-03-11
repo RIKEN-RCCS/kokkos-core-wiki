@@ -1,5 +1,5 @@
 
-Non-modifying Sequence
+シーケンス非変更
 ######################
 
 .. toctree::
