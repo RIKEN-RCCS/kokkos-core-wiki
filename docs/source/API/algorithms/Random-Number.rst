@@ -37,8 +37,7 @@ Rand
         gen_data_type(gen.rand(start,end));
      }
 
-``gen_data_type``、 ``gen_func_type``および``type_value``は、機能仕様です。
-この一覧にあるすべての関数およびクラスは、　``Kokkos::`` 名前空間の一部です。
+``gen_data_type``、 ``gen_func_type``　および　``type_value``　は、機能仕様です。この一覧にあるすべての関数およびクラスは、　``Kokkos::`` 名前空間の一部です。
 
 +-------------------+-------------------+---------------------------+-----------------------+
 | gen_data_type     | gen_func_type     | type_value                | gen_return_value      |
