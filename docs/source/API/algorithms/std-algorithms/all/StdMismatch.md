@@ -80,7 +80,7 @@ Kokkos::pair<IteratorType1, IteratorType2> mismatch(const std::string& label,
 - `exespace`:
   - 実行空間インスタンス
 
-- `ラベル`:
+- `label`:
   - 1,3については、 デフォルト文字列は: "Kokkos::mismatch_iterator_api_default"
   - 5,7については、 デフォルト文字列は: "Kokkos::mismatch_view_api_default"
 
@@ -92,7 +92,7 @@ Kokkos::pair<IteratorType1, IteratorType2> mismatch(const std::string& label,
 
 - `view1`, `view2`:
   - 比較対象のビュー
-  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
   - `exespace`　からアクセス可能でなければなりません。
 
 - `pred`
