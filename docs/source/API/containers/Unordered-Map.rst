@@ -1,5 +1,5 @@
 
-.. 役割:: cpp(code)
+.. ロール:: cpp(code)
 	:language: cpp
 
 ``UnorderedMap``
