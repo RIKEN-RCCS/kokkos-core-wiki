@@ -217,7 +217,7 @@
 
    .. cpp:function:: DynRankView(const AllocProperties& prop, const IntType& ... indices)
 
-       以下を必要とします: ``array_layout::is_regular == true``
+       要件: ``array_layout::is_regular == true``
 
        割り当てプロパティを持つ割り当てコンストラクタ。 割り当てプロパティオブジェクトは、``view_alloc``　関数によって返されます。
 
@@ -231,7 +231,7 @@
 
    .. cpp:function:: DynRankView(const pointer_type& ptr, const IntType& ... indices)
 
-       以下を必要とします: ``array_layout::is_regular == true``
+       要件: ``array_layout::is_regular == true``
 
        管理対象外データのラップコンストラクタ。
 
@@ -247,7 +247,7 @@
 
    .. cpp:function:: DynRankView(const ScratchSpace& space, const IntType& ... indices)
 
-       以下を必要とします: ``sizeof(IntType...)==rank_dynamic()`` および ``array_layout::is_regular == true``
+       要件: ``sizeof(IntType...)==rank_dynamic()`` および ``array_layout::is_regular == true``
 
        スクラッチメモリハンドルからメモリを取得するコンストラクタ。
 
@@ -265,7 +265,7 @@
 
        サブビューコンストラク。 引数については、　``subview``　関数を参照してください。
 
-   .. rubric:: Data Access Functionsデータアクセス
+   .. rubric:: データアクセス関数
 
    .. cpp:function:: reference_type operator() (const IntType& ... indices) const
 
@@ -375,7 +375,6 @@
 
 代入ルール
 ----------------
-
 代入ルールは、代入演算子とコピー構造体の両方をカバーします。 すべての論理的に合法な代入を可能にする一方で、可能であればコンパイル時に、そうでなければ実行時に不正な代入を傍受することを、目指しています。 以下では、それぞれ ``DstType`` と ``SrcType`` を宛先ビューとソースビューの型として使用します。 ``dst_view`` および ``src_view`` は、宛先ビューとソースビューの実行時インスタンスを示しています。すなわち:
 
 .. code-block:: cpp
@@ -387,8 +386,8 @@
 以下の条件はコンパイル時に満たされ、評価される必要があります:
 
 * ``DstType::rank == SrcType::rank``
-* ``DstType::non_const_value_type`` is the same as ``SrcType::non_const_value_type``
-* If ``std::is_const<SrcType::value_type>::value == true`` than ``std::is_const<DstType::value_type>::value == true``.
+* ``DstType::non_const_value_type`` は、 ``SrcType::non_const_value_type``　と同じです。
+* ``std::is_const<SrcType::value_type>::value == true`` が ``std::is_const<DstType::value_type>::value == true``　よりも大きい場合
 * ``MemorySpaceAccess<DstType::memory_space,SrcType::memory_space>::assignable == true``
 
 さらに、``DstType::array_layout`` が ``SrcType::array_layout``と同じでない場合、充足すべきルールもあります。これらのルールは、両方のレイアウトが、 ``LayoutLeft`` , ``LayoutRight`` or ``LayoutStride``、``LayoutRight`` または ``LayoutStride``　のいずれかの場合のみを対象としています。
