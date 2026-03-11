@@ -25,7 +25,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
 * Device, Kokkos Device型。そのメモリ領域がホストからアクセス不可の場合、
 デュアルビューは2つの独立したビューを含む：1つはデバイスメモリ内、
-もう1つはホストメモリ内。それ以外の場合、DualViewは1つのビューのみを保存します。
+もう1つはホストメモリ内。それ以外の場合、DualView　は1つのビューのみを保存します。
 
 * MemoryTraits (オプショナル) ユーザーの意図するメモリアクセス動作。 
 例については、`Kokkos::View <../core/view/view.html>`_ のドキュメントを参照してください。ほとんどのユーザーにとって、デフォルト設定で十分です。
@@ -89,7 +89,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:type::  t_dev_const_randomread::HostMirror t_host_const_randomread
 
-       ``t_dev_const_randomread``のconst, random-access Viewホストミラーの型。
+       ``t_dev_const_randomread``のconst, random-access View　ホストミラーの型。
 
     .. cpp:type:: View<typename traits::data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_um
 
@@ -141,8 +141,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: DualView();
 
-       "空のコンストラクタ。デバイスとホストの両方のビューオブジェクトは、それぞれのデフォルトコンストラクタを使用して構築されます。
-       "修正済み"フラグは両方とも"未修正"として初期化される。
+       "空のコンストラクタ。デバイスとホストの両方のビューオブジェクトは、それぞれのデフォルトコンストラクタを使用して構築されます。"修正済み"フラグは両方とも"未修正"として初期化されます。
 
     .. cpp:function:: DualView(const std::string& label, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
@@ -153,7 +152,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
     .. cpp:function:: DualView(ALLOC_PROP const& arg_prop, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        ホストとデバイスの両方でViewオブジェクトを割り当てるコンストラクタ。最初の引数として``Kokkos::view_alloc``で作成されたオブジェクトを渡すことを可能にします。例えば、ラベルを提供し、初期化を回避し、または実行空間インスタンスを指定します。
-       T以下の引数は、Viewオブジェクトの次元です。
+       T以下の引数は、View　オブジェクトの次元です。
        例えば、Viewが3次元であれば、最初の3つの整数引数はゼロ以外になり、また、続く整数引数は省略できます。
 
     .. cpp:function:: DualView(const DualView<SS, LS, DS, MS>& src);
@@ -169,8 +168,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
        既存のデバイスおよびホストビューオブジェクトからデュアルビューを作成します。本コンストラクタは、デバイスとホストのView　オブジェクトが同期されていることを前提としています。
        発信者は、このコンストラクタを呼び出す前にこれが事実であることを確認する責務を負います。本コンストラクタが戻った後、DualView　の　``sync()``　および　``modify()``　メソッドを使用して、
-       View　オブジェクトの同期を確保できます。 デュアルビューが1つのビューのみを格納する場合、
-　　　　すなわちデュアルビューのメモリ領域がホストからアクセス可能な場合、両引数は同一の割り当てを参照しなければなりません。
+       View　オブジェクトの同期を確保できます。 デュアルビューが1つのビューのみを格納する場合、すなわちデュアルビューのメモリ領域がホストからアクセス可能な場合、両引数は同一の割り当てを参照しなければなりません。
 
        - ``d_view_`` デバイスビュー
 
@@ -185,7 +183,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
     .. cpp:function:: テンプレート <class Device> static int get_device_side();
 
        * 特定のデバイス ``Device`` 上のビューを返します。 ``Device`` は、``Kokkos::Device`` 型、メモリ空間、またはデバイスビューもしくはホストアクセス可能ビューに対応する実行空間である可能性があります。 
-       * 例えば、Cuda上で次のようにDualViewを作成するとします:
+       * 例えば、Cuda上で次のように　DualView　を作成するとします:
 
          .. code-block:: cpp
 
@@ -206,7 +204,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: const t_host& view_host() const;
 
-       *  Return the host-accessible View. Returns the View by value with `Kokkos_ENABLE_DEPRECATED_CODE_4=ON`
+       *  ホストアクセス可能なビューを返します。　`Kokkos_ENABLE_DEPRECATED_CODE_4=ON`　を持つ値により、ビューを返します。
 
     .. cpp:function:: const t_dev& view_device() const;
 
@@ -227,10 +225,8 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: インライン void clear_sync_state();
 
-        If ``Device`` is the same as this指定の　device \\c Device　上でデータを変更済みとしてマークします。 　``Device``　が　本　DualView　のデバイスタイプと同一の場合、そのデバイスのデータを変更済みとしてマークしてください。
+       指定の　device \\c Device　上でデータを変更済みとしてマークします。 ``Device``　が　本　DualView　のデバイスタイプと同一の場合、そのデバイスのデータを変更済みとしてマークしてください。
        そうでない場合は、ホストのデータを変更済みとしてマークしてください。
-
-    |
 
     .. rubric:: *パブリック* メソッド：View オブジェクトの再割り当てまたはサイズ変更。
 
@@ -243,7 +239,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
     .. cpp:function:: void realloc(const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        両方のビューオブジェクトを再割り当てします。これにより、オブジェクトの既存の内容はすべて破棄され、
-       その変更されたフラグはリセットされます。古いViewのどちらの内容も、新しいViewオブジェクトにはコピー　*されません*　。
+       その変更されたフラグはリセットされます。古い　View　のどちらの内容も、新しい　View　オブジェクトにはコピー　*されません*　。
 
     .. cpp:function:: void resize(const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
@@ -253,7 +249,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     |
 
-    .. rubric:: Methods for querying capacity, stride, or dimension(s).キャパシティ、ストライド、または次元を問い合わせのための 　*パブリック*　メソッド。
+    .. rubric:: キャパシティ、ストライド、または次元を問い合わせのための 　*パブリック*　メソッド。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t span() const;
 
