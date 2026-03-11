@@ -68,7 +68,7 @@
 
 - ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``ラベル``: デバッグ目的で内部の並列カーネルに転送された文字列
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
   - 1　について、デフォルト文字列は、 : "Kokkos::move_iterator_api_default"
 
@@ -86,7 +86,7 @@
 
 - ``source``, ``dest``: 移動元および移動先へのビュー
 
-  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
 
   - 必ず　`exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
