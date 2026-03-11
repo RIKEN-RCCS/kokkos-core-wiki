@@ -270,8 +270,7 @@
    .. cpp:function:: reference_type operator() (const IntType& ... indices) const
 
       参照型である場合もそうでない場合もある ``reference_type`` の値を返します。
-      インデックス引数の数は、ビューの ``rank`` と一致する必要があります。リターン型の特性については、``reference_type`` 
-の注記を参照してください。
+      インデックス引数の数は、ビューの ``rank`` と一致する必要があります。リターン型の特性については、``reference_type`の注記を参照してください。
 
    .. cpp:function:: reference_type access (const IntType& i0=0, const IntType& i1=0, \
 			   const IntType& i2=0, const IntType& i3=0, const IntType& i4=0, \
