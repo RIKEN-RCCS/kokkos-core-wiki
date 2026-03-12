@@ -52,12 +52,12 @@
 ``Kokkos::HIP``
 ---------------
 
-　:sup: |Experimental|_ :sup:`バージョン4.0以降` `昇格した`　``Kokkos::HIP`` は、HIPがサポートするデバイス上での実行を表す　|ExecutionSpaceConceptType|_ です。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。　詳細については、|DocExecutionSpaceConcept|_　を参照してください。
+　``Kokkos::HIP`` :sup:`昇格` |Experimental|_ :sup:`バージョン 4.0以降` は、HIPがサポートするデバイス上での実行を表す　|ExecutionSpaceConceptType|_ です。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。　詳細については、|DocExecutionSpaceConcept|_　を参照してください。
 
 ``Kokkos::SYCL``
 ------------------------------
 
-　:sup: |Experimental|_ :sup:`バージョン4.5以降`  `昇格した`　``Kokkos::SYCL`` は、 SYCLがサポートするデバイス上での実行を表す |ExecutionSpaceConceptType|_ です。
+　``Kokkos::SYCL`` :sup:`昇格` |Experimental|_ :sup:`バージョン 4.5以降` は、 SYCLがサポートするデバイス上での実行を表す |ExecutionSpaceConceptType|_ です。
 
 　SYCL　バックエンドが有効化され、　GPU　アーキテクチャが指定されていない場合、　Kokkos　は、特定の　SYCL　デバイスタイプへ、制限なしで、Just-In-Timeコンパイルを使用します。
 したがって、SYCLバックエンド（実験的、未検証、最適化されていない）で、CPU　をターゲットにする唯一の選択肢がこれです。
