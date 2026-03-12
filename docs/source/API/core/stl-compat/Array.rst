@@ -24,7 +24,7 @@
 * 集合型として、それは、 ``T``: ``Kokkos::Array<int, 3> a = { 1, 2, 3 };``　に変換可能な、最大で　``N``　個の初期化子による集合初期化で初期化できます。
 
 ..
-  エンティティのAPI。
+  エンティティの　API。
 
 インターフェイス
 ---------
@@ -74,7 +74,7 @@
   .. cpp:function:: constexpr pointer data() noexcept
   .. cpp:function:: constexpr const_pointer data() const noexcept
 
-    :リターン: 配列の最初の要素へのポインタ。  If ``N == 0``　である場合、戻り値は、 特定されておらず、間接参照できません。
+    :リターン: 配列の最初の要素へのポインタ。  　``N == 0``　である場合、戻り値は、 特定されておらず、間接参照できません。
     :since: ``非定数`` 5.0以降
 
   .. cpp:function:: constexpr pointer begin() noexcept
@@ -88,7 +88,7 @@
   .. cpp:function:: constexpr const_pointer end() const noexcept
   .. cpp:function:: constexpr const_pointer cend() const noexcept
 
-    :return: ``data() + size()``。　戻り値は、間接参照できません。されていません。  ``N == 0``　である場合、 戻り値は、 ``begin()``　に等しくなります。
+    :return: ``data() + size()``。　戻り値は、間接参照できません。  ``N == 0``　である場合、 戻り値は、 ``begin()``　に等しくなります。
     :since: 5.0以降
 
 
@@ -156,16 +156,16 @@
 
 .. cpp:struct:: template<class T> Array<T, KOKKOS_INVALID_INDEX, Array<>::contiguous>
 
-* This container was a non-owning container.
-* This container had its size determined at construction time.
-* This container could be assigned from any ``Array<T, N , Proxy>``.
-* Assignment did not change the size of this container.
-* This container did not support move semantics.
+* 本コンテナは、非所有コンテナです。
+* 本コンテナのサイズは、構築時に決定されました。
+* 本コンテナは、任意の　``Array<T, N , Proxy>``　から割り当てられる可能性があります。
+* 代入により、このコンテナーのサイズは変更されませんでした。
+* 本コンテナは、移動セマンティクスをサポートしていませんでした。
 
 .. cpp:struct:: template<class T> Array<T, KOKKOS_INVALID_INDEX, Array<>::strided>
 
 * 本コンテナは、非所有コンテナです。
-* 本コンテナのサイズは、構築時に決定されました。
+* 本コンテナのサイズおよびストライドは、構築時に決定されました。
 * 本コンテナは、任意の　``Array<T, N , Proxy>``　から割り当てられる可能性があります。
 * 代入により、このコンテナーのサイズは変更されませんでした。
 * 本コンテナは、移動セマンティクスをサポートしていませんでした。
@@ -262,5 +262,5 @@ ________
    // char s[2][6] = {"nice", "thing"};
    // auto t6 = Kokkos::to_array(s);
 
-   return 0;
+   返し 0;
  }
