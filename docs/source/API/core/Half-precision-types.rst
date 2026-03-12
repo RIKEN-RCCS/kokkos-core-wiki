@@ -8,11 +8,12 @@
 
 型
 -----
+
 Kokkos　はポータブルな半精度型を、``Kokkos::Experimental::half_t`` および ``Kokkos::Experimental::bhalf_t``　の名称で提供します。
  - ``half_t`` は、標準の半精度浮動小数点数を表し、1ビットの符号ビット、5ビットの指数部、10ビットの小数部で構成されます。
  - ``bhalf_t`` は、'brain half'　として知られる型に対応し、1ビットの符号ビット、8ビットの指数部、7ビットの小数部を持ちます。
 
-本型は、現在のバックエンド固有の型（例：　Cuda上の``__half``　）にマッピングされるか、そのような型が存在しない場合は、``float``　にマッピングされます。
+本型は、現在のバックエンド固有の型（例：　Cuda上の ``__half``　）にマッピングされるか、そのような型が存在しない場合は、``float``　にマッピングされます。
 
 マクロ ``KOKKOS_HALF_T_IS_FLOAT`` および ``KOKKOS_BHALF_T_IS_FLOAT`` は、``half_t`` および ``bhalf_t`` が 、``float`` にマップされる場合に、 ``true`` に設定され、それ自身の独立した型にマップされる場合には、 ``false`` に設定されます。
 
@@ -90,14 +91,14 @@ Kokkos　はポータブルな半精度型を、``Kokkos::Experimental::half_t``
         Kokkos::ScopeGuard guard(argc, argv);
         const int N = 10;
 
-        using half_type = Kokkos::Experimental::bhalf_t　を使用;
+        using half_type = Kokkos::Experimental::bhalf_t;
 
         Kokkos::View<half_type*> view("half view", N);
 
         Kokkos::parallel_for("parallel region",
           N,
           KOKKOS_LAMBDA(const int i) {
-            // exponential function performed over `bhalf` type if available, over `float` otherwise 
+            // 利用可能な場合は `bhalf` 型に対して、そうでない場合は `float` 型に対して指数関数を実行します。
             view (i) = Kokkos::exp(half_type(i));
           });
     }
