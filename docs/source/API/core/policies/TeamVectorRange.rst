@@ -55,7 +55,7 @@
    template<class TeamMemberType, class iType1, class iType2>
    /* implementation defined */ TeamVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
-チームのスレッドとベクトルレーンのインデックス範囲 ``begin`` から``end-1`` まで分割します。
+チームのスレッドとベクトルレーンのインデックス範囲 ``begin`` から　``end-1`` まで分割します。
 
 * **引数**
     - ``team``: 呼び出しチーム実行コンテキストへのハンドル
