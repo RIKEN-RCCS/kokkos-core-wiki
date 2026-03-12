@@ -101,7 +101,7 @@
 .. cpp:function:: Impl::VectorSingleStruct PerThread(TeamMemberType team);
 
      ``single`` パターンと組み合わせて使用すると、呼び出しスレッド内の単一のベクターレーンへの実行が、制限されます。 この関数をベクトルレベルループ内で呼び出すことは合法ではありません。
-        - ``team``: object meeting the requirements of TeamHandle
+        - ``team``: TeamHandle　の要件を満たすオブジェクト
 
 例
 ~~~~~~~~
