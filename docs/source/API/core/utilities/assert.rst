@@ -37,7 +37,7 @@
         KOKKOS_ASSERT(Kokkos::is_initialized());  // ホストから呼び出し可能
 
         Kokkos::parallel_for(1, KOKKOS_LAMBDA(int i) {
-          KOKKOS_ASSERT(i == 0);  // also callable from the device side
+          KOKKOS_ASSERT(i == 0);  // デバイス側からも呼び出し可能
         });
 
         Kokkos::finalize();
@@ -52,8 +52,7 @@
 .. |KokkosAssert| 置換:: ``<Kokkos_Assert.hpp>``
 
 * バージョン 4.2以降、 |KokkosAssert|_　から ``KOKKOS_ASSERT`` もまた入手可能です。
-* C++ 標準ライブラリからの `assert`　とは対照的に、
-  ``KOKKOS_FUNCTION``から ``KOKKOS_ASSERT`` を呼び出すことは、合法的です。
+* C++ 標準ライブラリからの `assert`　とは対照的に、``KOKKOS_FUNCTION``から ``KOKKOS_ASSERT`` を呼び出すことは、合法的です。
 
 以下も参照
 --------
