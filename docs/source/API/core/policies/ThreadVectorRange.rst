@@ -61,7 +61,7 @@
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType1, class iType2>
-   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
+   /* 実装定義 */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 
 呼び出しスレッドのベクトルレーン全体で、インデックスレンジ ``begin``　から  ``end-1`` までを分割します。
@@ -76,9 +76,9 @@
 
 *  **返し**
 
-   * Implementation defined type.
+   * 実装定義型
 
-* **Requirements**:
+* **必要要件**:
 
   * ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept.html>`__  をモデル化する型です 
   
