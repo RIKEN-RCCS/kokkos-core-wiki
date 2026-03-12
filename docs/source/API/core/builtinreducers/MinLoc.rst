@@ -61,7 +61,7 @@
 
    .. cpp:type:: value_type
 
-      The reduction scalar type ( `ValLocScalar <ValLocScalar.html>`_　の特殊化))
+      還元スカラー型 ( `ValLocScalar <ValLocScalar.html>`_　の特殊化))
 
    .. cpp:type:: result_view_type
 
