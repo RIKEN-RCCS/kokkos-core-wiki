@@ -24,7 +24,7 @@ void create_histogram(View<int*> histogram, int min, int max, View<int*> values)
 このループを単純な　[`parallel_for()`](../API/core/parallel-dispatch/parallel_for)　で並列化すると、複数のスレッドが同時に同じ　`index`　をインクリメントしようとする可能性があります。その一方で、増分は実際には、３つの演算です:
   1. `histogram(index)` をレジスタへ読み込み、
   2. レジスタを増分し、
-  3. `レジスタを　`&histogram(index)`　に格納。
+  3. レジスタを　`&histogram(index)`　に格納。
 
 2つのスレッドが同時に同じインデックスに対してこの操作を試みると、両方のスレッドが値を読み込み、増分し、保存するという状況が発生する可能性があります。 どちらも同じ元の値を読み込んだため、更新のうち1つだけが適用されますが、一方、2番目の増加分は失われます。 これは、*競合状態*　と呼ばれます。
 
