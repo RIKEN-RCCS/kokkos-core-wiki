@@ -30,7 +30,7 @@ TeamThreadMDRange　は、階層的並列処理の中で使用される、`neste
 
       * **必要要件**
 
-	* ``TeamHandle`` 「TeamHandle <./TeamHandleConcept.html>'_　をモデル化する型です。
+	* ``TeamHandle`` は、`TeamHandle <./TeamHandleConcept.html>`_　をモデル化する型です。
 
 	* ``extent_1, extent_2, ...`` は、ints　です。
 
