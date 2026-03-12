@@ -140,7 +140,7 @@
 `cuBLAS` 呼び出しのキャプチャ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-本例は、 `cuBLAS`　コールをキャプチャするノードの作成方法を示しています。また、:cpp:'Kokkos::Graph'(*例*　`cuBLAS`　ハンドル)　の全寿命を通じて、データがどのように保存されているかも示しています。
+本例は、 `cuBLAS`　コールをキャプチャするノードの作成方法を示しています。また、　:cpp:`Kokkos::Graph`　(*例*　`cuBLAS`　ハンドル)　の全寿命を通じて、データがどのように保存されているかも示しています。
 
 .. literalinclude:: examples/graph_capture.cpp
    :language: c++
