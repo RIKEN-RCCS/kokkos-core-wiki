@@ -52,7 +52,7 @@
 * ``functor``　の　``ReturnType`` 型は、parallel_scanの ``ReturnType``　と互換性があり、提供されていれば、 ``init`` および ``join`` 関数の引数に一致しなければなりません。 ファンクタが、 ``init`` メンバー関数を持たない場合には、 スキャン演算の同一性は、値型のデフォルトコンストラクタによって与えられるものと仮定されます。（`reduction_identity <../builtinreducers/reduction_identity.html>`_ によってではありません）。
 * ファンクタは、``ReturnType``　と同様に、 ``FunctorType::value_type`` を定義する必要があります。
 
-Semanticsセマンティクス
+セマンティクス
 ---------
 
 * 並行性または実行順序は、保証されません。
