@@ -83,10 +83,9 @@ Gitリポジトリのクローニング (開発バージョン用)
 Kokkos　の設定と構築
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes how to configure and build Kokkos.  We assume you are in
-the root directory of the Kokkos source code (or the project embedding Kokkos).
+本節では、Kokkosの設定とビルド方法について説明します。Kokkosソースコード（または　Kokkos　を組み込んだプロジェクト）のディレクトリにいることを前提としています。
 
-Configuring Kokkos
+Kokkos　設定
 ------------------
 
 Kokkos　の設定には以下のコマンドを使用します :
@@ -96,7 +95,7 @@ Kokkos　の設定には以下のコマンドを使用します :
     cmake -B builddir [<options...>]
 
 
-``-B builddir''は、　``builddir``　というビルドディレクトリを作成します(別の名前を選んでも構いません)。  Kokkos はソース外ビルドを必要とします。   ``[<options...>]``   の部分は設定オプションを指定する部分です。
+``-B builddir``　は、　``builddir``　というビルドディレクトリを作成します(別の名前を選んでも構いません)。  Kokkos はソース外ビルドを必要とします。   ``[<options...>]``   の部分は設定オプションを指定する部分です。
 
 **一般的な CMake の選択肢**
 
