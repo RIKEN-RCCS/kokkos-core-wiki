@@ -41,7 +41,7 @@
 
 .. _KnownIssues: ../../../known-issues.html#mathematical-constants
 
-.. |KnownIssues| 置換:: known issues
+.. |KnownIssues| 置換:: 既知の問題
 
 * 	数学定数は ``Kokkos::Experimental::`` において、Kokkos 3.6以降利用可能です。
 * 	4.0では``Kokkos::numbers``　namespace　に「昇格」"昇格"し、4.3では、　``Kokkos::Experimental::``　から削除されています。
