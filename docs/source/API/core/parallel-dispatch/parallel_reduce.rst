@@ -70,7 +70,7 @@
 ~~~~~~~~~~~
 
 * ``name``: ユーザーが提供した文字列で、Kokkos Profiling Hooksを介してプロファイリングおよびデバッグツールで使用されます。
-* ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
+* ExecPolicy: イテレーション空間及び他の実行プロパティを定義する　*ExecutionPolicy* 。有効なポリシー配下の通りです :
 
   - ``IntegerType``: 1D反復範囲を定義し、0からカウント値までを範囲とします。
   - `RangePolicy <../policies/RangePolicy.html>`_: 1次元反復範囲を定義します。
