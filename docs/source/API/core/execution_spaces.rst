@@ -89,7 +89,7 @@
 ``Kokkos::Serial``
 ------------------
 
-　``Kokkos::Serial`` は、CPU上でのシリアル実行を表す|ExecutionSpaceConceptType|_　です。
+　``Kokkos::Serial`` は、CPU上でのシリアル実行を表す |ExecutionSpaceConceptType|_　です。
 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、|DocExecutionSpaceConcept|_　を参照してください。
 
 ``Kokkos::ExecutionSpaceConcept``
