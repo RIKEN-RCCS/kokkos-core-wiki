@@ -27,15 +27,15 @@ API
     // 典型的な Op<Args...> をサポートしない型のためのプライマリテンプレート
     template<class Default, class /* AlwaysVoid */, template<class...> class /* Op */, class... /* Args */>
     構造体 DETECTOR {
-        value_t = std::false_type　を使用;
-        type    = Default　を使用;
+        using value_t = std::false_type;
+        using type    = Default;
     };
 
     // 原型の Op<Args...> をサポートする型向けの特殊化
     template<class Default, template<class...> class Op, class... Args>
     struct DETECTOR<Default, VOID_T<Op<Args...>>, Op, Args...> {
-        value_t = std::true_type　を使用;
-        type    = Op<Args...>　を使用;
+        using value_t = std::true_type;
+        using type    = Op<Args...>;
     };
 
 .. code-block:: cpp
@@ -53,32 +53,32 @@ API
 
     テンプレート <template <class...> class Op, class... Args>
      is_detected =
-        typename DETECTOR<nonesuch, void, Op, Args...>::value_t　を使用;
+        using typename DETECTOR<nonesuch, void, Op, Args...>::value_t;
 
     // detected_t は、Op<Args...> が有効な型である場合に Op<Args...> の別名です。
     //  そうでない場合、 Kokkos::nonesuch　の別名です。
 
     テンプレート <template <class...> class Op, class... Args>
-    detected_t = typename DETECTOR<nonesuch, void, Op, Args...>::type　を使用;
+    using detected_t = typename DETECTOR<nonesuch, void, Op, Args...>::type;
 
     // detected_or_t は、Op<Args...> が有効な型である場合に  Op<Args...> の別名です。
     //  そうでない場合、 Default の別名です。
 
     テンプレート <class Default, template <class...> class Op, class... Args>
-    detected_or_t = typename DETECTOR<Default, void, Op, Args...>::type　を使用;
+    using detected_or_t = typename DETECTOR<Default, void, Op, Args...>::type;
 
     // is_detected_exact は、Op<Args...> が、 Expected と同じ型である場合に std::true_type の別名です。
     //  そうでない場合、std::false_type　の別名です。
 
     テンプレート <class Expected, template <class...> class Op, class... Args>
-    is_detected_exact = std::is_same<Expected, detected_t<Op, Args...>>　を使用;
+    using is_detected_exact = std::is_same<Expected, detected_t<Op, Args...>>;
 
     // is_detected_convertible は、Op<Args...> が To へ変換可能な場合に std::true_type の別名となります。
     //  そうでない場合、std::false_type　の別名です。
 
     テンプレート <class To, template <class...> class Op, class... Args>
     is_detected_convertible =
-        std::is_convertible<detected_t<Op, Args...>, To>　を使用;
+        using std::is_convertible<detected_t<Op, Args...>, To>;
 
     // C++17 またはそれ以降の便利変数
 
@@ -105,21 +105,21 @@ API
 .. code-block:: cpp
 
     template<class T>
-    copy_assign_t = decltype(std::declval<T&>() = std::declval<T const&>())　を使用;
+    using copy_assign_t = decltype(std::declval<T&>() = std::declval<T const&>());
 
 次に、その特性は簡単に次のように表現できます:
 
 .. code-block:: cpp
 
     template<class T>
-    is_copy_assignable = Kokkos::is_detected<copy_assign_t, T>　を使用;
+    using is_copy_assignable = Kokkos::is_detected<copy_assign_t, T>;
 
 コピー代入の戻り値の型が ``T&`` であることを確認したい場合、以下を使用します:
 
 .. code-block:: cpp
 
     template<class T>
-    is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>　を使用;
+    using is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>;
 
 ネストされた型定義を検出
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -131,10 +131,10 @@ API
 .. code-block:: cpp
 
     template<class T>
-    diff_t = typename T::difference_type　を使用;
+    using diff_t = typename T::difference_type;
 
 その後、型を宣言することができます:
 
 .. code-block:: cpp
 
-    our_difference_type = Kokkos::detected_or_t<std::ptrdiff_t, diff_t, MyType>　を使用;
+    using our_difference_type = Kokkos::detected_or_t<std::ptrdiff_t, diff_t, MyType>;
