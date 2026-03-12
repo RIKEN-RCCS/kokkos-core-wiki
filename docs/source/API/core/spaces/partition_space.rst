@@ -57,12 +57,12 @@
   - ``space`` は、 ``instance[i].fence()``　により囲まれていません。
   しかしながら、実際には、これらのインスタンスは、同じハードウェアリソースにディスパッチされるため、互いにブロックし合う可能性があります。
 
-- `args``（または　``weights``　要素）の相対的な重みは、望ましいリソース配分に関するヒントとして使用されます。
+- `args``（または　 ``weights``　要素）の相対的な重みは、望ましいリソース配分に関するヒントとして使用されます。
   例えば、個別のスレッドを使用するバックエンドの場合、 ``{1,2}`` の重みの結果、2つのインスタンスが生じ、
   その1つ目は、元のインスタンスのスレッドの約3分の1であり、
   そして2番目は、3分の2を伴います。しかしながら、一部のバックエンドについては、それぞれ返されたインスタンスは、元のもののコピーである場合があります。
 
-.. ::
+.. 重要::
 
    ``Cuda``　については、 それぞれ新たにインスタスを作成した　``HIP`` および ``SYCL``は、それ自身の *stream*/*queue*　と関連します。
 
@@ -77,8 +77,8 @@
    template<class ExecSpace, class ... OtherParams>
    void foo(const ExecSpace& space, OtherParams...params) {
      auto [instance0, instance1] = Kokkos::partition_space(space,1,2);
-     // dispatch two kernels, F1 needs less resources then F2
-     // F1 and F2 may now execute concurrently
+     // 2つのカーネルをディスパッチし、 F1 は、F2　よりも少ないリソースを必要とします
+     // F1 および F2 は、現在同時に実行できます
      Kokkos::parallel_for("F1",
        Kokkos::RangePolicy<ExecSpace>(instance0,0,N1),
        Functor1(params...));
