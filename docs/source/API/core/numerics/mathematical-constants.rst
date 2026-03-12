@@ -8,8 +8,7 @@
 
 .. |text| replace:: ``<Kokkos_MathematicalConstants.hpp>``
 
-ヘッダー |text|_　に定義。
- ``<Kokkos_Core.hpp>``　に含まれます。
+ヘッダー |text|_　に定義。``<Kokkos_Core.hpp>``　に含まれます。
 
 .. _text2: https://en.cppreference.com/w/cpp/numeric/constants
 
