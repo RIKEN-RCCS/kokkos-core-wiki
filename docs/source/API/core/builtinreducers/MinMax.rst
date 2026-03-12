@@ -60,7 +60,7 @@
 
    .. cpp:type:: value_type
 
-      還元スカラー型。The reduction scalar type ( `MinMaxScalar <MinMaxScalar.html>`_　の特殊化)
+      還元スカラー型 ( `MinMaxScalar <MinMaxScalar.html>`_　の特殊化)。
 
    .. cpp:type:: result_view_type
 
