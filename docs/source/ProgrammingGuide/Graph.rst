@@ -69,7 +69,7 @@
 
     ...
 
-    自動 my_captured_node = predecessor.cuda_capture(
+    auto my_captured_node = predecessor.cuda_capture(
         exec,
         MyCudaCapture{.data = my_data}
     );
@@ -113,7 +113,7 @@
 
 .. graphviz::
 
-    digraph diamondダイグラフダイアモンド {
+    digraph diamond {
         A -> B;
         A -> C;
         B -> D;
