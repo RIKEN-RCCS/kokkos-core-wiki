@@ -45,4 +45,4 @@
 機能
 ~~~~~~~~~~~~~
 
-すべての ``ExecutionPolicy`` 型は、 ``index_type``という名前のネスト型を提供します。
+すべての ``ExecutionPolicy`` 型は、 ``index_type``　という名前のネスト型を提供します。
