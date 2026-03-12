@@ -71,7 +71,7 @@ TeamHandleConcept　は、　``TeamPolicy``　と ``TeamTask``　の ``member_ty
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION int league_size() const noexcept ;
 
-      返し: the number of teams/workitems launched in the kernel.カーネル内で起動したチーム/ワークアイテムの数
+      返し: カーネル内で起動したチーム/ワークアイテムの数。
 
 
    .. rubric:: スクラッチ空間コントロール
@@ -88,7 +88,7 @@ TeamHandleConcept　は、　``TeamPolicy``　と ``TeamTask``　の ``member_ty
 
       - ``level``: 要求されたスクラッチメモリのレベルは、 ``0`` または ``1``　のいずれかです。
 
-      - リターン: レベルにより特定されたチームで共有するスクラッチメモリへのスクラッチメモリハンドル。
+      - 返し: レベルにより特定されたチームで共有するスクラッチメモリへのスクラッチメモリハンドル。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION const scratch_memory_space & thread_scratch(int level) const ;
 
@@ -97,7 +97,7 @@ TeamHandleConcept　は、　``TeamPolicy``　と ``TeamTask``　の ``member_ty
 
       - ``level``: 要求されたスクラッチメモリのレベルは、 ``0`` または ``1``　のいずれかです。
 
-      - Returns: レベルにより特定されたチームで共有するスクラッチメモリへのスクラッチメモリハンドル。
+      - 返し: レベルにより特定されたチームで共有するスクラッチメモリへのスクラッチメモリハンドル。
 
 
    .. rubric:: チーム集合演算子
@@ -130,15 +130,15 @@ TeamHandleConcept　は、　``TeamPolicy``　と ``TeamTask``　の ``member_ty
 
    .. cpp:function:: template< typename ReducerType> KOKKOS_INLINE_FUNCTION void team_reduce( ReducerType const & reducer ) const noexcept;
 
-      Performs a reduction across all members of the team as specified by ``reducer``. ``ReducerType`` must meet the concept of ``Kokkos::Reducer``.
+       ``reducer``　により特定された通りに、チームすべてのメンバーに渡って、還元を実行します。 ``ReducerType`` は、``Kokkos::Reducer``　の概念を満たす必要があります。
 
    .. cpp:function:: template< typename T > KOKKOS_INLINE_FUNCTION T team_scan( T const & value , T * const global = 0 ) const noexcept;
 
-      チームメンバーが提供する ``var`` に対して、エクスクルーシブスキャンを行います。  ``t = team_rank()`` および ``VALUES[t]``　を、 the value of from スレッド ``t``　からの　``var`` の値とします。
+      チームメンバーが提供する ``var`` に対して、エクスクルーシブスキャンを行います。  ``t = team_rank()`` および ``VALUES[t]``　を、 スレッド ``t``　からの　``var`` の値とします。
 
       - リターン: ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[t-1]`` または ``t==0``　の0。
 
-      - ``global`` が指定されている場合は、 ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[team_size()-1]``に設定され、すべてのチームメンバーについて、同じポインタでなければなりません。
+      - ``global`` が指定されている場合は、 ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[team_size()-1]``　に設定され、すべてのチームメンバーについて、同じポインタでなければなりません。
 
 例
 --------
@@ -148,17 +148,17 @@ TeamHandleConcept　は、　``TeamPolicy``　と ``TeamTask``　の ``member_ty
     型定義 TeamPolicy<...> policy_type;
     parallel_for(policy_type(N,TEAM_SIZE).set_scratch_size(PerTeam(0,4096)),
                 KOKKOS_LAMBDA (const typename policy_type::member_type& team_handle) {
-        int ts = team_handle.team_size(); // returns TEAM_SIZE
-        int tid = team_handle.team_rank(); // returns a number between 0 and TEAM_SIZE
-        int ls = team_handle.league_size(); // returns N
-        int lid = team_handle.league_rank(); // returns a number between 0 and N
+        int ts = team_handle.team_size(); // returns TEAM_SIZEを返します
+        int tid = team_handle.team_rank(); //  0 および TEAM_SIZE　の間の番号を返します
+        int ls = team_handle.league_size(); //  N　を返します
+        int lid = team_handle.league_rank(); //  0 および N　の間の番号を返します
 
         int value = tid * 5;
         team_handle.team_broadcast(value, 3);
         // あらゆるスレッド上で、value==15 
         value += tid;
         team_handle.team_broadcast([&] (int & var) { var*=2 }, value, 2);
-        // value==34 on every thread
+        // あらゆるスレッド上で、value==34 
         int global;
         int scan = team_handle.team_scan(tid+1, &global);
         // あらゆるスレッド上で、scan == tid*(tid+1)/2 
