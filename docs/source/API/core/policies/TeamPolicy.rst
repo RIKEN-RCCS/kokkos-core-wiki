@@ -56,7 +56,7 @@ TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Polic
 
    .. cpp:function:: TeamPolicy(index_type league_size, index_type team_size, index_type vector_length=1)
 
-       ``league_size``　ワークアイテムの起動リクエストで、 ``vector_length``　のベクトル長を使用して、それぞれが ``team_size``スレッドで、スレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。
+       ``league_size``　ワークアイテムの起動リクエストで、 ``vector_length``　のベクトル長を使用して、それぞれが ``team_size``　スレッドで、スレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。
 
    .. cpp:function:: TeamPolicy(index_type league_size, Impl::AUTO_t, index_type vector_length=1)
 
@@ -93,8 +93,8 @@ TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Polic
 
       - ``per_thread``: スレッドごとのスクラッチサイズ(バイト単位)のラッパーです。関数　``PerThread(int)``　で返されます。
 
-      One can set the scratch size for level 0 and 1 independently by calling the function twice. Subsequent calls with the same level overwrite the previous value.関数を　2回呼び出すことで、レベル　0　と　1　のスクラッチサイズを独立して設定できます。 同じレベルでの後続の呼び出しは、前の値を上書きします。
-      Returns: 　``*this``　を参照
+      関数を　2回呼び出すことで、レベル　0　と　1　のスクラッチサイズを独立して設定できます。 同じレベルでの後続の呼び出しは、前の値を上書きします。
+      返し: 　``*this``　を参照
 
    .. rubric:: 実行時設定の参照制限
 
@@ -181,7 +181,7 @@ TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Polic
         });
         team.team_barrier();
 
-        // ランク-2ビューとして格納されている、行列　A　の　n　行目の合計を計算
+        // ランク2ビューとして格納されている、行列　A　の　n　行目の合計を計算
         int team_sum;
         parallel_reduce(TeamThreadRange(team,M), [&] (const int& i, int& lsum) {
             lsum += A(n,i);
