@@ -6,7 +6,7 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-TeamHandleConcept　は、　``TeamPolicy``と ``TeamTask``　の ``member_type`` の概念を定義しています。 実際のタイプはポリシーで定義されますが、以下の　API　を満たしています。 特定のクラスは、``TeamPolicy`` および
+TeamHandleConcept　は、　``TeamPolicy``　と ``TeamTask``　の ``member_type`` の概念を定義しています。 実際のタイプはポリシーで定義されますが、以下の　API　を満たしています。 特定のクラスは、``TeamPolicy`` および
 ``TeamTask`` が提供する公開　API　の一部であり、 ``TeamHandleConcept``　で定義された部分のみであることに、注意してください。 
 クラスの実際の名称やテンプレートパラメータ、既存のコンストラクタ、概念を超えたメンバー関数などは公開された　Kokkos API　の一部ではないため、変更の対象となります。
 
