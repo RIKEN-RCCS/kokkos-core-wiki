@@ -58,6 +58,6 @@ Defined in header ``<Kokkos_Profiling_ScopedRegion.hpp>``
 
 
 
-**See also**
+**以下も参照**
 
 `ProfilingSection <profiling_section.html>`_: Implements a scope-based section ownership wrapper
