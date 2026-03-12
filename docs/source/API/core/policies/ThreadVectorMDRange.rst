@@ -20,14 +20,14 @@
 
    .. cpp:function:: ThreadVectorMDRange(team, extent_1, extent_2, ...);
 
-      呼び出しスレッドのベクトルレーン上で、インデックス範囲 ``0`` から``extent`` を分割します。
+      呼び出しスレッドのベクトルレーン上で、インデックス範囲 ``0`` から　``extent`` を分割します。
       ここでは、 ``extent`` は、ベクトル化されるバックエンド依存のランクです。
 
       :param team: 呼び出しチーム実行コンテキストへのTeamHandle
 
       :param extent_1, extent_2, ...: 各ランクのインデックス範囲長
 
-      * **Requirements**
+      * **必要要件**
 
 	* ``TeamHandle`` は、 `TeamHandle <./TeamHandleConcept.html>`_　をモデル化する型です。
 
