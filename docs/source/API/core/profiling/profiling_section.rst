@@ -6,7 +6,7 @@
 
 ヘッダー ``<Kokkos_Profiling_ProfileSection.hpp>``　に定義。
 
-Usage
+使用例
 -----
 
 .. code-block:: cpp
