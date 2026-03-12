@@ -23,7 +23,7 @@
 
  |NumericLimits|_　の代替えを提供します。  C++23標準ライブラリに追加される新しい機能を実装し、モノリシックな ``numeric_limits`` クラステンプレートを個別のトレイトテンプレートに分割します。 詳細については、標準ライブラリヘッダー からの |P1841|_.numeric_limit　を参照してください。
 
-Numeric traits are defined in the  since Kokkos 3.5数値特性は、Kokkos 3.5以降に、``Kokkos::Experimental`` namespace　で定義されています。
+数値特性は、Kokkos 3.5以降に、``Kokkos::Experimental`` namespace　で定義されています。
 
 以下に利用可能な特性のリストを記載します。
 
