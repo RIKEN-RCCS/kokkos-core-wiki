@@ -14,11 +14,11 @@
 * :cpp:`HIP`
 * :cpp:`SYCL`
 
-これらのバックエンドでは、:cpp:'Kokkos::Graph'　の特殊化はネイティブのグラフ　API、すなわち、CUDA Graph API、HIP Graph API、およびSYCL(コマンド)グラフAPIに、それぞれマッピングされます。
+これらのバックエンドでは、:cpp:`Kokkos::Graph`　の特殊化はネイティブのグラフ　API、すなわち、CUDA Graph API、HIP Graph API、およびSYCL(コマンド)グラフAPIに、それぞれマッピングされます。
 
 
 
-他のバックエンドについては、:cpp:'Kokkos::Graph'　がデフォルトの実装を提供します。
+他のバックエンドについては、　:cpp:`Kokkos::Graph` がデフォルトの実装を提供します。
 
 実行空間インスタンスとグラフの比較
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
