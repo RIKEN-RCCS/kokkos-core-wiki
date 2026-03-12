@@ -103,7 +103,7 @@
 
 * ``MaxLoc<T,I,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。  S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
-* 必要条件:  ``Scalar`` には、 定義した ``operator =`` and  ``operator >``  が定義されます。 ``Kokkos::reduction_identity<Scalar>::max()`` は、有効な式です。
+* 必要条件:  ``Scalar`` には、 定義した ``operator =`` および  ``operator >``  が定義されます。 ``Kokkos::reduction_identity<Scalar>::max()`` は、有効な式です。
 
 * 必要条件: ``Index`` は、定義した ``operator =`` を持ちます。 ``Kokkos::reduction_identity<Index>::min()``  は、有効な式です。
 
