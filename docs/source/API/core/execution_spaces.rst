@@ -57,7 +57,7 @@
 ``Kokkos::SYCL``
 ------------------------------
 
-　:sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降`  `昇格した`　``Kokkos::SYCL`` は、 SYCLがサポートするデバイス上での実行を表す|ExecutionSpaceConceptType|_　です。
+　:sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降`  `昇格した`　``Kokkos::SYCL`` は、 SYCLがサポートするデバイス上での実行を表す |ExecutionSpaceConceptType|_ です。
 
 　SYCL　バックエンドが有効化され、　GPU　アーキテクチャが指定されていない場合、　Kokkos　は、特定の　SYCL　デバイスタイプへ、制限なしで、Just-In-Timeコンパイルを使用します。
 したがって、SYCLバックエンド（実験的、未検証、最適化されていない）で、CPU　をターゲットにする唯一の選択肢がこれです。
