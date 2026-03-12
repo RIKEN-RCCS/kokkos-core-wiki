@@ -25,7 +25,7 @@
 
     :tparam MemorySpace: 保存先を制御します。 省略された場合、デフォルトの実行領域のメモリ領域が使用されます。 (つまり、 ``Kokkos::DefaultExecutionSpace::memory_space``　です)。
 
-    :param ptr: The pointer to the memory to deallocate on the specified memory space.指定されたメモリ空間上で解放するメモリへのポインタ。
+    :param ptr: 指定されたメモリ空間上で割り当て解除するメモリへのポインタ。
 
     :返し: ()
 
