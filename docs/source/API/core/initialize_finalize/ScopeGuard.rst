@@ -81,7 +81,7 @@
 
     .. cpp:function:: ScopeGuard& operator=(ScopeGuard&&) = delete;
 
-       Move assignment operator
+       移動代入演算子
 
 注意事項
 -----
