@@ -24,7 +24,7 @@
 
   * :cpp:any:`T` は浮動小数点型　(``float``, ``double``, ``long double``)　か拡張浮動小数点型でなければなりません。
 
-  * :cpp:any:`T` は、 ``const`` および/または ``volatile`` に適することはできません。
+  * :cpp:any:`T` を、 ``const`` および/または ``volatile`` により修飾されることはできません。
 
   * 特定のバックエンド(CUDA　や　SYCL　の``long double`` 等）では動作しないタイプもあります。
 
@@ -99,7 +99,7 @@
 
   .. cpp:function:: constexpr void real(T r) noexcept
 
-    Assigns ``r`` を実成分に代入します。
+    ``r`` を実成分に代入します。
 
   .. cpp:function:: constexpr T& imag() noexcept
   .. cpp:function:: constexpr T imag() const noexcept
@@ -244,7 +244,7 @@
 
   .. cpp:function:: template<typename T> T imag(complex<T> x) noexcept
 
-    :return: ``x.imag()``.
+    :返し: ``x.imag()``.
 
   .. cpp:function:: template<typenmame T> complex<T> polar(T rho, T theta = T())
 
@@ -273,7 +273,7 @@
   .. cpp:function:: template<typename T> complex<T> exp(complex<T> x)
   .. cpp:function:: template<typename T> complex<T> exp(std::complex<T> x)
 
-    :返し: 複素 e 底指数関数  ``complex(x)``.
+    :返し: 複素 e 底指数関数  ``complex(x)``。
 
   .. cpp:function:: template<typename T> complex<T> log(complex<T> x)
 
