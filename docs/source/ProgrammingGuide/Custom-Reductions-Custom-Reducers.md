@@ -22,10 +22,10 @@
 ```c++
 #include <Kokkos_Core.hpp>
 
-名前空間 sample {
+namespace sample {
 
-テンプレート <class ScalarType, int N>
-構造体 array_type {
+template <class ScalarType, int N>
+struct array_type {
   ScalarType myArray[N];
 
   KOKKOS_INLINE_FUNCTION
@@ -55,8 +55,8 @@
   }
 };
 
-テンプレート <class T, class Space, int N>
-構造体 SumMyArray {
+template <class T, class Space, int N>
+struct SumMyArray {
  public:
   // 必要とされます
   typedef SumMyArray reducer;
@@ -64,10 +64,10 @@
   typedef Kokkos::View<value_type*, Space, Kokkos::MemoryUnmanaged>
       result_view_type;
 
- プライベート:
+ private:
   value_type& value;
 
- パブリック:
+ public:
   KOKKOS_INLINE_FUNCTION
   SumMyArray(value_type& value_) : value(value_) {}
 
