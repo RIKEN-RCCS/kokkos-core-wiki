@@ -47,7 +47,7 @@
        LOr(const result_view_type& value_);
    };
 
-Interfaceインターフェイス
+インターフェイス
 ---------
 
 .. cpp:class:: template<class Scalar, class Space> LOr
