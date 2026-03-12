@@ -11,9 +11,9 @@
  本例では、組み込みの [`Sum`](../API/core/builtinreducers/Sum) リデューサーを使って配列に対してカスタム還元を行います。
 
 ```c++
-名前空間 sample {  // 名前空間は、還元識別子における名前解決に役立ちます 
+namespace sample {  // 名前空間は、還元識別子における名前解決に役立ちます 
    template< class ScalarType, int N >
-   構造体 array_type {
+   struct array_type {
      ScalarType the_array[N];
   
      KOKKOS_INLINE_FUNCTION   // デフォルトコンストラクタ -  0's　に初期化します
@@ -34,11 +34,11 @@
        return *this;
      }
    };
-   型定義 array_type<int,4> ValueType;  // 以下のコードの簡易化に使用されます
+   typedef array_type<int,4> ValueType;  // 以下のコードの簡易化に使用されます
 }
-名前空間　Kokkos { //reduction identity 還元識別は、Kokkos namespace　に定義されなければなりません
+namespace　Kokkos { //reduction identity 還元識別は、Kokkos namespace　に定義されなければなりません
    template<>
-   構造体 reduction_identity< sample::ValueType > {
+   struct reduction_identity< sample::ValueType > {
       KOKKOS_FORCEINLINE_FUNCTION static sample::ValueType sum() {
          return sample::ValueType();
       }
