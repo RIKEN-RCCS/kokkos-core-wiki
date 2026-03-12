@@ -27,15 +27,15 @@ API
     // 典型的な Op<Args...> をサポートしない型のためのプライマリテンプレート
     template<class Default, class /* AlwaysVoid */, template<class...> class /* Op */, class... /* Args */>
     構造体 DETECTOR {
-        using value_t = std::false_type　を使用;
-        using type    = Default　を使用;
+        value_t = std::false_type　を使用;
+        type    = Default　を使用;
     };
 
     // 原型の Op<Args...> をサポートする型向けの特殊化
     template<class Default, template<class...> class Op, class... Args>
     struct DETECTOR<Default, VOID_T<Op<Args...>>, Op, Args...> {
-        using value_t = std::true_type　を使用;
-        using type    = Op<Args...>　を使用;
+        value_t = std::true_type　を使用;
+        type    = Op<Args...>　を使用;
     };
 
 .. code-block:: cpp
@@ -59,7 +59,7 @@ API
     //  そうでない場合、 Kokkos::nonesuch　の別名です。
 
     テンプレート <template <class...> class Op, class... Args>
-    using detected_t = typename DETECTOR<nonesuch, void, Op, Args...>::type　を使用;
+    detected_t = typename DETECTOR<nonesuch, void, Op, Args...>::type　を使用;
 
     // detected_or_t は、Op<Args...> が有効な型である場合に  Op<Args...> の別名です。
     //  そうでない場合、 Default の別名です。
@@ -71,13 +71,13 @@ API
     //  そうでない場合、std::false_type　の別名です。
 
     テンプレート <class Expected, template <class...> class Op, class... Args>
-    using is_detected_exact = std::is_same<Expected, detected_t<Op, Args...>>;
+    is_detected_exact = std::is_same<Expected, detected_t<Op, Args...>>　を使用;
 
     // is_detected_convertible は、Op<Args...> が To へ変換可能な場合に std::true_type の別名となります。
     //  そうでない場合、std::false_type　の別名です。
 
     テンプレート <class To, template <class...> class Op, class... Args>
-    using is_detected_convertible =
+    is_detected_convertible =
         std::is_convertible<detected_t<Op, Args...>, To>　を使用;
 
     // C++17 またはそれ以降の便利変数
@@ -105,21 +105,21 @@ API
 .. code-block:: cpp
 
     template<class T>
-    using copy_assign_t = decltype(std::declval<T&>() = std::declval<T const&>())　を使用;
+    copy_assign_t = decltype(std::declval<T&>() = std::declval<T const&>())　を使用;
 
 次に、その特性は簡単に次のように表現できます:
 
 .. code-block:: cpp
 
     template<class T>
-    using is_copy_assignable = Kokkos::is_detected<copy_assign_t, T>　を使用;
+    is_copy_assignable = Kokkos::is_detected<copy_assign_t, T>　を使用;
 
 コピー代入の戻り値の型が ``T&`` であることを確認したい場合、以下を使用します:
 
 .. code-block:: cpp
 
     template<class T>
-    using is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>　を使用;
+    is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>　を使用;
 
 ネストされた型定義を検出
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -131,10 +131,10 @@ API
 .. code-block:: cpp
 
     template<class T>
-    using diff_t = typename T::difference_type;
+    diff_t = typename T::difference_type　を使用;
 
 その後、型を宣言することができます:
 
 .. code-block:: cpp
 
-    using our_difference_type = Kokkos::detected_or_t<std::ptrdiff_t, diff_t, MyType>　を使用;
+    our_difference_type = Kokkos::detected_or_t<std::ptrdiff_t, diff_t, MyType>　を使用;
