@@ -22,7 +22,7 @@
     Kokkos::RangePolicy(exec, 開始, 終了)
     Kokkos::RangePolicy(exec, 開始, 終了, chunk_size)
 
-RangePolicy は、``begin`` から開始して、開区間で``end`` に行く、1次元反復空間の実行方針を、定義します。
+RangePolicy は、``begin`` から開始して、開区間で　``end`` に行く、1次元反復空間の実行方針を、定義します。
 
 シノプシス
 --------
