@@ -41,14 +41,14 @@ int main(int argc, char *argv[]) {
   }
 
   // クリーンアップ
-  インスタンス削除;
+  delete instance;
 }
 ```
 
 このコードは、見た目以上に、GPUへ移植するのが難しいです。
 単純なアプローチを使用して、関数を　`KOKKOS_FUNCTION`　でアノテーションし、`for`　ループを　`parallel_for`　に置き換え、`instance`　をGPUメモリにコピーします（具体的な方法は現時点では明示しません）。
 次に、　`Bar()` inside the `parallel_for`　を呼び出します。
-一見問題ないように見えますが、`instance`がホスト版の`Bar()`を呼び出すため、通常はクラッシュします。
+一見問題ないように見えますが、 `instance` がホスト版の `Bar()` を呼び出すため、通常はクラッシュします。
 その理由を理解するには、仮想関数がどのように実装されているかを少し理解する必要があります。
 
 ## 仮想テーブル、仮想ポインタ、GPUでは非常に厄介
@@ -110,11 +110,11 @@ int main(int argc, char *argv[])
   {
 
   // 作成
-  void* deviceInstanceMemory = Kokkos::kokkos_malloc(sizeof(Derived)); // allocate memory on device
+  void* deviceInstanceMemory = Kokkos::kokkos_malloc(sizeof(Derived)); // デバイス上でメモリを割り当て
   Kokkos::parallel_for("initialize", 1, KOKKOS_LAMBDA (const int i) {
-    new (static_cast<Derived*>(deviceInstanceMemory)) Derived(); // initialize on device
+    new (static_cast<Derived*>(deviceInstanceMemory)) Derived(); // デバイス上で初期化
   });
-  Base* deviceInstance = static_cast<Derived*>(deviceInstanceMemory); // declare on this memory
+  Base* deviceInstance = static_cast<Derived*>(deviceInstanceMemory); // 本メモリ上で宣言
 
   // 使用
   Kokkos::parallel_for("myKernel", 10, KOKKOS_LAMBDA (const int i) {
@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
   Kokkos::parallel_for("destroy", 1, KOKKOS_LAMBDA (const int i) {
     deviceInstance->~Base(); // destroy on device
   });
-  Kokkos::kokkos_free(deviceInstanceMemory); // free
+  Kokkos::kokkos_free(deviceInstanceMemory); // 解放
 
   }
   Kokkos::finalize();
@@ -163,7 +163,7 @@ deviceInstance->setAField(someHostValue); // set on host
 セッターは依然としてホスト上で呼び出されます。
 これは、`SharedSpace`　をサポートするバックエンドでのみ有効であることに注意してください。
 
-"統一された"　`SharedSpace`　を使用しているにもかかわらず、デバイス上で正しい　Vpointer（そしてそれゆえの Vtable ）を得るためには、依然として配置 new に頼らなければならないことに注意してください！
+"統一された"　`SharedSpace`　を使用しているにもかかわらず、デバイス上で正しい　Vpointer（そしてそれゆえの Vtable ）を得るためには、依然として placement new に頼らなければならないことに注意してください！
 
 ## では、デバイス側で　Vtable が本当に必要ない場合はどうでしょうか？
 
