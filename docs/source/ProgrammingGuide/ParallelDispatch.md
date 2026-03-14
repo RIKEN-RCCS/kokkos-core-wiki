@@ -245,14 +245,14 @@ parallel_reduce (X.extent(0), cs, sums);
 以下に、中間結果は、`浮動小数点`　型となるラムダの例を示します。
 
 ```c++
-View<float*> x = ...; // assume filled with input values
+View<float*> x = ...; // 入力値が入力されると仮定
 const size_t N = x.extent(0);
 parallel_scan (N, KOKKOS_LAMBDA (const int i,
           float& update, const bool final) {
     // 蓄積する前に更新した場合に備え、古い値を読み込みます
     const float val_i = x(i); 
     if (final) {
-      x(i) = update; // only update array on final pass
+      x(i) = update; // 最終パスに関する配列の更新のみを実行
     }
     // エクスクルーシブスキャンについては、
     // ここで行った通りに、配列更新後、更新値を変えます。インクルーシブスキャンについては、
