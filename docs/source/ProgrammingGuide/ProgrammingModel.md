@@ -28,7 +28,7 @@
 
 ### 範囲ポリシー
 
-実行ポリシーの中で、もっとも単純な形態は、 _範囲ポリシー_　です。それらは、範囲内の各要素に対して一度ずつ演算を実行するために使用されます。 There are no prescriptions of order of execution or concurrency, which means that it is not legal to synchronize different iterations.
+実行ポリシーの中で、もっとも単純な形態は、 _範囲ポリシー_　です。それらは、範囲内の各要素に対して一度ずつ演算を実行するために使用されます。 実行順序や並行性に関する規定はありません。つまり、異なる反復処理を同期させることは許可されていません。
 
 ### チームポリシー
 
