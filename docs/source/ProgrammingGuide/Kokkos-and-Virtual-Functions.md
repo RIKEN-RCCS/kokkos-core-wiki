@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 
 仮想関数を実装するためにコンパイラが何をしているのかがわかったので、次に、なぜそれが　GPU　では機能しないのかを見ていきましょう。
 
-クレジット：このセクションの内容は[Pablo Ariasのこの記事]を改訂したものです [this article of Pablo Arias](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/).
+クレジット：このセクションの内容は、 [this article of Pablo Arias]　を改訂したものです(https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/).
 
 ## では、なぜ直接的なアプローチがうまくいかないのか？
 
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
 デバイス上で構築している場合、正しいVポインタを取得できるため、正しい関数が得られます。
 この変更により、仮想関数は、デバイス側でのみ呼び出せるようになり、ホスト側では呼び出せなくなります。
 
-したがって、まずデバイス上でメモリを割り当て、次に[*配置型　new*](https://en.cppreference.com/w/cpp/language/new#Placement_new):
+したがって、まずデバイス上でメモリを割り当て、次に[*placement new*](https://en.cppreference.com/w/cpp/language/new#Placement_new):
 
 ```cpp
 #include <Kokkos_Core.hpp>
@@ -134,10 +134,10 @@ int main(int argc, char *argv[])
 
 まず、`KOKKOS_FUNCTION` マクロを使用して、カーネルからメソッドを呼び出せるようにします
 インスタンスを作成する際、そのインスタンスが使用する　*メモリ*　と、実際にインスタンス化された　*オブジェクト*　との区別を導入することに、注意してください。
-オブジェクトインスタンスは、デバイス上で単一反復の`parallel_for`　内で、[配置新規]　(https://en.cppreference.com/w/cpp/language/new#Placement_new)　を使用して構築されます
+オブジェクトインスタンスは、デバイス上で単一反復の`parallel_for`　内で、[placement new](https://en.cppreference.com/w/cpp/language/new#Placement_new)　を使用して構築されます
 カーネルには戻り値の型がないため、オブジェクトの型とメモリ割り当てを関連付けるために、静的キャストを使用します。
 
-[破棄可能な]　(https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor)　オブジェクトの場合、デストラクタはデバイス上で明示的に呼び出さなければなりません。
+[trivially destructible](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor)　オブジェクトの場合、デストラクタはデバイス上で明示的に呼び出さなければなりません。
 単一反復の　`parallel_for`　でオブジェクトを破棄した後、`kokkos_free`　でメモリ割り当てを最終的に解放できます。
 
 このコードは非常に見苦しいですが、デバイス上で仮想関数の呼び出しを機能させます。Vpointerは現在、デバイスのVtableを指しています。
@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
 
 ![VPointerToDevice](./figures/VirtualFunctions-VPointerToDevice.png)
 
-完全な動作例については、 [ repo　内の例](https://github.com/kokkos/kokkos/blob/master/example/virtual_functions/main.cpp).
+完全な動作例については、 [the example in the repo](https://github.com/kokkos/kokkos/blob/master/example/virtual_functions/main.cpp).
 
 ## ホスト値と連動するセッターが必要な場合はどうするべきですか？
 
