@@ -25,8 +25,8 @@ __device__ SomeFunction(double* x) {
   ...
 }
 
-構造体 ファンクタ {
-  型定義 Cuda execution_space;
+struct functor {
+  typedef Cuda execution_space;
   View<double*,Cuda> a;
   KOKKOS_INLINE_FUNCTION
  void operator(const int& i) {
@@ -85,9 +85,9 @@ for(int i=0;i<150;i++)
 template<class ExecutionSpace>
 void MyKokkosFunction(double* a, const double** b, int n, int m) {
   // ホスト実行空間とビュータイプを定義
-  型定義 HostSpace::execution_space host_space;
-  型定義 View<double*,ExecutionSpace> t_1d_device_view;
-  型定義 View<double**,ExecutionSpace> t_2d_device_view;
+  typedef HostSpace::execution_space host_space;
+  typedef View<double*,ExecutionSpace> t_1d_device_view;
+  typedef View<double**,ExecutionSpace> t_2d_device_view;
 
   // ビューを　ExecutionSpace のメモリ空間に割り当て
   t_1d_device_view d_a("a",n);
@@ -126,8 +126,8 @@ void MyKokkosFunction(double* a, const double** b, int n, int m) {
 ```c++
 void MyKokkosFunction(int* a, const double* b, int n, int m) {
   // ホスト実行空間とビュータイプを定義
-  型定義 View<int*, DefaultHostExecutionSpace, MemoryTraits<Unmanaged>> t_1d_view;
-  型定義 View<double**[3],LayoutRight, DefaultHostExecutionSpace,
+  typedef View<int*, DefaultHostExecutionSpace, MemoryTraits<Unmanaged>> t_1d_view;
+  typedef View<double**[3],LayoutRight, DefaultHostExecutionSpace,
                MemoryTraits<Unmanaged>> t_3d_view;
   // 管理対象外のビューのラベル保持は不可能
 
