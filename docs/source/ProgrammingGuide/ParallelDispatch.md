@@ -17,7 +17,7 @@
 
 ### ファンクタ
 
- _ファンクタ_ は、並列ループの本体を定義する方法の一つです。 それは、パブリックな `operator()` インスタンスメソッドを持つクラスまたは　struct<sup>1</sup> です。 そのメソッドの引数は、実行したい並列操作（for、reduce、または　scan）、およびループの実行ポリc（例えば、範囲またはチーム）の両方に依存します。ファンク他の一例については、 各並列操作の種類についての、本章の該当セクションを参照してください。 最も一般的なケースである　[`parallel_for()`](../API/core/parallel-dispatch/parallel_for)　では、for　ループのインデックスである、整数型の引数を取ります。これはとなります。他の引数である可能性もあります; [Chapter 8 - Hierarchical Parallelism](HierarchicalParallelism)　を参照してください。
+ _ファンクタ_ は、並列ループの本体を定義する方法の一つです。 それは、パブリックな `operator()` インスタンスメソッドを持つクラスまたは　struct<sup>1</sup> です。 そのメソッドの引数は、実行したい並列操作（for、reduce、または　scan）、およびループの実行ポリc（例えば、範囲またはチーム）の両方に依存します。ファンク他の一例については、 各並列操作の種類についての、本章の該当セクションを参照してください。 最も一般的なケースである　[`parallel_for()`](../API/core/parallel-dispatch/parallel_for)　では、for　ループのインデックスである、整数型の引数を取ります。これはとなります。他の引数である可能性もあります;[Chapter 8 - Hierarchical Parallelism](HierarchicalParallelism)を参照してください。
 
 　`operator()`　メソッドは、const　でなければならず、`KOKKOS_FUNCTION`　または　`KOKKOS_INLINE_FUNCTION`　マクロでマークされなければなりません。一部のバックエンド (CUDA および　HIP等) については、このマクロは、ご自身のメソッドがアクセラレータデバイスとホストの両方で実行可能であることを示すために必要です。 マークアップを必要とするバックエンドでビルドしない場合、`KOKKOS_INLINE_FUNCTION` は `inline` に展開され、そｓて and `KOKKOS_FUNCTION` は不要ですが、害はありません。 そのようなメソッドのシグネチャの例を以下に示します：
 
