@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
 // 
 void* deviceInstanceMemory = Kokkos::kokkos_malloc<Kokkos::SharedSpace>(sizeof(Derived)); // allocate on shared space
 // ...
-deviceInstance->setAField(someHostValue); // set on host
+deviceInstance->setAField(someHostValue); // ホスト上で設定
 ```
 
 セッターは依然としてホスト上で呼び出されます。
