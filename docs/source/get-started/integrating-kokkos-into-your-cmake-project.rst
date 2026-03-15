@@ -114,7 +114,9 @@ Kokkos 統合をコントロール:
 
   cmake -DCMAKE_REQUIRE_FIND_PACKAGE_Kokkos=ON -DKokkos_ROOT=/path/to/kokkos/install/dir
 
-or
+
+または
+
 
 .. code-block:: sh
 
