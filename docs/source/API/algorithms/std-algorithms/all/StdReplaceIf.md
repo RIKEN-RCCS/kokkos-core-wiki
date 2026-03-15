@@ -4,25 +4,25 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-名前空間 Kokkos{
-名前空間 実験的{
+namespace Kokkos{
+namespace Experimental{
 
-テンプレート <class ExecutionSpace, class IteratorType, class UnaryPredicateType, class T>
+template <class ExecutionSpace, class IteratorType, class UnaryPredicateType, class T>
 void replace_if(const ExecutionSpace& exespace,                              (1)
                 IteratorType first, IteratorType last,
                 UnaryPredicateType pred, const T& new_value);
 
-テンプレート <class ExecutionSpace, class IteratorType, class UnaryPredicateType, class T>
+template <class ExecutionSpace, class IteratorType, class UnaryPredicateType, class T>
 void replace_if(const std::string& label, const ExecutionSpace& exespace,    (2)
                 IteratorType first, IteratorType last,
                 UnaryPredicateType pred, const T& new_value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class UnaryPredicateType, class T>
+template <class ExecutionSpace, class DataType, class... Properties, class UnaryPredicateType, class T>
 void replace_if(const ExecutionSpace& exespace,                              (3)
                 const Kokkos::View<DataType, Properties...>& view,
                 UnaryPredicateType pred, const T& new_value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class UnaryPredicateType, class T>
+template <class ExecutionSpace, class DataType, class... Properties, class UnaryPredicateType, class T>
 void replace_if(const std::string& label, const ExecutionSpace& exespace,    (4)
                 const Kokkos::View<DataType, Properties...>& view,
                 UnaryPredicateType pred, const T& new_value);
@@ -45,7 +45,7 @@ void replace_if(const std::string& label, const ExecutionSpace& exespace,    (4)
   - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならず、 型　value_type　すべての引数　``v``　（constの可能性）について、ブール型に変換可能で、そこでは、``value_type``　が、　 `InputIteratorType`  (1,2,について) の値型、または  `view`  (3,4について)　の値型であり、  ``v``　を変更してはいけません。
   - 以下に一致しなければなりません:
   ```c++
-  構造体 述語
+  struct Predicate
   {
      KOKKOS_INLINE_FUNCTION
      bool operator()(const value_type & v) const { return /* ... */; }
@@ -53,7 +53,7 @@ void replace_if(const std::string& label, const ExecutionSpace& exespace,    (4)
      // または、また有効
 
      KOKKOS_INLINE_FUNCTION
-     ブール operator()(value_type v) const { return /* ... */; }
+     bool operator()(value_type v) const { return /* ... */; }
   };
   ```
 
@@ -65,14 +65,14 @@ void replace_if(const std::string& label, const ExecutionSpace& exespace,    (4)
 ## 例
 
 ```c++
-テンプレート <class ValueType>
-構造体 IsPositiveFunctor {
+template <class ValueType>
+struct IsPositiveFunctor {
   KOKKOS_INLINE_FUNCTION
-  ブール operator()(const ValueType val) const { return (val > 0); }
+  bool operator()(const ValueType val) const { return (val > 0); }
 };
 // ---
 
-名前空間 KE = Kokkos::Experimental;
+namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
 // a　を使って何かを実行
 // ...
