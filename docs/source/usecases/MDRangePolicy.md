@@ -132,7 +132,7 @@ Kokkos::parallel_for("mdr_for_all_cells",
 ## 資料
 
 [`MDRangePolicy`](../API/core/policies/MDRangePolicy) の　API　資料は、Kokkos　の　Wiki　でご覧いただけます：
-[Wikiリンク](https://github.com/kokkos/kokkos/wiki/Kokkos%3A%3AMDRangePolicy)。
+[wiki link](https://github.com/kokkos/kokkos/wiki/Kokkos%3A%3AMDRangePolicy)。
  
 この例が基づいている使用事例は、Trilinos の Intrepid2 パッケージに由来するものです。 具体例については、Trilinos　のコードを以下のファイルでご確認ください：`Trilinos/packages/intrepid2/src/Shared/Intrepid2_ArrayToolsDef*.hpp`。
 
