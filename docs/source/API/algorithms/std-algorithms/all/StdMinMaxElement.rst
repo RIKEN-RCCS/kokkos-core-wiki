@@ -151,4 +151,4 @@
    };
 
    // ビューを直接渡す
-   自動 res = KE::minmax_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanComparator<double>());
+   auto res = KE::minmax_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanComparator<double>());
