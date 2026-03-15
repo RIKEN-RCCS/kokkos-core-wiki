@@ -13,25 +13,25 @@ Kokkos 4.7　において非推奨
 
 * ``Kokkos::MemoryManaged``
    * 置換: 無し
-   * Unneeded due to redundancy with default memory trait and confusing use when requesting unmanaged views with MemoryManaged
+   * デフォルトのメモリ特性と重複し、不要であり、MemoryManaged　で管理対象外ビューを要求する際の混乱を招くので、不要です。
 
 * ``KOKKOS_NONTEMPORAL_PREFETCH_{LOAD,STORE}``
    * 置換: 無し
    * 非内部利用を意図したものではありません。
 
-Deprecated in Kokkos 4.6
+Kokkos 4.6　において非推奨
 ---------------------------
 
 * ``StaticCrsGraph`` moved to Kokkos Kernels
    * ``KokkosSparse::StaticCrsGraph``
-   * aligns better with functionality provided by ``KokkosKernels``.
+   * ``KokkosKernels`` が提供した機能性により整合しています。
 
 * ``native_simd`` and ``native_simd_mask`` types
-   * replacement: ``simd`` and ``simd_mask``
-   * alignment with the C++ standard
+   * 置換: ``simd`` and ``simd_mask``
+   * C++ standardC++ 標準との整合性。
 
-* Makefile support
-   * replacement: CMake
+* Makefile サポート
+   * 置換: CMake
    * reducing maintenance burden for a little-used build system
 
 * Direct access to ``d_view`` and ``h_view`` members in ``DualView``
