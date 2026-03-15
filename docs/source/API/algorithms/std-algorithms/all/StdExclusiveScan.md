@@ -4,8 +4,8 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-名前空間 Kokkos{
-名前空間 Experimental{
+namespace Kokkos{
+namespace Experimental{
 
 //
 // オーバーロードセット A
