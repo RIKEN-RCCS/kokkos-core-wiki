@@ -20,24 +20,24 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType2 swap_ranges(const ExecutionSpace& ex, IteratorType1 first1,          (1)
                              IteratorType1 last1, IteratorType2 first2);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   自動 swap_ranges(const ExecutionSpace& ex,                                         (2)
+   auto swap_ranges(const ExecutionSpace& ex,                                         (2)
                     const ::Kokkos::View<DataType1, Properties1...>& source,
                     ::Kokkos::View<DataType2, Properties2...>& dest);
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType2 swap_ranges(const std::string& label, const ExecutionSpace& ex,      (3)
                              IteratorType1 first1, IteratorType1 last1,
                              IteratorType2 first2);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   自動 swap_ranges(const std::string& label, const ExecutionSpace& ex,               (4)
+   auto swap_ranges(const std::string& label, const ExecutionSpace& ex,               (4)
                     const ::Kokkos::View<DataType1, Properties1...>& source,
                     ::Kokkos::View<DataType2, Properties2...>& dest);
 
@@ -48,15 +48,15 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2>
+   template <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
    IteratorType2 swap_ranges(const TeamHandleType& teamHandle, IteratorType1 first1,  (5)
                              IteratorType1 last1, IteratorType2 first2);
 
-   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
+   template <class TeamHandleType, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   自動 swap_ranges(const TeamHandleType& teamHandle,                                 (6)
+   auto swap_ranges(const TeamHandleType& teamHandle,                                 (6)
                     const ::Kokkos::View<DataType1, Properties1...>& source,
                     ::Kokkos::View<DataType2, Properties2...>& dest);
 
