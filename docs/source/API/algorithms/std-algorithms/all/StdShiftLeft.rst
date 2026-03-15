@@ -18,24 +18,24 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType>
+   template <class ExecutionSpace, class IteratorType>
    IteratorType shift_left(const ExecutionSpace& exespace,                 (1)
                            IteratorType first, IteratorType last,
                            typename IteratorType::difference_type n);
 
-   テンプレート <class ExecutionSpace, class IteratorType>
+   template <class ExecutionSpace, class IteratorType>
    IteratorType shift_left(const std::string& label,                       (2)
                            const ExecutionSpace& exespace,
                            IteratorType first, IteratorType last,
                            typename IteratorType::difference_type n);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
-   自動 shift_left(const ExecutionSpace& exespace,                         (3)
+   template <class ExecutionSpace, class DataType, class... Properties>
+   auto shift_left(const ExecutionSpace& exespace,                         (3)
                   const Kokkos::View<DataType, Properties...>& view,
                   typename decltype(begin(view))::difference_type n);
 
-   templateテンプレート <class ExecutionSpace, class DataType, class... Properties>
-   自動 shift_left(const std::string& label,                               (4)
+   template <class ExecutionSpace, class DataType, class... Properties>
+   auto shift_left(const std::string& label,                               (4)
                    const ExecutionSpace& exespace,
                    const Kokkos::View<DataType, Properties...>& view,
                   typename decltype(begin(view))::difference_type n);
@@ -48,13 +48,13 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType>
+   template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType shift_left(const TeamHandleType& teamHandle,               (5)
                            IteratorType first, IteratorType last,
                            typename IteratorType::difference_type n);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties>
+   template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
    自動 shift_left(const TeamHandleType& teamHandle,                       (6)
                    const Kokkos::View<DataType, Properties...>& view,
