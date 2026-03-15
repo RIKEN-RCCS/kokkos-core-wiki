@@ -219,7 +219,7 @@ Kokkos 4.6　において非推奨
 
 
 
-Type aliases deprecated in Kokkos-3.7　において非推奨である型エイリアス
+Kokkos-3.7　において非推奨である型エイリアス
 
 -------------------------------------
 ``ActiveExecutionMemorySpace``, ``host_execution_space``, ``host_memory_space``, ``host_mirror_space``, ``is_array_layout``, ``is_execution_policy``, ``is_execution_space``, ``is_memory_space``, ``is_memory_traits``, ``is_space``, ``Iterate``, ``MDRangePolicy``, ``Rank``, ``SpaceAccessibility``
@@ -290,35 +290,35 @@ Member functions deprecated in Kokkos-3.7　において非推奨
    * - メソッド名
      - クラス
 
-   * - ``静的 void OpenMP::partition_master()``
+   * - ``static void OpenMP::partition_master()``
      - ``クラス OpenMP`` (Kokkos_OpenMP.hpp)
 
-   * - ``静的 void OpenMPInternal::validate_partition()``
-     - ``クラス OpenMPInternal`` (Kokkos_OpenMP_Instance.hpp)
+   * - ``static void OpenMPInternal::validate_partition()``
+     - ``class OpenMPInternal`` (Kokkos_OpenMP_Instance.hpp)
 
    * - ``std::string ProfilingSection::getName()``
-     - ``クラス ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
+     - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
 
    * - ``uint32_t ProfilingSection::getSectionID()``
-     - ``クラス ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
+     - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
 
    * - ``int TeamPolicyInternal::vector_length() const``
-     - ``クラス TeamPolicyInternal`` (Kokkos_HIP_Parallel_Team.hpp, Kokkos_SYCL_Parallel_Team.hpp)
+     - ``class TeamPolicyInternal`` (Kokkos_HIP_Parallel_Team.hpp, Kokkos_SYCL_Parallel_Team.hpp)
 
-   * - ``インライン int TeamPolicyInternal::vector_length() const``
-     - ``クラス TeamPolicyInternal`` (Kokkos_OpenMPTarget_Exec.hpp, Kokkos_Cuda_Parallel_Team.hpp)
+   * - ``inline int TeamPolicyInternal::vector_length() const``
+     - ``class TeamPolicyInternal`` (Kokkos_OpenMPTarget_Exec.hpp, Kokkos_Cuda_Parallel_Team.hpp)
 
-   * - ``静的 void CudaSpace::access_error();``
-     - ``クラス CudaSpace`` (Kokkos_CudaSpace.hpp), ``class HIPSpace`` (Kokkos_HIP_Space.hpp)
+   * - ``static void CudaSpace::access_error();``
+     - ``class CudaSpace`` (Kokkos_CudaSpace.hpp), ``class HIPSpace`` (Kokkos_HIP_Space.hpp)
 
-   * - ``静的 void CudaSpace::access_error(const void* const);``
-     - ``クラス CudaSpace`` (Kokkos_CudaSpace.hpp), ``class HIPSpace`` (Kokkos_HIP_Space.hpp)
+   * - ``static void CudaSpace::access_error(const void* const);``
+     - ``class CudaSpace`` (Kokkos_CudaSpace.hpp), ``class HIPSpace`` (Kokkos_HIP_Space.hpp)
 
-   * - ``静的 int CudaUVMSpace::number_of_allocations();``
-     - ``クラス CudaUVMSpace`` (Kokkos_CudaSpace.hpp)
+   * - ``static int CudaUVMSpace::number_of_allocations();``
+     - ``class CudaUVMSpace`` (Kokkos_CudaSpace.hpp)
 
    * - ``HPX::partition(...), HPX::partition_master()``
-     - ``クラス HPX`` (Kokkos_HPX.hpp)
+     - ``class HPX`` (Kokkos_HPX.hpp)
 
 
  Kokkos-3.7　において非推奨であるクラス
@@ -330,9 +330,9 @@ Member functions deprecated in Kokkos-3.7　において非推奨
 
    * -
 
-   * - ``クラス MasterLock<OpenMP>``
+   * - ``class MasterLock<OpenMP>``
 
-   * - ``クラス KOKKOS_ATTRIBUTE_NODISCARD ScopeGuard``
+   * - ``class KOKKOS_ATTRIBUTE_NODISCARD ScopeGuard``
 
 
 名前空間アップデート
