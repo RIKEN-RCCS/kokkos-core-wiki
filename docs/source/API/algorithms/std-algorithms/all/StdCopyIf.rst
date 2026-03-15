@@ -20,18 +20,18 @@
 
 .. code-block:: cpp
 
-  テンプレート <
-    クラス ExecutionSpace, class InputIteratorType,
-    クラス OutputIteratorType, class UnaryPredicateType>
+  template <
+    class ExecutionSpace, class InputIteratorType,
+    class OutputIteratorType, class UnaryPredicateType>
   OutputIteratorType copy_if(const ExecutionSpace& exespace,                   (1)
                              InputIteratorType first_from,
                              InputIteratorType last_from,
                              OutputIteratorType first_to,
                              UnaryPredicateType pred);
 
-  テンプレート <
-    クラス ExecutionSpace, class InputIteratorType,
-    クラス OutputIteratorType, class UnaryPredicateType>
+  template <
+    class ExecutionSpace, class InputIteratorType,
+    class OutputIteratorType, class UnaryPredicateType>
   OutputIteratorType copy_if(const std::string& label,
                              const ExecutionSpace& exespace,                   (2)
                              InputIteratorType first_from,
@@ -39,24 +39,24 @@
                              OutputIteratorType first_to,
                              UnaryPredicateType pred);
 
-  テンプレート <
-    クラス ExecutionSpace,
-    クラス DataType1, class... Properties1,
-    クラス DataType2, class... Properties2,
-    クラス UnaryPredicateType
+  template <
+    class ExecutionSpace,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2,
+    class UnaryPredicateType
   >
-  自動 copy_if(const ExecutionSpace& exespace,                                 (3)
+  auto copy_if(const ExecutionSpace& exespace,                                 (3)
                const Kokkos::View<DataType1, Properties1...>& view_from,
                const Kokkos::View<DataType2, Properties2...>& view_to,
                UnaryPredicateType pred);
 
-  テンプレート <
-    クラス ExecutionSpace,
-    クラス DataType1, class... Properties1,
-    クラス DataType2, class... Properties2,
-    クラス UnaryPredicateType
+  template <
+    class ExecutionSpace,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2,
+    class UnaryPredicateType
   >
-  自動 copy_if(const std::string& label, const ExecutionSpace& exespace,       (4)
+  auto copy_if(const std::string& label, const ExecutionSpace& exespace,       (4)
                const Kokkos::View<DataType1, Properties1...>& view_from,
                const Kokkos::View<DataType2, Properties2...>& view_to,
                UnaryPredicateType pred);
@@ -69,9 +69,9 @@
 
 .. code-block:: cpp
 
-  テンプレート <
-    クラス TeamHandleType, class InputIteratorType,
-    クラス OutputIteratorType, class UnaryPredicateType>
+  template <
+    class TeamHandleType, class InputIteratorType,
+    class OutputIteratorType, class UnaryPredicateType>
   KOKKOS_FUNCTION
   OutputIteratorType copy_if(const TeamHandleType& teamHandle,                 (5)
                              InputIteratorType first_from,
@@ -79,13 +79,13 @@
                              OutputIteratorType first_to,
                              UnaryPredicateType pred);
 
-  テンプレート <
-    クラス TeamHandleType,
-    クラス DataType1, class... Properties1,
-    クラス DataType2, class... Properties2,
-    クラス UnaryPredicateType>
+  template <
+    class TeamHandleType,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2,
+    class UnaryPredicateType>
   KOKKOS_FUNCTION
-  自動 copy_if(const TeamHandleType& teamHandle,                              (6)
+  auto copy_if(const TeamHandleType& teamHandle,                              (6)
                const Kokkos::View<DataType1, Properties1...>& view_from,
                const Kokkos::View<DataType2, Properties2...>& view_to,
                UnaryPredicateType pred);
@@ -113,15 +113,15 @@
 
   .. code-block:: cpp
 
-   構造体　述語
+   struct　述語
    {
       KOKKOS_INLINE_FUNCTION
-      ブール operator()(const value_type & v) const { return /* ... */; }
+      bool operator()(const value_type & v) const { return /* ... */; }
 
       // または、また有効
 
       KOKKOS_INLINE_FUNCTION
-      ブール operator()(value_type v) const { return /* ... */; }
+      bool operator()(value_type v) const { return /* ... */; }
    };
 
 
