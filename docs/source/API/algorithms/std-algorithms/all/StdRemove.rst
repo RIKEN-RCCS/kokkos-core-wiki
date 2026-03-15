@@ -18,30 +18,30 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class Iterator, class ValueType>
-   イテレータ remove(const ExecutionSpace& exespace,                       (1)
+   template <class ExecutionSpace, class Iterator, class ValueType>
+   Iterator remove(const ExecutionSpace& exespace,                       (1)
                    Iterator first, Iterator last,
                    const ValueType& value);
 
-   テンプレート <class ExecutionSpace, class Iterator, class ValueType>
-   イテレータ remove(const std::string& label,                             (2)
+   template <class ExecutionSpace, class Iterator, class ValueType>
+   Iterator remove(const std::string& label,                             (2)
                    const ExecutionSpace& exespace,
                    Iterator first, Iterator last,
                    const ValueType& value);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス DataType, class... Properties,
-     クラス ValueType>
-   自動 remove(const ExecutionSpace& exespace,                           (3)
+   template <
+     class ExecutionSpace,
+     class DataType, class... Properties,
+     class ValueType>
+   auto remove(const ExecutionSpace& exespace,                           (3)
                const Kokkos::View<DataType, Properties...>& view,
                const ValueType& value);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス DataType, class... Properties,
-     クラス ValueType>
-   自動 remove(const std::string& label,                                 (4)
+   template <
+     class ExecutionSpace,
+     class DataType, class... Properties,
+     class ValueType>
+   auto remove(const std::string& label,                                 (4)
                const ExecutionSpace& exespace,
                const Kokkos::View<DataType, Properties...>& view,
                const ValueType& value);
@@ -53,18 +53,18 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class Iterator, class ValueType>
+   template <class TeamHandleType, class Iterator, class ValueType>
    KOKKOS_FUNCTION
    Iterator remove(const TeamHandleType& teamHandle,                     (5)
                    Iterator first, Iterator last,
                    const ValueType& value);
 
    テンプレート <
-     クラス TeamHandleType,
-     クラス DataType, class... Properties,
-     クラス ValueType>
+     class TeamHandleType,
+     class DataType, class... Properties,
+     class ValueType>
    KOKKOS_FUNCTION
-   自動 remove(const TeamHandleType& teamHandle,                         (6)
+   auto remove(const TeamHandleType& teamHandle,                         (6)
                const Kokkos::View<DataType, Properties...>& view,
                const ValueType& value);
 
