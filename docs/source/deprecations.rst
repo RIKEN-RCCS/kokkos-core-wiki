@@ -82,35 +82,36 @@ Kokkos 4.4 において非推奨
 
 * ``layout_iterate_type_selector``
    * 置換: 無し
-   * only useful internally
+   * 内部でのみ有用です
 
 * ``Array<T, N, Proxy>``
    * 置換: 無し
-   * alignment with std::array
+   * std::array　との整合性
 
 * ``HPX::HPX(instance_mode mode)``
-   * replacement: ``explicit HPX(instance_mode mode)``
-   * execution space instance constructors should be ``explicit``
+   * 置換: ``explicit HPX(instance_mode mode)``
+   * 実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
 
 * ``HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)``
-   * replacement: ``explicit HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)``
-   * execution space instance constructors should be ``explicit``
+   * 置換: ``explicit HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)``
+   * 実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
 
 * ``OpenMP::OpenMP(int pool_size)``
-   * replacement: ``explicit OpenMP::OpenMP(int pool_size)``
-   * execution space instance constructors should be ``explicit``
+   * 置換: ``explicit OpenMP::OpenMP(int pool_size)``
+   * 実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
 
 * ``Serial::Serial(NewInstance)``
-   * replacement: ``explicit Serial::Serial(NewInstance)``
-   * execution space instance constructors should be ``explicit``
+   * 置換: ``explicit Serial::Serial(NewInstance)``
+   * 実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
 
 * ``ChunkSize::ChunkSize(int value)``
-   * replacement: ``explicit ChunkSize::ChunkSize(int value)``
-   * ``ChunkSize`` should be constructed explicitly
+   * 置換: ``explicit ChunkSize::ChunkSize(int value)``
+   * ``ChunkSize`` は、明示的に構築されるべきです
 
 * ``pair<T, void>``
-   * replacement: none
-   * the specialization is not documented, does not follow the standard library, it is not tested and has no known usage
+   * 置換: 無し
+   * 仕様は文書化されておらず、標準ライブラリに準拠しておらず、テストもされておらず、既知の使用例もありません
+
 
 
 Deprecated in Kokkos 4.3
