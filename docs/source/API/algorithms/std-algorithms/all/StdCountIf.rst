@@ -19,29 +19,29 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType, class Predicate>
-   型名 IteratorType::difference_type count_if(const ExecutionSpace& exespace,
+   template <class ExecutionSpace, class IteratorType, class Predicate>
+   typename IteratorType::difference_type count_if(const ExecutionSpace& exespace,
 						   IteratorType first,
 						   IteratorType last,                   (1)
 						   Predicate pred);
 
 
-   テンプレート <class ExecutionSpace, class IteratorType, class Predicate>
-   型名 IteratorType::difference_type count_if(const std::string& label,
+   template <class ExecutionSpace, class IteratorType, class Predicate>
+   typename IteratorType::difference_type count_if(const std::string& label,
 						   const ExecutionSpace& exespace,
 						   IteratorType first,                  (2)
 						   IteratorType last,
 						   Predicate pred);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties,
-	     クラス Predicate>
-   自動 count_if(const ExecutionSpace& exespace,
+   template <class ExecutionSpace, class DataType, class... Properties,
+	     class Predicate>
+   auto count_if(const ExecutionSpace& exespace,
 		 const ::Kokkos::View<DataType, Properties...>& view,                   (3)
 		 Predicate pred);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties,
-	     クラス Predicate>
-   自動 count_if(const std::string& label, const ExecutionSpace& exespace,
+   template <class ExecutionSpace, class DataType, class... Properties,
+	     class Predicate>
+   auto count_if(const std::string& label, const ExecutionSpace& exespace,
 		 const ::Kokkos::View<DataType, Properties...>& view,                   (4)
 		 Predicate pred);
 
@@ -53,17 +53,17 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType, class Predicate>
+   template <class TeamHandleType, class IteratorType, class Predicate>
    KOKKOS_FUNCTION
    typename IteratorType::difference_type count_if(const TeamHandleType& teamHandle,
 						   IteratorType first,
 						   IteratorType last,                   (5)
 						   Predicate pred);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties,
+   template <class TeamHandleType, class DataType, class... Properties,
 	     class Predicate>
    KOKKOS_FUNCTION
-   自動 count_if(const TeamHandleType& teamHandle,
+   auto count_if(const TeamHandleType& teamHandle,
 		 const ::Kokkos::View<DataType, Properties...>& view,                   (6)
 		 Predicate pred);
 
@@ -104,7 +104,7 @@
 
   .. code-block:: cpp
 
-     構造体 CustomPredicate{
+     struct CustomPredicate{
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const {
           /* vが所望の条件を満たす場合に真 */;
