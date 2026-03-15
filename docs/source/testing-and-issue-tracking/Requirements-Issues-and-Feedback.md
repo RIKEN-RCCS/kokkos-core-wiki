@@ -1,7 +1,7 @@
 # 要望、課題およびフィードバック
 
-Kokkosでは、顧客との連絡を主に　[Kokkos Issues](https://github.com/kokkos/kokkos/issues)　および　[KokkosTeam Slack](https://kokkosteam.slack.com)　チャンネルを通じて管理しております。 Slack　チャンネルは、気軽な質問および要望、フィードバックに利用できます。
-コミュニケーションの遅れを追跡する必要がある場合には（特に、 Kokkos　へのコード変更が必要な場合）、github.com　の問題を開きます。
+Kokkosでは、顧客との連絡を主に　[Kokkos Issues](https://github.com/kokkos/kokkos/issues)　および　[KokkosTeam Slack](https://kokkosteam.slack.com)　チャンネルを通じて管理しております。 Slack チャンネルは、気軽な質問および要望、フィードバックに利用できます。
+コミュニケーションの遅れを追跡する必要がある場合には（特に、 Kokkos へのコード変更が必要な場合）、github.com　の問題を開きます。
 バグ報告、機能改善の要望、および新機能に対する要望については、必ず課題を開いてください。
 毎週開催される Kokkos 開発者会議において、課題の優先順位付けを、行います。
 
