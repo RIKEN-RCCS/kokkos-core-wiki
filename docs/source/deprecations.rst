@@ -9,15 +9,15 @@ Kokkos 4.7　において非推奨
 
 * ``KOKKOS_MEMORY_ALIGNMENT[_THRESHOLD]``
    * 置換: 無し
-   * Not intended for non-internal use.
+   * 非内部利用を意図したものではありません。
 
 * ``Kokkos::MemoryManaged``
-   * replacement: none
+   * 置換: 無し
    * Unneeded due to redundancy with default memory trait and confusing use when requesting unmanaged views with MemoryManaged
 
 * ``KOKKOS_NONTEMPORAL_PREFETCH_{LOAD,STORE}``
-   * replacement: none
-   * Not intended for non-internal use.
+   * 置換: 無し
+   * 非内部利用を意図したものではありません。
 
 Deprecated in Kokkos 4.6
 ---------------------------
@@ -42,19 +42,19 @@ Deprecated in Kokkos 4.5
 ---------------------------
 
 * Tasking interface: ``BasicFuture``, ``TaskSingle``, ``TaskPriority``, ``task_spawn``, ``host_spawn``, ``respawn``, ``when_all``, ``wait``
-   * replacement: none
+   * 置換: 無し
    * unused, limited implementation
 
 * ``HPX::HPX::is_asynchronous(HPX const & = HPX())``
-   * replacement: none
+   * 置換: 無し
    * unused, conformity of execution spaces
 
 * ``OpenMP::is_asynchronous(OpenMP const& = OpenMP())``
-   * replacement: none
+   * 置換: 無し
    * unused, conformity of execution spaces
 
 * ``atomic_query_version``
-   * replacement: none
+   * 置換: 無し
    * no known use case
 
 * :cpp:func:`atomic_assign`
@@ -77,15 +77,15 @@ Deprecated in Kokkos 4.4
 ---------------------------
 
 * ``is_layouttiled``
-   * replacement: none
+   * 置換: 無し
    * unused
 
 * ``layout_iterate_type_selector``
-   * replacement: none
+   * 置換: 無し
    * only useful internally
 
 * ``Array<T, N, Proxy>``
-   * replacement: none
+   * 置換: 無し
    * alignment with std::array
 
 * ``HPX::HPX(instance_mode mode)``
