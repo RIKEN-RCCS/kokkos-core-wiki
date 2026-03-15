@@ -117,10 +117,10 @@
      - `Clangベースの静的解析 <https://www.youtube.com/watch?v=MH6zFYGw0HU&feature=youtu.be&t=5697>`_
      -
    * - 8.
-     - `Kokkos カーネル数学ライブラリ <https://www.youtube.com/watch?v=_qD4X66MQF8&t=1s>`_
+     - `Kokkos カーネル: 数学ライブラリ <https://www.youtube.com/watch?v=_qD4X66MQF8&t=1s>`_
      - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_08_KokkosKernels.pdf>`__
    * - 8.1.
-     - `Kokkos カーネル: Library Based Approach for Performance Portable Sparse/Dense linear algebra and Graph Kernelsパフォーマンスポータブルスパース/全結合層およびグラフカーネルのためのライブラリベースのアプローチ <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=1166>`_
+     - `Kokkos カーネル: パフォーマンスポータブルスパース/密集線型代数およびグラフカーネルのためのライブラリベースのアプローチ <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=1166>`_
      -
    * - 8.2.
      - `BLAS および LAPACK <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=2045>`_
