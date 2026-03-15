@@ -1,7 +1,7 @@
 必要要件
 ############
 
-Compiler Versionsコンパイラバージョン
+コンパイラバージョン
 =================
 
 一般的に、Kokkos　は最低限のコンパイラバージョンより新しいすべてのコンパイラで動作することになっています。
@@ -181,10 +181,6 @@ Kokkos 3.x
 * CMake >= 3.18: Fortranリンク。これは、ほとんどの　Fortran/Kokkos　混合構築には、影響しません。 既知の構築問題<https://github.com/kokkos/kokkos/blob/master/BUILD.md#known-issues>`_　を参照してください。
 * CMake >= 3.21.1 for NVC++
 
-Primary tested compiler are passing in release mode
-with warnings as errors. They also are tested with a comprehensive set of
-backend combinations (i.e. OpenMP, Pthreads, Serial, OpenMP+Serial, ...).
-We are using the following set of flags:
 主要テスト済みコンパイラは、リリースモードにおいて、エラーとして警告を出して、合格しています。 包括的なバックエンドの組み合わせでテストされます（つまり、OpenMP、Pthreads、Serial、OpenMP+Serial　等）。
 以下のフラッグセットを使用しています:
 
