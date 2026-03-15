@@ -1,5 +1,5 @@
-.. Color profiles for Sphinxのためのカラープロファイル
-.. Has to be used with hacks.css　で使用する必要があります
+.. Sphinx　のためのカラープロファイル
+.. hacks.cssによって使用する必要があります
 .. (https://bitbucket.org/lbesson/web-sphinx/src/master/.static/hacks.css)
 
 .. role:: black
