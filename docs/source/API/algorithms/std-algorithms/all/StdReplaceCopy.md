@@ -4,40 +4,40 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-名前空間 Kokkos{
-名前空間 Experimental{
+namespace Kokkos{
+namespace Experimental{
 
-テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class T>
+template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class T>
 OutputIteratorType replace_copy(const ExecutionSpace& exespace,               (1)
                                 InputIteratorType first_from,
                                 InputIteratorType last_from,
                                 OutputIteratorType first_to,
                                 const T& old_value, const T& new_value);
 
-テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class T>
+template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class T>
 OutputIteratorType replace_copy(const std::string& label,                     (2)
                                 const ExecutionSpace& exespace,
                                 OutputIteratorType first_to,
                                 const T& old_value, const T& new_value);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス T
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class T
 >
-自動 replace_copy(const ExecutionSpace& exespace,                             (3)
+auto replace_copy(const ExecutionSpace& exespace,                             (3)
                   const Kokkos::View<DataType1, Properties1...>& view_from,
                   const Kokkos::View<DataType2, Properties2...>& view_to,
                   const T& old_value, const T& new_value);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス T
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class T
 >
-自動 replace_copy(const std::string& label,
+auto replace_copy(const std::string& label,
                   const ExecutionSpace& exespace,                             (4)
                   const Kokkos::View<DataType1, Properties1...>& view_from,
                   const Kokkos::View<DataType2, Properties2...>& view_to,
