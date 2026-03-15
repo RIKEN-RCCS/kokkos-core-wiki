@@ -18,39 +18,39 @@
 
 .. code-block:: cpp
 
-  テンプレート <
-    クラス ExecutionSpace, class InputIteratorType,
-    クラス SizeType, class OutputIteratorType>
+  template <
+    class ExecutionSpace, class InputIteratorType,
+    class SizeType, class OutputIteratorType>
   OutputIteratorType copy_n(const ExecutionSpace& exespace,                    (1)
                             InputIteratorType first_from,
                             SizeType n,
                             OutputIteratorType first_to);
 
-  テンプレート <
-    クラス ExecutionSpace, class InputIteratorType,
-    クラス SizeType, class OutputIteratorType>
+  template <
+    class ExecutionSpace, class InputIteratorType,
+    class SizeType, class OutputIteratorType>
   OutputIteratorType copy_n(const std::string & label,
                             const ExecutionSpace& exespace,                    (2)
                             InputIteratorType first_from,
                             SizeType n,
                             OutputIteratorType first_to);
 
-  テンプレート <
-    クラス ExecutionSpace,
-    クラス DataType1, class... Properties1,
-    クラス SizeType,
-    クラス DataType2, class... Properties2>
-  自動 copy_n(const ExecutionSpace& exespace,                                  (3)
+  template <
+    class ExecutionSpace,
+    class DataType1, class... Properties1,
+    class SizeType,
+    class DataType2, class... Properties2>
+  auto copy_n(const ExecutionSpace& exespace,                                  (3)
               const Kokkos::View<DataType1, Properties1...>& view_from,
               SizeType n,
               const Kokkos::View<DataType2, Properties2...>& view_to);
 
-  テンプレート <
-    クラス ExecutionSpace,
-    クラス DataType1, class... Properties1,
-    クラス SizeType,
-    クラス DataType2, class... Properties2>
-  自動 copy_n(const std::string& label, const ExecutionSpace& exespace,        (4)
+  template <
+    class ExecutionSpace,
+    class DataType1, class... Properties1,
+    class SizeType,
+    class DataType2, class... Properties2>
+  auto copy_n(const std::string& label, const ExecutionSpace& exespace,        (4)
               const Kokkos::View<DataType1, Properties1...>& view_from,
               SizeType n,
               const Kokkos::View<DataType2, Properties2...>& view_to);
@@ -62,21 +62,21 @@
 
 .. code-block:: cpp
 
-  テンプレート <
-    クラス TeamHandleType, class InputIteratorType,
-    クラス SizeType, class OutputIteratorType>
+  template <
+    class TeamHandleType, class InputIteratorType,
+    class SizeType, class OutputIteratorType>
   KOKKOS_FUNCTION
   OutputIteratorType copy_n(const TeamHandleType& teamHandle,                 (5)
                             InputIteratorType first_from,
                             SizeType n,
 			    OutputIteratorType first_to);
 
-  テンプレート <
-    クラス TeamHandleType,
-    クラス DataType1, class... Properties1, class SizeType,
-    クラス DataType2, class... Properties2>
+  template <
+    class TeamHandleType,
+    class DataType1, class... Properties1, class SizeType,
+    class DataType2, class... Properties2>
   KOKKOS_FUNCTION
-  自動 copy_n(const TeamHandleType& teamHandle,                               (6)
+  auto copy_n(const TeamHandleType& teamHandle,                               (6)
               const ::Kokkos::View<DataType1, Properties1...>& view_from,
 	      SizeType n,
               ::Kokkos::View<DataType2, Properties2...>& view_to);
