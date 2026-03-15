@@ -29,7 +29,8 @@ cd docs/generated_docs
 python3 -m http.server
 ```
 
-次に、 http://localhost:8000　　に移動してください。
+次に、 http://localhost:8000
+に移動してください。
 
 その代わりに、あるいは、make　を実行するたびに自動更新を希望する場合は、[httpwatcher](https://pypi.org/project/httpwatcher/) と組み合わせて、ドキュメンテーションを利用できます。
 
