@@ -18,25 +18,25 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType>
+   template <class ExecutionSpace, class IteratorType>
    IteratorType rotate(const ExecutionSpace& exespace,                            (1)
                        IteratorType first,
                        IteratorType n_first,
                        IteratorType last);
 
-   テンプレート <class ExecutionSpace, class IteratorType>
+   template <class ExecutionSpace, class IteratorType>
    IteratorType rotate(const std::string& label, const ExecutionSpace& exespace,  (2)
                        IteratorType first,
                        IteratorType n_first,
                        IteratorType last);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
-   自動 rotate(const ExecutionSpace& exespace,                                    (3)
+   template <class ExecutionSpace, class DataType, class... Properties>
+   auto rotate(const ExecutionSpace& exespace,                                    (3)
                const Kokkos::View<DataType, Properties...>& view,
                std::size_t n_location);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
-   自動 rotate(const std::string& label, const ExecutionSpace& exespace,          (4)
+   template <class ExecutionSpace, class DataType, class... Properties>
+   auto rotate(const std::string& label, const ExecutionSpace& exespace,          (4)
                const Kokkos::View<DataType, Properties...>& view,
                std::size_t n_location);
 
@@ -47,14 +47,14 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType>
+   template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType rotate(const TeamHandleType& teamHandle,                          (5)
                        IteratorType first,
                        IteratorType n_first,
                        IteratorType last);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties>
+   template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
    auto rotate(const TeamHandleType& teamHandle,                                  (6)
                const Kokkos::View<DataType, Properties...>& view,
