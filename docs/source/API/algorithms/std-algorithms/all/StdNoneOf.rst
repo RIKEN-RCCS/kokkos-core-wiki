@@ -19,23 +19,23 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType, class Predicate>
-   ブール none_of(const ExecutionSpace& exespace,                              (1)
+   template <class ExecutionSpace, class IteratorType, class Predicate>
+   bool none_of(const ExecutionSpace& exespace,                              (1)
 		IteratorType first, IteratorType last,
 		Predicate predicate);
 
-   テンプレート <class ExecutionSpace, class IteratorType, class Predicate>
-   ブール none_of(const std::string& label, const ExecutionSpace& exespace,    (2)
+   template <class ExecutionSpace, class IteratorType, class Predicate>
+   bool none_of(const std::string& label, const ExecutionSpace& exespace,    (2)
 		IteratorType first, IteratorType last,
 		Predicate predicate);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties,      (3)
+   template <class ExecutionSpace, class DataType, class... Properties,      (3)
 	     class Predicate>
-   ブール none_of(const ExecutionSpace& exespace,
+   bool none_of(const ExecutionSpace& exespace,
 		const ::Kokkos::View<DataType, Properties...>& v,
 		Predicate predicate);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties,
+   template <class ExecutionSpace, class DataType, class... Properties,
 	     class Predicate>
     none_of(const std::string& label, const ExecutionSpace& exespace,    (4)
 		const ::Kokkos::View<DataType, Properties...>& v,
@@ -48,16 +48,16 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType, class Predicate>
+   template <class TeamHandleType, class IteratorType, class Predicate>
    KOKKOS_FUNCTION
-   ブール none_of(const TeamHandleType& teamHandle,                            (5)
+   bool none_of(const TeamHandleType& teamHandle,                            (5)
 		IteratorType first, IteratorType last,
 		Predicate predicate);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties,
+   template <class TeamHandleType, class DataType, class... Properties,
 	     class Predicate>
    KOKKOS_FUNCTION
-   ブール none_of(const TeamHandleType& teamHandle,                           (6)
+   bool none_of(const TeamHandleType& teamHandle,                           (6)
 		const ::Kokkos::View<DataType, Properties...>& v,
 		Predicate predicate);
 
@@ -97,7 +97,7 @@
 
   .. code-block:: cpp
 
-     構造体 CustomPredicate{
+     struct CustomPredicate{
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const;
      };
