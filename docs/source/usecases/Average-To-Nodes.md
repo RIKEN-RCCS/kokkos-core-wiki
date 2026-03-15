@@ -53,7 +53,7 @@ Kokkos::View<double*> sum_to_nodes(Kokkos::View<int**> elements_to_nodes, int nu
 
 各ノードで2つの合計値が得られたため、ノードを最終的に1回ループ処理し、
 これら2つの合計値の比率を求め、平均値を定義すれば十分です。
-この関数は、各ノードに隣接する要素の数が事前に計算済みであると仮定した上で構成されます。.
+この関数は、各ノードに隣接する要素の数が事前に計算済みであると仮定した上で構成されます。
 
 ```c++
 Kokkos::View<double*> average_to_nodes(Kokkos::View<int**> elements_to_nodes, int number_of_nodes,
@@ -63,6 +63,6 @@ Kokkos::View<double*> average_to_nodes(Kokkos::View<int**> elements_to_nodes, in
   Kokkos::parallel_for(number_of_nodes, KOKKOS_LAMBDA(int node) {
     node_values[node] /= elements_per_node[node];
   });
-  node_values　を返す;
+  return node_values;
 }
 ```
