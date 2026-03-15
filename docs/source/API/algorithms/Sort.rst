@@ -7,12 +7,12 @@
 .. code-block:: cpp
 
     template<class DstViewType, class SrcViewType>
-    構造体 copy_functor { }
+    struct copy_functor { }
 
     template<class DstViewType, class PermuteViewType, class SrcViewType>
-    構造体 copy_permute_functor { }
+    struct copy_permute_functor { }
 
-    クラス BinSort {
+    class BinSort {
         template<class DstViewType, class SrcViewType> struct copy_functor { }
         template<class DstViewType, class PermuteViewType, class SrcViewType> struct copy_permute_functor { }
         template<class ValuesViewType> void sort( ValuesViewType const & values, int values_range_begin, int values_range_end ) const { }
@@ -39,34 +39,34 @@
         
     //名前空間 Kokkos::Experimental
 
-    テンプレート <class TeamMember, class ViewType>
+    template <class TeamMember, class ViewType>
     KOKKOS_INLINE_FUNCTION void sort_team(const TeamMember& t, const ViewType& view);
 
-    テンプレート <class TeamMember, class ViewType, class Comparator>
+    template <class TeamMember, class ViewType, class Comparator>
     KOKKOS_INLINE_FUNCTION void sort_team(const TeamMember& t, const ViewType& view, const Comparator& comp);
 
-    テンプレート <class TeamMember, class KeyViewType, class ValueViewType>
+    template <class TeamMember, class KeyViewType, class ValueViewType>
     KOKKOS_INLINE_FUNCTION void sort_by_key_team(
         const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView);
 
-    テンプレート <class TeamMember, class KeyViewType, class ValueViewType, class Comparator>
+    template <class TeamMember, class KeyViewType, class ValueViewType, class Comparator>
     KOKKOS_INLINE_FUNCTION void sort_by_key_team(
         const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView, const Comparator& comp);
 
-    テンプレート <class TeamMember, class ViewType>
+    template <class TeamMember, class ViewType>
     KOKKOS_INLINE_FUNCTION void sort_thread(const TeamMember& t, const ViewType& view);
 
-    テンプレート <class TeamMember, class ViewType, class Comparator>
+    template <class TeamMember, class ViewType, class Comparator>
     KOKKOS_INLINE_FUNCTION void sort_thread(const TeamMember& t, const ViewType& view);
 
-    テンプレート <class TeamMember, class ViewType, class Comparator>
+    template <class TeamMember, class ViewType, class Comparator>
     KOKKOS_INLINE_FUNCTION void sort_thread(const TeamMember& t, const ViewType& view, const Comparator& comp);
 
-    テンプレート <class TeamMember, class KeyViewType, class ValueViewType>
+    template <class TeamMember, class KeyViewType, class ValueViewType>
     KOKKOS_INLINE_FUNCTION void sort_by_key_thread(
         const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView);
 
-    テンプレート <class TeamMember, class KeyViewType, class ValueViewType, class Comparator>
+    template <class TeamMember, class KeyViewType, class ValueViewType, class Comparator>
     KOKKOS_INLINE_FUNCTION void sort_by_key_thread(
         const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView, const Comparator& comp);
 
@@ -78,7 +78,7 @@
 
 .. code-block:: cpp
 
-    構造体 IntComparator {
+    struct IntComparator {
         KOKKOS_FUNCTION constexpr bool operator()(const int& a, const int& b) const {
              a > b　を返します; //a の方が大きい場合、a は b の前に来ます。
         }
@@ -103,9 +103,9 @@
     #include <Kokkos_Random.hpp>
 
     int main(int argc, char* argv[]) {
-        ExecSpace = Kokkos::DefaultExecutionSpace　を使用;
-        TeamPol = Kokkos::TeamPolicy<ExecSpace>　を使用;
-        TeamMem = typename TeamPol::member_type　を使用;
+        using ExecSpace = Kokkos::DefaultExecutionSpace;
+        using TeamPol = Kokkos::TeamPolicy<ExecSpace>;
+        using TeamMem = typename TeamPol::member_type;
         Kokkos::initialize(argc, argv);
         {
             int n = 10;
@@ -151,7 +151,7 @@
             }
         }
         Kokkos::finalize();
-        0を返します;
+       return 0;
     }
 
 出力例
