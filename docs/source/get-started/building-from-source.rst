@@ -120,6 +120,8 @@ Kokkos　の設定には以下のコマンドを使用します :
   例: ``-DCMAKE_INSTALL_PREFIX=/path/to/install/dir``
 
 **　Kokkos　固有の重要なオプション:**
+
+
 * ``-DKokkos_ENABLE_<BACKEND>=ON``: 現在オープンソース化されている実験的バックエンド等、ターゲットデバイス向けの特定のバックエンドを有効にします。
 * ``-DKokkos_ENABLE_<BACKEND>=ON``: 
    完全なリストについては :ref:'keywords_backends' を参照してください。
