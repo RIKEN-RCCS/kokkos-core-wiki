@@ -18,42 +18,42 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType>
-   自動 min_element(const ExecutionSpace& exespace,                        (1)
+   template <class ExecutionSpace, class IteratorType>
+   auto min_element(const ExecutionSpace& exespace,                        (1)
                     IteratorType first, IteratorType last);
 
-   テンプレート <class ExecutionSpace, class IteratorType>
-   自動 min_element(const std::string& label,                              (2)
+   template <class ExecutionSpace, class IteratorType>
+   auto min_element(const std::string& label,                              (2)
                     const ExecutionSpace& exespace,
                     IteratorType first, IteratorType last);
 
-   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
-   自動 min_element(const ExecutionSpace& exespace,                        (3)
+   template <class ExecutionSpace, class IteratorType, class ComparatorType>
+   auto min_element(const ExecutionSpace& exespace,                        (3)
                     IteratorType first, IteratorType last,
                     ComparatorType comp);
 
-   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
-   自動 min_element(const std::string& label,                              (4)
+   template <class ExecutionSpace, class IteratorType, class ComparatorType>
+   auto min_element(const std::string& label,                              (4)
                     const ExecutionSpace& exespace,
                     IteratorType first, IteratorType last,
                     ComparatorType comp);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
-   自動 min_element(const ExecutionSpace& exespace,                        (5)
+   template <class ExecutionSpace, class DataType, class... Properties>
+   auto min_element(const ExecutionSpace& exespace,                        (5)
                     const ::Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
-   自動 min_element(const std::string& label,                              (6)
+   template <class ExecutionSpace, class DataType, class... Properties>
+   auto min_element(const std::string& label,                              (6)
                     const ExecutionSpace& exespace,
                     const ::Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
-   自動 min_element(const ExecutionSpace& exespace,                        (7)
+   template <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
+   auto min_element(const ExecutionSpace& exespace,                        (7)
                     const ::Kokkos::View<DataType, Properties...>& view,
                     ComparatorType comp);
 
-   テンプレート <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
-   自動 min_element(const std::string& label,                              (8)
+   template <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
+   auto min_element(const std::string& label,                              (8)
                     const ExecutionSpace& exespace,
                     const ::Kokkos::View<DataType, Properties...>& view,
                     ComparatorType comp);
@@ -65,23 +65,23 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType>
+   template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
-   自動 min_element(const TeamHandleType& teamHandle,                      (9)
+   auto min_element(const TeamHandleType& teamHandle,                      (9)
                     IteratorType first, IteratorType last);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties>
+   template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
-   自動 min_element(const TeamHandleType& teamHandle,                      (10)
+   auto min_element(const TeamHandleType& teamHandle,                      (10)
                     const ::Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class TeamHandleType, class IteratorType, class ComparatorType>
+   template <class TeamHandleType, class IteratorType, class ComparatorType>
    KOKKOS_FUNCTION
-   自動 min_element(const TeamHandleType& teamHandle,                      (11)
+   auto min_element(const TeamHandleType& teamHandle,                      (11)
                     IteratorType first, IteratorType last,
                     ComparatorType comp);
 
-   テンプレート <class TeamHandleType, class DataType, class ComparatorType,
+   template <class TeamHandleType, class DataType, class ComparatorType,
              class... Properties>
    KOKKOS_FUNCTION
    auto min_element(const TeamHandleType& teamHandle,                      (12)
@@ -126,7 +126,7 @@
 
   .. code-block:: cpp
 
-     構造体 コンパレータ
+     struct Comparator
      {
        KOKKOS_INLINE_FUNCTION
        ブール operator()(const value_type & a, const value_type & b) const {
@@ -153,7 +153,7 @@
 
 .. code-block:: cpp
 
-   名前空間 KE = Kokkos::Experimental;
+   namespace KE = Kokkos::Experimental;
    Kokkos::View<double*> a("a", 13);
    // a を何らかの方法で満たす
 
@@ -164,8 +164,8 @@
 
 
    // カスタムコンパレータを使用
-   テンプレート <class ValueType1, class ValueType2 = ValueType1>
-   構造体 CustomLessThanComparator {
+   template <class ValueType1, class ValueType2 = ValueType1>
+   struct CustomLessThanComparator {
      KOKKOS_INLINE_FUNCTION
       operator()(const ValueType1& a,
                      const ValueType2& b) const {
@@ -177,4 +177,4 @@
    };
 
    // ビューを直接渡す
-   自動 res = KE::min_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanComparator<double>());
+   auto res = KE::min_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanComparator<double>());
