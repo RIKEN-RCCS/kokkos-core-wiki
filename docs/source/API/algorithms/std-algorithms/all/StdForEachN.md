@@ -4,25 +4,25 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```cpp
-名前空間 Kokkos{
-名前空間 Experimental{
+namespace Kokkos{
+namespace Experimental{
 
-テンプレート <class ExecutionSpace, class InputIterator, class SizeType, class UnaryFunctorType>
+template <class ExecutionSpace, class InputIterator, class SizeType, class UnaryFunctorType>
 UnaryFunctorType for_each_n(const ExecutionSpace& exespace,
                       InputIterator first, SizeType n,
                       UnaryFunctorType functor);                                     (1)
 
-テンプレート <class ExecutionSpace, class InputIterator, class SizeType, class UnaryFunctorType>
+template <class ExecutionSpace, class InputIterator, class SizeType, class UnaryFunctorType>
 UnaryFunctorType for_each_n(const std::string& label, const ExecutionSpace& exespace,
                       InputIterator first, SizeType n
                       UnaryFunctorType functor);                                     (2)
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class SizeType, class UnaryFunctorType>
+template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class UnaryFunctorType>
 UnaryFunctorType for_each_n(const ExecutionSpace& exespace,
              const Kokkos::View<DataType, Properties...>& view, SizeType n,
              UnaryFunctorType functor);                                              (3)
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class SizeType, class UnaryFunctorType>
+template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class UnaryFunctorType>
 UnaryFunctorType for_each_n(const std::string& label, const ExecutionSpace& exespace,
              const Kokkos::View<DataType, Properties...>& view, SizeType n,
              UnaryFunctorType func);                                                 (4)
