@@ -4,47 +4,47 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-名前空間 Kokkos{
-名前空間 実験的{
+namespace Kokkos{
+namespace 実験的{
 
 //
 // オーバーロードセット A
 //
-テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
+template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
 OutputIteratorType inclusive_scan(const ExecutionSpace& exespace,                 (1)
                                   InputIteratorType first_from,
                                   InputIteratorType last_from,
                                   OutputIteratorType first_dest);
 
-テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
+template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
 OutputIteratorType inclusive_scan(const std::string& label,                       (2)
                                   const ExecutionSpace& exespace,
                                   InputIteratorType first_from,
                                   InputIteratorType last_from,
                                   OutputIteratorType first_dest);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2>
-自動 inclusive_scan(const ExecutionSpace& exespace,                               (3)
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2>
+auto inclusive_scan(const ExecutionSpace& exespace,                               (3)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2>
-自動 inclusive_scan(const std::string& label, const ExecutionSpace& exespace,     (4)
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2>
+auto inclusive_scan(const std::string& label, const ExecutionSpace& exespace,     (4)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest);
 
 //
 // オーバーロードセット B
 //
-テンプレート <
- クラス ExecutionSpace, class InputIteratorType,
- クラス OutputIteratorType, class BinaryOpType
+template <
+ class ExecutionSpace, class InputIteratorType,
+ class OutputIteratorType, class BinaryOpType
  >
 OutputIteratorType inclusive_scan(const ExecutionSpace& exespace,                 (5)
                                   InputIteratorType first_from,
@@ -52,9 +52,9 @@ OutputIteratorType inclusive_scan(const ExecutionSpace& exespace,               
                                   OutputIteratorType first_dest,
                                   BinaryOpType bin_op);
 
-テンプレート <
-  クラス ExecutionSpace, class InputIteratorType,
-  クラス OutputIteratorType, class BinaryOpType
+template <
+  class ExecutionSpace, class InputIteratorType,
+  class OutputIteratorType, class BinaryOpType
   >
 OutputIteratorType inclusive_scan(const std::string& label,                       (6)
                                   const ExecutionSpace& exespace,
@@ -63,21 +63,21 @@ OutputIteratorType inclusive_scan(const std::string& label,                     
                                   OutputIteratorType first_dest,
                                   BinaryOpType bin_op);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス BinaryOpType>
-自動 inclusive_scan(const ExecutionSpace& exespace,                               (7)
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class BinaryOpType>
+auto inclusive_scan(const ExecutionSpace& exespace,                               (7)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     BinaryOpType bin_op);
 
-テンプレート <
-  クラス ExecutionSpace, class DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス BinaryOpType>
-自動 inclusive_scan(const std::string& label, const ExecutionSpace& exespace,     (8)
+template <
+  class ExecutionSpace, class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class BinaryOpType>
+auto inclusive_scan(const std::string& label, const ExecutionSpace& exespace,     (8)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     BinaryOpType bin_op);
@@ -85,10 +85,10 @@ OutputIteratorType inclusive_scan(const std::string& label,                     
 //
 // オーバーロードセット C
 //
-テンプレート <
- クラス ExecutionSpace,
- クラス InputIteratorType, class OutputIteratorType,
- クラス BinaryOpType, class ValueType
+template <
+ class ExecutionSpace,
+ class InputIteratorType, class OutputIteratorType,
+ class BinaryOpType, class ValueType
  >
 OutputIteratorType inclusive_scan(const ExecutionSpace& exespace,                 (9)
                                   InputIteratorType first_from,
@@ -97,9 +97,9 @@ OutputIteratorType inclusive_scan(const ExecutionSpace& exespace,               
                                   BinaryOpType bin_op,
                                   ValueType init_value);
 
-テンプレート <
-  クラス ExecutionSpace, クラス InputIteratorType,
-  クラス OutputIteratorType, クラス BinaryOpType, クラス ValueType
+template <
+  class ExecutionSpace, class InputIteratorType,
+  class OutputIteratorType, class BinaryOpType, class ValueType
   >
 OutputIteratorType inclusive_scan(const std::string& label,                       (10)
                                   const ExecutionSpace& exespace,
@@ -109,23 +109,23 @@ OutputIteratorType inclusive_scan(const std::string& label,                     
                                   BinaryOpType bin_op,
                                   ValueType init_value);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス BinaryOpType, class ValueType>
-自動 inclusive_scan(const ExecutionSpace& exespace,                               (11)
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class BinaryOpType, class ValueType>
+auto inclusive_scan(const ExecutionSpace& exespace,                               (11)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     BinaryOpType bin_op,
                     ValueType init_value);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス BinaryOpType, class ValueType>
-自動 inclusive_scan(const std::string& label, const ExecutionSpace& exespace,     (12)
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class BinaryOpType, class ValueType>
+auto inclusive_scan(const std::string& label, const ExecutionSpace& exespace,     (12)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     BinaryOpType bin_op,
