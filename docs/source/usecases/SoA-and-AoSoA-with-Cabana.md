@@ -9,8 +9,8 @@
 ### `Cabana::SoA`
 ヘッダー [`<Cabana_SoA.hpp>`](https://github.com/ECP-copa/Cabana/blob/master/core/src/Cabana_SoA.hpp)　に定義。
 ```C++
-テンプレート <typename DataTypes, int VectorLength>
-構造体 SoA;
+template <typename DataTypes, int VectorLength>
+struct SoA;
 ```
 
 `Cabana::SoA` は、指定されたベクトル長を持つ異種配列の固定サイズのコレクションを格納する方法を提供する構造体テンプレートです。
@@ -24,7 +24,7 @@
 : SoAが固定サイズの配列として格納する要素の型。
 `Cabana::MemberTypes` の特殊化であることが求められ、それは、```C++　と定義されます。
 
-テンプレート <typename... Types>
+template <typename... Types>
 MemberTypes<Types...>;
 ```
 
@@ -41,10 +41,10 @@ MemberTypes<Types...>;
 ヘッダー [`<Cabana_AoSoA.hpp>`](https://github.com/ECP-copa/Cabana/blob/master/core/src/Cabana_AoSoA.hpp)　に定義。
 
 ```C++
-テンプレート <class DataTypes, class MemorySpace,
+template <class DataTypes, class MemorySpace,
           int VectorLength = DEDUCED-FROM-MEMORY-SPACE,
           class MemoryTraits = Kokkos::MemoryManaged>
-クラス AoSoA;
+class AoSoA;
 ```
 
 #### テンプレートパラメータ
