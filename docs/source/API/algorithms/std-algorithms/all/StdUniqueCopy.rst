@@ -18,69 +18,69 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class InputIterator, class OutputIterator>
+   template <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator unique_copy(const ExecutionSpace& exespace,                 (1)
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to);
 
-   テンプレート <class ExecutionSpace, class InputIterator, class OutputIterator>
+   template <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator unique_copy(const std::string& label,                       (2)
                               const ExecutionSpace& exespace,
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to);
 
-   テンプレート <
+   template <
      class ExecutionSpace,
      class DataType1, class... Properties1,
      class DataType2, class... Properties2>
-   自動 unique_copy(const ExecutionSpace& exespace,                           (3)
+   auto unique_copy(const ExecutionSpace& exespace,                           (3)
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス DataType1, class... Properties1,
-     クラス DataType2, class... Properties2>
-   自動 unique_copy(const std::string& label,                                 (4)
+   template <
+     class ExecutionSpace,
+     class DataType1, class... Properties1,
+     class DataType2, class... Properties2>
+   auto unique_copy(const std::string& label,                                 (4)
                     const ExecutionSpace& exespace,
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス InputIterator, class OutputIterator,
-     クラス BinaryPredicate>
+   template <
+     class ExecutionSpace,
+     class InputIterator, class OutputIterator,
+     class BinaryPredicate>
    OutputIterator unique_copy(const ExecutionSpace& exespace,                 (5)
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to,
                               BinaryPredicate pred);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス InputIterator, class OutputIterator,
-     クラス BinaryPredicate>
+   template <
+     class ExecutionSpace,
+     class InputIterator, class OutputIterator,
+     class BinaryPredicate>
    OutputIterator unique_copy(const std::string& label,                       (6)
                               const ExecutionSpace& exespace,
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to,
                               BinaryPredicate pred);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス DataType1, class... Properties1,
-     クラス DataType2, class... Properties2,
-     クラス BinaryPredicate>
-   自動 unique_copy(const ExecutionSpace& exespace,                           (7)
+   template <
+     class ExecutionSpace,
+     class DataType1, class... Properties1,
+     class DataType2, class... Properties2,
+     class BinaryPredicate>
+   auto unique_copy(const ExecutionSpace& exespace,                           (7)
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest,
                     BinaryPredicate pred);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス DataType1, class... Properties1,
-     クラス DataType2, class... Properties2,
-     クラス BinaryPredicate>
-   自動 unique_copy(const std::string& label,                                 (8)
+   template <
+     class ExecutionSpace,
+     class DataType1, class... Properties1,
+     class DataType2, class... Properties2,
+     class BinaryPredicate>
+   auto unique_copy(const std::string& label,                                 (8)
                     const ExecutionSpace& exespace,
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest,
@@ -93,38 +93,38 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class InputIterator, class OutputIterator>
+   template <class TeamHandleType, class InputIterator, class OutputIterator>
    KOKKOS_FUNCTION
    OutputIterator unique_copy(const TeamHandleType& teamHandle,               (9)
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to);
 
-   テンプレート <
-     クラス TeamHandleType,
-     クラス DataType1, class... Properties1,
-     クラス DataType2, class... Properties2>
+   template <
+     class TeamHandleType,
+     class DataType1, class... Properties1,
+     class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   自動 unique_copy(const TeamHandleType& teamHandle,                         (10)
+   auto unique_copy(const TeamHandleType& teamHandle,                         (10)
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-   テンプレート <
-     クラス TeamHandleType,
-     クラス InputIterator, class OutputIterator,
-     クラス BinaryPredicate>
+   template <
+     class TeamHandleType,
+     class InputIterator, class OutputIterator,
+     class BinaryPredicate>
    KOKKOS_FUNCTION
    OutputIterator unique_copy(const TeamHandleType& teamHandle,               (11)
                               InputIterator first_from, InputIterator last_from,
                               OutputIterator first_to,
                               BinaryPredicate pred);
 
-   テンプレート <
-     クラス TeamHandleType,
-     クラス DataType1, class... Properties1,
-     クラス DataType2, class... Properties2,
-     クラス BinaryPredicate>
+   template <
+     class TeamHandleType,
+     class DataType1, class... Properties1,
+     class DataType2, class... Properties2,
+     class BinaryPredicate>
    KOKKOS_FUNCTION
-   自動 unique_copy(const TeamHandleType& teamHandle,                         (12)
+   auto unique_copy(const TeamHandleType& teamHandle,                         (12)
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest,
                     BinaryPredicate pred);
@@ -167,7 +167,7 @@
 
   .. code-block:: cpp
 
-     構造体 述語
+     struct Predicate
      {
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const { return /* ... */; }
@@ -175,10 +175,10 @@
        // または、また有効
 
        KOKKOS_INLINE_FUNCTION
-       ブール operator()(value_type v) const { return /* ... */; }
+       bool operator()(value_type v) const { return /* ... */; }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
 宛先範囲またはビュー内にコピーされる最後の要素の *後の* 要素へのイテレータ。
