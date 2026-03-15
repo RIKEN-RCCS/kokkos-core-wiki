@@ -19,42 +19,42 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType>
-   ブール is_sorted(const ExecutionSpace& exespace,                              (1)
+   template <class ExecutionSpace, class IteratorType>
+   bool is_sorted(const ExecutionSpace& exespace,                              (1)
                   IteratorType first, IteratorType last);
 
-   テンプレート <class ExecutionSpace, class IteratorType>
-   ブール is_sorted(const std::string& label,                                    (2)
+   template <class ExecutionSpace, class IteratorType>
+   bool is_sorted(const std::string& label,                                    (2)
                   const ExecutionSpace& exespace,
                   IteratorType first, IteratorType last);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
-   ブール is_sorted(const ExecutionSpace& exespace,                              (3)
+   template <class ExecutionSpace, class DataType, class... Properties>
+   bool is_sorted(const ExecutionSpace& exespace,                              (3)
                   const ::Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
-   ブール is_sorted(const std::string& label, const ExecutionSpace& exespace,    (4)
+   template <class ExecutionSpace, class DataType, class... Properties>
+   bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (4)
                   const ::Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
-   ブール is_sorted(const ExecutionSpace& exespace,                              (5)
+   template <class ExecutionSpace, class IteratorType, class ComparatorType>
+   bool is_sorted(const ExecutionSpace& exespace,                              (5)
                   IteratorType first, IteratorType last,
                   ComparatorType comp);
 
-   テンプレート <class ExecutionSpace, class IteratorType, class ComparatorType>
-   ブール is_sorted(const std::string& label, const ExecutionSpace& exespace,    (6)
+   template <class ExecutionSpace, class IteratorType, class ComparatorType>
+   bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (6)
                   IteratorType first, IteratorType last,
                   ComparatorType comp);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties,
+   template <class ExecutionSpace, class DataType, class... Properties,
              class ComparatorType>
-   ブール is_sorted(const ExecutionSpace& exespace,                              (7)
+   bool is_sorted(const ExecutionSpace& exespace,                              (7)
                   const ::Kokkos::View<DataType, Properties...>& view,
                   ComparatorType comp);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties,
+   template <class ExecutionSpace, class DataType, class... Properties,
              class ComparatorType>
-   ブール is_sorted(const std::string& label, const ExecutionSpace& exespace,    (8)
+   bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (8)
                   const ::Kokkos::View<DataType, Properties...>& view,
                   ComparatorType comp);
 
@@ -65,26 +65,26 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType>
+   template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
-   ブール is_sorted(const TeamHandleType& teamHandle,                            (9)
+   bool is_sorted(const TeamHandleType& teamHandle,                            (9)
                   IteratorType first, IteratorType last);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties>
+   template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
-   ブール is_sorted(const TeamHandleType& teamHandle,                            (10)
+   bool is_sorted(const TeamHandleType& teamHandle,                            (10)
                   const ::Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class TeamHandleType, class IteratorType, class ComparatorType>
+   template <class TeamHandleType, class IteratorType, class ComparatorType>
    KOKKOS_FUNCTION
-   ブール is_sorted(const TeamHandleType& teamHandle,                            (11)
+   bool is_sorted(const TeamHandleType& teamHandle,                            (11)
                   IteratorType first, IteratorType last,
                   ComparatorType comp);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties,
+   template <class TeamHandleType, class DataType, class... Properties,
              class ComparatorType>
    KOKKOS_FUNCTION
-   ブール is_sorted(const TeamHandleType& teamHandle,                            (12)
+   bool is_sorted(const TeamHandleType& teamHandle,                            (12)
                   const ::Kokkos::View<DataType, Properties...>& view,
                   ComparatorType comp);
 
@@ -132,7 +132,7 @@
 
   .. code-block:: cpp
 
-     構造体 コンパレータ
+     struct Comparator
      {
        KOKKOS_INLINE_FUNCTION
        ブール operator()(const value_type & a, const value_type & b) const {
