@@ -4,27 +4,27 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-名前空間 Kokkos{
-名前空間 実験的{
+namespace Kokkos{
+namespace Experimental{
 
-テンプレート <class ExecutionSpace, class IteratorType, class PredicateType>
+template <class ExecutionSpace, class IteratorType, class PredicateType>
 IteratorType partition_point(const ExecutionSpace& exespace,                   (1)
                              IteratorType first, IteratorType last,
                              PredicateType pred);
 
-テンプレート <class ExecutionSpace, class IteratorType, class PredicateType>
+template <class ExecutionSpace, class IteratorType, class PredicateType>
 IteratorType partition_point(const std::string& label,                         (2)
                              const ExecutionSpace& exespace,
                              IteratorType first, IteratorType last,
                              PredicateType pred);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-自動 partition_point(const ExecutionSpace& exespace,
+template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+auto partition_point(const ExecutionSpace& exespace,
                      const ::Kokkos::View<DataType, Properties...>& view,      (3)
                      PredicateType pred);
 
 テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-自動 partition_point(const std::string& label,                                 (4)
+auto partition_point(const std::string& label,                                 (4)
                      const ExecutionSpace& exespace,
                      const ::Kokkos::View<DataType, Properties...>& view,
                      PredicateType pred);
