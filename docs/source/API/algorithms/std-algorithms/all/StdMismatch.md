@@ -4,17 +4,17 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```cpp
-名前空間 Kokkos{
-名前空間 実験的{
+namespace Kokkos{
+namespace Experimental{
 
-テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
+template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 Kokkos::pair<IteratorType1, IteratorType2> mismatch(const ExecutionSpace& exespace,
                   IteratorType1 first1,
                   IteratorType1 last1,                                               (1)
                   IteratorType2 first2,
                   IteratorType2 last2);
 
-テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
+template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 Kokkos::pair<IteratorType1, IteratorType2> mismatch(
                 const std::string& label,
                 const ExecutionSpace& exespace,
@@ -23,14 +23,14 @@ Kokkos::pair<IteratorType1, IteratorType2> mismatch(
                 IteratorType2 first2,
                 IteratorType2 last2)
 
-テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2, class BinaryPredicate>
+template <class ExecutionSpace, class IteratorType1, class IteratorType2, class BinaryPredicate>
 Kokkos::pair<IteratorType1, IteratorType2> mismatch(const ExecutionSpace& exespace,
                   IteratorType1 first1,
                   IteratorType1 last1,                                               (3)
                   IteratorType2 first2,
                   IteratorType2 last2, BinaryPredicate pred);
 
-テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2, class BinaryPredicate>
+template <class ExecutionSpace, class IteratorType1, class IteratorType2, class BinaryPredicate>
 Kokkos::pair<IteratorType1, IteratorType2> mismatch(const std::string& label,
                   const ExecutionSpace& exespace,
                   IteratorType1 first1,
@@ -38,28 +38,28 @@ Kokkos::pair<IteratorType1, IteratorType2> mismatch(const std::string& label,
                   IteratorType2 first2,
                   IteratorType2 last2, BinaryPredicate pred);
 
-テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
-自動 mismatch(const ExecutionSpace& exespace,
+auto mismatch(const ExecutionSpace& exespace,
               const Kokkos::View<DataType1, Properties1...>& view1,                  (5)
               const Kokkos::View<DataType2, Properties2...>& view2);
 
-テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
-自動 mismatch(const std::string& label, const ExecutionSpace& exespace,
+auto mismatch(const std::string& label, const ExecutionSpace& exespace,
               const Kokkos::View<DataType1, Properties1...>& view1,                  (6)
               const Kokkos::View<DataType2, Properties2...>& view2);
 
-テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicateType>
-自動 mismatch(const ExecutionSpace& exespace,
+auto mismatch(const ExecutionSpace& exespace,
               const Kokkos::View<DataType1, Properties1...>& view1,                  (7)
               const Kokkos::View<DataType2, Properties2...>& view2,
               BinaryPredicateType&& predicate);
 
-テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicateType>
-自動 mismatch(const std::string& label, const ExecutionSpace& exespace,
+auto mismatch(const std::string& label, const ExecutionSpace& exespace,
               const Kokkos::View<DataType1, Properties1...>& view1,                  (8)
               const Kokkos::View<DataType2, Properties2...>& view2,
               BinaryPredicateType&& predicate);
@@ -97,12 +97,12 @@ Kokkos::pair<IteratorType1, IteratorType2> mismatch(const std::string& label,
 
 - `pred`
   ```cpp
-  テンプレート <class ValueType1, class ValueType2 = ValueType1>
-  構造体 IsEqualFunctor {
+  template <class ValueType1, class ValueType2 = ValueType1>
+  struct IsEqualFunctor {
 
   KOKKOS_INLINE_FUNCTION
   Kokkos::pair<ValueType1, ValueType2> operator()(const ValueType1& a, const ValueType2& b) const {
-    返し (a == b);
+    return (a == b);
     }
   };
  ```
@@ -115,20 +115,20 @@ Kokkos::pair<IteratorType1, IteratorType2> mismatch(const std::string& label,
 ## 例 
 
 ```cpp
-名前空間 KE = Kokkos::Experimental;
+namespace KE = Kokkos::Experimental;
 
-テンプレート <class ValueType1, class ValueType2 = ValueType1>
-構造体 MismatchFunctor {
+template <class ValueType1, class ValueType2 = ValueType1>
+struct MismatchFunctor {
 
   KOKKOS_INLINE_FUNCTION
   Kokkos::pair<ValueType1, ValueType2> operator()(const ValueType1& a, const ValueType2& b) const {
     if(a != b)
-        返し (Kokkos::pair<ValueType1, ValueType2> (a,b));
+        return (Kokkos::pair<ValueType1, ValueType2> (a,b));
   }
 };
 
-自動 exespace = Kokkos::DefaultExecutionSpace;
-view_type = Kokkos::View<exespace, int*>　を使用;
+auto exespace = Kokkos::DefaultExecutionSpace;
+using view_type = Kokkos::View<exespace, int*>;
 view_type a("a", 15);
 view_type b("b", 15);
 // 何らかの方法で a,b を満たす
