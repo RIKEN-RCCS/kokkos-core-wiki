@@ -21,49 +21,49 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType>
+   template <class ExecutionSpace, class IteratorType>
    IteratorType unique(const ExecutionSpace& exespace,                       (1)
                        IteratorType first, IteratorType last);
 
-   テンプレート <class ExecutionSpace, class IteratorType>
+   template <class ExecutionSpace, class IteratorType>
    IteratorType unique(const std::string& label,                             (2)
                        const ExecutionSpace& exespace,
                        IteratorType first, IteratorType last);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   template <class ExecutionSpace, class DataType, class... Properties>
    auto unique(const ExecutionSpace& exespace,                               (3)
                const Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   template <class ExecutionSpace, class DataType, class... Properties>
    auto unique(const std::string& label, const ExecutionSpace& exespace,     (4)
                const Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class ExecutionSpace, class IteratorType, class BinaryPredicate>
+   template <class ExecutionSpace, class IteratorType, class BinaryPredicate>
    IteratorType unique(const ExecutionSpace& exespace,                       (5)
                        IteratorType first, IteratorType last,
                        BinaryPredicate pred);
 
-   テンプレート <class ExecutionSpace, class IteratorType, class BinaryPredicate>
+   template <class ExecutionSpace, class IteratorType, class BinaryPredicate>
    IteratorType unique(const std::string& label,                             (6)
                        const ExecutionSpace& exespace,
                        IteratorType first, IteratorType last,
                        BinaryPredicate pred);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス
+   template <
+     class ExecutionSpace,
+     class
 
 DataType, class... Properties,
-     クラス BinaryPredicate>
+     class BinaryPredicate>
    自動 unique(const ExecutionSpace& exespace,                               (7)
                const Kokkos::View<DataType, Properties...>& view,
                BinaryPredicate pred);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス DataType, class... Properties,
-     クラス BinaryPredicate>
-   自動 unique(const std::string& label,                                     (8)
+   template <
+     class ExecutionSpace,
+     class DataType, class... Properties,
+     class BinaryPredicate>
+   auto unique(const std::string& label,                                     (8)
                const ExecutionSpace& exespace,
                const Kokkos::View<DataType, Properties...>& view,
                BinaryPredicate pred);
@@ -75,26 +75,26 @@ DataType, class... Properties,
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType>
+   template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType unique(const TeamHandleType& teamHandle,                     (9)
                        IteratorType first, IteratorType last);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties>
+   template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
    auto unique(const TeamHandleType& teamHandle,                             (10)
                const Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class TeamHandleType, class IteratorType, class BinaryPredicate>
+   template <class TeamHandleType, class IteratorType, class BinaryPredicate>
    KOKKOS_FUNCTION
    IteratorType unique(const TeamHandleType& teamHandle,                     (11)
                        IteratorType first, IteratorType last,
                        BinaryPredicate pred);
 
-   テンプレート <
-       クラス TeamHandleType,
-       クラス DataType, class... Properties,
-       クラス BinaryPredicate>
+   template <
+       class TeamHandleType,
+       class DataType, class... Properties,
+       class BinaryPredicate>
    KOKKOS_FUNCTION
    auto unique(const TeamHandleType& teamHandle,                             (12)
                const Kokkos::View<DataType, Properties...>& view,
@@ -137,7 +137,7 @@ DataType, class... Properties,
 
   .. code-block:: cpp
 
-     構造体 述語
+     struct Predicate
      {
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const { return /* ... */; }
