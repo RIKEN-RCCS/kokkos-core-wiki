@@ -27,59 +27,59 @@
 
 .. code-block:: cpp
 
-  テンプレート <
-    クラス ExecutionSpace, class InputIterator,
-    クラス OutputIterator, class UnaryOperation>
+  template <
+    class ExecutionSpace, class InputIterator,
+    class OutputIterator, class UnaryOperation>
   OutputIterator transform(const ExecutionSpace& exespace,                        (1)
                            InputIterator first_from, InputIterator last_from,
                            OutputIterator first_to,
                            UnaryOperation unary_op);
 
-  テンプレート <
-    クラス ExecutionSpace, class InputIterator,
-    クラス OutputIterator, class UnaryOperation>
+  template <
+    class ExecutionSpace, class InputIterator,
+    class OutputIterator, class UnaryOperation>
   OutputIterator transform(const std::string& label,                              (2)
                            const ExecutionSpace& exespace,
                            InputIterator first_from, InputIterator last_from,
                            OutputIterator first_to,
                            UnaryOperation unary_op);
 
-  テンプレート <
-    クラス ExecutionSpace,
-    クラス DataType1, class... Properties1,
-    クラス DataType2, class... Properties2,
-    クラス UnaryOperation
+  template <
+    class ExecutionSpace,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2,
+    class UnaryOperation
   >
-  自動 transform(const ExecutionSpace& exespace,                                  (3)
+  auto transform(const ExecutionSpace& exespace,                                  (3)
                  const Kokkos::View<DataType1, Properties1...>& source,
                  Kokkos::View<DataType2, Properties2...>& dest,
                  UnaryOperation unary_op);
 
-  テンプレート <
-    クラス ExecutionSpace,
-    クラス DataType1, class... Properties1,
-    クラス DataType2, class... Properties2,
-    クラス UnaryOperation
+  template <
+    class ExecutionSpace,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2,
+    class UnaryOperation
   >
-  自動 transform(const std::string& label, const ExecutionSpace& exespace,        (4)
+  auto transform(const std::string& label, const ExecutionSpace& exespace,        (4)
                  const Kokkos::View<DataType1, Properties1...>& source,
                  Kokkos::View<DataType2, Properties2...>& dest,
                  UnaryOperation unary_op);
 
-  テンプレート <
-    クラス ExecutionSpace,
-    クラス InputIterator1, class InputIterator2, class OutputIterator,
-    クラス BinaryOperation
+  template <
+    class ExecutionSpace,
+    class InputIterator1, class InputIterator2, class OutputIterator,
+    class BinaryOperation
   >
   OutputIterator transform(const ExecutionSpace& exespace,                        (5)
                            InputIterator1 first_from1, InputIterator1 last_from1,
                            InputIterator2 first_from2, OutputIterator first_to,
                            BinaryOperation binary_op);
 
-  テンプレート <
-    クラス ExecutionSpace,
-    クラス InputIterator1, class InputIterator2, class OutputIterator,
-    クラス BinaryOperation
+  template <
+    class ExecutionSpace,
+    class InputIterator1, class InputIterator2, class OutputIterator,
+    class BinaryOperation
   >
   OutputIterator transform(const std::string& label,                              (6)
                            const ExecutionSpace& exespace,
@@ -87,27 +87,27 @@
                            InputIterator2 first_from2, OutputIterator first_to,
                            BinaryOperation binary_op);
 
-  テンプレート <
-    クラス ExecutionSpace,
-    クラス DataType1, class... Properties1,
-    クラス DataType2, class... Properties2,
-    クラス DataType3, class... Properties3,
-    クラス BinaryOperation
+  template <
+    class ExecutionSpace,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2,
+    class DataType3, class... Properties3,
+    class BinaryOperation
   >
-  自動 transform(const ExecutionSpace& exespace,                                  (7)
+  auto transform(const ExecutionSpace& exespace,                                  (7)
                  const Kokkos::View<DataType1, Properties1...>& source1,
                  const Kokkos::View<DataType2, Properties2...>& source2,
                  Kokkos::View<DataType3, Properties3...>& dest,
                  BinaryOperation binary_op);
 
-  テンプレート <
-    クラス ExecutionSpace,
-    クラス DataType1, class... Properties1,
-    クラス DataType2, class... Properties2,
-    クラス DataType3, class... Properties3,
-    クラス BinaryOperation
+  template <
+    class ExecutionSpace,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2,
+    class DataType3, class... Properties3,
+    class BinaryOperation
   >
-  自動 transform(const std::string& label, const ExecutionSpace& exespace,        (8)
+  auto transform(const std::string& label, const ExecutionSpace& exespace,        (8)
                  const Kokkos::View<DataType1, Properties1...>& source1,
                  const Kokkos::View<DataType2, Properties2...>& source2,
                  Kokkos::View<DataType3, Properties3...>& dest,
@@ -120,9 +120,9 @@
 
 .. code-block:: cpp
 
-  テンプレート <
-    クラス TeamHandleType, class InputIterator,
-    クラス OutputIterator, class UnaryOperation>
+  template <
+    class TeamHandleType, class InputIterator,
+    class OutputIterator, class UnaryOperation>
   KOKKOS_FUNCTION
   OutputIterator transform(const TeamHandleType& teamHandle,                      (9)
                            InputIterator first_from,
@@ -130,21 +130,21 @@
 			   OutputIterator first_to,
                            UnaryOperation unary_op);
 
-  テンプレート <
+  template <
     class TeamHandleType,
     class DataType1, class... Properties1,
     class DataType2, class... Properties2,
     class UnaryOperation>
   KOKKOS_FUNCTION
-  自動 transform(const TeamHandleType& teamHandle,                               (10)
+  auto transform(const TeamHandleType& teamHandle,                               (10)
                  const ::Kokkos::View<DataType1, Properties1...>& source,
                  ::Kokkos::View<DataType2, Properties2...>& dest,
 		 UnaryOperation unary_op);
 
-  テンプレート <
-    クラス TeamHandleType, class InputIterator1,
-    クラス InputIterator2, class OutputIterator,
-    クラス BinaryOperation>
+  template <
+    class TeamHandleType, class InputIterator1,
+    class InputIterator2, class OutputIterator,
+    class BinaryOperation>
   KOKKOS_FUNCTION
   OutputIterator transform(const TeamHandleType& teamHandle,                     (11)
                            InputIterator1 first_from1,
@@ -153,14 +153,14 @@
 			   OutputIterator first_to,
                            BinaryOperation binary_op);
 
-  テンプレート <
-    クラス TeamHandleType,
-    クラス DataType1, class... Properties1,
-    クラス DataType2, class... Properties2,
-    クラス DataType3, class... Properties3,
-    クラス BinaryOperation>
+  template <
+    class TeamHandleType,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2,
+    class DataType3, class... Properties3,
+    class BinaryOperation>
   KOKKOS_FUNCTION
-  自動 transform(const TeamHandleType& teamHandle,                               (12)
+  auto transform(const TeamHandleType& teamHandle,                               (12)
                  const ::Kokkos::View<DataType1, Properties1...>& source1,
                  const ::Kokkos::View<DataType2, Properties2...>& source2,
                  ::Kokkos::View<DataType3, Properties3...>& dest,
