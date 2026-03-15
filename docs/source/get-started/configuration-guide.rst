@@ -83,16 +83,16 @@
     :配列: 左
 
     * -
-      - ディスクリプション/情報
+   　 - ディスクリプション/情報
 
     * - ``Kokkos_ENABLE_CUDA``
       - NVIDIA GPUs　対象とした　CUDA　バックエンドを構築
 
-　　* - ``Kokkos_ENABLE_HIP``
-      -  AMD GPUs　を対象とした　HIP バックエンドを構築
+    * - ``Kokkos_ENABLE_HIP``
+      - AMD GPUs　を対象とした　HIP バックエンドを構築
 
     * - ``Kokkos_ENABLE_SYCL``
-      -  GPUs を対象とした　SYCL バックエンドを構築
+      - GPUs を対象とした　SYCL バックエンドを構築
 
     * - ``Kokkos_ENABLE_OPENMPTARGET``
       - :red:`[Experimental]` アクセラレータデバイスへのオフロードのための OpenMP ターゲットバックエンドを構築
