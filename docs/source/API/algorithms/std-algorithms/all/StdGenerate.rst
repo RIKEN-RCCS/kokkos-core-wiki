@@ -19,22 +19,22 @@
 
 .. code-block:: cpp
 
-  テンプレート <class ExecutionSpace, class IteratorType, class GeneratorType>
+  template <class ExecutionSpace, class IteratorType, class GeneratorType>
   void generate(const ExecutionSpace& exespace,                                (1)
                 IteratorType first, IteratorType last,
                 GeneratorType g);
 
-  テンプレート <class ExecutionSpace, class IteratorType, class GeneratorType>
+  template <class ExecutionSpace, class IteratorType, class GeneratorType>
   void generate(const std::string& label, const ExecutionSpace& exespace,      (2)
                 IteratorType first, IteratorType last,
                 GeneratorType g);
 
-  テンプレート <class ExecutionSpace, class DataType, class... Properties, class GeneratorType>
+  template <class ExecutionSpace, class DataType, class... Properties, class GeneratorType>
   void generate(const ExecutionSpace& exespace,                                (3)
                 const Kokkos::View<DataType, Properties...>& view,
                 GeneratorType g);
 
-  テンプレート <class ExecutionSpace, class DataType, class... Properties, class GeneratorType>
+  template <class ExecutionSpace, class DataType, class... Properties, class GeneratorType>
   void generate(const std::string& label, const ExecutionSpace& exespace,      (4)
                 const Kokkos::View<DataType, Properties...>& view,
                 GeneratorType g);
@@ -46,13 +46,13 @@
 
 .. code-block:: cpp
 
-  テンプレート <class TeamHandleType, class IteratorType, class GeneratorType>
+  template <class TeamHandleType, class IteratorType, class GeneratorType>
   KOKKOS_FUNCTION
   void generate(const TeamHandleType& teamHandle,                              (5)
                 IteratorType first, IteratorType last,
                 GeneratorType g);
 
-  テンプレート <class TeamHandleType, class DataType, class... Properties, class GeneratorType>
+  template <class TeamHandleType, class DataType, class... Properties, class GeneratorType>
   KOKKOS_FUNCTION
   void generate(const TeamHandleType& teamHandle,                              (6)
                 const Kokkos::View<DataType, Properties...>& view,
@@ -93,7 +93,7 @@
 
   .. code-block:: cpp
 
-     構造体 Generate
+     struct Generate
      {
 	 KOKKOS_INLINE_FUNCTION
 	 return_type operator()() const{ return /* ... */; }
