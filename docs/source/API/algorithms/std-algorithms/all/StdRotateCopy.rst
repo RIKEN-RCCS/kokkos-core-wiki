@@ -1,7 +1,7 @@
 ``rotate_copy``
 ===============
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``Kokkos_StdAlgorithms.hpp``
 
 Description
 -----------
@@ -18,14 +18,14 @@ Description
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class InputIterator, class OutputIterator>
+   template <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator rotate_copy(const ExecutionSpace& exespace,                   (1)
                               InputIterator first_from,
                               InputIterator n_first,
                               InputIterator last_from,
                               OutputIterator first_to);
 
-   テンプレート <class ExecutionSpace, class InputIterator, class OutputIterator>
+   template <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator rotate_copy(const std::string& label,                         (2)
                               const ExecutionSpace& exespace,
                               InputIterator first_from,
@@ -33,7 +33,7 @@ Description
                               InputIterator last_from,
                               OutputIterator first_to);
 
-   テンプレート <
+   template <
      class ExecutionSpace,
      class DataType1, class... Properties1,
      class DataType2, class... Properties2>
@@ -42,11 +42,11 @@ Description
                     std::size_t n_location,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-   テンプレート <
+   template <
      class ExecutionSpace,
      class DataType1, class... Properties1,
      class DataType2, class... Properties2>
-   自動 rotate_copy(const std::string& label,                                   (4)
+   auto rotate_copy(const std::string& label,                                   (4)
                     const ExecutionSpace& exespace,
                     const Kokkos::View<DataType1, Properties1...>& source,
                     std::size_t n_location,
@@ -59,7 +59,7 @@ Description
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class InputIterator, class OutputIterator>
+   template <class TeamHandleType, class InputIterator, class OutputIterator>
    KOKKOS_FUNCTION
    OutputIterator rotate_copy(const TeamHandleType& teamHandle,                 (5)
                               InputIterator first_from,
@@ -67,12 +67,12 @@ Description
                               InputIterator last_from,
                               OutputIterator first_to);
 
-   テンプレート <
+   template <
      class TeamHandleType,
      class DataType1, class... Properties1,
      class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   自動 rotate_copy(const TeamHandleType& teamHandle,                           (6)
+   auto rotate_copy(const TeamHandleType& teamHandle,                           (6)
                     const Kokkos::View<DataType1, Properties1...>& source,
                     std::size_t n_location,
                     const Kokkos::View<DataType2, Properties2...>& dest);
