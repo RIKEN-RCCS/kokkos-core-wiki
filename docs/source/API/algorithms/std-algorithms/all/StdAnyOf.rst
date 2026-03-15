@@ -19,25 +19,25 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class InputIterator, class Predicate>
-   ブール any_of(const ExecutionSpace& exespace,                                (1)
+   template <class ExecutionSpace, class InputIterator, class Predicate>
+   bool any_of(const ExecutionSpace& exespace,                                (1)
                InputIterator first, InputIterator last,
 	       Predicate predicate);
 
-   テンプレート <class ExecutionSpace, class InputIterator, class Predicate>
-   ブール any_of(const std::string& label, const ExecutionSpace& exespace,      (2)
+   template <class ExecutionSpace, class InputIterator, class Predicate>
+   bool any_of(const std::string& label, const ExecutionSpace& exespace,      (2)
 	       InputIterator first, InputIterator last,
 	       Predicate predicate);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties,
+   template <class ExecutionSpace, class DataType, class... Properties,
 	     class Predicate>
-   ブール any_of(const ExecutionSpace& exespace,                                (3)
+   bool any_of(const ExecutionSpace& exespace,                                (3)
 	       const ::Kokkos::View<DataType, Properties...>& v,
 	       Predicate predicate);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties,
+   template <class ExecutionSpace, class DataType, class... Properties,
 	     class Predicate>
-   ブール any_of(const std::string& label, const ExecutionSpace& exespace,      (4)
+   bool any_of(const std::string& label, const ExecutionSpace& exespace,      (4)
 	       const ::Kokkos::View<DataType, Properties...>& v,
 	       Predicate predicate);
 
@@ -48,16 +48,16 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class InputIterator, class Predicate>
+   template <class TeamHandleType, class InputIterator, class Predicate>
    KOKKOS_FUNCTION
-   ブール any_of(const TeamHandleType& teamHandle,                              (5)
+   bool any_of(const TeamHandleType& teamHandle,                              (5)
                InputIterator first, InputIterator last,
 	       Predicate predicate);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties,
+   template <class TeamHandleType, class DataType, class... Properties,
 	     class Predicate>
    KOKKOS_FUNCTION
-   ブール any_of(const TeamHandleType& teamHandle,                              (6)
+   bool any_of(const TeamHandleType& teamHandle,                              (6)
 	       const ::Kokkos::View<DataType, Properties...>& v,
 	       Predicate predicate);
 
@@ -99,7 +99,7 @@
 
   .. code-block:: cpp
 
-     構造体 CustomPredicate
+     struct CustomPredicate
      {
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const {
