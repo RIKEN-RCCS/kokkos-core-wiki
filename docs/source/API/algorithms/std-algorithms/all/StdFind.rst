@@ -20,23 +20,23 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class InputIterator, class T>
+   template <class ExecutionSpace, class InputIterator, class T>
    InputIterator find(const ExecutionSpace& exespace,                                   (1)
 		      InputIterator first, InputIterator last,
 		      const T& value);
 
-   テンプレート <class ExecutionSpace, class InputIterator, class T>
+   template <class ExecutionSpace, class InputIterator, class T>
    InputIterator find(const std::string& label, const ExecutionSpace& exespace,         (2)
 		      InputIterator first, InputIterator last,
 		      const T& value);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
+   template <class ExecutionSpace, class DataType, class... Properties, class T>
    auto find(const ExecutionSpace& exespace,                                            (3)
 	     const Kokkos::View<DataType, Properties...>& view,
 	     const T& value);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
-   自動 find(const std::string& label, const ExecutionSpace& exespace,                  (4)
+   template <class ExecutionSpace, class DataType, class... Properties, class T>
+   auto find(const std::string& label, const ExecutionSpace& exespace,                  (4)
 	     const Kokkos::View<DataType, Properties...>& view,
 	     const T& valuにおけるの
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -45,15 +45,15 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class InputIterator, class T>
+   template <class TeamHandleType, class InputIterator, class T>
    KOKKOS_FUNCTION
    InputIterator find(const TeamHandleType& teamHandle,                                 (5)
 		      InputIterator first, InputIterator last,
 		      const T& value);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties, class T>
+   template <class TeamHandleType, class DataType, class... Properties, class T>
    KOKKOS_FUNCTION
-   自動 find(const TeamHandleType& teamHandle,                                          (6)
+   auto find(const TeamHandleType& teamHandle,                                          (6)
 	     const Kokkos::View<DataType, Properties...>& view,
 	     const T& value);
 
@@ -100,14 +100,14 @@
 
 .. code-block:: cpp
 
-   名前空間 KE = Kokkos::Experimental;
-   自動 exespace = Kokkos::DefaultExecutionSpace;
-   view_type = Kokkos::View<exespace, int*>　を使用;
+   namespace KE = Kokkos::Experimental;
+   auto exespace = Kokkos::DefaultExecutionSpace;
+   using view_type = Kokkos::View<exespace, int*>;
    view_type a("a", 15);
    // 何らかの方法で、 "a" を満たす
 
-   自動 exespace = Kokkos::DefaultExecutionSpace;
-   自動 it1 = KE::find(exespace, KE::cbegin(a), KE::cend(a), 5);
+   auto exespace = Kokkos::DefaultExecutionSpace;
+   auto it1 = KE::find(exespace, KE::cbegin(a), KE::cend(a), 5);
 
    // OpenMPが有効化されており、 "a" がホストからアクセス可能であると仮定すれば、以下も可能です。
-   自動 it2 = KE::find(Kokkos::OpenMP(), KE::begin(a), KE::end(a), 5);
+   auto it2 = KE::find(Kokkos::OpenMP(), KE::begin(a), KE::end(a), 5);
