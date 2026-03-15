@@ -18,20 +18,20 @@
 
 .. code-block:: cpp
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス InputIterator, class OutputIterator,
-     クラス ValueType>
+   template <
+     class ExecutionSpace,
+     class InputIterator, class OutputIterator,
+     class ValueType>
    OutputIterator remove_copy(const ExecutionSpace& exespace,                   (1)
                               InputIterator first_from,
                               InputIterator last_from,
                               OutputIterator first_to,
                               const ValueType& value);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス InputIterator, class OutputIterator,
-     クラス ValueType>
+   template <
+     class ExecutionSpace,
+     class InputIterator, class OutputIterator,
+     class ValueType>
    OutputIterator remove_copy(const std::string& label,                         (2)
                               const ExecutionSpace& exespace,
                               InputIterator first_from,
@@ -39,22 +39,22 @@
                               OutputIterator first_to,
                               const ValueType& value);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス DataType1, class... Properties1,
-     クラス DataType2, class... Properties2,
-     クラス ValueType>
-   自動 remove_copy(const ExecutionSpace& exespace,                             (3)
+   template <
+     class ExecutionSpace,
+     class DataType1, class... Properties1,
+     class DataType2, class... Properties2,
+     class ValueType>
+   auto remove_copy(const ExecutionSpace& exespace,                             (3)
                     const Kokkos::View<DataType1, Properties1...>& view_from,
                     const Kokkos::View<DataType2, Properties2...>& view_dest,
                     const ValueType& value);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス DataType1, class... Properties1,
-     クラス DataType2, class... Properties2,
-     クラス ValueType>
-   自動 remove_copy(const std::string& label,                                   (4)
+   template <
+     class ExecutionSpace,
+     class DataType1, class... Properties1,
+     class DataType2, class... Properties2,
+     class ValueType>
+   auto remove_copy(const std::string& label,                                   (4)
                     const ExecutionSpace& exespace,
                     const Kokkos::View<DataType1, Properties1...>& view_from,
                     const Kokkos::View<DataType2, Properties2...>& view_dest,
@@ -68,10 +68,10 @@
 
 .. code-block:: cpp
 
-   テンプレート <
-     クラス TeamHandleType,
-     クラス InputIterator, class OutputIterator,
-     クラス ValueType>
+   template <
+     class TeamHandleType,
+     class InputIterator, class OutputIterator,
+     class ValueType>
    KOKKOS_FUNCTION
    OutputIterator remove_copy(const TeamHandleType& teamHandle,                 (5)
                               InputIterator first_from,
@@ -79,11 +79,11 @@
                               OutputIterator first_to,
                               const ValueType& value);
 
-   テンプレート <
-     クラス TeamHandleType,
-     クラス DataType1, class... Properties1,
-     クラス DataType2, class... Properties2,
-     クラス ValueType>
+   template <
+     class TeamHandleType,
+     class DataType1, class... Properties1,
+     class DataType2, class... Properties2,
+     class ValueType>
    KOKKOS_FUNCTION
    自動 remove_copy(const TeamHandleType& teamHandle,                           (6)
                     const Kokkos::View<DataType1, Properties1...>& view_from,
