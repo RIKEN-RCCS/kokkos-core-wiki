@@ -19,24 +19,24 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType, class T>
-   型名 IteratorType::difference_type count(const ExecutionSpace& exespace,
+   template <class ExecutionSpace, class IteratorType, class T>
+   typename IteratorType::difference_type count(const ExecutionSpace& exespace,
 						IteratorType first,
 						IteratorType last,                      (1)
 						const T& value);
 
-   テンプレート <class ExecutionSpace, class IteratorType, class T>
-   型名 IteratorType::difference_type count(const std::string& label,
+   template <class ExecutionSpace, class IteratorType, class T>
+   typename IteratorType::difference_type count(const std::string& label,
 						const ExecutionSpace& exespace,
 						IteratorType first,
 						IteratorType last,                      (2)
 						const T& value);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
-   自動 count(const ExecutionSpace& exespace,                                           (3)
+   template <class ExecutionSpace, class DataType, class... Properties, class T>
+   auto count(const ExecutionSpace& exespace,                                           (3)
 	      const ::Kokkos::View<DataType, Properties...>& view, const T& value);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
+   template <class ExecutionSpace, class DataType, class... Properties, class T>
     count(const std::string& label, const ExecutionSpace& exespace,                 (4)
 	      const ::Kokkos::View<DataType, Properties...>& view,
 	      const T& value);
@@ -48,16 +48,16 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType, class T>
+   template <class TeamHandleType, class IteratorType, class T>
    KOKKOS_FUNCTION
-   型名 IteratorType::difference_type count(const TeamHandleType& teamHandle,
+   typename IteratorType::difference_type count(const TeamHandleType& teamHandle,
 						IteratorType first,
 						IteratorType last,                      (5)
 						const T& value);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties, class T>
+   template <class TeamHandleType, class DataType, class... Properties, class T>
    KOKKOS_FUNCTION
-   自動 count(const TeamHandleType& teamHandle,                                         (6)
+   auto count(const TeamHandleType& teamHandle,                                         (6)
 	      const ::Kokkos::View<DataType, Properties...>& view,
 	      const T& value);
 
