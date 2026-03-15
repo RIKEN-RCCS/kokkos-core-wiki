@@ -218,8 +218,7 @@
       * ``オフ``
 
     * * ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC``
-      * ``cudaMallocAsync`` (requires CUDA Toolkit version 11.2 or higher)　を使用。 この
-最適化により、デバイスあたり複数のCUDAストリームを使用するアプリケーションにおいて、パフォーマンスが向上する可能性がありますが、 MPI　ディストリビューションは、古いバージョンの　UCX　および多くの　Cray MPICH　インスタンスに基づいて構築されたものとは互換性がないことは広く認識されています。 `既知の課題 <../known-issues.html#cuda>`_　を参照してください。
+      * ``cudaMallocAsync`` ( CUDA Toolkit version 11.2以降が必要　)　を使用。 この最適化により、デバイスあたり複数のCUDAストリームを使用するアプリケーションにおいて、パフォーマンスが向上する可能性がありますが、 MPI　ディストリビューションは、古いバージョンの　UCX　および多くの　Cray MPICH　インスタンスに基づいて構築されたものとは互換性がないことは広く認識されています。 `既知の課題 <../known-issues.html#cuda>`_　を参照してください。
       * (以下の [#cuda_malloc_async]_　を参照)
 
     * * ``Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS``
