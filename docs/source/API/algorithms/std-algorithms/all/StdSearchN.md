@@ -4,54 +4,54 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```cpp
-名前空間 Kokkos{
-名前空間 実験的E{
+namespace Kokkos{
+namespace Experimental{
 
-テンプレート <class ExecutionSpace, class IteratorType, class SizeType,
+template <class ExecutionSpace, class IteratorType, class SizeType,
           class ValueType>
 IteratorType search_n(const ExecutionSpace& exespace, IteratorType first,
                       IteratorType last, SizeType count,                             (1)
                       const ValueType& value);
 
-テンプレート <class ExecutionSpace, class IteratorType, class SizeType,
+template <class ExecutionSpace, class IteratorType, class SizeType,
           class ValueType>
 IteratorType search_n(const std::string& label, const ExecutionSpace& exespace,
                       IteratorType first, IteratorType last, SizeType count,         (2)
                       const ValueType& value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties,
+template <class ExecutionSpace, class DataType, class... Properties,
           class SizeType, class ValueType>
-自動 search_n(const ExecutionSpace& exespace,
+auto search_n(const ExecutionSpace& exespace,
               const ::Kokkos::View<DataType, Properties...>& view,                   (3)
               SizeType count, const ValueType& value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties,
+template <class ExecutionSpace, class DataType, class... Properties,
           class SizeType, class ValueType>
 自動 search_n(const std::string& label, const ExecutionSpace& exespace,
               const ::Kokkos::View<DataType, Properties...>& view,                   (4)
               SizeType count, const ValueType& value);
 
 // オーバーロードセット 2: 引き渡された二項述語
-テンプレート <class ExecutionSpace, class IteratorType, class SizeType,
+template <class ExecutionSpace, class IteratorType, class SizeType,
           class ValueType, class BinaryPredicateType>
 IteratorType search_n(const ExecutionSpace& exespace, IteratorType first,
                       IteratorType last, SizeType count, const ValueType& value,     (5)
                       const BinaryPredicateType& pred);
 
-テンプレート <class ExecutionSpace, class IteratorType, class SizeType,
+template <class ExecutionSpace, class IteratorType, class SizeType,
           class ValueType, class BinaryPredicateType>
 IteratorType search_n(const std::string& label, const ExecutionSpace& exespace,
                       IteratorType first, IteratorType last, SizeType count,         (6)
                       const ValueType& value, const BinaryPredicateType& pred);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties,
+template <class ExecutionSpace, class DataType, class... Properties,
           class SizeType, class ValueType, class BinaryPredicateType>
-自動 search_n(const ExecutionSpace& exespace,
+auto search_n(const ExecutionSpace& exespace,
               const ::Kokkos::View<DataType, Properties...>& view,                   (7)
               SizeType count, const ValueType& value,
               const BinaryPredicateType& pred);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties,
+template <class ExecutionSpace, class DataType, class... Properties,
           class SizeType, class ValueType, class BinaryPredicateType>
 auto search_n(const std::string& label, const ExecutionSpace& exespace,
               const ::Kokkos::View<DataType, Properties...>& view,                   (8)
