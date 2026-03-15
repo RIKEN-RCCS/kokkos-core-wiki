@@ -5,7 +5,7 @@
 
 ```cpp
 namespace Kokkos{
-namespace 実験的{
+namespace Experimental{
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 bool lexicographical_compare(const ExecutionSpace& exespace, IteratorType1 first1,
