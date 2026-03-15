@@ -7,22 +7,22 @@
 名前空間 Kokkos{
 名前空間 Experimental{
 
-テンプレート <class ExecutionSpace, class IteratorType, class T>
+template <class ExecutionSpace, class IteratorType, class T>
 void fill(const ExecutionSpace& exespace,                                    (1)
           IteratorType first, IteratorType last,
           const T& value);
 
-テンプレート <class ExecutionSpace, class IteratorType, class T>
+template <class ExecutionSpace, class IteratorType, class T>
 void fill(const std::string& label, const ExecutionSpace& exespace,          (2)
           IteratorType first, IteratorType last,
           const T& value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
+template <class ExecutionSpace, class DataType, class... Properties, class T>
 void fill(const ExecutionSpace& exespace,                                    (3)
           const Kokkos::View<DataType, Properties...>& view,
           const T& value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
+template <class ExecutionSpace, class DataType, class... Properties, class T>
 void fill(const std::string& label, const ExecutionSpace& exespace,          (4)
           const Kokkos::View<DataType, Properties...>& view,
           const T& value);
@@ -64,7 +64,7 @@ void fill(const std::string& label, const ExecutionSpace& exespace,          (4)
 ## 例
 
 ```c++
-名前空間 KE = Kokkos::Experimental;
+namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
 
 KE::fill(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a), 4.);
