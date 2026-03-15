@@ -35,9 +35,9 @@ for (int f = 0; f < F; ++f)
 for (int p = 0; p < P; ++p)
 {
 
-  自動結果 = Kokkos::subview(outputField, c, f, p, Kokkos::ALL);
-  自動左   = Kokkos::subview(inputData, c, p, Kokkos::ALL, Kokkos::ALL);
-  自動右  = Kokkos::subview(inputField, c, f, p, Kokkos::ALL);
+  auto result = Kokkos::subview(outputField, c, f, p, Kokkos::ALL);
+  auto left   = Kokkos::subview(inputData, c, p, Kokkos::ALL, Kokkos::ALL);
+  auto right  = Kokkos::subview(inputField, c, f, p, Kokkos::ALL);
   
   for (int i=0;i<D;++i) {
   
@@ -67,9 +67,9 @@ Kokkos::parallel_for("for_all_cells",
      for (int p = 0; p < P; ++p)
      {
 
-      自動結果 = Kokkos::subview(outputField, c, f, p, Kokkos::ALL);
-      自動左   = Kokkos::subview(inputData, c, p, Kokkos::ALL, Kokkos::ALL);
-      自動右  = Kokkos::subview(inputField, c, f, p, Kokkos::ALL);
+      auto result = Kokkos::subview(outputField, c, f, p, Kokkos::ALL);
+      auto left   = Kokkos::subview(inputData, c, p, Kokkos::ALL, Kokkos::ALL);
+      auto right  = Kokkos::subview(inputField, c, f, p, Kokkos::ALL);
   
       for (int i=0;i<D;++i) {
   
@@ -88,7 +88,7 @@ Kokkos::parallel_for("for_all_cells",
 
 セル数が十分に多く、並列化が有効となる場合、すなわち並列ディスパッチのオーバーヘッドと計算時間の合計が、シリアル実行の総時間よりも短い場合には、上記のシンプルな実装によりパフォーマンスが向上します。
 
-特に、体 `F` と点 `P` に対する for ループ内において、さらに活用できる並列処理の余地がございます。 これを実現する一つの方法は、3つの反復範囲の積である`C*F*P`を取り、その積に対して[`parallel_for`](../API/core/parallel-dispatch/parallel_for)　を実行することです。 ただし、これには抽出ルーチンが必要となります。具体的には、平坦化された反復範囲 `C*F*P` のインデックスと、この例におけるデータ構造が要求する多次元インデックスとの間の対応付けを行う必要があります。 さらに、パフォーマンスの移植性を実現するためには、1次元積分反復範囲と多次元3Dインデックス間のマッピングにアーキテクチャ認識が必要となりますが、これは、Kokkosでデータアクセスパターンを確立するために使用される　[`LayoutLeft`](../API/core/view/layoutLeft)　および[`LayoutRight`](../API/core/view/layoutRight)　の概念に類似したものです。
+特に、体 `F` と点 `P` に対する for ループ内において、さらに活用できる並列処理の余地があります。 これを実現する一つの方法は、3つの反復範囲の積である`C*F*P`を取り、その積に対して[`parallel_for`](../API/core/parallel-dispatch/parallel_for)　を実行することです。 ただし、これには抽出ルーチンが必要となります。具体的には、平坦化された反復範囲 `C*F*P` のインデックスと、この例におけるデータ構造が要求する多次元インデックスとの間の対応付けを行う必要があります。 さらに、パフォーマンスの移植性を実現するためには、1次元積分反復範囲と多次元3Dインデックス間のマッピングにアーキテクチャ認識が必要となりますが、これは、Kokkosでデータアクセスパターンを確立するために使用される　[`LayoutLeft`](../API/core/view/layoutLeft)　および[`LayoutRight`](../API/core/view/layoutRight)　の概念に類似したものです。
 
  [`MDRangePolicy`](../API/core/policies/MDRangePolicy) は、反復範囲の積を手動で計算したり、1次元と3次元の多次元インデックス間のマッピングを行ったりする必要なく、3つの反復範囲すべてに対して並列化を行うという目標を達成するための自然な方法を提供します。[`MDRangePolicy`](../API/core/policies/MDRangePolicy) は、最初の実装である [`RangePolicy`](../API/core/policies/RangePolicy) の使用例で示された内容の通り、きっちりと入れ子になった for ループでの使用に適しており、単一次元での並列化を超える計算における追加の並列性を実現する手法を提供します。
 
@@ -98,13 +98,13 @@ Kokkos::parallel_for("for_all_cells",
 Kokkos::parallel_for("mdr_for_all_cells", 
   Kokkos::MDRangePolicy< Kokkos::Rank<3> > ({0,0,0}, {C,F,P}),
    KOKKOS_LAMBDA (const int c, const int f, const int p) {
-    自動結果 = Kokkos::subview(outputField, c, f, p, Kokkos::ALL);
-    自動左   = Kokkos::subview(inputData, c, p, Kokkos::ALL, Kokkos::ALL);
-    自動右 = Kokkos::subview(inputField, c, f, p, Kokkos::ALL);
+    auto result = Kokkos::subview(outputField, c, f, p, Kokkos::ALL);
+    auto left   = Kokkos::subview(inputData, c, p, Kokkos::ALL, Kokkos::ALL);
+    auto right  = Kokkos::subview(inputField, c, f, p, Kokkos::ALL);
   
     for (int i=0;i<D;++i) {
   
-      ダブル tmp(0);
+      double tmp(0);
     
       for (int j=0;j<D;++j)
         tmp += left(i, j)*right(j);
