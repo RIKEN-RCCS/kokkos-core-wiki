@@ -21,7 +21,7 @@
      - `データ並列パターン <https://www.youtube.com/watch?v=rUIcWtFU5qM&feature=youtu.be&t=3000>`_
      -
    * - 1.4.
-     - `Kokkos を使ったアプリケーション構築<https://www.youtube.com/watch?v=rUIcWtFU5qM&feature=youtu.be&t=4986>`_
+     - `Kokkos を使ったアプリケーション構築 <https://www.youtube.com/watch?v=rUIcWtFU5qM&feature=youtu.be&t=4986>`_
      -
    * - 2.
      - `Views and Spacesビューおよび空間 <https://www.youtube.com/watch?v=O-asHTtO7O4>`_
@@ -120,7 +120,7 @@
      - `Kokkos カーネル数学ライブラリ <https://www.youtube.com/watch?v=_qD4X66MQF8&t=1s>`_
      - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_08_KokkosKernels.pdf>`__
    * - 8.1.
-     - `Kokkos カーネル: Library Based Approach for Performance Portable Sparse/Dense linear algebra and Graph Kernels <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=1166>`_
+     - `Kokkos カーネル: Library Based Approach for Performance Portable Sparse/Dense linear algebra and Graph Kernelsパフォーマンスポータブルスパース/全結合層およびグラフカーネルのためのライブラリベースのアプローチ <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=1166>`_
      -
    * - 8.2.
      - `BLAS および LAPACK <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=2045>`_
@@ -129,7 +129,7 @@
      - `Batched BLAS および LAPACK <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=2601>`_
      -
    * - 8.4.
-     - `Sparse Linear Algebra <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=3490>`_
+     - `疎線形代数 <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=3490>`_
      -
    * - 8.5.
      - `Graph カーネル <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=4387>`_
