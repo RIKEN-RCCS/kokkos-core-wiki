@@ -114,6 +114,105 @@ Kokkos 4.4 において非推奨
 
 
 
+Kokkos 4.3　において非推奨
+---------------------------
+
+* ``Experimental::swap``
+   * 置換: ``kokkos_swap``
+   * ADLにより曖昧さを回避
+
+* ``ExecutionSpace::in_parallel``
+   * 置換: ``KOKKOS_IF_ON_HOST``/``KOKKOS_IF_ON_DEVICE``は、部分的に同様の行動を提供します
+   * 一貫性を欠いた実装、限定的な利用
+
+* ``Cuda::device_arch()``
+   * 置換: 無し
+   * 実行空間間での均一性
+
+* ``Cuda::detect_device_count()``
+   * 置換: num_devices()
+   * 実行空間間での均一性
+
+* ``Cuda::detect_device_arch()``
+   * 置換: 無し
+   * 実行空間間での均一性
+
+* ``HIP::HIP::detect_device_count()``
+   * 置換: ``num_devices()``
+   * 実行空間間での均一性
+
+* ``RangePolicy::set(ChunkSize chunksize)``
+   * 置換: ``RangePolicy::set_chunk_size(int chunk_size)``
+   * ``ChunkSize`` が  ``RangePolicy::set()`` で使用可能な唯一の追加パラメータでした。
+
+* ``InitializationSettings::set_num_devices``, ``InitializationSettings::has_num_devices``, ``InitializationSettings::get_num_devices``
+   * 置換: ``num_devices``
+   *  `InitializationSettings` の変更により、これらは不要となりました。
+
+* ``InitializationSettings::set_skip_devices``, ``InitializationSettings::has_skip_devices``, ``InitializationSettings::get_skip_devices``
+   * 置換: ``KOKKOS_VISIBLE_DEVICES``
+   *  `InitializationSettings` の変更により、これらは不要となりました。
+
+
+ Kokkos 4.2　において非推奨
+---------------------------
+
+* ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
+   * 置換: ``Cuda::Cuda(cudaStream_t stream)``
+   *  Cuda 実行空間インスタンスの構築には、常に外部管理の ``cudaStream``　オブジェクトを使用すべきです。
+
+* ``HIP::HIP(hipStream_t stream, bool manage_stream)``
+    * 置換 ``HIP::HIP(hipStream_t stream)``
+    *  HIP 実行空間インスタンスの構築には、常に外部管理の ``hipStream`` オブジェクトを使用すべきです。execution space 
+
+* ``vector``
+    * 置換: 無し
+    * 非標準的な動作であり、Kokkosの概念とは相性が良くありません。
+
+* ``HostSpace::HostSpace(AllocationMechanism)``
+    * 置換: ``HostSpace::HostSpace()``
+    * ``AllocationMechanism`` は使用されず、 整合性を伴う　``operator new`` は、無条件で使用されています。
+
+*  ``Kokkos::Experimental`` 名前空間の中の　SIMD 算術関数
+    * 置換: SIMD math function in the ``Kokkos`` namespace
+    *  ADLの問題、他の数学関数オーバーロードとの一貫性
+
+
+ Kokkos 4.1　において非推奨
+---------------------------
+
+*  ``BinSort``, ``BinOp1D``, and ``BinOp3D``　のためのデフォルトコンストラクタ
+   * 置換: 無し
+   * デフォルトコンストラクタは、無効であり、利用不可能なオブジェクトを作成しました。
+
+* ``View::Rank``
+   * 置換: ``View::rank()``
+   *  ``View::rank()``　のため、文書化されておらず、冗長です
+
+* ``View::subview<MemoryTraits>(...)``
+   * 置換: ``View::subview(...)``
+   * 有用ではなく、使用されていません
+
+
+ Kokkos 4.0　において非推奨
+---------------------------
+
+* ``CudaUVMSpace::available()``
+   * 置換: ``SharedSpace``
+   * 移植不可能であり、常に　``真``　を返す
+
+* ``Complex`` ``volatile`` オーバーロード
+   * 置換: 無し
+   *  ``volatile`` オーバーロードを使用する必要はありません
+
+* ``pair`` ``volatile`` オーバーロード
+   * 置換: 無し
+   *  ``volatile`` オーバーロードを使用する必要はありません
+
+* ``ScratchMemorySpace::align(const IntType& size)``
+   * 置換: 無し
+   * 使用されておらず、有用ではありません
+
 Deprecated in Kokkos 4.3
 ---------------------------
 
