@@ -4,44 +4,44 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-名前空間 Kokkos{
-名前空間 Experimental{
+namespace Kokkos{
+namespace Experimental{
 
 //
 // オーバーロードセット A
 //
-テンプレート <
-  クラス ExecutionSpace, class IteratorType1,
-  クラス IteratorType2, class ValueType>
+template <
+  class ExecutionSpace, class IteratorType1,
+  class IteratorType2, class ValueType>
 ValueType transform_reduce(const ExecutionSpace& exespace,                      (1)
                            IteratorType1 first1, IteratorType1 last1,
                            IteratorType2 first2,
                            ValueType init_reduction_value);
 
-テンプレート <
-  クラス ExecutionSpace, class IteratorType1,
-  クラス IteratorType2, class ValueType>
+template <
+  class ExecutionSpace, class IteratorType1,
+  class IteratorType2, class ValueType>
 ValueType transform_reduce(const std::string& label,                            (2)
                            const ExecutionSpace& exespace,
                            IteratorType1 first1, IteratorType1 last1,
                            IteratorType2 first2,
                            ValueType init_reduction_value);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス ValueType>
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class ValueType>
 ValueType transform_reduce(const ExecutionSpace& exespace,                      (3)
                            const ::Kokkos::View<DataType1, Properties1...>& first_view,
                            const ::Kokkos::View<DataType2, Properties2...>& second_view,
                            ValueType init_reduction_value);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス ValueType>
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class ValueType>
 ValueType transform_reduce(const std::string& label,                            (4)
                            const ExecutionSpace& exespace,
                            const ::Kokkos::View<DataType1, Properties1...>& first_view,
@@ -51,11 +51,11 @@ ValueType transform_reduce(const std::string& label,                            
 //
 // オーバーロードセット B
 //
-テンプレート <
-  クラス ExecutionSpace,
-  クラス IteratorType1, class IteratorType2,
-  クラス ValueType,
-  クラス BinaryJoinerType, class BinaryTransform>
+template <
+  class ExecutionSpace,
+  class IteratorType1, class IteratorType2,
+  class ValueType,
+  class BinaryJoinerType, class BinaryTransform>
 ValueType transform_reduce(const ExecutionSpace& exespace,                      (5)
                            IteratorType1 first1,
                            IteratorType1 last1, IteratorType2 first2,
@@ -63,11 +63,11 @@ ValueType transform_reduce(const ExecutionSpace& exespace,                      
                            BinaryJoinerType joiner,
                            BinaryTransform binary_transformer);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス IteratorType1, class IteratorType2,
-  クラス ValueType,
-  クラス BinaryJoinerType, class BinaryTransform>
+template <
+  class ExecutionSpace,
+  class IteratorType1, class IteratorType2,
+  class ValueType,
+  class BinaryJoinerType, class BinaryTransform>
 ValueType transform_reduce(const std::string& label,                            (6)
                            const ExecutionSpace& exespace,
                            IteratorType1 first1, IteratorType1 last1,
@@ -76,12 +76,12 @@ ValueType transform_reduce(const std::string& label,                            
                            BinaryJoinerType joiner,
                            BinaryTransform binary_transformer);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス ValueType,
-  クラス BinaryJoinerType, class BinaryTransform>
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class ValueType,
+  class BinaryJoinerType, class BinaryTransform>
 ValueType transform_reduce(const ExecutionSpace& exespace,                      (7)
                            const ::Kokkos::View<DataType1, Properties1...>& first_view,
                            const ::Kokkos::View<DataType2, Properties2...>& second_view,
@@ -89,12 +89,12 @@ ValueType transform_reduce(const ExecutionSpace& exespace,                      
                            BinaryJoinerType joiner,
                            BinaryTransform binary_transformer);
 
-テンプレート <
-   クラス ExecutionSpace,
-   クラス DataType1, class... Properties1,
-   クラス DataType2, class... Properties2,
-   クラス ValueType,
-   クラス BinaryJoinerType, class BinaryTransform>
+template <
+   class ExecutionSpace,
+   class DataType1, class... Properties1,
+   class DataType2, class... Properties2,
+   class ValueType,
+   class BinaryJoinerType, class BinaryTransform>
 ValueType transform_reduce(const std::string& label,                            (8)
                            const ExecutionSpace& exespace,
                            const ::Kokkos::View<DataType1, Properties1...>& first_view,
@@ -106,20 +106,20 @@ ValueType transform_reduce(const std::string& label,                            
 //
 // オーバーロードセット C
 //
-テンプレート <
-  クラス ExecutionSpace,
-  クラス IteratorType, class ValueType,
-  クラス BinaryJoinerType, class UnaryTransform>
+template <
+  class ExecutionSpace,
+  class IteratorType, class ValueType,
+  class BinaryJoinerType, class UnaryTransform>
 ValueType transform_reduce(const ExecutionSpace& exespace,                      (9)
                            IteratorType first1, IteratorType last1,
                            ValueType init_reduction_value,
                            BinaryJoinerType joiner,
                            UnaryTransform unary_transformer);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス IteratorType, class ValueType,
-  クラス BinaryJoinerType, class UnaryTransform>
+template <
+  class ExecutionSpace,
+  class IteratorType, class ValueType,
+  class BinaryJoinerType, class UnaryTransform>
 ValueType transform_reduce(const std::string& label,
                            const ExecutionSpace& exespace,                      (10)
                            IteratorType first1, IteratorType last1,
@@ -127,17 +127,17 @@ ValueType transform_reduce(const std::string& label,
                            BinaryJoinerType joiner,
                            UnaryTransform unary_transformer);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType, class... Properties, class ValueType,
-  クラス BinaryJoinerType, class UnaryTransform>
+template <
+  class ExecutionSpace,
+  class DataType, class... Properties, class ValueType,
+  class BinaryJoinerType, class UnaryTransform>
 ValueType transform_reduce(const ExecutionSpace& exespace,                      (11)
                            const ::Kokkos::View<DataType, Properties...>& first_view,
                            ValueType init_reduction_value,
                            BinaryJoinerType joiner,
                            UnaryTransform unary_transformer);
 
-テンプレート <
+template <
   クラス ExecutionSpace,
   クラス DataType, class... Properties, class ValueType,
   クラス BinaryJoinerType, class UnaryTransform>
@@ -157,8 +157,7 @@ ValueType transform_reduce(const std::string& label,                            
 - (1,2): 範囲 `[first1, last1)` 内の各要素と、`first2` から始まる範囲の要素との間で、
 *積*（`演算子*` 経由）を実行し、結果を初期値 `init_reduction_value` と共に還元します。
   
-- (3,4): performs the *product* (via `operator*`) between each pair
-  of elements in `first_view` and `second_view`,　`first_view`　と　`second_view`　の各要素ペア間で
+- (3,4): `first_view`　と　`second_view`　の各要素ペア間で
 *積*（`演算子*` 経由）を実行し、結果を初期値 `init_reduction_value` と共に還元します。
 
 - (5,6): ファンクタ　`binary_transformer` を、
@@ -205,11 +204,11 @@ ValueType transform_reduce(const std::string& label,                            
   　引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst)　`ValueType`  の2つの引数　`a,b`　を使って、呼び出し可能であり、 `a,b` を変更してはいけません。
   - 以下に一致しなければなりません:
   ```c++
-  構造体 JoinFunctor {
+  struct JoinFunctor {
 	KOKKOS_FUNCTION
 	constexpr ValueType operator()(const ValueType& a,
                                  const ValueType& b) const {
-	  返し /* ... */
+	  return /* ... */
 	}
   };
   ```
@@ -225,7 +224,7 @@ ValueType transform_reduce(const std::string& label,                            
   struct BinaryTransformer {
 	KOKKOS_FUNCTION
 	constexpr return_type operator()(const value_type_a & a, const value_type_b & b) const {
-	  返し /* ... */
+	  return /* ... */
 	}
   };
   ```
@@ -236,7 +235,7 @@ ValueType transform_reduce(const std::string& label,                            
   引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst)　`value_type`　の引数　`v`　を使って呼び出し可能で、そこでは、`value_type`　が、 `first1` (9,10について)　の値型、または  `first_view` (11,12について)　であり、`v` を変更してはいけません。
   - 以下に一致しなければなりません:
   ```c++
-  構造体 UnaryTransformer {
+  struct UnaryTransformer {
 	KOKKOS_FUNCTION
 	constexpr value_type operator()(const value_type & v) const {
 	  return /* ... */
