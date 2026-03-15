@@ -27,7 +27,6 @@ struct SoA;
 template <typename... Types>
 MemberTypes<Types...>;
 ```
-
 `ベクトル長`
 : 各データ型ごとに連続したメモリ位置に格納される要素の数。
 
@@ -39,6 +38,7 @@ MemberTypes<Types...>;
 
 ### Cabana::AoSoA
 ヘッダー [`<Cabana_AoSoA.hpp>`](https://github.com/ECP-copa/Cabana/blob/master/core/src/Cabana_AoSoA.hpp)　に定義。
+
 
 ```C++
 template <class DataTypes, class MemorySpace,
