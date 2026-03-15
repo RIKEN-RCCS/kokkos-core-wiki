@@ -19,52 +19,52 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType1 find_end(const ExecutionSpace& exespace,                                (1)
                           IteratorType1 first, IteratorType1 last,
 			  IteratorType2 s_first, IteratorType2 s_last);
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType1 find_end(const std::string& label, const ExecutionSpace& exespace,
 			  IteratorType1 first, IteratorType1 last,                       (2)
 			  IteratorType2 s_first, IteratorType2 s_last);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
-   自動 find_end(const ExecutionSpace& exespace,
+   auto find_end(const ExecutionSpace& exespace,
 		 const ::Kokkos::View<DataType1, Properties1...>& view,                  (3)
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
-   自動 find_end(const std::string& label, const ExecutionSpace& exespace,
+   auto find_end(const std::string& label, const ExecutionSpace& exespace,
 		 const ::Kokkos::View<DataType1, Properties1...>& view,                  (4)
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2,
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
    IteratorType1 find_end(const ExecutionSpace& exespace,                                (5)
                           IteratorType1 first, IteratorType1 last,
 			  IteratorType2 s_first, IteratorType2 s_last,
 			  const BinaryPredicateType& pred);
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2,
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
    IteratorType1 find_end(const std::string& label, const ExecutionSpace& exespace,      (6)
 			  IteratorType1 first, IteratorType1 last,
 			  IteratorType2 s_first, IteratorType2 s_last,
 			  const BinaryPredicateType& pred);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2, class BinaryPredicateType>
-   自動 find_end(const ExecutionSpace& exespace,                                         (7)
+   auto find_end(const ExecutionSpace& exespace,                                         (7)
 		 const ::Kokkos::View<DataType1, Properties1...>& view,
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view,
 		 const BinaryPredicateType& pred);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2, class BinaryPredicateType>
-   自動 find_end(const std::string& label, const ExecutionSpace& exespace,               (8)
+   auto find_end(const std::string& label, const ExecutionSpace& exespace,               (8)
 		 const ::Kokkos::View<DataType1, Properties1...>& view,
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view,
 		 const BinaryPredicateType& pred);
@@ -76,20 +76,20 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2>
+   template <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
    IteratorType1 find_end(const TeamHandleType& teamHandle,                              (9)
                           IteratorType1 first, IteratorType1 last,
 			  IteratorType2 s_first, IteratorType2 s_last);
 
-   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
+   template <class TeamHandleType, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   自動 find_end(const TeamHandleType& teamHandle,                                      (10)
+   auto find_end(const TeamHandleType& teamHandle,                                      (10)
 		 const ::Kokkos::View<DataType1, Properties1...>& view,
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
-   テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2,
+   template <class TeamHandleType, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
    KOKKOS_FUNCTION
    IteratorType1 find_end(const TeamHandleType& teamHandle,                             (11)
@@ -97,7 +97,7 @@
 			  IteratorType2 s_first, IteratorType2 s_last,
 			  const BinaryPredicateType& pred);
 
-   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
+   template <class TeamHandleType, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2, class BinaryPredicateType>
    KOKKOS_FUNCTION
     find_end(const TeamHandleType& teamHandle,                                      (12)
@@ -153,10 +153,10 @@
 
   .. code-block:: cpp
 
-     テンプレート <class ValueType1, class ValueType2 = ValueType1>
-     構造体 IsEqualFunctor {
+     template <class ValueType1, class ValueType2 = ValueType1>
+     struct IsEqualFunctor {
       KOKKOS_INLINE_FUNCTION
-      ブール operator()(const ValueType1& a, const ValueType2& b) const {
+      bool operator()(const ValueType1& a, const ValueType2& b) const {
         return (a == b);
       }
      };
