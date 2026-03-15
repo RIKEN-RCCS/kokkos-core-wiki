@@ -89,9 +89,9 @@ struct Fib {
   operator() (team_member & member, return_type & return) {
     auto scheduler = member.scheduler();
     if (N < 2) {
-        返し = N;
+        return = N;
     } else if (f1.is_ready() && f2.is_ready()) {
-        返し = f1.get() + f2.get();
+        return = f1.get() + f2.get();
     } else{
         f1 = Kokkos::task_spawn( Kokkos::TaskSingle(scheduler),
                                  Fib{N-1} );
