@@ -68,7 +68,7 @@ template <typename DataType>
 
 最初に、flclモジュールを読み込みます: 
 ``` fortran
-:: flcl_mod　を使用
+use :: flcl_mod
 ```
 次に、2つの 'Y' 配列を含む配列を定義し、一方の配列は　Fortran　で　daxpy　の結果を計算するために使用され、もう一方の配列は　kokkos で計算するために使用されます。
 ``` fortran 
