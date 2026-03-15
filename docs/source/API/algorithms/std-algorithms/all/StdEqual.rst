@@ -19,76 +19,76 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
-   ブール equal(const ExecutionSpace& exespace,                                        (1)
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   bool equal(const ExecutionSpace& exespace,                                        (1)
               IteratorType1 first1, IteratorType1 last1,
 	      IteratorType2 first2);
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
-   ブール equal(const std::string& label, const ExecutionSpace& exespace,              (2)
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   bool equal(const std::string& label, const ExecutionSpace& exespace,              (2)
 	      IteratorType1 first1, IteratorType1 last1,
 	      IteratorType2 first2);
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2,
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
-   ブール equal(const ExecutionSpace& exespace,                                        (3)
+   bool equal(const ExecutionSpace& exespace,                                        (3)
               IteratorType1 first1, IteratorType1 last1,
 	      IteratorType2 first2,
 	      BinaryPredicateType predicate);
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2,
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
-   ブール equal(const std::string& label, const ExecutionSpace& exespace,              (4)
+   bool equal(const std::string& label, const ExecutionSpace& exespace,              (4)
 	      IteratorType1 first1, IteratorType1 last1,
 	      IteratorType2 first2,
 	      BinaryPredicateType predicate);
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
-   ブール equal(const ExecutionSpace& exespace, IteratorType1 first1,                  (5)
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   bool equal(const ExecutionSpace& exespace, IteratorType1 first1,                  (5)
               IteratorType1 last1, IteratorType2 first2,
 	      IteratorType2 last2);
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
-   ブール equal(const std::string& label, const ExecutionSpace& exespace,              (6)
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   bool equal(const std::string& label, const ExecutionSpace& exespace,              (6)
 	      IteratorType1 first1, IteratorType1 last1,
 	      IteratorType2 first2, IteratorType2 last2);
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2,
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
-   ブール equal(const ExecutionSpace& exespace,                                        (7)
+   bool equal(const ExecutionSpace& exespace,                                        (7)
 	      IteratorType1 first1, IteratorType1 last1,
 	      IteratorType2 first2, IteratorType2 last2,
 	      BinaryPredicateType predicate);
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2,
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
-   ブール equal(const std::string& label, const ExecutionSpace& exespace,              (8)
+   bool equal(const std::string& label, const ExecutionSpace& exespace,              (8)
 	      IteratorType1 first1, IteratorType1 last1,
 	      IteratorType2 first2, IteratorType2 last2,
 	      BinaryPredicateType predicate);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
-   ブール equal(const ExecutionSpace& exespace,                                        (9)
+   bool equal(const ExecutionSpace& exespace,                                        (9)
 	      const Kokkos::View<DataType1, Properties1...>& view1,
               const Kokkos::View<DataType2, Properties2...>& view2);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
-   ブール equal(const std::string& label, const ExecutionSpace& exespace,             (10)
+   bool equal(const std::string& label, const ExecutionSpace& exespace,             (10)
 	      const Kokkos::View<DataType1, Properties1...>& view1,
 	      const Kokkos::View<DataType2, Properties2...>& view2);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2, class BinaryPredicate>
-   ブール equal(const ExecutionSpace& exespace,                                       (11)
+   bool equal(const ExecutionSpace& exespace,                                       (11)
 	      const Kokkos::View<DataType1, Properties1...>& view1,
 	      const Kokkos::View<DataType2, Properties2...>& view2,
 	      BinaryPredicate pred);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2, class BinaryPredicate>
-   ブール equal(const std::string& label, const ExecutionSpace& exespace,             (12)
+   bool equal(const std::string& label, const ExecutionSpace& exespace,             (12)
 	      const Kokkos::View<DataType1, Properties1...>& view1,
 	      const Kokkos::View<DataType2, Properties2...>& view2,
 	      BinaryPredicate pred);
@@ -100,45 +100,45 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2>
+   template <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
-   ブール equal(const TeamHandleType& teamHandle,                                     (13)
+   bool equal(const TeamHandleType& teamHandle,                                     (13)
               IteratorType1 first1, IteratorType1 last1,
 	      IteratorType2 first2);
 
-   テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2,
+   template <class TeamHandleType, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
    KOKKOS_FUNCTION
-   ブール equal(const TeamHandleType& teamHandle,                                     (14)
+   bool equal(const TeamHandleType& teamHandle,                                     (14)
               IteratorType1 first1, IteratorType1 last1,
 	      IteratorType2 first2,
 	      BinaryPredicateType predicate);
 
-   テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2>
+   template <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
-   ブール equal(const TeamHandleType& teamHandle,                                     (15)
+   bool equal(const TeamHandleType& teamHandle,                                     (15)
               IteratorType1 first1, IteratorType1 last1,
 	      IteratorType2 first2, IteratorType2 last2);
 
-   テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2,
+   template <class TeamHandleType, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
    KOKKOS_FUNCTION
-   ブール equal(const TeamHandleType& teamHandle,                                     (16)
+   bool equal(const TeamHandleType& teamHandle,                                     (16)
               IteratorType1 first1, IteratorType1 last1,
 	      IteratorType2 first2, IteratorType2 last2,
 	      BinaryPredicateType predicate);
 
-   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
+   template <class TeamHandleType, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   ブール equal(const TeamHandleType& teamHandle,                                     (17)
+   bool equal(const TeamHandleType& teamHandle,                                     (17)
 	      const Kokkos::View<DataType1, Properties1...>& view1,
 	      const Kokkos::View<DataType2, Properties2...>& view2);
 
-   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
+   template <class TeamHandleType, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2, class BinaryPredicate>
    KOKKOS_FUNCTION
-   ブール equal(const TeamHandleType& teamHandle,                                     (18)
+   bool equal(const TeamHandleType& teamHandle,                                     (18)
 	      const Kokkos::View<DataType1, Properties1...>& view1,
 	      const Kokkos::View<DataType2, Properties2...>& view2,
 	      BinaryPredicate pred);
@@ -194,11 +194,11 @@
 
   .. code-block:: cpp
 
-     テンプレート <class ValueType1, class ValueType2 = ValueType1>
-     構造体 IsEqualFunctor {
+     template <class ValueType1, class ValueType2 = ValueType1>
+     struct IsEqualFunctor {
       KOKKOS_INLINE_FUNCTION
       bool operator()(const ValueType1& a, const ValueType2& b) const {
-        返し (a == b);
+        return (a == b);
       }
      };
 
@@ -221,16 +221,16 @@
 
    名前空間 KE = Kokkos::Experimental;
 
-   テンプレート <class ValueType1, class ValueType2 = ValueType1>
-   構造体 IsEqualFunctor {
+   template <class ValueType1, class ValueType2 = ValueType1>
+   struct IsEqualFunctor {
      KOKKOS_INLINE_FUNCTION
      bool operator()(const ValueType1& a, const ValueType2& b) const {
-       返し (a == b);
+       return (a == b);
      }
    };
 
-   自動 exespace = Kokkos::DefaultExecutionSpace;
-   view_type = Kokkos::View<exespace, int*>　を使用;
+   auto exespace = Kokkos::DefaultExecutionSpace;
+   using view_type = Kokkos::View<exespace, int*>;
    view_type a("a", 15);
    view_type b("b", 15);
    // 何らかの方法で a,b を満たす
@@ -238,7 +238,7 @@
    // ファンクタを作成
    IsEqualFunctor<int,int> p();
 
-   ブール isEqual = KE::equal(exespace, KE::begin(a), KE::end(a),
+   bool isEqual = KE::equal(exespace, KE::begin(a), KE::end(a),
                             KE::begin(b), KE::end(b) p);
 
    // ホスト上で明示的に実行（aとbがホスト上でアクセス可能であることを想定）
