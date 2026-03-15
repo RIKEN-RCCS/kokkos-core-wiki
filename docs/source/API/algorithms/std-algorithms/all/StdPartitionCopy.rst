@@ -18,7 +18,7 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace,
+   template <class ExecutionSpace,
              class InputIteratorType,
              class OutputIteratorTrueType,
              class OutputIteratorFalseType,
@@ -31,7 +31,7 @@
                   OutputIteratorFalseType to_first_false,
                   PredicateType pred);
 
-   テンプレート <class ExecutionSpace,
+   template <class ExecutionSpace,
              class InputIteratorType,
              class OutputIteratorTrueType,
              class OutputIteratorFalseType,
@@ -45,23 +45,23 @@
                   OutputIteratorFalseType to_first_false,
                   PredicateType pred);
 
-   テンプレート <class ExecutionSpace,
+   template <class ExecutionSpace,
              class DataType1, class... Properties1,
              class DataType2, class... Properties2,
              class DataType3, class... Properties3,
              class PredicateType>
-   自動 partition_copy(const ExecutionSpace& exespace,                             (3)
+   auto partition_copy(const ExecutionSpace& exespace,                             (3)
                        const ::Kokkos::View<DataType1, Properties1...>& view_from,
                        const ::Kokkos::View<DataType2, Properties2...>& view_dest_true,
                        const ::Kokkos::View<DataType3, Properties3...>& view_dest_false,
                        PredicateType pred);
 
-   テンプレート <class ExecutionSpace,
+   template <class ExecutionSpace,
              class DataType1, class... Properties1,
              class DataType2, class... Properties2,
              class DataType3, class... Properties3,
              class PredicateType>
-   自動 partition_copy(const std::string& label,                                   (4)
+   auto partition_copy(const std::string& label,                                   (4)
                        const ExecutionSpace& exespace,
                        const ::Kokkos::View<DataType1, Properties1...>& view_from,
                        const ::Kokkos::View<DataType2, Properties2...>& view_dest_true,
@@ -75,7 +75,7 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class InputIteratorType,
+   template <class TeamHandleType, class InputIteratorType,
              class OutputIteratorTrueType, class OutputIteratorFalseType,
              class PredicateType>
    KOKKOS_FUNCTION
@@ -85,11 +85,11 @@
                OutputIteratorTrueType to_first_true,
                OutputIteratorFalseType to_first_false, PredicateType pred);
 
-   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
+   template <class TeamHandleType, class DataType1, class... Properties1,
        class DataType2, class... Properties2, class DataType3,
        class... Properties3, class PredicateType>
    KOKKOS_FUNCTION
-   自動 partition_copy(const TeamHandleType& teamHandle,                           (6)
+   auto partition_copy(const TeamHandleType& teamHandle,                           (6)
        const ::Kokkos::View<DataType1, Properties1...>& view_from,
        const ::Kokkos::View<DataType2, Properties2...>& view_dest_true,
        const ::Kokkos::View<DataType3, Properties3...>& view_dest_false,
@@ -160,12 +160,12 @@
 
   .. code-block:: cpp
 
-     構造体 述語
+     struct Predicate
      {
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const { return /* ... */; }
 
-       // or, also validまたは、また有効
+       // または、また有効
 
        KOKKOS_INLINE_FUNCTION
        bool operator()(value_type v) const { return /* ... */; }
