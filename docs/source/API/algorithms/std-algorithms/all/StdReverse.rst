@@ -19,18 +19,18 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class InputIterator>
+   template <class ExecutionSpace, class InputIterator>
    void reverse(const ExecutionSpace& ex, InputIterator first, InputIterator last);  (1)
 
-   テンプレート <class ExecutionSpace, class InputIterator>
+   template <class ExecutionSpace, class InputIterator>
    void reverse(const std::string& label, const ExecutionSpace& ex,                  (2)
                 InputIterator first, InputIterator last);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   template <class ExecutionSpace, class DataType, class... Properties>
    void reverse(const ExecutionSpace& ex,                                            (3)
                 const ::Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   template <class ExecutionSpace, class DataType, class... Properties>
    void reverse(const std::string& label, const ExecutionSpace& ex,                  (4)
                 const ::Kokkos::View<DataType, Properties...>& view);
 
@@ -41,12 +41,12 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class InputIterator>
+   template <class TeamHandleType, class InputIterator>
    KOKKOS_FUNCTION
    void reverse(const TeamHandleType& teamHandle, InputIterator first,               (5)
                 InputIterator last);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties>
+   template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
    void reverse(const TeamHandleType& teamHandle,                                    (6)
                 const ::Kokkos::View<DataType, Properties...>& view);
