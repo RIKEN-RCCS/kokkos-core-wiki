@@ -20,41 +20,41 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType>
+   template <class ExecutionSpace, class IteratorType>
    IteratorType adjacent_find(const ExecutionSpace& exespace,                              (1)
 		              IteratorType first, IteratorType last);
 
-   テンプレート <class ExecutionSpace, class IteratorType>
+   template <class ExecutionSpace, class IteratorType>
    IteratorType adjacent_find(const std::string& label, const ExecutionSpace& exespace,    (2)
 			      IteratorType first, IteratorType last);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
+   template <class ExecutionSpace, class DataType, class... Properties>
    auto adjacent_find(const ExecutionSpace& exespace,                                      (3)
 		      const ::Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties>
-   自動 adjacent_find(const std::string& label, const ExecutionSpace& exespace,            (4)
+   template <class ExecutionSpace, class DataType, class... Properties>
+   auto adjacent_find(const std::string& label, const ExecutionSpace& exespace,            (4)
 		      const ::Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
+   template <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
    IteratorType adjacent_find(const ExecutionSpace& exespace,                              (5)
 		              IteratorType first, IteratorType last,
 			      BinaryPredicateType pred);
 
-   テンプレート <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
+   template <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
    IteratorType adjacent_find(const std::string& label, const ExecutionSpace& exespace,    (6)
 			      IteratorType first, IteratorType last,
 			      BinaryPredicateType pred);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties,
+   template <class ExecutionSpace, class DataType, class... Properties,
 	     class BinaryPredicateType>
-   自動 adjacent_find(const ExecutionSpace& exespace,
+   auto adjacent_find(const ExecutionSpace& exespace,
 		      const ::Kokkos::View<DataType, Properties...>& view,                 (7)
 		      BinaryPredicateType pred);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties,
+   template <class ExecutionSpace, class DataType, class... Properties,
 	     class BinaryPredicateType>
-   自動 adjacent_find(const std::string& label, const ExecutionSpace& exespace,            (8)
+   auto adjacent_find(const std::string& label, const ExecutionSpace& exespace,            (8)
 		      const ::Kokkos::View<DataType, Properties...>& view,
 		      BinaryPredicateType pred);
 
@@ -70,21 +70,21 @@
    IteratorType adjacent_find(const TeamHandleType& teamHandle,                            (9)
 		              IteratorType first, IteratorType last);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties>
+   template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
    auto adjacent_find(const TeamHandleType& teamHandle,                                   (10)
 		      const ::Kokkos::View<DataType, Properties...>& view);
 
-   テンプレート <class TeamHandleType, class IteratorType, class BinaryPredicateType>
+   template <class TeamHandleType, class IteratorType, class BinaryPredicateType>
    KOKKOS_FUNCTION
    IteratorType adjacent_find(const TeamHandleType& teamHandle,                           (11)
 		              IteratorType first, IteratorType last,
 			      BinaryPredicateType pred);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties,
+   template <class TeamHandleType, class DataType, class... Properties,
 	     class BinaryPredicateType>
    KOKKOS_FUNCTION
-   自動 adjacent_find(const TeamHandleType& teamHandle,
+   auto adjacent_find(const TeamHandleType& teamHandle,
 		      const ::Kokkos::View<DataType, Properties...>& view,                (12)
 		      BinaryPredicateType pred);
 
@@ -125,10 +125,10 @@
 
   .. code-block:: cpp
 
-     構造体 Comparator{
+     struct Comparator{
        KOKKOS_INLINE_FUNCTION
-       ブール operator()(const value_type & a, const value_type & b) const {
-         返し / *a が b */　に等しいとみなされる場合に真* ;
+       bool operator()(const value_type & a, const value_type & b) const {
+         return / *a が b */　に等しいとみなされる場合に真* ;
        }
      };
 
