@@ -12,26 +12,26 @@ Rand
 .. code-block:: cpp
 
    template<class Generator>
-   構造体 rand<Generator, gen_data_type>
+   struct rand<Generator, gen_data_type>
    {
      KOKKOS_INLINE_FUNCTION
       gen_func_type max(){
-       返し type_value;
+       return type_value;
      }
 
      KOKKOS_INLINE_FUNCTION
-     静的 gen_func_type draw(Generator& gen){
-       返し gen_data_type((gen.rand()&gen_return_value)
+     static gen_func_type draw(Generator& gen){
+       return gen_data_type((gen.rand()&gen_return_value)
      }
 
      KOKKOS_INLINE_FUNCTION
-     静的 gen_func_type draw(Generator& gen,
+     static gen_func_type draw(Generator& gen,
                                const gen_data_type& range){
-       返し gen_data_type((gen.rand(range));
+       return gen_data_type((gen.rand(range));
      }
 
      KOKKOS_INLINE_FUNCTION
-     静的 gen_func_type draw(Generator& gen,
+     static gen_func_type draw(Generator& gen,
                                const gen_data_type& start,
 			       const gen_data_type& end){
         gen_data_type(gen.rand(start,end));
@@ -94,11 +94,11 @@ Kokkos_Randomは、擬似乱数ジェネレータに必要な構造を提供し�
 .. code-block:: cpp
 
     template<class DeviceType>
-    クラス  {
-      パブリック:
+    class  {
+      public:
 
-      device_type = DeviceType　を使用;
-      using generator_type = Generator<DeviceType>　を使用;
+      using device_type = DeviceType;
+      using generator_type = Generator<DeviceType>;
 
       Pool();
       Pool(uint64_t seed);
@@ -137,12 +137,12 @@ Kokkos_Randomは、擬似乱数ジェネレータに必要な構造を提供し�
 .. code-block:: cpp
 
     template<class Device>
-    クラス ジェネレータ {
-      パブリック:
+    class Generator {
+      public:
 
-      型定義 DeviceType device_type;
+      typedef DeviceType device_type;
 
-      //Max return values of respective [X]rand[S]() functions (XorShift).
+      //各 [X]rand[S]() 関数 (XorShift)　の最大戻し値
       enum {MAX_URAND = 0xffffffffU};
       enum {MAX_URAND64 = 0xffffffffffffffffULL-1};
       enum {MAX_RAND = static_cast<int>(0xffffffffU/2)};
