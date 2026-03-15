@@ -40,13 +40,13 @@
 デバイスが反復処理 n において、演算を実行している間、反復処理 n+1 に必要なホストデータのセットアップを実行します。
 
 ```c++
-型定義 ダブル value_type;
-型定義 Kokkos::OpenMP   HostExecSpace;
-型定義 Kokkos::Cuda     DeviceExecSpace;
-型定義 Kokkos::RangePolicy<DeviceExecSpace>  device_range_policy;
-型定義 Kokkos::RangePolicy<HostExecSpace>    host_range_policy;
-型定義 Kokkos::View<double*, Kokkos::CudaSpace>   ViewVectorType;
-型定義 Kokkos::View<double**, Kokkos::CudaSpace>  ViewMatrixType;
+typedef double value_type;
+typedef Kokkos::OpenMP   HostExecSpace;
+typedef Kokkos::Cuda     DeviceExecSpace;
+typedef Kokkos::RangePolicy<DeviceExecSpace>  device_range_policy;
+typedef Kokkos::RangePolicy<HostExecSpace>    host_range_policy;
+typedef Kokkos::View<double*, Kokkos::CudaSpace>   ViewVectorType;
+typedef Kokkos::View<double**, Kokkos::CudaSpace>  ViewMatrixType;
 
 // ホスト上のデータをセットアップ
 // 反復処理間の変動性の論証のため、パラメータ xVal を使用
@@ -124,14 +124,14 @@ for ( int repeat = 0; repeat < nrepeat; repeat++ ) {
 ## コード例
 
 ```c++
-型定義 Kokkos::RangePolicy<>    range_policy;
-型定義 Kokkos::View<double*>    ViewVectorType;
+typedef Kokkos::RangePolicy<>    range_policy;
+typedef Kokkos::View<double*>    ViewVectorType;
 
 ViewVectorType V_r;
 ViewVectorType V_r1;
 ViewVectorType::HostMirror h_V = Kokkos::create_mirror_view( y );
 
-get_initial_state(h_V); // function to initialize V on host
+get_initial_state(h_V); // ホスト上で V を初期化する関数
 
 Kokkos::deep_copy(V_r, h_V);
 Kokkos::deep_copy(V_r1, h_V)
@@ -146,7 +146,7 @@ for (int r = 0; r < R; r++) {
  
   Kokkos::fence();  // ホストおよびデバイス間を同期
  
-  Kokkos::deep_copy(h_V, V_r1);  // update for next iteration
+  Kokkos::deep_copy(h_V, V_r1);  // 次のイテレーションに更新
   Kokkos::deep_copy(V_r, h_V);
      
 }
