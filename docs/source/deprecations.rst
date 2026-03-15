@@ -32,10 +32,10 @@ Kokkos 4.6　において非推奨
 
 * Makefile サポート
    * 置換: CMake
-   * reducing maintenance burden for a little-used build system
+   * 使用頻度の低いビルドシステムの保守負担を軽減します
 
-* Direct access to ``d_view`` and ``h_view`` members in ``DualView``
-   * replacement: ``view_host()`` and ``view_device()``
+* ``DualView``　における ``d_view`` および ``h_view`` メンバーへ直接アクセス
+   * 置換: ``view_host()`` and ``view_device()``
    * enforcing invariants in ``DualView``, e.g., consistency between the two ``View`` instances referenced
 
 Deprecated in Kokkos 4.5
