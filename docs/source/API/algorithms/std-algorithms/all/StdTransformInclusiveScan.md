@@ -4,12 +4,12 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-名前空間 Kokkos{
-名前空間 Experimental{
+namespace Kokkos{
+namespace Experimental{
 
-テンプレート <
-  クラス ExecutionSpace, class InputIteratorType,
-  クラス OutputIteratorType, class BinaryOpType, class UnaryOpType>
+template <
+  class ExecutionSpace, class InputIteratorType,
+  class OutputIteratorType, class BinaryOpType, class UnaryOpType>
 OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,       (1)
                                             InputIteratorType first_from,
                                             InputIteratorType last_from,
@@ -17,9 +17,9 @@ OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,     
                                             BinaryOpType binary_op,
                                             UnaryOpType unary_op);
 
-テンプレート <
-  クラス ExecutionSpace, class InputIteratorType,
-  クラス OutputIteratorType, class BinaryOpType, class UnaryOpType>
+template <
+  class ExecutionSpace, class InputIteratorType,
+  class OutputIteratorType, class BinaryOpType, class UnaryOpType>
 OutputIteratorType transform_inclusive_scan(const std::string& label,             (2)
                                             const ExecutionSpace& exespace,
                                             InputIteratorType first_from,
@@ -28,33 +28,33 @@ OutputIteratorType transform_inclusive_scan(const std::string& label,           
                                             BinaryOpType binary_op,
                                             UnaryOpType unary_op);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス BinaryOpType, class UnaryOpType>
-自動 transform_inclusive_scan(const ExecutionSpace& exespace,                     (3)
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class BinaryOpType, class UnaryOpType>
+auto transform_inclusive_scan(const ExecutionSpace& exespace,                     (3)
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               BinaryOpType binary_op,
                               UnaryOpType unary_op);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
   class BinaryOpType, class UnaryOpType>
-自動 transform_inclusive_scan(const std::string& label,                           (4)
+auto transform_inclusive_scan(const std::string& label,                           (4)
                               const ExecutionSpace& exespace,
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               BinaryOpType binary_op,
                               UnaryOpType unary_op);
 
-テンプレート <
-  クラス ExecutionSpace, class InputIteratorType,
-  クラス OutputIteratorType, class BinaryOpType, class UnaryOpType,
-  クラス ValueType>
+template <
+  class ExecutionSpace, class InputIteratorType,
+  class OutputIteratorType, class BinaryOpType, class UnaryOpType,
+  class ValueType>
 OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,       (5)
                                             InputIteratorType first_from,
                                             InputIteratorType last_from,
@@ -63,10 +63,10 @@ OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,     
                                             UnaryOpType unary_op,
                                             ValueType init_value);
 
-テンプレート <
-  クラス ExecutionSpace, class InputIteratorType,
-  クラス OutputIteratorType, class BinaryOpType, class UnaryOpType,
-  クラス ValueType>
+template <
+  class ExecutionSpace, class InputIteratorType,
+  class OutputIteratorType, class BinaryOpType, class UnaryOpType,
+  class ValueType>
 OutputIteratorType transform_inclusive_scan(const std::string& label,             (6)
                                             const ExecutionSpace& exespace,
                                             InputIteratorType first_from,
@@ -76,23 +76,23 @@ OutputIteratorType transform_inclusive_scan(const std::string& label,           
                                             UnaryOpType unary_op,
                                             ValueType init_value);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス BinaryOpType, class UnaryOpType, class ValueType>
-自動 transform_inclusive_scan(const ExecutionSpace& exespace,                     (7)
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class BinaryOpType, class UnaryOpType, class ValueType>
+auto transform_inclusive_scan(const ExecutionSpace& exespace,                     (7)
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               BinaryOpType binary_op, UnaryOpType unary_op,
                               ValueType init_value);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス BinaryOpType, class UnaryOpType, class ValueType>
-自動 transform_inclusive_scan(const std::string& label,                           (8)
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class BinaryOpType, class UnaryOpType, class ValueType>
+auto transform_inclusive_scan(const std::string& label,                           (8)
                               const ExecutionSpace& exespace,
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
