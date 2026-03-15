@@ -20,23 +20,23 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class InputIterator, class PredicateType>
-   ブール is_partitioned(const ExecutionSpace& exespace,                              (1)
+   template <class ExecutionSpace, class InputIterator, class PredicateType>
+   bool is_partitioned(const ExecutionSpace& exespace,                              (1)
                        InputIterator first, InputIterator last,
                        PredicateType pred);
 
-   テンプレート <class ExecutionSpace, class InputIterator, class PredicateType>
-   ブール is_partitioned(const std::string& label, const ExecutionSpace& exespace,    (2)
+   template <class ExecutionSpace, class InputIterator, class PredicateType>
+   bool is_partitioned(const std::string& label, const ExecutionSpace& exespace,    (2)
                        InputIterator first, InputIterator last,
                        PredicateType pred);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-   自動 is_partitioned(const ExecutionSpace& exespace,
+   template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+   auto is_partitioned(const ExecutionSpace& exespace,
                        const ::Kokkos::View<DataType, Properties...>& view,         (3)
                        PredicateType pred);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-   自動 is_partitioned(const std::string& label, const ExecutionSpace& exespace,
+   template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+   auto is_partitioned(const std::string& label, const ExecutionSpace& exespace,
                        const ::Kokkos::View<DataType, Properties...>& view,         (4)
                        PredicateType pred);
 
@@ -48,15 +48,15 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType, class PredicateType>
+   template <class TeamHandleType, class IteratorType, class PredicateType>
    KOKKOS_FUNCTION
-   ブール is_partitioned(const TeamHandleType& teamHandle, IteratorType first,        (5)
+   bool is_partitioned(const TeamHandleType& teamHandle, IteratorType first,        (5)
                        IteratorType last, PredicateType pred);
 
-   テンプレート <class TeamHandleType, class PredicateType, class DataType,
+   template <class TeamHandleType, class PredicateType, class DataType,
              class... Properties>
    KOKKOS_FUNCTION
-   ブール is_partitioned(const TeamHandleType& teamHandle,                            (6)
+   bool is_partitioned(const TeamHandleType& teamHandle,                            (6)
                        const ::Kokkos::View<DataType, Properties...>& view,
                        PredicateType pred);
 
@@ -100,10 +100,10 @@
 
   .. code-block:: cpp
 
-     構造体 述語
+     struct Predicate
      {
        KOKKOS_INLINE_FUNCTION
-       ブール operator()(const value_type & v) const { return /* ... */; }
+       bool operator()(const value_type & v) const { return /* ... */; }
 
        // または、また有効
 
@@ -122,21 +122,21 @@
 
 .. code-block:: cpp
 
-   名前空間 KE = Kokkos::Experimental;
+   namespace KE = Kokkos::Experimental;
 
-   テンプル<class ValueType>
-   構造体 IsNegative
+   template<class ValueType>
+   struct IsNegative
    {
      KOKKOS_INLINE_FUNCTION
-     ブール operator()(const ValueType & operand) const {
+     bool operator()(const ValueType & operand) const {
        constexpr auto zero = static_cast<ValueType>(0);
-       返し (operand < zero);
+       return (operand < zero);
      }
    };
 
-   view_type = Kokkos::View<int*>　を使用;
+   using view_type = Kokkos::View<int*>;
    view_type a("a", 15);
    // 何らかの方法で　a を満たす
 
-   自動 exespace  = Kokkos::DefaultExecutionSpace;
-   const 自動 res = KE::is_partitioned(exespace, KE::cbegin(a), KE::cend(a), IsNegative<int>());
+   auto exespace  = Kokkos::DefaultExecutionSpace;
+   const auto res = KE::is_partitioned(exespace, KE::cbegin(a), KE::cend(a), IsNegative<int>());
