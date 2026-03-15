@@ -20,25 +20,25 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType2 move_backward(const ExecutionSpace& ex, IteratorType1 first,          (1)
                                IteratorType1 last, IteratorType2 d_last);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   自動 move_backward(const ExecutionSpace& ex,                                        (2)
+   auto move_backward(const ExecutionSpace& ex,                                        (2)
                       const ::Kokkos::View<DataType1, Properties1...>& source,
                       ::Kokkos::View<DataType2, Properties2...>& dest);
 
 
-   テンプレート <class ExecutionSpace, class IteratorType1, class IteratorType2>
+   template <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType2 move_backward(const std::string& label, const ExecutionSpace& ex,     (3)
                                IteratorType1 first, IteratorType1 last,
                                IteratorType2 d_last);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   自動 move_backward(const std::string& label, const ExecutionSpace& ex,              (4)
+   auto move_backward(const std::string& label, const ExecutionSpace& ex,              (4)
                       const ::Kokkos::View<DataType1, Properties1...>& source,
                       ::Kokkos::View<DataType2, Properties2...>& dest);
 
@@ -49,15 +49,15 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType1, class IteratorType2>
+   template <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
    IteratorType2 move_backward(const TeamHandleType& teamHandle, IteratorType1 first,  (5)
                                IteratorType1 last, IteratorType2 d_last);
 
-   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
+   template <class TeamHandleType, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   自動 move_backward(const TeamHandleType& teamHandle,                                (6)
+   auto move_backward(const TeamHandleType& teamHandle,                                (6)
                       const ::Kokkos::View<DataType1, Properties1...>& source,
                       ::Kokkos::View<DataType2, Properties2...>& dest);
 
