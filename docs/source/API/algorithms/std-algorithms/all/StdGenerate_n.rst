@@ -20,25 +20,25 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class IteratorType, class Size, class Generator>
+   template <class ExecutionSpace, class IteratorType, class Size, class Generator>
    IteratorType generate_n(const ExecutionSpace& exespace,                           (1)
                            IteratorType first, Size count,
                            Generator g);
 
-   テンプレート <class ExecutionSpace, class IteratorType, class Size, class Generator>
+   template <class ExecutionSpace, class IteratorType, class Size, class Generator>
    IteratorType generate_n(const std::string& label, const ExecutionSpace& exespace, (2)
                            IteratorType first, Size count,
                            Generator g);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class Size,
+   template <class ExecutionSpace, class DataType, class... Properties, class Size,
              class Generator>
-   自動 generate_n(const ExecutionSpace& exespace,                                   (3)
+   auto generate_n(const ExecutionSpace& exespace,                                   (3)
                    const ::Kokkos::View<DataType, Properties...>& view, Size count,
                    Generator g);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class Size,
+   template <class ExecutionSpace, class DataType, class... Properties, class Size,
              class Generator>
-   自動 generate_n(const std::string& label, const ExecutionSpace& ex,               (4)
+   auto generate_n(const std::string& label, const ExecutionSpace& ex,               (4)
                    const ::Kokkos::View<DataType, Properties...>& view, Size count,
                    Generator g);
 
@@ -49,16 +49,16 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType, class Size, class Generator>
+   template <class TeamHandleType, class IteratorType, class Size, class Generator>
    KOKKOS_FUNCTION
    IteratorType generate_n(const TeamHandleType& teamHandle,                         (5)
                            IteratorType first, Size count,
                            Generator g);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties, class Size,
+   template <class TeamHandleType, class DataType, class... Properties, class Size,
              class Generator>
    KOKKOS_FUNCTION
-   自動 generate_n(const TeamHandleType& teamHandle,                                 (6)
+   auto generate_n(const TeamHandleType& teamHandle,                                 (6)
                    const ::Kokkos::View<DataType, Properties...>& view, Size count,
                    Generator g);
 
@@ -102,7 +102,7 @@
 
   .. code-block:: cpp
 
-     構造体 生成
+     struct Generate
      {
         KOKKOS_INLINE_FUNCTION
         return_type operator()() const{ return /* ... */; }
