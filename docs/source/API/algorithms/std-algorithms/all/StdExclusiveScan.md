@@ -10,18 +10,18 @@
 //
 // オーバーロードセット A
 //
-テンプレート <
-  クラス ExecutionSpace, class InputIteratorType,
-  クラス OutputIteratorType, class ValueType>
+template <
+  class ExecutionSpace, class InputIteratorType,
+  class OutputIteratorType, class ValueType>
 OutputIteratorType exclusive_scan(const ExecutionSpace& exespace,                (1)
                                   InputIteratorType first,
                                   InputIteratorType last,
                                   OutputIteratorType first_dest,
                                   ValueType init_value);
 
-テンプレート <
-  クラス ExecutionSpace, class InputIteratorType,
-  クラス OutputIteratorType, class ValueType>
+template <
+  class ExecutionSpace, class InputIteratorType,
+  class OutputIteratorType, class ValueType>
 OutputIteratorType exclusive_scan(const std::string& label,                      (2)
                                   const ExecutionSpace& exespace,
                                   InputIteratorType first,
@@ -29,22 +29,22 @@ OutputIteratorType exclusive_scan(const std::string& label,                     
                                   OutputIteratorType first_dest,
                                   ValueType init_value);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス ValueType>
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class ValueType>
 auto exclusive_scan(const ExecutionSpace& exespace,                              (3)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     ValueType init_value);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス ValueType>
-自動 exclusive_scan(const std::string& label, const ExecutionSpace& exespace,    (4)
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class ValueType>
+auto exclusive_scan(const std::string& label, const ExecutionSpace& exespace,    (4)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     ValueType init_value);
@@ -52,9 +52,9 @@ auto exclusive_scan(const ExecutionSpace& exespace,                             
 //
 // オーバーロードセット B
 //
-テンプレート <
- クラス ExecutionSpace, class InputIteratorType,
- クラス OutputIteratorType, class ValueType, class BinaryOpType
+template <
+ class ExecutionSpace, class InputIteratorType,
+ class OutputIteratorType, class ValueType, class BinaryOpType
  >
 OutputIteratorType exclusive_scan(const ExecutionSpace& exespace,                (5)
                                   InputIteratorType first_from,
@@ -63,9 +63,9 @@ OutputIteratorType exclusive_scan(const ExecutionSpace& exespace,               
                                   ValueType init_value, BinaryOpType bin_op);
 
 
-テンプレート <
-  クラス ExecutionSpace, class InputIteratorType,
-  クラス OutputIteratorType, class ValueType, class BinaryOpType
+template <
+  class ExecutionSpace, class InputIteratorType,
+  class OutputIteratorType, class ValueType, class BinaryOpType
   >
 OutputIteratorType exclusive_scan(const std::string& label,                      (6)
                                   const ExecutionSpace& exespace,
@@ -74,20 +74,20 @@ OutputIteratorType exclusive_scan(const std::string& label,                     
                                   OutputIteratorType first_dest,
                                   ValueType init_value, BinaryOpType bin_op);
 
-テンプレート <
-  クラス ExecutionSpace, class DataType1, class... Properties1,
-  クラス DataType2, class... Properties2, class ValueType,
-  クラス BinaryOpType>
-自動 exclusive_scan(const ExecutionSpace& exespace,                              (7)
+template <
+  class ExecutionSpace, class DataType1, class... Properties1,
+  class DataType2, class... Properties2, class ValueType,
+  class BinaryOpType>
+auto exclusive_scan(const ExecutionSpace& exespace,                              (7)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     ValueType init_value, BinaryOpType bin_op);
 
-テンプレート <
-  クラス ExecutionSpace, class DataType1, class... Properties1,
-  クラス DataType2, class... Properties2, class ValueType,
-  クラス BinaryOpType>
-自動 exclusive_scan(const std::string& label, const ExecutionSpace& exespace,    (8)
+template <
+  class ExecutionSpace, class DataType1, class... Properties1,
+  class DataType2, class... Properties2, class ValueType,
+  class BinaryOpType>
+auto exclusive_scan(const std::string& label, const ExecutionSpace& exespace,    (8)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     ValueType init_value, BinaryOpType bin_op);
@@ -132,7 +132,7 @@ OutputIteratorType exclusive_scan(const std::string& label,                     
 
   - 以下に一致しなければなりません:
   ```c++
-  構造体 BinaryOp
+  struct BinaryOp
   {
      KOKKOS_INLINE_FUNCTION
      return_type operator()(const value_type & a,
