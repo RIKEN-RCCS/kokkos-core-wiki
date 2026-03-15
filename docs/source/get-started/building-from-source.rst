@@ -83,7 +83,7 @@ Gitリポジトリのクローニング (開発バージョン用)
 Kokkos　の設定と構築
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-本節では、Kokkosの設定とビルド方法について説明します。Kokkosソースコード（または　Kokkos　を組み込んだプロジェクト）のディレクトリにいることを前提としています。
+本節では、Kokkos の設定とビルド方法について説明します。Kokkos ソースコード（または　Kokkos　を組み込んだプロジェクト）のディレクトリにいることを前提としています。
 
 Kokkos　設定
 ------------------
@@ -105,11 +105,11 @@ Kokkos　の設定には以下のコマンドを使用します :
 
   例: ``-DCMAKE_CXX_COMPILER=/path/to/hipcc``
  
-* ``-DCMAKE_CXX_STANDARD=<standard>``: C++標準を設定します  。デフォルトは、``20``　です。
+* ``-DCMAKE_CXX_STANDARD=<standard>``: C++ 標準を設定します  。デフォルトは、``20``　です。
 
   例: ``-DCMAKE_CXX_STANDARD=23``
 
-* ``-DCMAKE_BUILD_TYPE=<type>``: 最適化レベルとデバッグ情報を制御します。一般的な選択肢は、 ``Debug``、 ``Release``、 ``RelWithDebInfo``(デフォルト)、 および　``MinSizeRel``　です。
+* ``-DCMAKE_BUILD_TYPE=<type>``: 最適化レベルとデバッグ情報を制御します。一般的な選択肢は、 ``Debug``、 ``Release``、 ``RelWithDebInfo`` (デフォルト)、 および　``MinSizeRel``　です。
 
   例: ``-DCMAKE_BUILD_TYPE=Release``
 
@@ -143,7 +143,7 @@ Kokkos　の設定には以下のコマンドを使用します :
  
  
 * ``-DKokkos_ARCH_<ARCHITECTURE>=ON``: コード生成のためのターゲットアーキテクチャを指定します。一部のバックエンドはアーキテクチャを自動検出できますが、明示的に指定するのが最適である場合が多いです。
-  完全なリストについては、 :ref:`keywords_arch` for a complete list　を参照してください。
+  完全なリストについては、 :ref:`keywords_arch` を参照してください。
   例えば:
 
   * ``AMD_GFX90A``: AMD MI210X (Frontier)
