@@ -19,30 +19,30 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class Iterator, class UnaryPredicate>
-   イテレータ remove_if(const ExecutionSpace& exespace,                           (1)
+   template <class ExecutionSpace, class Iterator, class UnaryPredicate>
+   Iterator remove_if(const ExecutionSpace& exespace,                           (1)
                       Iterator first, Iterator last,
                       UnaryPredicate pred);
 
-   テンプレート <class ExecutionSpace, class Iterator, class UnaryPredicate>
-   イテレータ remove_if(const std::string& label,                                 (2)
+   template <class ExecutionSpace, class Iterator, class UnaryPredicate>
+   Iterator remove_if(const std::string& label,                                 (2)
                       const ExecutionSpace& exespace,
                       Iterator first, Iterator last,
                       UnaryPredicate pred);
 
-   テンプレート <
-   　クラス ExecutionSpace,
-     クラス DataType, class... Properties,
-     クラス UnaryPredicate>
-   自動 remove_if(const ExecutionSpace& exespace,                               (3)
+   template <
+   　class ExecutionSpace,
+     class DataType, class... Properties,
+     class UnaryPredicate>
+   auto remove_if(const ExecutionSpace& exespace,                               (3)
                   const Kokkos::View<DataType, Properties...>& view,
                   UnaryPredicate pred);
 
-   テンプレート <
-     クラス ExecutionSpace,
-     クラス DataType, class... Properties,
-     クラス UnaryPredicate>
-   自動 remove_if(const std::string& label,                                     (4)
+   template <
+     class ExecutionSpace,
+     class DataType, class... Properties,
+     class UnaryPredicate>
+   auto remove_if(const std::string& label,                                     (4)
                   const ExecutionSpace& exespace,
                   const Kokkos::View<DataType, Properties...>& view,
                   UnaryPredicate pred);
@@ -54,18 +54,18 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class Iterator, class UnaryPredicate>
+   template <class TeamHandleType, class Iterator, class UnaryPredicate>
    KOKKOS_FUNCTION
-   イテレータ remove_if(const TeamHandleType& teamHandle,                         (5)
+   Iterator remove_if(const TeamHandleType& teamHandle,                         (5)
                       Iterator first, Iterator last,
                       UnaryPredicate pred);
 
-   テンプレート <
-     クラス TeamHandleType,
-     クラス DataType, class... Properties,
-     クラス UnaryPredicate>
+   template <
+     class TeamHandleType,
+     class DataType, class... Properties,
+     class UnaryPredicate>
    KOKKOS_FUNCTION
-   自動 remove_if(const TeamHandleType& teamHandle,                             (6)
+   auto remove_if(const TeamHandleType& teamHandle,                             (6)
                   const Kokkos::View<DataType, Properties...>& view,
                   UnaryPredicate pred);
 
@@ -95,15 +95,15 @@
 
   .. code-block:: cpp
 
-     構造体 述語
+     struct Predicate
      {
        KOKKOS_INLINE_FUNCTION
-       ブール operator()(const value_type & v) const { return /* ... */; }
+       bool operator()(const value_type & v) const { return /* ... */; }
 
        // または、また有効
 
        KOKKOS_INLINE_FUNCTION
-       ブール operator()(value_type v) const { return /* ... */; }
+       bool operator()(value_type v) const { return /* ... */; }
      };
 
 戻り値
