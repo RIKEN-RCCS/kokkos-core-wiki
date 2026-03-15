@@ -9,237 +9,235 @@ Kokkos 4.7　において非推奨
 
 * ``KOKKOS_MEMORY_ALIGNMENT[_THRESHOLD]``
    * 置換: 無し
-   * 非内部利用を意図したものではありません。
+   * Not intended for non-internal use.
 
 * ``Kokkos::MemoryManaged``
-   * 置換: 無し
-   * デフォルトのメモリ特性と重複し、不要であり、MemoryManaged　で管理対象外ビューを要求する際の混乱を招くので、不要です。
+   * replacement: none
+   * Unneeded due to redundancy with default memory trait and confusing use when requesting unmanaged views with MemoryManaged
 
 * ``KOKKOS_NONTEMPORAL_PREFETCH_{LOAD,STORE}``
-   * 置換: 無し
-   * 非内部利用を意図したものではありません。
+   * replacement: none
+   * Not intended for non-internal use.
 
-Kokkos 4.6　において非推奨
+Deprecated in Kokkos 4.6
 ---------------------------
 
-* ``StaticCrsGraph`` は、 Kokkos Kernels　に移動しました。
+* ``StaticCrsGraph`` moved to Kokkos Kernels
    * ``KokkosSparse::StaticCrsGraph``
-   * ``KokkosKernels``　が提供した機能性により整合しています。
+   * aligns better with functionality provided by ``KokkosKernels``.
 
-* ``native_simd`` および ``native_simd_mask`` 型
-   * 置換: ``simd`` and ``simd_mask``
-   * C++ 標準との整合性。
+* ``native_simd`` and ``native_simd_mask`` types
+   * replacement: ``simd`` and ``simd_mask``
+   * alignment with the C++ standard
 
-* Makefile サポート
-   * 置換: CMake
-   * 使用頻度の低いビルドシステムの保守負担を軽減します。
+* Makefile support
+   * replacement: CMake
+   * reducing maintenance burden for a little-used build system
 
-*  ``DualView``　における ``d_view`` および ``h_view`` メンバーへ直接アクセス
-   * 置換: ``view_host()`` および ``view_device()``
-   * DualView　において不変条件を実行すること、例えば、参照される2つのビューインスタンス間の一貫性です。
+* Direct access to ``d_view`` and ``h_view`` members in ``DualView``
+   * replacement: ``view_host()`` and ``view_device()``
+   * enforcing invariants in ``DualView``, e.g., consistency between the two ``View`` instances referenced
 
- Kokkos 4.5　において非推奨
+Deprecated in Kokkos 4.5
 ---------------------------
 
-* タスク割り当てインターフェイス: ``BasicFuture``, ``TaskSingle``, ``TaskPriority``, ``task_spawn``, ``host_spawn``, ``respawn``, ``when_all``, ``wait``
-   * 置換: 無し
-   * 使用されていません、限定的に実装
+* Tasking interface: ``BasicFuture``, ``TaskSingle``, ``TaskPriority``, ``task_spawn``, ``host_spawn``, ``respawn``, ``when_all``, ``wait``
+   * replacement: none
+   * unused, limited implementation
 
 * ``HPX::HPX::is_asynchronous(HPX const & = HPX())``
-   * 置換: 無し
-   * 使用されていません、実行空間の適合性
+   * replacement: none
+   * unused, conformity of execution spaces
 
 * ``OpenMP::is_asynchronous(OpenMP const& = OpenMP())``
-   * replacement: 無し
-   * 使用されていません、実行空間の適合性
+   * replacement: none
+   * unused, conformity of execution spaces
 
 * ``atomic_query_version``
-   * 置換: 無し
-   * 既知の使用例がありません
+   * replacement: none
+   * no known use case
 
 * :cpp:func:`atomic_assign`
-   * 置換: :cpp:func:`atomic_store`
-   * 重複した機能
+   * replacement: :cpp:func:`atomic_store`
+   * duplicated functionality
 
 * :cpp:func:`atomic_increment`
-   * 置換: :cpp:func:`atomic_inc`
-   * 重複した機能
+   * replacement: :cpp:func:`atomic_inc`
+   * duplicated functionality
 
 * :cpp:func:`atomic_decrement`
-   * 置換: :cpp:func:`atomic_dec`
-   * 重複した機能
+   * replacement: :cpp:func:`atomic_dec`
+   * duplicated functionality
 
 * :cpp:func:`atomic_compare_exchange_strong`
-   * 置換: :cpp:func:`atomic_compare_exchange`
-   * 重複した機能
+   * replacement: :cpp:func:`atomic_compare_exchange`
+   * duplicated functionality
 
- Kokkos 4.4　において非推奨
+Deprecated in Kokkos 4.4
 ---------------------------
 
 * ``is_layouttiled``
-   * 置換: 無し
-   * 使用されていません
+   * replacement: none
+   * unused
 
 * ``layout_iterate_type_selector``
-   * 置換: 無し
-   * 内部でのみ有用です
+   * replacement: none
+   * only useful internally
 
 * ``Array<T, N, Proxy>``
-   * 置換: 無し
-   *  std::array　との整合性
+   * replacement: none
+   * alignment with std::array
 
 * ``HPX::HPX(instance_mode mode)``
-   * 置換: ``explicit HPX(instance_mode mode)``
-   * 実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
-
+   * replacement: ``explicit HPX(instance_mode mode)``
+   * execution space instance constructors should be ``explicit``
 
 * ``HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)``
-   * 置換: ``explicit HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)``
-   * 実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
+   * replacement: ``explicit HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)``
+   * execution space instance constructors should be ``explicit``
 
 * ``OpenMP::OpenMP(int pool_size)``
-   * 置換: ``explicit OpenMP::OpenMP(int pool_size)``
-   * 実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
+   * replacement: ``explicit OpenMP::OpenMP(int pool_size)``
+   * execution space instance constructors should be ``explicit``
 
 * ``Serial::Serial(NewInstance)``
-   * 置換: ``explicit Serial::Serial(NewInstance)``
-   * ``実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
+   * replacement: ``explicit Serial::Serial(NewInstance)``
+   * execution space instance constructors should be ``explicit``
 
 * ``ChunkSize::ChunkSize(int value)``
-   * 置換: ``explicit ChunkSize::ChunkSize(int value)``
-   * ``ChunkSize`` は、明示的に構築されるべきです
+   * replacement: ``explicit ChunkSize::ChunkSize(int value)``
+   * ``ChunkSize`` should be constructed explicitly
 
 * ``pair<T, void>``
-   * 置換: 無し
-   * 仕様は文書化されておらず、標準ライブラリに準拠しておらず、テストもされておらず、既知の使用例もありません
+   * replacement: none
+   * the specialization is not documented, does not follow the standard library, it is not tested and has no known usage
 
 
- Kokkos 4.3　において非推奨
+Deprecated in Kokkos 4.3
 ---------------------------
 
 * ``Experimental::swap``
-   * 置換: ``kokkos_swap``
-   * ADLにより曖昧さを回避
+   * replacement: ``kokkos_swap``
+   * avoiding ambiguities due to ADL
 
 * ``ExecutionSpace::in_parallel``
-   * 置換: ``KOKKOS_IF_ON_HOST``/``KOKKOS_IF_ON_DEVICE``は、部分的に同様の行動を提供します
-   * 一貫性を欠いた実装、限定的な利用
+   * replacement: ``KOKKOS_IF_ON_HOST``/``KOKKOS_IF_ON_DEVICE`` partly provide similar behavior
+   * inconsistent implementation, limited use
 
 * ``Cuda::device_arch()``
-   * 置換: 無し
-   * 実行空間間での均一性
+   * replacement: none
+   * uniformity between execution spaces
 
 * ``Cuda::detect_device_count()``
-   * 置換: num_devices()
-   * 実行空間間での均一性
+   * replacement: num_devices()
+   * uniformity between execution spaces
 
 * ``Cuda::detect_device_arch()``
-   * 置換: 無し
-   * 実行空間間での均一性
+   * replacement: none
+   * uniformity between execution spaces
 
 * ``HIP::HIP::detect_device_count()``
-   * 置換: ``num_devices()``
-   * 実行空間間での均一性
+   * replacement: ``num_devices()``
+   * uniformity between execution spaces
 
 * ``RangePolicy::set(ChunkSize chunksize)``
-   * 置換: ``RangePolicy::set_chunk_size(int chunk_size)``
-   * ``ChunkSize`` が  ``RangePolicy::set()`` で使用可能な唯一の追加パラメータでした。
+   * replacement: ``RangePolicy::set_chunk_size(int chunk_size)``
+   * ``ChunkSize`` was the only extra parameter usable with ``RangePolicy::set()``
 
 * ``InitializationSettings::set_num_devices``, ``InitializationSettings::has_num_devices``, ``InitializationSettings::get_num_devices``
-   * 置換: ``num_devices``
-   *  `InitializationSettings` の変更により、これらは不要となりました。
+   * replacement: ``num_devices``
+   * changes in `InitializationSettings` made these superfluous
 
 * ``InitializationSettings::set_skip_devices``, ``InitializationSettings::has_skip_devices``, ``InitializationSettings::get_skip_devices``
-   * 置換: ``KOKKOS_VISIBLE_DEVICES``
-   *  `InitializationSettings` の変更により、これらは不要となりました。
+   * replacement: ``KOKKOS_VISIBLE_DEVICES``
+   * changes in `InitializationSettings` made these superfluous
 
 
- Kokkos 4.2　において非推奨
+Deprecated in Kokkos 4.2
 ---------------------------
 
 * ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
-   * 置換: ``Cuda::Cuda(cudaStream_t stream)``
-   *  Cuda 実行空間インスタンスの構築には、常に外部管理の ``cudaStream``　オブジェクトを使用すべきです。
+   * replacement: ``Cuda::Cuda(cudaStream_t stream)``
+   * constructing a Cuda execution space instance should always use an externally managed ``cudaStream`` object
 
 * ``HIP::HIP(hipStream_t stream, bool manage_stream)``
-    * 置換 ``HIP::HIP(hipStream_t stream)``
-    *  HIP 実行空間インスタンスの構築には、常に外部管理の ``hipStream`` オブジェクトを使用すべきです。execution space 
+    * replacement ``HIP::HIP(hipStream_t stream)``
+    * constructing a HIP execution space instance should always use an externally managed ``hipStream`` object
 
 * ``vector``
-    * 置換: 無し
-    * 非標準的な動作であり、Kokkosの概念とは相性が良くありません。
+    * replacement: none
+    * non-standard behavior, doesn't work well with Kokkos concepts
 
 * ``HostSpace::HostSpace(AllocationMechanism)``
-    * 置換: ``HostSpace::HostSpace()``
-    * ``AllocationMechanism`` は使用されず、 整合性を伴う　``operator new`` は、無条件で使用されています。
+    * replacement: ``HostSpace::HostSpace()``
+    * ``AllocationMechanism`` is unused, ``operator new`` with alignment is used unconditionally
 
-*  ``Kokkos::Experimental`` 名前空間の中の　SIMD 算術関数
-    * 置換: SIMD math function in the ``Kokkos`` namespace
-    *  ADLの問題、他の数学関数オーバーロードとの一貫性
+* SIMD math functions in the ``Kokkos::Experimental`` namespace
+    * replacement: SIMD math function in the ``Kokkos`` namespace
+    * issues with ADL, consistency with other math function overloads
 
 
- Kokkos 4.1　において非推奨
+Deprecated in Kokkos 4.1
 ---------------------------
 
-*  ``BinSort``, ``BinOp1D``, and ``BinOp3D``　のためのデフォルトコンストラクタ
-   * 置換: 無し
-   * デフォルトコンストラクタは、無効であり、利用不可能なオブジェクトを作成しました。
+* Default constructor for ``BinSort``, ``BinOp1D``, and ``BinOp3D``
+   * replacement: none
+   * the default constructors created invalid, unusable objects
 
 * ``View::Rank``
-   * 置換: ``View::rank()``
-   *  ``View::rank()``　のため、文書化されておらず、冗長です
+   * replacement: ``View::rank()``
+   * undocumented, redundant due to existence of ``View::rank()``
 
 * ``View::subview<MemoryTraits>(...)``
-   * 置換: ``View::subview(...)``
-   * 有用ではなく、使用されていません
+   * replacement: ``View::subview(...)``
+   * not useful, unused
 
 
- Kokkos 4.0　において非推奨
+Deprecated in Kokkos 4.0
 ---------------------------
 
 * ``CudaUVMSpace::available()``
-   * 置換: ``SharedSpace``
-   * 移植不可能であり、常に　``真``　を返す
+   * replacement: ``SharedSpace``
+   * not portable, would always return ``true``
 
-* ``Complex`` ``volatile`` オーバーロード
-   * 置換: 無し
-   *  ``volatile`` オーバーロードを使用する必要はありません
+* ``Complex`` ``volatile`` overloads
+   * replacement: none
+   * no need for using ``volatile`` overloads
 
-* ``pair`` ``volatile`` オーバーロード
-   * 置換: 無し
-   *  ``volatile`` オーバーロードを使用する必要はありません
+* ``pair`` ``volatile`` overloads
+   * replacement: none
+   * no need for using ``volatile`` overloads
 
 * ``ScratchMemorySpace::align(const IntType& size)``
-   * 置換: 無し
-   * 使用されておらず、有用ではありません
+   * replacement: none
+   * unused, not useful
 
 
- Kokkos-3.x　において非推奨
+Deprecated in Kokkos-3.x
 ===========================
 
 
 
-Kokkos-3.7　において非推奨である型エイリアス
-
+Type aliases deprecated in Kokkos-3.7
 -------------------------------------
 ``ActiveExecutionMemorySpace``, ``host_execution_space``, ``host_memory_space``, ``host_mirror_space``, ``is_array_layout``, ``is_execution_policy``, ``is_execution_space``, ``is_memory_space``, ``is_memory_traits``, ``is_space``, ``Iterate``, ``MDRangePolicy``, ``Rank``, ``SpaceAccessibility``
 
 
- Kokkos-3.7　において非推奨であるマクロ
+Macros deprecated in Kokkos-3.7
 -------------------------------
 
 ``KOKKOS_RESTRICT_EXECUTION_TO_(DATA_SPACE)``, ``HIP_SAFE_CALL(call)``
 
 
- Kokkos-3.7　において非推奨である自由関数
+Free-functions deprecated in Kokkos-3.7
 ---------------------------------------
 
-.. リスト表::
-   :幅: 30 70
-   :ヘッダー列: 1
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
 
-   * - 名前
-     - 場所
+   * - Name
+     - Where
 
    * - .. code-block:: cpp
 
@@ -280,18 +278,18 @@ Kokkos-3.7　において非推奨である型エイリアス
      - ``namespace Kokkos::Impl`` (Kokkos_HIP_Error.hpp)
 
 
-Member functions deprecated in Kokkos-3.7　において非推奨
+Member functions deprecated in Kokkos-3.7
 ------------------------------------------
 
-.. リスト表::
-   :幅: 70 30
-   :ヘッダー列: 1
+.. list-table::
+   :widths: 70 30
+   :header-rows: 1
 
-   * - メソッド名
-     - クラス
+   * - Method name
+     - Class
 
    * - ``static void OpenMP::partition_master()``
-     - ``クラス OpenMP`` (Kokkos_OpenMP.hpp)
+     - ``class OpenMP`` (Kokkos_OpenMP.hpp)
 
    * - ``static void OpenMPInternal::validate_partition()``
      - ``class OpenMPInternal`` (Kokkos_OpenMP_Instance.hpp)
@@ -321,12 +319,12 @@ Member functions deprecated in Kokkos-3.7　において非推奨
      - ``class HPX`` (Kokkos_HPX.hpp)
 
 
- Kokkos-3.7　において非推奨であるクラス
+Classes deprecated in Kokkos-3.7
 --------------------------------
 
-.. リスト表::
-   :幅: 自動
-   :ヘッダー列: 1
+.. list-table::
+   :widths: auto
+   :header-rows: 1
 
    * -
 
@@ -335,15 +333,15 @@ Member functions deprecated in Kokkos-3.7　において非推奨
    * - ``class KOKKOS_ATTRIBUTE_NODISCARD ScopeGuard``
 
 
-名前空間アップデート
+Namespace updates
 ----------------------
 
-.. リスト表::
-   :幅: 40 60
-   :ヘッダー列: 1
+.. list-table::
+   :widths: 40 60
+   :header-rows: 1
 
-   * - 以前
-     - 現在使用すべきもの
+   * - Previous
+     - You should now use
 
    * - ``Kokkos::Experimental::aMathFunction``
      - ``Kokkos::aMathFunction``
@@ -361,49 +359,49 @@ Member functions deprecated in Kokkos-3.7　において非推奨
      - ``Kokkos::minmax``
 
 
-他の非推奨
+Other deprecations
 ------------------
 
-.. リスト表::
-   :幅: 自動
-   :ヘッダー列: 1
+.. list-table::
+   :widths: auto
+   :header-rows: 1
 
-   * - 以前
-     - 置換対象
+   * - Previous
+     - Replaced with
 
    * - ``Kokkos::is_reducer_type``
      - ``Kokkos::is_reducer``
 
-   * - 生ポインタを使った配列還元
-     - 戻し引数として ``Kokkos::View`` を使用します
+   * - Array reductions with raw pointer
+     - Use ``Kokkos::View`` as return argument
 
-   * -  ``index_list_type``　を選択する　``OffsetView`` コンストラクタ
-     - ``Kokkos::pair`` (CPU および GPU)
+   * - ``OffsetView`` constructors taking ``index_list_type``
+     - ``Kokkos::pair`` (CPU and GPU)
 
-   * - パラメータ ``bool always_use_kokkos_sort``を選択する ``Kokkos::sort`` のオーバーロード
-     - 必要であれば、 ``Kokkos::BinSort`` を使用するか、または、ブール値パラメータを伴わない ``Kokkos::sort`` を呼びます
+   * - Overloads of ``Kokkos::sort`` taking a parameter ``bool always_use_kokkos_sort``
+     - Use ``Kokkos::BinSort`` if required, or call ``Kokkos::sort`` without bool parameter
 
-   * - 空ではない WorkTag が使用される場合には、非推奨警告を発します
-     - 空の WorkTag クラスを使用します
+   * - Raise deprecation warnings if non-empty WorkTag class is used
+     - Use empty WorkTag class
 
-   * - ``InitArguments`` 構造体
-     - 問い合わせ可能な属性を持つ　``InitializationSettings()`` クラスオブジェクト 
+   * - ``InitArguments`` struct
+     - ``InitializationSettings()`` class object with query-able attributes
 
    * - ``finalize_all()``
      - ``finalize()``
 
-   * -  ``volatile`` キーワードにより修飾された引数を伴う ``join()`` を呼び出す ``parallel_reduce``　事例について、警告します
-     -  ``volatile`` オーバーロードを削除します
+   * - Warn about ``parallel_reduce`` cases that call ``join()`` with arguments qualified by ``volatile`` keyword
+     - Remove ``volatile`` overloads
 
 
-   * - 第一引数として、 ``WithOutInitializing`` を選択する　``create_mirror_view`` 
+   * - ``create_mirror_view`` taking ``WithOutInitializing`` as first argument
      - ``create_mirror_view(Kokkos::Impl::WithoutInitializing_t wi, Kokkos::View<T, P...> const& v)``
 
-   * - ``#define KOKKOS_THREAD_LOCAL`` マクロ
+   * - ``#define KOKKOS_THREAD_LOCAL`` macro
      - ``thread_local``
 
    * - ``class MasterLock``
-     - クラスを削除します
+     - Remove class
 
    * - ``Kokkos::Impl::is_view``
      - ``Kokkos::is_view``
@@ -411,23 +409,25 @@ Member functions deprecated in Kokkos-3.7　において非推奨
    * - ``inline void cuda_internal_safe_call_deprecated()``
      - ``#define CUDA_SAFE_CALL(call)``
 
-   * - 後続引数として、ラベルを選択する ``parallel_*`` オーバーロード
-     - ``Kokkos::parallel_*("KokkosViewLabel", ポリシー, f);``
+   * - ``parallel_*`` overloads taking the label as trailing argument
+     - ``Kokkos::parallel_*("KokkosViewLabel", policy, f);``
 
 
- Kokkos-3.7　におけるパブリックヘッダー
+Public Headers in Kokkos-3.7
 ----------------------------
 
- Kokkos-3.7　より、 以下の項目が、 *パブリック* ヘッダーです:
+From Kokkos-3.7, the following are *public* headers:
 
-コア
+Core
 ~~~~~~~~~~~~
 ``Kokkos_Core.hpp``, ``Kokkos_Macros.hpp``, ``Kokkos_Atomic.hpp``, ``Kokkos_DetectionIdiom.hpp``, ``Kokkos_MathematicalConstants.hpp``, ``Kokkos_MathematicalFunctions.hpp``, ``Kokkos_NumericTraits.hpp``, ``Kokkos_Array.hpp``, ``Kokkos_Complex.hpp``, ``Kokkos_Pair.hpp``, ``Kokkos_Half.hpp``, ``Kokkos_Timer.hpp``
 
-アルゴリズム
+Algorithms
 ~~~~~~~~~~~~~~~~~~
 ``Kokkos_StdAlgorithms.hpp``, ``Kokkos_Random.hpp``, ``Kokkos_Sort.hpp``
 
-コンテナ
+Containers
 ~~~~~~~~~~~~~~~~~~
 ``Kokkos_Bit.hpp``, ``Kokkos_DualView.hpp``, ``Kokkos_DynRankView.hpp``, ``Kokkos_ErrorReporter.hpp``, ``Kokkos_Functional.hpp``, ``Kokkos_OffsetView.hpp``, ``Kokkos_ScatterView.hpp``, ``Kokkos_StaticCrsGraph.hpp``, ``Kokkos_UnorderedMap.hpp``, ``Kokkos_Vector.hpp``
+
+os_UnorderedMap.hpp``, ``Kokkos_Vector.hpp``
