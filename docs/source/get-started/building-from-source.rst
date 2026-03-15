@@ -123,7 +123,7 @@ Kokkos　の設定には以下のコマンドを使用します :
 
 
 * ``-DKokkos_ENABLE_<BACKEND>=ON``: 現在オープンソース化されている実験的バックエンド等、ターゲットデバイス向けの特定のバックエンドを有効にします。
-* ``-DKokkos_ENABLE_<BACKEND>=ON``: 
+
    完全なリストについては :ref:'keywords_backends' を参照してください。
 
   一般的なバックエンド:
