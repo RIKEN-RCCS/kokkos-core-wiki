@@ -4,25 +4,25 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-名前空間 Kokkos{
-名前空間 Experimental{
+namespace Kokkos{
+namespace Experimental{
 
-テンプレート <class ExecutionSpace, class IteratorType, class SizeType, class T>
+template <class ExecutionSpace, class IteratorType, class SizeType, class T>
 IteratorType fill_n(const ExecutionSpace& exespace,                             (1)
                     IteratorType first,
                     SizeType n, const T& value);
 
-テンプレート <class ExecutionSpace, class IteratorType, class SizeType, class T>
+template <class ExecutionSpace, class IteratorType, class SizeType, class T>
 IteratorType fill_n(const std::string& label, const ExecutionSpace& exespace,   (2)
                     IteratorType first,
                     SizeType n, const T& value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class SizeType, class T>
+template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class T>
 auto fill_n(const ExecutionSpace& exespace,                                     (3)
             const Kokkos::View<DataType, Properties...>& view,
             SizeType n, const T& value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class SizeType, class T>
+template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class T>
 auto fill_n(const std::string& label, const ExecutionSpace& exespace,           (4)
             const Kokkos::View<DataType, Properties...>& view,
             SizeType n, const T& value);
@@ -33,7 +33,7 @@ auto fill_n(const std::string& label, const ExecutionSpace& exespace,           
 
 # ディスクリプション
 
- `first` 　で始まる範囲内の最初の　`n`　個の要素　(オーバーロード 1,2)　または
+ `first` で始まる範囲内の最初の　`n`　個の要素　(オーバーロード 1,2)　または
 `view` 内の最初の　`n`　個の要素　(オーバーロード 3,4)　に　`値` をコピー割り当てします。
 
 ## パラメータおよび要件
