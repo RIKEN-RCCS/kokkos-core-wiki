@@ -6,7 +6,7 @@
 
 ## プログラミング構成
 本例では、[FLCL](https://github.com/kokkos/kokkos-fortran-interop) に含まれる Kokkos Fortran 相互運用ユーティリティを使用しています。
-これには、Fortranで割り当てられた配列を　ndarray　に変換するための一連の　Fortran　ルーチンと、ndarray　を　Kokkos　の管理対象外ビューに変換するための一連の　C++　関数が含まれます。
+これには、Fortranで割り当てられた配列を、ndarray に変換するための一連の　Fortran　ルーチンと、ndarray を　Kokkos の管理対象外ビューに変換するための一連の　C++　関数が含まれます。
 
 ndarray　型（flcl_ndarray_t）は、ランク、次元、ストライド（dopeベクトルに相当）および平坦化されたデータを保持するシンプルな構造体です。これは　[flcl-cxx.hpp](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-cxx.hpp)　で定義および実装されています。
 
@@ -29,35 +29,35 @@ typedef struct _flcl_nd_array_t {
 エンド型 nd_array_t
 ```
 
-Fortran　で割り当てられた配列を　ndarray　に変換するには、[flcl-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-f.f90)　で定義されている一連の手続き（インターフェースの背後で動作します）を使用します。
+Fortran で割り当てられた配列を　ndarray　に変換するには、[flcl-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-f.f90)　で定義されている一連の手続き（インターフェースの背後で動作します）を使用します。
 
 ```fortran
-インターフェイス to_nd_array
+interface to_nd_array
     ! 1D スペシャリゼーション
-　　モジュールプロシージャ　to_nd_array_l_1d
-    モジュールプロシージャ　to_nd_array_i32_1d
-    モジュールプロシージャ　to_nd_array_i64_1d
-    モジュールプロシージャ　to_nd_array_r32_1d
-    モジュールプロシージャ　to_nd_array_r64_1d
+     module procedure to_nd_array_l_1d
+     module procedure to_nd_array_i32_1d
+     module procedure to_nd_array_i64_1d
+     module procedure to_nd_array_r32_1d
+     module procedure to_nd_array_r64_1d
     
     ! 2D スペシャリゼーション
-    モジュールプロシージャ to_nd_array_l_2d
-    モジュールプロシージャ to_nd_array_i32_2d
-    モジュールプロシージャ to_nd_array_i64_2d
-    モジュールプロシージャ to_nd_array_r32_2d
-    モジュールプロシージャ to_nd_array_r64_2d
+    module procedure to_nd_array_l_2d
+    module procedure to_nd_array_i32_2d
+    module procedure to_nd_array_i64_2d
+    module procedure to_nd_array_r32_2d
+    module procedure to_nd_array_r64_2d
 
     ! 3D スペシャリゼーション
-    モジュールプロシージャ　to_nd_array_l_3d
-    モジュールプロシージャ　to_nd_array_i32_3d
-    モジュールプロシージャ　to_nd_array_i64_3d
-    モジュールプロシージャ　to_nd_array_r32_3d
-    モジュールプロシージャ　to_nd_array_r64_3d
+    module procedure to_nd_array_l_3d
+    module procedure to_nd_array_i32_3d
+    module procedure to_nd_array_i64_3d
+    module procedure to_nd_array_r32_3d
+    module procedure to_nd_array_r64_3d
 ```
 
 ndarray　を　Kokkos::View　に変換するには、[flcl-cxx.hpp](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-cxx.hpp)　に定義されている　view_from_ndarray　を使用します。
 ``` c++ 
-テンプレート <typename DataType>
+template <typename DataType>
   Kokkos::View<DataType, Kokkos::LayoutStride, Kokkos::HostSpace, Kokkos::MemoryUnmanaged>
   view_from_ndarray(flcl_ndarray_t const &ndarray) 
 ```
@@ -84,45 +84,45 @@ ii = 1, mm　を実行
 end do
 ``` 
 
-Kokkos　における　DAXPY　の実行は、axpyの呼び出しから始まります: 
+Kokkos　における　DAXPY　の実行は、axpy の呼び出しから始まります: 
 ``` fortran 
 axpy(c_y, x, alpha) を呼び出し
 ``` 
 
 これは　[axpy-ndarray-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy-ndarray/axpy-ndarray-f.f90)　で定義されています。
 ``` fortran 
-サブルーチン axpy( y, x, alpha )
-   使用、 intrinsic :: iso_c_binding
+subroutine axpy( y, x, alpha )
+   use, intrinsic :: iso_c_binding
    use :: flcl_mod
-   暗黙型宣言無効化
+   implicit none
    real(c_double), dimension(:), intent(inout) :: y
    real(c_double), dimension(:), intent(in) :: x
    real(c_double), intent(in) :: alpha
 
-   f_axpy(to_nd_array(y), to_nd_array(x), alpha)　呼び出し
-エンドサブルーチン axpy
+   call f_axpy(to_nd_array(y), to_nd_array(x), alpha)
+end subroutine axpy
 ```
 サブルーチン f_axpy を呼び出しますが、その前に Fortran の配列を nd_array に変換します。
 f_axpy は先に定義されており、f_axpy が C ルーチン 'c_axpy' にバインドされている点に注意してください。
 
 ``` fortran
 インターフェイス
-    サブルーチン　f_axpy( nd_array_y, nd_array_x, alpha ) &
+    subroutine f_axpy( nd_array_y, nd_array_x, alpha ) &
         & bind(c, name='c_axpy')
-        使用, intrinsic :: iso_c_binding
+        use, intrinsic :: iso_c_binding
         :: flcl_mod　を使用
         type(nd_array_t) :: nd_array_y
         type(nd_array_t) :: nd_array_x
         real(c_double) :: alpha
-    エンドサブルーチン f_axpy
-エンドインターフェイス
+    end subroutine f_axpy
+end interface
 ```
 
 c_axpy は、計算に Kokkos を利用している箇所であり、[axpy-ndarray-cxx.cc](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy-ndarray/axpy-ndarray-cxx.cc) に定義されています。
 
 ```c++ 
 void c_axpy( flcl_ndarray_t *nd_array_y, flcl_ndarray_t *nd_array_x, double *alpha ) {
-  flcl::view_from_ndarray　を使用;
+  using flcl::view_from_ndarray;
 
   auto y = view_from_ndarray<double*>(*nd_array_y);
   auto x = view_from_ndarray<double*>(*nd_array_x);
@@ -132,7 +132,7 @@ void c_axpy( flcl_ndarray_t *nd_array_y, flcl_ndarray_t *nd_array_x, double *alp
     y(idx) += *alpha * x(idx);
   });
 
-  戻し;
+  return;
 }
 ```
 
