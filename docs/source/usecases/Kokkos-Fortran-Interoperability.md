@@ -21,33 +21,33 @@ typedef struct _flcl_nd_array_t {
 これには、[flcl-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-f.f90) に位置する Fortran 相当の型があります。
 
 ``` fortran
-型, bind(C) :: nd_array_t
+type, bind(C) :: nd_array_t
     integer(c_size_t) :: rank
     integer(c_size_t) :: dims(ND_ARRAY_MAX_RANK)
     integer(c_size_t) :: strides(ND_ARRAY_MAX_RANK)
     type(c_ptr) :: data
-エンド型 nd_array_t
+end type nd_array_t
 ```
 
 Fortran で割り当てられた配列を　ndarray　に変換するには、[flcl-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-f.f90)　で定義されている一連の手続き（インターフェースの背後で動作します）を使用します。
 
 ```fortran
 interface to_nd_array
-    ! 1D スペシャリゼーション
+    ! 1D specializations
      module procedure to_nd_array_l_1d
      module procedure to_nd_array_i32_1d
      module procedure to_nd_array_i64_1d
      module procedure to_nd_array_r32_1d
      module procedure to_nd_array_r64_1d
     
-    ! 2D スペシャリゼーション
+    ! 2D specializations
     module procedure to_nd_array_l_2d
     module procedure to_nd_array_i32_2d
     module procedure to_nd_array_i64_2d
     module procedure to_nd_array_r32_2d
     module procedure to_nd_array_r64_2d
 
-    ! 3D スペシャリゼーション
+    ! 3D specializations
     module procedure to_nd_array_l_3d
     module procedure to_nd_array_i32_3d
     module procedure to_nd_array_i64_3d
@@ -70,23 +70,23 @@ template <typename DataType>
 ``` fortran
 :: flcl_mod　を使用
 ```
-次に、2つの「Y」配列を含む配列を定義し、一方の配列は　Fortran　で　daxpy　の結果を計算するために使用され、もう一方の配列は　kokkos　で計算するために使用されます。
+次に、2つの 'Y' 配列を含む配列を定義し、一方の配列は　Fortran　で　daxpy　の結果を計算するために使用され、もう一方の配列は　kokkos で計算するために使用されます。
 ``` fortran 
   real(c_double), dimension(:), allocatable :: f_y
   real(c_double), dimension(:), allocatable :: c_y
   real(c_double), dimension(:), allocatable :: x
   real(c_double) :: alpha
 ``` 
-FortranでのDAPPYの実装は、単に以下の通りです: 
+FortranでのDAPPYの実行は、単に以下の通りです: 
 ``` fortran 
-ii = 1, mm　を実行
+do ii = 1, mm
     f_y(ii) = f_y(ii) + alpha * x(ii)
 end do
 ``` 
 
 Kokkos　における　DAXPY　の実行は、axpy の呼び出しから始まります: 
 ``` fortran 
-axpy(c_y, x, alpha) を呼び出し
+call axpy(c_y, x, alpha) 
 ``` 
 
 これは　[axpy-ndarray-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy-ndarray/axpy-ndarray-f.f90)　で定義されています。
@@ -106,7 +106,7 @@ end subroutine axpy
 f_axpy は先に定義されており、f_axpy が C ルーチン 'c_axpy' にバインドされている点に注意してください。
 
 ``` fortran
-インターフェイス
+interface
     subroutine f_axpy( nd_array_y, nd_array_x, alpha ) &
         & bind(c, name='c_axpy')
         use, intrinsic :: iso_c_binding
