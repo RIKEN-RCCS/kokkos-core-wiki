@@ -4,25 +4,25 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-名前空間 Kokkos{
-名前空間 Experimental{
+namespace Kokkos{
+namespace Experimental{
 
-テンプレート <class ExecutionSpace, class IteratorType, class T>
+template <class ExecutionSpace, class IteratorType, class T>
 void replace(const ExecutionSpace& exespace,                                 (1)
              IteratorType first, IteratorType last,
              const T& old_value, const T& new_value);
 
-テンプレート <class ExecutionSpace, class IteratorType, class T>
+template <class ExecutionSpace, class IteratorType, class T>
 void replace(const std::string& label, const ExecutionSpace& exespace,       (2)
              IteratorType first, IteratorType last,
              const T& old_value, const T& new_value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
+template <class ExecutionSpace, class DataType, class... Properties, class T>
 void replace(const ExecutionSpace& exespace,                                 (3)
              const Kokkos::View<DataType, Properties...>& view,
              const T& old_value, const T& new_value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class T>
+template <class ExecutionSpace, class DataType, class... Properties, class T>
 void replace(const std::string& label, const ExecutionSpace& exespace,       (4)
              const Kokkos::View<DataType, Properties...>& view,
              const T& old_value, const T& new_value);
