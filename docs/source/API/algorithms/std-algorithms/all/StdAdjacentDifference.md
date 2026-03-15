@@ -7,27 +7,27 @@
 名前空間 Kokkos{
 名前空間 Experimental{
 
-テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
+template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
 OutputIteratorType adjacent_difference(const ExecutionSpace& exespace,                    (1)
                                        InputIteratorType first_from,
                                        InputIteratorType last_from,
                                        OutputIteratorType first_dest);
 
-テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class BinaryOp>
+template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class BinaryOp>
 OutputIteratorType adjacent_difference(const ExecutionSpace& exespace,                    (2)
                                        InputIteratorType first_from,
                                        InputIteratorType last_from,
                                        OutputIteratorType first_dest,
                                        BinaryOp bin_op);
 
-テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
+template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
 OutputIteratorType adjacent_difference(const std::string& label,                          (3)
                                        const ExecutionSpace& exespace,
                                        InputIteratorType first_from,
                                        InputIteratorType last_from,
                                        OutputIteratorType first_dest);
 
-テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class BinaryOp>
+template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class BinaryOp>
 OutputIteratorType adjacent_difference(const std::string& label,                          (4)
                                        const ExecutionSpace& exespace,
                                        InputIteratorType first_from,
@@ -35,25 +35,25 @@ OutputIteratorType adjacent_difference(const std::string& label,                
                                        OutputIteratorType first_dest,
                                        BinaryOp bin_op);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2>
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2>
 auto adjacent_difference(const ExecutionSpace& exespace,                                  (5)
                          const ::Kokkos::View<DataType1, Properties1...>& view_from,
                          const ::Kokkos::View<DataType2, Properties2...>& view_dest);
 
-テンプレート <
+template <
   class ExecutionSpace,
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class BinaryOp>
-自動 adjacent_difference(const ExecutionSpace& exespace,                                  (6)
+auto adjacent_difference(const ExecutionSpace& exespace,                                  (6)
                          const ::Kokkos::View<DataType1, Properties1...>& view_from,
                          const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                          BinaryOp bin_op);
 
-テンプレート <
+template <
   class ExecutionSpace,
   class DataType1, class... Properties1,
   class DataType2, class... Properties2>
@@ -62,12 +62,12 @@ auto adjacent_difference(const std::string& label,                              
                          const ::Kokkos::View<DataType1, Properties1...>& view_from,
                          const ::Kokkos::View<DataType2, Properties2...>& view_dest);
 
-テンプレート <
-  クラス ExecutionSpace,
-  クラス DataType1, class... Properties1,
-  クラス DataType2, class... Properties2,
-  クラス BinaryOp>
-自動 adjacent_difference(const std::string& label,                                        (8)
+template <
+  class ExecutionSpace,
+  class DataType1, class... Properties1,
+  class DataType2, class... Properties2,
+  class BinaryOp>
+auto adjacent_difference(const std::string& label,                                        (8)
                          const ExecutionSpace& exespace,
                          const ::Kokkos::View<DataType1, Properties1...>& view_from,
                          const ::Kokkos::View<DataType2, Properties2...>& view_dest,
@@ -111,18 +111,18 @@ auto adjacent_difference(const std::string& label,                              
   渡された実行空間より呼び出され、そこでは `value_type`　が　`InputIteratorType`　の値型 (1,2,3,4について) または、 `view_from`　の値型 (5,6,7,8について)　であり、 `a,b`　を変更してはいけません。
   - 以下に一致しなければなりません:
   ```c++
-  構造体 BinaryOp
+  struct BinaryOp
   {
      KOKKOS_INLINE_FUNCTION
      return_type operator()(const value_type & a,
 	                        const value_type & b) const {
-       返し /* ... */;
+       return /* ... */;
      }
 
      // または、また有効
      return_type operator()(value_type a,
 	                        value_type b) const {
-       返し /* ... */;
+       return /* ... */;
      }
   };
   ```
