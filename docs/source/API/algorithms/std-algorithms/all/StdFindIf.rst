@@ -19,23 +19,23 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class InputIterator, class PredicateType>
+   template <class ExecutionSpace, class InputIterator, class PredicateType>
    InputIterator find_if(const ExecutionSpace& exespace,                                (1)
 			 InputIterator first, InputIterator last,
 			 PredicateType pred);
 
-   テンプレート <class ExecutionSpace, class InputIterator, class PredicateType>
+   template <class ExecutionSpace, class InputIterator, class PredicateType>
    InputIterator find_if(const std::string& label, const ExecutionSpace& exespace,      (2)
 			 InputIterator first, InputIterator last,
 			 PredicateType pred);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-   自動 find_if(const ExecutionSpace& exespace,
+   template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+   auto find_if(const ExecutionSpace& exespace,
 		const Kokkos::View<DataType, Properties...>& view,                      (3)
 		PredicateType pred);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-   自動 find_if(const std::string& label, const ExecutionSpace& exespace,
+   template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+   auto find_if(const std::string& label, const ExecutionSpace& exespace,
 		const Kokkos::View<DataType, Properties...>& view,                      (4)
 		PredicateType pred);
 
@@ -46,15 +46,15 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class InputIterator, class PredicateType>
+   template <class TeamHandleType, class InputIterator, class PredicateType>
    KOKKOS_FUNCTION
    InputIterator find_if(const TeamHandleType& teamHandle,                              (5)
 			 InputIterator first, InputIterator last,
 			 PredicateType pred);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties, class PredicateType>
+   template <class TeamHandleType, class DataType, class... Properties, class PredicateType>
    KOKKOS_FUNCTION
-   自動 find_if(const TeamHandleType& teamHandle,
+   auto find_if(const TeamHandleType& teamHandle,
 		const Kokkos::View<DataType, Properties...>& view,                      (6)
 		PredicateType pred);
 
@@ -96,15 +96,15 @@
 
     .. code-block:: cpp
 
-       構造体　述語
+       struct　Predicate
        {
 	  KOKKOS_INLINE_FUNCTION
-	  ブール operator()(const /*type needed */ & operand) const { return /* ... */; }
+	  bool operator()(const /*type needed */ & operand) const { return /* ... */; }
 
 	  // または、また有効
 
 	  KOKKOS_INLINE_FUNCTION
-	  ブール operator()(/*type needed */ operand) const { return /* ... */; }
+	  bool operator()(/*type needed */ operand) const { return /* ... */; }
        };
 
 戻り値
@@ -119,29 +119,29 @@
 
 .. code-block:: cpp
 
-   名前空間 KE = Kokkos::Experimental;
+   namespace KE = Kokkos::Experimental;
 
-   テンプレート　<class ValueType>
-   構造体 EqualsValue
+   template　<class ValueType>
+   struct EqualsValue
    {
      const ValueType m_value;
      EqualsValFunctor(ValueType value) : m_value(value){}
 
      KOKKOS_INLINE_FUNCTION
-     ブール operator()(const ValueType & operand) const {
+     bool operator()(const ValueType & operand) const {
        return operand == m_value;
      }
    };
 
-   自動 exespace = Kokkos::DefaultExecutionSpace;
-   view_type = Kokkos::View<exespace, int*>　を使用；
+   auto exespace = Kokkos::DefaultExecutionSpace;
+   using view_type = Kokkos::View<exespace, int*>;
    view_type a("a", 15);
    // 何らかの方法で "a" を満たす
 
    // 述語を作成する
    EqualsValue<int> p(5);
 
-   自動 it1 = KE::find_if(exespace, KE::begin(a), KE::end(a), p);
+   auto it1 = KE::find_if(exespace, KE::begin(a), KE::end(a), p);
 
    // OpenMP　が有効になっていると仮定すれば、明示的に以下のように呼び出すことも可能です
-   自動 it2 = KE::find_if(Kokkos::OpenMP(), KE::begin(a), KE::end(a), p);
+   auto it2 = KE::find_if(Kokkos::OpenMP(), KE::begin(a), KE::end(a), p);
