@@ -19,30 +19,30 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 
 .. code-block:: cpp
 
-  テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
+  template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
   OutputIteratorType copy(const ExecutionSpace& exespace,                      (1)
                           InputIteratorType first_from,
                           InputIteratorType last_from,
                           OutputIteratorType first_to);
 
-  テンプレート <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
+  template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
   OutputIteratorType copy(const std::string& label,                            (2)
                           const ExecutionSpace& exespace,
                           InputIteratorType first_from,
                           InputIteratorType last_from,
                           OutputIteratorType first_to);
-  テンプレート <
+  template <
     class ExecutionSpace,
     class DataType1, class... Properties1,
     class DataType2, class... Properties2
   >
-  自動 copy(const ExecutionSpace& exespace,                                    (3)
+  auto copy(const ExecutionSpace& exespace,                                    (3)
             const Kokkos::View<DataType1, Properties1...>& view_from,
             const Kokkos::View<DataType2, Properties2...>& view_to);
-  テンプレート <
-    クラス ExecutionSpace,
-    クラス DataType1, class... Properties1,
-    クラス DataType2, class... Properties2
+  template <
+    class ExecutionSpace,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2
   >
    copy(const std::string& label, const ExecutionSpace& exespace,          (4)
             const Kokkos::View<DataType1, Properties1...>& view_from,
@@ -55,18 +55,18 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 
 .. code-block:: cpp
 
-  テンプレート <class TeamHandleType, class InputIteratorType, class OutputIteratorType>
+  template <class TeamHandleType, class InputIteratorType, class OutputIteratorType>
   KOKKOS_FUNCTION
   OutputIteratorType copy(const TeamHandleType& teamHandle,                    (5)
                           InputIteratorType first_from,
 			  InputIteratorType last_from,
 			  OutputIteratorType first_to);
 
-  テンプレート <
-    クラス TeamHandleType, class DataType1, class... Properties1,
-    クラス DataType2, class... Properties2>
+  template <
+    class TeamHandleType, class DataType1, class... Properties1,
+    class DataType2, class... Properties2>
   KOKKOS_FUNCTION
-  自動 copy(const TeamHandleType& teamHandle,                                  (6)
+  auto copy(const TeamHandleType& teamHandle,                                  (6)
             const ::Kokkos::View<DataType1, Properties1...>& view_from,
             ::Kokkos::View<DataType2, Properties2...>& view_to);
 
