@@ -4,50 +4,50 @@
 ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
 
 ```c++
-名前空間 Kokkos{
-名前空間　実験的 {
+namespace Kokkos{
+namespace Experimental{
 
 //
 // オーバーロードセット A
 //
-テンプレート <class ExecutionSpace, class IteratorType>
-型名 IteratorType::value_type reduce(const ExecutionSpace& exespace,        (1)
+template <class ExecutionSpace, class IteratorType>
+typename IteratorType::value_type reduce(const ExecutionSpace& exespace,        (1)
                                          IteratorType first,
                                          IteratorType last);
 
-テンプレート <class ExecutionSpace, class IteratorType>
-型名 IteratorType::value_type reduce(const std::string& label,              (2)
+template <class ExecutionSpace, class IteratorType>
+typename IteratorType::value_type reduce(const std::string& label,              (2)
                                          const ExecutionSpace& exespace,
                                          IteratorType first,
                                          IteratorType last);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties>
-自動 reduce(const ExecutionSpace& exespace,                                     (3)
+template <class ExecutionSpace, class DataType, class... Properties>
+auto reduce(const ExecutionSpace& exespace,                                     (3)
             const ::Kokkos::View<DataType, Properties...>& view);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties>
-自動 reduce(const std::string& label, const ExecutionSpace& exespace,           (4)
+template <class ExecutionSpace, class DataType, class... Properties>
+auto reduce(const std::string& label, const ExecutionSpace& exespace,           (4)
             const ::Kokkos::View<DataType, Properties...>& view);
 
 //
 // オーバーロードセット B
 //
-テンプレート <class ExecutionSpace, class IteratorType, class ValueType>
+template <class ExecutionSpace, class IteratorType, class ValueType>
 ValueType reduce(const ExecutionSpace& exespace,                                (5)
                  IteratorType first, IteratorType last,
                  ValueType init_reduction_value);
 
-テンプレート <class ExecutionSpace, class IteratorType, class ValueType>
+template <class ExecutionSpace, class IteratorType, class ValueType>
 ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      (6)
                  IteratorType first, IteratorType last,
                  ValueType init_reduction_value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class ValueType>
+template <class ExecutionSpace, class DataType, class... Properties, class ValueType>
 ValueType reduce(const ExecutionSpace& exespace,                                (7)
                  const ::Kokkos::View<DataType, Properties...>& view,
                  ValueType init_reduction_value);
 
-テンプレート <class ExecutionSpace, class DataType, class... Properties, class ValueType>
+template <class ExecutionSpace, class DataType, class... Properties, class ValueType>
 ValueType reduce(const std::string& label,                                      (8)
                  const ExecutionSpace& exespace,
                  const ::Kokkos::View<DataType, Properties...>& view,
@@ -56,33 +56,33 @@ ValueType reduce(const std::string& label,                                      
 //
 // オーバーロードセット C
 //
-テンプレート <
-  クラス ExecutionSpace, class IteratorType, class ValueType,
-  クラス BinaryOp>
+template <
+  class ExecutionSpace, class IteratorType, class ValueType,
+  class BinaryOp>
 ValueType reduce(const ExecutionSpace& exespace,                                (9)
                  IteratorType first, IteratorType last,
                  ValueType init_reduction_value,
                  BinaryOp joiner);
 
-テンプレート <
-  クラス ExecutionSpace, class IteratorType, class ValueType,
-  クラス BinaryOp>
+template <
+  class ExecutionSpace, class IteratorType, class ValueType,
+  class BinaryOp>
 ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      (10)
                  IteratorType first, IteratorType last,
                  ValueType init_reduction_value,
                  BinaryOp joiner);
 
-テンプレート <
-  クラス ExecutionSpace, class DataType, class... Properties,
-  クラス ValueType, class BinaryOp>
+template <
+  class ExecutionSpace, class DataType, class... Properties,
+  class ValueType, class BinaryOp>
 ValueType reduce(const ExecutionSpace& exespace,                                (11)
                  const ::Kokkos::View<DataType, Properties...>& view,
                  ValueType init_reduction_value,
                  BinaryOp joiner);
 
-テンプレート <
-  クラス ExecutionSpace, class DataType, class... Properties,
-  クラス ValueType, class BinaryOp>
+template <
+  class ExecutionSpace, class DataType, class... Properties,
+  class ValueType, class BinaryOp>
 ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      (12)
                  const ::Kokkos::View<DataType, Properties...>& view,
                  ValueType init_reduction_value,
@@ -126,7 +126,7 @@ ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      
 
   - 以下に一致しなければなりません:
   ```c++
-  構造体 JoinFunctor {
+  struct JoinFunctor {
 	KOKKOS_FUNCTION
 	constexpr ValueType operator()(const ValueType& a, const ValueType& b) const {
 	  return /* ... */
