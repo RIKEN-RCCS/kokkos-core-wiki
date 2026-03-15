@@ -21,22 +21,22 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class InputIterator, class OutputIterator>
+   template <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator move(const ExecutionSpace& ex, InputIterator first,          (1)
                        InputIterator last, OutputIterator d_first);
 
-   テンプレート <class ExecutionSpace, class InputIterator, class OutputIterator>
+   template <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator move(const std::string& label, const ExecutionSpace& ex,     (2)
                        InputIterator first, InputIterator last,
                        OutputIterator d_first);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   自動 move(const ExecutionSpace& ex,                                         (3)
+   auto move(const ExecutionSpace& ex,                                         (3)
              const ::Kokkos::View<DataType1, Properties1...>& source,
              ::Kokkos::View<DataType2, Properties2...>& dest);
 
-   テンプレート <class ExecutionSpace, class DataType1, class... Properties1,
+   template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
     move(const std::string& label, const ExecutionSpace& ex,               (4)
              const ::Kokkos::View<DataType1, Properties1...>& source,
@@ -49,15 +49,15 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class InputIterator, class OutputIterator>
+   template <class TeamHandleType, class InputIterator, class OutputIterator>
    KOKKOS_FUNCTION
    OutputIterator move(const TeamHandleType& teamHandle, InputIterator first,  (5)
                        InputIterator last, OutputIterator d_first);
 
-   テンプレート <class TeamHandleType, class DataType1, class... Properties1,
+   template <class TeamHandleType, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   自動 move(const TeamHandleType& teamHandle,                                 (6)
+   auto move(const TeamHandleType& teamHandle,                                 (6)
              const ::Kokkos::View<DataType1, Properties1...>& source,
              ::Kokkos::View<DataType2, Properties2...>& dest);
 
