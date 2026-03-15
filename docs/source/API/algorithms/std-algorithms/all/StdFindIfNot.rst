@@ -19,23 +19,23 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ExecutionSpace, class InputIterator, class PredicateType>
+   template <class ExecutionSpace, class InputIterator, class PredicateType>
    InputIterator find_if_not(const ExecutionSpace& exespace,                            (1)
 		             InputIterator first, InputIterator last,
 			     PredicateType pred);
 
-   テンプレート <class ExecutionSpace, class InputIterator, class PredicateType>
+   template <class ExecutionSpace, class InputIterator, class PredicateType>
    InputIterator find_if_not(const std::string& label, const ExecutionSpace& exespace,  (2)
 			     InputIterator first, InputIterator last,
 			     PredicateType pred);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-   自動 find_if_not(const ExecutionSpace& exespace,                                     (3)
+   template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+   auto find_if_not(const ExecutionSpace& exespace,                                     (3)
 		    const Kokkos::View<DataType, Properties...>& view,
 		    PredicateType pred);
 
-   テンプレート <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-   自動 find_if_not(const std::string& label, const ExecutionSpace& exespace,           (4)
+   template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
+   auto find_if_not(const std::string& label, const ExecutionSpace& exespace,           (4)
 		    const Kokkos::View<DataType, Properties...>& view,
 		    PredicateType pred);
 
@@ -46,15 +46,15 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class InputIterator, class PredicateType>
+   template <class TeamHandleType, class InputIterator, class PredicateType>
    KOKKOS_FUNCTION
    InputIterator find_if_not(const TeamHandleType& teamHandle,                          (5)
 		             InputIterator first, InputIterator last,
 			     PredicateType pred);
 
-   テンプレート <class TeamHandleType, class DataType, class... Properties, class PredicateType>
+   template <class TeamHandleType, class DataType, class... Properties, class PredicateType>
    KOKKOS_FUNCTION
-   自動 find_if_not(const TeamHandleType& teamHandle,                                   (6)
+   auto find_if_not(const TeamHandleType& teamHandle,                                   (6)
 		    const Kokkos::View<DataType, Properties...>& view,
 		    PredicateType pred);
 
@@ -95,10 +95,10 @@
 
     .. code-block:: cpp
 
-       構造体　述語
+       struct　Predicate
        {
 	  KOKKOS_INLINE_FUNCTION
-	  ブール operator()(const /*type needed */ & operand) const { return /* ... */; }
+	  bool operator()(const /*type needed */ & operand) const { return /* ... */; }
 
 	  // または、また有効
 
