@@ -65,7 +65,7 @@
 
 .. code-block:: cpp
 
-   テンプレート <class TeamHandleType, class IteratorType>
+   template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType adjacent_find(const TeamHandleType& teamHandle,                            (9)
 		              IteratorType first, IteratorType last);
