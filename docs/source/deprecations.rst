@@ -22,7 +22,7 @@ Kokkos 4.7　において非推奨
 Kokkos 4.6　において非推奨
 ---------------------------
 
-* ``StaticCrsGraph`` moved to Kokkos Kernels
+* ``StaticCrsGraph`` は、 Kokkos Kernels に移動しました。
    * ``KokkosSparse::StaticCrsGraph``
    * ``KokkosKernels`` が提供した機能性により整合しています。
 
@@ -36,49 +36,49 @@ Kokkos 4.6　において非推奨
 
 * ``DualView``　における ``d_view`` および ``h_view`` メンバーへ直接アクセス
    * 置換: ``view_host()`` and ``view_device()``
-   * enforcing invariants in ``DualView``, e.g., consistency between the two ``View`` instances referenced
+   * DualView において不変条件を実行すること、例えば、参照される2つのビューインスタンス間の一貫性です。
 
-Deprecated in Kokkos 4.5
+Kokkos 4.5 において非推奨
 ---------------------------
 
-* Tasking interface: ``BasicFuture``, ``TaskSingle``, ``TaskPriority``, ``task_spawn``, ``host_spawn``, ``respawn``, ``when_all``, ``wait``
+* タスク割り当てインターフェイス: ``BasicFuture``, ``TaskSingle``, ``TaskPriority``, ``task_spawn``, ``host_spawn``, ``respawn``, ``when_all``, ``wait``
    * 置換: 無し
-   * unused, limited implementation
+   * 使用されていません、限定的に実装
 
 * ``HPX::HPX::is_asynchronous(HPX const & = HPX())``
    * 置換: 無し
-   * unused, conformity of execution spaces
+   * 使用されていません、実行空間の適合性
 
 * ``OpenMP::is_asynchronous(OpenMP const& = OpenMP())``
    * 置換: 無し
-   * unused, conformity of execution spaces
+   * 使用されていません、実行空間の適合性
 
 * ``atomic_query_version``
    * 置換: 無し
-   * no known use case
+   * 既知の使用例がありません
 
 * :cpp:func:`atomic_assign`
-   * replacement: :cpp:func:`atomic_store`
-   * duplicated functionality
+   * 置換: :cpp:func:`atomic_store`
+   * 重複した機能
 
 * :cpp:func:`atomic_increment`
-   * replacement: :cpp:func:`atomic_inc`
-   * duplicated functionality
+   * 置換: :cpp:func:`atomic_inc`
+   * 重複した機能
 
 * :cpp:func:`atomic_decrement`
-   * replacement: :cpp:func:`atomic_dec`
-   * duplicated functionality
+   * 置換: :cpp:func:`atomic_dec`
+   * 重複した機能
 
 * :cpp:func:`atomic_compare_exchange_strong`
-   * replacement: :cpp:func:`atomic_compare_exchange`
-   * duplicated functionality
+   * 置換: :cpp:func:`atomic_compare_exchange`
+   * 重複した機能
 
-Deprecated in Kokkos 4.4
+Kokkos 4.4 において非推奨
 ---------------------------
 
 * ``is_layouttiled``
    * 置換: 無し
-   * unused
+   * 使用されていません
 
 * ``layout_iterate_type_selector``
    * 置換: 無し
