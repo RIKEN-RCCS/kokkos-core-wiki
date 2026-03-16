@@ -4,18 +4,18 @@
 .. role:: cpp(code)
     :language: cpp
 
-　``<Kokkos_Core.hpp>``　に含まれるヘッダー ``<Kokkos_Swap.hpp>``:sup:`( 4.3以降)` 　に定義。
+　``<Kokkos_Core.hpp>``　に含まれるヘッダー ``<Kokkos_Swap.hpp>``:sup:`(バージョン　4.3以降)` 　に定義。
 
 .. code-block:: cpp
 
-    テンプレート <class T>
+    template <class T>
     KOKKOS_FUNCTION constexpr void
     kokkos_swap(T& a, T& b) noexcept(std::is_nothrow_move_constructible_v<T> &&
-                                     std::is_nothrow_move_assignable_v<T>);  // (1) (since 4.3)
+                                     std::is_nothrow_move_assignable_v<T>);  // (1) (バージョン　4.3以降)
 
-    テンプレート <class T2, std::size_t N>
+    template <class T2, std::size_t N>
     KOKKOS_FUNCTION constexpr void
-    kokkos_swap(T2 (&a)[N], T2 (&b)[N]) noexcept(noexcept(*a, *b));  // (2) (since 4.3)
+    kokkos_swap(T2 (&a)[N], T2 (&b)[N]) noexcept(noexcept(*a, *b));  // (2) (バージョン 4.3以降)
 
 
 1) 値　``a`` および　``b``　を入れ替えます。 ``std::is_move_constructible_v<T> && std::is_move_assignable_v<T>``　が　``true``　でなければ、このオーバーロードは、オーバーロード解決に関与しません。
