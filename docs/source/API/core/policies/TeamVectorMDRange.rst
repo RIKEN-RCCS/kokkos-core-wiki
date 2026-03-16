@@ -20,7 +20,7 @@ TeamVectorMDRange は、階層的並列処理の内部で使用される `nested
       チームのスレッドにインデックス範囲を分け、ベクトルレーン上でインデックスレンジを分割します。
       バックエンドによって決定されるスレッドとベクトル化のランクです。
 
-      :param team: 呼び出しチーム実行コンテキストへのTeamHandle
+      :param team: 呼び出しチーム実行コンテキストへの TeamHandle
 
       :param extent_1, extent_2, ...: 各ランクのインデックス範囲長
 
@@ -53,14 +53,14 @@ TeamVectorMDRange は、階層的並列処理の内部で使用される `nested
 
 .. code-block:: cpp
 
-   TeamHandle = TeamPolicy<>::member_type　を使用;
+   using TeamHandle = TeamPolicy<>::member_type;
 
    parallel_for(TeamPolicy<>(N,AUTO),
      KOKKOS_LAMBDA(TeamHandle const& team) {
 
        int leagueRank = team.league_rank();
 
-       自動 範囲 = TeamVectorMDRange<Rank<4>, TeamType>(team, n0, n1, n2, n3);
+       auto range = TeamVectorMDRange<Rank<4>, TeamType>(team, n0, n1, n2, n3);
 
        parallel_for(range,
          [=](int i0, int i1, int i2, int i3) {
