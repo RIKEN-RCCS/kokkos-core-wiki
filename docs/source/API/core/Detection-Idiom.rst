@@ -1,4 +1,4 @@
-Detection Idiom検出イディオム
+検出イディオム
 ===============
 
 .. role:: cpp(code)
@@ -8,7 +8,7 @@ Detection Idiom検出イディオム
 
 ヘッダーファイル: ``<Kokkos_DetectionIdiom.hpp>``
 
-Kokkos 検出イディオムは、ISO/IEC TS 19568:2017、ライブラリ基礎のためのC++拡張のバージョン2の検出イディオムに基づいており、
+Kokkos 検出イディオムは、ISO/IEC TS 19568:2017、ライブラリ基礎のための C++ 拡張のバージョン2の検出イディオムに基づいており、
 そのドラフトは、`here <https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>`　に見られます。
 
 元の C++ プロポーザルは、 `here <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>`　に見られます。
@@ -26,7 +26,7 @@ API
 
     // 典型的な Op<Args...> をサポートしない型のためのプライマリテンプレート
     template<class Default, class /* AlwaysVoid */, template<class...> class /* Op */, class... /* Args */>
-    構造体 DETECTOR {
+    struct DETECTOR {
         using value_t = std::false_type;
         using type    = Default;
     };
@@ -40,56 +40,56 @@ API
 
 .. code-block:: cpp
 
-    名前空間 Kokkos {
+    namespace Kokkos {
 
     // 提供されたアーキタイプをサポートしない型について、detected_t が返す型の簡略化is_detected は、Op<Args...> が有効な型である場合に std::true_type の別名となります。
-    構造体 nonesuch {
+    struct nonesuch {
         nonesuch(nonesuch&&) = delete;
         ~nonesuch() = delete;
     };
 
-    // is_detected は、Op<Args...> が有効な型である場合に std::true_type の別名となります。
-    // otherwise, an alias for std::false_type
+    // is_detected は、Op<Args...> が有効な型である場合に std::true_type の別名です。
+    // そうでない場合には、std::false_type についての別名です。
 
-    テンプレート <template <class...> class Op, class... Args>
+    template <template <class...> class Op, class... Args>
      is_detected =
         using typename DETECTOR<nonesuch, void, Op, Args...>::value_t;
 
     // detected_t は、Op<Args...> が有効な型である場合に Op<Args...> の別名です。
     //  そうでない場合、 Kokkos::nonesuch　の別名です。
 
-    テンプレート <template <class...> class Op, class... Args>
+    template <template <class...> class Op, class... Args>
     using detected_t = typename DETECTOR<nonesuch, void, Op, Args...>::type;
 
     // detected_or_t は、Op<Args...> が有効な型である場合に  Op<Args...> の別名です。
     //  そうでない場合、 Default の別名です。
 
-    テンプレート <class Default, template <class...> class Op, class... Args>
+    template <class Default, template <class...> class Op, class... Args>
     using detected_or_t = typename DETECTOR<Default, void, Op, Args...>::type;
 
     // is_detected_exact は、Op<Args...> が、 Expected と同じ型である場合に std::true_type の別名です。
     //  そうでない場合、std::false_type　の別名です。
 
-    テンプレート <class Expected, template <class...> class Op, class... Args>
+    template <class Expected, template <class...> class Op, class... Args>
     using is_detected_exact = std::is_same<Expected, detected_t<Op, Args...>>;
 
     // is_detected_convertible は、Op<Args...> が To へ変換可能な場合に std::true_type の別名となります。
     //  そうでない場合、std::false_type　の別名です。
 
-    テンプレート <class To, template <class...> class Op, class... Args>
+    template <class To, template <class...> class Op, class... Args>
     is_detected_convertible =
         using std::is_convertible<detected_t<Op, Args...>, To>;
 
     // C++17 またはそれ以降の便利変数
 
-    テンプレート <template <class...> class Op, class... Args>
+    template <template <class...> class Op, class... Args>
     inline constexpr bool is_detected_v = is_detected<Op, Args...>::value;
 
-    テンプレート <class Expected, template <class...> class Op, class... Args>
+    template <class Expected, template <class...> class Op, class... Args>
     inline constexpr bool is_detected_exact_v =
         is_detected_exact<Expected, Op, Args...>::value;
 
-    テンプレート <class Expected, template <class...> class Op, class... Args>
+    template <class Expected, template <class...> class Op, class... Args>
     inline constexpr bool is_detected_convertible_v =
 
     } // Kokkos 名前空間
