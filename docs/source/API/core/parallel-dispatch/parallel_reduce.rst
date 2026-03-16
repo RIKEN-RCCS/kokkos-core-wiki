@@ -25,20 +25,20 @@
 
 .. code-block:: cpp
 
-    テンプレート <class ExecPolicy, class FunctorType>
+    template <class ExecPolicy, class FunctorType>
     Kokkos::parallel_reduce(const std::string& name,
                             const ExecPolicy& policy,
                             const FunctorType& functor);
 
 .. code-block:: cpp
 
-    テンプレート <class ExecPolicy, class FunctorType>
+    template <class ExecPolicy, class FunctorType>
     Kokkos::parallel_reduce(const ExecPolicy& policy,
                             const FunctorType& functor);
 
 .. code-block:: cpp
 
-    テンプレート <class ExecPolicy, class FunctorType, class... ReducerArgument>
+    template <class ExecPolicy, class FunctorType, class... ReducerArgument>
     Kokkos::parallel_reduce(const std::string& name,
                             const ExecPolicy& policy,
                             const FunctorType& functor,
@@ -46,14 +46,14 @@
 
 .. code-block:: cpp
 
-    テンプレート <class ExecPolicy, class FunctorType, class... ReducerArgument>
+    template <class ExecPolicy, class FunctorType, class... ReducerArgument>
     Kokkos::parallel_reduce(const ExecPolicy& policy,
                             const FunctorType& functor,
                             const ReducerArgument&... reducer);
 
 .. code-block:: cpp
 
-    テンプレート <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
+    template <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
     Kokkos::parallel_reduce(const std::string& name,
                             const ExecPolicy& policy,
                             const FunctorType& functor,
@@ -61,7 +61,7 @@
 
 .. code-block:: cpp
 
-    テンプレート <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
+    template <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
     Kokkos::parallel_reduce(const ExecPolicy& policy,
                             const FunctorType& functor,
                             ReducerArgumentNonConst&... reducer);
