@@ -125,7 +125,7 @@ SYCL backendについては、 ユーザーは、``sycl::queue`` オブジェク
 
 .. code-block:: cpp
 
-    ExecutionSpace = decltype(exec_space)　を使用;
+    using ExecutionSpace = decltype(exec_space);
     Kokkos::View<int*, typename ExecutionSpace::memory_space> V(Kokkos::view_alloc("V", exec_space), 10);
 
 カーネル起動
