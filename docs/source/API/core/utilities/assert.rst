@@ -8,10 +8,10 @@
 
 .. code-block:: cpp
 
-    #定義された場合(NDEBUG) および定義されない場合(KOKKOS_ENABLE_DEBUG)
-    #  KOKKOS_ASSERT(condition) ((void)0)　を定義
+    #if defined(NDEBUG) and not defined(KOKKOS_ENABLE_DEBUG)
+    #  define KOKKOS_ASSERT(condition) ((void)0)
     #else
-    #   (!bool(condition)) /*call Kokkos::abort()*/　である場合、 KOKKOS_ASSERT(condition) を定義
+    #  define KOKKOS_ASSERT(condition) if (!bool(condition)) /*call Kokkos::abort()*/
     #endif
 
 マクロ ``KOKKOS_ASSERT`` の定義は、他のマクロ、
@@ -49,7 +49,7 @@
 
 .. _KokkosAssert: https://github.com/kokkos/kokkos/blob/4.2.00/core/src/Kokkos_Assert.hpp
 
-.. |KokkosAssert| 置換:: ``<Kokkos_Assert.hpp>``
+.. |KokkosAssert| replace:: ``<Kokkos_Assert.hpp>``
 
 * バージョン 4.2以降、 |KokkosAssert|_　から ``KOKKOS_ASSERT`` もまた入手可能です。
 * C++ 標準ライブラリからの `assert`　とは対照的に、``KOKKOS_FUNCTION``から ``KOKKOS_ASSERT`` を呼び出すことは、合法的です。
