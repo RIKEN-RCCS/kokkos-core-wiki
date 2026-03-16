@@ -11,7 +11,7 @@
 .. code-block:: cpp
 
     Kokkos::initialize(argc, argv);
-    Kokkos::initialize(Kokkos::InitializationSettings()  // (since 3.7)
+    Kokkos::initialize(Kokkos::InitializationSettings()  // (バージョン 3.7以降)
                            .set_disable_warnings(true)
                            .set_num_threads(8)
                            .set_map_device_id_by("random"));
