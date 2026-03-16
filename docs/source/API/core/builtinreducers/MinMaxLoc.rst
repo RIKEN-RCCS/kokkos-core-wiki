@@ -22,10 +22,10 @@
 .. code-block:: cpp
 
    template<class Scalar, class Space>
-   クラス MinMaxLoc{
+   class MinMaxLoc{
      public:
-       型定義 MinMaxLoc リデューサー;
-       型定義 MinMaxLocScalar<typename std::remove_cv<Scalar>::type,
+       typedef MinMaxLoc reducer;
+       typedef MinMaxLocScalar<typename std::remove_cv<Scalar>::type,
                                typename std::remove_cv<Index>::type> value_type;
         Kokkos::View<value_type, Space> result_view_type;
 
@@ -53,7 +53,7 @@
 
 .. cpp:class:: template<class Scalar, class Space> MinMaxLoc
 
-   .. rubric:: パブリック型
+   .. rubric:: Public Types
 
    .. cpp:type:: リデューサー
 
