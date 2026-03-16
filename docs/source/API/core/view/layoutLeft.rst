@@ -13,7 +13,7 @@
 
    Kokkos::View<float*, Kokkos::LayoutLeft> my_view;
 
-Descriptionディスクリプション
+ディスクリプション
 -----------
 
 .. cpp:struct:: LayoutLeft
@@ -21,7 +21,7 @@ Descriptionディスクリプション
    多次元ビューに提供された場合、最初のインデックスが連続したインデックスとなるように、
    メモリを配置します。 これは、割り当てに関する　Fortran　の慣習に合致します。
 
-   .. rubric:: ネストされた型定義
+   .. rubric:: Nested Typedefs
 
    .. cpp:type:: array_layout
 
@@ -29,7 +29,7 @@ Descriptionディスクリプション
 
    .. rubric:: メンバー変数
 
-   .. cpp:member:: 静的 constexpr bool is_extent_constructible = true
+   .. cpp:member:: static constexpr bool is_extent_constructible = true
 
        このクラスが拡張可能なコンストラクタを持つかどうかを検出するためのブール値。
 
