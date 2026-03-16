@@ -21,9 +21,9 @@
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType>
-   /* 定義された実装 */ ThreadVectorRange(TeamMemberType team, iType count);
+   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType count);
    template<class TeamMemberType, class iType1, class iType2>
-   /* 定義された実装 */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
+   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 
 ディスクリプション
@@ -32,7 +32,7 @@
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType>
-   /* 定義された実装 */ ThreadVectorRange(TeamMemberType team, iType count);
+   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType count);
    
 
 チームのスレッドとベクトルレーンのインデックス範囲  ``0`` から ``count-1`` まで分割します。
@@ -61,7 +61,7 @@
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType1, class iType2>
-   /* 実装定義 */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
+   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 
 呼び出しスレッドのベクトルレーン全体で、インデックスレンジ ``begin``　から  ``end-1`` までを分割します。
@@ -96,7 +96,7 @@
 
 .. code-block:: cpp
 
-    型定義 TeamPolicy<>::member_type team_handle;
+    typedef TeamPolicy<>::member_type team_handle;
     parallel_for(TeamPolicy<>(N,AUTO,4), KOKKOS_LAMBDA (const team_handle& team) {
      int n = team.league_rank();
      parallel_for(TeamThreadRange(team,M), [&] (const int i) {
