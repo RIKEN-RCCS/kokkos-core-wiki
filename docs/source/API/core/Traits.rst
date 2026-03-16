@@ -19,12 +19,12 @@ is_memory_space
 is_memory_traits
 ----------------
 
- ``Kokkos::MemoryTraits``. の特殊化を検出するためのブール型特性。
+ ``Kokkos::MemoryTraits`` の特殊化を検出するためのブール型特性。
 
 is_reducer
 ----------
 
-　`Reducer concept <builtinreducers/ReducerConcept.html>`_ をモデル化する型を検出するためのブール型特性。
+　`リデューサー概念 <builtinreducers/ReducerConcept.html>`_ をモデル化する型を検出するためのブール型特性。
 
 is_space
 --------
