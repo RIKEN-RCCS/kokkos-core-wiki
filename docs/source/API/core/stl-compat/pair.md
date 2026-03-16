@@ -14,11 +14,11 @@ std::pair<int,float> converted_kokkos_pair = kokkos_pair.to_std_pair();
 
 ## シノプシス 
 ```c++
-テンプレート <class T1, class T2>
+template <class T1, class T2>
 struct pair {
 
-    型定義 T1 first_type;
-    型定義 T2 second_type;
+    typedef T1 first_type;
+    typedef T2 second_type;
 
     first_type first;
     second_type second;
@@ -33,7 +33,7 @@ struct pair {
     template <class U, class V>
     KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
   
-    テンプレート <class U, class V>
+    template <class U, class V>
     pair(const std::pair<U, V>& p);
   
     std::pair<T1, T2> to_std_pair() const;
