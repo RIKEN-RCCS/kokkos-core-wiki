@@ -9,17 +9,17 @@
 
 .. _KokkosNumericTraits: https://github.com/kokkos/kokkos/blob/3.5.00/core/src/Kokkos_NumericTraits.hpp
 
-.. |KokkosNumericTraits| 置換:: ``<Kokkos_NumericTraits.hpp>``
+.. |KokkosNumericTraits| replace:: ``<Kokkos_NumericTraits.hpp>``
 
  ``<Kokkos_Core.hpp>``　に含まれる ヘッダー |KokkosNumericTraits|_　に定義。
 
 .. _NumericLimits: https://en.cppreference.com/w/cpp/types/numeric_limits
 
-.. |NumericLimits| 置換:: 標準ライブラリヘッダー ``<limits>``　からの ``numeric_limits``。
+.. |NumericLimits| replace:: 標準ライブラリヘッダー ``<limits>``　からの ``numeric_limits``。
 
 .. _P1841 : http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p1841r2.pdf
 
-.. |P1841| 置換:: P1841
+.. |P1841| replace:: P1841
 
  |NumericLimits|_　の代替えを提供します。  C++23標準ライブラリに追加される新しい機能を実装し、モノリシックな ``numeric_limits`` クラステンプレートを個別のトレイトテンプレートに分割します。 詳細については、標準ライブラリヘッダー からの |P1841|_.numeric_limit　を参照してください。
 
@@ -105,7 +105,7 @@
 
 .. code-block:: cpp
 
-    テンプレート <class T>
+    template <class T>
     constexpr auto has_infinity(T)
             -> decltype(Kokkos::Experimental::infinity<T>::value, std::true_type{}) {
         return {};
@@ -113,16 +113,16 @@
 
     constexpr std::false_type has_infinity(...) { return {}; }
 
-    テンプレート <クラス T>
+    template <class T>
     KOKKOS_FUNCTION constexpr std::enable_if_t<has_infinity(T{}), T>
     legacy_std_numeric_limits_infinity() {
         return Kokkos::Experimental::infinity<T>::value;
     }
 
-    テンプレート <class T>
+    template <class T>
     KOKKOS_FUNCTION constexpr std::enable_if_t<!has_infinity(T{}), T>
     legacy_std_numeric_limits_infinity() {
-        返し T();
+        return T();
     }
 
 ------------
@@ -135,7 +135,7 @@
 
 .. _CommonMathematicalFunctions : mathematical-functions.html 
 
-.. |CommonMathematicalFunctions| 置換:: 一般数学関数
+.. |CommonMathematicalFunctions| replace:: 一般数学関数
 
 |MathematicalConstants|_
 
