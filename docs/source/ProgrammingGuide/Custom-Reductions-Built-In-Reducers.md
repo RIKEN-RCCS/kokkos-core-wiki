@@ -102,7 +102,7 @@ Kokkos::parallel_reduce( "MinLocReduce", Kokkos::TeamPolicy<>(N,AUTO),
   
   // チームの一人が全体に貢献すべきです
   // 注意事項: 最小または最大還元について、
-  //       あらゆるチームメンバーがこれを行った場合、それは損なわれません
+  // あらゆるチームメンバーがこれを行った場合、それは損なわれません
   Kokkos::single(Kokkos::PerTeam(team), [=] () {
     if( row_minmaxloc.min_val < team_minmaxloc.min_val ) {
       team_minmaxloc.min_val = row_minmaxloc.min_val;
