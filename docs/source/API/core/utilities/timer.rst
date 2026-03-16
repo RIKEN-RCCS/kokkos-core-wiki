@@ -12,13 +12,13 @@
 .. code-block:: cpp
 
     Kokkos::Timer timer;
-    ダブル　タイム = timer.seconds();
+    double time = timer.seconds();
     timer.reset();
 
 インターフェイス
 ---------
 
-.. cpp:class:: タイマー
+.. cpp:class:: Timer
 
    経過時間を計測するための高精度タイマークラスです。
 
@@ -64,7 +64,7 @@
 
 .. code-block:: cpp
 
-    タイマー タイマー;
+    Timer timer;
     // ...
     double time1 = timer.seconds();
     timer.reset();
