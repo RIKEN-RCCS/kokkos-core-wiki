@@ -42,7 +42,7 @@
 ---------
 .. code-block:: cpp
 
-    テンプレート <typename DataType [, typename Layout [, typename ExecSpace [, typename Operation [, typename Duplication [, typename Contribution]]]]]>
+    template <typename DataType [, typename Layout [, typename ExecSpace [, typename Operation [, typename Duplication [, typename Contribution]]]]]>
     class ScatterView
 
 パラメータ
@@ -74,7 +74,7 @@
 ディスクリプション
 -----------
 
-.. cpp:class:: テンプレート <typename DataType, typename Layout, typename ExecSpace, typename Op, typename Duplication, typename Contribution> ScatterView
+.. cpp:class:: template <typename DataType, typename Layout, typename ExecSpace, typename Op, typename Duplication, typename Contribution> ScatterView
 
     .. rubric:: パブリックメンバー変数
 
@@ -163,7 +163,7 @@
        古いデータを破棄してビューのサイズを変更します。
 
 
-    .. rubric:: *プライベート* メンバー
+    .. rubric:: *Private* Members
 
     :member: typedef original_view_type internal_view_type;
     :member: internal_view_type internal_view;
