@@ -1,7 +1,7 @@
 ソースからの構築
 ====================
 
-Kokkos　のソースコード取得
+Kokkos のソースコード取得
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 本セクションでは、Kokkos　のソースコードを取得する方法について説明します。 これらのリリースは広範なテストを経ており、一般的に安定性が高いため、多くのユーザーにタグ付きリリースのダウンロードを推奨します。 最新機能が必要な上級者向けにも、開発版が利用可能で、安定性の低いコードにも対応できる場合があります。
@@ -11,7 +11,7 @@ Kokkos　のソースコード取得
 
 多くのユーザーに推奨されるアプローチは、GitHub　からのリリースアーカイブのダウンロードです。
 
-1.  **最新リリースを探す:**   <https://github.com/kokkos/kokkos/releases>`_ にアクセスして最新リリース(または必要な特定のバージョン)を見つけてください。
+1.  **最新リリースを探す:**  <https://github.com/kokkos/kokkos/releases>`_ にアクセスして最新リリース(または必要な特定のバージョン)を見つけてください。
 
 2.  **アーカイブとチェックサムをダウンロードしてください:** ``kokkos-X.Y.Z.tar.gz`` アーカイブと対応する　``kokkos-X.Y.Z-SHA-256.txt``　チェックサムファイルの両方をダウンロードしてください。 チェックサムを使ってダウンロードしたアーカイブの整合性を確認することが重要です。
 
@@ -103,21 +103,21 @@ Kokkos　の設定には以下のコマンドを使用します :
 
 * ``-DCMAKE_CXX_COMPILER=<compiler>``:　CPUs.C++コンパイラへの完全なパスを指定します。例えば、AMD GPUには ``hipcc`` 、  Intel GPUには ``icpx``、   CPUには、 ``g++`` または ``clang++`` を使いましょう。
 
-  例: ``-DCMAKE_CXX_COMPILER=/path/to/hipcc``
+  Example: ``-DCMAKE_CXX_COMPILER=/path/to/hipcc``
  
 * ``-DCMAKE_CXX_STANDARD=<standard>``: C++ 標準を設定します  。デフォルトは、``20``　です。
 
-  例: ``-DCMAKE_CXX_STANDARD=23``
+  Example: ``-DCMAKE_CXX_STANDARD=23``
 
 * ``-DCMAKE_BUILD_TYPE=<type>``: 最適化レベルとデバッグ情報を制御します。一般的な選択肢は、 ``Debug``、 ``Release``、 ``RelWithDebInfo`` (デフォルト)、 および　``MinSizeRel``　です。
 
-  例: ``-DCMAKE_BUILD_TYPE=Release``
+  Example: ``-DCMAKE_BUILD_TYPE=Release``
 
 * ``-DCMAKE_INSTALL_PREFIX=<prefix>``: ディスク上のディレクトリを指定します。
   Kokkos が設置される予定です。
 
 
-  例: ``-DCMAKE_INSTALL_PREFIX=/path/to/install/dir``
+  Example: ``-DCMAKE_INSTALL_PREFIX=/path/to/install/dir``
 
 **　Kokkos　固有の重要なオプション:**
 
@@ -183,7 +183,7 @@ Kokkos　の設定には以下のコマンドを使用します :
 
 これによって、Kokkos　を編集します。  複数コアを使うには、``-j<N>`` を加えることにより、速く編集をできます　( ``<N>``をコア数に置換します)。
 
-例: ``cmake --build builddir -j8``
+Example: ``cmake --build builddir -j8``
 
 
  Kokkos　インストール
@@ -195,7 +195,7 @@ Kokkos　のインストール (ヘッダーファイルおよびライブラリ
 
     cmake --install builddir [--prefix <prefix>]
 
-The ``--prefix <prefix>`` オプションはインストールディレクトリを指定します。 省略すると、Kokkos　はデフォルトの場所、多くの場合 ``/usr/local``　(**非推奨**)　にインストールされます。
+ ``--prefix <prefix>`` オプションはインストールディレクトリを指定します。 省略すると、Kokkos　はデフォルトの場所、多くの場合 ``/usr/local``　(**非推奨**)　にインストールされます。
 
 オプション: Kokkos　構築テスト
 -----------------------------------
