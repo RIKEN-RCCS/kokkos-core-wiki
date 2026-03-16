@@ -8,8 +8,7 @@
 
 DNF
 ---
-
- Kokkos　をインストールするには、Fedora Project　パッケージマネージャーを使うことができます 
+Kokkos　をインストールするには、Fedora Project　パッケージマネージャーを使うことができます 
 https://packages.fedoraproject.org/pkgs/kokkos/
 
 他のパッケージマネージャー
@@ -17,8 +16,7 @@ https://packages.fedoraproject.org/pkgs/kokkos/
 
 `Spack <https://spack.io>`_
 ---------------------------
-
- Kokkos.は　HPC向けの、有名なパッケージマネージャーです。  Spack　には、　Kokkos　のインストールレシピが付属しています。
+Kokkos.は　HPC向けの、有名なパッケージマネージャーです。  Spack　には、　Kokkos　のインストールレシピが付属しています。
 
  `Kokkos レシピウェブページ <https://packages.spack.io/package.html?name=kokkos>`_ には  、Kokkosの利用可能なバージョンとそのオプションがまとめられています。
 
