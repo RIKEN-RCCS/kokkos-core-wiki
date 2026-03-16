@@ -2,7 +2,7 @@
 ``DualView``
 ============
 
-Header file: ``<Kokkos_DualView.hpp>``
+ヘッダーファイル: ``<Kokkos_DualView.hpp>``
 
 |
 
