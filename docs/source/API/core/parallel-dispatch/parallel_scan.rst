@@ -11,23 +11,23 @@
 
 .. code-block:: cpp
 
-    Kokkos::parallel_scan( name, policy, functor, result );
-    Kokkos::parallel_scan( name, policy, functor );
-    Kokkos::parallel_scan( policy, functor, result);
-    Kokkos::parallel_scan( policy, functor );
+    Kokkos::parallel_scan( 名前, ポリシー, ファンクタ, 結果 );
+    Kokkos::parallel_scan( 名前, ポリシー, ファンクタ );
+    Kokkos::parallel_scan( policy, ファンクタ, 結果);
+    Kokkos::parallel_scan( policy, ファンクタ );
 
 　``functor``　で定義された並列作業を、*ExecutionPolicy* ``policy``　に従ってディスパッチし、作業項目が提供する成果物に対して排他的または包括的なスキャンを実行します。 オプションのラベル　``name`` はプロファイリングおよびデバッグツールで使用されます。提供された場合、最終結果は、 ``result``　に格納されます。
 
 インターフェイス
 ---------
 
-.. cpp:function:: テンプレート <class ExecPolicy, class FunctorType> Kokkos::parallel_scan(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_scan(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
 
-.. cpp:function:: テンプレート <class ExecPolicy, class FunctorType> Kokkos::parallel_scan(const ExecPolicy&  policy, const FunctorType& functor);
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_scan(const ExecPolicy&  policy, const FunctorType& functor);
 
-.. cpp:function:: テンプレート <class ExecPolicy, class FunctorType, class ReturnType> Kokkos::parallel_scan(const std::string& name, const ExecPolicy&  policy, const FunctorType& functor, ReturnType& return_value);
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReturnType> Kokkos::parallel_scan(const std::string& name, const ExecPolicy&  policy, const FunctorType& functor, ReturnType& return_value);
 
-.. cpp:function:: テンプレート <class ExecPolicy, class FunctorType, class ReturnType> Kokkos::parallel_scan(const ExecPolicy&  policy, const FunctorType& functor, ReturnType& return_value);
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReturnType> Kokkos::parallel_scan(const ExecPolicy&  policy, const FunctorType& functor, ReturnType& return_value);
 
 パラメータ:
 ~~~~~~~~~~~
