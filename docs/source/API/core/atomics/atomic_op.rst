@@ -58,7 +58,7 @@
 
 .. cpp:function:: template<class T> void atomic_increment(T* const ptr_to_value);
 
-    ``(*ptr_to_value)++`` を原子的に実行、または、 ``atomic_fetch_add(ptr_to_value, T(1))``　呼び出します。
+    ``(*ptr_to_value)++`` を原子的に実行、または、 ``atomic_fetch_add(ptr_to_value, T(1))``　を呼び出します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
