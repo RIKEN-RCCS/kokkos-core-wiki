@@ -108,7 +108,7 @@
 
 .. code-block:: cpp
 
-    型定義 TeamPolicy<>::member_type team_handle;
+    typedef TeamPolicy<>::member_type team_handle;
     parallel_for(TeamPolicy<>(N,AUTO,4), KOKKOS_LAMBDA (const team_handle& team) {
         int n = team.league_rank();
         parallel_for(TeamThreadRange(team,M), [&] (const int& i) {
