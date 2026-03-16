@@ -8,7 +8,7 @@
 
 .. code-block:: cpp
 
-    [[nodiscard]] int num_threads() noexcept;  // ( 4.1以降)
+    [[nodiscard]] int num_threads() noexcept;  // (バージョン 4.1以降)
 
  ``DefaultHostExecutionSpace``　により使用された同時実行スレッド数を返します。
 
@@ -18,15 +18,15 @@
 
 .. _device_id : device_id.html
 
-.. |device_id| 置換:: ``device_id``
+.. |device_id| replace:: ``device_id``
 
 .. _num_devices : num_devices.html
 
-.. |num_devices| 置換:: ``num_devices``
+.. |num_devices| replace:: ``num_devices``
 
 .. _initialize: ../initialize_finalize/initialize.html
 
-.. |initialize| 置換:: ``initialize``
+.. |initialize| replace:: ``initialize``
 
 .. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
 
