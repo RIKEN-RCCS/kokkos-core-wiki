@@ -5,16 +5,16 @@
 
 .. _CppReferenceSharedPtr: https://en.cppreference.com/w/cpp/memory/shared_ptr
 
-.. |CppReferenceSharedPtr| 置換:: ``std::shared_ptr``
+.. |CppReferenceSharedPtr| replace:: ``std::shared_ptr``
 
 .. _ProgrammingGuide: ../../../ProgrammingGuide/View.html#memory-access-traits
 
-.. |ProgrammingGuide| 置換:: プログラミングガイド
+.. |ProgrammingGuide| replace:: Programming Guide
 
 クラスインターフェイス
 ---------------
 
-.. cpp:class:: テンプレート <class DataType, class... Properties> View
+.. cpp:class:: template <class DataType, class... Properties> View
 
    Kokkos View　は、コンパイル時のレイアウトとメモリ空間を持つ、参照カウント可能な多次元配列です。
    そのセマンティクスは、|CppReferenceSharedPtr|_　のものと同様です。
@@ -38,8 +38,8 @@
       .. code-block:: cpp
          :caption: ビューテンプレートパラメータの順序付け。
 
-         テンプレート <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
-         クラス　ビュー;
+         template <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
+         class View;
 
    :tparam LayoutType: インデックスの基盤となる1次元メモリストレージへのマッピングを決定します。
    
@@ -70,12 +70,12 @@
    ここで、"namespace"　を押します; これは名前空間エンティティを作成するものではなく、ここからポップまでのすべて　ビュークラスの一部であることを、Sphinx　に伝えます。
    すべてのエンティティは、依然としてスコープを介して参照されます (つまり、 View::data_type)。
 
-.. cpp:namespace-push:: テンプレート <class DataType, class... Properties> View
+.. cpp:namespace-push:: template <class DataType, class... Properties> View
 
 パブリック定数
 ^^^^^^^^^^^^^^^^
 
-.. cpp:member:: 静的 constexpr bool reference_type_is_lvalue_reference
+.. cpp:member:: static constexpr bool reference_type_is_lvalue_reference
 
    参照型が、C++左辺値参照であるかどうかの確認。
 
@@ -104,7 +104,7 @@
 
 .. cpp:type:: non_const_scalar_array_type
 
-   :cpp:type:`scalar_array_type`　の非 　:cpp:`const` バージョンであり、それがすでに  non-:cpp:`const`　 :cpp:type:`scalar_array_type` と同じです。
+   :cpp:type:`scalar_array_type`　の non-:cpp:`const` バージョンであり、それがすでに  non-:cpp:`const`　であれば、　:cpp:type:`scalar_array_type` と同じです。
 
 
 スカラー型
@@ -133,7 +133,7 @@
 
 .. cpp:type:: memory_space
 
-   The :ref:`memory space <api-memory-spaces>` where the :cpp:class:`View` data is stored.
+   :cpp:class:`View` データが格納されている　:ref:`memory space <api-memory-spaces>` 。
 
 .. cpp:type:: device_type
 
@@ -152,7 +152,7 @@
 
 .. cpp:type:: non_const_type
 
-   :cpp:any:`DataType` テンプレートパラメータとして渡された、　:cpp:class:type with :cpp:type:`non_const_data_type` を持つ、本　:cpp:class:`View` 。
+   :cpp:any:`DataType` テンプレートパラメータとして渡された、:cpp:class:type with :cpp:type:`non_const_data_type` を持つ、本　:cpp:class:`View` 。
 
 .. cpp:type:: const_type
 
@@ -190,7 +190,7 @@
 
 .. cpp:type:: size_type
 
-   本 :cpp:class:`View`　の　メモリ空間に関するインデックス型。
+   本 :cpp:class:`View`　のメモリ空間に関するインデックス型。
 
 .. cpp:type:: 次元
 
@@ -208,7 +208,7 @@
 
    デフォルトコンストラクタ。 割り当ては行われず、参照カウントも発生しません。すべての領域はゼロであり、データ指針は :cpp:`nullptr` です。
 
-.. cpp:function:: template<class DT, class... Prop> View( const View<DT, Prop...>& rhs)
+.. cpp:function:: template<class DT, class... Prop> View(const View<DT, Prop...>& rhs)
 
    互換性のあるビューを持つコピーコンストラクタ。以下の　`View`　クラスの代入ルールに従います。
 
@@ -228,7 +228,7 @@
 
    :param extents: Extents of the :cpp:class:`View`.
 
-   .. rubric:: 必要要件:
+   .. rubric:: Requirements:
 
    - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
       後者の場合、コンパイル時の次元に対応する範囲は、:cpp:class:`View` 型のコンパイル時の範囲と一致する必要があります。
@@ -247,7 +247,7 @@
 
 .. cpp:function:: template<class IntType> View( const ALLOC_PROP &prop, const IntType& ... extents)
 
-   割り当てプロパティを持つ割り当てコンストラクタ（　:cpp:func:`view_alloc` の呼び出しによって作成される）。実行空間が、 
+   割り当てプロパティを持つ割り当てコンストラクタ（:cpp:func:`view_alloc` の呼び出しによって作成される）。実行空間が、 
    :cpp:any:`prop`　において特定される場合には、 初期化ではそれは使われず、フェンスは設定されません。
    そうでない場合には、:cpp:class:`View` は、:cpp:type:`memory_space` に対応するデフォルトの実行空間インスタンスを使用して初期化され、フェンスが設定されます。
 
@@ -257,16 +257,16 @@
 
    :param extents: ビューの範囲
 
-   .. rubric:: 必要要件:
+   .. rubric:: Requirements:
 
    - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
       後者の場合、コンパイル時の次元に対応する範囲は、:cpp:class:`View` 型のコンパイル時の範囲と一致する必要があります。
    - :cpp:expr:`array_layout::is_regular == true`.
 
-.. cpp:function:: View( const ALLOC_PROP &prop, const array_layout& layout)
+.. cpp:function:: View(const ALLOC_PROP &prop, const array_layout& layout)
 
-   割り当てプロパティ　( :cpp:func:`view_alloc`　への呼び出しにより作成) および　レイアウトオブジェクトを使って、コンストラクタを割り当てます。実行空間が、
-  :cpp:any:`prop`　において、特定される場合には、  初期化ではそれは使われず、フェンスは設定されません。
+   割り当てプロパティ　(:cpp:func:`view_alloc` への呼び出しにより作成) および　レイアウトオブジェクトを使って、コンストラクタを割り当てます。実行空間が、
+  :cpp:any:`prop`　において、特定される場合には、 初期化ではそれは使われず、フェンスは設定されません。
    そうでない場合には、:cpp:class:`View` は、:cpp:type:`memory_space` に対応するデフォルトの実行空間インスタンスを使用して初期化され、フェンスが設定されます。
 
    :param prop:  `view_alloc`　によって返される割り当てプロパティオブジェクト。
@@ -286,7 +286,7 @@
 
    :param extents: :cpp:class:`View`　の範囲。
 
-   .. rubric:: 必要要件:
+   .. rubric:: Requirements:
 
    - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
       後者の場合、コンパイル時の次元に対応する範囲は、:cpp:class:`View` 型のコンパイル時の範囲と一致する必要があります。
@@ -314,7 +314,7 @@
 
    :param extents:  :cpp:class:`View`　の範囲。
 
-   .. rubric:: 必要要件:
+   .. rubric:: Requirements:
 
    - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
       後者の場合、コンパイル時の次元に対応する範囲は、:cpp:class:`View` 型のコンパイル時の範囲と一致する必要があります。
@@ -358,10 +358,10 @@
 
 .. cpp:function:: template <class ElementType, class ExtentsType, class LayoutType, class AccessorType> explicit(SEE_BELOW) View(const mdspan<ElementType, ExtentsType, LayoutType, AccessorType>& mds)
 
-   :tparam ElementType: the mdspan 要素型
-   :tparam ExtentsType: the mdspan 範囲
-   :tparam LayoutType: the mdspan レイアウト
-   :tparam AccessorType: the mdspan 
+   :tparam ElementType: mdspan 要素型
+   :tparam ExtentsType: mdspan 範囲
+   :tparam LayoutType: mdspan レイアウト
+   :tparam AccessorType: mdspan 
 
    :param mds: 変換元の　mdspan。
 
@@ -392,7 +392,7 @@
    :cpp:type:`reference_type` の値を返しますが、この型自体は参照可能である場合もあれば、そうでない場合もあります。
    インデックス引数の数は、ビューの　:cpp:func:`rank`　に一致する必要があります。
 
-   .. rubric:: 必要要件:
+   .. rubric:: Requirements:
    
    - :cpp:expr:`sizeof(IntType...) == rank_dynamic()`
 
@@ -413,13 +413,13 @@
 データレイアウト、次元、ストライド
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. cpp:function:: 静的 constexpr size_t rank()
+.. cpp:function:: static constexpr size_t rank()
 
    :return: ビューのランク
 
    .. versionadded:: 4.1
 
-.. cpp:function:: 静的 constexpr size_t rank_dynamic()
+.. cpp:function:: static constexpr size_t rank_dynamic()
 
    :return: 実行時に決定される次元の数。
 
@@ -441,7 +441,7 @@
 
 .. cpp:function:: constexpr array_layout layout() const
 
-   :返し:  同じ寸法で他のビューを構築するために使用可能なレイアウトオブジェクト。
+   :return:  同じ寸法で他のビューを構築するために使用可能なレイアウトオブジェクト。
 
 
 .. cpp:function:: template<class iType> constexpr size_t extent( const iType& dim) const
@@ -450,7 +450,7 @@
    :param dim: 範囲を取得する対象の次元
    :return:  次元　:cpp:any:`dim`　の範囲
 
-   .. rubric:: 前提条件:
+   .. rubric:: Preconditions:
 
    - :cpp:any:`dim` は、 :cpp:func:`rank`　よりも小さくなければなりません。
 
@@ -464,7 +464,7 @@
 :cpp:`int`　演算が　:cpp:`size_t`　よりも効率的なアーキテクチャにおいて有用です。
    また、その他に、:cpp:`int`型で全てのインデックス演算を実行するアプリケーションにおいて、型キャストの必要性を排除する可能性があります。
 
-   .. rubric:: 前提条件:
+   .. rubric:: Preconditions:
 
    - :cpp:any:`dim` は、 :cpp:func:`rank`　よりも小さくなければなりません。
 
@@ -476,13 +476,13 @@
 
    Example: :cpp:expr:`a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))`
 
-   .. rubric:: 前提条件:
+   .. rubric:: Preconditions:
 
    - :cpp:any:`dim` は、 :cpp:func:`rank`　よりも小さくなければなりません。
 
 .. cpp:function:: constexpr size_t stride_0() const
 
-   :返し:  次元 0　のストライド
+   :return:  次元 0　のストライド
 
 .. cpp:function:: constexpr size_t stride_1() const
 
@@ -520,7 +520,7 @@
    Sets :cpp:expr:`strides[r]` to :cpp:expr:`stride(r)` for all :math:`r` with :math:`0 \le r \lt \texttt{rank()}`.
    Sets :cpp:expr: to :cpp:func:`span()`　への　`strides[rank()]`
 
-   .. rubric:: 前提条件:
+   .. rubric:: Preconditions:
 
    - :cpp:any:`strides` は、長さ :cpp:expr:`rank() + 1`　の配列でなければなりません。
 
@@ -534,29 +534,29 @@
 
 .. cpp:function:: constexpr size_t size() const
 
-   :返し: 範囲の積、つまり、 :cpp:class:`View`　における論理的要素の数。
+   :return: 範囲の積、つまり、 :cpp:class:`View`　における論理的要素の数。
 
 .. cpp:function:: constexpr pointer_type data() const
 
    :return: 基盤データは位置へのポインタ。
 
-   .. ::
+   .. 警告::
    
       Kokkos　によって管理されているメモリに対して、メモリの動作を操作する関数（例：``memAdvise``）を呼び出すと、未定義の動作を引き起こします。
 
 .. cpp:function:: bool span_is_contiguous() const
 
-   :返し: 範囲が連続しているかどうか (つまり、 範囲内のすべてのメモリ位置が、:cpp:class:`View`　に含まれるインデックス空間に属しているかどうか )。
+   :return: 範囲が連続しているかどうか (つまり、 範囲内のすべてのメモリ位置が、:cpp:class:`View`　に含まれるインデックス空間に属しているかどうか )。
 
-.. cpp:function:: 静的 constexpr size_t required_allocation_size(size_t N0=0, size_t N1=0, \
+.. cpp:function:: static constexpr size_t required_allocation_size(size_t N0=0, size_t N1=0, \
          size_t N2=0, size_t N3=0, \
          size_t N4=0, size_t N5=0, \
          size_t N6=0, size_t N7=0);
    
    :param N0, N1, N2, N3, N4, N5, N6, N7: 照会対象となる次元
-   :返し: 指定された次元を持つ管理対象外の :cpp:class:`View` に必要なバイト数。
+   :return: 指定された次元を持つ管理対象外の :cpp:class:`View` に必要なバイト数。
 
-   .. rubric:: 必要要件:
+   .. rubric:: Requirements:
    
    - :cpp:expr:`array_layout::is_regular == true`.
 
@@ -570,11 +570,11 @@
 
 .. cpp:function:: int use_count() const;
 
-   :返し:  基盤となる割り当ての現在の参照カウント。
+   :return:  基盤となる割り当ての現在の参照カウント。
 
 .. cpp:function:: const std::string label() const;
 
-   :返し: ビューのラベル。
+   :return: ビューのラベル。
 
 .. cpp:function:: void assign_data(pointer_type arg_data);
 
@@ -585,7 +585,7 @@
 
 .. cpp:function:: constexpr bool is_allocated() const;
 
-   :返し: ビューが、有効なメモリ位置付けを指す場合には、真。
+   :return: ビューが、有効なメモリ位置付けを指す場合には、真。
 
    本関数は、管理ビューと管理対象外ビューの両方で機能します。
    管理対象外ビューでは、参照されるアドレスが有効であることが保証されるのではなく、単にヌルポインタでないことのみが保証されます。
@@ -602,15 +602,15 @@
 
    :constraints: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>` は、 :cpp:`mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>`　に代入可能でなければなりません。
 
-   :返し: :cpp:class:`View`　の *natural mdspan*　から変換された範囲およびレイアウトを持つ mdspan。
+   :retrun: :cpp:class:`View`　の *natural mdspan*　から変換された範囲およびレイアウトを持つ mdspan。
 
 .. cpp:function:: template <class OtherAccessorType = default_accessor<typename traits::value_type>> constexpr auto to_mdspan(const OtherAccessorType& other_accessor = OtherAccessorType{})
 
    :tparam OtherAccessor: 対象 mdspan アクセサ
 
-   :制約: :cpp:`typename OtherAccessorType::data_handle_type` は、 :cpp:`value_type*`　に代入可能でなければなりません。
+   :constraints: :cpp:`typename OtherAccessorType::data_handle_type` は、 :cpp:`value_type*`　に代入可能でなければなりません。
 
-   :返し: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>`　ですが、 :cpp:any:`other_accessor`　から構築されたアクセサポリシーを伴います。
+   :return: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>`　ですが、 :cpp:any:`other_accessor`　から構築されたアクセサポリシーを伴います。
 
 .. cpp:namespace-pop::
 
@@ -630,7 +630,7 @@
 
 .. cpp:function:: テンプレート <class LT, class... LP, class RT, class... RP> bool operator!=(const View<LT, LP...>& lhs, const View<RT, RP...>& rhs)
 
-   :返し: :cpp:expr:`!(lhs == rhs)`
+   :return: :cpp:expr:`!(lhs == rhs)`
 
 .. _api-view-assignment:
 
