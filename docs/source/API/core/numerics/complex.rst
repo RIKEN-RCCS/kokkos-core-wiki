@@ -26,9 +26,9 @@
 
   * :cpp:any:`T` を、 ``const`` および/または ``volatile`` により修飾されることはできません。
 
-  * 特定のバックエンド(CUDA　や　SYCL　の``long double`` 等）では動作しないタイプもあります。
+  * 特定のバックエンド(CUDA　または　SYCL の``long double`` 等）では動作しないタイプもあります。
 
-  .. rubric:: パブリック型:
+  .. rubric:: Public Types:
 
   .. cpp:type:: value_type = T
 
@@ -88,7 +88,7 @@
 
   .. rubric:: パブリックメンバー関数:
 
-  .. cpp:function:: 演算子 std::complex<T>() const noexcept
+  .. cpp:function:: operator std::complex<T>() const noexcept
 
      ``std::complex``　への変換演算子
 
@@ -195,11 +195,11 @@
   .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, std::complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> bool operator!=(std::complex<T1> x, complex<T2> y) noexcept
 
-    :返し: ``!(x == y)``
+    :retrun: ``!(x == y)``
 
   .. cpp:function:: template<typename T> complex<T> operator+(complex<T> x) noexcept
 
-    :返し: ``x``
+    :return: ``x``
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, T2 y) noexcept
@@ -215,20 +215,20 @@
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(T1 x, complex<T2> y) noexcept
 
-    :返し: 複素値 ``complex(y)`` は複素値「complex(x)」 ``complex(x)``　から差し引かれます。
+    :retrun: 複素値 ``complex(y)`` は複素値「complex(x)」 ``complex(x)``　から差し引かれます。
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(T1 x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(std::complex<T1> x, complex<T2> y) noexcept
 
-    :返し: 複素値 ``complex(x)`` に複素値 ``complex(y)``　を掛けたものです。
+    :retrun: 複素値 ``complex(x)`` に複素値 ``complex(y)``　を掛けたものです。
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(T1 x, complex<T2> y) noexcept
 
-    :返し: 複素値 ``complex(y)`` は複素値 ``complex(x)``　に分割されます。
+    :return: 複素値 ``complex(y)`` は複素値 ``complex(x)``　に分割されます。
 
   .. cpp:function:: template<typename T> std::istream& operator>>(std::ostream& i, complex<T>& x)
 
@@ -236,19 +236,19 @@
 
   .. cpp:function:: template<typename T> std::ostream& operator<<(std::ostream& o, complex<T> x)
 
-    :返し: ``o << std::complex(x)``
+    :return: ``o << std::complex(x)``
 
   .. cpp:function:: template<typename T> T real(complex<T> x) noexcept
 
-    :返し: ``x.real()``.
+    :return: ``x.real()``.
 
   .. cpp:function:: template<typename T> T imag(complex<T> x) noexcept
 
-    :返し: ``x.imag()``.
+    :return: ``x.imag()``.
 
   .. cpp:function:: template<typenmame T> complex<T> polar(T rho, T theta = T())
 
-    :返し: ``complex``の値は、大きさが　``rho``　、位相角が　``theta``　である複素数に対応します。
+    :return: ``complex``の値は、大きさが　``rho``　、位相角が　``theta``　である複素数に対応します。
 
   .. cpp:function:: template<typename T> T abs(complex<T> x)
 
@@ -264,72 +264,72 @@
 
   .. cpp:function:: template<typename T> complex<T> sqrt(complex<T> x)
 
-    :返し: 右半平面の域にある複素平方根  ``x``　。
+    :return: 右半平面の域にある複素平方根  ``x``　。
 
   .. cpp:function:: template<typename T> complex<T> conj(complex<T> x) noexcept
 
-    :返し: 複素共役 ``x``。
+    :return: 複素共役 ``x``。
 
   .. cpp:function:: template<typename T> complex<T> exp(complex<T> x)
   .. cpp:function:: template<typename T> complex<T> exp(std::complex<T> x)
 
-    :返し: 複素 e 底指数関数  ``complex(x)``。
+    :return: 複素 e 底指数関数  ``complex(x)``。
 
   .. cpp:function:: template<typename T> complex<T> log(complex<T> x)
 
-    :返し:  x　の複素自然対数(基数e)。
+    :retrun:  x　の複素自然対数(基数e)。
 
   .. cpp:function:: template<typename T> complex<T> log10(complex<T> x)
 
-    :返し: ``x``　の複素共通(10進底)対数は ``log(x) / log(10)``と定義されます。
+    :return: ``x``　の複素共通(10進底)対数は ``log(x) / log(10)``と定義されます。
 
   .. cpp:function:: template<typename T> complex<T> sin(complex<T> x)
 
-    :返し:  ``x``の複素正弦。
+    :return:  ``x``の複素正弦。
 
   .. cpp:function:: template<typename T> complex<T> cos(complex<T> x)
 
-    :返し:  ``x``　の複素余弦。　
+    :return:  ``x``　の複素余弦。　
 
   .. cpp:function:: template<typename T> complex<T> tan(complex<T> x)
 
-    :返し:  ``x``　の複素接線。
+    :return:  ``x``　の複素接線。
 
   .. cpp:function:: template<typename T> complex<T> sinh(complex<T> x)
 
-    :返し: ``x``　の複素双曲正弦。
+    :return: ``x``　の複素双曲正弦。
 
   .. cpp:function:: template<typename T> complex<T> cosh(complex<T> x)
 
-    :返し:  ``x``　の複素双曲余弦。
+    :return:  ``x``　の複素双曲余弦。
 
   .. cpp:function:: template<typename T> complex<T> tanh(complex<T> x)
 
-    :返し:  ``x``　の複素双曲接線。
+    :return:  ``x``　の複素双曲接線。
 
   .. cpp:function:: template<typename T> complex<T> asinh(complex<T> x)
 
-    :返し:  ``x``　の複素弧双曲正弦。
+    :return:  ``x``　の複素弧双曲正弦。
 
   .. cpp:function:: template<typename T> complex<T> acosh(complex<T> x)
 
-    :返し:  ``x``　の複素弧双曲余弦。
+    :return:  ``x``　の複素弧双曲余弦。
 
   .. cpp:function:: template<typename T> complex<T> atanh(complex<T> x)
 
-    :返し:  ``x``　の複素弧の双曲接線。
+    :return:  ``x``　の複素弧の双曲接線。
 
   .. cpp:function:: template<typename T> complex<T> asin(complex<T> x)
 
-    :返し:  ``x``　の複素弧正弦。
+    :return:  ``x``　の複素弧正弦。
 
   .. cpp:function:: template<typename T> complex<T> acos(complex<T> x)
 
-    :返し:  ``x``　の複素弧余弦。
+    :return:  ``x``　の複素弧余弦。
 
   .. cpp:function:: template<typename T> complex<T> atan(complex<T> x)
 
-    :返し:  ``x``　の複素弧接線。
+    :return:  ``x``　の複素弧接線。
 
   .. cpp:function:: template<size_t I, typename T> constexpr T& get(complex<T>& z) noexcept
   .. cpp:function:: template<size_t I, typename T> constexpr T&& get(complex<T>&& z) noexcept
