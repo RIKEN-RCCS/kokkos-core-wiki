@@ -32,7 +32,7 @@
 バックエンドは、``-DKokkos_ENABLE_<BACKEND>=ON``
 フラグで設定することで有効にできますが、
 そこでは、``<BACKEND>``　は有効化することを望む特定のバックエンドに置き換えてください。
-（例：CUDAの場合は、 ``-DKokkos_ENABLE_CUDA=ON`` ）
+（例：CUDA の場合は、 ``-DKokkos_ENABLE_CUDA=ON`` ）
 
 **制約:**
   相互排斥: 同時に有効にできるデバイスバックエンド（例：CUDA、HIP、SYCL）とホスト並列バックエンド（例：OpenMP、C++スレッド）は、それぞれ1つずつに限られます。なぜなら、これらのバックエンドが並列処理を潜在的な競合が生じる方法で管理するためです。
@@ -52,7 +52,7 @@
       - ディスクリプション/情報
 
     * - ``Kokkos_ENABLE_SERIAL``
-      -  CPU　を対象としたシリアルバックエンドの構築
+      -  CPU を対象としたシリアルバックエンドの構築
 
 ホスト並列バックエンド
 ----------------------
@@ -66,7 +66,7 @@
       - ディスクリプション/情報
 
     * - ``Kokkos_ENABLE_OPENMP``
-      -  CPU　を対象とした　OpenMP　バックエンドの構築
+      -  CPU を対象とした　OpenMP　バックエンドの構築
 
     * - ``Kokkos_ENABLE_THREADS``
       -  C++ スレッドバックエンドの構築
@@ -184,7 +184,7 @@
 
 .. [#dual_view_modify_check] ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` デフォルト値は、以下の通り:
   
-  * ``CMAKE_BUILD_TYPE`` が ``デバッグ`` の場合 ``オン``、それ以外の場合は ``オフ`` ( Kokkos 4.7まで)
+  * ``CMAKE_BUILD_TYPE`` が ``デバッグ`` の場合 ``オン``、それ以外の場合は ``オフ`` (Kokkos 4.7まで)
   * 常に ``オン`` ( Kokkos 4.7以降)
 
 .. _keywords_enable_backend_specific_options:
@@ -198,7 +198,7 @@
     :配列: 左
 
     * -
-      - Description/infoディスクリプション/情報
+      - ディスクリプション/情報
       - デフォルト
 　　
     * * ``Kokkos_ENABLE_CUDA_CONSTEXPR``
@@ -238,7 +238,7 @@
       * ``オフ``
 
     * * ``Kokkos_ENABLE_IMPL_HPX_ASYNC_DISPATCH``
-      * HPX　バックエンドの非同期ディスパッチを有効化します
+      * HPX バックエンドの非同期ディスパッチを有効化します
       * ``オン``
 
     * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
@@ -275,7 +275,7 @@
 
 開発
 -----------
-これらは、Kokkos　の開発者向けです。 ユーザーであれば、おそらくこれらの設定は行うべきではないでしょう。
+これらは、Kokkos の開発者向けです。 ユーザーであれば、おそらくこれらの設定は行うべきではないでしょう。
 
 .. リスト表::
     :幅: 25 65 35
