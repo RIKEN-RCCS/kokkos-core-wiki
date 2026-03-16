@@ -11,11 +11,11 @@
    * - クラス
      - ディスクリプション
    * - `create_mirror[_view] <view/create_mirror.html>`__
-     - 別のメモリ空間に、　``Kokkos::View``　のコピーを作成。
+     - 別のメモリ空間に、 ``Kokkos::View``　のコピーを作成。
    * - `deep_copy() <view/deep_copy.html>`__
      - ビューとスカラー間のデータコピー。
    * - `LayoutLeft <view/layoutLeft.html>`__
-     - Fortran　に準拠したメモリレイアウト。
+     - Fortran に準拠したメモリレイアウト。
    * - `LayoutRight <view/layoutRight.html>`__
      -  C　に一致するメモリレイアウト。
    * - `LayoutStride <view/layoutStride.html>`__
@@ -23,9 +23,9 @@
    * - `MemoryTraits <view/memoryTraits.html>`__
      - メモリアクセス特性。
    * - `realloc <view/realloc.html>`__
-     -  ``Kokkos::View``　の再割り当て。
+     -  ``Kokkos::View`` の再割り当て。
    * - `resize <view/resize.html>`__
-     - 　``Kokkos::View``　のサイズ変更。
+     - 　``Kokkos::View`` のサイズ変更。
    * - `subview <view/subview.html>`__
      - 　``Kokkos::View``　からスライスを取得。
    * - `View <view/view.html>`__
