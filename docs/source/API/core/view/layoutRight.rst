@@ -21,7 +21,7 @@
    多次元ビューに提供された場合、  **最後の指数が隣接したものである**　ために、
    メモリを配置します。 これは、割り当てに関する　C　の慣習に合致します。
 
-   .. rubric:: ネストされた型定義
+   .. rubric:: Nested Typedefs
 
    .. cpp:type:: array_layout
 
@@ -29,7 +29,7 @@
 
    .. rubric:: メンバー変数
 
-   .. cpp:member:: 静的 constexpr bool is_extent_constructible = true
+   .. cpp:member:: static constexpr bool is_extent_constructible = true
 
        このクラスが拡張可能なコンストラクタを持つかどうかを検出するためのブール値。
 
