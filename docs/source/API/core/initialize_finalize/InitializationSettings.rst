@@ -10,7 +10,7 @@
 
 .. code-block:: cpp
 
-    自動　設定 = Kokkos::InitializationSettings()
+    auto settings = Kokkos::InitializationSettings()
                     .set_num_threads(8)
                     .set_device_id(0)
                     .set_disable_warnings(false);
