@@ -17,7 +17,7 @@ TeamHandleConcept　は、　``TeamPolicy``　と ``TeamTask``　の ``member_ty
 .. cpp:class:: TeamHandleConcept
 
 
-   .. rubric:: 公開ネストエイリアス
+   .. rubric:: Public nested aliases
 
    .. cpp:type:: execution_space
 
@@ -53,7 +53,7 @@ TeamHandleConcept　は、　``TeamPolicy``　と ``TeamTask``　の ``member_ty
 
    .. cpp:function:: TeamHandleConcept & operator = ( TeamHandleConcept const & ) = default
 
-      代入演算子。 返し: ``*this``.
+      代入演算子。 return: ``*this``.
 
    .. rubric:: インデックス照会
 
@@ -145,7 +145,7 @@ TeamHandleConcept　は、　``TeamPolicy``　と ``TeamTask``　の ``member_ty
 
 .. code-block:: cpp
 
-    型定義 TeamPolicy<...> policy_type;
+    typedef TeamPolicy<...> policy_type;
     parallel_for(policy_type(N,TEAM_SIZE).set_scratch_size(PerTeam(0,4096)),
                 KOKKOS_LAMBDA (const typename policy_type::member_type& team_handle) {
         int ts = team_handle.team_size(); // returns TEAM_SIZEを返します
