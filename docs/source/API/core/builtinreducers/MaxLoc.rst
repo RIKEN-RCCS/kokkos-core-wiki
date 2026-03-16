@@ -22,12 +22,12 @@
 .. code-block:: cpp
 
    template<class Scalar, class Index, class Space>
-   クラス MaxLoc{
-     パブリック:
-       型定義 MaxLoc リデューサー;
-       型定義 ValLocScalar<typename std::remove_cv<Scalar>::type,
+   class MaxLoc{
+     public:
+       typedef MaxLoc reducer;
+       typedef ValLocScalar<typename std::remove_cv<Scalar>::type,
                                typename std::remove_cv<Index>::type > value_type;
-       型定義 Kokkos::View<value_type, Space> result_view_type;
+       typedef Kokkos::View<value_type, Space> result_view_type;
 
        KOKKOS_INLINE_FUNCTION
        void join(value_type& dest, const value_type& src) const;
@@ -53,7 +53,7 @@
 
 .. cpp:class:: template<class Scalar, class Index, class Space> MaxLoc
 
-   .. rubric:: パブリック型
+   .. rubric:: Public Types
 
    .. cpp:type:: リデューサー
 
