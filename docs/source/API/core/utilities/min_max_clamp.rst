@@ -6,7 +6,7 @@
 
 .. _StandardLibraryHeaderAlgorithm: https://en.cppreference.com/w/cpp/header/algorithm
 
-.. |StandardLibraryHeaderAlgorithm| 置換:: ``<algorithm>``
+.. |StandardLibraryHeaderAlgorithm| replace:: ``<algorithm>``
 
  ヘッダー ``<Kokkos_Core.hpp>``　に定義
 
@@ -16,19 +16,19 @@ min/max および clamp 関数テンプレートは、Kokkos 3.7 以降、``Kokk
 
 .. _min: https://en.cppreference.com/w/cpp/algorithm/min
 
-.. |min| 置換:: ``min``
+.. |min| replace:: ``min``
 
 .. _max: https://en.cppreference.com/w/cpp/algorithm/max
 
-.. |max| 置換:: ``max``
+.. |max| replace:: ``max``
 
 .. _minmax: https://en.cppreference.com/w/cpp/algorithm/minmax
 
-.. |minmax| 置換:: ``minmax``
+.. |minmax| replace:: ``minmax``
 
 .. _clamp: https://en.cppreference.com/w/cpp/algorithm/clamp
 
-.. |clamp| 置換:: ``clamp``
+.. |clamp| replace:: ``clamp``
 
 
 ========== ============================================================
@@ -43,13 +43,13 @@ min/max および clamp 関数テンプレートは、Kokkos 3.7 以降、``Kokk
 
 .. _KokkosClamp: https://github.com/kokkos/kokkos/blob/4.3.00/core/src/Kokkos_Clamp.hpp
 
-.. |KokkosClamp| 置換:: ``<Kokkos_Clamp.hpp>``
+.. |KokkosClamp| replace:: ``<Kokkos_Clamp.hpp>``
 
 .. _KokkosMinMax: https://github.com/kokkos/kokkos/blob/4.3.00/core/src/Kokkos_MinMax.hpp
 
 .. |KokkosMinMax| :: ``<Kokkos_MinMax.hpp>``
 
-* バージョン4.3より、 これらの関数を利用可能にするには、それぞれ |KokkosClamp|_ および |KokkosMinMax|_ が含まれる場合があります。
+* バージョン 4.3より、 これらの関数を利用可能にするには、それぞれ |KokkosClamp|_ および |KokkosMinMax|_ が含まれる場合があります。
 
 ----
 
@@ -58,11 +58,11 @@ min/max および clamp 関数テンプレートは、Kokkos 3.7 以降、``Kokk
 
 .. _min_element: ../../algorithms/std-algorithms/all/StdMinElement.html
 
-.. |min_element| 置換:: ``min_element``
+.. |min_element| replace:: ``min_element``
 
 .. _max_element: ../../algorithms/std-algorithms/all/StdMaxElement.html
 
-.. |max_element| 置換:: ``max_element``
+.. |max_element| replace:: ``max_element``
 
 .. _minmax_element: ../../algorithms/std-algorithms/all/StdMinMaxElement.html
 
