@@ -14,7 +14,7 @@
 インターフェイス
 ---------
 
-.. cpp:class:: テンプレート <class Rank, typename TeamHandle> ThreadVectorMDRange
+.. cpp:class:: template <class Rank, typename TeamHandle> ThreadVectorMDRange
 
    .. rubric:: コンストラクタ
 
@@ -58,14 +58,14 @@
 
 .. code-block:: cpp
 
-   using TeamHandle = TeamPolicy<>::member_type　を使用;
+   using TeamHandle = TeamPolicy<>::member_type;
 
    parallel_for(TeamPolicy<>(N, Kokkos::AUTO),
      KOKKOS_LAMBDA(TeamHandle const& team) {
        int leagueRank = team.league_rank();
 
-       自動 teamThreadRange = TeamThreadRange(team, n0);
-       自動 threadVectorMDRange =
+       auto teamThreadRange = TeamThreadRange(team, n0);
+       auto threadVectorMDRange =
            ThreadVectorMDRange<Rank<3>, TeamHandle>(
                team, n1, n2, n3);
 
