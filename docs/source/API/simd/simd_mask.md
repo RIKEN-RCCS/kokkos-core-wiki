@@ -10,9 +10,9 @@
 ## インターフェイス
 
 ```c++
-名前空間 実験的 {
-テンプレート <class T, class Abi>
-クラス basic_simd_mask;
+namespace Experimental {
+template <class T, class Abi>
+class basic_simd_mask;
 }
 ```
 
