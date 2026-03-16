@@ -30,8 +30,8 @@
 
    int main(int argc, char* argv[]) {
      if (Kokkos::num_devices() == 0) {
-       std::cerr << "execution\nについて、利用可能なデバイスはありません";
-       返し 1;
+       std::cerr << "no device available for execution\n";
+       return 1;
      }
      Kokkos::initialize(argc, argv);
      // 何かを実行
@@ -46,15 +46,15 @@
 
 .. _device_id : device_id.html
 
-.. |device_id| 置換:: ``device_id``
+.. |device_id| replace:: ``device_id``
 
 .. _num_threads : num_threads.html
 
-.. |num_threads| 置換:: ``num_threads``
+.. |num_threads| replace:: ``num_threads``
 
 .. _initialize: ../initialize_finalize/initialize.html
 
-.. |initialize| 置換:: ``initialize``
+.. |initialize| replace:: ``initialize``
 
 .. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
 
