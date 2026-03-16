@@ -120,23 +120,23 @@
 
 .. _Serial: execution_spaces.html
 
-.. |Serial| 置換:: :cpp:func:`Serial`
+.. |Serial| replace:: :cpp:func:`Serial`
 
 .. _OpenMP: execution_spaces.html
 
-.. |OpenMP| 置換:: :cpp:func:`OpenMP`
+.. |OpenMP| replace:: :cpp:func:`OpenMP`
 
 .. _Threads: execution_spaces.html
 
-.. |Threads| 置換:: :cpp:func:`Threads`
+.. |Threads| replace:: :cpp:func:`Threads`
 
 .. _Cuda: execution_spaces.html
 
-.. |Cuda| 置換:: :cpp:func:`Cuda`
+.. |Cuda| replace:: :cpp:func:`Cuda`
 
 .. _HPX: execution_spaces.html
 
-.. |HPX| 置換:: :cpp:func:`HPX`
+.. |HPX| replace:: :cpp:func:`HPX`
 
 +--------------------------------+--------------------------------------------------------------------------+
 | マクロ                          | ディスクリプション                                                              |
