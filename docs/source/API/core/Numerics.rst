@@ -28,8 +28,7 @@
 
    numerics/bit-manipulation.md
 
-The header ``<Kokkos_BitManipulation.hpp>`` is a backport of the C++20 standard library header ``<bit>`` and
-provides several function templates to access, manipulate, and process individual bits and bit sequences.
+ヘッダー ``<Kokkos_BitManipulation.hpp>`` は、 C++20 標準ライブラリヘッダー ``<bit>`` のバックポートであり、個々のビットおよびビットシーケンスのアクセス、操作およびプロセスのためにいくつかの関数テンプレートを提供します。
 
 .. toctree::
    :maxdepth: 1
