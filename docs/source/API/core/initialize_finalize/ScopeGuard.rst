@@ -31,7 +31,7 @@
 
     そのライフサイクルの開始時に　``Kokkos::initialize``　を呼び出し、終了時に、``Kokkos::finalize``　を呼び出すクラス。
 
-    .. rubric:: コンストラクタ
+    .. rubric:: Constructors
 
     .. cpp:function:: ScopeGuard(int& argc, char* argv[]);
 
@@ -46,7 +46,7 @@
 
        .. 警告:: 3.7まで有効。
 
-    .. cpp:function:: テンプレート <class... Args> ScopeGuard(Args&&... args);
+    .. cpp:function:: template <class... Args> ScopeGuard(Args&&... args);
 
         :param args:  `Kokkos::initialize <initialize.html#kokkosinitialize>`_　に引き渡す引数。
 
@@ -55,7 +55,7 @@
 
 	.. code-block:: cpp
 
-	   テンプレート <class... Args> ScopeGuard(Args&&... args){ initialize(std::forward<Args>(args)...); }
+	   template <class... Args> ScopeGuard(Args&&... args){ initialize(std::forward<Args>(args)...); }
 
     .. cpp:function:: ~ScopeGuard();
 
@@ -121,10 +121,8 @@
     int main(int argc, char* argv[]) {
         Kokkos::ScopeGuard guard(argc, argv);
         Kokkos::View<double*> my_view("my_view", 10);
-        // my_view destructor called before Kokkos::finalize
-        // ScopeGuard destructor called, calls Kokkos::finalize
-    }
-
+        //  Kokkos::finalize　の前に呼び出された　my_view　デストラクタ
+        //　呼び出された　ScopeGuard デストラクタが Kokkos::finalize　を呼び出します
 
 以下も参照
 ~~~~~~~~
