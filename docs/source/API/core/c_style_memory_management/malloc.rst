@@ -8,15 +8,15 @@
 
 .. _MemorySpace: ../memory_spaces.html
 
-.. |MemorySpace| 置換:: ``MemorySpace``
+.. |MemorySpace| replace:: ``MemorySpace``
 
 .. _Kokkos_kokkos_free: free.html
 
-.. |Kokkos_kokkos_free| 置換:: ``Kokkos::kokkos_free()``
+.. |Kokkos_kokkos_free| replace:: ``Kokkos::kokkos_free()``
 
 .. _Kokkos_realloc: realloc.html
 
-.. |Kokkos_realloc| 置換:: ``Kokkos::kokkos_realloc()``
+.. |Kokkos_realloc| replace:: ``Kokkos::kokkos_realloc()``
 
 指定されたメモリ空間 |MemorySpace|_ 上に、ラベルなどのメタデータ用に追加のスペースを加えた、初期化されていないストレージを ``size`` バイト分割り当てます。
 
