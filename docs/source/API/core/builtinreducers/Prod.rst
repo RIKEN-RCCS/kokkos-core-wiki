@@ -22,11 +22,11 @@
 .. code-block:: cpp
 
    template<class Scalar, class Space>
-   クラス Prod{
-     パブリック:
-       型定義 Prod reducerリデューサー;
-       型定義 typename std::remove_cv<Scalar>::type value_type;
-       型定義 Kokkos::View<value_type, Space> result_view_type;
+   class Prod{
+     public:
+       typedef Prod reducer;
+       typedef typename std::remove_cv<Scalar>::type value_type;
+       typedef Kokkos::View<value_type, Space> result_view_type;
 
        KOKKOS_INLINE_FUNCTION
        void join(value_type& dest, const value_type& src) const;
@@ -52,7 +52,7 @@
 
 .. cpp:class:: template<class Scalar, class Space> Prod
 
-   .. rubric:: パブリック型
+   .. rubric:: Public Types
 
    .. cpp:type:: リデューサー
 
