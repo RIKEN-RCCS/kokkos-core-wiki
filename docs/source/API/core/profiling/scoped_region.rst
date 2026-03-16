@@ -4,14 +4,14 @@
 .. role:: cpp(code)
    :language: cpp
 
-Defined in header ``<Kokkos_Profiling_ScopedRegion.hpp>``
+ヘッダー ``<Kokkos_Profiling_ScopedRegion.hpp>``　に定義
 
 使用例
 -----
 
 .. code-block:: cpp
 
-   Kokkos::Profiling::ScopedRegion region("label");  // (since 4.1)
+   Kokkos::Profiling::ScopedRegion region("label");  // (バージョン 4.1以降)
 
 
 
@@ -29,7 +29,7 @@ Defined in header ``<Kokkos_Profiling_ScopedRegion.hpp>``
 .. cpp:Function:: ~ScopedRegion();
 
    領域を終了します。
-   Calls ``Profiling::popRegion()``　を呼び出します。
+    ``Profiling::popRegion()``　を呼び出します。
 
 例
 -------
@@ -41,9 +41,9 @@ Defined in header ``<Kokkos_Profiling_ScopedRegion.hpp>``
    void do_work_v1() {
      Kokkos::Profiling::pushRegion("MyApp::do_work");
      // <code>
-     if (cond) の場合{
+     if (cond) {
        Kokkos::Profiling::popRegion();  // must remember to pop here as well
-       返し;
+       return;
      }
      // <more code>
      Kokkos::Profiling::popRegion();
@@ -52,7 +52,7 @@ Defined in header ``<Kokkos_Profiling_ScopedRegion.hpp>``
    void do_work_v2() {
      Kokkos::Profiling::ScopedRegion region("MyApp::do_work");
      // <code>
-     if (cond) を返す場合;
+     if (cond) return;
      // <more code>
    }
 
