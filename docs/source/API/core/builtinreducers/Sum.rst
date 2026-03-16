@@ -52,7 +52,7 @@
 
 .. cpp:class:: template<class Scalar, class Space> Sum
 
-   .. rubric:: パブリック型
+   .. rubric:: Public Types
 
    .. cpp:type:: リデューサー
 
