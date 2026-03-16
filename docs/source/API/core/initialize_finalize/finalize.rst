@@ -52,7 +52,7 @@ Kokkos　実行環境を完了。
 
     int main(int argc, char* argv[]) {
         Kokkos::initialize(argc, argv);
-        {  // Kokkos::finalizeが呼び出される前に、　my_view　のデストラクタが確実に呼び出されるようにする範囲
+        {  // Kokkos::finalize　が呼び出される前に、　my_view　のデストラクタが確実に呼び出されるようにする範囲
             Kokkos::View<double*> my_view("my_view", 10);
         }  // my_view　の範囲がここで終了
         Kokkos::finalize();
