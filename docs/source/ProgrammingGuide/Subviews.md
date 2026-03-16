@@ -52,11 +52,11 @@ Kokkos::View<double**> A ("A", N0, N1);
 Kokkos::View<double**,LayoutStride> A_sub(A,make_pair(2,4),make_pair(3,7));
 ```
 
-この用途ためには、サブビューのレイアウトタイプを知っている必要があります。 良い点としては、このような直接的な構成は、 `Kokkos::subview`関数を使うよりも一般的に安価です
+この用途ためには、サブビューのレイアウトタイプを知っている必要があります。 良い点としては、このような直接的な構成は、 `Kokkos::subview` 関数を使うよりも一般的に安価です
 
 ### C++11 型演鐸
 
- 上記の例では、C++11　のキーワード　 `auto` が使われていることに注意してください。`A` サブビューは、親ビューとは異なるタイプを持つことがあります。例えば、 `A` に　LayoutRight　があり、A_sub　に　LayoutStride　がある場合、A の行全体のサブビューにも　LayoutRight　が存在しますが、 `A` の列全体のサブビューには　LayoutStride　が存在します。 `subview` 関数の結果を間違った型に割り当てる場合、Kokkos　はコンパイル時エラーを発生させます。 これを回避する最も簡単な方法は、C++11　の自動キーワードを使ってコンパイラに正しい型を導き出すことです。 とはいえ、自動車保険には独自のコストがかかります。 一般的に、コンパイラにとっては、明示的に既知の型よりも自動を扱う方がコストがかかります。
+ 上記の例では、C++11　のキーワード　 `auto` が使われていることに注意してください。`A` サブビューは、親ビューとは異なるタイプを持つことがあります。例えば、 `A` に　LayoutRight　があり、A_sub　に　LayoutStride　がある場合、A の行全体のサブビューにも　LayoutRight　が存在しますが、 `A` の列全体のサブビューには　LayoutStride が存在します。 `subview` 関数の結果を間違った型に割り当てる場合、Kokkos　はコンパイル時エラーを発生させます。 これを回避する最も簡単な方法は、C++11　の自動キーワードを使ってコンパイラに正しい型を導き出すことです。 とはいえ、自動車保険には独自のコストがかかります。 一般的に、コンパイラにとっては、明示的に既知の型よりも自動を扱う方がコストがかかります。
 
 ### サブビューの次元
 
@@ -71,12 +71,12 @@ Kokkos::View<double**,LayoutStride> A_sub(A,make_pair(2,4),make_pair(3,7));
 一部の用途では、引数が与えられたサブビューのタイプを知ることが有用です。 このような場合、`auto`　型控除の利用は不便になることがあります。 d`decltype()` と  `std::declval` を使ってサブビュー関数からこれを得ることも可能ですが、Kokkos は便利な型エイリアスを提供します:
 
 ```c++
-my_view_type = Kokkos::View<double **>　を使用;
+using my_view_type = Kokkos::View<double **>;
 my_subview_type = Kokkos::Subview<my_view_type,
                                         std::remove_const_t<decltype(Kokkos::ALL)>,
-                                        Kokkos::pair<unsigned, unsigned>>　を使用;
+                                        using Kokkos::pair<unsigned, unsigned>>;
 
-my_subview_type_deduced = decltype(subview(std::declval<my_view_type>(), Kokkos::ALL, std::make_pair(1u, 1u)))　を使用;
+using my_subview_type_deduced = decltype(subview(std::declval<my_view_type>(), Kokkos::ALL, std::make_pair(1u, 1u)));
 
 static_assert(std::is_same<my_subview_type, my_subview_type_deduced>::value);
 ```
