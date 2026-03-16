@@ -4,7 +4,7 @@
 ====================
 
 .. 警告::
-   ``half_t`` and ``bhalf_t`` are still in the ``Kokkos::Experimental`` namespace.
+   ``half_t`` および ``bhalf_t`` は、まだ ``Kokkos::Experimental`` namespace　内にあります。
 
 型
 -----
@@ -78,7 +78,7 @@ Kokkos　はポータブルな半精度型を、``Kokkos::Experimental::half_t``
 
 ¹　GPU_ARCH >= 80　の場合のみ
 
-²　--std=c++20 (https://docs.nvidia.com/cuda/archive/12.3.2/cuda-toolkit-release-notes/index.html#cuda-math-release-12-3)を使ってコンパイルする際、nvcc-12.2　に対して、ではありません。
+²　--std=c++20 (https://docs.nvidia.com/cuda/archive/12.3.2/cuda-toolkit-release-notes/index.html#cuda-math-release-12-3) を使ってコンパイルする際、nvcc-12.2　に対して、ではありません。
 
 例
 ~~~~~~~
