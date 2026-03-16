@@ -15,7 +15,7 @@ TeamThreadMDRange　は、階層的並列処理の中で使用される、`neste
 インターフェイス
 ---------
 
-.. cpp:class:: テンプレート <class Rank, typename TeamHandle> TeamThreadMDRange
+.. cpp:class:: template <class Rank, typename TeamHandle> TeamThreadMDRange
 
    .. rubric:: コンストラクタ
 
@@ -57,14 +57,14 @@ TeamThreadMDRange　は、階層的並列処理の中で使用される、`neste
 
 .. code-block:: cpp
 
-   TeamHandle = TeamPolicy<>::member_type　を使用;
+   using TeamHandle = TeamPolicy<>::member_type;
 
    parallel_for(TeamPolicy<>(N,AUTO),
      KOKKOS_LAMBDA (TeamHandle const& team) {
 
        int leagueRank = team.league_rank();
 
-       自動　範囲 = TeamThreadMDRange<Rank<4>, TeamHandle>(team, n0, n1, n2, n3);
+       auto range = TeamThreadMDRange<Rank<4>, TeamHandle>(team, n0, n1, n2, n3);
 
        parallel_for(range, [=](int i0, int i1, int i2, int i3) {
          A(leagueRank, i0, i1, i2, i3) = B(leagueRank, i1) + C(i1, i2, i3);
