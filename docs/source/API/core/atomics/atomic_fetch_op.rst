@@ -70,7 +70,7 @@
 
 .. cpp:function:: template<class T> T atomic_fetch_mod(T* const ptr_to_value, const T value);
 
-   Atomically executes ``tmp = *ptr_to_value; *ptr_to_value %= value; return tmp;``　を原子的に実行します。
+   ``tmp = *ptr_to_value; *ptr_to_value %= value; return tmp;``　を原子的に実行します。
 
    :param ptr_to_value: 更新対象の値のアドレス
    :param value: 元の値を組み合わせるための値。
