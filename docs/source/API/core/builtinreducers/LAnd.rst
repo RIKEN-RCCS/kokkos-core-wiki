@@ -25,9 +25,9 @@ Header File: ``<Kokkos_Core.hpp>``
    template<class Scalar, class Space>
    class LAnd{
      public:
-       型定義 LAnd リデューサー;
-       型定義 型名 std::remove_cv<Scalar>::type value_type;
-       型定義 Kokkos::View<value_type, Space> result_view_type;
+       typedef LAnd reducer;
+       typedef typename std::remove_cv<Scalar>::type value_type;
+       typedef Kokkos::View<value_type, Space> result_view_type;
 
        KOKKOS_INLINE_FUNCTION
        void join(value_type& dest, const value_type& src) const;
@@ -53,7 +53,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
 .. cpp:class:: template<class Scalar, class Space> LAnd
 
-   .. rubric:: パブリック型
+   .. rubric:: Public Types
 
    .. cpp:type:: リデューサー
 
