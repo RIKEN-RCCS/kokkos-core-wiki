@@ -47,19 +47,20 @@
   .. cpp:type:: value_type = T
   .. cpp:type:: pointer = T*
   .. cpp:type:: const_pointer = const T*
-  .. cpp:type:: reference = T&
+  .. cpp:type:: reference = T&  
   .. cpp:type:: const_reference = const T&
   .. cpp:type:: size_type = size_t
   .. cpp:type:: difference_type = ptrdiff_t
+  
 
   .. rubric:: パブリックメンバー関数
 
-  .. cpp:function:: 静的 constexpr ブール empty() noexcept
+  .. cpp:function::  constexpr ブール empty() noexcept
 
     :返し: ``N == 0``
     :since: ``非定数`` 5.0以降　
 
-  .. cpp:function:: 静的 constexpr size_type size() noexcept
+  .. cpp:function:: static constexpr size_type size() noexcept
   .. cpp:function:: constexpr size_type max_size() const noexcept
 
     :return: ``N``
@@ -69,7 +70,7 @@
   .. cpp:function:: constexpr const_reference operator[](size_t i) const
 
     :返し: 配列の ``i``　番目の要素への参照。
-    :since: 引数が整数型、またはスコープのない列挙型である必要はありません。 ( 5.1以降)
+    :since: 引数が整数型、またはスコープのない列挙型である必要はありません。 (バージョン　5.1以降)
 
   .. cpp:function:: constexpr pointer data() noexcept
   .. cpp:function:: constexpr const_pointer data() const noexcept
@@ -246,7 +247,7 @@ ________
    static_assert(std::is_same_v<decltype(t2), Kokkos::Array<int, 4>>);
 
    // 特定された要素の型を使って、長さを演鐸
-   // implicit conversion happens暗示的変換が発生
+   // 暗示的変換が発生
    auto t3 = Kokkos::to_array<long>({0, 1, 3});
    static_assert(std::is_same_v<decltype(t3), Kokkos::Array<long, 3>>);
 
@@ -262,5 +263,5 @@ ________
    // char s[2][6] = {"nice", "thing"};
    // auto t6 = Kokkos::to_array(s);
 
-   返し 0;
+   return 0;
  }
