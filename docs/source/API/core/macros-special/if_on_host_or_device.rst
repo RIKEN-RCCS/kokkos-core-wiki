@@ -58,17 +58,17 @@ OpenACC　または　OpenMPTarget　をサポートするコンパイラ等、G
 
 .. code-block:: cpp
 
-    構造体 MyS { int i; };
+    struct MyS { int i; };
 
     KOKKOS_FUNCTION MyS MakeStruct() {
       // 本戻り値ステートメントは、ホスト対象のみに対してコンパイルされます。
       KOKKOS_IF_ON_HOST((
-        返し MyS{0};
+        return MyS{0};
       ))
 
       // 本戻り値ステートメントは、デバイス対象のみに対してコンパイルされます。
       KOKKOS_IF_ON_DEVICE((
-        返し MyS{1};
+        return MyS{1};
       ))
     }
 
