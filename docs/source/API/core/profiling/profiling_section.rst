@@ -37,18 +37,18 @@
 .. cpp:Function:: ~ProfilingSection();
 
    セクションを削除します。
-   Calls ``Profiling.destroyProfileSection(sectionID);``　を呼び出します。
+    ``Profiling.destroyProfileSection(sectionID);``　を呼び出します。
 
 .. cpp:Function:: void start();
 
    セクションを開始します。
-   Calls ``Profiling::startSection(sectionID);``　を呼び出します。
+    ``Profiling::startSection(sectionID);``　を呼び出します。
 
 
 .. cpp:Function:: void stop();
 
    セクションを終了します。
-   Calls ``Profiling::stopSection(sectionID);``　を呼び出します。
+   ``Profiling::stopSection(sectionID);``　を呼び出します。
 
 
 **以下も参照**
