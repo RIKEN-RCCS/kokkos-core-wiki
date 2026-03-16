@@ -22,7 +22,7 @@
 
    |
 
-   .. rubric:: *パブリック* 型定義
+   .. rubric:: *Public* typedefs
 
    .. cpp:type:: report_type
 
@@ -38,7 +38,7 @@
       :cpp:type:`device_type::execution_space`
 
 
-   .. rubric:: *パブリック* コンストラクタ
+   .. rubric:: *Public* constructors
 
    .. cpp:function:: ErrorReporter(const std::string& label, int size)
 
