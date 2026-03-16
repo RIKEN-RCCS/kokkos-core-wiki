@@ -25,10 +25,10 @@ TeamThreadRange　は  、階層的並列処理内で使われる、 `nested exe
 .. code-block:: cpp
     
     template<class TeamMemberType, class iType>
-    /* 定義された実装 */ TeamThreadRange(TeamMemberType team, iType count);
+    /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType count);
     
     template<class TeamMemberType, class iType1, class iType2>
-    /* 定義された実装 */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
+    /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
 
 ディスクリプション
 -----------
@@ -36,7 +36,7 @@ TeamThreadRange　は  、階層的並列処理内で使われる、 `nested exe
 .. code-block:: cpp
 
     template<class TeamMemberType, class iType>
-    /* 定義された実装 */ TeamThreadRange(TeamMemberType team, iType count);
+    /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType count);
 
 \
     チームのスレッド全体でインデックスレンジ　``0`` から ``count-1`` までを分割します。
@@ -82,7 +82,7 @@ TeamThreadRange　は  、階層的並列処理内で使われる、 `nested exe
 
 .. code-block:: cpp
 
-    型定義 TeamPolicy<>::member_type team_handle;
+    typedef TeamPolicy<>::member_type team_handle;
     parallel_for(TeamPolicy<>(N,AUTO,4), KOKKOS_LAMBDA (const team_handle& team) {
         int n = team.league_rank();
         parallel_for(TeamThreadRange(team,M), [&] (const int& i) {
