@@ -53,7 +53,7 @@ and `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
 
 .. code-block:: cpp
 
-    Kokkos::タイマー　タイマー;
+    Kokkos::Timer timer;
     // 本演算は非同期であり、フェンスなしで行われます。
     // ローンチオーバーヘッドのみを計測します。
     Kokkos::parallel_for("Test", N, functor);
