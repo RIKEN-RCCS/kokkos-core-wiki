@@ -22,9 +22,9 @@
 
 * 　``View::memory_space``　にアクセス可能な実行スペースインスタンス。
 
-* 要素の初期化および破棄を回避するための　``Kokkos::WithoutInitializing``。
+* 要素の初期化および破棄を回避するための　``Kokkos::WithoutInitializing`` 。
 
-* ホスト上で要素の初期化と破棄を順次実行するための　``Kokkos::SequentialHostInit`` (　4.4.01より　)。
+* ホスト上で要素の初期化と破棄を順次実行するための　``Kokkos::SequentialHostInit`` (バージョン 4.4.01より)。
 
 * メモリアライメントのためのパディング次元への割り当てを可能にするための　``Kokkos::AllowPadding`` 。
 
