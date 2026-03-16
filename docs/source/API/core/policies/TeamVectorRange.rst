@@ -33,7 +33,7 @@
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType>
-   /* 定義された実装 */ TeamVectorRange(TeamMemberType team, iType count);
+   /* Implementation defined */ TeamVectorRange(TeamMemberType team, iType count);
 
 チームのスレッドとベクトルレーンのインデックス範囲 ``0``  から ``count-1`` まで分割します。
 
