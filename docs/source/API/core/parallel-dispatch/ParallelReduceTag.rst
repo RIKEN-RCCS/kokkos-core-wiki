@@ -17,7 +17,7 @@
 
 .. code-block:: cpp
 
-    PolicyType = Kokkos::TeamPolicy<>　を使用; 
+    using PolicyType = Kokkos::TeamPolicy<>; 
     PolicyType policy;
     int recommended_team_size = policy.team_size_recommended(
         Functor, Kokkos::ParallelReduceTag());
@@ -27,7 +27,7 @@
 
 .. code-block:: cpp
 
-    構造体 ParallelReduceTag{};
+     struct ParallelReduceTag{};
 
 パブリックメンバー関数
 --------------------
