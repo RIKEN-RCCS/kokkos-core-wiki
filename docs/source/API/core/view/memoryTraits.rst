@@ -1,12 +1,12 @@
 ``MemoryTraits``
 ================
 
-:cpp:struct:`MemoryTraits` は、is the last template parameter of :cpp:class:`View`　の最後のテンプレートパラメータです。
+:cpp:struct:`MemoryTraits` は、 :cpp:class:`View`　の最後のテンプレートパラメータです。
 
 構造体インターフェイス
 ----------------
 
-.. cpp:struct:: テンプレート <unsigned N> MemoryTraits
+.. cpp:struct:: template <unsigned N> MemoryTraits
 
   多次元ビューに提供された場合、 ``MemoryTraits`` は、割り当て処理に関する追加情報を渡すことを許可します。 テンプレート引数は、下記の列挙型値のビット単位の論理和であることが想定されます。
 
@@ -40,11 +40,11 @@
 
 .. _MemoryAccessTraits: ../../../ProgrammingGuide/View.html#memory-access-traits
 
-.. |MemoryAccessTraits| 置換:: メモリアクセストレイト
+.. |MemoryAccessTraits| replace:: メモリアクセストレイト
 
 .. _UnmanagedViews: ../../../ProgrammingGuide/View.html#unmanaged-views
 
-.. |UnmanagedViews| 置換:: unmanaged views管理対象外ビュー
+.. |UnmanagedViews| replace:: unmanaged views管理対象外ビュー
 
 非メンバー列挙型
 ^^^^^^^^^^^^^^^^
