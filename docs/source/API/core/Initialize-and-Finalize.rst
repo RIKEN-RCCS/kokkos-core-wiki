@@ -4,7 +4,7 @@
 Kokkos::initialize
 ------------------
 
-Kokkos　の内部オブジェクトと、有効化されたすべての　Kokkos　バックエンドを初期化します
+Kokkos の内部オブジェクトと、有効化されたすべての　Kokkos　バックエンドを初期化します
 
 詳細については、 `Kokkos::finalize <initialize_finalize/finalize.html>`_ を参照してください。
 
@@ -12,14 +12,14 @@ Kokkos　の内部オブジェクトと、有効化されたすべての　Kokko
 Kokkos::finalize
 ----------------
 
-Kokkos　の初期化状態を照会することができ、Kokkos　が初期化されている場合に、`true`　を返します。
+Kokkos の初期化状態を照会することができ、Kokkos　が初期化されている場合に、`true`　を返します。
 
 詳細については、 `Kokkos::is_initialized <initialize_finalize/is_Initialized.html>`_ を参照してください。
 
 
 Kokkos::is_initialized
 ----------------------
-Kokkos　の最終処理完了状態を照会することができ、Kokkos　が最終処理が完了している場合に、`true`　を返します。
+Kokkos の最終処理完了状態を照会することができ、Kokkos　が最終処理が完了している場合に、`true`　を返します。
 
 詳細については、 `Kokkos::is_finalized <initialize_finalize/is_Finalized.html>`_ を参照してください。
 
