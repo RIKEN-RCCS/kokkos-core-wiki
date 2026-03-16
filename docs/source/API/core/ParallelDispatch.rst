@@ -11,7 +11,7 @@
    :header-rows: 1
 
    * - 関数
-     - Descriptionディスクリプション
+     - ディスクリプション
    * - `parallel_for <parallel-dispatch/parallel_for.html>`__
      - ユーザーコードを並列に実行
    * - `parallel_reduce <parallel-dispatch/parallel_reduce.html>`__
