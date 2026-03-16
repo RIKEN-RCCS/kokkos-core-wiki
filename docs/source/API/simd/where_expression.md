@@ -9,11 +9,11 @@
 ## インターフェイス
 
 ```c++
-名前空間 実験的 {
-テンプレート <class M, class T>
-クラス const_where_expression;
-テンプレート <class M, class T>
-クラス where_expression : public const_where_expression;
+namespace Experimental {
+template <class M, class T>
+class const_where_expression;
+template <class M, class T>
+class where_expression : public const_where_expression;
 }
 ```
 
@@ -22,10 +22,10 @@
 第2のテンプレートパラメータ `T` は値の型であり、クラス型テンプレート `Kokkos::Experimental::simd` のインスタンス、または `double` などの基本型である必要があります。
 
 ### Where 関数
-Where expression　オブジェクトは、非メンバメソッド `Kokkos::Experimental::where` を呼び出すことによってのみ構築されます。:
- * `テンプレート <class T, class Abi> where_expression<simd_mask<T, Abi>, simd<T, Abi>>
-    where(const simd_mask<T, Abi>&, simd<T, Abi>&)`: `simd_mask`引数によって選択された　`simd`　引数の値を参照する、非定数の　where式　を作成します。
- * `テンプレート <class T, class Abi> const_where_expression<simd_mask<T, Abi>, simd<T, Abi>>
+オブジェクトは、非メンバメソッド `Kokkos::Experimental::where` を呼び出すことによってのみ構築されます。:
+ * `template <class T, class Abi> where_expression<simd_mask<T, Abi>, simd<T, Abi>>
+    where(const simd_mask<T, Abi>&, simd<T, Abi>&)`: `simd_mask`引数によって選択された　`simd`　引数の値を参照する、非定数の where 式を作成します。
+ * `template <class T, class Abi> const_where_expression<simd_mask<T, Abi>, simd<T, Abi>>
     where(const simd_mask<T, Abi>&, const simd<T, Abi>&)`: `simd_mask`　引数によって選択された　`simd`　引数の値を参照する　`where`　式を定数として作成します。
 
 ### 負荷/格納メソッド
@@ -38,7 +38,7 @@ Where expression　オブジェクトは、非メンバメソッド `Kokkos::Exp
  * `Kokkos::Experimental::element_aligned_tag` は `decltype(simd_flag_default)` の型エイリアスであり、`Kokkos::Experimental::vector_aligned_tag` は `decltype(simd_flag_aligned)` の型エイリアスです。
 
 ### 収集/分散メソッド
- これらのメソッドは、　Kokkos　によって追加されたものであり、ISO C++　のプロポーザルには含まれておりません。
+ これらのメソッドは、　Kokkos によって追加されたものであり、ISO C++ のプロポーザルには含まれておりません。
  * `void const_where_expression::scatter_to(double* mem, simd<std::int32_t, Abi> const& index) const`: 値型 `T` が `Kokkos::Experimental::simd<double, Abi>` の場合、本関数はマスク値 `i` が真であるとき、値を `mem[index[i]]` に分散します。
  * `void where_expression::gather_from(const double* mem, simd<std::int32_t, Abi> const& index)`: 値型 `T` が `Kokkos::Experimental::simd<double, Abi>` の場合、本関数は、マスク値 `i` が真であるとき、`mem[index[i]]` から値を収集します。
 
@@ -54,13 +54,13 @@ Where expression　オブジェクトは、非メンバメソッド `Kokkos::Exp
 int main(int argc, char* argv[]) {
   Kokkos::initialize(argc,argv);
   {
-    simd_type = Kokkos::Experimental::simd<double>　を使用;
+    using simd_type = Kokkos::Experimental::simd<double>;
     // この後、ベクトル　a　の最初の値は負になります
     simd_type a([] (std::size_t i) { return 1.0 * i - 1.0; });
-    // where　式を使用して、負の値を　0.0　に設定することができます
+    // where 式を使用して、負の値を　0.0　に設定することができます
     where(a < 0.0, a) = 0.0;
     // 現在では、関数の呼び出しにドメイン制限を設ける方が安全かもしれません
-    自動 b = Kokkos::sqrt(a);
+    auto b = Kokkos::sqrt(a);
   }
   Kokkos::finalize();
 }
