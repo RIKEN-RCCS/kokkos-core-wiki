@@ -21,7 +21,7 @@
 ディスクリプション
 -----------
 
-.. cpp:class:: テンプレート <class DataType, class LayoutType, class MemorySpace, class MemoryTraits> DynRankView;
+.. cpp:class:: template <class DataType, class LayoutType, class MemorySpace, class MemoryTraits> DynRankView;
 
    :tparam DataType: ``DynRankView``　の基本的なスカラー型を定義します。
 
