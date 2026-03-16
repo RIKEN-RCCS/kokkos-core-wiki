@@ -171,7 +171,7 @@ TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Polic
 
 .. code-block:: cpp
 
-    team_handle = TeamPolicy<>::member_type　を使用;
+    using team_handle = TeamPolicy<>::member_type;
     parallel_for(TeamPolicy<>(N,AUTO), KOKKOS_LAMBDA (const team_handle& team) {
 
         // 各チームが、Aの列を初期化します
