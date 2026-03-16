@@ -8,19 +8,19 @@
 
 .. _MemorySpaceType: #kokkos-memoryspaceconcept
 
-.. |MemorySpaceType| 置換:: :cpp:func:`MemorySpace` type
+.. |MemorySpaceType| replace:: :cpp:func:`MemorySpace` type
 
 .. _TheDocumentationOnTheMemorySpaceConcept: #kokkos-memoryspaceconcept
 
-.. |TheDocumentationOnTheMemorySpaceConcept| 置換:: the documentation on the :cpp:func:`MemorySpace` concept
+.. |TheDocumentationOnTheMemorySpaceConcept| replace:: the documentation on the :cpp:func:`MemorySpace` concept
 
 .. _Experimental: utilities/experimental.html#experimentalnamespace
 
-.. |Experimental| 置換:: 実験的
+.. |Experimental| replace:: Experimental
 
 .. _ExecutionSpaceType: ./execution_spaces.html#kokkos-executionspaceconcept
 
-.. |ExecutionSpaceType| 置換:: :cpp:func:`ExecutionSpace` 型
+.. |ExecutionSpaceType| replace:: :cpp:func:`ExecutionSpace` 型
 
 .. _ExecutionSpaceTypes: ./execution_spaces.html#kokkos-executionspaceconcept
 
@@ -117,10 +117,10 @@
 
     // これは実際のクラスではなく、概念を簡略に記述したものです。
     クラス MemorySpaceConcept {
-    パブリック:
-        型定義 MemorySpaceConcept memory_space;
-        型定義 ... execution_space;
-        型定義 Device<execution_space, memory_space> device_type;
+    public:
+        typedef MemorySpaceConcept memory_space;
+        typedef ... execution_space;
+        typedef Device<execution_space, memory_space> device_type;
 
         MemorySpaceConcept();
         MemorySpaceConcept(const MemorySpaceConcept& src);
@@ -130,12 +130,12 @@
     };
 
     template<class MS>
-    構造体 is_memory_space {
+    struct is_memory_space {
     enum { value = false };
     };
 
     template<>
-    構造体 is_memory_space<MemorySpaceConcept> {
+    struct is_memory_space<MemorySpaceConcept> {
     enum { value = true };
     };  
 
@@ -144,15 +144,15 @@
 
 .. _ExecutionSpace: execution_spaces.html#executionspaceconcept
 
-.. |ExecutionSpace| 置換:: :cpp:func:`ExecutionSpace`
+.. |ExecutionSpace| replace:: :cpp:func:`ExecutionSpace`
 
 .. _DeepCopyDocumentation: view/deep_copy.html
 
-.. |DeepCopyDocumentation| 置換:: :cpp:func:`deep_copy` documentation
+.. |DeepCopyDocumentation| replace:: :cpp:func:`deep_copy` documentation
 
 .. _KokkosSpaceAccessibility: SpaceAccessibility.html
 
-.. |KokkosSpaceAccessibility| 置換:: :cpp:func:`Kokkos::SpaceAccessibility`
+.. |KokkosSpaceAccessibility| replace:: :cpp:func:`Kokkos::SpaceAccessibility`
 
 * ``memory_space``: 自己型。;
 * ``execution_space``: デフォルトの |ExecutionSpace|_ は、``MemorySpace`` のインスタンスが提供するメモリ内でオブジェクトを構築するとき、または（場合によっては）そのようなメモリからの深部コピーまたは深部コピーを行う際に使用されます（詳細は |DeepCopyDocumentation|_ を参照）。 Kokkos は、``Kokkos::SpaceAccessibility<execution_space, memory_space>::accessible`` が ``true`` であることを保証します（|KokkosSpaceAccessibility|_ を参照）。
@@ -162,17 +162,17 @@
 ~~~~~~~~~~~~
 
 * ``MemorySpaceConcept()``: デフォルトコンストラクタ。
-* ``MemorySpaceConcept(const MemorySpaceConcept& src)``: Copy constructor.
+* ``MemorySpaceConcept(const MemorySpaceConcept& src)``: コピーコンストラク。
 
 関数
 ~~~~~~~~~
 
 * ``const char* name() const;``: メモリ空間のインスタンスのラベルを返します。
-* ``void * allocate(ptrdiff_t size) const;``: ``MemorySpaceConcept`` が表すメモリリソースを使用して、少なくとも「size」バイトのバッファを割り当てます。
+* ``void * allocate(ptrdiff_t size) const;``: ``MemorySpaceConcept`` が表すメモリリソースを使用して、少なくとも ``size`` バイトのバッファを割り当てます。
 * ``void deallocate(void* ptr, ptrdiff_t size) const;``: 以前、正確に `allocate(size)` で割り当てられた、`ptr`（型 `void*`）から始まるバッファを解放します。
 
 非メンバーファシリティ
 ~~~~~~~~~~~~~~~~~~~~~
 
 * ``template<class MS> struct is_memory_space;``　: クラスがメモリ空間であるかどうかを確認するための型特性。
-* ``template<class S1, class S2> struct SpaceAccessibility;``　: 2つのスペースが互換性があるか（割り当て可能、deep_copy可能、アクセス可能）を確認するための型特性。
+* ``template<class S1, class S2> struct SpaceAccessibility;``　: 2つのスペースが互換性があるか（割り当て可能、deep_copy 可能、アクセス可能）を確認するための型特性。
