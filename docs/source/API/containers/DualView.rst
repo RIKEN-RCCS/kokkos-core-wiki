@@ -56,7 +56,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     |
 
-    .. rubric:: *パブリック* 型定義
+    .. rubric:: *Public* typedef
 
     .. cpp:type:: ViewTraits<DataType, Arg1Type, Arg2Type, Arg3Type> traits
 
@@ -70,7 +70,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
        デバイス上の ``Kokkos::View`` の型。
 
-    .. cpp:type:: 型名 t_dev::HostMirror t_host
+    .. cpp:type:: typename t_dev::HostMirror t_host
 
        　``t_dev``の``Kokkos::View``ホストミラーの型。
 
@@ -78,7 +78,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
        デバイス上のconst Viewの型。
 
-    .. cpp:type:: 型名 t_dev_const::HostMirror t_host_const
+    .. cpp:type:: typename t_dev_const::HostMirror t_host_const
 
        　``t_dev_const``のconst Viewホストミラーの型。
 
@@ -88,7 +88,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:type::  t_dev_const_randomread::HostMirror t_host_const_randomread
 
-       ``t_dev_const_randomread``のconst, random-access View　ホストミラーの型。
+       ``t_dev_const_randomread``の const, random-access View　ホストミラーの型。
 
     .. cpp:type:: View<typename traits::data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_um
 
@@ -110,7 +110,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
        デバイス上の　const, random-access View　の型。
 
-    .. cpp:type:: 型名 t_dev_const_randomread::HostMirror t_host_const_randomread_um
+    .. cpp:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread_um
 
        　``t_dev_const_randomread``　の　const, random-access View　ミラーの型。
 
@@ -118,7 +118,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:type:: View<unsigned int, LayoutLeft, typename t_host::execution_space> t_modified_flag;
 
-    .. rubric:: データメンバー
+    .. rubric:: Data Members
 
     .. cpp:member:: t_dev d_view
 
@@ -136,7 +136,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     |
 
-    .. rubric:: *パブリック* コンストラクタ
+    .. rubric:: *Public* constructors
 
     .. cpp:function:: DualView();
 
@@ -177,9 +177,9 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. rubric:: 同期化、変更済みとしてマーク、およびビューの取得のための　*パブリック*　メソッド。
 
-    .. cpp:function:: テンプレート <class Device> KOKKOS_INLINE_FUNCTION const auto& view();
+    .. cpp:function:: template <class Device> KOKKOS_INLINE_FUNCTION const auto& view();
 
-    .. cpp:function:: テンプレート <class Device> static int get_device_side();
+    .. cpp:function:: template <class Device> static int get_device_side();
 
        * 特定のデバイス ``Device`` 上のビューを返します。 ``Device`` は、``Kokkos::Device`` 型、メモリ空間、またはデバイスビューもしくはホストアクセス可能ビューに対応する実行空間である可能性があります。 
        * 例えば、Cuda上で次のように　DualView　を作成するとします:
@@ -209,25 +209,25 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
        * デバイス上の　View　を返します。 `Kokkos_ENABLE_DEPRECATED_CODE_4=ON`　を持つ値によって、　View　を返します。
 
-    .. cpp:function:: テンプレート <class Device> void sync(const typename Impl::enable_if<(std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
+    .. cpp:function:: template <class Device> void sync(const typename Impl::enable_if<(std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
 
-    .. cpp:function:: テンプレート <class Device> void sync(const typename Impl::enable_if<(!std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
+    .. cpp:function:: template <class Device> void sync(const typename Impl::enable_if<(!std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
 
        * デバイスまたはホスト上のデータは、他方の領域のデータが変更済みとしてマークされた場合にのみ更新します。
        * ``デバイス``が、本　DualView　のデバイスタイプと同じ場合、ホストからデバイスへデータをコピーします。それ以外の場合には、デバイスからホストへデータをコピーします。いずれの場合も、コピー元のソースが変更された場合にのみコピーしてください。
        * これは一方向の同期のみです。コピー先の対象が変更されている場合、本演算はその変更を破棄します。また、デバイスとホストの変更フラグの両方をリセットします。
        * 本メソッドでは、どちらのビューでデータを変更したかを独自に判断できません。変更されたデータを、適切なテンプレートパラメータを指定して、``modify()``　メソッドを呼び出すことで、手動で変更済みとしてマークする必要があります。
 
-    .. cpp:function:: テンプレート <class Device> bool need_sync() const;
+    .. cpp:function:: template <class Device> bool need_sync() const;
 
-    .. cpp:function:: テンプレート <class Device> void modify();
+    .. cpp:function:: template <class Device> void modify();
 
-    .. cpp:function:: インライン void clear_sync_state();
+    .. cpp:function:: inline void clear_sync_state();
 
        指定の　device \\c Device　上でデータを変更済みとしてマークします。 ``Device``　が　本　DualView　のデバイスタイプと同一の場合、そのデバイスのデータを変更済みとしてマークしてください。
        そうでない場合は、ホストのデータを変更済みとしてマークしてください。
 
-    .. rubric:: *パブリック* メソッド：View オブジェクトの再割り当てまたはサイズ変更。
+    .. rubric:: View オブジェクトの再割り当てまたはサイズ変更のための　*Pulbic* Methods
 
     .. cpp:function:: constexpr bool is_allocated() const;
 
@@ -247,7 +247,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     |
 
-    .. rubric:: キャパシティ、ストライド、または次元を問い合わせのための 　*パブリック*　メソッド。
+    .. rubric:: キャパシティ、ストライド、または次元を問い合わせのための *Public* Methods。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t span() const;
 
@@ -257,14 +257,14 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
        スパンが連続している場合に、真を返します
 
-    .. cpp:function:: テンプレート <typename iType> void stride(iType* stride_) const;
+    .. cpp:function:: template <typename iType> void stride(iType* stride_) const;
 
       各次元ごとにストライドを取得します。 ``stride_`` [rank] を　span()　に設定します。
 
-    .. cpp:function:: テンプレート <typename iType> KOKKOS_INLINE_FUNCTION constexpr typename std::enable_if<std::is_integral<iType>::value, size_t>::type extent(const iType& r) const;
+    .. cpp:function:: template <typename iType> KOKKOS_INLINE_FUNCTION constexpr typename std::enable_if<std::is_integral<iType>::value, size_t>::type extent(const iType& r) const;
 
        要求されたランクの範囲を返します。
 
-    .. cpp:function:: テンプレート <typename iType> KOKKOS_INLINE_FUNCTION constexpr typename std::enable_if<std::is_integral<iType>::value, int>::type extent_int(const iType& r) const;
+    .. cpp:function:: template <typename iType> KOKKOS_INLINE_FUNCTION constexpr typename std::enable_if<std::is_integral<iType>::value, int>::type extent_int(const iType& r) const;
 
        要求されたランクについて、整数の範囲を返します。
