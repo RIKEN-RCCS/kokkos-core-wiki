@@ -6,14 +6,14 @@
 
 .. _KokkosPrintf: https://github.com/kokkos/kokkos/blob/4.2.00/core/src/Kokkos_Printf.hpp
 
-.. |KokkosPrintf| 置換:: ``<Kokkos_Printf.hpp>``
+.. |KokkosPrintf| replace:: ``<Kokkos_Printf.hpp>``
 
  ``<Kokkos_Core.hpp>``　に含まれる ヘッダー |KokkosPrintf|_ に定義。
 
 .. code-block:: cpp
 
     テンプレート <typename... Args>
-    KOKKOS_FUNCTION void printf(const char* format, Args... args);  // ( 4.2以降)
+    KOKKOS_FUNCTION void printf(const char* format, Args... args);  // (バージョン 4.2以降)
 
  ``format`` および ``args...`` に特定されるデータを ``stdout``　に出力します。
 この動作は、　``std::printf``　に類似していますが、
