@@ -6,11 +6,11 @@ Space Accessibility
 
 .. _ExecutionSpace: execution_spaces.html#executionspaceconcept
 
-.. |ExecutionSpace| 置換:: ``ExecutionSpace``
+.. |ExecutionSpace| replace:: ``ExecutionSpace``
 
 .. _MemorySpace: memory_spaces.html#memoryspaceconcept
 
-.. |MemorySpace| 置換:: ``MemorySpace``
+.. |MemorySpace| replace:: ``MemorySpace``
 
 ``Kokkos::SpaceAccessibility<>`` は、最初のテンプレート引数として |ExecutionSpace|_ 型または |MemorySpace|_ 型を、2番目の型として  |MemorySpace|_  型を取る特性クラステンプレートで、それらのエンティティ間の関係について詳細を表現しています。メモリ空間型　``MSp1`` および ``MSp2`` 、および実行空間型　``Ex``　を前提とすれば、以下の式は指定された意味において有効となります:
 
@@ -38,7 +38,7 @@ Space Accessibility
 
 .. _KokkosView: view/view.html
 
-.. |KokkosView| 置換:: ``Kokkos::View``
+.. |KokkosView| replace:: ``Kokkos::View``
 
 ``V2``　型　のいずれか　（そうでない場合には、有効な）インスタンスから ( ``true``　に等しい``std::is_same<V2::memory_space, MSp2>::value``　を持つ) ``View`` ``V1``　型 ( ``true``　に等しい　``std::is_same<V1::memory_space, MSp1>::value`` を持つ)　のいずれか（そうでない場合には、有効な）インスタンスから取得する参照データに割り当てることが、 Kokkos プログラミングモデル内で有効である場合に限り、コンパイル時に、`bool``　に変換可能で、必ず　``true``　となる値。  
 
