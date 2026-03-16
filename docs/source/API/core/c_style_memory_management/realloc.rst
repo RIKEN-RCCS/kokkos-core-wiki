@@ -8,11 +8,11 @@ Defined in ヘッダー ``<Kokkos_Core.hpp>``　に定義。
 
 .. _Kokkos_kokkos_malloc: malloc.html
 
-.. |Kokkos_kokkos_malloc| 置換:: ``Kokkos::kokkos_malloc()``
+.. |Kokkos_kokkos_malloc| replace:: ``Kokkos::kokkos_malloc()``
 
 .. _Kokkos_kokkos_realloc: realloc.html
 
-.. |Kokkos_kokkos_realloc| 置換:: ``Kokkos::kokkos_realloc()``
+.. |Kokkos_kokkos_realloc| replace:: ``Kokkos::kokkos_realloc()``
 
 .. _MemorySpace: ../memory_spaces.html
 
@@ -20,7 +20,7 @@ Defined in ヘッダー ``<Kokkos_Core.hpp>``　に定義。
 
 .. _Kokkos_kokkos_free: free.html
 
-.. |Kokkos_kokkos_free| 置換:: ``Kokkos::kokkos_free()``
+.. |Kokkos_kokkos_free| replace:: ``Kokkos::kokkos_free()``
 
 指定されたメモリ領域を再割り当てします。それは、同じメモリースペース |MemorySpace|_　上で、以前に |Kokkos_kokkos_malloc|_ または |Kokkos_kokkos_realloc|_　により割り当てられる必要があり、
 まだ |Kokkos_kokkos_free|_ で解放されておらず、そうでない場合には、結果は未定義となる。
