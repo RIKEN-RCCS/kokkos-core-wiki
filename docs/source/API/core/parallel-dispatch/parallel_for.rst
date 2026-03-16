@@ -15,7 +15,7 @@
 
 .. _text: ../policies/ExecutionPolicyConcept.html
 
-.. |text| 置換:: *ExecutionPolicy*
+.. |text| replace:: *ExecutionPolicy*
 
  ``functor``で定義された並列作業を、|text|_ ``policy``　に従ってディスパッチします。 オプションのラベル　``name``　は、
 プロファイリングおよびデバッグツールで使用されます。この呼び出しは非同期であり、呼び出し元へ直ちに返る可能性があります。 
@@ -23,7 +23,7 @@
 インターフェイス
 ---------
 
-.. cpp:function:: テンプレート <class ExecPolicy, class FunctorType> Kokkos::parallel_for(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_for(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
 
 .. cpp:function:: テンプレート <class ExecPolicy, class FunctorType> Kokkos::parallel_for(const ExecPolicy& policy, const FunctorType& functor);
 
@@ -90,10 +90,10 @@
     #include<Kokkos_Core.hpp>
     #include<cstdio> 
 
-    構造体 TagA {};
-    構造体 TagB {};
+    struct TagA {};
+    struct TagB {};
 
-    構造体 Foo {
+    struct Foo {
         KOKKOS_INLINE_FUNCTION
         void operator() (const TagA, const Kokkos::TeamPolicy<>::member_type& team) const {
             printf("Greetings from thread %i of team %i with TagA\n",
