@@ -20,8 +20,8 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ViewType, class... Args>
-   Subview = IMPL_DETAIL　を使用; // ソースビューの特性からサブビューのタイプを演鐸します。
+   template <class ViewType, class... Args>
+   using Subview = IMPL_DETAIL; // ソースビューの特性からサブビューのタイプを演鐸します。
 
  ``Kokkos::subview(ViewType view_arg, Args .... args)``　の結果の型。
 
@@ -42,10 +42,10 @@
 
 .. code-block:: cpp
 
-   view_type = Kokkos::View<double ***[5]>　を使用;
+   using view_type = Kokkos::View<double ***[5]>;
    view_type a("A",N0,N1,N2);
 
-   構造体 subViewHolder {
+   struct subViewHolder {
    Kokkos::Subview<view_type,
                    std::pair<int,int>,
                    int,
