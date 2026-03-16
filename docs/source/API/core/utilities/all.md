@@ -4,7 +4,7 @@
  ヘッダー `<Kokkos_Core.hpp>`　に定義。
 
 ```c++
-名前空間 Kokkos{
+namespace Kokkos{
   constexpr UNSPECIFIED-TYPE ALL = IMPLEMENTATION-DETAIL;
 }
 ```
