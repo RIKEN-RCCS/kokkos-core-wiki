@@ -17,7 +17,7 @@
 
     .. rubric:: パブリックメンバー変数
 
-    .. cpp:member:: 静的 constexpr ブール reference_type_is_lvalue_reference
+    .. cpp:member:: static constexpr bool reference_type_is_lvalue_reference
 
        レファレンス型が、 C++ lvalueレファレンスかどうか。
 
@@ -169,11 +169,11 @@
 
         :return: 基盤となる割当ての現在の参照カウント。
 
-    .. cpp:function:: インライン const std::string label();
+    .. cpp:function:: inline const std::string label();
 
         :return: ``DynamicView``　のラベル。
 
-    .. cpp:function:: ブール is_allocated() const
+    .. cpp:function:: bool is_allocated() const
 
         :return: ビューが割り当てられたメモリチャンクの有効なセットを指している場合に真です。 resize_serial が 0 より大きいサイズで呼び出されるまで、これが偽を返すことにご注意ください。
 
