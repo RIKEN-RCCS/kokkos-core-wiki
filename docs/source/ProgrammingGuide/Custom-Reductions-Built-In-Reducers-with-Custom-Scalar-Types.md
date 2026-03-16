@@ -61,6 +61,6 @@ int main( int argc, char* argv[] )
   }
   Kokkos::finalize();
 
-  返し 0;
+  return 0;
 }
 ```
