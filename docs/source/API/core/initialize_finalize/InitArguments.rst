@@ -18,7 +18,7 @@ InitArguments
 インターフェイス
 ---------
 
-.. cpp:構造体:: InitArguments
+.. cpp:struct:: InitArguments
 
    .. cpp:member:: int num_threads
 
