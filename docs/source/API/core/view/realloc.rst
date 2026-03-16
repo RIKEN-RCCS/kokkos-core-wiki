@@ -21,7 +21,7 @@
 
 .. code-block:: cpp
 
-   テンプレート <class T, class... P>
+   template <class T, class... P>
    void realloc(View<T, P...>& v,
 		const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
 		const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
@@ -42,7 +42,7 @@
 
 .. code-block:: cpp
 
-   テンプレート <class I, class T, class... P>
+   template <class I, class T, class... P>
    void realloc(const I& arg_prop, Kokkos::View<T, P...>& v,
 		const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
 		const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
@@ -67,7 +67,7 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ALLOC_PROP, class T, class... P>
+   template <class ALLOC_PROP, class T, class... P>
    void realloc(const ALLOC_PROP& arg_prop,
 		Kokkos::View<T, P...>& v,
 		const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
@@ -97,7 +97,7 @@
 
 .. code-block:: cpp
 
-   テンプレート <class T, class... P>
+   template <class T, class... P>
    void realloc(Kokkos::View<T, P...>& v,
 		const typename Kokkos::View<T, P...>::array_layout& layout);
 
@@ -109,7 +109,7 @@
 
 .. code-block:: cpp
 
-   テンプレート <class I, class T, class... P>
+   template <class I, class T, class... P>
    void realloc(const I& arg_prop, Kokkos::View<T, P...>& v,
                 const typename Kokkos::View<T, P...>::array_layout& layout);
 
@@ -124,7 +124,7 @@
 
 .. code-block:: cpp
 
-   テンプレート <class ALLOC_PROP, class T, class... P>
+   template <class ALLOC_PROP, class T, class... P>
    void realloc(const ALLOC_PROP& arg_prop,
                 Kokkos::View<T, P...>& v,
 		const typename Kokkos::View<T, P...>::array_layout& layout);
