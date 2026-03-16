@@ -12,7 +12,7 @@
 
 .. _text2: https://en.cppreference.com/w/cpp/numeric/constants
 
-.. |text2| 置換:: ``<numbers>``
+.. |text2| replace:: ``<numbers>``
 
  |text2|_ ( C++20　以降)　からのすべての数学定数を提供します。
 
@@ -41,7 +41,7 @@
 
 .. _KnownIssues: ../../../known-issues.html#mathematical-constants
 
-.. |KnownIssues| 置換:: 既知の問題
+.. |KnownIssues| replace:: 既知の問題
 
 * 	数学定数は ``Kokkos::Experimental::`` において、Kokkos 3.6以降利用可能です。
 * 	4.0では``Kokkos::numbers``　namespace　に「昇格」"昇格"し、4.3では、　``Kokkos::Experimental::``　から削除されています。
