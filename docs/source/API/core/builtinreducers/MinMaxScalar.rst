@@ -17,7 +17,7 @@
 
 .. code-block:: cpp
 
-   MinMax<T,S>::value_type 結果;
+   MinMax<T,S>::value_type result;
    parallel_reduce(N,Functor,MinMax<T,S>(result));
    T minValue = result.min_val;
    T maxValue = result.max_val;
