@@ -22,12 +22,12 @@
 
 .. code-block:: cpp
 
-    クラス リデューサー {
-        パブリック:
+    class Reducer{
+        public:
             //概念に必要
-            型定義 リデューサー リデューサー;
-            型定義 ... value_type;
-            型定義 Kokkos::View<value_type, ... > result_view_type;
+            typedef Reducer reducer;
+            typedef ... value_type;
+            typedef Kokkos::View<value_type, ... > result_view_type;
 
             KOKKOS_INLINE_FUNCTION
             void join(value_type& dest, const value_type& src) const;
