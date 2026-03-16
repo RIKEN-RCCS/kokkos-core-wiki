@@ -24,9 +24,9 @@
     template<class Scalar, class Space>
     class BAnd{
         public:
-            型定義 BAnd リデューサー;
-            型定義 型名 std::remove_cv<Scalar>::type value_type;
-            型定義 Kokkos::View<value_type, Space> result_view_type;
+            typedef BAnd reducer;
+            typedef typename std::remove_cv<Scalar>::type value_type;
+            typedef Kokkos::View<value_type, Space> result_view_type;
 
             KOKKOS_INLINE_FUNCTION
             void join(value_type& dest, const value_type& src) const;
@@ -52,7 +52,7 @@
 
 .. cpp:class:: template<class Scalar, class Space> BAnd
 
-   .. rubric:: パブリック型
+   .. rubric:: Public Types
 
    .. cpp:type:: リデューサー
 
