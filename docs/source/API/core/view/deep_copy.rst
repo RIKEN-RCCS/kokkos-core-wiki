@@ -20,17 +20,17 @@
 インターフェイス
 ---------
 
-.. cpp:function:: テンプレート <class ExecSpace, class ViewDest, class ViewSrc> void Kokkos::deep_copy(const ExecSpace& exec_space, const ViewDest& dest, const ViewSrc& src);
+.. cpp:function:: template <class ExecSpace, class ViewDest, class ViewSrc> void Kokkos::deep_copy(const ExecSpace& exec_space, const ViewDest& dest, const ViewSrc& src);
 
-.. cpp:function:: テンプレート <class ExecSpace, class ViewDest> void Kokkos::deep_copy(const ExecSpace& exec_space, const ViewDest& dest, const typename ViewDest::value_type& src);
+.. cpp:function:: template <class ExecSpace, class ViewDest> void Kokkos::deep_copy(const ExecSpace& exec_space, const ViewDest& dest, const typename ViewDest::value_type& src);
 
-.. cpp:function:: テンプレート <class ExecSpace, class ViewSrc> void Kokkos::deep_copy(const ExecSpace& exec_space, ViewSrc::value_type& dest, const ViewSrc& src);
+.. cpp:function:: template <class ExecSpace, class ViewSrc> void Kokkos::deep_copy(const ExecSpace& exec_space, ViewSrc::value_type& dest, const ViewSrc& src);
 
-.. cpp:function:: テンプレート <class ViewDest, class ViewSrc> void Kokkos::deep_copy(const ViewDest& dest, const ViewSrc& src);
+.. cpp:function:: template <class ViewDest, class ViewSrc> void Kokkos::deep_copy(const ViewDest& dest, const ViewSrc& src);
 
-.. cpp:function:: テンプレート <class ViewDest> void Kokkos::deep_copy(const ViewDest& dest, const typename ViewDest::value_type& src);
+.. cpp:function:: template <class ViewDest> void Kokkos::deep_copy(const ViewDest& dest, const typename ViewDest::value_type& src);
 
-.. cpp:function:: テンプレート <class ViewSrc> void Kokkos::deep_copy(ViewSrc::value_type& dest, const ViewSrc& src);
+.. cpp:function:: template <class ViewSrc> void Kokkos::deep_copy(ViewSrc::value_type& dest, const ViewSrc& src);
 
 パラメータ
 ~~~~~~~~~~
@@ -66,7 +66,7 @@
 
 --------
 
-Some Things you can and cannot do
+実行可能な事柄と不可能な事柄
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
@@ -142,7 +142,7 @@ Some Things you can and cannot do
                                        Kokkos::LayoutLeft>::value)からのからレイアウトを継承します;
 
             // これは現在機能しています。なぜなら h_view_tmp および h_view の両方が
-            // from HostSpace::execution_space
+            // HostSpace::execution_space
             Kokkos::deep_copy(h_view_tmp,h_view)　からアクセス可能であるためです;
 
             // 現在　h_view_tmp および d_view が互換性のあるレイアウトであるため、h_view_tmp から d_view へのコピーが可能です。
