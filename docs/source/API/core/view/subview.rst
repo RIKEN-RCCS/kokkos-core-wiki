@@ -11,9 +11,9 @@
 
 .. code-block:: cpp
 
-    自動 s = subview(view,std::pair<int,int>(5,191),Kokkos::ALL,1);
+    auto s = subview(view,std::pair<int,int>(5,191),Kokkos::ALL,1);
 
-Creates a ``Kokkos::View`` representing a subset of another ``Kokkos::View``.別の ``Kokkos::View``　のサブセットを表す ``Kokkos::View`` を作成します。
+別の ``Kokkos::View``　のサブセットを表す ``Kokkos::View`` を作成します。
 
 
 .. _KokkosAll: ../utilities/all.html#kokkosall
@@ -74,7 +74,7 @@ Creates a ``Kokkos::View`` representing a subset of another ``Kokkos::View``.別
 
     Kokkos::View<double***[5]> a("A",N0,N1,N2);
 
-    自動 s  = Kokkos::subview(a,
+    auto s  = Kokkos::subview(a,
                               std::pair<int,int>(3,15),
 			      5,
 			      Kokkos::ALL,
