@@ -8,7 +8,7 @@
 
 .. code-block:: cpp
 
-    [[nodiscard]] int device_id() noexcept;  // ( 4.1以降)
+    [[nodiscard]] int device_id() noexcept;  // (バージョン4.1以降)
 
 ホストバックエンドのみが有効な場合、 ``DefaultExecutionSpace`` または　``-1`` により使用されるデバイスの
 id　を返します。
@@ -19,19 +19,19 @@ id　を返します。
 
 .. _num_devices : num_devices.html
 
-.. |num_devices| 置換:: ``num_devices``
+.. |num_devices| replace:: ``num_devices``
 
 .. _num_threads : num_threads.html
 
-.. |num_threads| 置換:: ``num_threads``
+.. |num_threads| replace:: ``num_threads``
 
 .. _initialize: ../initialize_finalize/initialize.html
 
-.. |initialize| 置換:: ``initialize``
+.. |initialize| replace:: ``initialize``
 
 .. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
 
-.. |InitializationSettings| 置換:: ``InitializationSettings``
+.. |InitializationSettings| replace:: ``InitializationSettings``
 
 |num_devices|_: Kokkos　に利用可能なデバイスの数を返します。
 
