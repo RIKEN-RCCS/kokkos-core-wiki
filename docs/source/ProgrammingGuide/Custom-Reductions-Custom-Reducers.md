@@ -38,7 +38,7 @@ struct array_type {
     }
   }
 
-  KOKKOS_INLINE_FUNCTION  // initialize myArray to 0
+  KOKKOS_INLINE_FUNCTION  // myArray を 0　に初期化します
       void
       init() {
     for (int i = 0; i < N; i++) {
@@ -51,7 +51,7 @@ struct array_type {
     for (int i = 0; i < N; i++) {
       myArray[i] += src.myArray[i];
     }
-     *これを返します;
+     return *this;
   }
 };
 
