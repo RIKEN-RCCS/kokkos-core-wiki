@@ -8,7 +8,7 @@
 
 DNF
 ---
-Kokkos　をインストールするには、Fedora Project　パッケージマネージャーを使うことができます 
+Kokkos をインストールするには、Fedora Project　パッケージマネージャーを使うことができます 
 https://packages.fedoraproject.org/pkgs/kokkos/
 
 他のパッケージマネージャー
@@ -62,9 +62,7 @@ AMD GPU　に関しては、従来の　Spack　のキーワードはKokkosのCM
     spack install kokkos +rocm amdgpu_target=gfx942
 
 
- `amdgpu_target`　オプションは、対象　GPU　アーキテクチャ固有のものです。
-Spack　ではアーキテクチャを明示的に指定する必要があります(自動検出なし)。
-
+ `amdgpu_target`　オプションは、対象　GPU　アーキテクチャ固有のものです。Spack　ではアーキテクチャを明示的に指定する必要があります(自動検出なし)。
 
 
 Intel GPU　に関しては、 SYCL バックエンドを使用して、 以下を実行します:
@@ -98,7 +96,7 @@ Spack　で自分だけの　Kokkos　依存プロジェクトをパッケージ
 
 コンパイラは、CUDA　の `nvcc_wrapper` のようなラッパーかもしれません。 Kokkosパッケージでは、`kokkos_cxx` 属性としてエクスポートされます。
 
-以下は、Kokkos　を依存関係として含む　 `package.py` ファイルの例です::
+以下は、Kokkos　を依存関係として含む　 `package.py` ファイルの例です:
 
 .. code-block:: python
 
