@@ -20,8 +20,8 @@
 
 Kokkos 対応プラットフォーム、サポートされたコンパイラおよびソフトウェア開発キット　(SDK)　のバージョン一覧の詳細については、 :doc:`requirements` を参照してください。
 
- CMake をインストールしていない場合  は、`CMake installation guide
-<https://cmake.org/install>`_.　を参照してください。ください。
+
+CMake をインストールしていない場合  は、`CMake installation guide<https://cmake.org/install>`_.　を参照してください。ください。
 
 
 プロジェクトのセットアップ
