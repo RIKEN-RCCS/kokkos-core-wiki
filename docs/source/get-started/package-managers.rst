@@ -17,7 +17,8 @@ https://packages.fedoraproject.org/pkgs/kokkos/
 `Spack <https://spack.io>`_
 ---------------------------
 Kokkos.は　HPC向けの、有名なパッケージマネージャーです。  Spack　には、　Kokkos　のインストールレシピが付属しています。
- `Kokkos レシピウェブページ <https://packages.spack.io/package.html?name=kokkos>`_ には  、Kokkosの利用可能なバージョンとそのオプションがまとめられています。
+ 
+`Kokkos レシピウェブページ <https://packages.spack.io/package.html?name=kokkos>`_ には  、Kokkosの利用可能なバージョンとそのオプションがまとめられています。
 
 ほとんどの場合、Spack Kokkos　のバリアントは、Kokkosの　`CMake options <./configuration-guide.html>`_. と同じオプションに従っています。
 利用可能なバリアントのリストは、以下の実行により、見つけることができます
@@ -33,7 +34,7 @@ GPUに関しては、Spack　にはそのような仕組みは存在せず、ユ
 
 
 
-Spack　で　Kokkos　インストール
+Spack で Kokkos インストール
 
 ++++++++++++++++++++++++++++
 
