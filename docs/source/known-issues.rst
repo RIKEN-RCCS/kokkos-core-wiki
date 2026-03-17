@@ -7,12 +7,12 @@
 ``Windows.h`` ヘッダー
 ====================
 
-Windows で　Kokkos を使用する場合、プログラムやライブラリが　`windows.h`　を含む場合があります。なぜなら、このヘッダーは、事前に　`NOMINMAX`　が定義されなければ、`min`　と　`max`　という名前の2つのマクロを定義するため、問題を含みます。プリプロセッサはソースコード内の文字列をマクロで置換するため、解釈不能な結果となり、コンパイルは失敗に終わります。したがって、ヘッダーファイル `Kokkos_Core.hpp` はこれらのマクロに対して保護されており、つまりそれらはヘッダーファイルの先頭では未定義であり、末尾で再定義されるということです。`Kokkos_Core.hpp`　内の定義はマクロに対して保護されているが、外部からのコードは保護されていません。 したがって、定義されるマクロへの対応として、コンパイルラインで、`-DNOMINMAX` または `/DNOMINMAX` を定義する（推奨）ことによる、あるいは `min` または `max` を含む名前に `()` を付けることによるかは、ユーザー次第である。
+Windows で　Kokkos を使用する場合、プログラムやライブラリが　`windows.h` を含む場合があります。なぜなら、このヘッダーは、事前に　`NOMINMAX`　が定義されなければ、`min`　と　`max`　という名前の2つのマクロを定義するため、問題を含みます。プリプロセッサはソースコード内の文字列をマクロで置換するため、解釈不能な結果となり、コンパイルは失敗に終わります。したがって、ヘッダーファイル `Kokkos_Core.hpp` はこれらのマクロに対して保護されており、つまりそれらはヘッダーファイルの先頭では未定義であり、末尾で再定義されるということです。`Kokkos_Core.hpp` 内の定義はマクロに対して保護されているが、外部からのコードは保護されていません。 したがって、定義されるマクロへの対応として、コンパイルラインで、`-DNOMINMAX` または `/DNOMINMAX` を定義する（推奨）ことによる、あるいは `min` または `max` を含む名前に `()` を付けることによるかは、ユーザー次第である。
 
 CUDA
 ====
 
-- 一部の　MPI　バージョンまたはレガシー　NVIDIA GPU　を使用する場合、Kokkos（バージョン4.2から4.4）の　`CudaSpace`　に対するデフォルトの割り当てメカニズムが問題を引き起こす可能性があります。例えば、MPI　は不正なメモリアクセスでクラッシュする可能性があり、Kokkos　の初期化では次のようなエラーが報告される場合があります:
+- 一部の　MPI バージョンまたはレガシー NVIDIA GPU を使用する場合、Kokkos（バージョン4.2から4.4）の　`CudaSpace`　に対するデフォルトの割り当てメカニズムが問題を引き起こす可能性があります。例えば、MPI は不正なメモリアクセスでクラッシュする可能性があり、Kokkos の初期化では次のようなエラーが報告される場合があります:
 
   .. code-block::
 
@@ -31,20 +31,20 @@ CUDA
 - CUDA 11.0 から 11.2 は、 glibc 2.34 の librt スタブと互換性がありません。そのイシューは、CMakeパッケージが　librt とのリンクをどのように処理するかに関連しています。詳細については、イシュー　`#7512　をご覧ください。
 <https://github.com/kokkos/kokkos/issues/7512>`_.
 
-- Microsoft Visual Studio　と　Cuda　バックエンドを有効化した状態で、Kokkos　を利用するアプリケーションを構築するには、CMake 言語機能の使用が必要です。 以下を参照してください
+- Microsoft Visual Studio　と　Cuda　バックエンドを有効化した状態で、Kokkos を利用するアプリケーションを構築するには、CMake 言語機能の使用が必要です。 以下を参照してください
 :ref:`keywords_enable_backend_specific_options`.
 
 HIP
 ===
 
--  `HIPManagedSpace`　を使用する場合、以下の条件下では、 メモリは　CPU　と　GPU　の間を移動します:
+-  `HIPManagedSpace`　を使用する場合、以下の条件下では、 メモリは　CPU と　GPU の間を移動します:
    - ハードウェアがそれをサポートする場合
    - カーネルが、ページ移行をサポートするようにコンパイルされた場合
    - 環境変数 `HSA_XNACK` が 1 に設定されている場合。
 
    より詳細な説明については、 `here <https://docs.olcf.ornl.gov/systems/frontier_user_guide.html#enabling-gpu-page-migration>`_ を参照してください。
 
-- HIP　および　gcc 8間の互換性の問題。 以下のエラーに遭遇する可能性があります:
+- HIP および gcc 8間の互換性の問題。 以下のエラーに遭遇する可能性があります:
 
   .. code-block::
 
@@ -73,22 +73,22 @@ SYCL
            |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       2573 |                     detail::IsDeprecatedDeviceCopyable<FieldT>::value,
            |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      /usr/bin/compiler/../../include/sycl/types.hpp:2605:7: note: テンプレートクラスのインスタンス化において'sycl::detail::CheckFieldsAreDeviceCopyable<(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83), 4>' requested here
+      /usr/bin/compiler/../../include/sycl/types.hpp:2605:7: note: テンプレートクラスのインスタンス化において 'sycl::detail::CheckFieldsAreDeviceCopyable<(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83), 4>' ここでリクエスト
       2605 |     : CheckFieldsAreDeviceCopyable<FuncT, __builtin_num_fields(FuncT)>,
            |       ^
-     /usr/bin/compiler/../../include/sycl/types.hpp:2613:7: note: in instantiation of template class 'sycl::detail::CheckDeviceCopyable<(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>' requested here
+     /usr/bin/compiler/../../include/sycl/types.hpp:2613:7: note: テンプレートクラスのインスタンス化において 'sycl::detail::CheckDeviceCopyable<(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>' ここでリクエスト
       2613 |     : CheckDeviceCopyable<KernelType> {};
            |       ^
-     /usr/bin/compiler/../../include/sycl/handler.hpp:1652:5: note: in instantiation of template class 'sycl::detail::CheckDeviceCopyable<sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>>' requested here
+     /usr/bin/compiler/../../include/sycl/handler.hpp:1652:5: note: テンプレートクラスのインスタンス化において 'sycl::detail::CheckDeviceCopyable<sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>>' ここでリクエスト
       1652 |     detail::CheckDeviceCopyable<KernelType>();
            |     ^
-     /usr/bin/compiler/../../include/sycl/handler.hpp:1694:5: note: in instantiation of function template specialization 'sycl::handler::unpack<sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::ext::oneapi::experimental::properties<std::tuple<>>, false, (lambda at /usr/bin/compiler/../../include/sycl/handler.hpp:1697:21)>' requested here
+     /usr/bin/compiler/../../include/sycl/handler.hpp:1694:5: note: 関数テンプレート特殊化のインスタンス化において 'sycl::handler::unpack<sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::ext::oneapi::experimental::properties<std::tuple<>>, false, (lambda at /usr/bin/compiler/../../include/sycl/handler.hpp:1697:21)>' ここでリクエスト
       1694 |     unpack<KernelName, KernelType, PropertiesT,
            |     ^
-     /usr/bin/compiler/../../include/sycl/handler.hpp:1293:7: note:  関数テンプレート特殊化のインスタンス化において 'sycl::handler::kernel_parallel_for_wrapper<sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::item<1, true>, sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::ext::oneapi::experimental::properties<std::tuple<>>>' requested here
+     /usr/bin/compiler/../../include/sycl/handler.hpp:1293:7: note: 関数テンプレート特殊化のインスタンス化において 'sycl::handler::kernel_parallel_for_wrapper<sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::item<1, true>, sycl::detail::RoundedRangeKernel<sycl::item<1, true>, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)>, sycl::ext::oneapi::experimental::properties<std::tuple<>>>' ここでリクエスト
       1293 |       kernel_parallel_for_wrapper<KName, TransformedArgType, decltype(Wrapper),
            |       ^
-     /usr/bin/compiler/../../include/sycl/handler.hpp:2332:5: note: (skipping 7 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+     /usr/bin/compiler/../../include/sycl/handler.hpp:2332:5: note: (バックトレースの中にある7コンテクストをスキップ;すべてを参照するには、-ftemplate-backtrace-limit=0 を使ってください)
       2332 |     parallel_for_lambda_impl<KernelName, KernelType, 1, PropertiesT>(
            |     ^
      [...]
