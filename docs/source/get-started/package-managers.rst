@@ -115,7 +115,7 @@ Spack　で自分だけの　Kokkos　依存プロジェクトをパッケージ
             return args
 
 
-より完全な例としては、`Kokkos Spack レシピ　<https://packages.spack.io/package.html?name=kokkos>`_　の　*Required by*　セクション内にある既存のレシピを参照するか、以下を実行してください::
+より完全な例としては、`Kokkos Spack recipe <https://packages.spack.io/package.html?name=kokkos>`_ の　*Required by*　セクション内にある既存のレシピを参照するか、以下を実行してください:
 
 .. code-block::
 
