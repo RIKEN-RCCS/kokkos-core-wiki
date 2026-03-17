@@ -7,7 +7,7 @@
 ``Windows.h`` ヘッダー
 ====================
 
-Windows　で　Kokkos　を使用する場合、プログラムやライブラリが　`windows.h`　を含む場合があります。なぜなら、このヘッダーは、事前に　`NOMINMAX`　が定義されなければ、`min`　と　`max`　という名前の2つのマクロを定義するため、問題を含みます。プリプロセッサはソースコード内の文字列をマクロで置換するため、解釈不能な結果となり、コンパイルは失敗に終わります。したがって、ヘッダーファイル `Kokkos_Core.hpp` はこれらのマクロに対して保護されており、つまりそれらはヘッダーファイルの先頭では未定義であり、末尾で再定義されるということです。`Kokkos_Core.hpp`　内の定義はマクロに対して保護されているが、外部からのコードは保護されていません。 したがって、定義されるマクロへの対応として、コンパイルラインで、`-DNOMINMAX` または `/DNOMINMAX` を定義する（推奨）ことによる、あるいは `min` または `max` を含む名前に `()` を付けることによるかは、ユーザー次第である。
+Windows で　Kokkos を使用する場合、プログラムやライブラリが　`windows.h`　を含む場合があります。なぜなら、このヘッダーは、事前に　`NOMINMAX`　が定義されなければ、`min`　と　`max`　という名前の2つのマクロを定義するため、問題を含みます。プリプロセッサはソースコード内の文字列をマクロで置換するため、解釈不能な結果となり、コンパイルは失敗に終わります。したがって、ヘッダーファイル `Kokkos_Core.hpp` はこれらのマクロに対して保護されており、つまりそれらはヘッダーファイルの先頭では未定義であり、末尾で再定義されるということです。`Kokkos_Core.hpp`　内の定義はマクロに対して保護されているが、外部からのコードは保護されていません。 したがって、定義されるマクロへの対応として、コンパイルラインで、`-DNOMINMAX` または `/DNOMINMAX` を定義する（推奨）ことによる、あるいは `min` または `max` を含む名前に `()` を付けることによるかは、ユーザー次第である。
 
 CUDA
 ====
@@ -28,10 +28,10 @@ CUDA
 
   そのため、バージョン4.5からは、Kokkosのデフォルト動作では、予防上 `cudaMallocAsync.`を無効にします。
 
-- CUDA 11.0 から 11.2 は、 glibc 2.34 の librt スタブと互換性がありません。そのイシューは、CMakeパッケージが　librt　とのリンクをどのように処理するかに関連しています。詳細については、イシュー　`#7512　をご覧ください。
+- CUDA 11.0 から 11.2 は、 glibc 2.34 の librt スタブと互換性がありません。そのイシューは、CMakeパッケージが　librt とのリンクをどのように処理するかに関連しています。詳細については、イシュー　`#7512　をご覧ください。
 <https://github.com/kokkos/kokkos/issues/7512>`_.
 
-- Microsoft Visual Studio　と　Cuda　バックエンドを有効化した状態で、Kokkos　を利用するアプリケーションを構築するには、CMake　言語機能の使用が必要です。 以下を参照してください
+- Microsoft Visual Studio　と　Cuda　バックエンドを有効化した状態で、Kokkos　を利用するアプリケーションを構築するには、CMake 言語機能の使用が必要です。 以下を参照してください
 :ref:`keywords_enable_backend_specific_options`.
 
 HIP
@@ -110,7 +110,7 @@ SYCL
 
     #include <Kokkos_Core.hpp>
     
-    using namespace Kokkos　を使用;  // avoid using　ディレクティブを回避
+    using namespace Kokkos;  // avoid using　ディレクティブを回避
 
     KOKKOS_FUNCTION void do_math() {
       auto sqrt5 = sqrt(5);  // error: ambiguous ::sqrt or Kokkos::sqrt?
