@@ -132,7 +132,7 @@
 --------------------
 
 ..
-  これらは、例えば、フレンド関数等、緊密に関連している場合にのみ、ここに示される必要があります。 しかしながら、view_alloc 等は、ここに、ビューを目的としてここに示すべきではありません。shouldn't be here for view
+  これらは、例えば、フレンド関数等、緊密に関連している場合にのみ、ここに示される必要があります。 しかしながら、view_alloc 等は、ここに、ビューを目的としてここに示すべきではありません。
 
 .. cpp:function:: template<class ViewSrc> bool operator==(CoolerView, ViewSrc);
 
