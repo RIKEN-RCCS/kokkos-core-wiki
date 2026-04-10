@@ -138,28 +138,28 @@ auto inclusive_scan(const std::string& label, const ExecutionSpace& exespace,   
 ## ディスクリプション
 
 - 1,2,3,4: 二つの要素を結合するために、二項演算子 `bin_op` を用いて、範囲 `[first_from, last_from)` (1,2) に対して、
-- あるいは `view_from`　 (3,4) 　に対して、インクルーシブプレフィックススキャンを計算し、
- `first_dest` (1,2) の範囲の始め、または `view_dest` (3,4)　に結果を書き込みます。
+- あるいは `view_from`  (3,4)  に対して、インクルーシブプレフィックススキャンを計算し、
+ `first_dest` (1,2) の範囲の始め、または `view_dest` (3,4) に結果を書き込みます。
 
 - 5,6,7,8: 二つの要素を結合するために、二項演算子 `bin_op` を用いて、範囲 `[first_from, last_from)` (5,6) に対して、
-- あるいは `view_from` (7,8) 　に対して、インクルーシブプレフィックススキャンを計算し、
- `first_dest` (5,6) の範囲の始め、または `view_dest` (7,8)　に結果を書き込みます。
+- あるいは `view_from` (7,8)  に対して、インクルーシブプレフィックススキャンを計算し、
+ `first_dest` (5,6) の範囲の始め、または `view_dest` (7,8) に結果を書き込みます。
 
-- 9,10,11,12: 二つの要素および初期値としての `init`　を結合するために、二項演算子 `bin_op` を用いて、範囲 `[first_from, last_from)` (9,10) に対して、
+- 9,10,11,12: 二つの要素および初期値としての `init` を結合するために、二項演算子 `bin_op` を用いて、範囲 `[first_from, last_from)` (9,10) に対して、
 - あるいは `view_from` (11,12) に対して、インクルーシブプレフィックススキャンを計算し、
- `first_dest` (9,10) の範囲の始め、または `view_dest` (11,12)　に結果を書き込みます。
+ `first_dest` (9,10) の範囲の始め、または `view_dest` (11,12) に結果を書き込みます。
 
 インクルーシブとは、i番目の入力要素が、i番目の和に含まれることを意味します。
 
 ## パラメータおよび要件
 
 - `exespace`, `first_from`, `first_last`, `first_dest`, `view_from`, `view_dest`, `bin_op`:
-  -  [`exclusive_scan`](./StdExclusiveScan)　と同様。
+  -  [`exclusive_scan`](./StdExclusiveScan) と同様。
 - `label`:
   - デバッグ目的で実装カーネルに名付けるために使用
-  - 1,5,9　について、デフォルト文字列は、 : "Kokkos::inclusive_scan_iterator_api_default"
-  - 3,7,11　について、デフォルト文字列は、 : "Kokkos::inclusive_scan_iterator_api_default"
+  - 1,5,9 について、デフォルト文字列は、 : "Kokkos::inclusive_scan_iterator_api_default"
+  - 3,7,11 について、デフォルト文字列は、 : "Kokkos::inclusive_scan_iterator_api_default"
 
 ## 戻り値
 
-最後の要素がコピーされた *後*　の宛先へのイテレータ。
+最後の要素がコピーされた *後* の宛先へのイテレータ。

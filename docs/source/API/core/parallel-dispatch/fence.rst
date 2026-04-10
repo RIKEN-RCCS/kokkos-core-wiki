@@ -12,12 +12,12 @@
 
     Kokkos::fence();
 
-未完了の非同期　Kokkos　演算がすべて完了した時点でブロックします。
-それは、三引数 `deep_copy <../view/deep_copy.html>`_　だけでなく、並列ディスパッチ　(例えば、 `parallel_for() <parallel_for.html#kokkosparallel_for>`_, `parallel_reduce() <parallel_reduce.html#kokkosparallel_reduce>`_ 
+未完了の非同期 Kokkos 演算がすべて完了した時点でブロックします。
+それは、三引数 `deep_copy <../view/deep_copy.html>`_ だけでなく、並列ディスパッチ (例えば、 `parallel_for() <parallel_for.html#kokkosparallel_for>`_, `parallel_reduce() <parallel_reduce.html#kokkosparallel_reduce>`_ 
 and `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
 含みます。
 
-注意事項: 実行空間インスタンス固有の　``fence`` も存在します。: `ExecutionSpaceConcept <../execution_spaces.html#executionspaceconcept>`_
+注意事項: 実行空間インスタンス固有の ``fence`` も存在します。: `ExecutionSpaceConcept <../execution_spaces.html#executionspaceconcept>`_
 
 インターフェイス
 ---------
@@ -33,12 +33,12 @@ and `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
 パラメータ
 ~~~~~~~~~~
 
-- ``label``: フェンスプロファイリング操作において特定のフェンスを識別するためのラベルです。``label``　は、ユニークである必要はありません。
+- ``label``: フェンスプロファイリング操作において特定のフェンスを識別するためのラベルです。``label`` は、ユニークである必要はありません。
 
 必要要件
 ~~~~~~~~~~~~
 
-- ```Kokkos::fence()`` は、既存の並列領域内では呼び出すことはできません (つまり、  ファンクタまたはラムダの　``operator()`` 内)。
+- ```Kokkos::fence()`` は、既存の並列領域内では呼び出すことはできません (つまり、  ファンクタまたはラムダの ``operator()`` 内)。
 
 セマンティクス
 ---------
@@ -67,10 +67,10 @@ and `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
 
     Kokkos::deep_copy(exec1, a,b);
     Kokkos::deep_copy(exec2, a,b);
-    //  a　または b に干渉しない何かを行います。
+    //  a または b に干渉しない何かを行います。
     Kokkos::parallel_for("Test", N, functor);
 
-    // Kokkos::fence();　を完了するために
+    // Kokkos::fence(); を完了するために
     3つの演算すべてを待ちます。
 
     // a および bを使って何かを行います

@@ -4,7 +4,7 @@
 .. ロール:: cpp(code)
     :language: cpp
 
-ヘッダー ``<Kokkos_Core.hpp>``　に定義。
+ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 .. code-block:: cpp
 
@@ -19,5 +19,5 @@
 
 .. |KokkosAbort| replace:: ``<Kokkos_Abort.hpp>``
 
-* バージョン　4.2　より、  ``<Kokkos_Core.hpp>``　の代わりに、|KokkosAbort|_　が含まれる場合があります。
+* バージョン 4.2 より、  ``<Kokkos_Core.hpp>`` の代わりに、|KokkosAbort|_ が含まれる場合があります。
 

@@ -31,7 +31,7 @@
                       UnaryPredicate pred);
 
    template <
-   　class ExecutionSpace,
+    class ExecutionSpace,
      class DataType, class... Properties,
      class UnaryPredicate>
    auto remove_if(const ExecutionSpace& exespace,                               (3)
@@ -75,7 +75,7 @@
 .. |remove| replace:: ``remove``
 .. _remove: ./StdRemove.html
 
-- ``exespace``, ``first``, ``last``, ``view``:  |remove|_　と同様。
+- ``exespace``, ``first``, ``last``, ``view``:  |remove|_ と同様。
 
 - ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
@@ -89,7 +89,7 @@
 
 - ``pred``:
 
-  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型　value_type　すべての引数　``v``　（constの可能性）について、bool型に変換可能で、そこでは、``value_type``　が、　``Iterator`` (1,2,5について) の値型、または ``view`` (3,4,6について)　の値型であり、  ``v``　を変更してはいけません。
+  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 value_type すべての引数 ``v`` （constの可能性）について、bool型に変換可能で、そこでは、``value_type`` が、 ``Iterator`` (1,2,5について) の値型、または ``view`` (3,4,6について) の値型であり、  ``v`` を変更してはいけません。
 
   - 以下に一致しなければなりません:
 

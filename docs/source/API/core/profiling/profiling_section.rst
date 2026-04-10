@@ -4,7 +4,7 @@
 .. role:: cpp(code)
    :language: cpp
 
-ヘッダー ``<Kokkos_Profiling_ProfileSection.hpp>``　に定義。
+ヘッダー ``<Kokkos_Profiling_ProfileSection.hpp>`` に定義。
 
 使用例
 -----
@@ -19,12 +19,12 @@
 
 
 クラス ``ProfilingSection`` は、ユーザー定義のプロファイリングセクションを管理するための便利な
-`RAIIスタイル <https://en.cppreference.com/w/cpp/language/raii>`_ メカニズムを提供する、セクション　ID　ラッパーです。
+`RAIIスタイル <https://en.cppreference.com/w/cpp/language/raii>`_ メカニズムを提供する、セクション ID ラッパーです。
 
 
-　``ProfilingSection``　オブジェクトが作成されると、ユーザーが提供した文字列を用いてプロファイリングセクションが作成され、そのオブジェクトはセクションIDを保持します。
+ ``ProfilingSection`` オブジェクトが作成されると、ユーザーが提供した文字列を用いてプロファイリングセクションが作成され、そのオブジェクトはセクションIDを保持します。
 
-制御が　``ProfilingSection``　オブジェクトが作成されたスコープを離れた場合、``ProfilingSection``　は、破棄され、基盤となるセクションは適切に破棄されます。
+制御が ``ProfilingSection`` オブジェクトが作成されたスコープを離れた場合、``ProfilingSection`` は、破棄され、基盤となるセクションは適切に破棄されます。
 
  ``ProfilingSection`` クラスのコピーは不可能です。
 
@@ -32,23 +32,23 @@
 .. cpp:Function:: ProfilingSection(std::string const& sectionName);
 
    ユーザーに提供されたラベルを使って、セクションを構築します。
-    ``Profiling::createProfileSection(sectionName, &sectionID);``　を呼び出します。
+    ``Profiling::createProfileSection(sectionName, &sectionID);`` を呼び出します。
 
 .. cpp:Function:: ~ProfilingSection();
 
    セクションを削除します。
-    ``Profiling.destroyProfileSection(sectionID);``　を呼び出します。
+    ``Profiling.destroyProfileSection(sectionID);`` を呼び出します。
 
 .. cpp:Function:: void start();
 
    セクションを開始します。
-    ``Profiling::startSection(sectionID);``　を呼び出します。
+    ``Profiling::startSection(sectionID);`` を呼び出します。
 
 
 .. cpp:Function:: void stop();
 
    セクションを終了します。
-   ``Profiling::stopSection(sectionID);``　を呼び出します。
+   ``Profiling::stopSection(sectionID);`` を呼び出します。
 
 
 **以下も参照**

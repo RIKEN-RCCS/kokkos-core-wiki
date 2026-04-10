@@ -1,4 +1,4 @@
-.. Sphinx　のためのカラープロファイル
+.. Sphinx のためのカラープロファイル
 .. hacks.cssによって使用する必要があります
 .. (https://bitbucket.org/lbesson/web-sphinx/src/master/.static/hacks.css)
 
@@ -44,4 +44,4 @@
 .. role:: left
 .. role:: right
 
-.. (c) Lilian Besson, 2011-2016, https://bitbucket.org/lbesson/web-sphinx/　より適用
+.. (c) Lilian Besson, 2011-2016, https://bitbucket.org/lbesson/web-sphinx/ より適用

@@ -4,7 +4,7 @@
 .. ロール:: cpp(code)
     :language: cpp
 
-論理的 ``OR`` 演算を行う　`ReducerConcept <ReducerConcept.html>`_　の具体的な実装
+論理的 ``OR`` 演算を行う `ReducerConcept <ReducerConcept.html>`_ の具体的な実装
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
@@ -70,7 +70,7 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION LOr(value_type& value_);
 
-    　クラスコンストラクタで提供された結果への参照を返します。
+     クラスコンストラクタで提供された結果への参照を返します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION LOr(const result_view_type& value_);
 
@@ -80,11 +80,11 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-       ``src``　の ``and``　および　``dest`` を　``dest``: ``dest = src || dest;``　にビット単位で格納します。
+       ``src`` の ``and`` および ``dest`` を ``dest``: ``dest = src || dest;`` にビット単位で格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-      　``Kokkos::reduction_identity<Scalar>::land()`` メソッドを使用して、``val``　を初期化します。 デフォルト実装は、``val=0``　を設定します。
+       ``Kokkos::reduction_identity<Scalar>::land()`` メソッドを使用して、``val`` を初期化します。 デフォルト実装は、``val=0`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
@@ -97,9 +97,9 @@
 追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
 
-*  ``LOr<T,S>::value_type`` は、 非定数 ``T``　です。
+*  ``LOr<T,S>::value_type`` は、 非定数 ``T`` です。
 
-*  ``LOr<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
+*  ``LOr<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`` です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
 * 必要条件:  ``Scalar`` には、  ``operator =`` and ``operator ||`` が定義されます。``Kokkos::reduction_identity<Scalar>::lor()`` は、有効な式です。
 

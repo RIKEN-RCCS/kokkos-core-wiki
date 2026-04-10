@@ -11,27 +11,27 @@
 
 .. |KokkosNumericTraits| replace:: ``<Kokkos_NumericTraits.hpp>``
 
- ``<Kokkos_Core.hpp>``　に含まれる ヘッダー |KokkosNumericTraits|_　に定義。
+ ``<Kokkos_Core.hpp>`` に含まれる ヘッダー |KokkosNumericTraits|_ に定義。
 
 .. _NumericLimits: https://en.cppreference.com/w/cpp/types/numeric_limits
 
-.. |NumericLimits| replace:: 標準ライブラリヘッダー ``<limits>``　からの ``numeric_limits``。
+.. |NumericLimits| replace:: 標準ライブラリヘッダー ``<limits>`` からの ``numeric_limits``。
 
 .. _P1841 : http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p1841r2.pdf
 
 .. |P1841| replace:: P1841
 
- |NumericLimits|_　の代替えを提供します。  C++23標準ライブラリに追加される新しい機能を実装し、モノリシックな ``numeric_limits`` クラステンプレートを個別のトレイトテンプレートに分割します。 詳細については、標準ライブラリヘッダー からの |P1841|_.numeric_limit　を参照してください。
+ |NumericLimits|_ の代替えを提供します。  C++23標準ライブラリに追加される新しい機能を実装し、モノリシックな ``numeric_limits`` クラステンプレートを個別のトレイトテンプレートに分割します。 詳細については、標準ライブラリヘッダー からの |P1841|_.numeric_limit を参照してください。
 
-数値特性は、Kokkos 3.5以降に、``Kokkos::Experimental`` namespace　で定義されています。
+数値特性は、Kokkos 3.5以降に、``Kokkos::Experimental`` namespace で定義されています。
 
 以下に利用可能な特性のリストを記載します。
 
 ------------
 
-　Kokkos 3.6 に追加された``特性*`` を示しています。
+ Kokkos 3.6 に追加された``特性*`` を示しています。
 
-:strike:`trait*` は、 Kokkos 4.0　において削除された特性を示しています。
+:strike:`trait*` は、 Kokkos 4.0 において削除された特性を示しています。
 
 **数値的顕著価値**
 ``infinity``
@@ -58,7 +58,7 @@
 ------------
 
 +---------------------------------------------------------+------------------------------------------------+
-| 標準ライブラリ                                        | 　　C++17  を伴うKokkos                            |
+| 標準ライブラリ                                        |   C++17  を伴うKokkos                            |
 +=========================================================+================================================+
 | ``std::numeric_limits<Integral>::min()``                | ``finite_min_v<Integral>``                     |
 +---------------------------------------------------------+------------------------------------------------+
@@ -78,7 +78,7 @@
 +---------------------------------------------------------+------------------------------------------------+
 | ``std::numeric_limits<FloatingPoint>::signaling_NaN()`` | ``signaling_NaN_v<FloatingPoint>`` (バージョン 3.6以降) |
 +---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::denorm_min()``    | ``denorm_min_v<FloatingPoint>`` (バージョン　3.6以降)    |
+| ``std::numeric_limits<FloatingPoint>::denorm_min()``    | ``denorm_min_v<FloatingPoint>`` (バージョン 3.6以降)    |
 +---------------------------------------------------------+------------------------------------------------+
 | ``std::numeric_limits<Arithmetic>::digits``             | ``digits_v<Arithmetic>``                       |
 +---------------------------------------------------------+------------------------------------------------+
@@ -97,11 +97,11 @@
 | ``std::numeric_limits<FloatingPoint>::max_exponent10``  | ``max_exponent10_v<FloatingPoint>``            |
 +---------------------------------------------------------+------------------------------------------------+
 
-個々の特性には、C++14　で使用できる値メンバー定数があります  (例:  ``epsilon<float>::value``)。
+個々の特性には、C++14 で使用できる値メンバー定数があります  (例:  ``epsilon<float>::value``)。
 
 ------------
 
-個々の特性は、SFINAE　に配慮した、価値の存在/不在を検出できます。
+個々の特性は、SFINAE に配慮した、価値の存在/不在を検出できます。
 
 .. code-block:: cpp
 

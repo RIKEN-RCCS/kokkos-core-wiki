@@ -8,16 +8,16 @@
    * - リデューサー
      - ディスクリプション
    * - `初期化及び最終処理完了 <core/Initialize-and-Finalize.html>`__
-     - Kokkos　の初期化及び最終処理完了。
+     - Kokkos の初期化及び最終処理完了。
    * - `ビューおよびその関連 <core/View.html>`__
-     - Kokkos　多次元ビュークラスおよび関連するフリー関数。
+     - Kokkos 多次元ビュークラスおよび関連するフリー関数。
    * - `並列実行/ディスパッチ <core/ParallelDispatch.html>`__
      - 並列実行ディスパッチ。
    * - `組み込みリデューサー <core/builtin_reducers.html>`__
      - 組み込みリデューサー
    * - `実行ポリシー <core/Execution-Policies.html>`__
      - 実行ポリシー。
-　 * - `空間 <core/Spaces.html>`__
+  * - `空間 <core/Spaces.html>`__
      - メモリ空間及び実行空間のディスクリプション。
    * - `タスク並列処理 <core/Task-Parallelism.html>`__
      - タスクグラフの作成と配信。
@@ -34,11 +34,11 @@
    * - `Kokkos 概念 <core/KokkosConcepts.html>`__
      - Kokkos 概念
    * - `STL 互換性問題 <core/STL-Compatibility.html>`__
-     - 標準　C++　の機能のポートであり、それらが様々なハードウェアプラットフォームでは動作しない場合あり。
+     - 標準 C++ の機能のポートであり、それらが様々なハードウェアプラットフォームでは動作しない場合あり。
    * - `ユーティリティ <core/Utilities.html>`__
      - Kokkos コアのユーティリティ機能性部分。
    * - `検出イディオム <core/Detection-Idiom.html>`__
-     - SFINAE　に配慮した方法で、任意の　C++　式が有効かどうかを認識するために使用。
+     - SFINAE に配慮した方法で、任意の C++ 式が有効かどうかを認識するために使用。
    * - `マクロ <core/Macros.html>`__
      - グローバルマクロであり、アーキテクチャや一般的な設定等に使用。
    * - `半精度型 <core/Half-precision-types.html>`__

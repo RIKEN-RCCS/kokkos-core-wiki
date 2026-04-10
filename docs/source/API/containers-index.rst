@@ -26,7 +26,7 @@
    * - `UnorderedMap <containers/Unordered-Map.html>`__
      - UnorderedMap コメント。
    * - `vector <containers/vector.html>`__
-     - [非推奨] 非ホストメモリ空間で動作する、std::vector　互換の実装。
+     - [非推奨] 非ホストメモリ空間で動作する、std::vector 互換の実装。
 
 .. toctree::
    :hidden:

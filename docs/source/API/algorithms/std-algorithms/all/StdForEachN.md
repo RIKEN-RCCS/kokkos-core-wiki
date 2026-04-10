@@ -40,11 +40,11 @@ UnaryFunctorType for_each_n(const std::string& label, const ExecutionSpace& exes
 
 ## パラメータおよび要件
 
-- `exespace`, `first`, `view`, `func` :  [`for_each`](./StdForEach)　において同様。
+- `exespace`, `first`, `view`, `func` :  [`for_each`](./StdForEach) において同様。
 
 - `label`:
-  - 1　について、デフォルト文字列は、: "Kokkos::for_each_n_iterator_api_default"
-  - 3　について、デフォルト文字列は、: "Kokkos::for_each_n_view_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::for_each_n_iterator_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::for_each_n_view_api_default"
 
 - `n`:
   - 演算対象となる要素数

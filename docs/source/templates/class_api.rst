@@ -1,7 +1,7 @@
 ..
   見出しの表記については、以下の規則を使用してください：
 
-    # 各部に対して、オーバーラインを使用　（章の集まり）
+    # 各部に対して、オーバーラインを使用 （章の集まり）
 
     * 各部に対して、オーバーラインを使用
 
@@ -29,13 +29,13 @@
 ヘッダーファイル: ``Kokkos_Core.hpp``
 
 ..
-  そのものが何を行うのかについて、高レベルで、人間が理解しやすい言葉で簡潔にまとめた概要、そして可能であれば、それが存在する理由についての簡潔な説明　（最高で2，3文）；
+  そのものが何を行うのかについて、高レベルで、人間が理解しやすい言葉で簡潔にまとめた概要、そして可能であれば、それが存在する理由についての簡潔な説明 （最高で2，3文）；
 
 ディスクリプション
 -----------
 
 ..
-  エンティティの　API　。
+  エンティティの API 。
 
 インターフェイス
 ---------
@@ -66,7 +66,7 @@
 
   .. cpp:member:: int some_var = 5;
 
-    some_var　のディスクリプション
+    some_var のディスクリプション
 
     ..
       関連情報を持つ場合
@@ -82,7 +82,7 @@
 
   .. cpp:function:: CoolerView(CoolerView&& rhs)
 
-    それが、移動/コピー/デフォルト　コンストラクタかどうか。それが何であるかを記述します。
+    それが、移動/コピー/デフォルト コンストラクタかどうか。それが何であるかを記述します。
 
   ..
     デストラクタでリソースを解放するRAIIクラス等、APIの一部として何か有用な処理を行う場合にのみ、デストラクタを含めてください。メンバの処理や破棄を行うだけのクラスについては、そのメンバを記録する必要はありません。
@@ -99,9 +99,9 @@
 
     関数の簡単なディスクリプション。
 
-    :tparam U:  U　のディスクリプション
+    :tparam U:  U のディスクリプション
 
-    :param:  x　のディスクリプション
+    :param:  x のディスクリプション
 
     ..
       Describe any API changes between versions.
@@ -111,7 +111,7 @@
       バージョン間で変更された事柄What changed between versions: 例えば、2つのパラメータの代わりに、fooスタイル演算については、1つのパラメータのみを選択します。
 
   ..
-   非推奨の表記には、C++　の構文を使用してください（Kokkosの非推奨マクロは使用しないでください）。Sphinx　がこれを認識します。将来的には、HTML生成後に追加の解析を行い、より好ましい状態で表示する可能性があります。
+   非推奨の表記には、C++ の構文を使用してください（Kokkosの非推奨マクロは使用しないでください）。Sphinx がこれを認識します。将来的には、HTML生成後に追加の解析を行い、より好ましい状態で表示する可能性があります。
 
   .. cpp:type:: [[deprecated("in version 4.0.1")]] foobar
 
@@ -138,13 +138,13 @@
 
   :tparam ViewDst: その他
 
-  :return:  :cpp:expr:`0<=r<rank`　について、:cpp:type:`View::value_type`, :cpp:type:`View::array_layout`, :cpp:type:`View::memory_space`, :cpp:func:`View::rank`, :cpp:func:`View::data()` and :cpp:expr:`View::extent(r)`が、　一致すれば、真
+  :return:  :cpp:expr:`0<=r<rank` について、:cpp:type:`View::value_type`, :cpp:type:`View::array_layout`, :cpp:type:`View::memory_space`, :cpp:func:`View::rank`, :cpp:func:`View::data()` and :cpp:expr:`View::extent(r)`が、 一致すれば、真
 
 .. cpp:function:: void frobrnicator(CoolerView &v) noexcept
 
-  :param: v the :cpp:class:　意味不明化のための`CoolerView` 
+  :param: v the :cpp:class: 意味不明化のための`CoolerView` 
 
-  CoolerView　を意味不明化
+  CoolerView を意味不明化
 
 例
 --------
@@ -152,7 +152,7 @@
 ..
   上記の個々の関数についても、例を挙げておくと役立つかもしれません。
 
-  文章による説明（　"使用例"　等）よりも、実際に動作するコンパイル可能な例を優先いたします。
+  文章による説明（ "使用例" 等）よりも、実際に動作するコンパイル可能な例を優先いたします。
 
 .. code-block:: cpp
 

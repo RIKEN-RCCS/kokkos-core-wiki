@@ -6,7 +6,7 @@
 ディスクリプション
 -----------
 
-``pred``　が  ``真``　を返す要素は除外して、範囲から、``first_to`` から始まる新たな範囲、または ``view_from``　から ``view_dest`` への新しい範囲にコピーします。
+``pred`` が  ``真`` を返す要素は除外して、範囲から、``first_to`` から始まる新たな範囲、または ``view_from`` から ``view_dest`` への新しい範囲にコピーします。
 
 インターフェイス
 ---------
@@ -95,7 +95,7 @@
 .. |RemoveCopy| replace:: ``remove_copy``
 .. _RemoveCopy: ./StdRemoveCopy.html
 
-- ``exespace``, ``teamHandle``, ``first_from, last_from``, ``first_to``, ``view_from``, ``view_dest``: |RemoveCopy|_　と同様。
+- ``exespace``, ``teamHandle``, ``first_from, last_from``, ``first_to``, ``view_from``, ``view_dest``: |RemoveCopy|_ と同様。
 
 - ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
@@ -107,7 +107,7 @@
 
 - ``pred``:
 
-  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型　value_type　すべての引数　``v``　（constの可能性）について、bool型に変換可能で、そこでは、``value_type``　が、``InputIteratorType``　 (1,2,5について) の値型、または ``view`` (3,4,6について)　の値型であり、  ``v``　を変更してはいけません。
+  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 value_type すべての引数 ``v`` （constの可能性）について、bool型に変換可能で、そこでは、``value_type`` が、``InputIteratorType``  (1,2,5について) の値型、または ``view`` (3,4,6について) の値型であり、  ``v`` を変更してはいけません。
 
   - 以下に一致しなければなりません:
 

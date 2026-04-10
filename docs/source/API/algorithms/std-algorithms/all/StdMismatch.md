@@ -70,10 +70,10 @@ auto mismatch(const std::string& label, const ExecutionSpace& exespace,
 
 ## ディスクリプション
 
-2つの範囲から最初の不一致ペアを返します:  (1,2,3,4)　については、1つは [first1, last1) により定義され、もう1つは [first2,last2) によって定義されます。
+2つの範囲から最初の不一致ペアを返します:  (1,2,3,4) については、1つは [first1, last1) により定義され、もう1つは [first2,last2) によって定義されます。
 (5,6,7,8)において、2つのビュー `view1` および `view2` から、最初の不一致ペアを返します。
 (1,2,5,6)において、 `operator==` を使って、要素を比較します。
-(3,4,7,8) における要素を、 BinaryPredicate `pred`　を使用して比較します。
+(3,4,7,8) における要素を、 BinaryPredicate `pred` を使用して比較します。
 
 ## パラメータおよび要件
 
@@ -86,14 +86,14 @@ auto mismatch(const std::string& label, const ExecutionSpace& exespace,
 
 - `first1`, `last1`, `first2`, `last2`:
   - 比較対象の要素の範囲
-  - *ランダムアクセスイテレータ*　でなければなりません
+  - *ランダムアクセスイテレータ* でなければなりません
   - 有効な範囲、つまり、 `last1 >= first1` および `last2 >= first2` を表さなければなりません。
-  -  `exespace`　からアクセス可能でなければなりません。
+  -  `exespace` からアクセス可能でなければなりません。
 
 - `view1`, `view2`:
   - 比較対象のビュー
-  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
-  - `exespace`　からアクセス可能でなければなりません。
+  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 
 - `pred`
   ```cpp
@@ -109,7 +109,7 @@ auto mismatch(const std::string& label, const ExecutionSpace& exespace,
 
 ## 返し
 
-- (1,2) - Kokkos::pair, ここでは、 `.first` および `.second` が `operator==` が偽に評価される　IteratorType1 および IteratorType2 インスタンスです。 
+- (1,2) - Kokkos::pair, ここでは、 `.first` および `.second` が `operator==` が偽に評価される IteratorType1 および IteratorType2 インスタンスです。 
 - (3,4) - Kokkos::pair, ここでは、 `.first` および `.second` が `pred` が偽に評価され IteratorType1 およに IteratorType2  インスタンスです。
 
 ## 例 

@@ -37,12 +37,12 @@ void replace_if(const std::string& label, const ExecutionSpace& exespace,    (4)
 
 ## パラメータおよび要件
 
-- `exespace`, `first`, `last`, `view`, `new_value`:  [`replace`](./StdReplace)　と同様。
+- `exespace`, `first`, `last`, `view`, `new_value`:  [`replace`](./StdReplace) と同様。
 - `label`:
-  - 1　について、デフォルト文字列は、: "Kokkos::replace_if_iterator_api_default"
-  - 3　について、デフォルト文字列は、: "Kokkos::replace_if_view_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::replace_if_iterator_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::replace_if_view_api_default"
 - `pred`:
-  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)``　は、引数として渡された実行空間から呼び出されるためには、有効でなければならず、 型　value_type　すべての引数　``v``　（constの可能性）について、ブール型に変換可能で、そこでは、``value_type``　が、　 `InputIteratorType`  (1,2,について) の値型、または  `view`  (3,4について)　の値型であり、  ``v``　を変更してはいけません。
+  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならず、 型 value_type すべての引数 ``v`` （constの可能性）について、ブール型に変換可能で、そこでは、``value_type`` が、  `InputIteratorType`  (1,2,について) の値型、または  `view`  (3,4について) の値型であり、  ``v`` を変更してはいけません。
   - 以下に一致しなければなりません:
   ```c++
   struct Predicate
@@ -74,7 +74,7 @@ struct IsPositiveFunctor {
 
 namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
-// a　を使って何かを実行
+// a を使って何かを実行
 // ...
 
 const double oldValue{2};

@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
- ヘッダー ``<Kokkos_Core.hpp>``　に定義。
+ ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 .. code-block:: cpp
 
@@ -15,17 +15,17 @@
     #endif
 
 マクロ ``KOKKOS_ASSERT`` の定義は、他のマクロ、
-``NDEBUG`` および　``KOKKOS_ENABLE_DEBUG``。
+``NDEBUG`` および ``KOKKOS_ENABLE_DEBUG``。
 
-``NDEBUG`` が定義されず、 ``<Kokkos_Assert.hpp>`` または　``<Kokkos_Core.hpp>`` が含まれないソースコード内のポイントで
+``NDEBUG`` が定義されず、 ``<Kokkos_Assert.hpp>`` または ``<Kokkos_Core.hpp>`` が含まれないソースコード内のポイントで
 ``KOKKOS_ENABLE_DEBUG`` が定義されない場合には、
 アサートは何もできません。
 
-``NDEBUG`` が定義されない、または　``KOKKOS_ENABLE_DEBUG`` が定義される場合には、
-``KOKKOS_ASSERT`` は、``bool``　に変換されたその引数が、``false``　に決定されているかどうかを
+``NDEBUG`` が定義されない、または ``KOKKOS_ENABLE_DEBUG`` が定義される場合には、
+``KOKKOS_ASSERT`` は、``bool`` に変換されたその引数が、``false`` に決定されているかどうかを
 確認します。 そうである場合には、 ``KOKKOS_ASSERT`` は、
-事前定義されたマクロス  ``__FILE__`` and ``__LINE__``　のみならず、
-式のテキストを含む、診断情報を使って、 ``Kokkos::abort``　を呼び出します。
+事前定義されたマクロス  ``__FILE__`` and ``__LINE__`` のみならず、
+式のテキストを含む、診断情報を使って、 ``Kokkos::abort`` を呼び出します。
 
 例
 -------
@@ -51,8 +51,8 @@
 
 .. |KokkosAssert| replace:: ``<Kokkos_Assert.hpp>``
 
-* バージョン 4.2以降、 |KokkosAssert|_　から ``KOKKOS_ASSERT`` もまた入手可能です。
-* C++ 標準ライブラリからの `assert`　とは対照的に、``KOKKOS_FUNCTION``から ``KOKKOS_ASSERT`` を呼び出すことは、合法的です。
+* バージョン 4.2以降、 |KokkosAssert|_ から ``KOKKOS_ASSERT`` もまた入手可能です。
+* C++ 標準ライブラリからの `assert` とは対照的に、``KOKKOS_FUNCTION``から ``KOKKOS_ASSERT`` を呼び出すことは、合法的です。
 
 以下も参照
 --------

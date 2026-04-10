@@ -1,6 +1,6 @@
 # ScatterViewの要素をノードに平均化
 
- [`Kokkos::ScatterView`](../API/containers/ScatterView)　について典型的な使用事例を示すために、有限要素法プログラムにおいて、利用可能な情報が要素から節点への対応関係のみである場合を考えることが可能であり、要素からノードへ、ある量を平均化したいと思います。
+ [`Kokkos::ScatterView`](../API/containers/ScatterView) について典型的な使用事例を示すために、有限要素法プログラムにおいて、利用可能な情報が要素から節点への対応関係のみである場合を考えることが可能であり、要素からノードへ、ある量を平均化したいと思います。
 この平均値は、二つの和の比率、つまり、隣接する要素の量の和を
 隣接する要素の和で割ったものです。
 
@@ -9,8 +9,8 @@
 
 ノードに隣接する要素の数を計算するだけでも、[`Kokkos::ScatterView`](../API/containers/ScatterView) に関する必要なワークフローの大半が明らかになります。
 アルゴリズムは以下の通りです: メッシュ要素を並列に反復処理し、並行して、各メッシュ要素は自身のノードを特定し、そのノード固有の配列エントリに1を加算します。
-それらのエントリは最終的に、ノードごとに1つのエントリを持つ　[`Kokkos::View`](../API/core/view/view)　に格納されますが、
-アルゴリズムの間に、 データ競合を防止するため、これらは、[`Kokkos::ScatterView`](../API/containers/ScatterView)　を介してアクセスされます。
+それらのエントリは最終的に、ノードごとに1つのエントリを持つ [`Kokkos::View`](../API/core/view/view) に格納されますが、
+アルゴリズムの間に、 データ競合を防止するため、これらは、[`Kokkos::ScatterView`](../API/containers/ScatterView) を介してアクセスされます。
 
 ```c++
 Kokkos::View<int*> count_adjacent_elements(Kokkos::View<int**> elements_to_nodes, int number_of_nodes) {

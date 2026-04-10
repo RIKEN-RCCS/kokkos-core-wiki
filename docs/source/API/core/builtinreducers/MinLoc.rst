@@ -61,7 +61,7 @@
 
    .. cpp:type:: value_type
 
-      還元スカラー型 ( `ValLocScalar <ValLocScalar.html>`_　の特殊化))
+      還元スカラー型 ( `ValLocScalar <ValLocScalar.html>`_ の特殊化))
 
    .. cpp:type:: result_view_type
 
@@ -85,8 +85,8 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-      Initialize using the ``Kokkos::reduction_identity<Scalar>::min()`` メソッドを使って、 ``val.val`` を初期化します。　デフォルト実装は、The default implementation sets ``val=<TYPE>_MAX``　を設定します。
-      Initialize using the ``Kokkos::reduction_identity<Index>::min()``  メソッドを使って、 ``val.loc`` を初期化します。　デフォルト実装は、 ``val=<TYPE>_MAX``　を設定します。
+      Initialize using the ``Kokkos::reduction_identity<Scalar>::min()`` メソッドを使って、 ``val.val`` を初期化します。 デフォルト実装は、The default implementation sets ``val=<TYPE>_MAX`` を設定します。
+      Initialize using the ``Kokkos::reduction_identity<Index>::min()``  メソッドを使って、 ``val.loc`` を初期化します。 デフォルト実装は、 ``val=<TYPE>_MAX`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
@@ -99,11 +99,11 @@
 追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* ``MinLoc<T,I,S>::value_type`` は、 非定数 ``T`` および 非定数 ``I``　上の ValLocScalar の特殊化です。
+* ``MinLoc<T,I,S>::value_type`` は、 非定数 ``T`` および 非定数 ``I`` 上の ValLocScalar の特殊化です。
 
-* ``MinLoc<T,I,S>::result_view_type`` は ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
+* ``MinLoc<T,I,S>::result_view_type`` は ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`` です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
-* 必要条件: ``Scalar`` には、 ``operator =`` および　``operator <`` が定義されます。 ``Kokkos::reduction_identity<Scalar>::min()``  は有効な式です。
+* 必要条件: ``Scalar`` には、 ``operator =`` および ``operator <`` が定義されます。 ``Kokkos::reduction_identity<Scalar>::min()``  は有効な式です。
 
 * 必要条件: ``Index`` は、定義された ``operator =`` を持ちます。 ``Kokkos::reduction_identity<Index>::min()`` は有効な式です。
 
@@ -130,8 +130,8 @@
       Kokkos::View<double***> a("A", 5, 5, 5);
       Kokkos::deep_copy(a, 10);
       a(2, 3, 1)        = 5;
-      MinLoc_t    = Kokkos::MinLoc<double, Idx3D_t>　を使用;
-      MinLocVal_t = typename MinLoc_t::value_type　を使用;
+      MinLoc_t    = Kokkos::MinLoc<double, Idx3D_t> を使用;
+      MinLocVal_t = typename MinLoc_t::value_type を使用;
       MinLocVal_t result;
       Kokkos::parallel_reduce(
           Kokkos::MDRangePolicy<Kokkos::Rank<3>>({0, 0, 0}, {5, 5, 5}),

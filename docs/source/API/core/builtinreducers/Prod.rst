@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
- ``乗法`` 演算を実行する `ReducerConcept <ReducerConcept.html>`_　の具体的な実装
+ ``乗法`` 演算を実行する `ReducerConcept <ReducerConcept.html>`_ の具体的な実装
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
@@ -80,11 +80,11 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-      ``src`` および ``dest`` を乗じ、 ``dest``:  ``dest*=src;``　に格納します。
+      ``src`` および ``dest`` を乗じ、 ``dest``:  ``dest*=src;`` に格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-       ``Kokkos::reduction_identity<Scalar>::prod()`` メソッドを使って、 ``val`` を初期化します。 デフォルト実装は、 ``val=1``　を設定します。
+       ``Kokkos::reduction_identity<Scalar>::prod()`` メソッドを使って、 ``val`` を初期化します。 デフォルト実装は、 ``val=1`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
@@ -97,10 +97,10 @@
 追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* ``Prod<T,S>::value_type`` は、 非定数 ``T``　です。
+* ``Prod<T,S>::value_type`` は、 非定数 ``T`` です。
 
-* ``Prod<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。  S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
+* ``Prod<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`` です。  S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
-* 必要条件: ``Scalar`` には、　``operator =`` および ``operator *=`` が定義されます。 ``Kokkos::reduction_identity<Scalar>::prod()`` は有効な式です。
+* 必要条件: ``Scalar`` には、 ``operator =`` および ``operator *=`` が定義されます。 ``Kokkos::reduction_identity<Scalar>::prod()`` は有効な式です。
 
-*  Prod　をカスタム型で使用するために、   ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
+*  Prod をカスタム型で使用するために、   ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。

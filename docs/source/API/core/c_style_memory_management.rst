@@ -3,7 +3,7 @@ Cスタイルのメモリ管理
 
 関数
 ---------
- ``<Kokkos_Core.hpp>``　に定義。
+ ``<Kokkos_Core.hpp>`` に定義。
 
 .. toctree::
    :maxdepth: 1

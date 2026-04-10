@@ -65,7 +65,7 @@ struct pair {
                                   second_type const& s);
   ```
 
-  要素ごとのコンストラクタ。 `first` に `f`　の値、 `second` にthe value of `s` の値を割り当てます。
+  要素ごとのコンストラクタ。 `first` に `f` の値、 `second` にthe value of `s` の値を割り当てます。
 
   * 
   ```c++
@@ -73,7 +73,7 @@ struct pair {
   KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const pair<U, V>& p);
   ``` 
       
-   `std::pair`　から変換。ペアの各要素を、  `p`　内の対応する要素に、代入します。
+   `std::pair` から変換。ペアの各要素を、  `p` 内の対応する要素に、代入します。
 
 ### 代入および変換
 
@@ -91,4 +91,4 @@ struct pair {
   std::pair<T1, T2> to_std_pair() const;
   ```
 
-  コンテンツが、  `Kokkos::pair`　のコンテンツに一致する  `std::pair` を返します。明示的に `std::pair` のみを受け入れるライブラリの処理に有用です。
+  コンテンツが、  `Kokkos::pair` のコンテンツに一致する  `std::pair` を返します。明示的に `std::pair` のみを受け入れるライブラリの処理に有用です。

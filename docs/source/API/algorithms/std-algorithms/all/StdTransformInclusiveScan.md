@@ -105,13 +105,13 @@ auto transform_inclusive_scan(const std::string& label,                         
 
 ## ディスクリプション
 
-- 1,2: unary_op 演算子を用いて変換し、次に 範囲 [first_from, last_from)　内の各要素を、 結果の範囲に対して、`unary_op` を使用して、インクルーシブプレフィックススキャン演算を計算し、 `first_dest`　で始まる範囲に結果を書き込みます。 
+- 1,2: unary_op 演算子を用いて変換し、次に 範囲 [first_from, last_from) 内の各要素を、 結果の範囲に対して、`unary_op` を使用して、インクルーシブプレフィックススキャン演算を計算し、 `first_dest` で始まる範囲に結果を書き込みます。 
 
-- 3,4: 要素が `view_from`　から読み込まれ、 `view_dest`　に書き込まれた要素である場合を除き、 (1,2) と同様です。
+- 3,4: 要素が `view_from` から読み込まれ、 `view_dest` に書き込まれた要素である場合を除き、 (1,2) と同様です。
 
 - 5,6:  (1,2) と同様ですが、スキャンは、 `init_value` を示します。
 
-- 7,8:　(3,4) と同様ですが、スキャンは、 `init_value` を示します。
+- 7,8: (3,4) と同様ですが、スキャンは、 `init_value` を示します。
 
 インクルーシブは、i番目の入力要素が、i番目の和に含まれることを意味します。
 
@@ -119,7 +119,7 @@ auto transform_inclusive_scan(const std::string& label,                         
 ## パラメータおよび要件
 
 - `exespace`, `first_from`, `first_last`, `first_dest`, `view_from`, `view_dest`, `init_value`, `bin_op`, `unary_op`:
-  -  [`transform_exclusive_scan`](./StdTransformExclusiveScan)　と同様。
+  -  [`transform_exclusive_scan`](./StdTransformExclusiveScan) と同様。
 - `label`:
   - デバッグ目的で実装カーネルに名付けるために使用。
   - 1,5 について、デフォルト文字列は、: "Kokkos::transform_inclusive_scan_iterator_api_default"

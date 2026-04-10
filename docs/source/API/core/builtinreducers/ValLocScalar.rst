@@ -4,12 +4,12 @@
 .. ロール::cpp(code)
     :language: cpp
 
-:cpp:struct:`ValLocScalar` は、 **value** およびそれに対応する　 **location** (インデックス)  
+:cpp:struct:`ValLocScalar` は、 **value** およびそれに対応する  **location** (インデックス)  
 適切な単一単位として、格納するクラステンプレートです。
-それは、主に :cpp:class:`MinLoc` および :cpp:class:`MaxLoc` 組み込みリデューサーを使用する　
+それは、主に :cpp:class:`MinLoc` および :cpp:class:`MaxLoc` 組み込みリデューサーを使用する 
 :cpp:func:`parallel_reduce` 演算の結果を保持するように設計されています。
 
-一般的には、正確なテンプレートパラメータが使用されることを確証するために、リデューサーの　``::value_type``　メンバー　（例えば、　``MaxLoc<Scalar,Index,Space>::value_type``）
+一般的には、正確なテンプレートパラメータが使用されることを確証するために、リデューサーの ``::value_type`` メンバー （例えば、 ``MaxLoc<Scalar,Index,Space>::value_type``）
 を使用して、この型を取得することを推奨します。
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``

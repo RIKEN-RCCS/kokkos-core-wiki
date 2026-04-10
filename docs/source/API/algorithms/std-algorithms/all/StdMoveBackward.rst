@@ -7,8 +7,8 @@
 ディスクリプション
 -----------
 
-範囲内の要素、またはランク1の　``ビュー``　から、
-``d_last``　で始まる範囲、またはターゲットとなるランク1の　``ビュー``　へ、逆順で移動します。
+範囲内の要素、またはランク1の ``ビュー`` から、
+``d_last`` で始まる範囲、またはターゲットとなるランク1の ``ビュー`` へ、逆順で移動します。
 
 インターフェイス
 ---------
@@ -71,31 +71,31 @@
 
 - ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1　について、デフォルト文字列は、: "Kokkos::move_backward_iterator_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::move_backward_iterator_api_default"
 
-  - 3　について、デフォルト文字列は、: "Kokkos::move_backward_view_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::move_backward_view_api_default"
 
   - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
 - ``first``, ``last``, ``d_last``: 逆順での移動元および移動先の要素の範囲
 
-  - *ランダムアクセスイテレータ*　でなければなりません
+  - *ランダムアクセスイテレータ* でなければなりません
 
-  - 有効な範囲、つまり、 ``last >= first``　を表す必要があります。
+  - 有効な範囲、つまり、 ``last >= first`` を表す必要があります。
 
-  - 必ず　``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``source``, ``dest``: 逆順での移動元および移動先へのビュー
 
-  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - 必ず　``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります
 
 
 戻り値
 ~~~~~~~~~~~~
 
-- 1,3,5: ``d_last - Kokkos::Experimental::distance(first, last)``　に等しいイテレータ。
+- 1,3,5: ``d_last - Kokkos::Experimental::distance(first, last)`` に等しいイテレータ。
 
 - 2,4,6: ``Kokkos::Experimental::end(dest) -
-  Kokkos::Experimental:distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))``　に等しいイテレータ。
+  Kokkos::Experimental:distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))`` に等しいイテレータ。

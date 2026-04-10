@@ -61,7 +61,7 @@
 
    .. cpp:type:: value_type
 
-      還元スカラー型 ( `MinMaxLocScalar <MinMaxLocScalar.html>`_　の特殊化)
+      還元スカラー型 ( `MinMaxLocScalar <MinMaxLocScalar.html>`_ の特殊化)
 
    .. cpp:type:: result_view_type
 
@@ -86,9 +86,9 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init( value_type& val) const;
 
-       ``Kokkos::reduction_identity<Scalar>::min()`` メソッドを使って、 ``val.min_val`` を初期化します。　デフォルト実装は、 ``val=<TYPE>_MAX``　を設定します。
+       ``Kokkos::reduction_identity<Scalar>::min()`` メソッドを使って、 ``val.min_val`` を初期化します。 デフォルト実装は、 ``val=<TYPE>_MAX`` を設定します。
 
-       ``Kokkos::reduction_identity<Index>::max()``  メソッドを使って、  ``val.max_val`` を初期化します。 デフォルト実装は、  ``val=<TYPE>_MIN``　を設定します。
+       ``Kokkos::reduction_identity<Index>::max()``  メソッドを使って、  ``val.max_val`` を初期化します。 デフォルト実装は、  ``val=<TYPE>_MIN`` を設定します。
 
        ``Kokkos::reduction_identity<Scalar>::min()``  メソッドを使って、 ``val.min_loc`` を初期化します。 デフォルト実装は、``val=<TYPE>_MAX`` を設定します。
 
@@ -105,12 +105,12 @@
 追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* ``MinMaxLoc<T,I,S>::value_type`` は、 非定数 ``T`` および 非定数 ``I``　上の MinMaxLocScalar の特殊化です。
+* ``MinMaxLoc<T,I,S>::value_type`` は、 非定数 ``T`` および 非定数 ``I`` 上の MinMaxLocScalar の特殊化です。
 
 * ``MinMaxLoc<T,I,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
-* 必要条件: ``Scalar`` には、　``operator =``、 ``operator <`` および ``operator >``  が定義されます。 ``Kokkos::reduction_identity<Scalar>::min()`` および ``Kokkos::reduction_identity<Scalar>::max()`` は有効な式です。
+* 必要条件: ``Scalar`` には、 ``operator =``、 ``operator <`` および ``operator >``  が定義されます。 ``Kokkos::reduction_identity<Scalar>::min()`` および ``Kokkos::reduction_identity<Scalar>::max()`` は有効な式です。
 
 * 必要条件: ``Index`` は、定義された ``operator =`` を持ちます。 ``Kokkos::reduction_identity<Scalar>::min()`` は有効な式です。
 
-*  ``Scalar`` または ``Index``のいずれかのカスタム型で   MinMaxLoc を使用するために、 ``Kokkos::reduction_identity<CustomType>``  のテンプレート特殊化を定義する必要があります。　詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
+*  ``Scalar`` または ``Index``のいずれかのカスタム型で   MinMaxLoc を使用するために、 ``Kokkos::reduction_identity<CustomType>``  のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。

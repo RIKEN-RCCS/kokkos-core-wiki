@@ -13,7 +13,7 @@ Kokkos 4.7 において非推奨
 
 * ``Kokkos::MemoryManaged``
    * 置換: 無し
-   * デフォルトのメモリ特性と重複し、不要であり、MemoryManaged　で管理対象外ビューを要求する際の混乱を招くので、不要です。
+   * デフォルトのメモリ特性と重複し、不要であり、MemoryManaged で管理対象外ビューを要求する際の混乱を招くので、不要です。
 
 * ``KOKKOS_NONTEMPORAL_PREFETCH_{LOAD,STORE}``
    * 置換: 無し
@@ -34,7 +34,7 @@ Kokkos 4.6 において非推奨
    * 置換: CMake
    * 使用頻度の低いビルドシステムの保守負担を軽減します
 
-* ``DualView``　における ``d_view`` および ``h_view`` メンバーへ直接アクセス
+* ``DualView`` における ``d_view`` および ``h_view`` メンバーへ直接アクセス
    * 置換: ``view_host()`` and ``view_device()``
    * DualView において不変条件を実行すること、例えば、参照される2つのビューインスタンス間の一貫性です。
 
@@ -86,23 +86,23 @@ Kokkos 4.4 において非推奨
 
 * ``Array<T, N, Proxy>``
    * 置換: 無し
-   * std::array　との整合性
+   * std::array との整合性
 
 * ``HPX::HPX(instance_mode mode)``
    * 置換: ``explicit HPX(instance_mode mode)``
-   * 実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
+   * 実行空間インスタンスコンストラクタは、 ``explicit`` であるべきです
 
 * ``HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)``
    * 置換: ``explicit HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)``
-   * 実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
+   * 実行空間インスタンスコンストラクタは、 ``explicit`` であるべきです
 
 * ``OpenMP::OpenMP(int pool_size)``
    * 置換: ``explicit OpenMP::OpenMP(int pool_size)``
-   * 実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
+   * 実行空間インスタンスコンストラクタは、 ``explicit`` であるべきです
 
 * ``Serial::Serial(NewInstance)``
    * 置換: ``explicit Serial::Serial(NewInstance)``
-   * 実行空間インスタンスコンストラクタは、 ``explicit``　であるべきです
+   * 実行空間インスタンスコンストラクタは、 ``explicit`` であるべきです
 
 * ``ChunkSize::ChunkSize(int value)``
    * 置換: ``explicit ChunkSize::ChunkSize(int value)``
@@ -114,7 +114,7 @@ Kokkos 4.4 において非推奨
 
 
 
-Kokkos 4.3　において非推奨
+Kokkos 4.3 において非推奨
 ---------------------------
 
 * ``Experimental::swap``
@@ -158,7 +158,7 @@ Kokkos 4.2 において非推奨
 
 * ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
    * 置換: ``Cuda::Cuda(cudaStream_t stream)``
-   *  Cuda 実行空間インスタンスの構築には、常に外部管理の ``cudaStream``　オブジェクトを使用すべきです。
+   *  Cuda 実行空間インスタンスの構築には、常に外部管理の ``cudaStream`` オブジェクトを使用すべきです。
 
 * ``HIP::HIP(hipStream_t stream, bool manage_stream)``
     * 置換 ``HIP::HIP(hipStream_t stream)``
@@ -170,9 +170,9 @@ Kokkos 4.2 において非推奨
 
 * ``HostSpace::HostSpace(AllocationMechanism)``
     * 置換: ``HostSpace::HostSpace()``
-    * ``AllocationMechanism`` は使用されず、 整合性を伴う　``operator new`` は、無条件で使用されています。
+    * ``AllocationMechanism`` は使用されず、 整合性を伴う ``operator new`` は、無条件で使用されています。
 
-*  ``Kokkos::Experimental`` 名前空間の中の　SIMD 算術関数
+*  ``Kokkos::Experimental`` 名前空間の中の SIMD 算術関数
     * 置換: SIMD math function in the ``Kokkos`` namespace
     *  ADLの問題、他の数学関数オーバーロードとの一貫性
 
@@ -181,13 +181,13 @@ Kokkos 4.1 において非推奨
 ---------------------------
 ---------------------------
 
-*  ``BinSort``, ``BinOp1D``, and ``BinOp3D``　のためのデフォルトコンストラクタ
+*  ``BinSort``, ``BinOp1D``, and ``BinOp3D`` のためのデフォルトコンストラクタ
    * 置換: 無し
    * デフォルトコンストラクタは、無効であり、利用不可能なオブジェクトを作成しました。
 
 * ``View::Rank``
    * 置換: ``View::rank()``
-   *  ``View::rank()``　のため、文書化されておらず、冗長です
+   *  ``View::rank()`` のため、文書化されておらず、冗長です
 
 * ``View::subview<MemoryTraits>(...)``
    * 置換: ``View::subview(...)``
@@ -199,7 +199,7 @@ Kokkos 4.0 において非推奨
 
 * ``CudaUVMSpace::available()``
    * 置換: ``SharedSpace``
-   * 移植不可能であり、常に　``真``　を返す
+   * 移植不可能であり、常に ``真`` を返す
 
 * ``Complex`` ``volatile`` オーバーロード
    * 置換: 無し
@@ -224,13 +224,13 @@ Kokkos-3.7 において非推奨である型エイリアス
 ``ActiveExecutionMemorySpace``, ``host_execution_space``, ``host_memory_space``, ``host_mirror_space``, ``is_array_layout``, ``is_execution_policy``, ``is_execution_space``, ``is_memory_space``, ``is_memory_traits``, ``is_space``, ``Iterate``, ``MDRangePolicy``, ``Rank``, ``SpaceAccessibility``
 
 
- Kokkos-3.7　において非推奨であるマクロ
+ Kokkos-3.7 において非推奨であるマクロ
 -------------------------------
 
 ``KOKKOS_RESTRICT_EXECUTION_TO_(DATA_SPACE)``, ``HIP_SAFE_CALL(call)``
 
 
- Kokkos-3.7　において非推奨である自由関数
+ Kokkos-3.7 において非推奨である自由関数
 ---------------------------------------
 
 .. リスト表::
@@ -279,7 +279,7 @@ Kokkos-3.7 において非推奨である型エイリアス
      - ``namespace Kokkos::Impl`` (Kokkos_HIP_Error.hpp)
 
 
-Kokkos-3.7　において非推奨
+Kokkos-3.7 において非推奨
 ------------------------------------------
 
 .. リスト表::
@@ -320,7 +320,7 @@ Kokkos-3.7　において非推奨
      - ``class HPX`` (Kokkos_HPX.hpp)
 
 
- Kokkos-3.7　において非推奨であるクラス
+ Kokkos-3.7 において非推奨であるクラス
 --------------------------------
 
 .. リスト表::
@@ -376,7 +376,7 @@ Kokkos-3.7　において非推奨
    * - 生ポインタを使った配列還元
      - 戻し引数として ``Kokkos::View`` を使用します
 
-   * -  ``index_list_type``　を選択する　``OffsetView`` コンストラクタ
+   * -  ``index_list_type`` を選択する ``OffsetView`` コンストラクタ
      - ``Kokkos::pair`` (CPU および GPU)
 
    * - パラメータ ``bool always_use_kokkos_sort``を選択する ``Kokkos::sort`` のオーバーロード
@@ -386,16 +386,16 @@ Kokkos-3.7　において非推奨
      - 空の WorkTag クラスを使用します
 
    * - ``InitArguments`` 構造体
-     - 問い合わせ可能な属性を持つ　``InitializationSettings()`` クラスオブジェクト 
+     - 問い合わせ可能な属性を持つ ``InitializationSettings()`` クラスオブジェクト 
 
    * - ``finalize_all()``
      - ``finalize()``
 
-   * -  ``volatile`` キーワードにより修飾された引数を伴う ``join()`` を呼び出す ``parallel_reduce``　事例について、警告します
+   * -  ``volatile`` キーワードにより修飾された引数を伴う ``join()`` を呼び出す ``parallel_reduce`` 事例について、警告します
      -  ``volatile`` オーバーロードを削除します
 
 
-   * - 第一引数として、 ``WithOutInitializing`` を選択する　``create_mirror_view`` 
+   * - 第一引数として、 ``WithOutInitializing`` を選択する ``create_mirror_view`` 
      - ``create_mirror_view(Kokkos::Impl::WithoutInitializing_t wi, Kokkos::View<T, P...> const& v)``
 
    * - ``#define KOKKOS_THREAD_LOCAL`` マクロ
@@ -414,10 +414,10 @@ Kokkos-3.7　において非推奨
      - ``Kokkos::parallel_*("KokkosViewLabel", ポリシー, f);``
 
 
- Kokkos-3.7　におけるパブリックヘッダー
+ Kokkos-3.7 におけるパブリックヘッダー
 ----------------------------
 
- Kokkos-3.7　より、 以下の項目が、 *パブリック* ヘッダーです:
+ Kokkos-3.7 より、 以下の項目が、 *パブリック* ヘッダーです:
 
 コア
 ~~~~~~~~~~~~

@@ -41,16 +41,16 @@ void replace(const std::string& label, const ExecutionSpace& exespace,       (4)
   - 実行空間インスタンス
 - `label`:
   - デバッグ目的で実装カーネルを名付けるために使用
-  - 1　について、デフォルト文字列は、: "Kokkos::replace_iterator_api_default"
-  - 3　について、デフォルト文字列は、: "Kokkos::replace_view_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::replace_iterator_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::replace_view_api_default"
 - `first, last`:
   - 検索対象の要素の範囲
-  - 例えば、 ``Kokkos::Experimental::begin/end``　から返されるなど、*ランダムアクセスイテレータ*　でなければなりません。
-  - 有効範囲、つまり、 ``last >= first``　を表す必要があります。（この条件はデバッグモードで確認されます）。
-  - `exespace`　からアクセス可能でなければなりません。
+  - 例えば、 ``Kokkos::Experimental::begin/end`` から返されるなど、*ランダムアクセスイテレータ* でなければなりません。
+  - 有効範囲、つまり、 ``last >= first`` を表す必要があります。（この条件はデバッグモードで確認されます）。
+  - `exespace` からアクセス可能でなければなりません。
 - `view`:
-  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
-  - `exespace`　からアクセス可能でなければなりません。
+  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `old_value`, `new_value`:
   - 説明を要しません。
 
@@ -65,13 +65,13 @@ void replace(const std::string& label, const ExecutionSpace& exespace,       (4)
 ```c++
 namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
-//  a　を使用して何かを実行
+//  a を使用して何かを実行
 // ...
 
 const double oldValue{2};
 const double newValue{34};
 KE::replace(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a), oldValue, newValue);
 
-//　明示的にラベルと実行空間を設定します（アクティブであると仮定）
+// 明示的にラベルと実行空間を設定します（アクティブであると仮定）
 KE::replace("mylabel", Kokkos::OpenMP(), a, oldValue, newValue);
 ```

@@ -37,22 +37,22 @@
       - ディスクリプション
 
     * * `TeamThreadMDRange <policies/TeamThreadMDRange.html>`__
-      * TeamPolicy　カーネル内で使用され、チームの各スレッドに分割された多次元範囲に対してネストされた並列ループを実行します。
+      * TeamPolicy カーネル内で使用され、チームの各スレッドに分割された多次元範囲に対してネストされた並列ループを実行します。
 
     * * `TeamThreadRange <policies/TeamThreadRange.html>`__
-      * チームの各スレッドに分割されたネストされた並列ループを実行するために、TeamPolicy　カーネル内で使用されます。
+      * チームの各スレッドに分割されたネストされた並列ループを実行するために、TeamPolicy カーネル内で使用されます。
 
     * * `TeamVectorMDRange <policies/TeamVectorMDRange.html>`__
-      * チームのスレッドとそのベクトルレーンに分割された多次元範囲に対して、ネストされた並列ループを実行するために、TeamPolicy　カーネル内で使用されます。
+      * チームのスレッドとそのベクトルレーンに分割された多次元範囲に対して、ネストされた並列ループを実行するために、TeamPolicy カーネル内で使用されます。
 
     * * `TeamVectorRange <policies/TeamVectorRange.html>`__
-      * チームのスレッドとそのベクトルレーンに分割された、ネストされた並列ループを実行するために、TeamPolicy　カーネル内で使用されます。
+      * チームのスレッドとそのベクトルレーンに分割された、ネストされた並列ループを実行するために、TeamPolicy カーネル内で使用されます。
 
     * * `ThreadVectorMDRange <policies/ThreadVectorMDRange.html>`__
-      * スレッドのベクトルレーンを用いて多次元範囲に対して、ネストされた並列ループを実行するために、TeamPolicy　カーネル内で使用されます。
+      * スレッドのベクトルレーンを用いて多次元範囲に対して、ネストされた並列ループを実行するために、TeamPolicy カーネル内で使用されます。
 
     * * `ThreadVectorRange <policies/ThreadVectorRange.html>`__
-      * スレッドのベクトルレーンを用いてネストされた並列ループを実行するために、TeamPolicy　カーネル内で使用されます。
+      * スレッドのベクトルレーンを用いてネストされた並列ループを実行するために、TeamPolicy カーネル内で使用されます。
 
 すべての実行ポリシーのための共通引数
 ===========================================
@@ -90,7 +90,7 @@
 
     * * WorkTag
       * ``SomeClass``
-      * ファンクタ演算子を呼び出す際に、使用する作業タグのタイプを指定します。 任意のタグタイプにすることが可能です (つまり、  [empty](https://en.cppreference.com/w/cpp/types/is_empty) 構造体またはクラス )。デフォルトは、``void``　です。
+      * ファンクタ演算子を呼び出す際に、使用する作業タグのタイプを指定します。 任意のタグタイプにすることが可能です (つまり、  [empty](https://en.cppreference.com/w/cpp/types/is_empty) 構造体またはクラス )。デフォルトは、``void`` です。
 
 
 .. toctree::

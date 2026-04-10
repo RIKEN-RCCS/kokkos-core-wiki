@@ -15,9 +15,9 @@
 
 .. |StandardLibraryHeaderBit| replace:: ``<bit>``
 
- ``<Kokkos_Core.hpp>``に含まれる ヘッダー　 |KokkosBitManipulation|_ に定義。
+ ``<Kokkos_Core.hpp>``に含まれる ヘッダー  |KokkosBitManipulation|_ に定義。
 
-標準ライブラリヘッダー |StandardLibraryHeaderBit|_ から関数テンプレートを提供します( C++20　以降)。
+標準ライブラリヘッダー |StandardLibraryHeaderBit|_ から関数テンプレートを提供します( C++20 以降)。
 
 Kokkos 4.1ビット演算関数テンプレートは、Kokkos 4.1以降、Kokkos:: 名前空間で定義されています。
 
@@ -74,7 +74,7 @@ Kokkos 4.1ビット演算関数テンプレートは、Kokkos 4.1以降、Kokkos
 .. |popcount| replace:: ``popcount``
 
 ================== ============================================================
-|bit_cast|_        あるタイプのオブジェクト表現を別のタイプのものとして再解釈します　(下記の注参照)
+|bit_cast|_        あるタイプのオブジェクト表現を別のタイプのものとして再解釈します (下記の注参照)
 |byteswap|_        与えられた整数値のバイトを反転します 
 |has_single_bit|_  数が2の整数乗であるかどうかを検証します 
 |bit_ceil|_        与えられた値より小さい2の最小積分べき乗を求めます
@@ -94,5 +94,5 @@ Kokkos 4.1ビット演算関数テンプレートは、Kokkos 4.1以降、Kokkos
 注意事項
 -----
 
-* 上記のテンプレート関数すべてに対して、Kokkos::Experimental::namespace に *_builtin　で終わる非　constexpr　対応関数が提供されており、定数式には現れないコンパイラの内在要素を補っています。
-* C++　標準ライブラリの対応するものとは異なり、Kokkos::bit_cast　は定数式　(　constexpr　関数ではありません)　では使用できません。ライブラリ機能として実装できず、コンパイラの魔法を必要としますが、利用はできません。
+* 上記のテンプレート関数すべてに対して、Kokkos::Experimental::namespace に *_builtin で終わる非 constexpr 対応関数が提供されており、定数式には現れないコンパイラの内在要素を補っています。
+* C++ 標準ライブラリの対応するものとは異なり、Kokkos::bit_cast は定数式 ( constexpr 関数ではありません) では使用できません。ライブラリ機能として実装できず、コンパイラの魔法を必要としますが、利用はできません。

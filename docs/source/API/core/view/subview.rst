@@ -13,7 +13,7 @@
 
     auto s = subview(view,std::pair<int,int>(5,191),Kokkos::ALL,1);
 
-別の ``Kokkos::View``　のサブセットを表す ``Kokkos::View`` を作成します。
+別の ``Kokkos::View`` のサブセットを表す ``Kokkos::View`` を作成します。
 
 
 .. _KokkosAll: ../utilities/all.html#kokkosall
@@ -25,33 +25,33 @@
 
 .. cpp:function:: template<class ViewType, class ... Args> IMPL_DETAIL subview(const ViewType& v, Args ... args)
 
- ``args...``　が特定する　``v``　のサブセットを表す、新たな  ``Kokkos::View`` ``s`` を返します。The return type of subview　の返す型は、 実装の詳細であり、  ``Args...``　における型により決定されます。
+ ``args...`` が特定する ``v`` のサブセットを表す、新たな  ``Kokkos::View`` ``s`` を返します。The return type of subview の返す型は、 実装の詳細であり、  ``Args...`` における型により決定されます。
 
    .. rubric:: サブセットセレクション:
 
    * ``args...`` におけるすべての整数引数に対して、返されたビューのランクは、``v``のランクより一つ小さく、 ``s`` により参照された値は、``v`` へのインデックス付けの間に、対応する位置で整数引数を使用することに関連する値に対応します。  
 
-   * ``r``\ th 引数として KokkosAll_ を渡すことは、　``r``\ th  引数として pair<ptrdiff_t,ptrdiff_t>(0,v.extent(r)) を渡すことに等しいです。
+   * ``r``\ th 引数として KokkosAll_ を渡すことは、 ``r``\ th  引数として pair<ptrdiff_t,ptrdiff_t>(0,v.extent(r)) を渡すことに等しいです。
 
-   * ``r``\ th 引数 ``arg_r`` が``s.extent(d) = arg_r.second-arg_r.first``\ よりも、 引数リストにある　``d``\ th 範囲 (\ ``std::pair``\ ``Kokkos::pair`` または、|KokkosAll|_ )　である場合には、 
-      ``s``　の次元　``d``　は、　``v``の次元　``r``　の範囲 ``[arg_r.first,arg_r.second)``　を参照します。
+   * ``r``\ th 引数 ``arg_r`` が``s.extent(d) = arg_r.second-arg_r.first``\ よりも、 引数リストにある ``d``\ th 範囲 (\ ``std::pair``\ ``Kokkos::pair`` または、|KokkosAll|_ ) である場合には、 
+      ``s`` の次元 ``d`` は、 ``v``の次元 ``r`` の範囲 ``[arg_r.first,arg_r.second)`` を参照します。
 
 
    .. rubric:: 制約:
 
-   * ``sizeof...(args)`` は、　``ViewType::rank``　に等しいです。
+   * ``sizeof...(args)`` は、 ``ViewType::rank`` に等しいです。
 
    * 有効な引数は、以下の型です:
 
-     - ``std::is_integral<iType>::value`` を伴う、真である　``std::pair<iType,iType>``。
+     - ``std::is_integral<iType>::value`` を伴う、真である ``std::pair<iType,iType>``。
 
-     - ``std::is_integral<iType>::value`` を伴う、真である　``Kokkos::pair<iType,iType>`` 。
+     - ``std::is_integral<iType>::value`` を伴う、真である ``Kokkos::pair<iType,iType>`` 。
 
-     - ``std::is_integral<iType>::value`` を伴う、真である　``iType`` 。
+     - ``std::is_integral<iType>::value`` を伴う、真である ``iType`` 。
 
      - ``std::remove_const_t< decltype(``\ |KokkosAll|_ ``)>``
 
-   * ``r``\ th 引数 ``arg_r`` が 　``std::pair<iType,iType>`` または ``Kokkos::pair<iType,iType>`` の型である場合には、以下を満たす必要があります:
+   * ``r``\ th 引数 ``arg_r`` が  ``std::pair<iType,iType>`` または ``Kokkos::pair<iType,iType>`` の型である場合には、以下を満たす必要があります:
 
      - ``arg_r.first >= 0``
 

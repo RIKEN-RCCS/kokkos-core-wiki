@@ -64,7 +64,7 @@
 
    .. cpp:type:: result_view_type
 
-    　還元結果を参照する ``Kokkos::View``
+     還元結果を参照する ``Kokkos::View``
 
    .. rubric:: コンストラクタ
 
@@ -80,11 +80,11 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-       ``src``　および　``dest`` の最大値を　``dest``: ``dest = ( src > dest ) ? src :dest;``にビット単位で格納します。
+       ``src`` および ``dest`` の最大値を ``dest``: ``dest = ( src > dest ) ? src :dest;``にビット単位で格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-       ``Kokkos::reduction_identity<Scalar>::max()``  メソッドを使用して、``val``　を初期化します。 デフォルト実装は、　``val=<TYPE>_MIN``　を設定します。
+       ``Kokkos::reduction_identity<Scalar>::max()``  メソッドを使用して、``val`` を初期化します。 デフォルト実装は、 ``val=<TYPE>_MIN`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
@@ -97,9 +97,9 @@
 Additional Information
 ^^^^^^^^^^^^^^^^^^^^^^
 
-*  ``LOr<T,S>::value_type`` は、 非定数 ``T``　です。
+*  ``LOr<T,S>::value_type`` は、 非定数 ``T`` です。
 
-* ``Max<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
+* ``Max<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`` です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
 * 必要要件:  ``Scalar`` には、 ``operator =`` および ``operator >`` が定義されます。``Kokkos::reduction_identity<Scalar>::max()``  は、有効な式です。
 

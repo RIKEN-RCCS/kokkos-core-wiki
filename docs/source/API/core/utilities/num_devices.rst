@@ -4,13 +4,13 @@
 .. role:: cpp(code)
     :language: cpp
 
-ヘッダー ``<Kokkos_Core.hpp>``　に定義。
+ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 .. code-block:: cpp
 
     [[nodiscard]] int num_devices() noexcept;  // (バージョン 4.3以降)
 
-ホストバックエンドのみが有効な場合は、システム上で利用可能なデバイスの数、または　``-1``　を返します。
+ホストバックエンドのみが有効な場合は、システム上で利用可能なデバイスの数、または ``-1`` を返します。
 
 注意事項
 -----
@@ -60,10 +60,10 @@
 
 .. |InitializationSettings| :: ``InitializationSettings``
 
-|device_id|_: Kokkos　により使用されるデバイスの　id を返します。
+|device_id|_: Kokkos により使用されるデバイスの id を返します。
 
-|num_threads|_: Kokkos　により使用されるスレッド数を返します。
+|num_threads|_: Kokkos により使用されるスレッド数を返します。
 
 |initialize|_: Kokkos 実行環境を初期化します。
 
-|InitializationSettings|_: Kokkos　初期化の設定
+|InitializationSettings|_: Kokkos 初期化の設定

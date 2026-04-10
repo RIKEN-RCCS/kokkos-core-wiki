@@ -24,7 +24,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
 * Device, Kokkos Device型。そのメモリ領域がホストからアクセス不可の場合、
 デュアルビューは2つの独立したビューを含む：1つはデバイスメモリ内、
-もう1つはホストメモリ内。それ以外の場合、DualView　は1つのビューのみを保存します。
+もう1つはホストメモリ内。それ以外の場合、DualView は1つのビューのみを保存します。
 
 * MemoryTraits (オプショナル) ユーザーの意図するメモリアクセス動作。 
 例については、`Kokkos::View <../core/view/view.html>`_ のドキュメントを参照してください。ほとんどのユーザーにとって、デフォルト設定で十分です。
@@ -36,7 +36,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     view_type = Kokkos::DualView<Scalar**,
                                        Kokkos::LayoutLeft,
-                                       Device>　を使用
+                                       Device> を使用
     view_type a("A", n, m);
 
     Kokkos::deep_copy(a.view_device(), 1); // デバイス側エントリを1に設定
@@ -72,7 +72,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:type:: typename t_dev::HostMirror t_host
 
-       　``t_dev``の``Kokkos::View``ホストミラーの型。
+        ``t_dev``の``Kokkos::View``ホストミラーの型。
 
     .. cpp:type:: View<typename traits::const_data_type, Arg1Type, Arg2Type, Arg3Type> t_dev_const
 
@@ -80,27 +80,27 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:type:: typename t_dev_const::HostMirror t_host_const
 
-       　``t_dev_const``のconst Viewホストミラーの型。
+        ``t_dev_const``のconst Viewホストミラーの型。
 
     .. cpp:type:: View<typename traits::const_data_type, typename traits::array_layout, typename traits::device_type, Kokkos::MemoryTraits<Kokkos::RandomAccess> > t_dev_const_randomread
 
-　　　　  デバイス上の const、 random-access View　の型。
+      デバイス上の const、 random-access View の型。
 
     .. cpp:type::  t_dev_const_randomread::HostMirror t_host_const_randomread
 
-       ``t_dev_const_randomread``の const, random-access View　ホストミラーの型。
+       ``t_dev_const_randomread``の const, random-access View ホストミラーの型。
 
     .. cpp:type:: View<typename traits::data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_um
 
-       デバイス上の管理対象外　View　の型。
+       デバイス上の管理対象外 View の型。
 
     .. cpp:type:: View<typename t_host::data_type, typename t_host::array_layout, typename t_host::device_type, MemoryUnmanaged> t_host_um
 
-       \\c t_dev_umの管理対象外　View　ホストミラーの型。
+       \\c t_dev_umの管理対象外 View ホストミラーの型。
 
     .. cpp:type:: View<typename traits::const_data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_const_um
 
-       デバイス上の　const　管理対象外　View　の型。
+       デバイス上の const 管理対象外 View の型。
 
     .. cpp:type:: View<typename t_host::const_data_type, typename t_host::array_layout, typename t_host::device_type, MemoryUnmanaged> t_host_const_um
 
@@ -108,11 +108,11 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:type:: View<typename t_host::const_data_type, typename t_host::array_layout, typename t_host::device_type, Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess> > t_dev_const_randomread_um
 
-       デバイス上の　const, random-access View　の型。
+       デバイス上の const, random-access View の型。
 
     .. cpp:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread_um
 
-       　``t_dev_const_randomread``　の　const, random-access View　ミラーの型。
+        ``t_dev_const_randomread`` の const, random-access View ミラーの型。
 
     .. cpp:type:: View<unsigned int[2], LayoutLeft, typename t_host::execution_space> t_modified_flags;
 
@@ -122,11 +122,11 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:member:: t_dev d_view
 
-        　*device*　上のビューインスタンスは、 Kokkos 4.6 以降、パブリックアクセスは非推奨となります。
+         *device* 上のビューインスタンスは、 Kokkos 4.6 以降、パブリックアクセスは非推奨となります。
 
     .. cpp:member:: t_host h_view
 
-       　*host*　上のビューインスタンスは、 Kokkos 4.6 以降、パブリック アクセスは非推奨となります。
+        *host* 上のビューインスタンスは、 Kokkos 4.6 以降、パブリック アクセスは非推奨となります。
 
     .. cpp:member:: t_modified_flags modified_flags
 
@@ -145,18 +145,18 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
     .. cpp:function:: DualView(const std::string& label, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
         ホストとデバイスの両方でビューオブジェクトを割り当てるコンストラクタ。
-       最初の引数は文字列ラベルであり、これは完全に便宜のために用意されています。 (異なる　DualView　オブジェクトは、必要に応じて同じラベルを持つことができます。)
+       最初の引数は文字列ラベルであり、これは完全に便宜のために用意されています。 (異なる DualView オブジェクトは、必要に応じて同じラベルを持つことができます。)
        以下に示す引数は、Viewオブジェクトの次元です。例えば、Viewが3次元であれば、最初の3つの整数引数はゼロ以外になり、また、続く整数引数は省略できます。
 
     .. cpp:function:: DualView(ALLOC_PROP const& arg_prop, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        ホストとデバイスの両方でViewオブジェクトを割り当てるコンストラクタ。最初の引数として``Kokkos::view_alloc``で作成されたオブジェクトを渡すことを可能にします。例えば、ラベルを提供し、初期化を回避し、または実行空間インスタンスを指定します。
-       T以下の引数は、View　オブジェクトの次元です。
+       T以下の引数は、View オブジェクトの次元です。
        例えば、Viewが3次元であれば、最初の3つの整数引数はゼロ以外になり、また、続く整数引数は省略できます。
 
     .. cpp:function:: DualView(const DualView<SS, LS, DS, MS>& src);
 
-       コピーコンストラクタ　(シャローコピー)
+       コピーコンストラクタ (シャローコピー)
 
     .. cpp:function:: DualView(const DualView<SD, S1, S2, S3>& src, const Arg0& arg0, Args... args);
 
@@ -165,31 +165,31 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
     .. cpp:function:: DualView(const t_dev& d_view_, const t_host& h_view_);
 
 
-       既存のデバイスおよびホストビューオブジェクトからデュアルビューを作成します。本コンストラクタは、デバイスとホストのView　オブジェクトが同期されていることを前提としています。
-       発信者は、このコンストラクタを呼び出す前にこれが事実であることを確認する責務を負います。本コンストラクタが戻った後、DualView　の　``sync()``　および　``modify()``　メソッドを使用して、
-       View　オブジェクトの同期を確保できます。 デュアルビューが1つのビューのみを格納する場合、すなわちデュアルビューのメモリ領域がホストからアクセス可能な場合、両引数は同一の割り当てを参照しなければなりません。
+       既存のデバイスおよびホストビューオブジェクトからデュアルビューを作成します。本コンストラクタは、デバイスとホストのView オブジェクトが同期されていることを前提としています。
+       発信者は、このコンストラクタを呼び出す前にこれが事実であることを確認する責務を負います。本コンストラクタが戻った後、DualView の ``sync()`` および ``modify()`` メソッドを使用して、
+       View オブジェクトの同期を確保できます。 デュアルビューが1つのビューのみを格納する場合、すなわちデュアルビューのメモリ領域がホストからアクセス可能な場合、両引数は同一の割り当てを参照しなければなりません。
 
        - ``d_view_`` デバイスビュー
 
-       - ``h_view_``  ( ``t_host = t_dev::HostMirror``　型を持つ必要があります)
+       - ``h_view_``  ( ``t_host = t_dev::HostMirror`` 型を持つ必要があります)
 
     |
 
-    .. rubric:: 同期化、変更済みとしてマーク、およびビューの取得のための　*パブリック*　メソッド。
+    .. rubric:: 同期化、変更済みとしてマーク、およびビューの取得のための *パブリック* メソッド。
 
     .. cpp:function:: template <class Device> KOKKOS_INLINE_FUNCTION const auto& view();
 
     .. cpp:function:: template <class Device> static int get_device_side();
 
        * 特定のデバイス ``Device`` 上のビューを返します。 ``Device`` は、``Kokkos::Device`` 型、メモリ空間、またはデバイスビューもしくはホストアクセス可能ビューに対応する実行空間である可能性があります。 
-       * 例えば、Cuda上で次のように　DualView　を作成するとします:
+       * 例えば、Cuda上で次のように DualView を作成するとします:
 
          .. code-block:: cpp
 
-           dual_view_type = Kokkos::DualView<float, Kokkos::Cuda>　を使用;
+           dual_view_type = Kokkos::DualView<float, Kokkos::Cuda> を使用;
            dual_view_type DV ("my dual view", 100);
 
-         CUDA　デバイスのビューを取得したい場合は、次の操作を行ってください:
+         CUDA デバイスのビューを取得したい場合は、次の操作を行ってください:
 
          .. code-block:: cpp
 
@@ -203,20 +203,20 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: const t_host& view_host() const;
 
-       *  ホストアクセス可能なビューを返します。　`Kokkos_ENABLE_DEPRECATED_CODE_4=ON`　を持つ値により、ビューを返します。
+       *  ホストアクセス可能なビューを返します。 `Kokkos_ENABLE_DEPRECATED_CODE_4=ON` を持つ値により、ビューを返します。
 
     .. cpp:function:: const t_dev& view_device() const;
 
-       * デバイス上の　View　を返します。 `Kokkos_ENABLE_DEPRECATED_CODE_4=ON`　を持つ値によって、　View　を返します。
+       * デバイス上の View を返します。 `Kokkos_ENABLE_DEPRECATED_CODE_4=ON` を持つ値によって、 View を返します。
 
     .. cpp:function:: template <class Device> void sync(const typename Impl::enable_if<(std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
 
     .. cpp:function:: template <class Device> void sync(const typename Impl::enable_if<(!std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
 
        * デバイスまたはホスト上のデータは、他方の領域のデータが変更済みとしてマークされた場合にのみ更新します。
-       * ``デバイス``が、本　DualView　のデバイスタイプと同じ場合、ホストからデバイスへデータをコピーします。それ以外の場合には、デバイスからホストへデータをコピーします。いずれの場合も、コピー元のソースが変更された場合にのみコピーしてください。
+       * ``デバイス``が、本 DualView のデバイスタイプと同じ場合、ホストからデバイスへデータをコピーします。それ以外の場合には、デバイスからホストへデータをコピーします。いずれの場合も、コピー元のソースが変更された場合にのみコピーしてください。
        * これは一方向の同期のみです。コピー先の対象が変更されている場合、本演算はその変更を破棄します。また、デバイスとホストの変更フラグの両方をリセットします。
-       * 本メソッドでは、どちらのビューでデータを変更したかを独自に判断できません。変更されたデータを、適切なテンプレートパラメータを指定して、``modify()``　メソッドを呼び出すことで、手動で変更済みとしてマークする必要があります。
+       * 本メソッドでは、どちらのビューでデータを変更したかを独自に判断できません。変更されたデータを、適切なテンプレートパラメータを指定して、``modify()`` メソッドを呼び出すことで、手動で変更済みとしてマークする必要があります。
 
     .. cpp:function:: template <class Device> bool need_sync() const;
 
@@ -224,10 +224,10 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: inline void clear_sync_state();
 
-       指定の　device \\c Device　上でデータを変更済みとしてマークします。 ``Device``　が　本　DualView　のデバイスタイプと同一の場合、そのデバイスのデータを変更済みとしてマークしてください。
+       指定の device \\c Device 上でデータを変更済みとしてマークします。 ``Device`` が 本 DualView のデバイスタイプと同一の場合、そのデバイスのデータを変更済みとしてマークしてください。
        そうでない場合は、ホストのデータを変更済みとしてマークしてください。
 
-    .. rubric:: View オブジェクトの再割り当てまたはサイズ変更のための　*Pulbic* Methods
+    .. rubric:: View オブジェクトの再割り当てまたはサイズ変更のための *Pulbic* Methods
 
     .. cpp:function:: constexpr bool is_allocated() const;
 
@@ -238,12 +238,12 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
     .. cpp:function:: void realloc(const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        両方のビューオブジェクトを再割り当てします。これにより、オブジェクトの既存の内容はすべて破棄され、
-       その変更されたフラグはリセットされます。古い　View　のどちらの内容も、新しい　View　オブジェクトにはコピー　*されません*　。
+       その変更されたフラグはリセットされます。古い View のどちらの内容も、新しい View オブジェクトにはコピー *されません* 。
 
     .. cpp:function:: void resize(const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        両方のビューのサイズを変更し、必要に応じて古い内容を新しいビューにコピーします。このメソッドでは、
-       最後に変更済みとマークされたデバイスの古い内容を新しいViewオブジェクトにのみコピーします。従って、ユーザーはサイズ変更されたオブジェクトを使用する前に　``sync()``　を呼び出す必要があります。
+       最後に変更済みとマークされたデバイスの古い内容を新しいViewオブジェクトにのみコピーします。従って、ユーザーはサイズ変更されたオブジェクトを使用する前に ``sync()`` を呼び出す必要があります。
 
     |
 
@@ -251,7 +251,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t span() const;
 
-       割り当てサイズを返します ( ``Kokkos::View::span``　と同様).
+       割り当てサイズを返します ( ``Kokkos::View::span`` と同様).
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION bool span_is_contiguous();
 
@@ -259,7 +259,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: template <typename iType> void stride(iType* stride_) const;
 
-      各次元ごとにストライドを取得します。 ``stride_`` [rank] を　span()　に設定します。
+      各次元ごとにストライドを取得します。 ``stride_`` [rank] を span() に設定します。
 
     .. cpp:function:: template <typename iType> KOKKOS_INLINE_FUNCTION constexpr typename std::enable_if<std::is_integral<iType>::value, size_t>::type extent(const iType& r) const;
 

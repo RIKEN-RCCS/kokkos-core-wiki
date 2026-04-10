@@ -4,7 +4,7 @@
 .. ロール:: cpp(code)
     :language: cpp
 
-Defined in ヘッダー ``<Kokkos_Core.hpp>``　に定義。
+Defined in ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 .. _Kokkos_kokkos_malloc: malloc.html
 
@@ -22,24 +22,24 @@ Defined in ヘッダー ``<Kokkos_Core.hpp>``　に定義。
 
 .. |Kokkos_kokkos_free| replace:: ``Kokkos::kokkos_free()``
 
-指定されたメモリ領域を再割り当てします。それは、同じメモリースペース |MemorySpace|_　上で、以前に |Kokkos_kokkos_malloc|_ または |Kokkos_kokkos_realloc|_　により割り当てられる必要があり、
+指定されたメモリ領域を再割り当てします。それは、同じメモリースペース |MemorySpace|_ 上で、以前に |Kokkos_kokkos_malloc|_ または |Kokkos_kokkos_realloc|_ により割り当てられる必要があり、
 まだ |Kokkos_kokkos_free|_ で解放されておらず、そうでない場合には、結果は未定義となる。
 
 .. ::
 
-   Kokkos　の管理対象外であるメモリに対して、メモリの動作を操作する関数（例：memAdvise）を呼び出すと、未定義の動作を引き起こします。
+   Kokkos の管理対象外であるメモリに対して、メモリの動作を操作する関数（例：memAdvise）を呼び出すと、未定義の動作を引き起こします。
 
 ディスクリプション
 -----------
 
 .. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_realloc(void* ptr, size_t new_size);
 
-  :tparam MemorySpace: ストレージ先をコントロールします。　省略された場合、デフォルトの実行領域のメモリ領域が使用されます (つまり、``Kokkos::DefaultExecutionSpace::memory_space``)。
+  :tparam MemorySpace: ストレージ先をコントロールします。 省略された場合、デフォルトの実行領域のメモリ領域が使用されます (つまり、``Kokkos::DefaultExecutionSpace::memory_space``)。
 
-  :param ptr:　再割り当てされるべきメモリ領域へのポインタ
+  :param ptr: 再割り当てされるべきメモリ領域へのポインタ
 
   :param new_size: 新たなバイト数。
 
-  :返し: 成功した場合、新たに割り当てられたメモリの先頭へのポインタを返します。 メモリリークを避けるため、返されたポインタは |Kokkos_kokkos_free|_ で解放する必要があり、To avoid a memory leak, the returned pointer must be deallocated with |Kokkos_kokkos_free|_, 元のポインタ　 ``ptr`` は無効化され、それへのアクセスは未定義動作となります（再割り当てがインプレースで行われた場合でも）。失敗した場合には、ヌルポインタを返します。 元のポインタ ptr　 |Kokkos_kokkos_free|_　で再割り当てする必要があるかもしれません。
+  :返し: 成功した場合、新たに割り当てられたメモリの先頭へのポインタを返します。 メモリリークを避けるため、返されたポインタは |Kokkos_kokkos_free|_ で解放する必要があり、To avoid a memory leak, the returned pointer must be deallocated with |Kokkos_kokkos_free|_, 元のポインタ  ``ptr`` は無効化され、それへのアクセスは未定義動作となります（再割り当てがインプレースで行われた場合でも）。失敗した場合には、ヌルポインタを返します。 元のポインタ ptr  |Kokkos_kokkos_free|_ で再割り当てする必要があるかもしれません。
 
   :スロー: 失敗した場合、``Kokkos::Experimental::RawMemoryAllocationFailure`` をスローします。

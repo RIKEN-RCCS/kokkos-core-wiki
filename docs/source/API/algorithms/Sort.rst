@@ -70,17 +70,17 @@
     KOKKOS_INLINE_FUNCTION void sort_by_key_thread(
         const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView, const Comparator& comp);
 
-``sort_team`` と ``sort_by_key_team``　は内部的にチーム全体を使用するため、``TeamPolicy``　ラムダと関数の最上位レベル内で呼び出すことができます。　``sort_thread``　と 　``sort_by_key_thread``　はスレッドのベクターレーンを使用するため、　``TeamPolicy``　ループまたは ``TeamThreadRange``　ループ内で呼び出すことができます。 
+``sort_team`` と ``sort_by_key_team`` は内部的にチーム全体を使用するため、``TeamPolicy`` ラムダと関数の最上位レベル内で呼び出すことができます。 ``sort_thread`` と  ``sort_by_key_thread`` はスレッドのベクターレーンを使用するため、 ``TeamPolicy`` ループまたは ``TeamThreadRange`` ループ内で呼び出すことができます。 
 
-　``sort_by_key``　関数は、　``keyView``　をソートすると同時に、　``valueView``　の要素にも同じ順列を適用します。これは、　``(key[i], value[i])``　タプルをキーに従ってソートするのと同等です。この関数がよく使用される例としては、CRS（圧縮行スパース）行列の各行のエントリと値をソートする場合が挙げられます。これらの関数では、　``keyView.extent(0) == valueView.extent(0)``　である必要があります。
+ ``sort_by_key`` 関数は、 ``keyView`` をソートすると同時に、 ``valueView`` の要素にも同じ順列を適用します。これは、 ``(key[i], value[i])`` タプルをキーに従ってソートするのと同等です。この関数がよく使用される例としては、CRS（圧縮行スパース）行列の各行のエントリと値をソートする場合が挙げられます。これらの関数では、 ``keyView.extent(0) == valueView.extent(0)`` である必要があります。
 
-　``Comparator``　オブジェクトを取得するバージョンでは、それを使用してキーを順序付けます。　``Comparator::operator()``　は、2つのキー　``a``　と　``b``　を受け入れ、ソートされたリストで　``a``　が　``b``　の前にある場合にのみ、真となるブールを返すconstメンバー関数である必要があります。　``コンパレータオブジェクト``　を受け取らないバージョンの場合、キーは昇順 (　``operator<`` に従って) にソートされます。例えば、次のコンパレータは、``int``　のビューを　*降*　順でソートします。:
+ ``Comparator`` オブジェクトを取得するバージョンでは、それを使用してキーを順序付けます。 ``Comparator::operator()`` は、2つのキー ``a`` と ``b`` を受け入れ、ソートされたリストで ``a`` が ``b`` の前にある場合にのみ、真となるブールを返すconstメンバー関数である必要があります。 ``コンパレータオブジェクト`` を受け取らないバージョンの場合、キーは昇順 ( ``operator<`` に従って) にソートされます。例えば、次のコンパレータは、``int`` のビューを *降* 順でソートします。:
 
 .. code-block:: cpp
 
     struct IntComparator {
         KOKKOS_FUNCTION constexpr bool operator()(const int& a, const int& b) const {
-             a > b　を返します; //a の方が大きい場合、a は b の前に来ます。
+             a > b を返します; //a の方が大きい場合、a は b の前に来ます。
         }
     };
 
@@ -121,7 +121,7 @@
                     Kokkos::Experimental::sort_team(t, A_row_i);
                 });
             auto Ahost = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace(), A);
-            std::cout << "各行がソートされた状態で　A:\n";
+            std::cout << "各行がソートされた状態で A:\n";
             for(int i = 0; i < n; i++) {
                 for(int j = 0; j < n; j++) {
                     std::cout << Ahost(i, j) << ' ';

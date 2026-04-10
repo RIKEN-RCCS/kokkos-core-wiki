@@ -35,7 +35,7 @@ auto partition_point(const std::string& label,                                 (
 
 ## ディスクリプション
 
-範囲 　`[first, last)` または　 `ビュー` を調べ、
+範囲  `[first, last)` または  `ビュー` を調べ、
 `pred` を満たさない最初の要素を位置付けます。
 
 範囲（またはビュー）は既にパーティション分割済みであると仮定します。
@@ -43,7 +43,7 @@ auto partition_point(const std::string& label,                                 (
 
 ## パラメータおよび要件
 
-- `exespace`, `first`, `last`, `view`, `pred`:  [`is_partitioned`](./StdIsPartitioned)　と同様。
+- `exespace`, `first`, `last`, `view`, `pred`:  [`is_partitioned`](./StdIsPartitioned) と同様。
   - 実行空間インスタンス
 - `label`:
   - デバッグ目的の実装カーネルに名付けるために使用されます。
@@ -52,5 +52,5 @@ auto partition_point(const std::string& label,                                 (
 
 ## 返し
 
-最初のパーテーションにおける、最後の要素の *後*　の要素へのイテレータ、またはすべての要素が
- `pred`　を満たす場合、`last`　へのイテレータ。
+最初のパーテーションにおける、最後の要素の *後* の要素へのイテレータ、またはすべての要素が
+ `pred` を満たす場合、`last` へのイテレータ。

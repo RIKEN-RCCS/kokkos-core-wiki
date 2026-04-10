@@ -26,18 +26,18 @@ TeamVectorMDRange は、階層的並列処理の内部で使用される `nested
 
       * **必要要件**
 
-	* ``TeamHandle`` は、 `TeamHandle <./TeamHandleConcept.html>`_　をモデル化する型です。
+	* ``TeamHandle`` は、 `TeamHandle <./TeamHandleConcept.html>`_ をモデル化する型です。
 
-	* ``extent_1, extent_2, ...`` は、 ints　です。
+	* ``extent_1, extent_2, ...`` は、 ints です。
 
 	*  ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが  別のブランチで呼び出すことは、合法ではありません。
 
-	* ``extent_i`` の条件は、 ``i >= 2 && i <= 8``　が真であることです。
+	* ``extent_i`` の条件は、 ``i >= 2 && i <= 8`` が真であることです。
 	  例えば:
 
 	  .. code-block:: cpp
 
-	     TeamVectorMDRange(team, 4);               // OKではありません i>=2　に違反します。
+	     TeamVectorMDRange(team, 4);               // OKではありません i>=2 に違反します。
 
 	     TeamVectorMDRange(team, 4,5);             // OK
 	     TeamVectorMDRange(team, 4,5,6);           // OK
@@ -46,7 +46,7 @@ TeamVectorMDRange は、階層的並列処理の内部で使用される `nested
 制約
 ------------
 
- `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_　において使用される場合には、 還元は、合計に限定されることに注意してください。
+ `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、 還元は、合計に限定されることに注意してください。
 
 例
 --------

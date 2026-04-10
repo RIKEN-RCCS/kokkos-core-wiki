@@ -9,7 +9,7 @@
 ディスクリプション
 -----------
 
-TeamThreadMDRange　は、階層的並列処理の中で使用される、`nested execution policy <./NestedPolicies.html>`_ です。
+TeamThreadMDRange は、階層的並列処理の中で使用される、`nested execution policy <./NestedPolicies.html>`_ です。
 
 
 インターフェイス
@@ -21,27 +21,27 @@ TeamThreadMDRange　は、階層的並列処理の中で使用される、`neste
 
    .. cpp:function:: TeamThreadMDRange(team, extent_1, extent_2, ...);
 
-      チームのスレッド全体でインデックスレンジ ``0`` を ``extent`` に分割します。ここで、 ``extent``　はスレッドされるバックエンド依存のランクです
+      チームのスレッド全体でインデックスレンジ ``0`` を ``extent`` に分割します。ここで、 ``extent`` はスレッドされるバックエンド依存のランクです
 
-      :param team: 呼び出しチーム実行コンテキストへの　TeamHandle 
+      :param team: 呼び出しチーム実行コンテキストへの TeamHandle 
 
       :param extent_1, extent_2, ...: 各ランクのインデックス範囲長
 
 
       * **必要要件**
 
-	* ``TeamHandle`` は、`TeamHandle <./TeamHandleConcept.html>`_　をモデル化する型です。
+	* ``TeamHandle`` は、`TeamHandle <./TeamHandleConcept.html>`_ をモデル化する型です。
 
-	* ``extent_1, extent_2, ...`` は、ints　です。
+	* ``extent_1, extent_2, ...`` は、ints です。
 
-	*  ``team``　のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。
+	*  ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。
 
 	* ``extent_i`` の条件は、 ``i >= 2 && i <= 8`` が真であることです。
 	  For example:
 
 	  .. code-block:: cpp
 
-	     TeamThreadMDRange(team, 4);               // OKではありません、 i>=2　に違反します
+	     TeamThreadMDRange(team, 4);               // OKではありません、 i>=2 に違反します
 
 	     TeamThreadMDRange(team, 4,5);             // OK
 	     TeamThreadMDRange(team, 4,5,6);           // OK
@@ -50,7 +50,7 @@ TeamThreadMDRange　は、階層的並列処理の中で使用される、`neste
 制約
 ------------
 
- `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_　において使用される場合には、 還元は、合計に限定されることに注意してください。
+ `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、 還元は、合計に限定されることに注意してください。
 
 例
 --------

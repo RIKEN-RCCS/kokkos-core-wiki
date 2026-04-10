@@ -105,7 +105,7 @@
      - `Kokkos ツール <https://www.youtube.com/watch?v=MH6zFYGw0HU&feature=youtu.be&t=1275>`__
      -
    * - 7.2.
-     - `ベンダーおよび独立プロファイリング　GUI <https://www.youtube.com/watch?v=MH6zFYGw0HU&feature=youtu.be&t=2996>`_
+     - `ベンダーおよび独立プロファイリング GUI <https://www.youtube.com/watch?v=MH6zFYGw0HU&feature=youtu.be&t=2996>`_
      -
    * - 7.3.
      - `チューニング <https://www.youtube.com/watch?v=MH6zFYGw0HU&feature=youtu.be&t=3705>`_

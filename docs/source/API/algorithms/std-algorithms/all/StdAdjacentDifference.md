@@ -79,14 +79,14 @@ auto adjacent_difference(const std::string& label,                              
 
 ## ディスクリプション
 
-- (1,3,5,7): 第一に、 `*first_from` のコピーは、(1,3)　について　`*first_dest` に書き込まれ、
-  または、 `view_from(0)` のコピーは、 (5,7)　について `view_dest(0)` に書き込まれます。
-  第二に、それは、(1,3)　について、または、 (5,7)　について `view_from` において、範囲　`[first_from, last_from)` の要素の各隣接ペアの二番目及び一番目の *差* を計算し、それらを (1,3)　について、または  (5,7)　について `view_dest``first_dest + 1`　において範囲の初めに書き込みます。 
+- (1,3,5,7): 第一に、 `*first_from` のコピーは、(1,3) について `*first_dest` に書き込まれ、
+  または、 `view_from(0)` のコピーは、 (5,7) について `view_dest(0)` に書き込まれます。
+  第二に、それは、(1,3) について、または、 (5,7) について `view_from` において、範囲 `[first_from, last_from)` の要素の各隣接ペアの二番目及び一番目の *差* を計算し、それらを (1,3) について、または  (5,7) について `view_dest``first_dest + 1` において範囲の初めに書き込みます。 
 
-- (2,4,6,8): 第一に、 `*first_from`  のコピーは、 (2,4)　について　`*first_dest` に書き込まれ、
-  または、`view_from(0)` のコピーは、 (6,8)　について `view_dest(0)` に書き込まれます。
-  第二に、 (2,4)　について範囲　`[first_from, last_from)` の、または、 (6,8)　について  `view_from`　において、要素の各隣接ペアの二番目及び一番目を使ったバイナリファンクタを呼び出し、それらを
-   `first_dest + 1` for (2,4)　について、または (6,8)　について `view_dest`　において、範囲の初めに書き込みます。
+- (2,4,6,8): 第一に、 `*first_from`  のコピーは、 (2,4) について `*first_dest` に書き込まれ、
+  または、`view_from(0)` のコピーは、 (6,8) について `view_dest(0)` に書き込まれます。
+  第二に、 (2,4) について範囲 `[first_from, last_from)` の、または、 (6,8) について  `view_from` において、要素の各隣接ペアの二番目及び一番目を使ったバイナリファンクタを呼び出し、それらを
+   `first_dest + 1` for (2,4) について、または (6,8) について `view_dest` において、範囲の初めに書き込みます。
 
 
 ## パラメータおよび要件
@@ -95,20 +95,20 @@ auto adjacent_difference(const std::string& label,                              
   - 実行空間
 - `label`:
   - デバッグ目的で実装カーネルに名前を付けるために使用されます
-  - 1,2　について、 デフォルト文字列は、: "Kokkos::adjacent_difference_iterator_api_default"
-  - 5,6　について、 デフォルト文字列は、: "Kokkos::adjacent_difference_view_api_default"
+  - 1,2 について、 デフォルト文字列は、: "Kokkos::adjacent_difference_iterator_api_default"
+  - 5,6 について、 デフォルト文字列は、: "Kokkos::adjacent_difference_view_api_default"
 - `first_from`, `last_from`, `first_dest`:
-  -  `*_from` から読み取り、`first_dest`　に書き込むための要素の範囲
-  -  *ランダムアクセスイテレータ*　でなければなりません
+  -  `*_from` から読み取り、`first_dest` に書き込むための要素の範囲
+  -  *ランダムアクセスイテレータ* でなければなりません
   -  有効な範囲、すなわち、`last_from >= first_from` を表す必要があります。（デバッグモードで確認済み）
-  - `exespace`　からアクセス可能でなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `view_from`, `view_dest`:
-  - `view_from` から読み取り、`view_dest`　に書き込むためのビュー。
-  - 必ずランク1であり、`LayoutLeft`, `LayoutRight`, または `LayoutStride`　を持たなければなりません。
-  - `exespace`　からアクセス可能でなければなりません。
+  - `view_from` から読み取り、`view_dest` に書き込むためのビュー。
+  - 必ずランク1であり、`LayoutLeft`, `LayoutRight`, または `LayoutStride` を持たなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `bin_op`:
-  - 各要素のペアに対して適用する演算を表す　*二項* ファンクタ。
-  渡された実行空間より呼び出され、そこでは `value_type`　が　`InputIteratorType`　の値型 (1,2,3,4について) または、 `view_from`　の値型 (5,6,7,8について)　であり、 `a,b`　を変更してはいけません。
+  - 各要素のペアに対して適用する演算を表す *二項* ファンクタ。
+  渡された実行空間より呼び出され、そこでは `value_type` が `InputIteratorType` の値型 (1,2,3,4について) または、 `view_from` の値型 (5,6,7,8について) であり、 `a,b` を変更してはいけません。
   - 以下に一致しなければなりません:
   ```c++
   struct BinaryOp
@@ -126,10 +126,10 @@ auto adjacent_difference(const std::string& label,                              
      }
   };
   ```
-  返し型 `return_type` は、 (1,2,3,4)　については、型のオブジェクト `OutputIteratorType` 
-  または、 `value_type` が、 (5,6,7,8)　については、 `view_dest`　の値型である型のオブジェクトが、参照解除可能であり、
-  型 `return_type`　の値が割り当て可能であるようになければなりません。
+  返し型 `return_type` は、 (1,2,3,4) については、型のオブジェクト `OutputIteratorType` 
+  または、 `value_type` が、 (5,6,7,8) については、 `view_dest` の値型である型のオブジェクトが、参照解除可能であり、
+  型 `return_type` の値が割り当て可能であるようになければなりません。
 
 ## 返し
 
-書き込まれた最後の要素の　*後の*　要素へのイテレータ。
+書き込まれた最後の要素の *後の* 要素へのイテレータ。

@@ -8,7 +8,7 @@
 
 .. |StandardLibraryHeaderAlgorithm| replace:: ``<algorithm>``
 
- ヘッダー ``<Kokkos_Core.hpp>``　に定義
+ ヘッダー ``<Kokkos_Core.hpp>`` に定義
 
 標準ライブラリヘッダー |StandardLibraryHeaderAlgorithm|_ から最小値/最大値および関連する操作を提供します。
 

@@ -4,7 +4,7 @@
 .. ロール:: cpp(code)
     :language: cpp
 
-ヘッダー ``<Kokkos_Core.hpp>``　に定義。
+ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 .. _MemorySpace: ../memory_spaces.html
 
@@ -26,7 +26,7 @@
 
 .. 警告::
 
-    Kokkos　の管理対象外であるメモリに対して、メモリの動作を操作する関数（例：memAdvise）を呼び出すと、未定義の動作を引き起こします。
+    Kokkos の管理対象外であるメモリに対して、メモリの動作を操作する関数（例：memAdvise）を呼び出すと、未定義の動作を引き起こします。
 
 ディスクリプション
 -----------
@@ -35,7 +35,7 @@
 
 .. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_malloc(size_t size);
 
-    :tparam MemorySpace: ストレージ先をコントロールします。　省略された場合、デフォルトの実行領域のメモリ領域が使用されます (つまり、``Kokkos::DefaultExecutionSpace::memory_space``)。
+    :tparam MemorySpace: ストレージ先をコントロールします。 省略された場合、デフォルトの実行領域のメモリ領域が使用されます (つまり、``Kokkos::DefaultExecutionSpace::memory_space``)。
 
     :param label: KokkosP プロファイリングツールを介してプロファイリングおよびデバッグツールで使用される、ユーザーが提供した文字列。
 

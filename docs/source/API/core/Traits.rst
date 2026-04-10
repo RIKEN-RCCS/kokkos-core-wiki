@@ -24,9 +24,9 @@ is_memory_traits
 is_reducer
 ----------
 
-　`リデューサー概念 <builtinreducers/ReducerConcept.html>`_ をモデル化する型を検出するためのブール型特性。
+ `リデューサー概念 <builtinreducers/ReducerConcept.html>`_ をモデル化する型を検出するためのブール型特性。
 
 is_space
 --------
 
-Space　概念をモデル化する型を検出するためのブール型特性。
+Space 概念をモデル化する型を検出するためのブール型特性。

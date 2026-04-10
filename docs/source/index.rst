@@ -9,7 +9,7 @@ Kokkos: プログラミングモデル
 .. admonition:: :medium:`C++ Performance Portability Programming Model`
     :class: important
 
-　:medium:`Kokkos Core は、主要な　HPC　プラットフォームすべてを対象とした、パフォーマンスポータブルなアプリケーションを記述するためのC++　の中に、プログラミングモデルを実装しています。 その目的のために、コードの並列実行とデータ管理の両方に対する抽象化を提供します。 Kokkos　は、N　階層のメモリ階層と複数の種類の実行リソースを備えた複雑なノードアーキテクチャを対象に設計されています。 現在、それは、CUDA、HIP、SYCL、HPX、OpenMP、C++　スレッドを、その他複数のバックエンドの開発を伴って`バックエンドプログラミングモデルとして利用可能です。`
+ :medium:`Kokkos Core は、主要な HPC プラットフォームすべてを対象とした、パフォーマンスポータブルなアプリケーションを記述するためのC++ の中に、プログラミングモデルを実装しています。 その目的のために、コードの並列実行とデータ管理の両方に対する抽象化を提供します。 Kokkos は、N 階層のメモリ階層と複数の種類の実行リソースを備えた複雑なノードアーキテクチャを対象に設計されています。 現在、それは、CUDA、HIP、SYCL、HPX、OpenMP、C++ スレッドを、その他複数のバックエンドの開発を伴って`バックエンドプログラミングモデルとして利用可能です。`
 
 `Kokkos エコシステム <https://github.com/kokkos>`_ includes:
 
@@ -43,10 +43,10 @@ Kokkos: プログラミングモデル
      - `GitHub リンク <https://github.com/kokkos/kokkos-remote-spaces>`__
 
    * - ``kokkos-resilience``
-     - 　Kokkos　向けレジリエンスとチェックポイント拡張機能
+     -  Kokkos 向けレジリエンスとチェックポイント拡張機能
      - `GitHub link <https://github.com/kokkos/kokkos-resilience>`__
 
-　C++　標準ライブラリのための関連作業
+ C++ 標準ライブラリのための関連作業
 -----------------------------------------
 
 関連および関係する取り組みには以下が含まれます:
@@ -62,12 +62,12 @@ Kokkos: プログラミングモデル
      -
 
    * - ``mdspan``
-     -  C++23　を対象とした　mdspan の参照実装
+     -  C++23 を対象とした mdspan の参照実装
      - `P0009 <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p0009r16.html>`__
      - `GitHub link <https://github.com/kokkos/mdspan>`__
 
    * - ``stdBLAS``
-     -  stdBLAS　についての参照実装
+     -  stdBLAS についての参照実装
      - `P1673 <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p1673r8.html>`__
      - `GitHub link <https://github.com/kokkos/stdBLAS>`__
 
@@ -75,7 +75,7 @@ Kokkos: プログラミングモデル
 ----------
 
 スラック: https://kokkosteam.slack.com 上で見つけてください、または
-open an issue on `github <https://github.com/kokkos/kokkos/issues>`_　上でイシューを開いてください
+open an issue on `github <https://github.com/kokkos/kokkos/issues>`_ 上でイシューを開いてください
 
 ウェブサイトコンテンツ
 ---------------

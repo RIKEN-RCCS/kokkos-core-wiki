@@ -13,14 +13,14 @@
 
     new_value =  atomic_[op]_fetch(ptr_to_value,update_value);
 
-　``ptr_to_value`` で与えられたアドレスの変数を、関連する演算に従って、原子的に　``update_value``　で更新し、 そのアドレスで見つけた前の値を返します。
+ ``ptr_to_value`` で与えられたアドレスの変数を、関連する演算に従って、原子的に ``update_value`` で更新し、 そのアドレスで見つけた前の値を返します。
 
 ディスクリプション
 -----------
 
 .. cpp:function:: template<class T> T atomic_add_fetch(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value += value; return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value += value; return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス
 
@@ -28,7 +28,7 @@
 
 .. cpp:function:: template<class T> T atomic_and_fetch(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value &= value; return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value &= value; return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -36,7 +36,7 @@
 
 .. cpp:function:: template<class T> T atomic_div_fetch(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value /= value; return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value /= value; return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -44,7 +44,7 @@
 
 .. cpp:function:: template<class T> T atomic_lshift_fetch(T* const ptr_to_value, const unsigned shift);
 
-    ``*ptr_to_value << shift; return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value << shift; return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -52,7 +52,7 @@
 
 .. cpp:function:: template<class T> T atomic_max_fetch(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value = max(*ptr_to_value, value); return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value = max(*ptr_to_value, value); return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -60,7 +60,7 @@
 
 .. cpp:function:: template<class T> T atomic_min_fetch(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value = min(*ptr_to_value, value); return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value = min(*ptr_to_value, value); return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -68,7 +68,7 @@
 
 .. cpp:function:: template<class T> T atomic_mul_fetch(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value *= value; return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value *= value; return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -76,7 +76,7 @@
 
 .. cpp:function:: template<class T> T atomic_mod_fetch(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value %= value; return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value %= value; return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -84,7 +84,7 @@
 
 .. cpp:function:: template<class T> T atomic_or_fetch(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value |= value; return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value |= value; return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -92,7 +92,7 @@
 
 .. cpp:function:: template<class T> T atomic_rshift_fetch(T* const ptr_to_value, const unsigned shift);
 
-    ``*ptr_to_value >> shift; return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value >> shift; return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -100,7 +100,7 @@
 
 .. cpp:function:: template<class T> T atomic_sub_fetch(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value -= value; return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value -= value; return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -108,7 +108,7 @@
 
 .. cpp:function:: template<class T> T atomic_xor_fetch(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value ^= value; return *ptr_to_value;``　を原子的に実行します。
+    ``*ptr_to_value ^= value; return *ptr_to_value;`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 

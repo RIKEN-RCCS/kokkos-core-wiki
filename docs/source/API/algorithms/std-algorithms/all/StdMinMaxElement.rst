@@ -6,7 +6,7 @@
 ディスクリプション
 -----------
 
-2つの要素の比較には、``operator<``　を使用するか、ユーザーが提供する比較演算子を使用して、範囲内またはランク1の ``ビュー`` 内で最小および最大の要素を検索します。
+2つの要素の比較には、``operator<`` を使用するか、ユーザーが提供する比較演算子を使用して、範囲内またはランク1の ``ビュー`` 内で最小および最大の要素を検索します。
 
 インターフェイス
 ---------
@@ -96,7 +96,7 @@
 
 .. |min_element_link| replace:: ``min_element``
 
-- ``exespace``, ``first``, ``last``, ``view``, ``comp``:  |min_element_link|_　と同様。
+- ``exespace``, ``first``, ``last``, ``view``, ``comp``:  |min_element_link|_ と同様。
 
 - ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス。
 
@@ -111,13 +111,13 @@
 戻り値
 ~~~~~~~~~~~~
 
-その順序における、最小要素および最大要素へのイテレータの　Kokkos　ペア。
+その順序における、最小要素および最大要素へのイテレータの Kokkos ペア。
 
 以下の特例が適用されます:
 
-- 範囲 ``[first, last)`` が空である場合、それは ``Kokkos::pair(first, first)``　を返します。
+- 範囲 ``[first, last)`` が空である場合、それは ``Kokkos::pair(first, first)`` を返します。
 
-- ``ビュー`` が空である場合、 それは ``Kokkos::pair(Kokkos::Experimental::begin(view), Kokkos::Experimental::begin(view))``　を返します。
+- ``ビュー`` が空である場合、 それは ``Kokkos::pair(Kokkos::Experimental::begin(view), Kokkos::Experimental::begin(view))`` を返します。
 
 - 複数の要素が最小の要素と同等である場合、そのような要素のうち *最初* の要素へのイテレータを返します。
 
@@ -143,7 +143,7 @@
      KOKKOS_INLINE_FUNCTION
      bool operator()(const ValueType1& a,
                      const ValueType2& b) const {
-       // ここでは　<　を使用していますが、a　が　b　より小さい場合に、a < b　を返すような任意のカスタムロジックを実装することも可能です;
+       // ここでは < を使用していますが、a が b より小さい場合に、a < b を返すような任意のカスタムロジックを実装することも可能です;
      }
 
      KOKKOS_INLINE_FUNCTION

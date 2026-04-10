@@ -64,14 +64,14 @@ auto search_n(const std::string& label, const ExecutionSpace& exespace,
 
 ## ディスクリプション
 
-範囲 [first, last) を、`count` 要素の範囲について、それぞれ `value`   (1,2)　と等しいかどうかを比較して、検索します。
+範囲 [first, last) を、`count` 要素の範囲について、それぞれ `value`   (1,2) と等しいかどうかを比較して、検索します。
 `count` 要素の範囲について、それぞれ `value`  (3,4) と等しいかどうかを比較して、 `view` を検索します。
- (5,6)　における `value` について、 `pred` が真を返す`count` 要素の範囲について、範囲 [first, last) を検索します。
- (7,8)　における `value` について、 `pred` が真を返す`count` 要素の範囲について、 `view` を検索します。
+ (5,6) における `value` について、 `pred` が真を返す`count` 要素の範囲について、範囲 [first, last) を検索します。
+ (7,8) における `value` について、 `pred` が真を返す`count` 要素の範囲について、 `view` を検索します。
 
 ## パラメータおよび要件
 
-- `exespace`, `first`, `last`, `view` および `count` は、 [`for_each_n`](./StdForEachN)　と同様。
+- `exespace`, `first`, `last`, `view` および `count` は、 [`for_each_n`](./StdForEachN) と同様。
 
 - `label`:
     - 1,5: デフォルト文字列は、 "Kokkos::search_n_iterator_api_default".

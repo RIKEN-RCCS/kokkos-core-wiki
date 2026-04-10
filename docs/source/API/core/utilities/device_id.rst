@@ -4,14 +4,14 @@
 .. ロール:: cpp(code)
     :language: cpp
 
- ヘッダー ``<Kokkos_Core.hpp>``　に定義
+ ヘッダー ``<Kokkos_Core.hpp>`` に定義
 
 .. code-block:: cpp
 
     [[nodiscard]] int device_id() noexcept;  // (バージョン4.1以降)
 
-ホストバックエンドのみが有効な場合、 ``DefaultExecutionSpace`` または　``-1`` により使用されるデバイスの
-id　を返します。
+ホストバックエンドのみが有効な場合、 ``DefaultExecutionSpace`` または ``-1`` により使用されるデバイスの
+id を返します。
 
 ----
 
@@ -33,10 +33,10 @@ id　を返します。
 
 .. |InitializationSettings| replace:: ``InitializationSettings``
 
-|num_devices|_: Kokkos　に利用可能なデバイスの数を返します。
+|num_devices|_: Kokkos に利用可能なデバイスの数を返します。
 
-|num_threads|_: Kokkos　が使用するスレッド数を返します。
+|num_threads|_: Kokkos が使用するスレッド数を返します。
 
 |initialize|_: Kokkos 実行環境を初期化します。
 
-|InitializationSettings|_: Kokkos　を初期化するための設定
+|InitializationSettings|_: Kokkos を初期化するための設定

@@ -10,7 +10,7 @@
 
 .. |parallelReduce| replace:: :cpp:func:`parallel_reduce`
 
-チーム規模の要求対象となるファンクターを示すための、チーム規模計算機能で使用されるタグは、 |parallelReduce|_　に使用されています。
+チーム規模の要求対象となるファンクターを示すための、チーム規模計算機能で使用されるタグは、 |parallelReduce|_ に使用されています。
 
 使用例
 -----

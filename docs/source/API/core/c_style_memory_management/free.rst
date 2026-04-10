@@ -4,7 +4,7 @@
 .. ロール:: cpp(code)
     :language: cpp
 
-ヘッダー ``<Kokkos_Core.hpp>``　に定義
+ヘッダー ``<Kokkos_Core.hpp>`` に定義
 
 .. _Kokkos_kokkos_malloc: ./malloc.html
 
@@ -16,14 +16,14 @@
 
 指定されたメモリ空間 ``MemorySpace`` 上で、|Kokkos_kokkos_malloc|_ または |Kokkos_kokkos_realloc|_ によって以前に割り当てられた領域を解除します。
 
-　``ptr``　がヌルポインタの場合、この関数は何も行いません。
+ ``ptr`` がヌルポインタの場合、この関数は何も行いません。
 
 ディスクリプション
 -----------
 
 .. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void kokkos_free(void* ptr);
 
-    :tparam MemorySpace: 保存先を制御します。 省略された場合、デフォルトの実行領域のメモリ領域が使用されます。 (つまり、 ``Kokkos::DefaultExecutionSpace::memory_space``　です)。
+    :tparam MemorySpace: 保存先を制御します。 省略された場合、デフォルトの実行領域のメモリ領域が使用されます。 (つまり、 ``Kokkos::DefaultExecutionSpace::memory_space`` です)。
 
     :param ptr: 指定されたメモリ空間上で割り当て解除するメモリへのポインタ。
 

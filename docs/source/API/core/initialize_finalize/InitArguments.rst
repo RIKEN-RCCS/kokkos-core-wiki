@@ -12,7 +12,7 @@ InitArguments
 
  ``<Kokkos_Core.hpp>`` ヘッダーに定義。
 
-.. 警告:: 3.7以降非推奨、 4.3において削除、 **代わりに** ``Kokkos::InitializationSettings``　を　**使用** 
+.. 警告:: 3.7以降非推奨、 4.3において削除、 **代わりに** ``Kokkos::InitializationSettings`` を **使用** 
 
 
 インターフェイス
@@ -34,7 +34,7 @@ InitArguments
 
    .. cpp:function:: InitArguments()
 
-``InitArguments`` は、|KokkosInitialize|_ に渡される引数をプログラムで定義するために使用可能な構造です。 Iバージョン3.7で廃止され、|KokkosInitializationSetting|_　が推奨されるようになりました。
+``InitArguments`` は、|KokkosInitialize|_ に渡される引数をプログラムで定義するために使用可能な構造です。 Iバージョン3.7で廃止され、|KokkosInitializationSetting|_ が推奨されるようになりました。
 
 その置換の主な理由の一つは、ユーザー指定のデータメンバーがデフォルト値を持つものと区別できない点にあります。
 

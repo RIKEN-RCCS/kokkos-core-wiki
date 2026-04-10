@@ -1,7 +1,7 @@
 ビューおよびその関連項目
 ================
 
-データ管理は、あらゆるプログラムにおいて極めて重要な要素です。 Kokkos における主要な機能は ``Kokkos::View``　であり、 
+データ管理は、あらゆるプログラムにおいて極めて重要な要素です。 Kokkos における主要な機能は ``Kokkos::View`` であり、 
 以下のファシリティが利用可能です:
 
 .. リスト表::
@@ -11,13 +11,13 @@
    * - クラス
      - ディスクリプション
    * - `create_mirror[_view] <view/create_mirror.html>`__
-     - 別のメモリ空間に、 ``Kokkos::View``　のコピーを作成。
+     - 別のメモリ空間に、 ``Kokkos::View`` のコピーを作成。
    * - `deep_copy() <view/deep_copy.html>`__
      - ビューとスカラー間のデータコピー。
    * - `LayoutLeft <view/layoutLeft.html>`__
      - Fortran に準拠したメモリレイアウト。
    * - `LayoutRight <view/layoutRight.html>`__
-     -  C　に一致するメモリレイアウト。
+     -  C に一致するメモリレイアウト。
    * - `LayoutStride <view/layoutStride.html>`__
      - 任意のストライドに対するメモリレイアウト。
    * - `MemoryTraits <view/memoryTraits.html>`__
@@ -25,13 +25,13 @@
    * - `realloc <view/realloc.html>`__
      -  ``Kokkos::View`` の再割り当て。
    * - `resize <view/resize.html>`__
-     - 　``Kokkos::View`` のサイズ変更。
+     -  ``Kokkos::View`` のサイズ変更。
    * - `subview <view/subview.html>`__
-     - 　``Kokkos::View``　からスライスを取得。
+     -  ``Kokkos::View`` からスライスを取得。
    * - `View <view/view.html>`__
-     -  　Kokkos 主要データ構造、多次元メモリ空間およびレイアウト認識配列。
+     -   Kokkos 主要データ構造、多次元メモリ空間およびレイアウト認識配列。
    * - `view_alloc() <view/view_alloc.html>`__
-     - 　引数リストからビュー割り当てパラメータバンドルを作成。
+     -  引数リストからビュー割り当てパラメータバンドルを作成。
    * - `View-like Types <view/view_like.html>`__
      - おおまかに定義すると、``Kokkos::View`` のように振る舞うクラステンプレートの集合。
 

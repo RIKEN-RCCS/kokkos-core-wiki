@@ -5,7 +5,7 @@
 * アトミック演算は、書き込み競合を解決するために使用。
 * フリー関数の使用方法。
 * アトミックメモリ特性の使用方法。
-* 散布図の追加パターンに　[ScatterView](../API/containers/ScatterView)　を使用。
+* 散布図の追加パターンに [ScatterView](../API/containers/ScatterView) を使用。
 
 ## 書き込み競合およびそのアトミック演算による解決
 
@@ -21,12 +21,12 @@ void create_histogram(View<int*> histogram, int min, int max, View<int*> values)
 }
 ```
 
-このループを単純な　[`parallel_for()`](../API/core/parallel-dispatch/parallel_for)　で並列化すると、複数のスレッドが同時に同じ　`index`　をインクリメントしようとする可能性があります。その一方で、増分は実際には、３つの演算です:
+このループを単純な [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) で並列化すると、複数のスレッドが同時に同じ `index` をインクリメントしようとする可能性があります。その一方で、増分は実際には、３つの演算です:
   1. `histogram(index)` をレジスタへ読み込み、
   2. レジスタを増分し、
-  3. レジスタを　`&histogram(index)`　に格納。
+  3. レジスタを `&histogram(index)` に格納。
 
-2つのスレッドが同時に同じインデックスに対してこの操作を試みると、両方のスレッドが値を読み込み、増分し、保存するという状況が発生する可能性があります。 どちらも同じ元の値を読み込んだため、更新のうち1つだけが適用されますが、一方、2番目の増加分は失われます。 これは、*競合状態*　と呼ばれます。
+2つのスレッドが同時に同じインデックスに対してこの操作を試みると、両方のスレッドが値を読み込み、増分し、保存するという状況が発生する可能性があります。 どちらも同じ元の値を読み込んだため、更新のうち1つだけが適用されますが、一方、2番目の増加分は失われます。 これは、*競合状態* と呼ばれます。
 
 この状況におけるもう一つの典型的な例が、いわゆる*scatter-add* アルゴリズムです。
 例えば粒子コードでは、全ての粒子をループ処理し、各粒子に対して
@@ -76,7 +76,7 @@ void compute_force(View<int**> neighbours, View<double*> values) {
 }
 ```
 
-Tまた、古い値または新しい値を返すアトミック演算も存在します。これらは、[`atomic_fetch_[op]`](../API/core/atomics/atomic_fetch_op)　および　[`atomic_[op]_fetch`](../API/core/atomics/atomic_op_fetch)　の命名規則に従います。例えば、配列内の負の値のすべてのインデックスを見つけ、それらをリストに格納したい場合、以下のアルゴリズムが適用されます:
+Tまた、古い値または新しい値を返すアトミック演算も存在します。これらは、[`atomic_fetch_[op]`](../API/core/atomics/atomic_fetch_op) および [`atomic_[op]_fetch`](../API/core/atomics/atomic_op_fetch) の命名規則に従います。例えば、配列内の負の値のすべてのインデックスを見つけ、それらをリストに格納したい場合、以下のアルゴリズムが適用されます:
 ```c++
 void find_indices(View<int*> indices, View<double*> values) {
   View<int> count("Count");
@@ -95,7 +95,7 @@ void find_indices(View<int*> indices, View<double*> values) {
 |:--------------------------------------------------------------------------------------|:--------------------------|:-----------|:----------------------------|
 | [atomic_compare_exchange](../API/core/atomics/atomic_compare_exchange)                | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | 比較対象の値と一致した場合にのみ値を交換し、そうでない場合は元の値を返すアトミック演算。 |
 | [atomic_exchange](../API/core/atomics/atomic_exchange)                                | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | 値を交換し、元の値を返すアトミック演算。 |
-| [atomic_fetch_\[op\]](../API/core/atomics/atomic_fetch_op)                            | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | 古い値を返す様々なアトミック演算。 [op] は、 `add`, `and`, `div`, `lshift`, `max`, `min`, `mod`, `mul`, `or`, `rshift`, `sub` または `xor`　かもしれません。 |
+| [atomic_fetch_\[op\]](../API/core/atomics/atomic_fetch_op)                            | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | 古い値を返す様々なアトミック演算。 [op] は、 `add`, `and`, `div`, `lshift`, `max`, `min`, `mod`, `mul`, `or`, `rshift`, `sub` または `xor` かもしれません。 |
 | [atomic_load](../API/core/atomics/atomic_load)                                        | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | 値を読み込むアトミック演算。 |
 | [atomic_\[op\]](../API/core/atomics/atomic_op)                                        | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | 何も返さないアトミック演算。 [op] は、`and`, `add`, `dec`, `max`, `min`, `inc`, `or` または `sub` かもしれません。|
 | [atomic_\[op\]_fetch](../API/core/atomics/atomic_op_fetch)                            | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | 更新後の値を返す様々なアトミック演算。 [op] は、 `add`, `and`, `div`, `lshift`, `max`, `min`, `mod`, `mul`, `or`, `rshift`, `sub` または `xor` かもしれません。|
@@ -104,7 +104,7 @@ void find_indices(View<int*> indices, View<double*> values) {
 ## アトミックメモリ特性
 
 カーネル中の特定の`View`に対するすべての演算がアトミックである場合、アトミックメモリ特性も使用できます。
-通常、*非アトミック*　な　`View`　から　*アトミック*　な　`View`　を作成するのは、そのカーネルの処理のためだけであり、その後は通常の演算を適用します。
+通常、*非アトミック* な `View` から *アトミック* な `View` を作成するのは、そのカーネルの処理のためだけであり、その後は通常の演算を適用します。
 
 ```c++
 void create_histogram(View<int*> histogram, int min, int max, View<int*> values) {
@@ -119,8 +119,8 @@ void create_histogram(View<int*> histogram, int min, int max, View<int*> values)
 
 ## ScatterView
 
-CPU　では、特にKokkos　を　MPI　と併用する場合に、スレッド数を低く設定することが多いです。
+CPU では、特にKokkos を MPI と併用する場合に、スレッド数を低く設定することが多いです。
 データレプリケーションはアトミック演算を使用する場合よりも高いパフォーマンスを発揮することが多いです。
-ポータブルコードを維持するためには、[`ScatterView`](../API/containers/ScatterView)　を使用できます。 これにより、基盤となるハードウェアに応じて、アトミック演算の使用からデータ複製の使用へ、コンパイル時に透過的に切り替えることが可能になります。
+ポータブルコードを維持するためには、[`ScatterView`](../API/containers/ScatterView) を使用できます。 これにより、基盤となるハードウェアに応じて、アトミック演算の使用からデータ複製の使用へ、コンパイル時に透過的に切り替えることが可能になります。
 
 詳細はこちらで確認できます: [ScatterView](../API/containers/ScatterView)

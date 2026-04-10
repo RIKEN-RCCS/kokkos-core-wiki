@@ -4,16 +4,16 @@
 
 ヘッダーファイル: ``<Kokkos_StaticCrsGraph.hpp>`` ( Kokkos 4.5以降非推奨)
 
-``StaticCrsGraph``　を、KokkosKernels に移動しました。
+``StaticCrsGraph`` を、KokkosKernels に移動しました。
 
-StaticCrsGraph　は、圧縮された行ストレージ配列であり、行マップ、列インデックス、および非ゼロエントリが3つの異なる　Kokkos::Views　に格納されています。ホストまたはデバイス上で、CRSデータの操作とアクセスを簡素化するために、適切な型と関数が提供されています。
+StaticCrsGraph は、圧縮された行ストレージ配列であり、行マップ、列インデックス、および非ゼロエントリが3つの異なる Kokkos::Views に格納されています。ホストまたはデバイス上で、CRSデータの操作とアクセスを簡素化するために、適切な型と関数が提供されています。
 
 使用例
 -----
 
 .. code-block:: cpp
 
-    StaticCrsGraphType = Kokkos::StaticCrsGraph<unsigned, Space, void, void, unsigned>　を使用;
+    StaticCrsGraphType = Kokkos::StaticCrsGraph<unsigned, Space, void, void, unsigned> を使用;
     StaticCrsGraphType graph();
 
     const int begin = graph.row_map[0];

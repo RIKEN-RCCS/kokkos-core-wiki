@@ -14,7 +14,7 @@
    Kokkos::deep_copy(exec_space, dest, src);
    Kokkos::deep_copy(dest, src);
 
-データを、 ``src`` から ``dest``　にコピーしますが、その中で ``src`` および ``dest``　が
+データを、 ``src`` から ``dest`` にコピーしますが、その中で ``src`` および ``dest`` が
 特定状況下で、`Kokkos::Views <view.html>`_ またはスカラーである可能性があります。
 
 インターフェイス
@@ -37,7 +37,7 @@
 
 * ExecSpace:  `ExecutionSpace <../execution_spaces.html>`_
 
-* ViewDest: 非定数 ``value_type``　を伴う `view-like type <view_like.html>`_ 
+* ViewDest: 非定数 ``value_type`` を伴う `view-like type <view_like.html>`_ 
 
 * ViewSrc:  `view-like type <view_like.html>`_.
 
@@ -50,18 +50,18 @@
 
   - ``src.rank == dest.rank`` (または、 ``Kokkos::DynRankView`` , ``src.rank() == dest.rank()`` について)
 
-  - ``[0, dest.rank)``　内のすべての  ``k`` については、``dest.extent(k) == src.extent(k)`` (または、 ``dest.rank()``と同じ)
+  - ``[0, dest.rank)`` 内のすべての  ``k`` については、``dest.extent(k) == src.extent(k)`` (または、 ``dest.rank()``と同じ)
 
-  - ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` および ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true``　両方であるための、``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value``、 *または* there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (規定またはデフォルト)
+  - ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` および ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true`` 両方であるための、``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value``、 *または* there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (規定またはデフォルト)
 
 * ``src`` が `Kokkos::View <view.html>`_ で、 ``dest`` が、スカラーである場合には、 ``src.rank == 0`` は真です。
 
 セマンティクス
 ---------
 
-* `ExecutionSpace <../execution_spaces.html>`_ argument が提供されなければ、  いかなる実行空間のすべての優れた演算子　（カーネル、コピー演算子）は、コピーが実行される前に終了し、コピー演算子は、呼び出しが返される前に終了します。
+* `ExecutionSpace <../execution_spaces.html>`_ argument が提供されなければ、  いかなる実行空間のすべての優れた演算子 （カーネル、コピー演算子）は、コピーが実行される前に終了し、コピー演算子は、呼び出しが返される前に終了します。
 
-* `ExecutionSpace <../execution_spaces.html>`_ argument ``exec_space`` が提供されば、 呼び出しは、同期可能ーつまり、コピー演算子が実行される前に、呼び出しは、返されます。 その場合には、コピー演算子は、``exec_space``　に既に送信された作業がすべて完了した後にのみ発生し、コピー演算子は、 ``deep_copy`` 呼び出し返しの実行後に、``exec_space``　に送信されたいずれかの作業の前に完了します。注意事項: コピー演算子は、特定実行空間インスタンスにおける作業に関してのみ、同期的ですが、必ずしも同じ型の他のインスタンスにおける作業を伴っていません。 これは、追加の同期処理なしに、特定の　CUDA　ストリームに対して、``cudaMemcpyAsync``　を発行するのと同様の動作をします
+* `ExecutionSpace <../execution_spaces.html>`_ argument ``exec_space`` が提供されば、 呼び出しは、同期可能ーつまり、コピー演算子が実行される前に、呼び出しは、返されます。 その場合には、コピー演算子は、``exec_space`` に既に送信された作業がすべて完了した後にのみ発生し、コピー演算子は、 ``deep_copy`` 呼び出し返しの実行後に、``exec_space`` に送信されたいずれかの作業の前に完了します。注意事項: コピー演算子は、特定実行空間インスタンスにおける作業に関してのみ、同期的ですが、必ずしも同じ型の他のインスタンスにおける作業を伴っていません。 これは、追加の同期処理なしに、特定の CUDA ストリームに対して、``cudaMemcpyAsync`` を発行するのと同様の動作をします
 
 
 --------
@@ -131,23 +131,23 @@
             Kokkos::View<int**[5], Kokkos::LayoutLeft> d_view("DeviceView",N,R);
             Kokkos::View<int**[5], Kokkos::LayoutRight, Kokkos::HostSpace> h_view("HostView",N,R);
 
-            // 例えば、CUDA　ビルドや　HIP　ビルドでは失敗するでしょう:
+            // 例えば、CUDA ビルドや HIP ビルドでは失敗するでしょう:
             // Kokkos::deep_copy(d_view,h_view);
 
             // 互換性のないレイアウトを持つ2つのビューをデバイス間でコピーするには、一時的に
             auto h_view_tmp = Kokkos::create_mirror_view(d_view)を必要とします;
 
-            // これは、d_view　
+            // これは、d_view 
             static_assert(std::is_same<decltype(h_view_tmp)::array_layout,
                                        Kokkos::LayoutLeft>::value)からのからレイアウトを継承します;
 
             // これは現在機能しています。なぜなら h_view_tmp および h_view の両方が
             // HostSpace::execution_space
-            Kokkos::deep_copy(h_view_tmp,h_view)　からアクセス可能であるためです;
+            Kokkos::deep_copy(h_view_tmp,h_view) からアクセス可能であるためです;
 
-            // 現在　h_view_tmp および d_view が互換性のあるレイアウトであるため、h_view_tmp から d_view へのコピーが可能です。
-            // If we just compiled for OpenMP this is a no-op since h_view_tmp and d_view　OpenMP用にコンパイルするのであれば、
-            //  h_view_tmp および d_view　が同じデータを参照するでしょうから、これは　no-op です。
+            // 現在 h_view_tmp および d_view が互換性のあるレイアウトであるため、h_view_tmp から d_view へのコピーが可能です。
+            // If we just compiled for OpenMP this is a no-op since h_view_tmp and d_view OpenMP用にコンパイルするのであれば、
+            //  h_view_tmp および d_view が同じデータを参照するでしょうから、これは no-op です。
             Kokkos::deep_copy(d_view,h_view_tmp);
         }
         Kokkos::finalize();

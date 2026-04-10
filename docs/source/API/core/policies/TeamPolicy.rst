@@ -27,7 +27,7 @@
 
    .. rubric:: テンプレート引数
 
-TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Policies.html#common-arguments-for-all-execution-policies>`_　に説明されています。
+TeamPolicyの有効なテンプレート引数は、ここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ に説明されています。
 
    .. rubric:: パブリックネスト型定義
 
@@ -56,27 +56,27 @@ TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Polic
 
    .. cpp:function:: TeamPolicy(index_type league_size, index_type team_size, index_type vector_length=1)
 
-       ``league_size``　ワークアイテムの起動リクエストで、 ``vector_length``　のベクトル長を使用して、それぞれが ``team_size``　スレッドで、スレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。
+       ``league_size`` ワークアイテムの起動リクエストで、 ``vector_length`` のベクトル長を使用して、それぞれが ``team_size`` スレッドで、スレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。
 
    .. cpp:function:: TeamPolicy(index_type league_size, Impl::AUTO_t, index_type vector_length=1)
 
-      ``league_size``　ワークアイテムの起動リクエストで、 ``vector_length``　のベクトル長を使用して、それぞれが　Kokkos　が決定したサイズのスレッドチームに代入されます。 チームの規模は、ファンクタの性質を考慮して起動時に遅れて決定することができます。
+      ``league_size`` ワークアイテムの起動リクエストで、 ``vector_length`` のベクトル長を使用して、それぞれが Kokkos が決定したサイズのスレッドチームに代入されます。 チームの規模は、ファンクタの性質を考慮して起動時に遅れて決定することができます。
 
    .. cpp:function:: TeamPolicy(execution_space space, index_type league_size, index_type team_size, index_type vector_length=1)
 
-        ``league_size``　ワークアイテムの起動リクエストで、 ``vector_length``　のベクトル長を使用して、それぞれが　Kokkos　が決定したサイズのスレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。カーネル起動時に提供された実行空間インスタンスを使用します。
+        ``league_size`` ワークアイテムの起動リクエストで、 ``vector_length`` のベクトル長を使用して、それぞれが Kokkos が決定したサイズのスレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。カーネル起動時に提供された実行空間インスタンスを使用します。
 
    .. cpp:function:: TeamPolicy(execution_space space, index_type league_size, Impl::AUTO_t, index_type vector_length=1)
 
-       ``league_size``　ワークアイテムの起動リクエストで、 ``vector_length``　のベクトル長を使用して、それぞれが　Kokkos　が決定したサイズのスレッドチームに代入されます。チームの規模は、ファンクタの性質を考慮して起動時に遅れて決定することができます。カーネル起動時に提供された実行空間インスタンスを使用します。
+       ``league_size`` ワークアイテムの起動リクエストで、 ``vector_length`` のベクトル長を使用して、それぞれが Kokkos が決定したサイズのスレッドチームに代入されます。チームの規模は、ファンクタの性質を考慮して起動時に遅れて決定することができます。カーネル起動時に提供された実行空間インスタンスを使用します。
 
    .. rubric:: 実行時設定
 
    .. cpp:function:: inline TeamPolicy& set_chunk_size(int chunk);
 
-      チャンクサイズを設定します。各物理的なスレッドチームには、連続した　``chunk``　チームが代入されます。デフォルトは　1　です。
+      チャンクサイズを設定します。各物理的なスレッドチームには、連続した ``chunk`` チームが代入されます。デフォルトは 1 です。
 
-      Returns:  ``*this``　を参照。
+      Returns:  ``*this`` を参照。
 
    .. cpp:function:: inline TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team);
 
@@ -88,13 +88,13 @@ TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Polic
 
       チームごとのスクラッチサイズとスレッドごとのスクラッチサイズを設定します。
 
-      - ``level``: ストレージのレベルを設定してください。0　は最も近いキャッシュです。1　は最も近いストレージ(例:高帯域幅メモリ)です。
-      - ``per_team``: スクラッチのバイト単位のチームごとのサイズのラッパーです。関数 ``PerTeam(int)``　で返されます。
+      - ``level``: ストレージのレベルを設定してください。0 は最も近いキャッシュです。1 は最も近いストレージ(例:高帯域幅メモリ)です。
+      - ``per_team``: スクラッチのバイト単位のチームごとのサイズのラッパーです。関数 ``PerTeam(int)`` で返されます。
 
-      - ``per_thread``: スレッドごとのスクラッチサイズ(バイト単位)のラッパーです。関数　``PerThread(int)``　で返されます。
+      - ``per_thread``: スレッドごとのスクラッチサイズ(バイト単位)のラッパーです。関数 ``PerThread(int)`` で返されます。
 
-      関数を　2回呼び出すことで、レベル　0　と　1　のスクラッチサイズを独立して設定できます。 同じレベルでの後続の呼び出しは、前の値を上書きします。
-      返し: 　``*this``　を参照
+      関数を 2回呼び出すことで、レベル 0 と 1 のスクラッチサイズを独立して設定できます。 同じレベルでの後続の呼び出しは、前の値を上書きします。
+      返し:  ``*this`` を参照
 
    .. rubric:: 実行時設定の参照制限
 
@@ -110,17 +110,17 @@ TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Polic
 
    .. cpp:function:: template<class FunctorType> int team_size_max(const FunctorType& f, const ParallelReduceTag&) const;
 
-      特定のファンクタが与えられた場合、最大チームサイズを参照します。タグは、これが、　|parallelFor|_　か　|parallelReduce|_　かを示します。
-      注意事項:  これは静的な関数ではありません!　関数は、ベクター長と ``*this``　のスクラッチサイズの設定を考慮します。 戻り値より大きい値を使うと、ディスパッチ失敗になります。 戻り値が正でない場合、有効なチームサイズは見つかりません。 一般的な理由は、スクラッチキャッシュメモリへの要求が過剰であったことです。
-      返し:  ``f``　をディスパッチするために、他に同一の　``TeamPolicy`` と組み合わせて使用できることを可能にした``team_size``　の最大値。
+      特定のファンクタが与えられた場合、最大チームサイズを参照します。タグは、これが、 |parallelFor|_ か |parallelReduce|_ かを示します。
+      注意事項:  これは静的な関数ではありません! 関数は、ベクター長と ``*this`` のスクラッチサイズの設定を考慮します。 戻り値より大きい値を使うと、ディスパッチ失敗になります。 戻り値が正でない場合、有効なチームサイズは見つかりません。 一般的な理由は、スクラッチキャッシュメモリへの要求が過剰であったことです。
+      返し:  ``f`` をディスパッチするために、他に同一の ``TeamPolicy`` と組み合わせて使用できることを可能にした``team_size`` の最大値。
 
    .. cpp:function:: template<class FunctorType> int team_size_recommended(const FunctorType& f, const ParallelForTag&) const;
 
    .. cpp:function:: template<class FunctorType> int team_size_recommended(const FunctorType& f, const ParallelReduceTag&) const;
 
-      特定のファンクタ　``f``　について推奨されるチームサイズを照会します。タグは、これが　|parallelFor|_  か　|parallelReduce|_　かを示します。
-      注意事項: これは静的な関数ではありません! 関数は、ベクター長と ``*this``　のスクラッチサイズの設定を考慮します。 戻り値が正でない場合、有効なチームサイズは見つかりません。 一般的な理由は、スクラッチキャッシュメモリへの要求が過剰であったことです。
-      返し:  ``f``　をディスパッチするために、他に同一の　``TeamPolicy`` と組み合わせて使用できることを可能にした``team_size``　の最大値。
+      特定のファンクタ ``f`` について推奨されるチームサイズを照会します。タグは、これが |parallelFor|_  か |parallelReduce|_ かを示します。
+      注意事項: これは静的な関数ではありません! 関数は、ベクター長と ``*this`` のスクラッチサイズの設定を考慮します。 戻り値が正でない場合、有効なチームサイズは見つかりません。 一般的な理由は、スクラッチキャッシュメモリへの要求が過剰であったことです。
+      返し:  ``f`` をディスパッチするために、他に同一の ``TeamPolicy`` と組み合わせて使用できることを可能にした``team_size`` の最大値。
 
    .. cpp:function:: static int vector_length_max();
 
@@ -143,7 +143,7 @@ TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Polic
 
    .. cpp:function:: int scratch_size(int level, int team_size_ = -1) const;
 
-      本関数は、要求されたスクラッチサイズの合計を返します。 ``team_size`` が提供されていない場合は、内部設定から計算用のチームサイズ(すなわち、``this->team_size()``　を呼び出した結果)が使われます。 それ以外の場合は、提供されたチームサイズが使用されます。
+      本関数は、要求されたスクラッチサイズの合計を返します。 ``team_size`` が提供されていない場合は、内部設定から計算用のチームサイズ(すなわち、``this->team_size()`` を呼び出した結果)が使われます。 それ以外の場合は、提供されたチームサイズが使用されます。
       返し: 特定されたスクラッチレベルでのチームあたりの総スクラッチサイズ(バイト単位)の値。
 
    .. cpp:function:: int team_scratch_size(int level) const;
@@ -156,7 +156,7 @@ TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Polic
 
    .. cpp:function:: int chunk_size() const;
 
-      返し:  ``set_chunk_size()``　経由で設定された、チャンクサイズ。
+      返し:  ``set_chunk_size()`` 経由で設定された、チャンクサイズ。
 
 例
 --------
@@ -181,7 +181,7 @@ TeamPolicyの有効なテンプレート引数は、ここ　<../Execution-Polic
         });
         team.team_barrier();
 
-        // ランク2ビューとして格納されている、行列　A　の　n　行目の合計を計算
+        // ランク2ビューとして格納されている、行列 A の n 行目の合計を計算
         int team_sum;
         parallel_reduce(TeamThreadRange(team,M), [&] (const int& i, int& lsum) {
             lsum += A(n,i);

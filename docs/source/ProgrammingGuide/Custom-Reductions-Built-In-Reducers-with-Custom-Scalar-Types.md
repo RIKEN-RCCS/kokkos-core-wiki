@@ -2,7 +2,7 @@
 
 組み込みの還元を持つカスタムスカラータイプを使用するには、以下の要件を満たす必要があります。
 
-   * 初期化関数は、Kokkos::reduction_identity<T>　クラスの特殊化を通じて、提供されなければなりません。 
+   * 初期化関数は、Kokkos::reduction_identity<T> クラスの特殊化を通じて、提供されなければなりません。 
    * 適用還元クラスに必要な演算子を、実装する必要があります。
    * クラス/構造体は、デフォルトのコピーコンストラクタを使用するか、特定のコピーコンストラクタを実装している必要があります。 
 
@@ -16,7 +16,7 @@ namespace sample {  // 名前空間は、還元識別子における名前解決
    struct array_type {
      ScalarType the_array[N];
   
-     KOKKOS_INLINE_FUNCTION   // デフォルトコンストラクタ -  0's　に初期化します
+     KOKKOS_INLINE_FUNCTION   // デフォルトコンストラクタ -  0's に初期化します
      array_type() { 
        for (int i = 0; i < N; i++ ) { the_array[i] = 0; }
      }
@@ -36,7 +36,7 @@ namespace sample {  // 名前空間は、還元識別子における名前解決
    };
    typedef array_type<int,4> ValueType;  // 以下のコードの簡易化に使用されます
 }
-namespace　Kokkos { //reduction identity 還元識別は、Kokkos namespace　に定義されなければなりません
+namespace Kokkos { //reduction identity 還元識別は、Kokkos namespace に定義されなければなりません
    template<>
    struct reduction_identity< sample::ValueType > {
       KOKKOS_FORCEINLINE_FUNCTION static sample::ValueType sum() {
@@ -52,7 +52,7 @@ int main( int argc, char* argv[] )
      sample::ValueType tr;         
      Kokkos::parallel_reduce( E, KOKKOS_LAMBDA (const int& i, 
                                                 sample::ValueType & upd) {
-        int ndx =i%4;  // i%4 入力のすべてを総計します (総計を　4　で割ります)
+        int ndx =i%4;  // i%4 入力のすべてを総計します (総計を 4 で割ります)
         upd.the_array[ndx] += 1; 
      }, Kokkos::Sum<sample::ValueType>(tr) );
      printf( "  Computed result for %d is %d, %d, %d, %d \n", 

@@ -4,7 +4,7 @@
 .. ロール:: cpp(code)
     :language: cpp
 
- ``<Kokkos_Core.hpp>``　に含まれている、ヘッダー <Kokkos_Atomic.hpp> に定義されています。
+ ``<Kokkos_Core.hpp>`` に含まれている、ヘッダー <Kokkos_Atomic.hpp> に定義されています。
 
 使用例
 -----
@@ -13,14 +13,14 @@
 
     auto current = atomic_load(&obj);
 
-原子的に、``obj``　の現在の値を取得します。
+原子的に、``obj`` の現在の値を取得します。
 
 ディスクリプション
 -----------
 
 .. cpp:function:: template<class T> T atomic_load(T* ptr);
 
-    ``*ptr``　の内容を原子的に読み取り、それを返します。
+    ``*ptr`` の内容を原子的に読み取り、それを返します。
 
    ``{ T val = *ptr; return val; }``
 

@@ -1,7 +1,7 @@
 ``MemoryTraits``
 ================
 
-:cpp:struct:`MemoryTraits` は、 :cpp:class:`View`　の最後のテンプレートパラメータです。
+:cpp:struct:`MemoryTraits` は、 :cpp:class:`View` の最後のテンプレートパラメータです。
 
 構造体インターフェイス
 ----------------
@@ -24,7 +24,7 @@
 
 .. cpp:member::  static constexpr bool is_random_access
 
- 　RandomAccessトレイトが有効かどうかを示すブール値。
+  RandomAccessトレイトが有効かどうかを示すブール値。
 
 .. cpp:member::  static constexpr bool is_atomic
 
@@ -49,7 +49,7 @@
 非メンバー列挙型
 ^^^^^^^^^^^^^^^^
 
-以下の列挙値は、メモリアクセス特性指定に使用されます。これらの特性が実際にどのように使用できるかについての詳細については、プログラミングガイドの　|MemoryAccessTraits|_　のサブセクションを確認してください。
+以下の列挙値は、メモリアクセス特性指定に使用されます。これらの特性が実際にどのように使用できるかについての詳細については、プログラミングガイドの |MemoryAccessTraits|_ のサブセクションを確認してください。
 
 .. cpp:enum:: MemoryTraitsFlags
 
@@ -57,7 +57,7 @@
 
 .. cpp:enumerator:: 管理対象外
 
-  この特性は、　Kokkos　がこのような　View　に対して参照カウントも自動解放も行わないことを意味します。 この特性は、任意のメモリ空間に割り当てられたメモリに関連付けることができます。例えば、 *非管理ビュー*　は、割り当てられたメモリの生ポインタをラップすることで作成でき、同時に実行領域またはメモリ空間を適切に指定することもできます。
+  この特性は、 Kokkos がこのような View に対して参照カウントも自動解放も行わないことを意味します。 この特性は、任意のメモリ空間に割り当てられたメモリに関連付けることができます。例えば、 *非管理ビュー* は、割り当てられたメモリの生ポインタをラップすることで作成でき、同時に実行領域またはメモリ空間を適切に指定することもできます。
 
 .. cpp:enumerator:: RandomAccess
 
@@ -73,21 +73,21 @@
 
 .. cpp:enumerator:: Aligned
 
-  本特性は、この　``View``　におけるメモリ割り当てが、64バイト単位でアラインメントされていることをコンパイラに追加で通知します。
+  本特性は、この ``View`` におけるメモリ割り当てが、64バイト単位でアラインメントされていることをコンパイラに追加で通知します。
 
 非メンバー型エイリアス
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-以下の型エイリアスも、``Kokkos``　名前空間で利用可能です。
+以下の型エイリアスも、``Kokkos`` 名前空間で利用可能です。
 
 .. cpp:type:: MemoryManaged = Kokkos::MemoryTraits<>;
 .. cpp:type:: MemoryUnmanaged = Kokkos::MemoryTraits<Kokkos::Unmanaged>;
 .. cpp:type:: MemoryRandomAccess = Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>;
 
 .. 非推奨:: 4.7
-  明示的なメモリ特性としての管理対象メモリ（例：　``MemoryManaged = Kokkos::MemoryTraits<>　を使用;``　）は、　Kokkos 4.7 で非推奨となりました。 また、以前のバージョンのKokkosでも、列挙値の　``0``　を明示的に指定する必要がありました。つまり、``Kokkos::MemoryTraits<0>``　のように記述する必要があったのです。 これに関する詳細は、　|UnmanagedViews|_　の項目を参照してください。
+  明示的なメモリ特性としての管理対象メモリ（例： ``MemoryManaged = Kokkos::MemoryTraits<> を使用;`` ）は、 Kokkos 4.7 で非推奨となりました。 また、以前のバージョンのKokkosでも、列挙値の ``0`` を明示的に指定する必要がありました。つまり、``Kokkos::MemoryTraits<0>`` のように記述する必要があったのです。 これに関する詳細は、 |UnmanagedViews|_ の項目を参照してください。
 
-管理下にあるビューをランダムアクセス方式で使用するには、メモリ特性として、 ``Kokkos::MemoryTraits<Kokkos::RandomAccess>`` を指定する必要があり、　``Kokkos::MemoryRandomAccess`` としては指定しないことに注意してください。
+管理下にあるビューをランダムアクセス方式で使用するには、メモリ特性として、 ``Kokkos::MemoryTraits<Kokkos::RandomAccess>`` を指定する必要があり、 ``Kokkos::MemoryRandomAccess`` としては指定しないことに注意してください。
 
 例
 ^^^^^^^^

@@ -38,7 +38,7 @@
 汎用テンプレート引数
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-有効なテンプレートの引数はここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_　で説明します。
+有効なテンプレートの引数はここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ で説明します。
 
 使用例
 ~~~~~
@@ -69,7 +69,7 @@
 
 .. cpp:function:: Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType count);
 
-    チームのスレッド上でインデックス範囲 ``0`` から ``count-1`` まで分割します。このコールはチームにとって同期ポイントとなる可能性があり、 ``team_barrier``　の要件を満たす必要があります .
+    チームのスレッド上でインデックス範囲 ``0`` から ``count-1`` まで分割します。このコールはチームにとって同期ポイントとなる可能性があり、 ``team_barrier`` の要件を満たす必要があります .
         - ``team``: TeamHandleの要件を満たすオブジェクト
         - ``count``: インデックス範囲長
 
@@ -82,7 +82,7 @@
 
 .. cpp:function:: Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType count);
 
-    呼び出しスレッドのベクトルレーン上でインデックスレンジ　 ``0`` から ``count-1`` まで分割します。この関数をベクトルレベルループ内で呼び出すことは、合法ではありません。
+    呼び出しスレッドのベクトルレーン上でインデックスレンジ  ``0`` から ``count-1`` まで分割します。この関数をベクトルレベルループ内で呼び出すことは、合法ではありません。
         - ``team``: TeamHandleの要件を満たすオブジェクト
         - ``count``: インデックス範囲長
 
@@ -95,13 +95,13 @@
 
 .. cpp:function:: Impl::ThreadSingleStruct PerTeam(TeamMemberType team);
 
-     ``single`` パターンと組み合わせて使用すると、コールチーム内の単一のベクターレーンへの実行が、制限されます。同期イベントではありませんが、このコールはチーム全体が遭遇し、 ``team_barrier``　の呼び出し要件を満たす必要があります。
+     ``single`` パターンと組み合わせて使用すると、コールチーム内の単一のベクターレーンへの実行が、制限されます。同期イベントではありませんが、このコールはチーム全体が遭遇し、 ``team_barrier`` の呼び出し要件を満たす必要があります。
         - ``team``: TeamHandleの要件を満たすオブジェクト
 
 .. cpp:function:: Impl::VectorSingleStruct PerThread(TeamMemberType team);
 
      ``single`` パターンと組み合わせて使用すると、呼び出しスレッド内の単一のベクターレーンへの実行が、制限されます。 この関数をベクトルレベルループ内で呼び出すことは合法ではありません。
-        - ``team``: TeamHandle　の要件を満たすオブジェクト
+        - ``team``: TeamHandle の要件を満たすオブジェクト
 
 例
 ~~~~~~~~

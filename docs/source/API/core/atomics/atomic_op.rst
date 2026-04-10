@@ -13,7 +13,7 @@
 
     atomic_[op](ptr_to_value,update_value);
 
-　``ptr_to_value`` と　``update_value``　で与えられたアドレスの　``value``　を、関連する演算に従って、原子的に更新します。
+ ``ptr_to_value`` と ``update_value`` で与えられたアドレスの ``value`` を、関連する演算に従って、原子的に更新します。
 
 
 ディスクリプション
@@ -21,7 +21,7 @@
 
 .. cpp:function:: template<class T> void atomic_add(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value += value``　を原子的に実行します。
+    ``*ptr_to_value += value`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス
 
@@ -29,7 +29,7 @@
 
 .. cpp:function:: template<class T> void atomic_and(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value &= value``　を原子的に実行します。
+    ``*ptr_to_value &= value`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス
 
@@ -37,13 +37,13 @@
 
 .. cpp:function:: template<class T> void atomic_dec(T* ptr_to_value);
 
-    ``(*ptr_to_value)--`` を原子的に実行、または  ``atomic_fetch_sub(ptr_to_value, T(-1))``　を呼び出します。
+    ``(*ptr_to_value)--`` を原子的に実行、または  ``atomic_fetch_sub(ptr_to_value, T(-1))`` を呼び出します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
 .. cpp:function:: template<class T> void atomic_decrement(T* const ptr_to_value);
 
-    ``(*ptr_to_value)--`` 原子的に実行、または  ``atomic_fetch_sub(ptr_to_value, T(-1))``　を呼び出します。
+    ``(*ptr_to_value)--`` 原子的に実行、または  ``atomic_fetch_sub(ptr_to_value, T(-1))`` を呼び出します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -52,13 +52,13 @@
 
 .. cpp:function:: template<class T> void atomic_inc(T* ptr_to_value);
 
-    ``(*ptr_to_value)++`` を原子的に実行、または ``atomic_fetch_add(ptr_to_value, T(1))``　を呼び出します。
+    ``(*ptr_to_value)++`` を原子的に実行、または ``atomic_fetch_add(ptr_to_value, T(1))`` を呼び出します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
 .. cpp:function:: template<class T> void atomic_increment(T* const ptr_to_value);
 
-    ``(*ptr_to_value)++`` を原子的に実行、または、 ``atomic_fetch_add(ptr_to_value, T(1))``　を呼び出します。
+    ``(*ptr_to_value)++`` を原子的に実行、または、 ``atomic_fetch_add(ptr_to_value, T(1))`` を呼び出します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -67,7 +67,7 @@
 
 .. cpp:function:: template<class T> void atomic_max(T* const ptr_to_value, const T value);
 
-    ``if (value > *ptr_to_value) *ptr_to_value = value``　を原子的に実行します。
+    ``if (value > *ptr_to_value) *ptr_to_value = value`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -75,7 +75,7 @@
 
 .. cpp:function:: template<class T> void atomic_min(T* const ptr_to_value, const T value);
 
-    ``if (value < *ptr_to_value) *ptr_to_value = value``　を原子的に実行します。
+    ``if (value < *ptr_to_value) *ptr_to_value = value`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -83,7 +83,7 @@
 
 .. cpp:function:: template<class T> void atomic_or(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value |= value``　を原子的に実行します。
+    ``*ptr_to_value |= value`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
@@ -91,7 +91,7 @@
 
 .. cpp:function:: template<class T> void atomic_sub(T* const ptr_to_value, const T value);
 
-    ``*ptr_to_value -= value``　を原子的に実行します。
+    ``*ptr_to_value -= value`` を原子的に実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 

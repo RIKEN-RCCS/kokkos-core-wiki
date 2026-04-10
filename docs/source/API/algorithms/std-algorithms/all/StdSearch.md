@@ -63,13 +63,13 @@ auto search(const std::string& label, const ExecutionSpace& exespace,
 
 ## ディスクリプション
 
- (1,2,5,6)　における、[s_first, s_last)　の要素列が、範囲　[first, last)　の内での最初の出現を検索します。
- (3,4,7,8)　における、要素列 `s_view` の最初の出現を検索します。
- (1,2,3,4) 内の要素は、 `==` を使用して比較され、 (5,6,7,8) 内の要素は、 `pred`　を使用して比較されます。
+ (1,2,5,6) における、[s_first, s_last) の要素列が、範囲 [first, last) の内での最初の出現を検索します。
+ (3,4,7,8) における、要素列 `s_view` の最初の出現を検索します。
+ (1,2,3,4) 内の要素は、 `==` を使用して比較され、 (5,6,7,8) 内の要素は、 `pred` を使用して比較されます。
 
 ## パラメータおよび要件
 
-- `exespace`, `s_first`, `s_last`, `first`, `last`, `s_view` および `view` は、 [`mismatch`](./StdMismatch)　と同様です。
+- `exespace`, `s_first`, `s_last`, `first`, `last`, `s_view` および `view` は、 [`mismatch`](./StdMismatch) と同様です。
 
 - `label`:
     - 1,5: デフォルト文字列は、"Kokkos::search_iterator_api_default".

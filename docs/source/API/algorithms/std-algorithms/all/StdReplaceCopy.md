@@ -51,7 +51,7 @@ auto replace_copy(const std::string& label,
 
 `old_value` と等しいすべての要素を `new_value` で置換して、範囲 `[first_from, last_from)` の要素を、別の範囲
 `first_to` から始まる範囲（オーバーロード 1,2）または `view_from` から `view_to` までの範囲
-（オーバーロード 3,4）にコピーします。`operator==`　を使用して、要素間の比較を実行します。
+（オーバーロード 3,4）にコピーします。`operator==` を使用して、要素間の比較を実行します。
 
 ## パラメータおよび要件
 
@@ -59,21 +59,21 @@ auto replace_copy(const std::string& label,
   - 実行空間インスタンス
 - `label`:
   - デバッグ目的で実装カーネルに名付けるために使用。
-  - 1　について、デフォルト文字列は、: "Kokkos::replace_copy_iterator_api_default"
-  - 3　について、デフォルト文字列は、: "Kokkos::replace_copy_view_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::replace_copy_iterator_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::replace_copy_view_api_default"
 - `first_from, last_from`:
   - コピー元への要素の範囲
-  - *ランダムアクセスイテレータ*　でなければなりません。
-  - 有効範囲、つまり、 ``last >= first``　を表さなければなりません。 (デバッグモードで確認済み)
-  - `exespace`　からアクセス可能でなければなりません。
+  - *ランダムアクセスイテレータ* でなければなりません。
+  - 有効範囲、つまり、 ``last >= first`` を表さなければなりません。 (デバッグモードで確認済み)
+  - `exespace` からアクセス可能でなければなりません。
 - `first_to`:
   - コピー先への範囲の始め
-  - *ランダムアクセスイテレータ*　でなければなりません。
-  - `exespace`　からアクセス可能でなければなりません。
+  - *ランダムアクセスイテレータ* でなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `view_from`, `view_to`:
   - ソースおよび宛先のビュー
-  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
-  - `exespace`　からアクセス可能でなければなりません。
+  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `old_value`, `new_value`:
   - 説明を要しません。
 

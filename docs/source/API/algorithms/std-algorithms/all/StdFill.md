@@ -33,8 +33,8 @@ void fill(const std::string& label, const ExecutionSpace& exespace,          (4)
 
 ## ディスクリプション
 
-範囲 `[first, last)` (オーバーロード 1,2)　内、または
- `ビュー` (オーバーロード 3,4)　内に、各要素を代入します。
+範囲 `[first, last)` (オーバーロード 1,2) 内、または
+ `ビュー` (オーバーロード 3,4) 内に、各要素を代入します。
 
 
 ## パラメータおよび要件
@@ -43,16 +43,16 @@ void fill(const std::string& label, const ExecutionSpace& exespace,          (4)
   - 実行空間インスタンス
 - `label`:
   - デバッグ目的で実装カーネルに名付けるために使用
-  - 1　について、 デフォルト文字列は、: "Kokkos::fill_iterator_api_default"
-  - 3　について、 デフォルト文字列は、: "Kokkos::fill_view_api_default"
+  - 1 について、 デフォルト文字列は、: "Kokkos::fill_iterator_api_default"
+  - 3 について、 デフォルト文字列は、: "Kokkos::fill_view_api_default"
 - `first, last`:
   - 割当先の要素の範囲
-  - 例えば、 `Kokkos::Experimental::begin/end`　など、*ランダムアクセスイテレータ*　でなければなりません。
+  - 例えば、 `Kokkos::Experimental::begin/end` など、*ランダムアクセスイテレータ* でなければなりません。
   - 有効な範囲、つまり、``last_from >= first_from`` を表さなければなりません。 (デバッグモードで確認済み)
-  - `exespace`　からアクセス可能でなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `view`:
-  - 必ずランク-1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
-  - `exespace`　からアクセス可能でなければなりません。
+  - 必ずランク-1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `value`:
   - 各要素に割り当てる値
 

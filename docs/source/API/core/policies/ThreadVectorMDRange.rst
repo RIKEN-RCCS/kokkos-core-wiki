@@ -20,7 +20,7 @@
 
    .. cpp:function:: ThreadVectorMDRange(team, extent_1, extent_2, ...);
 
-      呼び出しスレッドのベクトルレーン上で、インデックス範囲 ``0`` から　``extent`` を分割します。
+      呼び出しスレッドのベクトルレーン上で、インデックス範囲 ``0`` から ``extent`` を分割します。
       ここでは、 ``extent`` は、ベクトル化されるバックエンド依存のランクです。
 
       :param team: 呼び出しチーム実行コンテキストへのTeamHandle
@@ -29,7 +29,7 @@
 
       * **必要要件**
 
-	* ``TeamHandle`` は、 `TeamHandle <./TeamHandleConcept.html>`_　をモデル化する型です。
+	* ``TeamHandle`` は、 `TeamHandle <./TeamHandleConcept.html>`_ をモデル化する型です。
 
 	* ``extent_1, extent_2, ...`` は、intsです。
 
@@ -38,20 +38,20 @@
 
 	  .. code-block:: cpp
 
-	     ThreadVectorMDRange(team, 4);               // OKではありません、 i>=2　に違反します
+	     ThreadVectorMDRange(team, 4);               // OKではありません、 i>=2 に違反します
 
 	     ThreadVectorMDRange(team, 4,5);             // OK
 	     ThreadVectorMDRange(team, 4,5,6);           // OK
 	     ThreadVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK, 範囲の最大値は認められます
 
 
-	* 　``TeamVectorRange`` ポリシー、 ``TeamVectorRange`` ポリシー、 ``TeamVectorMDRange`` ポリシー
+	*  ``TeamVectorRange`` ポリシー、 ``TeamVectorRange`` ポリシー、 ``TeamVectorMDRange`` ポリシー
 	  または、 ``ThreadVectorMDRange`` ポリシーを使用して、ディスパッチされた並列演算内で、コンストラクタを呼び出すことは出来ません。
 
 制約
 ------------
 
- <../parallel-dispatch/parallel_reduce.html>`_　において使用される場合には、 還元は、合計に限定されることに注意してください。
+ <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、 還元は、合計に限定されることに注意してください。
 
 例
 --------

@@ -4,14 +4,14 @@
 .. role:: cpp(code)
     :language: cpp
 
-検出イディオムは、SFINAE　に配慮した方法で、あらゆる　C++　式が有効かどうかを認識するために使用されます。
+検出イディオムは、SFINAE に配慮した方法で、あらゆる C++ 式が有効かどうかを認識するために使用されます。
 
 ヘッダーファイル: ``<Kokkos_DetectionIdiom.hpp>``
 
 Kokkos 検出イディオムは、ISO/IEC TS 19568:2017、ライブラリ基礎のための C++ 拡張のバージョン2の検出イディオムに基づいており、
-そのドラフトは、`here <https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>`　に見られます。
+そのドラフトは、`here <https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>` に見られます。
 
-元の C++ プロポーザルは、 `here <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>`　に見られます。
+元の C++ プロポーザルは、 `here <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>` に見られます。
 
 API
 ---
@@ -20,9 +20,9 @@ API
 
     // VOID_T および DETECTOR は説明用であり、直接使用を目的としていません。
 
-    // SFINAE　を効果的に活用する便利なメタ関数
+    // SFINAE を効果的に活用する便利なメタ関数
     template<class...>
-    VOID_T = void　を使用;
+    VOID_T = void を使用;
 
     // 典型的な Op<Args...> をサポートしない型のためのプライマリテンプレート
     template<class Default, class /* AlwaysVoid */, template<class...> class /* Op */, class... /* Args */>
@@ -56,7 +56,7 @@ API
         using typename DETECTOR<nonesuch, void, Op, Args...>::value_t;
 
     // detected_t は、Op<Args...> が有効な型である場合に Op<Args...> の別名です。
-    //  そうでない場合、 Kokkos::nonesuch　の別名です。
+    //  そうでない場合、 Kokkos::nonesuch の別名です。
 
     template <template <class...> class Op, class... Args>
     using detected_t = typename DETECTOR<nonesuch, void, Op, Args...>::type;
@@ -68,13 +68,13 @@ API
     using detected_or_t = typename DETECTOR<Default, void, Op, Args...>::type;
 
     // is_detected_exact は、Op<Args...> が、 Expected と同じ型である場合に std::true_type の別名です。
-    //  そうでない場合、std::false_type　の別名です。
+    //  そうでない場合、std::false_type の別名です。
 
     template <class Expected, template <class...> class Op, class... Args>
     using is_detected_exact = std::is_same<Expected, detected_t<Op, Args...>>;
 
     // is_detected_convertible は、Op<Args...> が To へ変換可能な場合に std::true_type の別名となります。
-    //  そうでない場合、std::false_type　の別名です。
+    //  そうでない場合、std::false_type の別名です。
 
     template <class To, template <class...> class Op, class... Args>
     is_detected_convertible =
@@ -124,7 +124,7 @@ API
 ネストされた型定義を検出
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-ネストされた``MyType::difference_type``　が存在する場合には、それを使用したいと仮定し、そうでない場合には、``std::ptrdiff_t``　の使用を所望します:
+ネストされた``MyType::difference_type`` が存在する場合には、それを使用したいと仮定し、そうでない場合には、``std::ptrdiff_t`` の使用を所望します:
 
 まず、アーキタイプヘルパーエイリアスを記述します:
 

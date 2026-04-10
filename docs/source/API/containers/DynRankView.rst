@@ -23,7 +23,7 @@
 
 .. cpp:class:: template <class DataType, class LayoutType, class MemorySpace, class MemoryTraits> DynRankView;
 
-   :tparam DataType: ``DynRankView``　の基本的なスカラー型を定義します。
+   :tparam DataType: ``DynRankView`` の基本的なスカラー型を定義します。
 
 		     .. 注意:: 本パラメータは、必須です。
 
@@ -36,13 +36,13 @@
 
 		       .. 重要:: 本パラメータは、オプションです。
 
-		       カスタムレイアウトは実装可能ですが、　Kokkos　にはいくつかの組み込みレイアウトが付属しています:
+		       カスタムレイアウトは実装可能ですが、 Kokkos にはいくつかの組み込みレイアウトが付属しています:
 
 		       * ``LayoutRight``: ストライドは、右端から左端に向かって増加します。
-			  最後の次元は、ストライドが1です。これはC言語の多次元配列（　``[][][]``　）がメモリ上に配置される方法に対応します。
+			  最後の次元は、ストライドが1です。これはC言語の多次元配列（ ``[][][]`` ）がメモリ上に配置される方法に対応します。
 
 		       * ``LayoutLeft``: ストライドは、左端から右端に向かって増加します。
-			 最初の次元は、ストライドが1です。これは　Fortran　が配列に使用するレイアウトです。
+			 最初の次元は、ストライドが1です。これは Fortran が配列に使用するレイアウトです。
 
 		       * ``LayoutStride``: ストライドは各次元で任意に設定できます。
 
@@ -50,72 +50,72 @@
 
 			.. 重要:: 本パラメータは、オプションです。
 
-			省略された場合、デフォルトの実行領域のデフォルトメモリ領域が使用されます　（つまり、　``Kokkos::DefaultExecutionSpace::memory_space``　)
+			省略された場合、デフォルトの実行領域のデフォルトメモリ領域が使用されます （つまり、 ``Kokkos::DefaultExecutionSpace::memory_space`` )
 
    :tparam MemoryTraits: メモリアクセスに対するより細かい制御
 
 			 .. 重要:: 本パラメータは、オプションです。
 
-			 * ``Unmanaged``: DynRankView　は参照カウントされません。割り当てはコンストラクタに提供されなければなりません。
+			 * ``Unmanaged``: DynRankView は参照カウントされません。割り当てはコンストラクタに提供されなければなりません。
 			 * ``Atomic``: ビューへのすべてのアクセスには、アトミック演算を使用します。
 			 * ``RandomAccess``: ビューがランダムアクセス方式で使用されていることを示唆します。
-			ビューもまた　``const``　であれば、これにより、GPU　上で特別なロード演算（すなわちテクスチャフェッチ）がトリガーされます。
+			ビューもまた ``const`` であれば、これにより、GPU 上で特別なロード演算（すなわちテクスチャフェッチ）がトリガーされます。
 			 * ``Restrict``: 現在のスコープ内で、他のデータ構造によるビューのエイリアシングは存在しません。
 
    .. 重要::
 
-      ``DataType``　以外のテンプレートパラメータはオプションですが、順序は強制されます。
-      つまり、例えば、　``LayoutType``　は省略可能ですが、 ``MemorySpace`` および ``MemoryTraits``の両方が
-      特定されれば、 ``MemoryTraits`` の前に 　``MemorySpace``　が来なければなりません。
+      ``DataType`` 以外のテンプレートパラメータはオプションですが、順序は強制されます。
+      つまり、例えば、 ``LayoutType`` は省略可能ですが、 ``MemorySpace`` および ``MemoryTraits``の両方が
+      特定されれば、 ``MemoryTraits`` の前に  ``MemorySpace`` が来なければなりません。
 
 
    .. rubric:: パブリック静的変数
 
    * ``rank``: ビューのランク (つまり、次元性)。
    * ``rank_dynamic``: 実行時に決定される次元の数。
-   * ``reference_type_is_lvalue_reference``: 参照型が　C++　の左辺値参照であるかどうか。
+   * ``reference_type_is_lvalue_reference``: 参照型が C++ の左辺値参照であるかどうか。
 
 
    .. rubric:: パブリックデータ型 型定義
 
    .. cpp:type:: data_type
 
-      　DynRankView　の ``DataType`` 
+       DynRankView の ``DataType`` 
 
    .. cpp:type:: const_data_type
 
-       ``DataType`` の定数バージョンであり、 それがすでに定数である場合には、 ``data_type``　と同じです。
+       ``DataType`` の定数バージョンであり、 それがすでに定数である場合には、 ``data_type`` と同じです。
 
    .. cpp:type:: non_const_data_type
 
-       ``DataType``　の非定数バージョンであり、それがすでに非定数である場合には、 ``data_type``　と同じです。
+       ``DataType`` の非定数バージョンであり、それがすでに非定数である場合には、 ``data_type`` と同じです。
 
    .. cpp:type:: scalar_array_type
 
-      もし　``DataType``　が、Sacado FAD型のような適切に特化した配列データ型を表す場合、 ``scalar_array_type`` は、基礎となる基本的なスカラー型です。
+      もし ``DataType`` が、Sacado FAD型のような適切に特化した配列データ型を表す場合、 ``scalar_array_type`` は、基礎となる基本的なスカラー型です。
 
    .. cpp:type:: const_scalar_array_type
 
-       ``scalar_array_type``　の定数バージョンであり、 それが既に定数である場合には、``scalar_array_type`` と同じです。
+       ``scalar_array_type`` の定数バージョンであり、 それが既に定数である場合には、``scalar_array_type`` と同じです。
 
    .. cpp:type:: non_const_scalar_array_type
 
-       ``scalar_array_type``　の非定数バージョンであり、 それがすでに非定数である場合には、 ``scalar_array_type`` と同じです。
+       ``scalar_array_type`` の非定数バージョンであり、 それがすでに非定数である場合には、 ``scalar_array_type`` と同じです。
 
    .. rubric:: パブリックスカラー型定義
 
    .. cpp:type:: value_type
 
-      配列指定子を削除した　``data_type`` で、つまりビューが参照しているデータのスカラー型です (例えば、 ``data_type`` が 　``const int*******``　である場合、 ``value_type`` は ``const int``　です)。
+      配列指定子を削除した ``data_type`` で、つまりビューが参照しているデータのスカラー型です (例えば、 ``data_type`` が  ``const int*******`` である場合、 ``value_type`` は ``const int`` です)。
 
 
    .. cpp:type:: const_value_type
 
-      　``value_type``　の定数バージョン。
+       ``value_type`` の定数バージョン。
 
    .. cpp:type:: non_const_value_type
 
-      　``value_type``　の非定数バージョン。
+       ``value_type`` の非定数バージョン。
 
    .. rubric:: パブリックスペース型定義
 
@@ -129,7 +129,7 @@
 
    .. cpp:type:: device_type
 
-       ``Device<execution_space,memory_space>``　に定義された複合型。
+       ``Device<execution_space,memory_space>`` に定義された複合型。
 
    .. cpp:type:: memory_traits
 
@@ -137,7 +137,7 @@
 
    .. cpp:type:: host_mirror_space
 
-      　``HostMirror``　に使用されるホストがアクセス可能なメモリ空間。
+       ``HostMirror`` に使用されるホストがアクセス可能なメモリ空間。
 
    .. rubric:: パブリックビュー型定義
 
@@ -151,7 +151,7 @@
 
    .. cpp:type:: HostMirror
 
-      ホストアクセス可能メモリ空間に格納された、同一の　``DataType``　および　``LayoutType``　を持つ互換ビュー型。
+      ホストアクセス可能メモリ空間に格納された、同一の ``DataType`` および ``LayoutType`` を持つ互換ビュー型。
 
    .. rubric:: パブリックデータハンドル型定義。
 
@@ -167,7 +167,7 @@
 
    .. cpp:type:: array_layout
 
-       ``DynRankView``　のレイアウト。
+       ``DynRankView`` のレイアウト。
 
    .. cpp:type:: size_type
 
@@ -179,17 +179,17 @@
 
    .. cpp:type:: 
 
-       ``DynRankView``.Kokkosの　``DynRankView``　の基盤となるマッピング構造の部分的な特殊化に使用される特殊化タグ。
+       ``DynRankView``.Kokkosの ``DynRankView`` の基盤となるマッピング構造の部分的な特殊化に使用される特殊化タグ。
 
    .. rubric:: コンストラクタ
 
    .. cpp:function:: DynRankView()
 
-       デフォルトコンストラクタ。 割り当ては行われず、参照カウントも発生しません。すべてのエクステントはゼロであり、そのデータポインタは　``nullptr``　であり、そのランクは　0　に設定されます。
+       デフォルトコンストラクタ。 割り当ては行われず、参照カウントも発生しません。すべてのエクステントはゼロであり、そのデータポインタは ``nullptr`` であり、そのランクは 0 に設定されます。
 
    .. cpp:function:: DynRankView(const DynRankView<DT, Prop...>& rhs)
 
-       互換性のある　DynRankView　を持つコピーコンストラクタ。 DynRankView　の代入ルールに従います。
+       互換性のある DynRankView を持つコピーコンストラクタ。 DynRankView の代入ルールに従います。
 
    .. cpp:function:: DynRankView(DynRankView&& rhs)
 
@@ -197,7 +197,7 @@
 
    .. cpp:function:: DynRankView(const View<RT,RP...> & rhs)
 
-       View　を入力と選択するコピーコンストラクタ。
+       View を入力と選択するコピーコンストラクタ。
 
    .. cpp:function:: DynRankView(const std::string& name, const IntType& ... indices)
 
@@ -219,7 +219,7 @@
 
        要件: ``array_layout::is_regular == true``
 
-       割り当てプロパティを持つ割り当てコンストラクタ。 割り当てプロパティオブジェクトは、``view_alloc``　関数によって返されます。
+       割り当てプロパティを持つ割り当てコンストラクタ。 割り当てプロパティオブジェクトは、``view_alloc`` 関数によって返されます。
 
        * ``indices``: ビューの実行時ディメンション。
 
@@ -242,7 +242,7 @@
 
        管理対象外データのラップコンストラクタ。
 
-       * ``ptr``: ユーザーが提供したメモリ割り当てへのポインタ。  ``DynRankView::required_allocation_size(layout)`` (\ *NEEDS TO BE IMPLEMENTED*\ )　のストレージを提供する必要があります。
+       * ``ptr``: ユーザーが提供したメモリ割り当てへのポインタ。  ``DynRankView::required_allocation_size(layout)`` (\ *NEEDS TO BE IMPLEMENTED*\ ) のストレージを提供する必要があります。
        * ``layout``: レイアウトクラスのインスタンス。
 
    .. cpp:function:: DynRankView(const ScratchSpace& space, const IntType& ... indices)
@@ -251,19 +251,19 @@
 
        スクラッチメモリハンドルからメモリを取得するコンストラクタ。
 
-       * ``space``: スクラッチメモリハンドル。通常、``TeamPolicy``　カーネルの　``team_handles``　から返されます。
+       * ``space``: スクラッチメモリハンドル。通常、``TeamPolicy`` カーネルの ``team_handles`` から返されます。
        * ``indices``: ビューの実行時ディメンション。
 
    .. cpp:function:: DynRankView(const ScratchSpace& space, const array_layout& layout)
 
        スクラッチメモリハンドルからメモリを取得するコンストラクタ。
 
-       * ``space``: スクラッチメモリハンドル。通常、``TeamPolicy``　カーネルの　``team_handles``　から返されます。
+       * ``space``: スクラッチメモリハンドル。通常、``TeamPolicy`` カーネルの ``team_handles`` から返されます。
        * ``layout``: レイアウトクラスのインスタンス。
 
    .. cpp:function:: DynRankView(const DynRankView<DT, Prop...>& rhs, Args ... args)
 
-       サブビューコンストラク。 引数については、　``subview``　関数を参照してください。
+       サブビューコンストラク。 引数については、 ``subview`` 関数を参照してください。
 
    .. rubric:: データアクセス関数
 
@@ -277,8 +277,8 @@
 			   const IntType& i5=0, const IntType& i6=0) const
 
        参照型である場合もそうでない場合もある ``reference_type`` の値を返します。
-      インデックス引数の数は、ビューの　``rank``　以上でなければなりません。
-      　``rank``　を超えるインデックス引数は　``0``　でなければならず、 ``KOKKOS_DEBUG`` が定義されている場合に有効になります。
+      インデックス引数の数は、ビューの ``rank`` 以上でなければなりません。
+       ``rank`` を超えるインデックス引数は ``0`` でなければならず、 ``KOKKOS_DEBUG`` が定義されている場合に有効になります。
       戻り値の型の特性については、``reference_type`` の注記を参照してください。
 
 
@@ -294,44 +294,44 @@
 
    .. cpp:function:: template<class iType> constexpr int extent_int(const iType& dim) const
 
-      ``int``　として、指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、``dim`` は ``rank`` より小さくなければならない。``extent`` と比較して、この関数は　``int``　演算が　``size_t``　よりも効率的なアーキテクチャで有用である。
-      また、そうでなければすべてのインデックス操作を　``int``　で行っているアプリケーションにおいて、型キャストの必要性を排除する可能性があります。
+      ``int`` として、指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、``dim`` は ``rank`` より小さくなければならない。``extent`` と比較して、この関数は ``int`` 演算が ``size_t`` よりも効率的なアーキテクチャで有用である。
+      また、そうでなければすべてのインデックス操作を ``int`` で行っているアプリケーションにおいて、型キャストの必要性を排除する可能性があります。
 
    .. cpp:function:: template<class iType> constexpr size_t stride(const iType& dim) const
 
-       指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、``dim`` は ``rank`` より小さくなければなりません。　例: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
+       指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、``dim`` は ``rank`` より小さくなければなりません。 例: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
 
    .. cpp:function:: constexpr size_t stride_0() const
 
-       ディメンション 0　の範囲を返します。
+       ディメンション 0 の範囲を返します。
 
    .. cpp:function:: constexpr size_t stride_1() const
 
-       ディメンション 1　のストライドを返します。
+       ディメンション 1 のストライドを返します。
 
    .. cpp:function:: constexpr size_t stride_2() const
 
-       ディメンション 2　のストライドを返します。
+       ディメンション 2 のストライドを返します。
 
    .. cpp:function:: constexpr size_t stride_3() const
 
-       ディメンション 3　のストライドを返します。
+       ディメンション 3 のストライドを返します。
 
    .. cpp:function:: constexpr size_t stride_4() const
 
-       ディメンション 4　のストライドを返します。
+       ディメンション 4 のストライドを返します。
 
    .. cpp:function:: constexpr size_t stride_5() const
 
-       ディメンション 5　のストライドを返します。
+       ディメンション 5 のストライドを返します。
 
    .. cpp:function:: constexpr size_t stride_6() const
 
-       ディメンション 6　のストライドを返します。
+       ディメンション 6 のストライドを返します。
 
    .. cpp:function:: constexpr size_t stride_7() const
 
-       ディメンション 7　のストライドを返します。
+       ディメンション 7 のストライドを返します。
 
    .. cpp:function:: constexpr size_t span() const
 
@@ -349,7 +349,7 @@
 			   size_t N2 = 0, size_t N3 = 0, size_t N4 = 0, \
 			   size_t N5 = 0, size_t N6 = 0);
 
-       指定された次元の非管理ビューに必要なバイト数を返します。 本関数は、 ``array_layout::is_regular == true``　である場合にのみ有効です。
+       指定された次元の非管理ビューに必要なバイト数を返します。 本関数は、 ``array_layout::is_regular == true`` である場合にのみ有効です。
 
    .. cpp:function:: static constexpr size_t required_allocation_size(const array_layout& layout);
 
@@ -363,11 +363,11 @@
 
    .. cpp:function:: const char* label() const;
 
-       :return:  ``DynRankView``　のラベル。
+       :return:  ``DynRankView`` のラベル。
 
    .. cpp:function:: constexpr unsigned rank() const
 
-       :return: 　``DynRankView``　のダイナミックランク。
+       :return:  ``DynRankView`` のダイナミックランク。
 
    .. cpp:function:: constexpr bool is_allocated() const
 
@@ -386,17 +386,17 @@
 以下の条件はコンパイル時に満たされ、評価される必要があります:
 
 * ``DstType::rank == SrcType::rank``
-* ``DstType::non_const_value_type`` は、 ``SrcType::non_const_value_type``　と同じです。
-* ``std::is_const<SrcType::value_type>::value == true`` が ``std::is_const<DstType::value_type>::value == true``　よりも大きい場合
+* ``DstType::non_const_value_type`` は、 ``SrcType::non_const_value_type`` と同じです。
+* ``std::is_const<SrcType::value_type>::value == true`` が ``std::is_const<DstType::value_type>::value == true`` よりも大きい場合
 * ``MemorySpaceAccess<DstType::memory_space,SrcType::memory_space>::assignable == true``
 
-さらに、``DstType::array_layout`` が ``SrcType::array_layout``と同じでない場合、充足すべきルールもあります。これらのルールは、両方のレイアウトが、 ``LayoutLeft`` , ``LayoutRight`` or ``LayoutStride``、``LayoutRight`` または ``LayoutStride``　のいずれかの場合のみを対象としています。
+さらに、``DstType::array_layout`` が ``SrcType::array_layout``と同じでない場合、充足すべきルールもあります。これらのルールは、両方のレイアウトが、 ``LayoutLeft`` , ``LayoutRight`` or ``LayoutStride``、``LayoutRight`` または ``LayoutStride`` のいずれかの場合のみを対象としています。
 
-* ``DstType::array_layout`` も ``SrcType::array_layout`` も ``LayoutStride``　ではない場合:
-    - ``DstType::array_layout``　よりも``DstType::rank > 1`` である場合、 ``SrcType::array_layout``　と同じである必要があります。
+* ``DstType::array_layout`` も ``SrcType::array_layout`` も ``LayoutStride`` ではない場合:
+    - ``DstType::array_layout`` よりも``DstType::rank > 1`` である場合、 ``SrcType::array_layout`` と同じである必要があります。
 
-* ``DstType::array_layout`` または ``SrcType::array_layout`` が ``LayoutStride``　である場合:
-    - 各ディメンション ``k`` については、その ``dst_view.extent(k) == src_view.extent(k)``　を保持する必要があります。
+* ``DstType::array_layout`` または ``SrcType::array_layout`` が ``LayoutStride`` である場合:
+    - 各ディメンション ``k`` については、その ``dst_view.extent(k) == src_view.extent(k)`` を保持する必要があります。
 
 
 例

@@ -8,7 +8,7 @@
 -----------
 
 ソース範囲またはビューから、述語が ``真`` を返す要素を
-別の範囲または ``ビュー``　にコピーします。
+別の範囲または ``ビュー`` にコピーします。
 
 インターフェイス
 ---------
@@ -97,23 +97,23 @@
 .. |copy| 置換:: ``コピー``
 .. _コピー: ./StdCopy.html
 
-- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``:  |copy|_　と同様。
+- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``:  |copy|_ と同様。
 
 - ``label``:
 
-  - 1　について、デフォルト文字列は、: "Kokkos::copy_if_iterator_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::copy_if_iterator_api_default"
 
-  - 3　について、デフォルト文字列は、: "Kokkos::copy_if_view_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::copy_if_view_api_default"
 
 - ``pred``:コピー対象の必須要素について ``真`` を返す一項述語
 
-  - ``pred(v)``  は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型　``value_type``　の引数　``v``　（constの可能性）のすべてのペアについて、ブール型に変換可能で、そこでは、``value_type``　が、``InputIteratorType``　の値型、または ``view_from``　であり、  ``v``　を変更してはいけません。
+  - ``pred(v)``  は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 ``value_type`` の引数 ``v`` （constの可能性）のすべてのペアについて、ブール型に変換可能で、そこでは、``value_type`` が、``InputIteratorType`` の値型、または ``view_from`` であり、  ``v`` を変更してはいけません。
 
   - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
-   struct　述語
+   struct 述語
    {
       KOKKOS_INLINE_FUNCTION
       bool operator()(const value_type & v) const { return /* ... */; }
@@ -128,5 +128,5 @@
 返し値
 ~~~~~~~~~~~~
 
-最後の要素がコピーされた *後の*　宛先へのイテレータ。
+最後の要素がコピーされた *後の* 宛先へのイテレータ。
 

@@ -7,16 +7,16 @@
 ``Windows.h`` ヘッダー
 ====================
 
-Windows で　Kokkos を使用する場合、プログラムやライブラリが　`windows.h` を含む場合があります。なぜなら、このヘッダーは、事前に　`NOMINMAX`　が定義されなければ、`min`　と　`max`　という名前の2つのマクロを定義するため、問題を含みます。プリプロセッサはソースコード内の文字列をマクロで置換するため、解釈不能な結果となり、コンパイルは失敗に終わります。したがって、ヘッダーファイル `Kokkos_Core.hpp` はこれらのマクロに対して保護されており、つまりそれらはヘッダーファイルの先頭では未定義であり、末尾で再定義されるということです。`Kokkos_Core.hpp` 内の定義はマクロに対して保護されているが、外部からのコードは保護されていません。 したがって、定義されるマクロへの対応として、コンパイルラインで、`-DNOMINMAX` または `/DNOMINMAX` を定義する（推奨）ことによる、あるいは `min` または `max` を含む名前に `()` を付けることによるかは、ユーザー次第である。
+Windows で Kokkos を使用する場合、プログラムやライブラリが `windows.h` を含む場合があります。なぜなら、このヘッダーは、事前に `NOMINMAX` が定義されなければ、`min` と `max` という名前の2つのマクロを定義するため、問題を含みます。プリプロセッサはソースコード内の文字列をマクロで置換するため、解釈不能な結果となり、コンパイルは失敗に終わります。したがって、ヘッダーファイル `Kokkos_Core.hpp` はこれらのマクロに対して保護されており、つまりそれらはヘッダーファイルの先頭では未定義であり、末尾で再定義されるということです。`Kokkos_Core.hpp` 内の定義はマクロに対して保護されているが、外部からのコードは保護されていません。 したがって、定義されるマクロへの対応として、コンパイルラインで、`-DNOMINMAX` または `/DNOMINMAX` を定義する（推奨）ことによる、あるいは `min` または `max` を含む名前に `()` を付けることによるかは、ユーザー次第である。
 
 CUDA
 ====
 
-- 一部の　MPI バージョンまたはレガシー NVIDIA GPU を使用する場合、Kokkos（バージョン4.2から4.4）の　`CudaSpace`　に対するデフォルトの割り当てメカニズムが問題を引き起こす可能性があります。例えば、MPI は不正なメモリアクセスでクラッシュする可能性があり、Kokkos の初期化では次のようなエラーが報告される場合があります:
+- 一部の MPI バージョンまたはレガシー NVIDIA GPU を使用する場合、Kokkos（バージョン4.2から4.4）の `CudaSpace` に対するデフォルトの割り当てメカニズムが問題を引き起こす可能性があります。例えば、MPI は不正なメモリアクセスでクラッシュする可能性があり、Kokkos の初期化では次のようなエラーが報告される場合があります:
 
   .. code-block::
 
-    'Kokkos::Experimental::CudaRawMemoryAllocationFailure'　のインスタンスをスローした後、terminate が呼び出されました。
+    'Kokkos::Experimental::CudaRawMemoryAllocationFailure' のインスタンスをスローした後、terminate が呼び出されました。
 
   フィックスとは、以下の CMake 引数を加えることにより、非同期メモリっ割り当てを無効にすることです:
 
@@ -24,20 +24,20 @@ CUDA
 
      -DKokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC=OFF
 
-このポリシーを無効化することが、特に　UCX　のような低レベル層において、一部の　MPI　実装を機能させるのに役立つ理由は何かについての技術的に説明すると、それは部分的には、`cudaMallocAsync` が、 `cudaMemPool_t,`を使用しており、デフォルトのメモリプールは調整なしではプロセス間通信（IPC）をサポートしないことに起因しています。 (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#interprocess_communication_support)。ユーザーは、IPC　を適切にサポートするためにデフォルトのメモリプールを設定する必要があります (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#library_composability)。
+このポリシーを無効化することが、特に UCX のような低レベル層において、一部の MPI 実装を機能させるのに役立つ理由は何かについての技術的に説明すると、それは部分的には、`cudaMallocAsync` が、 `cudaMemPool_t,`を使用しており、デフォルトのメモリプールは調整なしではプロセス間通信（IPC）をサポートしないことに起因しています。 (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#interprocess_communication_support)。ユーザーは、IPC を適切にサポートするためにデフォルトのメモリプールを設定する必要があります (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#library_composability)。
 
   そのため、バージョン4.5からは、Kokkosのデフォルト動作では、予防上 `cudaMallocAsync.`を無効にします。
 
-- CUDA 11.0 から 11.2 は、 glibc 2.34 の librt スタブと互換性がありません。そのイシューは、CMakeパッケージが　librt とのリンクをどのように処理するかに関連しています。詳細については、イシュー　`#7512　をご覧ください。
+- CUDA 11.0 から 11.2 は、 glibc 2.34 の librt スタブと互換性がありません。そのイシューは、CMakeパッケージが librt とのリンクをどのように処理するかに関連しています。詳細については、イシュー `#7512 をご覧ください。
 <https://github.com/kokkos/kokkos/issues/7512>`_.
 
-- Microsoft Visual Studio　と　Cuda　バックエンドを有効化した状態で、Kokkos を利用するアプリケーションを構築するには、CMake 言語機能の使用が必要です。 以下を参照してください
+- Microsoft Visual Studio と Cuda バックエンドを有効化した状態で、Kokkos を利用するアプリケーションを構築するには、CMake 言語機能の使用が必要です。 以下を参照してください
 :ref:`keywords_enable_backend_specific_options`.
 
 HIP
 ===
 
--  `HIPManagedSpace`　を使用する場合、以下の条件下では、 メモリは　CPU と　GPU の間を移動します:
+-  `HIPManagedSpace` を使用する場合、以下の条件下では、 メモリは CPU と GPU の間を移動します:
    - ハードウェアがそれをサポートする場合
    - カーネルが、ページ移行をサポートするようにコンパイルされた場合
    - 環境変数 `HSA_XNACK` が 1 に設定されている場合。
@@ -55,9 +55,9 @@ HIP
 SYCL
 ====
 
-- Kokkosアルゴリズムのいくつかの関数は、oneDPL　のようなサードパーティによるライブラリを使用しています。これらを使用する場合、Kokkos　はカーネル起動を制御しませんので、ユーザーは、コンパイラエラーを回避するために、TPLに渡されるすべての引数が`cicl::is_device_copyable`　トレイトを満たしていることを確認する必要があります。これは特に、Kokkos 4.7以前のバージョンおよび oneDPL 2022.8.0 以前のバージョンで、　Kokkos::sort　と共に使用される比較関数に当てはまります。 
+- Kokkosアルゴリズムのいくつかの関数は、oneDPL のようなサードパーティによるライブラリを使用しています。これらを使用する場合、Kokkos はカーネル起動を制御しませんので、ユーザーは、コンパイラエラーを回避するために、TPLに渡されるすべての引数が`cicl::is_device_copyable` トレイトを満たしていることを確認する必要があります。これは特に、Kokkos 4.7以前のバージョンおよび oneDPL 2022.8.0 以前のバージョンで、 Kokkos::sort と共に使用される比較関数に当てはまります。 
 例えば、Kokkos::Viewsの代わりに生のポインタを使用するなど、各パラメータが単純にコピー可能であることを確認することを、最も推奨します。
-それが不可能な場合で、oneDPLのバージョンが少なくとも、2022.8.0　であるならば、`sycl::is_device_copyable`　を特化させることで、別の回避策を提供できます。
+それが不可能な場合で、oneDPLのバージョンが少なくとも、2022.8.0 であるならば、`sycl::is_device_copyable` を特化させることで、別の回避策を提供できます。
 
   .. code-block:: cpp
 
@@ -104,13 +104,13 @@ SYCL
 数学関数
 ======================
 
--  using　ディレクティブと数学関数の互換性問題:
+-  using ディレクティブと数学関数の互換性問題:
 
 .. code-block:: cpp
 
     #include <Kokkos_Core.hpp>
     
-    using namespace Kokkos;  // avoid using　ディレクティブを回避
+    using namespace Kokkos;  // avoid using ディレクティブを回避
 
     KOKKOS_FUNCTION void do_math() {
       auto sqrt5 = sqrt(5);  // error: ambiguous ::sqrt or Kokkos::sqrt?
@@ -122,7 +122,7 @@ SYCL
 .. |Compatibility| replace:: Kokkos compatibility guidelines
 
 using ディレクティブ   ``using namespace Kokkos;`` の使用は、大いに避けるべきです(
-|Compatibility|_　参照) 。　数学関数への修飾子なしの呼び出しが存在する場合、コンパイルエラーが発生するからです。代わりに、  ローカルスコープでは、明示的な修飾子 ``Kokkos::sqrt`` または、using宣言　``using Kokkos::sqrt;``　を選択してください。
+|Compatibility|_ 参照) 。 数学関数への修飾子なしの呼び出しが存在する場合、コンパイルエラーが発生するからです。代わりに、  ローカルスコープでは、明示的な修飾子 ``Kokkos::sqrt`` または、using宣言 ``using Kokkos::sqrt;`` を選択してください。
 
 数学定数
 ======================

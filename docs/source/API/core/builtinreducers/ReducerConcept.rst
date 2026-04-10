@@ -4,7 +4,7 @@
 .. ロール:: cpp(code)
     :language: cpp
 
-リデューサーの概念とは、並列還元実行パターンにおいて、 "還元" が"どのように"実行されるかを定義する抽象化です。"何"　の抽象化はテンプレート引数として指定され、`parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ 演算において、還元対象となる　"何"　に対応します。本ページでは、仮定の　'リデューサー'　クラス定義を用いたリデューサーに求められる定義と機能について説明します。 組み込みリデューサーの簡単な説明も含まれます。
+リデューサーの概念とは、並列還元実行パターンにおいて、 "還元" が"どのように"実行されるかを定義する抽象化です。"何" の抽象化はテンプレート引数として指定され、`parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ 演算において、還元対象となる "何" に対応します。本ページでは、仮定の 'リデューサー' クラス定義を用いたリデューサーに求められる定義と機能について説明します。 組み込みリデューサーの簡単な説明も含まれます。
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
@@ -66,7 +66,7 @@
 コンストラクタ
 ~~~~~~~~~~~~
 
-コンストラクタは、概念の一部ではありません。カスタムリデューサーは、複雑なカスタムコンストラクタを持つことができます。  Kokkos　における組み込みリデューサーは、以下の2つのコンストラクタを持ちます :
+コンストラクタは、概念の一部ではありません。カスタムリデューサーは、複雑なカスタムコンストラクタを持つことができます。  Kokkos における組み込みリデューサーは、以下の2つのコンストラクタを持ちます :
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION Reducer(value_type& value_);
 
@@ -81,16 +81,16 @@
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-    * Combine  into ``dest``　に ``src``　を組み合わせます。　例えば、 ``Add`` は、　``dest+=src;``　を実行します。
+    * Combine  into ``dest`` に ``src`` を組み合わせます。 例えば、 ``Add`` は、 ``dest+=src;`` を実行します。
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-    * 適切な初期値を使って、 ``val``　を初期化するオプションのコールバックです。　例えば、 'Add' は、　``val = 0;``を代入しますが、 Prod は、``val = 1;``　を代入します。
+    * 適切な初期値を使って、 ``val`` を初期化するオプションのコールバックです。 例えば、 'Add' は、 ``val = 0;``を代入しますが、 Prod は、``val = 1;`` を代入します。
       デフォルトコンストラクタの呼び出しへのデフォルト。
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION void final(value_type& val) const;
 
-    * 結果　``val``　を修正するオプションのコールバック。 Defaults to a no-op.
+    * 結果 ``val`` を修正するオプションのコールバック。 Defaults to a no-op.
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
@@ -117,7 +117,7 @@ Returns a view of the result place.結果の保存先のビューを返します
 組み込みリデューサー
 ~~~~~~~~~~~~~~~~~
 
-Kokkos　は、C++　の組み込み型および``Kokkos::complex``に対して自動的に動作する、複数の組み込みリデューサーを提供しております。 組み込みリデューサーをカスタム型で使用するために、   ``Kokkos::reduction_identity<CustomType>``　のテンプレート特殊化を定義する必要があります。いかに簡単な例を示し、詳細については、 `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_　において閲覧可能です。
+Kokkos は、C++ の組み込み型および``Kokkos::complex``に対して自動的に動作する、複数の組み込みリデューサーを提供しております。 組み込みリデューサーをカスタム型で使用するために、   ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。いかに簡単な例を示し、詳細については、 `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_ において閲覧可能です。
 
 * `Kokkos::BAnd <BAnd.html>`_
 * `Kokkos::BOr <BOr.html>`_

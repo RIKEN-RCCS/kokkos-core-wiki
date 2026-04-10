@@ -98,13 +98,13 @@
 .. |IsSorted| replace:: ``is_sorted``
 .. _IsSorted: ./StdIsSorted.html
 
-- ``exespace``, ``teamHandle``, ``first``, ``last``, ``view``, ``comp``:  |IsSorted|_　と同様。
+- ``exespace``, ``teamHandle``, ``first``, ``last``, ``view``, ``comp``:  |IsSorted|_ と同様。
 
 - ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 必ずランク1であり、``LayoutLeft``　、  ``LayoutRight``　、または ``LayoutStride``　を持たなければなりません。
+  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - ``exespace``　からアクセス可能でなければなりません。
+  - ``exespace`` からアクセス可能でなければなりません。
 
   - 1 & 3: デフォルト文字列は、 "Kokkos::is_sorted_until_iterator_api_default"
 
@@ -116,4 +116,4 @@
 戻り値
 ~~~~~~~~~~~~
 
-- 範囲 ``[first, it)`` がソートされる最後のイテレータ 　``it``　およびかつ以下の条件が真である場合: ``std::is_same_v<decltype(it), IteratorType>``　、または範囲　``[Kokkos::Experimental::begin(view), it)``　がソートされている場合。 この2番目の事例については、以下の通りに``it``　が計算されることに注意してください。　``Kokkos::Experimental::begin(view) + increment``　：ここで、``increment`` は、アルゴリズム内に認められます。
+- 範囲 ``[first, it)`` がソートされる最後のイテレータ  ``it`` およびかつ以下の条件が真である場合: ``std::is_same_v<decltype(it), IteratorType>`` 、または範囲 ``[Kokkos::Experimental::begin(view), it)`` がソートされている場合。 この2番目の事例については、以下の通りに``it`` が計算されることに注意してください。 ``Kokkos::Experimental::begin(view) + increment`` ：ここで、``increment`` は、アルゴリズム内に認められます。

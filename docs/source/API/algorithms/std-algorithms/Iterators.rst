@@ -12,29 +12,29 @@
 
 .. cpp:function:: template <class DataType, class... Properties> KOKKOS_INLINE_FUNCTION auto begin(const Kokkos::View<DataType, Properties...>& view);
 
-   ``view``　の先頭へ　Kokkos **ランダムアクセス** イテレータを返します。
+   ``view`` の先頭へ Kokkos **ランダムアクセス** イテレータを返します。
 
 .. cpp:function:: template <class DataType, class... Properties> KOKKOS_INLINE_FUNCTION auto cbegin(const Kokkos::View<DataType, Properties...>& view);
 
-   ``view``　の先頭へ　Kokkos const修飾　**ランダム** イテレータを返します。
+   ``view`` の先頭へ Kokkos const修飾 **ランダム** イテレータを返します。
 
 .. cpp:function:: template <class DataType, class... Properties> KOKKOS_INLINE_FUNCTION auto end(const Kokkos::View<DataType, Properties...>& view);
 
-   ``view``　の要素の末尾を過ぎた位置まで　Kokkos **ランダムアクセス** イテレータを返します。
+   ``view`` の要素の末尾を過ぎた位置まで Kokkos **ランダムアクセス** イテレータを返します。
 
 
 .. cpp:function:: template <class DataType, class... Properties> KOKKOS_INLINE_FUNCTION auto cend(const Kokkos::View<DataType, Properties...>& view);
 
-   ``view``　の要素の末尾を過ぎた位置まで　Kokkos **ランダムアクセス** イテレータを返します。
+   ``view`` の要素の末尾を過ぎた位置まで Kokkos **ランダムアクセス** イテレータを返します。
 
 注意事項
 ~~~~~
 
 * 返されたイテレーターは、パフォーマンス上の理由から、 **ランダムアクセス** です。
 
-* 各関数内では、view　そのものを変更しないため、``view``　は、　``const``　として扱われます: 返されたイテレータは、構造を変更せずに　view　上で動作します。
+* 各関数内では、view そのものを変更しないため、``view`` は、 ``const`` として扱われます: 返されたイテレータは、構造を変更せずに view 上で動作します。
 
-* イテレータの参照解除は、``view``　がアクセス可能な実行空間内で行う必要があります。
+* イテレータの参照解除は、``view`` がアクセス可能な実行空間内で行う必要があります。
 
 パラメータと要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,10 +51,10 @@
     view_type a("a", 15);
 
     auto it = KE::begin(a);
-    // 　`a`　の内容を変更できます。
+    //  `a` の内容を変更できます。
 
     auto itc = KE::cbegin(a);
-    // 間接参照された場合（適切な実行空間内で）、 `a`　の内容の読み取りのみが可能です。
+    // 間接参照された場合（適切な実行空間内で）、 `a` の内容の読み取りのみが可能です。
 
 ------------------
 
@@ -63,7 +63,7 @@
 
 .. cpp:function:: template <class IteratorType> KOKKOS_INLINE_FUNCTION constexpr typename IteratorType::difference_type distance(IteratorType first, IteratorType last);
 
-   　``first``　から　``last``　に行くまでに必要なステップ数を返します。
+    ``first`` から ``last`` に行くまでに必要なステップ数を返します。
 
 パラメータと要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -73,7 +73,7 @@
 Return
 ~~~~~~
 
-``first``　から　``last``　に行くまでに必要なステップ数。
+``first`` から ``last`` に行くまでに必要なステップ数。
 ランダムアクセスイテレータを使用する場合、値が負になることがあります。
 
 
@@ -110,7 +110,7 @@ Return
 注意事項
 ~~~~~
 
-現在、操作がデフォルトの実行スペースで実行されるため、API　には実行スペースパラメータがありません。この操作はデフォルトの実行領域をフェンスします。
+現在、操作がデフォルトの実行スペースで実行されるため、API には実行スペースパラメータがありません。この操作はデフォルトの実行領域をフェンスします。
 
 返し
 ~~~~~~

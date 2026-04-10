@@ -6,7 +6,7 @@
 ディスクリプション
 -----------
 
-2つの要素の比較には、``operator<``　を使用するか、ユーザーが提供する比較演算子を使用して、範囲内またはランク1の ``ビュー`` 内で最大の要素を検索します。
+2つの要素の比較には、``operator<`` を使用するか、ユーザーが提供する比較演算子を使用して、範囲内またはランク1の ``ビュー`` 内で最大の要素を検索します。
 
 インターフェイス
 ---------
@@ -96,14 +96,14 @@
 
 .. |min_element_link| replace:: ``min_element``
 
-- ``exespace``, ``first``, ``last``, ``view``, ``comp``:  |min_element_link|_　と同様。
+- ``exespace``, ``first``, ``last``, ``view``, ``comp``:  |min_element_link|_ と同様。
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. _min_element_link: ./StdMinElement.html
 
 .. |min_element_link| replace:: ``min_element``
 
-- ``exespace``, ``first``, ``last``, ``view``, ``comp``:  |min_element_link|_　におけるのと同様。
+- ``exespace``, ``first``, ``last``, ``view``, ``comp``:  |min_element_link|_ におけるのと同様。
 
 - ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
@@ -124,9 +124,9 @@
 
 - 複数の要素が最大の要素と同等である場合、そのような要素のうち *最初* の要素へのイテレータを返します。
 
-- 範囲 ``[first, last)`` が空である場合、それは ``last``　を返します。
+- 範囲 ``[first, last)`` が空である場合、それは ``last`` を返します。
 
-- ``ビュー`` が空である場合、 それは ``Kokkos::Experimental::end(view)``　を返します。
+- ``ビュー`` が空である場合、 それは ``Kokkos::Experimental::end(view)`` を返します。
 
 例
 ~~~~~~~
@@ -149,8 +149,8 @@
      KOKKOS_INLINE_FUNCTION
      bool operator()(const ValueType1& a,
                      const ValueType2& b) const {
-       // ここでは　<　を使用していますが、a　が　b　より小さい場合に、真を返すような任意のカスタムロジックを実装することも可能です。
-       return a < b　を返す;
+       // ここでは < を使用していますが、a が b より小さい場合に、真を返すような任意のカスタムロジックを実装することも可能です。
+       return a < b を返す;
      }
 
      KOKKOS_INLINE_FUNCTION

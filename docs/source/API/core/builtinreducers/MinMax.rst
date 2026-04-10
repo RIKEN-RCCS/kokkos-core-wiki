@@ -60,7 +60,7 @@
 
    .. cpp:type:: value_type
 
-      還元スカラー型 ( `MinMaxScalar <MinMaxScalar.html>`_　の特殊化)。
+      還元スカラー型 ( `MinMaxScalar <MinMaxScalar.html>`_ の特殊化)。
 
    .. cpp:type:: result_view_type
 
@@ -80,13 +80,13 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-      ``dest``:  ``dest.min_val = (src.min_val < dest.min_val) ? src.min_val :dest.min_val;``　に、　``src`` および ``dest``　の最小値を格納します。
-    　``dest``:  ``dest.max_val = (src.max_val < dest.max_val) ? src.max_val :dest.max_val;``　に、　``src`` および ``dest``　の最大値を格納します。
+      ``dest``:  ``dest.min_val = (src.min_val < dest.min_val) ? src.min_val :dest.min_val;`` に、 ``src`` および ``dest`` の最小値を格納します。
+     ``dest``:  ``dest.max_val = (src.max_val < dest.max_val) ? src.max_val :dest.max_val;`` に、 ``src`` および ``dest`` の最大値を格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-       ``val.min_val`` using the ``Kokkos::reduction_identity<Scalar>::min()`` メソッドを使って、初期化します。 デフォルト実装は、 ``val=<TYPE>_MAX``　を設定します。
-       ``val.max_val`` using the ``Kokkos::reduction_identity<Index>::max()`` メソッドを使って、初期化します。 デフォルト実装は、 ``val=<TYPE>_MIN``　を設定します。
+       ``val.min_val`` using the ``Kokkos::reduction_identity<Scalar>::min()`` メソッドを使って、初期化します。 デフォルト実装は、 ``val=<TYPE>_MAX`` を設定します。
+       ``val.max_val`` using the ``Kokkos::reduction_identity<Index>::max()`` メソッドを使って、初期化します。 デフォルト実装は、 ``val=<TYPE>_MIN`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
@@ -98,10 +98,10 @@
 追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* ``MinMax<T,S>::value_type`` は、非定数　``T``　上の特殊化です。
+* ``MinMax<T,S>::value_type`` は、非定数 ``T`` 上の特殊化です。
 
-* ``MinMax<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。 .S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
+* ``MinMax<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`` です。 .S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
 * 必要条件: ``Scalar`` には、 ``operator =``、 ``operator <`` および ``operator >`` が定義されます。 ``Kokkos::reduction_identity<Scalar>::min()`` および ``Kokkos::reduction_identity<Scalar>::max()``  は、有効な式です。
 
-*  ``Scalar``　のカスタム型で  MinMax を使用するためには、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。　詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
+*  ``Scalar`` のカスタム型で  MinMax を使用するためには、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。

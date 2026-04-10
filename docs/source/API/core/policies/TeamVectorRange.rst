@@ -45,7 +45,7 @@
     - 実装定義型。
 
 * **必要要件**
-    - ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept.html>`_　をモデル化する型です。
+    - ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept.html>`_ をモデル化する型です。
     - ``std::is_integral<iType>::value`` は、真です。
     - ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。
     - ``count >= 0`` は、真です;
@@ -55,7 +55,7 @@
    template<class TeamMemberType, class iType1, class iType2>
    /* implementation defined */ TeamVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
-チームのスレッドとベクトルレーンのインデックス範囲 ``begin`` から　``end-1`` まで分割します。
+チームのスレッドとベクトルレーンのインデックス範囲 ``begin`` から ``end-1`` まで分割します。
 
 * **引数**
     - ``team``: 呼び出しチーム実行コンテキストへのハンドル
@@ -66,7 +66,7 @@
     - 実装定義型。
 
 * **必要要件**
-    - ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept.html>`_　をモデル化する型です。
+    - ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept.html>`_ をモデル化する型です。
     - ``std::is_integral<iType1>::value`` は、真です。
     - ``std::is_integral<iType2>::value`` は、真です。
     - ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。

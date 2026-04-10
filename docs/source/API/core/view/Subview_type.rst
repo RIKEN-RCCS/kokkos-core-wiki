@@ -8,12 +8,12 @@
 
 .. |subviewfunc| replace:: ``Kokkos::subview()``
 
-ヘッダー ``<Kokkos_Core.hpp>``　に定義。
+ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 ディスクリプション
 -----------
 
-|subviewfunc|_　関数を、指定の引数により呼び出した際に、返される型を演鐸するためのエイリアステンプレートです。
+|subviewfunc|_ 関数を、指定の引数により呼び出した際に、返される型を演鐸するためのエイリアステンプレートです。
 
 インターフェイス
 ---------
@@ -23,14 +23,14 @@
    template <class ViewType, class... Args>
    using Subview = IMPL_DETAIL; // ソースビューの特性からサブビューのタイプを演鐸します。
 
- ``Kokkos::subview(ViewType view_arg, Args .... args)``　の結果の型。
+ ``Kokkos::subview(ViewType view_arg, Args .... args)`` の結果の型。
 
 必要要件
 ------------
 
 以下を必要とします:
 
-- ``ViewType`` は、 ``Kokkos::View``　の仕様です。
+- ``ViewType`` は、 ``Kokkos::View`` の仕様です。
 
 - ``Args...`` は、 |subviewfunc|_ で定義されているスライス指定子です。
 

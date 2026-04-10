@@ -17,7 +17,7 @@
     parallel_scan(TeamThreadRange(team,begin,end),
         [=] (lint i, double& lsum, bool final) {...},sum);
 
-TeamThreadRange　は  、階層的並列処理内で使われる、 `nested execution policy <./NestedPolicies.html>`_　です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
+TeamThreadRange は  、階層的並列処理内で使われる、 `nested execution policy <./NestedPolicies.html>`_ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
 
 シノプシス
 --------
@@ -39,7 +39,7 @@ TeamThreadRange　は  、階層的並列処理内で使われる、 `nested exe
     /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType count);
 
 \
-    チームのスレッド全体でインデックスレンジ　``0`` から ``count-1`` までを分割します。
+    チームのスレッド全体でインデックスレンジ ``0`` から ``count-1`` までを分割します。
 
     * **引数**  
         - ``team``: 呼び出しチーム実行コンテキストへのハンドル。
@@ -49,7 +49,7 @@ TeamThreadRange　は  、階層的並列処理内で使われる、 `nested exe
         - 実装定義型。
 
     * **必要要件**   
-        - ``TeamMemberType`` は、 `TeamHandle <./TeamHandleConcept.html>`_　をモデル化する型です。
+        - ``TeamMemberType`` は、 `TeamHandle <./TeamHandleConcept.html>`_ をモデル化する型です。
         - ``std::is_integral<iType>::value`` は、真です。
         -  ``team`` のすべてのメンバースレッドは、同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。 
         - ``count >= 0`` は、真です;
@@ -60,7 +60,7 @@ TeamThreadRange　は  、階層的並列処理内で使われる、 `nested exe
     /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
    
 \
-    チームのスレッド全体でインデックスレンジ ``begin`` から　``end-1`` までを分割します。
+    チームのスレッド全体でインデックスレンジ ``begin`` から ``end-1`` までを分割します。
 
     * **引数**   
         - ``team``: 呼び出しチーム実行コンテキストへのハンドル。
@@ -71,7 +71,7 @@ TeamThreadRange　は  、階層的並列処理内で使われる、 `nested exe
         - 実装定義型
 
     * **必要要件**   
-        - ``TeamMemberType`` は、 `TeamHandle <./TeamHandleConcept.html>`_　をモデル化する型です。
+        - ``TeamMemberType`` は、 `TeamHandle <./TeamHandleConcept.html>`_ をモデル化する型です。
         - ``std::is_integral<iType1>::value`` は、真です。
         - ``std::is_integral<iType2>::value`` は、真です。
         -  ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。

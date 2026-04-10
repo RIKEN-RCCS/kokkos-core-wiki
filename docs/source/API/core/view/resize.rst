@@ -37,11 +37,11 @@
   古いビューおよび新たなビューの共通サブビューの内容を保持しながら、 ``v`` を、新しい次元にサイズ変更します。
 
   * ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
-  * ``n[X]``: 範囲　X　の新たな長さ。
+  * ``n[X]``: 範囲 X の新たな長さ。
 
   制約:
 
-  * ``View<T, P...>::array_layout`` は、 ``LayoutLeft`` または ``LayoutRight``　のいずれかです。
+  * ``View<T, P...>::array_layout`` は、 ``LayoutLeft`` または ``LayoutRight`` のいずれかです。
 
 * .. code-block:: cpp
 
@@ -57,18 +57,18 @@
 		  const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
   古いビューおよび新たなビューの共通サブビューの内容を保持しながら、 ``v`` を、新しい次元にサイズ変更します。
-　新たな ``Kokkos::View`` は、 ビューコンストラクタ特性 ``arg_prop``、
-  例えば、 Kokkos::WithoutInitializing　を使って、構築されます。
+ 新たな ``Kokkos::View`` は、 ビューコンストラクタ特性 ``arg_prop``、
+  例えば、 Kokkos::WithoutInitializing を使って、構築されます。
 
   * ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
 
-  * ``n[X]``: 範囲　X　の新たな長さ。
+  * ``n[X]``: 範囲 X の新たな長さ。
 
   * ``arg_prop``: ビューコンストラクタ特性、例えば、 ``Kokkos::WithoutInitializing``。
 
   制約:
 
-  * ``View<T, P...>::array_layout`` は、 ``LayoutLeft` または `LayoutRight``　のいずれかです。
+  * ``View<T, P...>::array_layout`` は、 ``LayoutLeft` または `LayoutRight`` のいずれかです。
 
 * .. code-block:: cpp
 
@@ -86,16 +86,16 @@
 
   古いビューおよび新たなビューの共通サブビューの内容を保持しながら、 ``v`` を、新しい次元にサイズ変更します。
   新たな ``Kokkos::View`` は、ビューコンストラクタ特性 ``arg_prop``、
-  例えば、``Kokkos::view_alloc(Kokkos::WithoutInitializing)``　を使って、構築されます。
-　``arg_prop`` が、実行空間を含む場合には、 最終フェンスを使用せずに、 メモリ配分およびコピー要素のために使用されます。
+  例えば、``Kokkos::view_alloc(Kokkos::WithoutInitializing)`` を使って、構築されます。
+ ``arg_prop`` が、実行空間を含む場合には、 最終フェンスを使用せずに、 メモリ配分およびコピー要素のために使用されます。
 
   * ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
-  * ``n[X]``: ``n[X]``: 範囲　X　の新たな長さ。
+  * ``n[X]``: ``n[X]``: 範囲 X の新たな長さ。
   * ``arg_prop``: View constructor properties、例えば ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``。
 
   制約:
 
-  * ``View<T, P...>::array_layout`` は、 ``LayoutLeft`` または ``LayoutRight``　　のいずれかです。
+  * ``View<T, P...>::array_layout`` は、 ``LayoutLeft`` または ``LayoutRight``  のいずれかです。
   * ``arg_prop``  は、メモリ、ラベルまたはメモリ空間へのポインタを含んではなりません。
 
 * .. code-block:: cpp
@@ -116,8 +116,8 @@
 	         const typename Kokkos::View<T, P...>::array_layout& layout);
 
   古いビューおよび新たなビューの共通サブビューの内容を保持しながら、 ``v`` を、新しい次元にサイズ変更します。
-　新たな ``Kokkos::View`` は、ビューコンストラクタ特性 ``arg_prop``、
-  例えば、Kokkos::WithoutInitializing　を使って、構築されます。
+ 新たな ``Kokkos::View`` は、ビューコンストラクタ特性 ``arg_prop``、
+  例えば、Kokkos::WithoutInitializing を使って、構築されます。
 
   * ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
   * ``layout``: 新たな次元を含むレイアウトインスタンス。
@@ -132,7 +132,7 @@
 
   古いビューおよび新たなビューの共通サブビューの内容を保持しながら、 ``v`` を、新しい次元にサイズ変更します。
   新たな ``Kokkos::View`` は、ビューコンストラクタ特性 ``arg_prop``、
-  例えば、　``Kokkos::view_alloc(Kokkos::WithoutInitializing)``を使って、構築されます。
+  例えば、 ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``を使って、構築されます。
   ``arg_prop`` が、実行空間を含む場合には、 最終フェンスを使用せずに、 メモリ配分およびコピー要素のために使用されます。
 
   * ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
@@ -150,10 +150,10 @@
 
     Kokkos::resize(v, 2, 3);
 
-それぞれ、以前のコンテンツを保持する動的拡張　2　と　3　を持つように、動的ランク2の　Kokkos::View　をサイズ変更します。
+それぞれ、以前のコンテンツを保持する動的拡張 2 と 3 を持つように、動的ランク2の Kokkos::View をサイズ変更します。
 
 * .. code-block:: cpp
 
     Kokkos::resize(Kokkos::WithoutInitializing, v, 2, 3);
 
-それぞれ、以前のコンテンツを保持する動的拡張　2　と　3　を持つように、動的ランク2の　Kokkos::View　をサイズ変更します。本呼び出しの後、 新たなコンテンツは、初期化されていません。
+それぞれ、以前のコンテンツを保持する動的拡張 2 と 3 を持つように、動的ランク2の Kokkos::View をサイズ変更します。本呼び出しの後、 新たなコンテンツは、初期化されていません。

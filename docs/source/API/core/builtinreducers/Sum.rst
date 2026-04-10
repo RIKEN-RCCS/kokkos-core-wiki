@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
-　``add`` 演算を行う `ReducerConcept <ReducerConcept.html>`_　の具体的な実装。
+ ``add`` 演算を行う `ReducerConcept <ReducerConcept.html>`_ の具体的な実装。
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
@@ -80,11 +80,11 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-       ``dest``:  ``dest+=src;``　に ``src`` を追加します。
+       ``dest``:  ``dest+=src;`` に ``src`` を追加します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-       ``Kokkos::reduction_identity<Scalar>::sum()`` メソッドを使って、``val``  を初期化します。 デフォルト実装は、The  ``val=0``　を設定します。
+       ``Kokkos::reduction_identity<Scalar>::sum()`` メソッドを使って、``val``  を初期化します。 デフォルト実装は、The  ``val=0`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
@@ -99,7 +99,7 @@
 
 * ``Sum<T,S>::value_type`` は、  非定数 ``T``
 
-* ``Sum<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
+* ``Sum<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`` です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
 * 必要条件: ``Scalar`` には、 ``operator =`` and ``operator +=`` が定義されます。 ``Kokkos::reduction_identity<Scalar>::sum()`` は有効な式です。
 

@@ -4,7 +4,7 @@
 .. :: cpp(code)
     :language: cpp
 
-ヘッダー ``<Kokkos_ErrorReporter.hpp>``　において定義。
+ヘッダー ``<Kokkos_ErrorReporter.hpp>`` において定義。
 
 ``ErrorReporter`` は、スレッドセーフな方法でエラーレポートを収集できるクラスです。
 レポートの型はユーザー定義であり、定義された容量までしかエラーを保存しません。
@@ -16,9 +16,9 @@
 
    スレッドセーフな方法でエラーレポートを収集するクラス。
 
-   :tparam ReportType: 報告されたエラーデータの型。 :cpp:struct:`View`　について有効な要素型でなければなりません。
+   :tparam ReportType: 報告されたエラーデータの型。 :cpp:struct:`View` について有効な要素型でなければなりません。
 
-   :tparam DeviceType:  ``ErrorReporter``　のデバイス型。 デフォルトは、 ``DefaultExecutionSpace::device_type``です。
+   :tparam DeviceType:  ``ErrorReporter`` のデバイス型。 デフォルトは、 ``DefaultExecutionSpace::device_type``です。
 
    |
 
@@ -60,11 +60,11 @@
 
    .. cpp:function:: int num_report_attempts() const
 
-      :returns: 2つの　``std::vector``　で、1つは報告者の　ID　を、もう1つは報告内容自体を格納します。 ベクトルのサイズは :cpp:any:`num_reports()` に等しいです。
+      :returns: 2つの ``std::vector`` で、1つは報告者の ID を、もう1つは報告内容自体を格納します。 ベクトルのサイズは :cpp:any:`num_reports()` に等しいです。
 
    .. cpp:function:: std::pair<std::vector<int>, std::vector<report_type>> get_reports() const
 
-      :returns: レポーターの id を含む2つの ``std::vector`` 　およびレポートそれ自体。 ベクトルサイズは、 :cpp:any:`num_reports()`　に等しいです。
+      :returns: レポーターの id を含む2つの ``std::vector``  およびレポートそれ自体。 ベクトルサイズは、 :cpp:any:`num_reports()` に等しいです。
 
    .. cpp:function:: bool full() const
 
@@ -72,15 +72,15 @@
 
    .. cpp:function:: void clear() const
 
-      エラーリポーターをリセットします。:cpp:any:`num_reports()` は、この演算の後、0　であり、新たなエラーの記録が可能です。
+      エラーリポーターをリセットします。:cpp:any:`num_reports()` は、この演算の後、0 であり、新たなエラーの記録が可能です。
 
    .. cpp:function:: void resize(const size_t size)
 
-      インスタンスの容量を　``size``　に変更します。　既存のエラーレポートが失われる可能性があります。
+      インスタンスの容量を ``size`` に変更します。 既存のエラーレポートが失われる可能性があります。
 
    .. cpp:function:: bool add_report(int reporter_id, report_type report) const
       
-     エラーの記録を試行します。 スペースがある場合、``report``　が保存され、試行は成功します。
+     エラーの記録を試行します。 スペースがある場合、``report`` が保存され、試行は成功します。
 
       :returns: エラー記録の試行が成功した場合にのみ、``真`` 。
 
@@ -96,7 +96,7 @@
 
    // ErrorReporter は、デバッグ目的で一定数のエラーを
    // 特定のポイントまで記録するために使用できます。
-   // ErrorReporter　の主な利点は、スレッドセーフであること、および
+   // ErrorReporter の主な利点は、スレッドセーフであること、および
    // 実行環境のアーキテクチャの並行性に依存する
    // ストレージを必要としないことです。
 
@@ -118,7 +118,7 @@
        // ユーザー定義型である可能性があります。
        Kokkos::Experimental::ErrorReporter<double> errors("MyErrors", 10);
 
-       // 0-50　および　50-100　の範囲に該当するポジションの数を数えます。
+       // 0-50 および 50-100 の範囲に該当するポジションの数を数えます。
        int num_lower_box = 0;
        int num_upper_box = 0;
        Kokkos::parallel_reduce(
@@ -140,14 +140,14 @@
 
        // 結果をレポートしましょう
        printf(
-           "%i パーティクルのうち、%i は、下のボックスに属し、 %i　はのボックスに属します "
+           "%i パーティクルのうち、%i は、下のボックスに属し、 %i はのボックスに属します "
            "box\n",
            positions.extent_int(0), num_lower_box, num_upper_box);
 
        // エラーをリポートしましょう
        printf(
-           "有効なドメイン　(0 - 100)の外に、%i パーティクルがありました。 ここに、 "
-           "最初の %i:\n　があります",
+           "有効なドメイン (0 - 100)の外に、%i パーティクルがありました。 ここに、 "
+           "最初の %i:\n があります",
            errors.num_report_attempts(), errors.num_reports());
 
        // レポーターIDおよびレポートを獲得するための、構築されたバインディングの使用。

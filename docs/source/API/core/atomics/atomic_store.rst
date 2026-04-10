@@ -4,7 +4,7 @@
 .. ロール:: cpp(code)
     :language: cpp
 
- ``<Kokkos_Core.hpp>``　に含まれている、ヘッダー <Kokkos_Atomic.hpp> に定義されています。
+ ``<Kokkos_Core.hpp>`` に含まれている、ヘッダー <Kokkos_Atomic.hpp> に定義されています。
 
 使用例
 -----
@@ -13,14 +13,14 @@
 
     atomic_store(&obj, desired);
 
-原子的に、 ``obj`` の現在の値を ``desired``　に置き換えます。
+原子的に、 ``obj`` の現在の値を ``desired`` に置き換えます。
 
 ディスクリプション
 -----------
 
 .. cpp:function:: template<class T> void atomic_store(T* ptr, std::type_identity_t<T> val);
 
-    原子的に、　``*ptr``　に　``val``　を書き込みます。
+    原子的に、 ``*ptr`` に ``val`` を書き込みます。
 
    ``{ *ptr = val; }``
 

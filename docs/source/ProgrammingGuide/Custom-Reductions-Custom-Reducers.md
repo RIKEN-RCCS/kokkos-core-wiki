@@ -1,6 +1,6 @@
 # カスタムリデューサー
 
-カスタムの任意の還元は、還元クラスと　"還元"　クラスを用いて実装されます。 "reduced"　クラスは、 [Built-In Reducers with Custom Scalar Types](Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types)　で使われるカスタムスカラータイプに非常に似ており、リダクションクラスは、[ReducerConcept](../API/core/builtinreducers/ReducerConcept)　を実装しています。
+カスタムの任意の還元は、還元クラスと "還元" クラスを用いて実装されます。 "reduced" クラスは、 [Built-In Reducers with Custom Scalar Types](Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types) で使われるカスタムスカラータイプに非常に似ており、リダクションクラスは、[ReducerConcept](../API/core/builtinreducers/ReducerConcept) を実装しています。
 
  "reduced" クラスについては、以下の要件を満たす必要があります
      
@@ -9,9 +9,9 @@
 
 還元クラスについては、以下の要件を満たす必要があります
      
-   * 型定義リデューサー、value_type および　result_view_type　は、定義される必要があります。詳細については、 [ReducerConcept](../API/core/builtinreducers/ReducerConcept) を参照してください。
+   * 型定義リデューサー、value_type および result_view_type は、定義される必要があります。詳細については、 [ReducerConcept](../API/core/builtinreducers/ReducerConcept) を参照してください。
    * リデューサーの概念手法は、実装される必要があります。
-   * 露出　result_view_type　は、オブジェクトが使用されるメモリ空間内で、定義されなければなりません 
+   * 露出 result_view_type は、オブジェクトが使用されるメモリ空間内で、定義されなければなりません 
 
 注意事項: タグ付き還元の場合でも、すなわちポリシー内でタグを指定する場合であっても、潜在的な `init`/`join`/`final` メンバ関数は `WorkTag` 引数を選択してははいけません。
 
@@ -38,7 +38,7 @@ struct array_type {
     }
   }
 
-  KOKKOS_INLINE_FUNCTION  // myArray を 0　に初期化します
+  KOKKOS_INLINE_FUNCTION  // myArray を 0 に初期化します
       void
       init() {
     for (int i = 0; i < N; i++) {

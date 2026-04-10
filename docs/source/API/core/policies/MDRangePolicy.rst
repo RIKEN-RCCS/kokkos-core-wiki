@@ -16,7 +16,7 @@
     Kokkos::MDRangePolicy<..., Rank<N>, ...>(開始, 終了, タイリング)
     Kokkos::MDRangePolicy<..., Rank<N>, ...>(空間, 開始, 終了, タイリング)
 
-　``MDRangePolicy`` は、 ``開始`` タプルから開区間で ``終わる`` 多次元反復空間の実行ポリシーを定義しています。反復空間はタイルされ、ユーザーはオプションでタイルサイズを設定できます。
+ ``MDRangePolicy`` は、 ``開始`` タプルから開区間で ``終わる`` 多次元反復空間の実行ポリシーを定義しています。反復空間はタイルされ、ユーザーはオプションでタイルサイズを設定できます。
 
 インターフェイス
 ---------
@@ -32,10 +32,10 @@
 汎用テンプレート引数
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-　``MDRangePolicy``の有効なテンプレート引数はここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_　に説明されています。
+ ``MDRangePolicy``の有効なテンプレート引数はここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ に説明されています。
 
 
- MDRangePolicy　に特有の必要論拠
+ MDRangePolicy に特有の必要論拠
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
@@ -45,7 +45,7 @@
              Kokkos::Iterate inner = Kokkos::Iterate::Default>
     class Kokkos::Rank;
 
-* インデックス空間のランクや、タイルをどの順序で反復するか、またタイル内でどのように反復するかを決定します。 外側と内側は``outer`` および ``inner`` は、``Kokkos::Iterate::Default``、 ``Kokkos::Iterate::Left``、または``Kokkos::Iterate::Right``　である可能性があります。
+* インデックス空間のランクや、タイルをどの順序で反復するか、またタイル内でどのように反復するかを決定します。 外側と内側は``outer`` および ``inner`` は、``Kokkos::Iterate::Default``、 ``Kokkos::Iterate::Left``、または``Kokkos::Iterate::Right`` である可能性があります。
 
 
 パブリッククラスメンバー
@@ -80,7 +80,7 @@ CTAD コンストラクタ ( 4.3以降)
 .. code-block:: cpp
 
    DefaultExecutionSpace des;
-   SomeExecutionSpace ses; // DefaultExecutionSpace　とは異なります
+   SomeExecutionSpace ses; // DefaultExecutionSpace とは異なります
 
    // MDRangePolicy<Rank<3>> に演繹します
    MDRangePolicy pl0({0, 0, 0}, {4, 5, 10}};
@@ -122,7 +122,7 @@ CTAD コンストラクタ ( 4.3以降)
 ^^^^^^^^^^^^^^^^
 .. cpp:function:: tile_type tile_size_recommended() const
 
-    * ``Kokkos::Array<array_index_type, rank>`` 型を返します。これは、 ``MDRangePolicy``　が内部でデフォルトで使うランクごとのタイルサイズを含みます。デフォルトのタイルサイズは静的で、指定されたバックエンドに基づいて設定されています。
+    * ``Kokkos::Array<array_index_type, rank>`` 型を返します。これは、 ``MDRangePolicy`` が内部でデフォルトで使うランクごとのタイルサイズを含みます。デフォルトのタイルサイズは静的で、指定されたバックエンドに基づいて設定されています。
 
     .. 注意事項:: ``tile_size_recommended()`` は、 Kokkos 4.5以降利用可能です。
 

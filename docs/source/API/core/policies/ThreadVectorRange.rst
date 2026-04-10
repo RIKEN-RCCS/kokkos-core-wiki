@@ -49,7 +49,7 @@
 
 *  **必要要件**
 
-   * ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept>`__　をモデル化する型です
+   * ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept>`__ をモデル化する型です
 
    * ``std::is_integral<iType>::value`` は、真です。
 
@@ -64,7 +64,7 @@
    /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 
-呼び出しスレッドのベクトルレーン全体で、インデックスレンジ ``begin``　から  ``end-1`` までを分割します。
+呼び出しスレッドのベクトルレーン全体で、インデックスレンジ ``begin`` から  ``end-1`` までを分割します。
 
 *  **引数**
 

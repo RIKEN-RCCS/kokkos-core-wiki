@@ -9,14 +9,14 @@
 
 .. 警告::
 
-   現在、 ``partition_space`` はまだ、名前空間 ``Kokkos::Experimental``　内にあります。
+   現在、 ``partition_space`` はまだ、名前空間 ``Kokkos::Experimental`` 内にあります。
 
 使用例
 -----
 
 .. code-block:: c++
 
-   自動　インスタンス = Kokkos::partition_space(Kokkos::DefaultExecutionSpace(),1,1,1);
+   自動 インスタンス = Kokkos::partition_space(Kokkos::DefaultExecutionSpace(),1,1,1);
 
 インターフェイス
 ---------
@@ -29,21 +29,21 @@
    新しい実行空間インスタンスを作成します。
    新しく作成されたインスタンスと既存のインスタンスの間には、暗示的同期関係は存在しません。
 
-   :param space: 実行空間インスタンス ( ../execution_spaces.html　を参照)
+   :param space: 実行空間インスタンス ( ../execution_spaces.html を参照)
 
-   :param args: 作成されたインスタンス数は、``sizeof...(Args)``　に等しい.
-		``args``　の相対的な重みは、新しく作成される各インスタンスに関連付ける
-		``space``　のハードウェアリソースの割合に関するヒントです。
+   :param args: 作成されたインスタンス数は、``sizeof...(Args)`` に等しい.
+		``args`` の相対的な重みは、新しく作成される各インスタンスに関連付ける
+		``space`` のハードウェアリソースの割合に関するヒントです。
 
-   :param weights: 算術型 ``T``  の ``std::vector`` で、新しく作成される、``space``　の各インスタンスに関連付ける。
+   :param weights: 算術型 ``T``  の ``std::vector`` で、新しく作成される、``space`` の各インスタンスに関連付ける。
                    ハードウェアリソースの割合のヒントを提供します。
 
 必要要件
 ~~~~~~~~~~~~
 
-- ``(std::is_arithmetic_v<Args> && ...)`` は、 ``true``　です。
+- ``(std::is_arithmetic_v<Args> && ...)`` は、 ``true`` です。
 
-- ``std::is_arithmetic_v<T>`` は、``true``　です。
+- ``std::is_arithmetic_v<T>`` は、``true`` です。
 
 - ``ExecutionSpace().concurrency() >= N_PARTITIONS``
 
@@ -52,19 +52,19 @@
 ~~~~~~~~~
 
 - いずれのインスタンス間にも、暗示的同期関係は存在せず、特に:
-  - ``instance[i]`` は、``space.fence()``　により囲まれていません。
-  - ``instance[i]`` は、``instance[j].fence()``　により囲まれておらず、そして
-  - ``space`` は、 ``instance[i].fence()``　により囲まれていません。
+  - ``instance[i]`` は、``space.fence()`` により囲まれていません。
+  - ``instance[i]`` は、``instance[j].fence()`` により囲まれておらず、そして
+  - ``space`` は、 ``instance[i].fence()`` により囲まれていません。
   しかしながら、実際には、これらのインスタンスは、同じハードウェアリソースにディスパッチされるため、互いにブロックし合う可能性があります。
 
--  ``args``　（または　 ``weights``　要素）の相対的な重みは、望ましいリソース配分に関するヒントとして使用されます。
+-  ``args`` （または  ``weights`` 要素）の相対的な重みは、望ましいリソース配分に関するヒントとして使用されます。
   例えば、個別のスレッドを使用するバックエンドの場合、 ``{1,2}`` の重みの結果、2つのインスタンスが生じ、
   その1つ目は、元のインスタンスのスレッドの約3分の1であり、
   そして2番目は、3分の2を伴います。しかしながら、一部のバックエンドについては、それぞれ返されたインスタンスは、元のもののコピーである場合があります。
 
 .. 重要::
 
-   ``Cuda``　については、 それぞれ新たにインスタスを作成した　``HIP`` および ``SYCL``は、それ自身の *stream*/*queue*　と関連します。
+   ``Cuda`` については、 それぞれ新たにインスタスを作成した ``HIP`` および ``SYCL``は、それ自身の *stream*/*queue* と関連します。
 
 
 例
@@ -77,7 +77,7 @@
    template<class ExecSpace, class ... OtherParams>
    void foo(const ExecSpace& space, OtherParams...params) {
      auto [instance0, instance1] = Kokkos::partition_space(space,1,2);
-     // 2つのカーネルをディスパッチし、 F1 は、F2　よりも少ないリソースを必要とします
+     // 2つのカーネルをディスパッチし、 F1 は、F2 よりも少ないリソースを必要とします
      // F1 および F2 は、現在同時に実行できます
      Kokkos::parallel_for("F1",
        Kokkos::RangePolicy<ExecSpace>(instance0,0,N1),

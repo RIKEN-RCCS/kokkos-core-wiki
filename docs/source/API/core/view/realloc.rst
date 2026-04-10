@@ -36,9 +36,9 @@
 
   -  ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
 
-  - ``n[X]``: 範囲　X　の新たな長さ。
+  - ``n[X]``: 範囲 X の新たな長さ。
 
-* 制約: ``View<T, P...>::array_layout`` は、``LayoutLeft`` または ``LayoutRight``　のいずれかです。
+* 制約: ``View<T, P...>::array_layout`` は、``LayoutLeft`` または ``LayoutRight`` のいずれかです。
 
 .. code-block:: cpp
 
@@ -53,17 +53,17 @@
 		const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
 		const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-* 　``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
-  新たな　``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、：Kokkos::WithoutInitializing　を使用して構築されます。
+*  ``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
+  新たな ``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、：Kokkos::WithoutInitializing を使用して構築されます。
 
   - ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
 
-  - ``n[X]``: 範囲　X　の新たな長さ。
+  - ``n[X]``: 範囲 X の新たな長さ。
 
-  - ``arg_prop``: ビューコンストラクタのプロパティ。　例えば、 ``Kokkos::WithoutInitializing``.
+  - ``arg_prop``: ビューコンストラクタのプロパティ。 例えば、 ``Kokkos::WithoutInitializing``.
 
 
-* 制約: ``View<T, P...>::array_layout`` は、  ``LayoutLeft`` または ``LayoutRight``　のいずれかです。
+* 制約: ``View<T, P...>::array_layout`` は、  ``LayoutLeft`` または ``LayoutRight`` のいずれかです。
 
 .. code-block:: cpp
 
@@ -80,18 +80,18 @@
 		const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
 * ``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
-  新たな　``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、``Kokkos::view_alloc(Kokkos::WithoutInitializing)``　を使用して構築されます。
+  新たな ``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、``Kokkos::view_alloc(Kokkos::WithoutInitializing)`` を使用して構築されます。
 
   - ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
 
-  - ``n[X]``: 範囲　X　の新たな長さ。
+  - ``n[X]``: 範囲 X の新たな長さ。
 
-  - ``arg_prop``: ビューコンストラクタのプロパティ。　例えば、  ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
+  - ``arg_prop``: ビューコンストラクタのプロパティ。 例えば、  ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
 
 
 * 制約:
 
-  - ``View<T, P...>::array_layout``　は、 ``LayoutLeft`` または ``LayoutRight``　のいずれかです。
+  - ``View<T, P...>::array_layout`` は、 ``LayoutLeft`` または ``LayoutRight`` のいずれかです。
 
   - ``arg_prop`` は、メモリへのポインタ、ラベル、またはメモリ空間を含んではなりません。
 
@@ -113,14 +113,14 @@
    void realloc(const I& arg_prop, Kokkos::View<T, P...>& v,
                 const typename Kokkos::View<T, P...>::array_layout& layout);
 
-* 　``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
-  新たな　``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、　Kokkos::WithoutInitializing　を使用して構築されます。
+*  ``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
+  新たな ``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、 Kokkos::WithoutInitializing を使用して構築されます。
 
   - ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
 
   - ``layout``: 新たな次元を含むレイアウトインスタンス。
 
-  - ``arg_prop``: ビューコンストラクタのプロパティ。　例えば、 ``Kokkos::WithoutInitializing``。
+  - ``arg_prop``: ビューコンストラクタのプロパティ。 例えば、 ``Kokkos::WithoutInitializing``。
 
 .. code-block:: cpp
 
@@ -129,14 +129,14 @@
                 Kokkos::View<T, P...>& v,
 		const typename Kokkos::View<T, P...>::array_layout& layout);
 
-* 　``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
-  新たな　``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、　``Kokkos::view_alloc(Kokkos::WithoutInitializing)``　を使用して構築されます。
+*  ``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
+  新たな ``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、 ``Kokkos::view_alloc(Kokkos::WithoutInitializing)`` を使用して構築されます。
 
   - ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
 
   - ``layout``: 新たな次元を含むレイアウトインスタンス。
 
-  - ``arg_prop``: ビューコンストラクタのプロパティ。　例えば、 ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``　。
+  - ``arg_prop``: ビューコンストラクタのプロパティ。 例えば、 ``Kokkos::view_alloc(Kokkos::WithoutInitializing)`` 。
 
 * : ``arg_prop`` は、メモリ、ラベルまたはメモリ空間へのポインタを含んではなりません。
 
@@ -147,10 +147,10 @@
 
     Kokkos::realloc(v, 2, 3);
 
-* それぞれ動的拡張　2　および　3　を持つように、動的ランク　2　の　``Kokkos::View``　を再割り当てします。
+* それぞれ動的拡張 2 および 3 を持つように、動的ランク 2 の ``Kokkos::View`` を再割り当てします。
 
 .. code-block:: cpp
 
     Kokkos::realloc(Kokkos::WithoutInitializing, v, 2, 3);
 
-* それぞれ動的拡張　2　および　3　を持つように、動的ランク　2の　``Kokkos::View``　を再割り当てします。 本呼出し後には、ビューは初期化されていません。
+* それぞれ動的拡張 2 および 3 を持つように、動的ランク 2の ``Kokkos::View`` を再割り当てします。 本呼出し後には、ビューは初期化されていません。

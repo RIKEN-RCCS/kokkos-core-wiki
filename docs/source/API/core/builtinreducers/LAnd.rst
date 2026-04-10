@@ -4,7 +4,7 @@
 .. ロール:: cpp(code)
     :language: cpp
 
-論理的 ``AND`` 演算を行う　`ReducerConcept <ReducerConcept.html>`_　の具体的実装
+論理的 ``AND`` 演算を行う `ReducerConcept <ReducerConcept.html>`_ の具体的実装
 
 
 Header File: ``<Kokkos_Core.hpp>``
@@ -81,12 +81,12 @@ Header File: ``<Kokkos_Core.hpp>``
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-      　``src``　の ``and``　および　``dest`` を ``dest``:  ``dest = src && dest;``　にビット単位で格納します。
+       ``src`` の ``and`` および ``dest`` を ``dest``:  ``dest = src && dest;`` にビット単位で格納します。
 
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-      　``Kokkos::reduction_identity<Scalar>::land()`` メソッドを使用して、``val``　を初期化します。 デフォルト実装は、``val=1``　を設定します。
+       ``Kokkos::reduction_identity<Scalar>::land()`` メソッドを使用して、``val`` を初期化します。 デフォルト実装は、``val=1`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
@@ -100,10 +100,10 @@ Header File: ``<Kokkos_Core.hpp>``
 追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
 
-*  ``LAnd<T,S>::value_type`` は、非定数 ``T``　です。
+*  ``LAnd<T,S>::value_type`` は、非定数 ``T`` です。
 
-* ``LAnd<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``　です。S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
+* ``LAnd<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`` です。S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
 * 必要条件: ``Scalar`` には、 ``operator =`` and ``operator &&`` が定義されます。 ``Kokkos::reduction_identity<Scalar>::land()`` は、有効な式です。
 
-* LAnd　をカスタム型で使用するには、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート仕様を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
+* LAnd をカスタム型で使用するには、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート仕様を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。

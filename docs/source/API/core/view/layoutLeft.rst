@@ -19,7 +19,7 @@
 .. cpp:struct:: LayoutLeft
 
    多次元ビューに提供された場合、最初のインデックスが連続したインデックスとなるように、
-   メモリを配置します。 これは、割り当てに関する　Fortran　の慣習に合致します。
+   メモリを配置します。 これは、割り当てに関する Fortran の慣習に合致します。
 
    .. rubric:: Nested Typedefs
 
@@ -47,7 +47,7 @@
 
    .. cpp:function:: LayoutLeft(LayoutLeft const&) = default
 
-    　デフォルトのコピーコンストラクタは、要素単位で他のレイアウトをコピーします。
+     デフォルトのコピーコンストラクタは、要素単位で他のレイアウトをコピーします。
 
    .. cpp:function:: LayoutLeft(LayoutLeft&&) = default
 

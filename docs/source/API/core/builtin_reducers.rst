@@ -1,9 +1,9 @@
 組み込みリデューサー
 =================
 
-　`ReducerConcept <builtinreducers/ReducerConcept.html>`__ は、リデューサーの概念を提供します。
+ `ReducerConcept <builtinreducers/ReducerConcept.html>`__ は、リデューサーの概念を提供します。
 
-　`parallel_reduce <parallel-dispatch/parallel_reduce.html>`__ と組み合わせて使用されるリデューサーオブジェクト。
+ `parallel_reduce <parallel-dispatch/parallel_reduce.html>`__ と組み合わせて使用されるリデューサーオブジェクト。
 
 .. リスト表::
    :幅: 25 75

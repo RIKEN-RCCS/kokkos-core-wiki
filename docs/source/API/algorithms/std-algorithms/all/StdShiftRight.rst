@@ -6,7 +6,7 @@
 ディスクリプション
 -----------
 
- 終りに向けて、``n``　位置により、範囲または ``view``　内において、要素をシフトします。
+ 終りに向けて、``n`` 位置により、範囲または ``view`` 内において、要素をシフトします。
 
 インターフェイス
 ---------
@@ -66,7 +66,7 @@
 .. |ShiftLeft| replace:: ``shift_left``
 .. _ShiftLeft: ./StdShiftLeft.html
 
-- ``exespace`` ``teamHandle``, ``first``, ``last``, ``view``:  |ShiftLeft|_　と同様。
+- ``exespace`` ``teamHandle``, ``first``, ``last``, ``view``:  |ShiftLeft|_ と同様。
 
 - ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
@@ -84,5 +84,5 @@
 戻り値
 ~~~~~~~~~~~~
 
-結果の範囲の始め。 ``n`` が  ``last - first`` よりも小さい場合には、 ``first + n`` を返します。 そうでなければ　``last``　を返します。
+結果の範囲の始め。 ``n`` が  ``last - first`` よりも小さい場合には、 ``first + n`` を返します。 そうでなければ ``last`` を返します。
 
