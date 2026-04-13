@@ -9,7 +9,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -17,7 +17,7 @@
    parallel_reduce(N,Functor,LOr<T,S>(result));
 
 シノプシス
---------
+----------
 
 .. code-block:: cpp
 
@@ -48,7 +48,7 @@
    };
 
 インターフェイス
----------
+----------------
 
 .. cpp:class:: template<class Scalar, class Space> LOr
 

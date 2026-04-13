@@ -1,5 +1,5 @@
 組み込みリデューサー
-=================
+====================
 
  `ReducerConcept <builtinreducers/ReducerConcept.html>`__ は、リデューサーの概念を提供します。
 

@@ -7,7 +7,7 @@
 ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 インターフェイス
----------
+----------------
 
 .. cpp:function:: ブール is_finalized() noexcept
 

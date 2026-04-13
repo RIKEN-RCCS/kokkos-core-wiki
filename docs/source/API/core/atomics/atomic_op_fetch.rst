@@ -7,7 +7,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -16,7 +16,7 @@
  ``ptr_to_value`` で与えられたアドレスの変数を、関連する演算に従って、原子的に ``update_value`` で更新し、 そのアドレスで見つけた前の値を返します。
 
 ディスクリプション
------------
+------------------
 
 .. cpp:function:: template<class T> T atomic_add_fetch(T* const ptr_to_value, const T value);
 

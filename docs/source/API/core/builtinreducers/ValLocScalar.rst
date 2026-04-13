@@ -15,7 +15,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -25,7 +25,7 @@
     I resultIndex = result.loc;
 
 インターフェイス
----------
+----------------
 
 .. cpp:struct::  template<class Scalar, class Index> ValLocScalar
 

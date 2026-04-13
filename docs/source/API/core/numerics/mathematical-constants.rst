@@ -37,7 +37,7 @@
 ------------
 
 注意事項
------
+--------
 
 .. _KnownIssues: ../../../known-issues.html#mathematical-constants
 
@@ -63,7 +63,7 @@
 ------------
 
 以下も参照
---------
+----------
 
 `一般数学関数 <mathematical-functions.html>`_
 

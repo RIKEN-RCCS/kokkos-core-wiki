@@ -7,7 +7,7 @@
  ``<Kokkos_Core.hpp>`` に含まれる ヘッダー ``<Kokkos_Complex.hpp>`` に定義。
 
 ディスクリプション
------------
+------------------
 
 ``complex`` は、複素数を表し操作するためのクラステンプレートです。
 
@@ -15,7 +15,7 @@
 * 注意事項: もし ``z`` が、Kokkos::complex<T> 型を持つ場合、 ``reinterpret_cast<T(&)[2]>(z)`` のようなキャストは未定義の挙動を引き起こします (これはstd::complexとは異なります)。
 
 インターフェイス
----------
+----------------
 
 .. cpp:class:: template<class T> complex
 

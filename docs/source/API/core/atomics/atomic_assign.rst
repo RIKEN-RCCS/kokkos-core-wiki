@@ -11,7 +11,7 @@
  ``<Kokkos_Core.hpp>`` に含まれるヘッダー ``<Kokkos_Atomic.hpp>`` に定義。
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -20,7 +20,7 @@
 原子レベルで、``obj`` の現在の値を ``desired`` に置換します。
 
 ディスクリプション
------------
+------------------
 
 .. cpp:function:: template<class T> void atomic_assign(T* ptr, std::type_identity_t<T> val);
 

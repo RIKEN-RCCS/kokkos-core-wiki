@@ -30,7 +30,7 @@ Defined in ヘッダー ``<Kokkos_Core.hpp>`` に定義。
    Kokkos の管理対象外であるメモリに対して、メモリの動作を操作する関数（例：memAdvise）を呼び出すと、未定義の動作を引き起こします。
 
 ディスクリプション
------------
+------------------
 
 .. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_realloc(void* ptr, size_t new_size);
 

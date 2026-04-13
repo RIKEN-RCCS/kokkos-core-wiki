@@ -7,7 +7,7 @@
  ``<Kokkos_Core.hpp>`` に含まれているヘッダー ``<Kokkos_Atomic.hpp>`` で定義されています。
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -16,7 +16,7 @@
 原子的に、 ``*ptr`` を ``expected`` と比較し、 等しい場合には、 ``desired`` と置換し、交換が発生しているか否かに関わらず、アドレス ``&obj`` において、以前に格納した値を常に返します。
 
 ディスクリプション
------------
+------------------
 
 .. cpp:function:: template<class T> T atomic_compare_exchange(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 
@@ -31,5 +31,5 @@
 
 
 以下も参照
---------
+----------
 * `atomic_exchange <atomic_exchange.html>`_: 参照対象の値を、原子的に置き換え、以前保持していた値を取得します。

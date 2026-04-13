@@ -7,7 +7,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -18,7 +18,7 @@
 階層的並列処理の中で使われる `nested execution policy <NestedPolicies.html>`_ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
 
 シノプシス
---------
+----------
 
 .. code-block:: cpp
 
@@ -28,7 +28,7 @@
    /* implementation defined */ TeamVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 ディスクリプション
------------
+------------------
 
 .. code-block:: cpp
 

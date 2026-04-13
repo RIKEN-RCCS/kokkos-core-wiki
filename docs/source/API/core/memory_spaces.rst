@@ -111,7 +111,7 @@
 "特定の場所でテンプレートパラメータとなる型に対してできること" を意味します。
 
 シノプシス
-~~~~~~~~
+~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -159,7 +159,7 @@
 * ``device_type``: ``DeviceType<execution_space,memory_space>``.
 
 コンストラクタ
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 * ``MemorySpaceConcept()``: デフォルトコンストラクタ。
 * ``MemorySpaceConcept(const MemorySpaceConcept& src)``: コピーコンストラク。
@@ -172,7 +172,7 @@
 * ``void deallocate(void* ptr, ptrdiff_t size) const;``: 以前、正確に `allocate(size)` で割り当てられた、`ptr`（型 `void*`）から始まるバッファを解放します。
 
 非メンバーファシリティ
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 * ``template<class MS> struct is_memory_space;`` : クラスがメモリ空間であるかどうかを確認するための型特性。
 * ``template<class S1, class S2> struct SpaceAccessibility;`` : 2つのスペースが互換性があるか（割り当て可能、deep_copy 可能、アクセス可能）を確認するための型特性。

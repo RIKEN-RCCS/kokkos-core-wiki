@@ -10,7 +10,7 @@ API 参照
    API/containers-index
    API/simd-index
    API/alphabetical
-   非推奨
+   deprecations
 
 :doc:`API/core-index`
 ~~~~~~~~~~~~~~~~~~~~~

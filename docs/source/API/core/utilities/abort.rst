@@ -13,7 +13,7 @@
 異常なプログラム終了が発生し、エラーの説明文字列が表示されます。
 
 注意事項
------
+--------
 
 .. _KokkosAbort: https://github.com/kokkos/kokkos/blob/4.2.00/core/src/Kokkos_Abort.hpp
 

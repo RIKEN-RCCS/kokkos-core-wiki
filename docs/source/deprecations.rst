@@ -220,18 +220,18 @@ Kokkos-3.x において非推奨
 
 
 Kokkos-3.7 において非推奨である型エイリアス
--------------------------------------
+-------------------------------------------
 ``ActiveExecutionMemorySpace``, ``host_execution_space``, ``host_memory_space``, ``host_mirror_space``, ``is_array_layout``, ``is_execution_policy``, ``is_execution_space``, ``is_memory_space``, ``is_memory_traits``, ``is_space``, ``Iterate``, ``MDRangePolicy``, ``Rank``, ``SpaceAccessibility``
 
 
  Kokkos-3.7 において非推奨であるマクロ
--------------------------------
+--------------------------------------
 
 ``KOKKOS_RESTRICT_EXECUTION_TO_(DATA_SPACE)``, ``HIP_SAFE_CALL(call)``
 
 
  Kokkos-3.7 において非推奨である自由関数
----------------------------------------
+----------------------------------------
 
 .. list-table::
    :widths: 30 70
@@ -321,7 +321,7 @@ Kokkos-3.7 において非推奨
 
 
 Kokkos-3.7 において非推奨であるクラス
---------------------------------
+-------------------------------------
 
 .. list-table::
    :widths: auto
@@ -415,7 +415,7 @@ Kokkos-3.7 において非推奨であるクラス
 
 
 Kokkos-3.7 におけるパブリックヘッダー
-----------------------------
+-------------------------------------
 
  Kokkos-3.7 より、 以下の項目が、 *パブリック* ヘッダーです:
 

@@ -7,12 +7,12 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 ディスクリプション
------------
+------------------
 
 階層的並列処理の中で使われる `nested execution policy <NestedPolicies.html>`_ です。 
 
 インターフェイス
----------
+----------------
 
 .. cpp:class:: template <class Rank, typename TeamHandle> ThreadVectorMDRange
 

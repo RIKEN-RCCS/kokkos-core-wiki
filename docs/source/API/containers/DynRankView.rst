@@ -19,7 +19,7 @@
 
 
 ディスクリプション
------------
+------------------
 
 .. cpp:class:: template <class DataType, class LayoutType, class MemorySpace, class MemoryTraits> DynRankView;
 

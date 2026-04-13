@@ -30,7 +30,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 例については、`Kokkos::View <../core/view/view.html>`_ のドキュメントを参照してください。ほとんどのユーザーにとって、デフォルト設定で十分です。
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -48,7 +48,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
     a.template sync<typename ViewType::execution_space>(); // 変更されたデータをデバイスに同期します
 
 ディスクリプション
------------
+------------------
 
 
 

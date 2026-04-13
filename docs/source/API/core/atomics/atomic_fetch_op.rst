@@ -7,7 +7,7 @@
 ヘッダーファイル: <Kokkos_Core.hpp>
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -17,7 +17,7 @@
 そのアドレスで見つけた前の値を返します。
 
 ディスクリプション
------------
+------------------
 
 .. cpp:function:: template<class T> T atomic_fetch_add(T* const ptr_to_value, const T value);
 

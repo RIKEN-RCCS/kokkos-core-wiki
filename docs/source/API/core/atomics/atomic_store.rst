@@ -7,7 +7,7 @@
  ``<Kokkos_Core.hpp>`` に含まれている、ヘッダー <Kokkos_Atomic.hpp> に定義されています。
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -16,7 +16,7 @@
 原子的に、 ``obj`` の現在の値を ``desired`` に置き換えます。
 
 ディスクリプション
------------
+------------------
 
 .. cpp:function:: template<class T> void atomic_store(T* ptr, std::type_identity_t<T> val);
 
@@ -30,6 +30,6 @@
 
 
 以下も参照
---------
+----------
 * `atomic_load <atomic_load.html>`_: 原子的に、参照対象オブジェクトの値を取得
 * `atomic_exchange <atomic_exchange.html>`_: 原子的に、参照対象の値を置き換え、以前保持していた値を取得

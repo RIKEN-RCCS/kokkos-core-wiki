@@ -7,7 +7,7 @@
 ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 インターフェイス
----------
+----------------
 
 .. cpp:function::  is_initialized() noexcept
 
@@ -32,7 +32,7 @@
     }    
 
 以下も参照
---------
+----------
 
 * `Kokkos::InitializationSettings <InitializationSettings.html#kokkosInitializationSettings>`_
 * `Kokkos::ScopeGuard <ScopeGuard.html#kokkosScopeGuard>`_

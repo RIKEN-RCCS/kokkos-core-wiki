@@ -10,7 +10,7 @@
 レポートの型はユーザー定義であり、定義された容量までしかエラーを保存しません。
 
 インターフェイス
----------
+----------------
 
 .. cpp:class:: template<class ReportType, class DeviceType> ErrorReporter
 

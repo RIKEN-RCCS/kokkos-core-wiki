@@ -1,5 +1,5 @@
 ``サブビュー``
-===========
+==============
 
 .. role:: cpp(code)
     :language: cpp
@@ -7,7 +7,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -21,7 +21,7 @@
 .. |KokkosAll| replace:: :cpp:func:`Kokkos::ALL`
 
 ディスクリプション
------------
+------------------
 
 .. cpp:function:: template<class ViewType, class ... Args> IMPL_DETAIL subview(const ViewType& v, Args ... args)
 

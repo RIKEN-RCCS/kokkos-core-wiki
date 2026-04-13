@@ -2,7 +2,7 @@
     :language: cpp
 
 マルチ GPU サポート
-=================
+===================
 
 Kokkos は、単一のホストプロセス（例：単一のMPIランク）から複数の GPU 上でカーネルを起動する機能をサポートしており、この機能は現在、CUDA、HIP、SYCL の各バックエンドで利用可能です。
 
@@ -143,6 +143,6 @@ SYCL backendについては、 ユーザーは、``sycl::queue`` オブジェク
     });
 
 注意事項
------
+--------
 
 - チュートリアル CUDAに関する マルチGPU 使用のためには、 <https://github.com/kokkos/kokkos-tutorials/tree/main/Exercises/multi_gpu_cuda>`_ が、利用可能です。

@@ -7,7 +7,7 @@
  ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -25,7 +25,7 @@
 .. warning: バージョン 3.7におけるビヘイビアの変更 (以下参照)。 ``ScopeGuard`` は、:cpp:func:`is_initialized()` または :cpp:func:`is_finalized()` のいずれかが ``true`` を返した場合に中断します。
 
 ディスクリプション
------------
+------------------
 
 .. cpp:class:: ScopeGuard
 
@@ -84,7 +84,7 @@
        移動代入演算子
 
 注意事項
------
+--------
 
 - コンストラクタでは、すべてのパラメータが内部で呼び出される ``Kokkos::initialize`` に渡される。
   詳細については、 `Kokkos::initialize <initialize.html#kokkosinitialize>`_ 参照。
@@ -125,6 +125,6 @@
         // 呼び出された ScopeGuard デストラクタが Kokkos::finalize を呼び出します
 
 以下も参照
-~~~~~~~~
+~~~~~~~~~~
 
 `Kokkos::initialize <initialize.html#kokkosinitialize>`_, `Kokkos::finalize <finalize.html#kokkosfinalize>`_

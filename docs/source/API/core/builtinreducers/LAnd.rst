@@ -10,7 +10,7 @@
 Header File: ``<Kokkos_Core.hpp>``
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -18,7 +18,7 @@ Header File: ``<Kokkos_Core.hpp>``
    parallel_reduce(N,Functor,LAnd<T,S>(result));
 
 シノプシス
---------
+----------
 
 .. code-block:: cpp
 
@@ -49,7 +49,7 @@ Header File: ``<Kokkos_Core.hpp>``
    };
 
 インターフェイス
----------
+----------------
 
 .. cpp:class:: template<class Scalar, class Space> LAnd
 

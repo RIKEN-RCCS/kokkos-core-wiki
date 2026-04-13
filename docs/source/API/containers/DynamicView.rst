@@ -9,7 +9,7 @@
 
 
 ディスクリプション
------------
+------------------
 
 .. cpp:class:: template<typename DataType , typename ... P> DynamicView : public Kokkos::ViewTraits<DataType , P ...>
 

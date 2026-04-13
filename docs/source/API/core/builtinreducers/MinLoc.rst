@@ -9,7 +9,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -17,7 +17,7 @@
    parallel_reduce(N,Functor,MinLoc<T,I,S>(result));
 
 シノプシス
---------
+----------
 
 .. code-block:: cpp
 
@@ -49,7 +49,7 @@
    };
 
 インターフェイス
----------
+----------------
 
 .. cpp:class:: template<class Scalar, class Index, class Space> MinLoc
 

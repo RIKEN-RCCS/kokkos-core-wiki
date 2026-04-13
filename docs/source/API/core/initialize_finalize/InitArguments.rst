@@ -16,7 +16,7 @@ InitArguments
 
 
 インターフェイス
----------
+----------------
 
 .. cpp:struct:: InitArguments
 
@@ -57,7 +57,7 @@ InitArguments
 
 
 以下も参照
-~~~~~~~~
+~~~~~~~~~~
 
 * |KokkosInitializationSetting|_
 * |KokkosInitialize|_

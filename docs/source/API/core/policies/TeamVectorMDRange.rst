@@ -4,12 +4,12 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 ディスクリプション
------------
+------------------
 
 TeamVectorMDRange は、階層的並列処理の内部で使用される `nested execution policy <./NestedPolicies.html>`_  です。
 
 インターフェイス
----------
+----------------
 
 .. cpp:class:: テンプレート <class Rank, typename TeamHandle> TeamVectorMDRange
 

@@ -7,13 +7,13 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 ディスクリプション
------------
+------------------
 
 TeamThreadMDRange は、階層的並列処理の中で使用される、`nested execution policy <./NestedPolicies.html>`_ です。
 
 
 インターフェイス
----------
+----------------
 
 .. cpp:class:: template <class Rank, typename TeamHandle> TeamThreadMDRange
 

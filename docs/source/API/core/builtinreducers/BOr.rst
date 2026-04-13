@@ -9,7 +9,7 @@ Specific implementation of `ReducerConcept <ReducerConcept.html>`_ performing bi
 Header File: ``<Kokkos_Core.hpp>``
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -17,7 +17,7 @@ Header File: ``<Kokkos_Core.hpp>``
    parallel_reduce(N,Functor,BOr<T,S>(result));
 
 シノプシス
---------
+----------
 
 .. code-block:: cpp
 
@@ -48,7 +48,7 @@ Header File: ``<Kokkos_Core.hpp>``
    };
 
 インターフェイス
----------
+----------------
 
 .. cpp:class:: template<class Scalar, class Space> BOr
 

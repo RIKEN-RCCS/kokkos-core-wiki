@@ -13,7 +13,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -23,7 +23,7 @@
    T maxValue = result.max_val;
 
 インターフェイス
----------
+----------------
 
 .. cpp:struct::  template<class Scalar> MinMaxScalar
 

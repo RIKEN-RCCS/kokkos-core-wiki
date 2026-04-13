@@ -12,7 +12,7 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
 
 
 ディスクリプション
------------
+------------------
 
 .. cpp:class:: TeamHandleConcept
 

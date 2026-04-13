@@ -28,7 +28,7 @@
 .. |create_scatter_view| replace:: ``create_scatter_view()``
 
 使用例
------
+------
 
  Kokkos ScatterView は、標準的な Kokkos::|View|_ のインターフェースとして機能し、原子またはデータレプリケーションを通じて散乱加算パターンを実装します。
 
@@ -39,7 +39,7 @@
 並列領域の後、最終還元を行うために自由関数 Kokkos::Experimental::contribute() を呼び出します。
 
 インターフェイス
----------
+----------------
 .. code-block:: cpp
 
     template <typename DataType [, typename Layout [, typename ExecSpace [, typename Operation [, typename Duplication [, typename Contribution]]]]]>
@@ -72,7 +72,7 @@
 このインターフェースを使って、デフォルトでない ``Operation``, ``Duplication`` または ``Contribution`` を持つ ScatterView を作成するのは複雑になることがあります。なぜなら、DataType、Layout、ExecSpace の正確なタイプを指定する必要があるからです。 そのため、代わりに Kokkos::Experimental::|create_scatter_view|_ という関数を使うことをお勧めします。
 
 ディスクリプション
------------
+------------------
 
 .. cpp:class:: template <typename DataType, typename Layout, typename ExecSpace, typename Op, typename Duplication, typename Contribution> ScatterView
 

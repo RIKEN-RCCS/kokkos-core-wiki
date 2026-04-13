@@ -7,7 +7,7 @@
 ヘッダー ``<Kokkos_Profiling_ScopedRegion.hpp>`` に定義
 
 使用例
------
+------
 
 .. code-block:: cpp
 

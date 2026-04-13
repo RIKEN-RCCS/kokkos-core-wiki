@@ -11,7 +11,7 @@
  ``<Kokkos_Core.hpp>`` に含まれている、ヘッダー ``<Kokkos_Atomic.hpp>`` に定義されています。`
 
 使用例
------
+------
 
 .. code-block:: cpp
 
@@ -22,7 +22,7 @@
 交換が起こった場合には、関数は ``true`` を返しますが、そうでなければ、``false`` を返します。
 
 ディスクリプション
------------
+------------------
 
 .. cpp:function:: template<class T> bool atomic_compare_exchange_strong(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 

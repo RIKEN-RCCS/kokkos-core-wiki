@@ -27,7 +27,7 @@ Kokkos 実行環境を完了。
 プログラムは、 `Kokkos::initialize <initialize.html>`_ を呼び出した後、それらがこの関数を呼び出さなければ、不適格となります。
 
 インターフェイス
----------
+----------------
 
 .. code-block:: cpp
 
@@ -39,7 +39,7 @@ Kokkos 実行環境を完了。
 * ``Kokkos::finalize`` は、ユーザーが初期化した Kokkos オブジェクトが、スコープ外になった後に、呼び出される必要があります。
 
 セマンティクス
-~~~~~~~~~
+~~~~~~~~~~~~~~
 
 * :cpp:func:`Kokkos::is_initialized() <is_initialized()>` は、``Kokkos::finalize`` 呼び出し後に falseを返す必要があります。
 
@@ -60,6 +60,6 @@ Kokkos 実行環境を完了。
 
 
 以下も参照
---------
+----------
 * `Kokkos::initialize <initialize.html>`_: Kokkos 実行環境を初期化。
 * `Kokkos::push_finalize_hook <push_finalize_hook.html>`_: ``Kokkos::finalize()`` 実行の際に呼び出される関数を登録
