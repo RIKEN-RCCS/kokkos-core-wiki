@@ -1,7 +1,7 @@
 ``atomic_compare_exchange_strong``
 ==================================
 
-.. 警告::
+.. warning:
    Kokkos 4.5以降非推奨
    代わりに `atomic_compare_exchange <atomic_compare_exchange.html>`_ を使ってください。
 

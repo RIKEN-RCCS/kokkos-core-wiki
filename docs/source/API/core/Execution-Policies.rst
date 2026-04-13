@@ -6,10 +6,10 @@
 
 `ExecutionPolicyConcept <policies/ExecutionPolicyConcept.html>`__ は、並列パターンの実行が、 “どのように” 行われるかを表すための基本的な抽象化です。
 
-.. リスト表::
-    :幅: 35 65
-    :ヘッダー列: 1
-    :配列: 左
+.. list-table::
+    :widths: 35 65
+    :header-rows: 1
+    :align: left
 
     * - ポリシー
       - ディスクリプション
@@ -29,9 +29,9 @@
 ネストされた実行ポリシーは、既に実行中の並列領域内で、`TeamPolicy <policies/TeamPolicy.html>`__ またはタスクポリシーによって、配置された並列作業を配置するために使用されます。 `NestedPolicies <policies/NestedPolicies.html>`__ summary。
 
 .. リスト表:
-    :幅: 25 75
-    :ヘッダー列: 1
-    :配列: 左
+    :widths: 25 75
+    :header-rows: 1
+    :align: left
 
     * - ポリシー
       - ディスクリプション
@@ -63,10 +63,10 @@
 
     テンプレート引数は任意の順序で指定できます。
 
-.. リスト表::
-    :幅: 30 30 40
-    :ヘッダー列: 1
-    :配列: 左
+.. list-table::
+    :widths: 30 30 40
+    :header-rows: 1
+    :align: left
 
     * - 引数
       - オプション

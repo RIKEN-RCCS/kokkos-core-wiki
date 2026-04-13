@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
- ヘッダー ``<Kokkos_Core.hpp>`` に定義。
+ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 .. code-block:: cpp
 
@@ -45,7 +45,7 @@
 
 
 注意事項
------
+---------------
 
 .. _KokkosAssert: https://github.com/kokkos/kokkos/blob/4.2.00/core/src/Kokkos_Assert.hpp
 
@@ -55,5 +55,5 @@
 * C++ 標準ライブラリからの `assert` とは対照的に、``KOKKOS_FUNCTION``から ``KOKKOS_ASSERT`` を呼び出すことは、合法的です。
 
 以下も参照
---------
+-----------------
 * `Kokkos::abort() <abort.html>`_ は、プログラムの異常終了を引き起こします。

@@ -1,14 +1,14 @@
 最小/最大 演算子
 ==========================
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 .. _StandardLibraryHeaderAlgorithm: https://en.cppreference.com/w/cpp/header/algorithm
 
 .. |StandardLibraryHeaderAlgorithm| replace:: ``<algorithm>``
 
- ヘッダー ``<Kokkos_Core.hpp>`` に定義
+ヘッダー ``<Kokkos_Core.hpp>`` に定義
 
 標準ライブラリヘッダー |StandardLibraryHeaderAlgorithm|_ から最小値/最大値および関連する操作を提供します。
 
@@ -39,7 +39,7 @@ min/max および clamp 関数テンプレートは、Kokkos 3.7 以降、``Kokk
 ========== ============================================================
 
 注意事項
------
+---------------
 
 .. _KokkosClamp: https://github.com/kokkos/kokkos/blob/4.3.00/core/src/Kokkos_Clamp.hpp
 
@@ -47,14 +47,14 @@ min/max および clamp 関数テンプレートは、Kokkos 3.7 以降、``Kokk
 
 .. _KokkosMinMax: https://github.com/kokkos/kokkos/blob/4.3.00/core/src/Kokkos_MinMax.hpp
 
-.. |KokkosMinMax| :: ``<Kokkos_MinMax.hpp>``
+.. |KokkosMinMax| replace:: ``<Kokkos_MinMax.hpp>``
 
 * バージョン 4.3より、 これらの関数を利用可能にするには、それぞれ |KokkosClamp|_ および |KokkosMinMax|_ が含まれる場合があります。
 
 ----
 
 以下も参照
---------
+-------------------
 
 .. _min_element: ../../algorithms/std-algorithms/all/StdMinElement.html
 
@@ -66,7 +66,7 @@ min/max および clamp 関数テンプレートは、Kokkos 3.7 以降、``Kokk
 
 .. _minmax_element: ../../algorithms/std-algorithms/all/StdMinMaxElement.html
 
-.. |minmax_element| :: ``minmax_element``
+.. |minmax_element| replace:: ``minmax_element``
 
 |min_element|_: 範囲内で、最小要素を返します。
 

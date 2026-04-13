@@ -1,10 +1,10 @@
 数値特性
 ==============
 
-.. ロール::cpp(code)
+.. role::cpp(code)
     :language: cpp
 
-.. ロール:: ストライク
+.. role:: ストライク
     :クラス: ストライク
 
 .. _KokkosNumericTraits: https://github.com/kokkos/kokkos/blob/3.5.00/core/src/Kokkos_NumericTraits.hpp

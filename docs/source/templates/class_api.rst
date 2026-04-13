@@ -32,13 +32,13 @@
   そのものが何を行うのかについて、高レベルで、人間が理解しやすい言葉で簡潔にまとめた概要、そして可能であれば、それが存在する理由についての簡潔な説明 （最高で2，3文）；
 
 ディスクリプション
------------
+-------------------------
 
 ..
   エンティティの API 。
 
 インターフェイス
----------
+-----------------------
 
 ..
   エンティティの宣言または署名。
@@ -115,9 +115,9 @@
 
   .. cpp:type:: [[deprecated("in version 4.0.1")]] foobar
 
-    フットバー機能を表示します。
+    foobar機能を表示します。
 
-    .. 非推奨:: 4.0.1
+    .. deprecated:: 4.0.1
 
       代わりに、 :cpp:type:`foobat` を使用します。
 
@@ -138,7 +138,7 @@
 
   :tparam ViewDst: その他
 
-  :return:  :cpp:expr:`0<=r<rank` について、:cpp:type:`View::value_type`, :cpp:type:`View::array_layout`, :cpp:type:`View::memory_space`, :cpp:func:`View::rank`, :cpp:func:`View::data()` and :cpp:expr:`View::extent(r)`が、 一致すれば、真
+  :return:  :cpp:expr:`0<=r<rank` について、:cpp:type:`View::value_type`, :cpp:type:`View::array_layout`, :cpp:type:`View::memory_space`, :cpp:func:`View::rank`, :cpp:func:`View::data()` and :cpp:expr:`View::extent(r)` が、 一致すれば、真
 
 .. cpp:function:: void frobrnicator(CoolerView &v) noexcept
 

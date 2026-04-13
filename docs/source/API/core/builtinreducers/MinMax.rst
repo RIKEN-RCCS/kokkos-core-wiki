@@ -1,7 +1,7 @@
 ``MinMax``
 ==========
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 最小値および最大値の両方を格納する `ReducerConcept <ReducerConcept.html>`_ の具体的な実装

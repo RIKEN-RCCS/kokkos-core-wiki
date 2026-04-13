@@ -1,13 +1,13 @@
 ``deep_copy``
 =============
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+----------
 
 .. code-block:: cpp
 
@@ -18,7 +18,7 @@
 特定状況下で、`Kokkos::Views <view.html>`_ またはスカラーである可能性があります。
 
 インターフェイス
----------
+------------------
 
 .. cpp:function:: template <class ExecSpace, class ViewDest, class ViewSrc> void Kokkos::deep_copy(const ExecSpace& exec_space, const ViewDest& dest, const ViewSrc& src);
 
@@ -50,14 +50,14 @@
 
   - ``src.rank == dest.rank`` (または、 ``Kokkos::DynRankView`` , ``src.rank() == dest.rank()`` について)
 
-  - ``[0, dest.rank)`` 内のすべての  ``k`` については、``dest.extent(k) == src.extent(k)`` (または、 ``dest.rank()``と同じ)
+  - ``[0, dest.rank)`` 内のすべての  ``k`` については、 ``dest.extent(k) == src.extent(k)`` (または、 ``dest.rank()`` と同じ)
 
   - ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` および ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true`` 両方であるための、``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value``、 *または* there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (規定またはデフォルト)
 
 * ``src`` が `Kokkos::View <view.html>`_ で、 ``dest`` が、スカラーである場合には、 ``src.rank == 0`` は真です。
 
 セマンティクス
----------
+------------------
 
 * `ExecutionSpace <../execution_spaces.html>`_ argument が提供されなければ、  いかなる実行空間のすべての優れた演算子 （カーネル、コピー演算子）は、コピーが実行される前に終了し、コピー演算子は、呼び出しが返される前に終了します。
 
@@ -115,7 +115,7 @@
     }
 
 レイアウト互換性のないビューをコピーする方法
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 

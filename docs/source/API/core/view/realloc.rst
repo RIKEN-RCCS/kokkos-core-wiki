@@ -3,7 +3,7 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 使用例

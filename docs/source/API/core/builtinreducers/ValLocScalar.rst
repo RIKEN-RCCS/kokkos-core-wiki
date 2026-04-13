@@ -1,7 +1,7 @@
 ``ValLocScalar``
 ================
 
-.. ロール::cpp(code)
+.. role::cpp(code)
     :language: cpp
 
 :cpp:struct:`ValLocScalar` は、 **value** およびそれに対応する  **location** (インデックス)  

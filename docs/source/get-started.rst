@@ -1,5 +1,5 @@
 それでは始めましょう
-###########
+##########################
 
 .. toctree::
    :maxdepth: 1
@@ -17,7 +17,7 @@ Want to try Kokkos right away?  Check it out on 今すぐ Kokkos を試してみ
 <https://godbolt.org/z/svrE563Kn>`_.
 
 :doc:`クイックスタート <get-started/quick-start>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 本ガイドでは、CMake プロジェクトを開始し、Kokkos コードの作成を開始するための最小限の最初の手順を説明します。
 
 :doc:`Integrating Kokkos into Your Project <get-started/integrating-kokkos-into-your-cmake-project>`

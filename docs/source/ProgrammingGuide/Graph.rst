@@ -23,7 +23,7 @@
 実行空間インスタンスとグラフの比較
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- :cpp:`Kokkos` の実行空間インスタンス上に提出されたワークロード は、*熱心に* 実行されます。*すなわち*、:cpp:'Kokkos::p arallel_' 関数が呼び出されると、デバイス上で即座にワークロードが起動されます。 
+ :cpp:`Kokkos` の実行空間インスタンス上に提出されたワークロード は、*熱心に* 実行されます。*すなわち*、:cpp:`Kokkos::parallel_` 関数が呼び出されると、デバイス上で即座にワークロードが起動されます。 
 
 対照的に、:cpp:`Kokkos::Graph` 抽象化は、*怠惰* な実行に従い、*すなわち* :cpp:`Kokkos::Graph` に追加されたワークロードは、グラフ全体が準備できて提出される *まで* 実行されません。
 
@@ -82,7 +82,7 @@
 2. 実行空間インスタンスの `exec` は、キャプチャされたワークロードをデバイスに関連付けます。
 3. "*キャプチャ* モード"中では、バックエンド固有の制限が適用される場合があります (例えば、Cudaプログラミングガイド <https://docs.nvidia.com/cuda/cuda-c-programming-guide/#prohibited-and-unhandled-operations>`_ を参照)。
 
-   .. 警告::
+   .. warning:
 
       "ストリーム" が複数のスレッドで使用されている場合、あるスレッドでのキャプチャが、他のスレッドに影響を与えることがあります(例えば、Cuda ランタイム API 文書上の :cpp:`cudaThreadExchangeStreamCaptureMode` <https://docs.nvidia.com/cuda/cuda-runtime-api/>`_ で を検索してください)。 
 
@@ -99,7 +99,7 @@
   * - :cpp:`SYCL`
     - `SYCL キューレコーディング <https://github.com/intel/llvm/blob/ee5e1ca95c78576c1b6f12b1c2d461ef4b537a9b/sycl/doc/extensions/experimental/sycl_ext_oneapi_graph.asciidoc?plain=1#L167-LL170>`_
 
-.. 注意事項::
+.. note:
 
     :cpp:'SYCL'の文書では、*キャプチャ* ではなく *レコーディング* という用語が使われていますが、実質的には同じ意味です。
 

@@ -7,7 +7,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+----------
 
 .. code-block:: c++
 
@@ -16,7 +16,7 @@
     mesh_subcomponent = Kokkos::subview(full_mesh,Kokkos::ALL(), 0, Kokkos::ALL()); //  x および z 成分を選択
 
 ディスクリプション
------------
+----------------------
 
 .. cpp:class:: LayoutStride
 
@@ -74,7 +74,7 @@
 
    .. rubric:: 関数
 
-   .. cpp:function:: KOKKOS_INLINE_FUNCTION 静的 LayoutStride order_dimensions(int const rank, \
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION static LayoutStride order_dimensions(int const rank, \
 		   iTypeOrder const* const order, iTypeDimen const* const dimen);
 
       指定された順序の次元に基づいてストライドを計算します。

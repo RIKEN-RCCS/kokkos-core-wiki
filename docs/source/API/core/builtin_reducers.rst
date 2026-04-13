@@ -5,9 +5,9 @@
 
  `parallel_reduce <parallel-dispatch/parallel_reduce.html>`__ と組み合わせて使用されるリデューサーオブジェクト。
 
-.. リスト表::
-   :幅: 25 75
-   :ヘッダー列: 1
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
 
    * - リデューサー
      - ディスクリプション

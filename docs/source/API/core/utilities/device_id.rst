@@ -1,10 +1,10 @@
 ``Kokkos::device_id``
 =====================
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
- ヘッダー ``<Kokkos_Core.hpp>`` に定義
+ヘッダー ``<Kokkos_Core.hpp>`` に定義
 
 .. code-block:: cpp
 

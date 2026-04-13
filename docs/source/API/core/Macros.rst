@@ -20,9 +20,9 @@
 バージョンマクロ
 --------------
 
-.. リスト表::
-   :ヘッダー列: 1
-   :配列: 左
+.. list-table::
+   :header-rows: 1
+   :align: left
 
    * - バージョン整数マクロ
      -  Kokkos バージョン 4.2.1を想定した値の例 
@@ -57,11 +57,11 @@
      // ...
    }
 
-.. 警告:: Kokkos 4.1まで、 ``KOKKOS_VERSION_MINOR`` および ``KOKKOS_VERSION_PATCH`` は、それらが本来 ``0`` であるべき時に、定義されませんでした。
+.. warning: Kokkos 4.1まで、 ``KOKKOS_VERSION_MINOR`` および ``KOKKOS_VERSION_PATCH`` は、それらが本来 ``0`` であるべき時に、定義されませんでした。
 
-.. リスト表::
-   :ヘッダー列: 1
-   :配列: 左
+.. list-table::
+   :header-rows: 1
+   :align: left
 
    * - 関数のようなバージョンのヘルパーマクロ ( Kokkos 4.1以降)
    * - ``KOKKOS_VERSION_LESS(メジャー・マイナー・パッチ)``

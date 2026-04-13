@@ -1,7 +1,7 @@
 ``kokkos_malloc``
 =================
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ヘッダー ``<Kokkos_Core.hpp>`` に定義。
@@ -24,7 +24,7 @@
 
 割り当てに失敗した場合、``Kokkos::Experimental::RawMemoryAllocationFailure`` 型の例外がスローされます。
 
-.. 警告::
+.. warning:
 
     Kokkos の管理対象外であるメモリに対して、メモリの動作を操作する関数（例：memAdvise）を呼び出すと、未定義の動作を引き起こします。
 

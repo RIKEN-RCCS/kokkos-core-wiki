@@ -13,7 +13,7 @@
 
    numerics/mathematical-functions.md
 
- ヘッダー ``<Kokkos_MathematicalFunctions.hpp>`` は、``fabs``, ``sqrt`` および ``sin`` 等の、標準Cライブラリの数学関数に対して、一貫性と移植性を備えたオーバーロードのセットを提供します。
+ヘッダー ``<Kokkos_MathematicalFunctions.hpp>`` は、``fabs``, ``sqrt`` および ``sin`` 等の、標準Cライブラリの数学関数に対して、一貫性と移植性を備えたオーバーロードのセットを提供します。
 
 .. toctree::
    :maxdepth: 1

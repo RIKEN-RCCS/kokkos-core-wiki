@@ -24,7 +24,7 @@ STL様 並列アルゴリズム
 
 :doc:`API/containers-index`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
- ``DualView``、 ``ScatterView``、 または ``OffsetView`` 等、異色ビュー型コンテナ
+ ``DualView`` 、 ``ScatterView`` 、 または ``OffsetView`` 等、異色ビュー型コンテナ
 
 
 :doc:`API/simd-index`

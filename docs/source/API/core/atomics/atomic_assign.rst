@@ -1,11 +1,11 @@
 ``atomic_assign``
 =================
 
-.. 警告::
+.. warning:
    Kokkos 4.5より、非推奨なので、 代わりに、
    :cpp:func:`atomic_store` をご使用ください。
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
  ``<Kokkos_Core.hpp>`` に含まれるヘッダー ``<Kokkos_Atomic.hpp>`` に定義。

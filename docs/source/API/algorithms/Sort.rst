@@ -1,7 +1,7 @@
 ソート
-====
+============
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 .. code-block:: cpp
@@ -26,14 +26,14 @@
     template<class ViewType> void sort( ViewType view, size_t const begin, size_t const end ) {  }
 
 ネストされたポリシーによるソート（チームレベルおよびスレッドレベル）
-=====================================================
+=================================================================================
 
  ``TeamPolicy`` カーネル内で使用する並列ソート関数。これらは、チームレベル（``TeamThreadRange``）またはスレッドレベル (``ThreadVectorRange``) の並列処理を使用してソートを実行します。
 
 ヘッダー: ``<Kokkos_NestedSort.hpp>``
 
 シノプシス
---------
+------------------
 
 .. code-block:: cpp
         

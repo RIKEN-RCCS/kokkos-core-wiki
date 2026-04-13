@@ -1,7 +1,7 @@
 ``initialize``
 ==============
 
-.. ロール::cpp(code)
+.. role::cpp(code)
     :language: cpp
 
  ヘッダー ``<Kokkos_Core.hpp>`` に定義。

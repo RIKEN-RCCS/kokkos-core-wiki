@@ -20,7 +20,7 @@ and `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
 注意事項: 実行空間インスタンス固有の ``fence`` も存在します。: `ExecutionSpaceConcept <../execution_spaces.html#executionspaceconcept>`_
 
 インターフェイス
----------
+------------------
 
 .. code-block:: cpp
 
@@ -41,7 +41,7 @@ and `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
 - ```Kokkos::fence()`` は、既存の並列領域内では呼び出すことはできません (つまり、  ファンクタまたはラムダの ``operator()`` 内)。
 
 セマンティクス
----------
+----------------
 
 - すべての未処理の非同期作業が完了した時点でブロックします。 未処理作業の副作用は、 ``fence`` 呼び出しの完了時に観測可能となります。つまり ``Kokkos::fence()`` は、メモリフェンスを意味します。
 
@@ -49,7 +49,7 @@ and `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
 --------
 
 タイミングカーネル
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 

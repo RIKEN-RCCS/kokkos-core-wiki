@@ -17,18 +17,18 @@
 
 .. |text| replace:: *ExecutionPolicy*
 
- ``functor``で定義された並列作業を、|text|_ ``policy`` に従ってディスパッチします。 オプションのラベル ``name`` は、
+``functor``で定義された並列作業を、|text|_ ``policy`` に従ってディスパッチします。 オプションのラベル ``name`` は、
 プロファイリングおよびデバッグツールで使用されます。この呼び出しは非同期であり、呼び出し元へ直ちに返る可能性があります。 
 
 インターフェイス
----------
+--------------------
 
 .. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_for(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
 
-.. cpp:function:: テンプレート <class ExecPolicy, class FunctorType> Kokkos::parallel_for(const ExecPolicy& policy, const FunctorType& functor);
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_for(const ExecPolicy& policy, const FunctorType& functor);
 
 パラメータ:
-~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 * ``name``: ユーザーが提供した文字列で、Kokkos Profiling Hooksを介してプロファイリングおよびデバッグツールで使用されます。
 * ExecPolicy: 反復空間およびその他の実行プロパティを定義する *ExecutionPolicy* :
@@ -47,12 +47,12 @@
 
 * ``ExecPolicy`` が ``IntegerType`` であれば、 ``functor`` は、メンバー関数 ``operator() (const IntegerType& i) const`` を持ちます。
 *  ``ExecPolicy`` が ``MDRangePolicy`` であり、 ``ExecPolicy::work_tag`` が ``void`` であれば、 ``functor`` は、``N`` が ``ExecPolicy::rank-1`` であるメンバー関数 ``operator() (const IntegerType& i0, ... , const IntegerType& iN) const`` を持ちます。 
-* ``ExecPolicy`` が ``MDRangePolicy`` であり、 ``ExecPolicy::work_tag`` が ``void`` でなければ、 ``functor`` は、``N`` が ``ExecPolicy::rank-1`` であるメンバー関数 ``operator() (const ExecPolicy::work_tag, const IntegerType& i0, ... , const IntegerType& iN) constを持ちます。
+* ``ExecPolicy`` が ``MDRangePolicy`` であり、 ``ExecPolicy::work_tag`` が ``void`` でなければ、 ``functor`` は、``N`` が ``ExecPolicy::rank-1`` であるメンバー関数 ``operator() (const ExecPolicy::work_tag, const IntegerType& i0, ... , const IntegerType& iN) const`` を持ちます。
 * ``ExecPolicy::work_tag`` が ``void`` であれば、 ``functor`` は、 メンバー関数 ``operator() (const ExecPolicy::member_type& handle) const`` を持ちます。
 * ``ExecPolicy::work_tag`` が ``void`` でなければ、 ``functor`` は、 メンバー関数 ``operator() (const ExecPolicy::work_tag, const ExecPolicy::member_type& handle) const`` を持ちます。
 
 セマンティクス
----------
+------------------
 
 * ``policy`` で定義された反復空間の各要素に対して、ファンクターの呼び出し演算子は正確に1回呼び出されます。ただし、``TeamPolicy`` および ``TeamThreadRange`` については、それぞれチームの各ベクトルレーンおよびスレッドによって呼び出し演算子が呼び出されます。
 * 並行性も、反復処理の実行順序も、保証されません。

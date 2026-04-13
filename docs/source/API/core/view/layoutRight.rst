@@ -1,20 +1,20 @@
 ``LayoutRight``
 ===============
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
    :language: cpp
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+------------
 
 .. code-block:: cpp
 
    Kokkos::View<float*, Kokkos::LayoutRight> my_view;
 
 ディスクリプション
------------
+--------------------
 
 .. cpp:struct:: LayoutRight
 

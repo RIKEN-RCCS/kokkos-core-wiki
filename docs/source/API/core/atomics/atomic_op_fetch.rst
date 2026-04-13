@@ -1,7 +1,7 @@
 ``atomic_[op]_fetch``
 =====================
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``

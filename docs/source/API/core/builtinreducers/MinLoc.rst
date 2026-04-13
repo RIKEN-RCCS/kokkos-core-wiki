@@ -1,7 +1,7 @@
 ``MinLoc``
 ==========
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 インデックスを伴って最小値を格納する `ReducerConcept <ReducerConcept.html>`_ の具体的な実装

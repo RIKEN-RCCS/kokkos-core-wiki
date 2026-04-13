@@ -1,7 +1,7 @@
 ``atomic_store``
 ================
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
  ``<Kokkos_Core.hpp>`` に含まれている、ヘッダー <Kokkos_Atomic.hpp> に定義されています。

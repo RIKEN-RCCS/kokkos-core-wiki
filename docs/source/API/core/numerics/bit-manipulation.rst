@@ -1,10 +1,10 @@
 ビット操作
 ================
 
-.. ロール::cpp(code)
+.. role::cpp(code)
     :language: cpp
 
-.. ロール:: ストライク
+.. role:: ストライク
     :クラス: ストライク
 
 .. _KokkosBitManipulation: https://github.com/kokkos/kokkos/blob/4.1.00/core/src/Kokkos_BitManipulation.hpp

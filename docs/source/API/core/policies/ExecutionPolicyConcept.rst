@@ -1,7 +1,7 @@
 ``ExecutionPolicy``
 ===================
 
-.. ロール::cpp(code)
+.. role::cpp(code)
     :language: cpp
 
  ``ExecutionPolicy`` の概念は、Kokkos パラレルパターンの実行がどのように行われるかを "どのように" 表現する基本的な抽象化です。このページでは、Kokkos の実行ポリシーの共通機能の使い方について実用的に説明しています。 より正式かつ理論的な説明については、本文書 <../KokkosConcepts.html>`_ を参照してください。

@@ -1,7 +1,7 @@
 ``MinMaxLoc``
 =============
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 対応するインデックスを使って最小値および最大値両方を格納する `ReducerConcept <ReducerConcept.html>`_ の具体的な実装

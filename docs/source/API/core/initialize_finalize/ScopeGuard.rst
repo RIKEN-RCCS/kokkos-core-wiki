@@ -22,7 +22,7 @@
 正しい使用法のためには、Kokkosへの呼び出しを発行する前に、必ず``ScopeGuard``の命名済みインスタンスを作成する必要があります。
 
 
-.. 警告:: バージョン 3.7におけるビヘイビアの変更 (以下参照)。 ``ScopeGuard`` は、:cpp:func:`is_initialized()` または :cpp:func:`is_finalized()` のいずれかが ``true`` を返した場合に中断します。
+.. warning: バージョン 3.7におけるビヘイビアの変更 (以下参照)。 ``ScopeGuard`` は、:cpp:func:`is_initialized()` または :cpp:func:`is_finalized()` のいずれかが ``true`` を返した場合に中断します。
 
 ディスクリプション
 -----------
@@ -38,13 +38,13 @@
        :param argc: コマンドライン引数の数。
        :param argv: コマンドライン引数を格納するヌル終端文字列への文字ポインタの配列。
 
-       .. 警告:: 3.7まで有効。
+       .. warning: 3.7まで有効。
 
     .. cpp:function:: ScopeGuard(InitArguments const& arguments = InitArguments());
 
        :param arguments: 有効な初期化引数を持つ ``構造体`` オブジェクト。
 
-       .. 警告:: 3.7まで有効。
+       .. warning: 3.7まで有効。
 
     .. cpp:function:: template <class... Args> ScopeGuard(Args&&... args);
 

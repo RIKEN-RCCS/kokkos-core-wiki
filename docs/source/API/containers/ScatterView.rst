@@ -1,12 +1,12 @@
 ``ScatterView``
 ===============
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
 	:language: cpp
 
 ヘッダーファイル: ``<Kokkos_ScatterView.hpp>``
 
-.. 警告::
+.. warning:
 
     ``ScatterView`` は、名前空間 Kokkos::Experimental にまだ存在しています。
 

@@ -66,7 +66,7 @@
 
    この割り当てオプションを使用する場合、`View` コンストラクタ/デストラクタは、ホスト上でシリアルループ内で、要素を作成/破棄します。
 
-   .. 警告::
+   .. warning:
 
      `SequentialHostInit` は、メモリ空間としての `View`s with `HostSpace`、 `SharedSpace`、
      または `SharedHostPinnedSpace` 等、ホストアクセス可能な `View` 作成時にのみ使用可能です。

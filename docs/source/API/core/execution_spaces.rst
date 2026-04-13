@@ -3,7 +3,7 @@
 実行空間
 ================
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 .. _ExecutionSpaceConceptType: #kokkos-executionspaceconcept

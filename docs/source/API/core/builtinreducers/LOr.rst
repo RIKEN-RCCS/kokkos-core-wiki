@@ -1,7 +1,7 @@
 ``LOr``
 =======
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 論理的 ``OR`` 演算を行う `ReducerConcept <ReducerConcept.html>`_ の具体的な実装

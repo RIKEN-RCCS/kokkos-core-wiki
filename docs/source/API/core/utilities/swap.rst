@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
- ``<Kokkos_Core.hpp>`` に含まれるヘッダー ``<Kokkos_Swap.hpp>``:sup:`(バージョン 4.3以降)`  に定義。
+``<Kokkos_Core.hpp>`` に含まれるヘッダー ``<Kokkos_Swap.hpp>``:sup:`(バージョン 4.3以降)`  に定義。
 
 .. code-block:: cpp
 
@@ -23,7 +23,7 @@
 2) 配列 ``a`` および ``b`` を入れ替えます。 ``T2``  が入れ替え可能でなければ、このオーバーロードは、オーバーロード解決に関与しません。
 
 注意事項
------
+-----------------
 .. _std_swap: https://en.cppreference.com/w/cpp/algorithm/swap
 
 .. |std_swap| replace:: ``std::swap``

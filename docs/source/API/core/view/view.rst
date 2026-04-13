@@ -1,5 +1,5 @@
 ``ビュー``
-========
+================
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
@@ -12,7 +12,7 @@
 .. |ProgrammingGuide| replace:: Programming Guide
 
 クラスインターフェイス
----------------
+--------------------------
 
 .. cpp:class:: template <class DataType, class... Properties> View
 
@@ -21,13 +21,12 @@
    
    :tparam DataType: `View` の基本スカラー型とその次元性を定義します。
 
-      基本構造は、 ``ScalarType STARS BRACKETS`` であり、ここで ``STARS`` の数は実行時長さの次元数を示し、
-   ``BRACKETS`` の数はコンパイル時次元数を定義します。
-      Due to C++ type restrictions runtime dimensions must come first.C++の型制限により、実行時の次元は最初に指定されなければなりません。
+      基本構造は、 ``ScalarType STARS BRACKETS`` であり、ここで ``STARS`` の数は実行時長さの次元数を示し、 ``BRACKETS`` の数はコンパイル時次元数を定義します。
+      C++の型制限により、実行時の次元は最初に指定されなければなりません。
       例:
 
       - :cpp:`double**`: 2つの実行時次元に持つ :cpp:`double` の2Dビュー
-      - :cpp:`const int***[5][3]`: 3つの実行時次元と2つのコンパイル時次元を持つ cpp:`int`（）の5D ビュー：
+      - :cpp:`const int***[5][3]`: 3つの実行時次元と2つのコンパイル時次元を持つ :cpp:`int` の5D ビュー：
          データは、:cpp:`const`.
       - :cpp:`Foo[6][2]`: コンパイル時2次元を持つ :cpp:`Foo` クラスの 2D ビュー
 
@@ -164,7 +163,7 @@
 
 
 データハンドル
-^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 .. cpp:type:: reference_type
 
@@ -192,17 +191,17 @@
 
    本 :cpp:class:`View` のメモリ空間に関するインデックス型。
 
-.. cpp:type:: 次元
+.. cpp:type:: dimension
 
    :cpp:class:`View` の範囲を表すことができる整数配列のような型。
 
-.. cpp:type:: 特殊化
+.. cpp:type:: specialize
 
    :cpp:class:`View` の基盤となるマッピング構造の部分的な特殊化に使用される特殊化タグ。
 
 
 コンストラクタ
-^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 .. cpp:function:: View()
 
@@ -266,7 +265,7 @@
 .. cpp:function:: View(const ALLOC_PROP &prop, const array_layout& layout)
 
    割り当てプロパティ (:cpp:func:`view_alloc` への呼び出しにより作成) および レイアウトオブジェクトを使って、コンストラクタを割り当てます。実行空間が、
-  :cpp:any:`prop` において、特定される場合には、 初期化ではそれは使われず、フェンスは設定されません。
+   :cpp:any:`prop` において、特定される場合には、 初期化ではそれは使われず、フェンスは設定されません。
    そうでない場合には、:cpp:class:`View` は、:cpp:type:`memory_space` に対応するデフォルトの実行空間インスタンスを使用して初期化され、フェンスが設定されます。
 
    :param prop:  `view_alloc` によって返される割り当てプロパティオブジェクト。
@@ -343,12 +342,12 @@
 
    :param mds: 変換元のmdspan。
 
-   .. 警告::
+   .. warning::
 
       :cpp:`explicit(bool)` は、C++20 以降でのみ利用可能です。 C++17を使って、Kokkos を構築する場合、このコンストラクタは、完全に暗黙的に定義されます。
       C++20 への、その後のアップグレードでは、:cpp:`traits::is_managed` が、 :cpp:`false` である場合、コンパイルエラーが発生する可能性があることに、注意してください。
 
-   :cpp:`NATURAL_MDSPAN_TYPE` は、ビューの :ref:`natural mdspan <api-view-natural-mdspans>` です。 :cpp:type:`array_layout` が、 :cpp:struct:`LayoutLeft`、 :cpp:struct:`LayoutRight`、または :cpp:class:`LayoutStride`のうちの1つである場合にのみ、 *natural mdspan* が利用可能です。 *natural mdspan* が利用可能である場合にのみ、このコンストラクタは、利用可能です。
+   :cpp:`NATURAL_MDSPAN_TYPE` は、ビューの :ref:`natural mdspan <api-view-natural-mdspans>` です。 :cpp:type:`array_layout` が、 :cpp:struct:`LayoutLeft` 、 :cpp:struct:`LayoutRight` 、または :cpp:class:`LayoutStride` のうちの1つである場合にのみ、 *natural mdspan* が利用可能です。 *natural mdspan* が利用可能である場合にのみ、このコンストラクタは、利用可能です。
 
    :cpp:any:`mds` から変換して :cpp:class:`View` を構築します。 :cpp:class:`View` は、管理対象外となり、 :cpp:`View(mds.data(), array_layout_from_mapping(mds.mapping()))` によるかの様に構築されます。
 
@@ -365,13 +364,13 @@
 
    :param mds: 変換元の mdspan。
 
-   .. 警告::
+   .. warning::
 
       ::cpp:`explicit(bool)` は、C++20 以降でのみ利用可能です。 C++17を使って、Kokkos を構築する場合、このコンストラクタは、完全に暗黙的に定義されます。
       C++20 への、その後のアップグレードでは、:cpp:`traits::is_managed` が、 :cpp:`false` である場合、コンパイルエラーが発生する可能性があることに、注意してください。
 
     :cpp:any:`mds` ～変換することにより、:cpp:class:`View` を構築します。
-   :cpp:class:`View`'s :ref:`natural mdspan <api-view-natural-mdspans>` は、 :cpp:any:`mds` から構築可能でなければなりません。 :cpp:class:`View` は、 :cpp:`View(NATURAL_MDSPAN_TYPE(mds))` によるかの様に、構築されます。
+    :cpp:class:`View`'s :ref:`natural mdspan <api-view-natural-mdspans>` は、 :cpp:any:`mds` から構築可能でなければなりません。 :cpp:class:`View` は、 :cpp:`View(NATURAL_MDSPAN_TYPE(mds))` によるかの様に、構築されます。
 
     C++20:において、
       本コンストラクタは、:cpp:any:`mds` が、 :cpp:class:`View` の *natural mdspan* に暗示的に変換可能な場合に、暗示的です。
@@ -403,15 +402,15 @@
    :tparam IntType: 整数型
    
    :param i0, i1, i2, i3, i4, i5, i6, i7: 参照を取得する要素のインデックス。
-   :: 指定されたインデックスの要素への参照。
+   :return: 指定されたインデックスの要素への参照。
 
    cpp:type:`reference_type` の値を返しますが、この型自体は参照可能である場合もあれば、そうでない場合もあります。
    インデックス引数の数は、ビューの :cpp:func:`rank` 以上である必要があります。
-   :cpp:func:`rank`を超えるインデックス引数は、 :cpp:`0` でなければなりませんが、これは、 :cpp:any:`KOKKOS_DEBUG` が定義されている場合に、必ず行われます。
+   :cpp:func:`rank` を超えるインデックス引数は、 :cpp:`0` でなければなりませんが、これは、 :cpp:any:`KOKKOS_DEBUG` が定義されている場合に、必ず行われます。
 
 
 データレイアウト、次元、ストライド
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. cpp:function:: static constexpr size_t rank()
 
@@ -425,15 +424,15 @@
 
    .. versionadded:: 4.1
 
-.. 注意事項::
+.. note::
 
-   実際には、:cpp:func:`rank()` および :cpp:func:`rank_dynamic()` は、静的メンバ関数として実装されていませんが、しかし、``rank``および``rank_dynamic``の基底型には、引数なしのメンバ関数があります。 (つまり、 引数なしで、呼び出し可能)。
+   実際には、 :cpp:func:`rank()` および :cpp:func:`rank_dynamic()` は、静的メンバ関数として実装されていませんが、しかし、 ``rank`` および ``rank_dynamic`` の基底型には、引数なしのメンバ関数があります。 (つまり、 引数なしで、呼び出し可能)。
 
 .. versionchanged:: 4.1
 
    :cpp:func:`rank` および :cpp:func:`rank_dynamic` は、 :cpp:`size_t` に変換可能な静的メンバ変数です。
    それらの基本型は未指定ですが、ホスト側とデバイス側の双方から呼び出せるゼロ引数メンバー関数を持つ :cpp:`std::integral_constant` と同等です。
-   ユーザーには、整数型への暗示的変換に依存する代わりに、:cpp:`rank()` および :cpp:`rank_dynamic()`（静的メンバ関数呼び出しに類似）の使用を推奨します。
+   ユーザーには、整数型への暗示的変換に依存する代わりに、:cpp:`rank()` および :cpp:`rank_dynamic()` (静的メンバ関数呼び出しに類似) の使用を推奨します。
 
    Kokkos 4.1 まで定義されていた :cpp:func:`rank` および :cpp:func:`rank_dynamic` の実際の型は、実装（つまり Kokkos ではなくコンパイラ）に委ねられていましたが、実際には、 :cpp:`int` であることが多く、この変更により符号付きおよび符号なしの整数型の比較に関する警告が発生する可能性があります。
    また、:cpp:func:`rank` 型を使用していたコードが動作しなくなる可能性があります
@@ -460,9 +459,9 @@
    :param dim: 範囲を取得する対象の次元
    :return:  :cpp:`int` としての次元 :cpp:any:`dim` の範囲
 
-   :cpp:func:`extent`と比較して、この関数は
-:cpp:`int` 演算が :cpp:`size_t` よりも効率的なアーキテクチャにおいて有用です。
-   また、その他に、:cpp:`int`型で全てのインデックス演算を実行するアプリケーションにおいて、型キャストの必要性を排除する可能性があります。
+   :cpp:func:`extent` と比較して、この関数は
+   :cpp:`int` 演算が :cpp:`size_t` よりも効率的なアーキテクチャにおいて有用です。
+   また、その他に、:cpp:`int` 型で全てのインデックス演算を実行するアプリケーションにおいて、型キャストの必要性を排除する可能性があります。
 
    .. rubric:: Preconditions:
 
@@ -540,7 +539,7 @@
 
    :return: 基盤データは位置へのポインタ。
 
-   .. 警告::
+   .. warning::
    
       Kokkos によって管理されているメモリに対して、メモリの動作を操作する関数（例：``memAdvise``）を呼び出すと、未定義の動作を引き起こします。
 
@@ -566,7 +565,7 @@
    :返し: 提供されたレイアウトの管理対象外である :cpp:class:`View` に必要なバイト数。
 
 その他のユーティリティメソッド
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. cpp:function:: int use_count() const;
 
@@ -590,7 +589,7 @@
    本関数は、管理ビューと管理対象外ビューの両方で機能します。
    管理対象外ビューでは、参照されるアドレスが有効であることが保証されるのではなく、単にヌルポインタでないことのみが保証されます。
 
- mdspan への変換
+mdspan への変換
 ^^^^^^^^^^^^^^^^^^^^
 
 .. cpp:function:: template <class OtherElementType, class OtherExtents, class OtherLayoutPolicy, class OtherAccessor> constexpr operator mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>()
@@ -628,7 +627,7 @@
 
    :return:  :cpp:type:`~View::value_type`, :cpp:type:`~View::array_layout`, :cpp:type:`~View::memory_space`, :cpp:func:`~View::rank()`, :cpp:func:`~View::data()` および :cpp:expr:`extent(r)`, for :math:`0 \le r \lt \texttt{rank()}`, が一致する場合に :cpp:`true`
 
-.. cpp:function:: テンプレート <class LT, class... LP, class RT, class... RP> bool operator!=(const View<LT, LP...>& lhs, const View<RT, RP...>& rhs)
+.. cpp:function:: template <class LT, class... LP, class RT, class... RP> bool operator!=(const View<LT, LP...>& lhs, const View<RT, RP...>& rhs)
 
    :return: :cpp:expr:`!(lhs == rhs)`
 
@@ -669,7 +668,7 @@
 
 * :cpp:`DstType::array_layout` または :cpp:`SrcType::array_layout` のいずれかが :cpp:class:`LayoutStride` である場合
 
-  - 各次元 :cpp:`k` について、:cpp:`dst_view.extent(k) == src_view.extent(k)`でなければなりません。
+  - 各次元 :cpp:`k` について、:cpp:`dst_view.extent(k) == src_view.extent(k)` でなければなりません。
 
 .. code-block:: cpp
    :caption: 代入例
@@ -691,7 +690,7 @@
 .. _api-view-natural-mdspans:
 
 ナチュラル mdspans
----------------
+-----------------------
 
 .. versionadded:: 4.4.0
 
@@ -710,7 +709,7 @@ C++23 は、非所有の多次元配列ビュー` である、mdspan <https://en
 #. :cpp:`M::layout_type` は、
 
    * :cpp:`V::array_layout` が :cpp:`LayoutLeft` であれば、:cpp:`std::layout_left_padded<std::dynamic_extent>`
-   * :cpp:`V::array_layout` が :cpp:`LayoutRight` であれば、:cpp:`std::layout_right_padded<std::dynamic_extent>
+   * :cpp:`V::array_layout` が :cpp:`LayoutRight` であれば、:cpp:`std::layout_right_padded<std::dynamic_extent>`
    * :cpp:`V::array_layout` が :cpp:any:`LayoutStride` であれば、:cpp:`std::layout_stride` 。
 
 #. :cpp:`M::accessor_type` が :cpp:`std::default_accessor<V::value_type>`

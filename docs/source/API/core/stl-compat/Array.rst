@@ -144,7 +144,7 @@
 
 非推奨インターフェイス
 --------------------
-.. 非推奨:: 4.4.00
+.. deprecated:: 4.4.00
 
 .. cpp:struct:: template<class T = void, size_t N = KOKKOS_INVALID_INDEX, class Proxy = void> Array
 

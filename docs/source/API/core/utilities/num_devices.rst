@@ -13,11 +13,11 @@
 ホストバックエンドのみが有効な場合は、システム上で利用可能なデバイスの数、または ``-1`` を返します。
 
 注意事項
------
+---------------
 
 ``Kokkos::num_devices()`` は、Kokkosが実行に利用できるデバイスの数を
 決定するために使用される場合があります。
-これは、``Kokkos::initialize()`` の前または ``Kokkos::finalize()`` の後に
+これは、 ``Kokkos::initialize()`` の前または ``Kokkos::finalize()`` の後に
 呼び出される可能性のある数少ないランタイム関数の1つです。
 
 例
@@ -58,7 +58,7 @@
 
 .. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
 
-.. |InitializationSettings| :: ``InitializationSettings``
+.. |InitializationSettings| replace:: ``InitializationSettings``
 
 |device_id|_: Kokkos により使用されるデバイスの id を返します。
 

@@ -1,13 +1,13 @@
 ``NestedPolicies``
 ==================
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 リスト
-----
+--------------
 
 ``Kokkos::PerTeam``
 ~~~~~~~~~~~~~~~~~~~
@@ -41,7 +41,7 @@
 有効なテンプレートの引数はここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ で説明します。
 
 使用例
-~~~~~
+~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -53,7 +53,7 @@
 ネストポリシーは、ネスト並列パターンに使用できます。グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは関数として実装されており、チームハンドルを通じて実行空間タイプに、暗示的テンプレート化が可能になります。
 
 シノプシス
-~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -65,7 +65,7 @@
     Impl::VectorSingleStruct PerThread(TeamMemberType team);
 
 ディスクリプション
-~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 .. cpp:function:: Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType count);
 
@@ -75,7 +75,7 @@
 
 .. cpp:function:: Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType begin, IndexType end);
 
-    チームのスレッドでインデックス範囲 ``begin`` から ``end-1`` まで分割  します。このコールはチームの同期ポイントとなる可能性があり、 ``team_barrier``の要件を満たす必要があります。
+    チームのスレッドでインデックス範囲 ``begin`` から ``end-1`` まで分割  します。このコールはチームの同期ポイントとなる可能性があり、 ``team_barrier`` の要件を満たす必要があります。
         - ``team``: TeamHandleの要件を満たすオブジェクト
         - ``begin``: 開始インデックス。
         - ``end``: 終了インデックス。

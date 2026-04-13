@@ -1,13 +1,13 @@
 ``parallel_scan``
 =================
 
-.. ロール::cpp(code)
+.. role::cpp(code)
     :language: cpp
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+----------
 
 .. code-block:: cpp
 
@@ -19,7 +19,7 @@
  ``functor`` で定義された並列作業を、*ExecutionPolicy* ``policy`` に従ってディスパッチし、作業項目が提供する成果物に対して排他的または包括的なスキャンを実行します。 オプションのラベル ``name`` はプロファイリングおよびデバッグツールで使用されます。提供された場合、最終結果は、 ``result`` に格納されます。
 
 インターフェイス
----------
+-------------------
 
 .. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_scan(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
 
@@ -53,7 +53,7 @@
 * ファンクタは、``ReturnType`` と同様に、 ``FunctorType::value_type`` を定義する必要があります。
 
 セマンティクス
----------
+-------------------
 
 * 並行性または実行順序は、保証されません。
 * ``ReturnType`` の内容は上書きされます。つまり、値を還元中立要素に初期化する必要はありません。

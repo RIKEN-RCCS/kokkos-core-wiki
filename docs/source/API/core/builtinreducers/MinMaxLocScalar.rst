@@ -1,7 +1,7 @@
 ``MinMaxLocScalar``
 ===================
 
-.. ロール::cpp(code)
+.. role::cpp(code)
     :language: cpp
 
 The :cpp:struct:`MinMaxLocScalar` は、最小値、最大値の両方を格納するクラステンプレートであり、そしてそれぞれの保存先が一つの単位として示されます。 それは、 :cpp:class:`MinMaxLoc` builtin リデューサーを使って、 :cpp:func:`parallel_reduce` 演算の結果を保持するために設計されています 

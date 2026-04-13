@@ -4,7 +4,7 @@
 ``KOKKOS_IF_ON_HOST`` および ``KOKKOS_IF_ON_DEVICE``
 =================================================
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
    :language: cpp
 
 概要

@@ -30,7 +30,7 @@
 
 .. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
 
-.. |InitializationSettings| :: ``InitializationSettings``
+.. |InitializationSettings| replace:: ``InitializationSettings``
 
 |num_devices|_: Kokkos が利用可能なデバイス数を返します。
 

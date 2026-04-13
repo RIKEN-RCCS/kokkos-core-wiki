@@ -7,7 +7,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+-----------------
 
 .. code-block:: cpp
 
@@ -21,7 +21,7 @@
 以下も参照: `TeamMember <TeamHandleConcept.html>`_
 
 ディスクリプション
------------
+--------------------------
 
 .. cpp:class:: template<class ...Args> TeamPolicy
 
@@ -126,7 +126,7 @@ TeamPolicyの有効なテンプレート引数は、ここ <../Execution-Policie
 
       Returns: ベクトル長の最大有効値。
 
-   .. cpp:function:: 静的 int scratch_size_max(int level);
+   .. cpp:function:: static int scratch_size_max(int level);
 
       返し: 指定のレベルについて、最大総スクラッチサイズ(バイト単位)。
       注意事項: カーネルがチームレベルの削減やスキャン演算を行う場合、このメモリのすべてが、動的ユーザーリクエストについて、利用可能になるわけではありません。 これらの最大スクラッチサイズの一部は、内部演算に使われています。これらの内部割り当ての実際のサイズは、還元またはスキャンで使用される値の型によって異なります。

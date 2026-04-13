@@ -1,7 +1,7 @@
 ``kokkos_realloc``
 ==================
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 Defined in ヘッダー ``<Kokkos_Core.hpp>`` に定義。

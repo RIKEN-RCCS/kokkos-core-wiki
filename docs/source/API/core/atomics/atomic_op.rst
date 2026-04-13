@@ -1,7 +1,7 @@
 ``atomic_[op]``
 ===============
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``

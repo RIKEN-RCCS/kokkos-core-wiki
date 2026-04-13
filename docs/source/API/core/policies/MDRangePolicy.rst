@@ -1,13 +1,13 @@
 ``MDRangePolicy``
 =================
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用例
------
+-------------
 
 .. code-block:: cpp
 
@@ -19,7 +19,7 @@
  ``MDRangePolicy`` は、 ``開始`` タプルから開区間で ``終わる`` 多次元反復空間の実行ポリシーを定義しています。反復空間はタイルされ、ユーザーはオプションでタイルサイズを設定できます。
 
 インターフェイス
----------
+-------------------
 
 .. code-block:: cpp
 
@@ -32,10 +32,10 @@
 汎用テンプレート引数
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- ``MDRangePolicy``の有効なテンプレート引数はここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ に説明されています。
+ ``MDRangePolicy`` の有効なテンプレート引数はここ `<../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ に説明されています。
 
 
- MDRangePolicy に特有の必要論拠
+MDRangePolicy に特有の必要論拠
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
@@ -49,10 +49,10 @@
 
 
 パブリッククラスメンバー
---------------------
+-------------------------------
 
 コンストラクタ
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 .. cpp:function:: MDRangePolicy()
 
@@ -74,8 +74,8 @@
 
     * タイル次元同様に、開始と終了のインデックスを提供します。 リストの長さは、ポリシーのランクに一致しなければなりません。
 
-CTAD コンストラクタ ( 4.3以降)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CTAD コンストラクタ (4.3以降)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: cpp
 
@@ -124,16 +124,16 @@ CTAD コンストラクタ ( 4.3以降)
 
     * ``Kokkos::Array<array_index_type, rank>`` 型を返します。これは、 ``MDRangePolicy`` が内部でデフォルトで使うランクごとのタイルサイズを含みます。デフォルトのタイルサイズは静的で、指定されたバックエンドに基づいて設定されています。
 
-    .. 注意事項:: ``tile_size_recommended()`` は、 Kokkos 4.5以降利用可能です。
+    .. note: ``tile_size_recommended()`` は、 Kokkos 4.5以降利用可能です。
 
 .. cpp:function:: int max_total_tile_size() const
 
     * すべてのタイルサイズの積の上限を表す値を返します。
 
-    .. 注意事項:: ``max_total_tile_size()`` は、 Kokkos 4.5以降利用可能です。
+    .. note: ``max_total_tile_size()`` は、 Kokkos 4.5以降利用可能です。
 
 注意事項
-^^^^^
+^^^^^^^^^^^^^
 
 * すべてのランクで、開始インデックスが一致する終了インデックスより大きくあってはいけません。
 * 開始と終了の配列ランクは一致しなければなりません。

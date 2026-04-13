@@ -1,7 +1,7 @@
 
 .. include:: ../../mydefs.rst
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ``DynRankView``

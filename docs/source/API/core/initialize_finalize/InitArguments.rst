@@ -1,7 +1,7 @@
 InitArguments
 =============
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
    :language: cpp
 
 .. _KokkosInitialize: initialize.html
@@ -12,7 +12,7 @@ InitArguments
 
  ``<Kokkos_Core.hpp>`` ヘッダーに定義。
 
-.. 警告:: 3.7以降非推奨、 4.3において削除、 **代わりに** ``Kokkos::InitializationSettings`` を **使用** 
+.. warning: 3.7以降非推奨、 4.3において削除、 **代わりに** ``Kokkos::InitializationSettings`` を **使用** 
 
 
 インターフェイス

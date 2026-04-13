@@ -1,7 +1,7 @@
 ``atomic_exchange``
 ===================
 
-.. ロール:: cpp(code)
+.. role:: cpp(code)
    :language: cpp
 
 ``<Kokkos_Core.hpp>`` 含まれているヘッダー ``<Kokkos_Atomic.hpp>`` により、定義されています。
