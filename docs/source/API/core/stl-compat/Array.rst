@@ -55,7 +55,7 @@
 
   .. rubric:: パブリックメンバー関数
 
-  .. cpp:function::  constexpr ブール empty() noexcept
+  .. cpp:function:: constexpr bool empty() noexcept
 
     :返し: ``N == 0``
     :since: ``非定数`` 5.0以降 
@@ -175,8 +175,8 @@
 
    .. rubric:: パブリック型
 
-   .. cpp:type:: 隣接
-   .. cpp:type:: 一定間隔
+   .. cpp:type:: contiguous
+   .. cpp:type:: strided
 
 * 本仕様は、は、埋め込みタグの種類を定義した型: ``contiguous`` および ``strided`` 。
 

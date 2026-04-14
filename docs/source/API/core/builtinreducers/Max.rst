@@ -54,7 +54,7 @@
 
    .. rubric:: Public Types
 
-   .. cpp:type:: リデューサー
+   .. cpp:type:: reducer_type
 
       自己型。
 
@@ -80,7 +80,7 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-       ``src`` および ``dest`` の最大値を ``dest``: ``dest = ( src > dest ) ? src :dest;``にビット単位で格納します。
+       ``src`` および ``dest`` の最大値を ``dest``: ``dest = ( src > dest ) ? src :dest;`` にビット単位で格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 

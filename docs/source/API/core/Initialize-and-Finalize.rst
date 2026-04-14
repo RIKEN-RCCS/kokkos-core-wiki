@@ -47,7 +47,7 @@ ScopeGuard は、Kokkos オブジェクトが``Kokkos::finalize``を実行した
     // Kokkos::finalize の後に呼び出される my_view デストラクタ !
   }
 
- ``Kokkos::ScopeGuard`` に切り替えると修正されます:
+``Kokkos::ScopeGuard`` に切り替えると修正されます:
 
 .. code-block:: cpp
 

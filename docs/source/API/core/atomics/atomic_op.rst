@@ -13,7 +13,7 @@
 
     atomic_[op](ptr_to_value,update_value);
 
- ``ptr_to_value`` と ``update_value`` で与えられたアドレスの ``value`` を、関連する演算に従って、原子的に更新します。
+``ptr_to_value`` と ``update_value`` で与えられたアドレスの ``value`` を、関連する演算に従って、原子的に更新します。
 
 
 ディスクリプション

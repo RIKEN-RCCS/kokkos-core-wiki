@@ -11,12 +11,12 @@
 
 .. code-block:: cpp
 
-    Kokkos::parallel_scan( 名前, ポリシー, ファンクタ, 結果 );
-    Kokkos::parallel_scan( 名前, ポリシー, ファンクタ );
-    Kokkos::parallel_scan( policy, ファンクタ, 結果);
-    Kokkos::parallel_scan( policy, ファンクタ );
+    Kokkos::parallel_scan( name, policy, functor, result );
+    Kokkos::parallel_scan( name, policy, functor );
+    Kokkos::parallel_scan( policy, functor, result);
+    Kokkos::parallel_scan( policy, functor );
 
- ``functor`` で定義された並列作業を、*ExecutionPolicy* ``policy`` に従ってディスパッチし、作業項目が提供する成果物に対して排他的または包括的なスキャンを実行します。 オプションのラベル ``name`` はプロファイリングおよびデバッグツールで使用されます。提供された場合、最終結果は、 ``result`` に格納されます。
+``functor`` で定義された並列作業を、*ExecutionPolicy* ``policy`` に従ってディスパッチし、作業項目が提供する成果物に対して排他的または包括的なスキャンを実行します。 オプションのラベル ``name`` はプロファイリングおよびデバッグツールで使用されます。提供された場合、最終結果は、 ``result`` に格納されます。
 
 インターフェイス
 -------------------
@@ -37,7 +37,7 @@
 
   - ``IntegerType``: 1D反復範囲を定義し、0からカウント値までを範囲とします。
   - `RangePolicy <../policies/RangePolicy.html>`_: 1D反復範囲を定義します。
-  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: チーム内のスレッドにより実行されるべき1次元反復範囲を定義します。``TeamPolicy`` または ``TaskTeam``を通じて実行される並列領域内でのみ有効です。
+  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: チーム内のスレッドにより実行されるべき1次元反復範囲を定義します。``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
   - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき1次元反復範囲を定義します。 ``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
 * FunctorType: 有効なファンクタで、（少なくとも）  ``ExecPolicy`` と縮小型との組み合わせに対応するシグネチャを持つ `operator()`` を備えるもの。
 * ReturnType: ``operator +=`` および ``operator =`` を持つ POD 型 または ``Kokkos::View``.

@@ -110,7 +110,7 @@ interface
     subroutine f_axpy( nd_array_y, nd_array_x, alpha ) &
         & bind(c, name='c_axpy')
         use, intrinsic :: iso_c_binding
-        :: flcl_mod を使用
+        use flcl_mod
         type(nd_array_t) :: nd_array_y
         type(nd_array_t) :: nd_array_x
         real(c_double) :: alpha

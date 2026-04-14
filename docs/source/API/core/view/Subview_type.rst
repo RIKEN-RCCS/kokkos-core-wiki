@@ -23,7 +23,7 @@
    template <class ViewType, class... Args>
    using Subview = IMPL_DETAIL; // ソースビューの特性からサブビューのタイプを演鐸します。
 
- ``Kokkos::subview(ViewType view_arg, Args .... args)`` の結果の型。
+``Kokkos::subview(ViewType view_arg, Args .... args)`` の結果の型。
 
 必要要件
 ------------

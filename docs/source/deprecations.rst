@@ -122,7 +122,7 @@ Kokkos 4.3 において非推奨
    * ADLにより曖昧さを回避
 
 * ``ExecutionSpace::in_parallel``
-   * 置換: ``KOKKOS_IF_ON_HOST``/``KOKKOS_IF_ON_DEVICE``は、部分的に同様の行動を提供します
+   * 置換: ``KOKKOS_IF_ON_HOST``/``KOKKOS_IF_ON_DEVICE`` は、部分的に同様の行動を提供します
    * 一貫性を欠いた実装、限定的な利用
 
 * ``Cuda::device_arch()``
@@ -179,7 +179,6 @@ Kokkos 4.2 において非推奨
 
 Kokkos 4.1 において非推奨
 ---------------------------
----------------------------
 
 *  ``BinSort``, ``BinOp1D``, and ``BinOp3D`` のためのデフォルトコンストラクタ
    * 置換: 無し
@@ -224,13 +223,13 @@ Kokkos-3.7 において非推奨である型エイリアス
 ``ActiveExecutionMemorySpace``, ``host_execution_space``, ``host_memory_space``, ``host_mirror_space``, ``is_array_layout``, ``is_execution_policy``, ``is_execution_space``, ``is_memory_space``, ``is_memory_traits``, ``is_space``, ``Iterate``, ``MDRangePolicy``, ``Rank``, ``SpaceAccessibility``
 
 
- Kokkos-3.7 において非推奨であるマクロ
+Kokkos-3.7 において非推奨であるマクロ
 --------------------------------------
 
 ``KOKKOS_RESTRICT_EXECUTION_TO_(DATA_SPACE)``, ``HIP_SAFE_CALL(call)``
 
 
- Kokkos-3.7 において非推奨である自由関数
+Kokkos-3.7 において非推奨である自由関数
 ----------------------------------------
 
 .. list-table::
@@ -379,7 +378,7 @@ Kokkos-3.7 において非推奨であるクラス
    * -  ``index_list_type`` を選択する ``OffsetView`` コンストラクタ
      - ``Kokkos::pair`` (CPU および GPU)
 
-   * - パラメータ ``bool always_use_kokkos_sort``を選択する ``Kokkos::sort`` のオーバーロード
+   * - パラメータ ``bool always_use_kokkos_sort`` を選択する ``Kokkos::sort`` のオーバーロード
      - 必要であれば、 ``Kokkos::BinSort`` を使用するか、または、ブール値パラメータを伴わない ``Kokkos::sort`` を呼びます
 
    * - 空ではない WorkTag が使用される場合には、非推奨警告を発します
@@ -417,7 +416,7 @@ Kokkos-3.7 において非推奨であるクラス
 Kokkos-3.7 におけるパブリックヘッダー
 -------------------------------------
 
- Kokkos-3.7 より、 以下の項目が、 *パブリック* ヘッダーです:
+Kokkos-3.7 より、 以下の項目が、 *パブリック* ヘッダーです:
 
 コア
 ~~~~~~~~~~~~

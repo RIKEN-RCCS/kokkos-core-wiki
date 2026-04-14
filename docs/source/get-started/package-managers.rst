@@ -72,7 +72,7 @@ Intel GPU に関しては、 SYCL バックエンドを使用して、 以下を
     spack spec kokkos +sycl intel_gpu_arch=intel_pvc
 
 
- `intel_gpu_arch` オプションは、対象のGPU アーキテクチャ専用であることに、注意してください。
+`intel_gpu_arch` オプションは、対象のGPU アーキテクチャ専用であることに、注意してください。
 Spack ではアーキテクチャを明示的に指定する必要があります(自動検出なし)。
 
 

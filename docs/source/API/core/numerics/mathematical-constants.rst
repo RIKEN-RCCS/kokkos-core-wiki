@@ -14,7 +14,7 @@
 
 .. |text2| replace:: ``<numbers>``
 
- |text2|_ ( C++20 以降) からのすべての数学定数を提供します。
+|text2|_ ( C++20 以降) からのすべての数学定数を提供します。
 
 すべての定数は  バージョン4.0以降の Kokkos::numbers:: namespace で定義されており、以前のバージョンでは、 Kokkos::Experimental で定義されています。
 

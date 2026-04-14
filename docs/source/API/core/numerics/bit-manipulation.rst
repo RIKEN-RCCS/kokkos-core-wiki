@@ -15,7 +15,7 @@
 
 .. |StandardLibraryHeaderBit| replace:: ``<bit>``
 
- ``<Kokkos_Core.hpp>``に含まれる ヘッダー  |KokkosBitManipulation|_ に定義。
+``<Kokkos_Core.hpp>`` に含まれる ヘッダー  |KokkosBitManipulation|_ に定義。
 
 標準ライブラリヘッダー |StandardLibraryHeaderBit|_ から関数テンプレートを提供します( C++20 以降)。
 

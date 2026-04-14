@@ -27,10 +27,10 @@
 
 		     .. 注意:: 本パラメータは、必須です。
 
-		     基本構造は、 ``ScalarType``です。
+		     基本構造は、 ``ScalarType`` です。
 		     
 
-		     * ``double``: ``DynRankView``で、 次元数はコンストラクタの引数として渡され、その数がランクを決定します。
+		     * ``double``: ``DynRankView`` で、 次元数はコンストラクタの引数として渡され、その数がランクを決定します。
 
    :tparam LayoutType: インデックスの基盤となる1次元メモリストレージへのマッピングを決定します。
 
@@ -59,13 +59,13 @@
 			 * ``Unmanaged``: DynRankView は参照カウントされません。割り当てはコンストラクタに提供されなければなりません。
 			 * ``Atomic``: ビューへのすべてのアクセスには、アトミック演算を使用します。
 			 * ``RandomAccess``: ビューがランダムアクセス方式で使用されていることを示唆します。
-			ビューもまた ``const`` であれば、これにより、GPU 上で特別なロード演算（すなわちテクスチャフェッチ）がトリガーされます。
+			   ビューもまた ``const`` であれば、これにより、GPU 上で特別なロード演算（すなわちテクスチャフェッチ）がトリガーされます。
 			 * ``Restrict``: 現在のスコープ内で、他のデータ構造によるビューのエイリアシングは存在しません。
 
    .. 重要::
 
       ``DataType`` 以外のテンプレートパラメータはオプションですが、順序は強制されます。
-      つまり、例えば、 ``LayoutType`` は省略可能ですが、 ``MemorySpace`` および ``MemoryTraits``の両方が
+      つまり、例えば、 ``LayoutType`` は省略可能ですが、 ``MemorySpace`` および ``MemoryTraits`` の両方が
       特定されれば、 ``MemoryTraits`` の前に  ``MemorySpace`` が来なければなりません。
 
 
@@ -270,16 +270,16 @@
    .. cpp:function:: reference_type operator() (const IntType& ... indices) const
 
       参照型である場合もそうでない場合もある ``reference_type`` の値を返します。
-      インデックス引数の数は、ビューの ``rank`` と一致する必要があります。リターン型の特性については、``reference_type`の注記を参照してください。
+      インデックス引数の数は、ビューの ``rank`` と一致する必要があります。リターン型の特性については、``reference_type`` の注記を参照してください。
 
    .. cpp:function:: reference_type access (const IntType& i0=0, const IntType& i1=0, \
 			   const IntType& i2=0, const IntType& i3=0, const IntType& i4=0, \
 			   const IntType& i5=0, const IntType& i6=0) const
 
        参照型である場合もそうでない場合もある ``reference_type`` の値を返します。
-      インデックス引数の数は、ビューの ``rank`` 以上でなければなりません。
+       インデックス引数の数は、ビューの ``rank`` 以上でなければなりません。
        ``rank`` を超えるインデックス引数は ``0`` でなければならず、 ``KOKKOS_DEBUG`` が定義されている場合に有効になります。
-      戻り値の型の特性については、``reference_type`` の注記を参照してください。
+       戻り値の型の特性については、``reference_type`` の注記を参照してください。
 
 
    .. rubric:: データレイアウト、ディメンション、ストライド
@@ -390,7 +390,7 @@
 * ``std::is_const<SrcType::value_type>::value == true`` が ``std::is_const<DstType::value_type>::value == true`` よりも大きい場合
 * ``MemorySpaceAccess<DstType::memory_space,SrcType::memory_space>::assignable == true``
 
-さらに、``DstType::array_layout`` が ``SrcType::array_layout``と同じでない場合、充足すべきルールもあります。これらのルールは、両方のレイアウトが、 ``LayoutLeft`` , ``LayoutRight`` or ``LayoutStride``、``LayoutRight`` または ``LayoutStride`` のいずれかの場合のみを対象としています。
+さらに、``DstType::array_layout`` が ``SrcType::array_layout`` と同じでない場合、充足すべきルールもあります。これらのルールは、両方のレイアウトが、 ``LayoutLeft`` , ``LayoutRight`` or ``LayoutStride`` 、``LayoutRight`` または ``LayoutStride`` のいずれかの場合のみを対象としています。
 
 * ``DstType::array_layout`` も ``SrcType::array_layout`` も ``LayoutStride`` ではない場合:
     - ``DstType::array_layout`` よりも``DstType::rank > 1`` である場合、 ``SrcType::array_layout`` と同じである必要があります。

@@ -52,7 +52,7 @@
 
 *  ``DataType``, ``Layout`` および ``ExecSpace`` は、Kokkos::View のものと同じ型である必要があります。 本 ScatterView はインターフェースされています。
 
-* ````:
+* ``Op``:
   次の値を選択可能です:
 
   - ``Kokkos::Experimental::ScatterSum``: Sum を実行します。それがデフォルトの値です。
@@ -176,7 +176,7 @@
 .. cpp:function:: template <typename Operation, typename Duplication, typename Contribution> create_scatter_view(const View<DT1, VP...>& view)
 
    ``view`` をインターフェースとする新しい ScatterView を作成します。
-   `Operation`` のデフォルト値は、 is ``Kokkos::Experimental::ScatterSum``であり、 ``Duplication`` および ``Contribution`` は、ScatterView が``ExecSpace`` 上で動作する際に可能な限り効率的になるよう選択されます。
+   `Operation`` のデフォルト値は、 is ``Kokkos::Experimental::ScatterSum`` であり、 ``Duplication`` および ``Contribution`` は、ScatterView が``ExecSpace`` 上で動作する際に可能な限り効率的になるよう選択されます。
 
 .. _contribute:
 

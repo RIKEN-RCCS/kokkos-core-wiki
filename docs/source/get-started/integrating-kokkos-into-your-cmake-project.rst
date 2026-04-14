@@ -23,7 +23,7 @@ Kokkosは、 ``Kokkos::kokkos`` というターゲットを提供しており、
 * ``Kokkos::kokkos``  は、必要なビルドフラグをすべて提供する名前スペース付きのインポートターゲットです。 
 * ``CONFIG`` キーワードは、CMake に設定ファイルを使うように、指示します。
 
- Kokkos は別途インストールし、CMake で``Kokkos_ROOT`` 変数を使ってその場所を指すこともできます。
+Kokkos は別途インストールし、CMake で``Kokkos_ROOT`` 変数を使ってその場所を指すこともできます。
 
 .. code-block:: sh
 
@@ -58,7 +58,7 @@ Kokkosは、 ``Kokkos::kokkos`` というターゲットを提供しており、
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    
 `FetchContent <https://cmake.org/cmake/help/latest/module/FetchContent.html>`_ は、
- CMake の設定段階で、Kokkos をダウンロードし依存関係として含めるプロセスを簡素化します。
+CMake の設定段階で、Kokkos をダウンロードし依存関係として含めるプロセスを簡素化します。
 
 .. code-block:: cmake
 
@@ -105,7 +105,7 @@ Kokkos 統合をコントロール:
 * `CMAKE_DISABLE_FIND_PACKAGE_Kokkos <https://cmake.org/cmake/help/latest/variable/CMAKE_DISABLE_FIND_PACKAGE_PackageName.html>`_:
   外部でのインストールが見つかった場合でも、組み込み  Kokkos の使用を強制するために、本変数を ``TRUE`` に設定します。
 * `CMAKE_REQUIRE_FIND_PACKAGE_Kokkos <https://cmake.org/cmake/help/latest/variable/CMAKE_REQUIRE_FIND_PACKAGE_PackageName.html>`_:
- 外部の Kokkosインストールを要求するために、本変数を ``TRUE`` に設定します。Kokkos が見つからない場合には、構築は失敗します。
+  外部の Kokkosインストールを要求するために、本変数を ``TRUE`` に設定します。Kokkos が見つからない場合には、構築は失敗します。
 * ``Kokkos_ROOT``: CMake が``find_package()`` を使う際に、Kokkos  を検索すべきディレクトリを指定するために、本変数を使用します。
 
 例えば:

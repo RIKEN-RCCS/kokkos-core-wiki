@@ -18,7 +18,7 @@
 
    :tparam ReportType: 報告されたエラーデータの型。 :cpp:struct:`View` について有効な要素型でなければなりません。
 
-   :tparam DeviceType:  ``ErrorReporter`` のデバイス型。 デフォルトは、 ``DefaultExecutionSpace::device_type``です。
+   :tparam DeviceType:  ``ErrorReporter`` のデバイス型。 デフォルトは、 ``DefaultExecutionSpace::device_type`` です。
 
    |
 
@@ -68,7 +68,7 @@
 
    .. cpp:function:: bool full() const
 
-      :returns: 試行されたレポートの数が :cpp:any:`capacity()` に等しいか、それを超える場合にのみ、``真`` 。
+      :returns: 試行されたレポートの数が :cpp:any:`capacity()` に等しいか、それを超える場合にのみ、`` 真`` 。
 
    .. cpp:function:: void clear() const
 
@@ -82,7 +82,7 @@
       
      エラーの記録を試行します。 スペースがある場合、``report`` が保存され、試行は成功します。
 
-      :returns: エラー記録の試行が成功した場合にのみ、``真`` 。
+      :returns: エラー記録の試行が成功した場合にのみ、`` 真`` 。
 
 
 例

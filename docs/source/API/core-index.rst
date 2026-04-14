@@ -17,7 +17,7 @@
      - 組み込みリデューサー
    * - `実行ポリシー <core/Execution-Policies.html>`__
      - 実行ポリシー。
-  * - `空間 <core/Spaces.html>`__
+   * - `空間 <core/Spaces.html>`__
      - メモリ空間及び実行空間のディスクリプション。
    * - `タスク並列処理 <core/Task-Parallelism.html>`__
      - タスクグラフの作成と配信。

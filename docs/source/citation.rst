@@ -1,7 +1,7 @@
 Kokkos 引用
 =============
 
-.. highlight:: 無し
+.. highlight:: none
 
 ::
 

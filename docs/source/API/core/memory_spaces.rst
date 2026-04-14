@@ -29,7 +29,7 @@
 ``Kokkos::CudaSpace``
 ---------------------
 
- ``Kokkos::CudaSpace`` は、Cuda対応GPU上のデバイスメモリを表すMemorySpaceTypeです。  ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
+``Kokkos::CudaSpace`` は、Cuda対応GPU上のデバイスメモリを表すMemorySpaceTypeです。  ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
 
 ``Kokkos::CudaHostPinnedSpace``
 -------------------------------
@@ -39,47 +39,47 @@
 ``Kokkos::CudaUVMSpace``
 ------------------------
 
- ``Kokkos::CudaUVMSpace`` は、Cuda 対応 GPU システム上の統合仮想メモリを表す MemorySpaceType です。 統合仮想メモリは、ほとんどのホスト実行空間からもアクセス可能です。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。 
+``Kokkos::CudaUVMSpace`` は、Cuda 対応 GPU システム上の統合仮想メモリを表す MemorySpaceType です。 統合仮想メモリは、ほとんどのホスト実行空間からもアクセス可能です。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。 
 
 ``Kokkos::HIPSpace``
 --------------------
 
- ``Kokkos::HIPSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降` は、HIP GPUプログラミング環境においてGPU上のデバイスメモリを表すMemorySpaceTypeです。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。 
+``Kokkos::HIPSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降` は、HIP GPUプログラミング環境においてGPU上のデバイスメモリを表すMemorySpaceTypeです。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。 
 
 ``Kokkos::HIPHostPinnedSpace``
 ------------------------------
 
- ``Kokkos::HIPHostPinnedSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降` は、HIP GPU プログラミング環境において、GPU からアクセス可能なホスト側の固定メモリを表す MemorySpaceType です。このメモリはホストとデバイスの両方の実行空間からアクセス可能です。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
+``Kokkos::HIPHostPinnedSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降` は、HIP GPU プログラミング環境において、GPU からアクセス可能なホスト側の固定メモリを表す MemorySpaceType です。このメモリはホストとデバイスの両方の実行空間からアクセス可能です。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
 
 ``Kokkos::HIPManagedSpace``
 ---------------------------
 
- ``Kokkos::HIPManagedSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降`  は、HIP GPU プログラミング環境における GPU 上のページ移行メモリを表す MemorySpaceType です。ページ移行メモリは、ほとんどのホスト実行空間からアクセス可能です。 すべてのオペレーティングシステムと HIP 対応ハードウェアの組み合わせで利用可能ですが、``xnack`` 機能をサポートし有効化するには、オペレーティングシステムとハードウェアの両方が対応している必要があります。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
+``Kokkos::HIPManagedSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降`  は、HIP GPU プログラミング環境における GPU 上のページ移行メモリを表す MemorySpaceType です。ページ移行メモリは、ほとんどのホスト実行空間からアクセス可能です。 すべてのオペレーティングシステムと HIP 対応ハードウェアの組み合わせで利用可能ですが、``xnack`` 機能をサポートし有効化するには、オペレーティングシステムとハードウェアの両方が対応している必要があります。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
 
 ``Kokkos::SYCLDeviceUSMSpace``
 --------------------------------------------
 
- ``Kokkos::SYCLDeviceUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPU プログラミング環境において、GPU 上のデバイスメモリを表します。本メモリは、SYCL 実行空間からのみアクセス可能です。
+``Kokkos::SYCLDeviceUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPU プログラミング環境において、GPU 上のデバイスメモリを表します。本メモリは、SYCL 実行空間からのみアクセス可能です。
 
 ``Kokkos::SYCLHostUSMSpace``
 ------------------------------------------
 
- ``Kokkos::SYCLHostUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPUプログラミング環境において、GPUからアクセス可能なホスト側の固定メモリを表す |MemorySpaceType|_ です。このメモリは、ホスト実行空間とSYCL 実行空間の両方からアクセス可能です。 
+``Kokkos::SYCLHostUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPUプログラミング環境において、GPUからアクセス可能なホスト側の固定メモリを表す |MemorySpaceType|_ です。このメモリは、ホスト実行空間とSYCL 実行空間の両方からアクセス可能です。 
 
 ``Kokkos::SYCLSharedUSMSpace``
 --------------------------------------------
 
- ``Kokkos::SYCLSharedUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPUプログラミング環境において、GPU上のページ移行メモリを表す |MemorySpaceType|_ です。 このメモリは、ホスト実行空間とSYCL 実行空間の両方からアクセス可能です。 
+``Kokkos::SYCLSharedUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPUプログラミング環境において、GPU上のページ移行メモリを表す |MemorySpaceType|_ です。 このメモリは、ホスト実行空間とSYCL 実行空間の両方からアクセス可能です。 
 
 ``Kokkos::HostSpace``
 ---------------------
 
- ``Kokkos::HostSpace`` is CPUからアクセス可能な従来のランダムアクセスメモリを表す |MemorySpaceType|_ です。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
+``Kokkos::HostSpace`` is CPUからアクセス可能な従来のランダムアクセスメモリを表す |MemorySpaceType|_ です。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
 
 ``Kokkos::SharedSpace``
 -----------------------
 
- ``Kokkos::SharedSpace`` :sup:`バージョン4.0以降` |MemorySpaceType| の別名であり、有効化された任意の |ExecutionSpaceType| からアクセス可能なメモリを表します。これを実現するため、メモリは「実行空間」で表される処理ユニットのローカルメモリとの間で移動させることができます。この動作は、アクセス時にOSとドライバによって自動的に行われます。アクセスする処理ユニットのローカルメモリに現在存在しない場合、メモリはチャンク単位で移動されます（サイズはバックエンドに依存します）。 これらのチャンクは独立して移動可能であり（例：GPU 上でアクセスされる部分のみをGPUへ移動）、処理ユニット上に存在する間はローカルメモリと同様に扱われます。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
+``Kokkos::SharedSpace`` :sup:`バージョン4.0以降` |MemorySpaceType| の別名であり、有効化された任意の |ExecutionSpaceType| からアクセス可能なメモリを表します。これを実現するため、メモリは「実行空間」で表される処理ユニットのローカルメモリとの間で移動させることができます。この動作は、アクセス時にOSとドライバによって自動的に行われます。アクセスする処理ユニットのローカルメモリに現在存在しない場合、メモリはチャンク単位で移動されます（サイズはバックエンドに依存します）。 これらのチャンクは独立して移動可能であり（例：GPU 上でアクセスされる部分のみをGPUへ移動）、処理ユニット上に存在する間はローカルメモリと同様に扱われます。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
 利用可能性は、プリプロセッサ定義 ``KOKKOS_HAS_SHARED_SPACE`` または ``constexpr bool Kokkos::has_shared_space`` で確認できます。
 以下のバックエンドにおいて、``Kokkos::SharedSpace`` は対応する |MemorySpaceType|_ を指しています:
 
@@ -103,12 +103,12 @@
 ``Kokkos::MemorySpaceConcept``
 ------------------------------
 
- ``MemorySpace`` の概念は、Kokkos において、割り当ておよびアクセスが発生する "場所" と "方法" を表すための、基本的な抽象化です。Kokkos を使用するコードの大半は、特定のインスタンスよりもむしろ、``MemorySpace`` という *汎用的な概念* について、記述される必要があります。このページでは、Kokkos の実行空間の一般的な機能を 実際にどのように*使用* するかを説明しています；より正式で理論的な処理については、本文書 <KokkosConcepts.html>`_  を参照してください。
+``MemorySpace`` の概念は、Kokkos において、割り当ておよびアクセスが発生する "場所" と "方法" を表すための、基本的な抽象化です。Kokkos を使用するコードの大半は、特定のインスタンスよりもむしろ、``MemorySpace`` という *汎用的な概念* について、記述される必要があります。このページでは、Kokkos の実行空間の一般的な機能を 実際にどのように*使用* するかを説明しています；より正式で理論的な処理については、本文書 <KokkosConcepts.html>`_  を参照してください。
 
     *免責事項*: C++における "概念" という用語に目新しい点はありません; C++でテンプレートを使ったことがある人は
-知っていようといまいと、コンセプトを使っています。「概念」という言葉自体に惑わされないでください。
-この言葉は現在、C++20の新たな言語機能と結びつけられることが多くなっています。 ここで "概念" とは単に
-"特定の場所でテンプレートパラメータとなる型に対してできること" を意味します。
+    知っていようといまいと、コンセプトを使っています。「概念」という言葉自体に惑わされないでください。
+    この言葉は現在、C++20の新たな言語機能と結びつけられることが多くなっています。 ここで "概念" とは単に
+    "特定の場所でテンプレートパラメータとなる型に対してできること" を意味します。
 
 シノプシス
 ~~~~~~~~~~

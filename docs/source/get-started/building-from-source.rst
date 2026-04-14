@@ -101,15 +101,15 @@ Kokkos の設定には以下のコマンドを使用します :
 
 これらのオプションは、一般的にはあらゆる CMake プロジェクトに役立ちます：
 
-* ``-DCMAKE_CXX_COMPILER=<compiler>``: CPUs.C++コンパイラへの完全なパスを指定します。例えば、AMD GPUには ``hipcc`` 、  Intel GPUには ``icpx``、   CPUには、 ``g++`` または ``clang++`` を使いましょう。
+* ``-DCMAKE_CXX_COMPILER=<compiler>``: CPUs.C++コンパイラへの完全なパスを指定します。例えば、AMD GPUには ``hipcc`` 、  Intel GPUには ``icpx`` 、   CPUには、 ``g++`` または ``clang++`` を使いましょう。
 
   Example: ``-DCMAKE_CXX_COMPILER=/path/to/hipcc``
- 
+
 * ``-DCMAKE_CXX_STANDARD=<standard>``: C++ 標準を設定します  。デフォルトは、``20`` です。
 
   Example: ``-DCMAKE_CXX_STANDARD=23``
 
-* ``-DCMAKE_BUILD_TYPE=<type>``: 最適化レベルとデバッグ情報を制御します。一般的な選択肢は、 ``Debug``、 ``Release``、 ``RelWithDebInfo`` (デフォルト)、 および ``MinSizeRel`` です。
+* ``-DCMAKE_BUILD_TYPE=<type>``: 最適化レベルとデバッグ情報を制御します。一般的な選択肢は、 ``Debug`` 、 ``Release`` 、 ``RelWithDebInfo`` (デフォルト)、 および ``MinSizeRel`` です。
 
   Example: ``-DCMAKE_BUILD_TYPE=Release``
 
@@ -140,8 +140,8 @@ Kokkos の設定には以下のコマンドを使用します :
 
 
   実験的なバックエンドと :ref:'keywords_enable_backend_specific_options' を含めます。
- 
- 
+
+
 * ``-DKokkos_ARCH_<ARCHITECTURE>=ON``: コード生成のためのターゲットアーキテクチャを指定します。一部のバックエンドはアーキテクチャを自動検出できますが、明示的に指定するのが最適である場合が多いです。
   完全なリストについては、 :ref:`keywords_arch` を参照してください。
   例えば:
@@ -153,12 +153,12 @@ Kokkos の設定には以下のコマンドを使用します :
   * ``AMPERE80``: NVIDIA A100 (Perlmutter)
 
   例: ``-DKokkos_ARCH_AMPERE80=ON``
- 
+
 * ``-DKokkos_ENABLE_DEPRECATED_CODE_4=ON``: 非推奨とマークされた、すべてのコードを有効化します。これを、 ``OFF`` に設定すると、非推奨のシンボルが削除されます。
   
 * ``-DKokkos_ENABLE_DEPRECATION_WARNINGS=ON``: 非推奨警告を有効にします。
   今後のリリースでサプライズを避けるために、これを強く推奨します。理由がない限り、これを無効にしないでください。
- 
+
 
 **構成例**
 
@@ -172,7 +172,7 @@ Kokkos の設定には以下のコマンドを使用します :
         -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF
 
 
- Kokkos 構築
+Kokkos 構築
 ---------------
 
 設定後、Kokkos 使用について構築してください:
@@ -181,12 +181,12 @@ Kokkos の設定には以下のコマンドを使用します :
 
     cmake --build builddir
 
-これによって、Kokkos を編集します。  複数コアを使うには、``-j<N>`` を加えることにより、速く編集をできます ( ``<N>``をコア数に置換します)。
+これによって、Kokkos を編集します。  複数コアを使うには、``-j<N>`` を加えることにより、速く編集をできます ( ``<N>`` をコア数に置換します)。
 
 Example: ``cmake --build builddir -j8``
 
 
- Kokkos インストール
+Kokkos インストール
 --------------------
 
 Kokkos のインストール (ヘッダーファイルおよびライブラリ) のために、以下を使用してください:
@@ -195,7 +195,7 @@ Kokkos のインストール (ヘッダーファイルおよびライブラリ) 
 
     cmake --install builddir [--prefix <prefix>]
 
- ``--prefix <prefix>`` オプションはインストールディレクトリを指定します。 省略すると、Kokkos はデフォルトの場所、多くの場合 ``/usr/local`` (**非推奨**) にインストールされます。
+``--prefix <prefix>`` オプションはインストールディレクトリを指定します。 省略すると、Kokkos はデフォルトの場所、多くの場合 ``/usr/local`` (**非推奨**) にインストールされます。
 
 オプション: Kokkos 構築テスト
 -----------------------------------

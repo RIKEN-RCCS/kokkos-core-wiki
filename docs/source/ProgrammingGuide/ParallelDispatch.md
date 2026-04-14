@@ -227,6 +227,7 @@ Kokkos::View<float*, Kokkos::HostSpace> sums ("sums", numCols);
 parallel_reduce (X.extent(0), cs, sums);
 Kokkos::fence();
 std::cout << sums(0) << '\n';
+```
 
 還元された配列の要素数がコンパイル時の定数である場合、
 結果をC言語の配列に直接格納することも可能です：

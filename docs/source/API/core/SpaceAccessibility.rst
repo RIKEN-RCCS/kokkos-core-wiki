@@ -28,7 +28,7 @@ Space Accessibility
     
     Kokkos::SpaceAccessibility<MSp1, MSp2>::accessible
 
- ``Kokkos::SpaceAccessibility<MSp1::execution_space, MSp2>::accessible`` と同等。
+``Kokkos::SpaceAccessibility<MSp1::execution_space, MSp2>::accessible`` と同等。
 
 ------------
 
@@ -60,7 +60,7 @@ Space Accessibility
 
 .. |KokkosDeepCopy| replace:: ``Kokkos::deep_copy``
 
-``V2`` 型 のいずれか （そうでない場合には、有効な）インスタンスから ( ``true`` に等しい``std::is_same<V2::memory_space, MSp2>::value`` を持つ) ``View`` ``V1`` 型 ( ``true`` に等しい ``std::is_same<V1::memory_space, MSp1>::value`` を持つ) のいずれか（そうでない場合には、有効な）インスタンスへ、Kokkosプログラミングモデル内で、Kokkos::deep_copy することが有効である場合に限り、コンパイル時に、`bool`` に変換可能で、必ず ``true`` となる値。換言すれば、 ``v2`` が、``V2`` の有効なインスタンスであり、 ``v1`` が ``V1`` の有効なインスタンス(形および他の属性を持ち、そうでない場合には、 ``v2``と互換性がある) である場合、以下の式が  Kokkos プログラミングモデル内で明確に定義され、有効となります:
+``V2`` 型 のいずれか （そうでない場合には、有効な）インスタンスから ( ``true`` に等しい``std::is_same<V2::memory_space, MSp2>::value`` を持つ) ``View`` ``V1`` 型 ( ``true`` に等しい ``std::is_same<V1::memory_space, MSp1>::value`` を持つ) のいずれか（そうでない場合には、有効な）インスタンスへ、Kokkosプログラミングモデル内で、Kokkos::deep_copy することが有効である場合に限り、コンパイル時に、`bool`` に変換可能で、必ず ``true`` となる値。換言すれば、 ``v2`` が、``V2`` の有効なインスタンスであり、 ``v1`` が ``V1`` の有効なインスタンス(形および他の属性を持ち、そうでない場合には、 ``v2`` と互換性がある) である場合、以下の式が  Kokkos プログラミングモデル内で明確に定義され、有効となります:
 
 .. code-block:: cpp
     

@@ -55,7 +55,7 @@
 
    .. rubric:: Public Types
 
-   .. cpp:type:: リデューサー
+   .. cpp:type:: reducer_type
 
       自己型。
 

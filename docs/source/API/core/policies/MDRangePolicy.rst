@@ -11,12 +11,12 @@
 
 .. code-block:: cpp
 
-    Kokkos::MDRangePolicy<..., Rank<N>, ...>(開始, 終了)
-    Kokkos::MDRangePolicy<..., Rank<N>, ...>(空間, 開始, 終了)
-    Kokkos::MDRangePolicy<..., Rank<N>, ...>(開始, 終了, タイリング)
-    Kokkos::MDRangePolicy<..., Rank<N>, ...>(空間, 開始, 終了, タイリング)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(begin, end)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(space, begin, end)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(begin, end, tiling)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(space, begin, end, tiling)
 
- ``MDRangePolicy`` は、 ``開始`` タプルから開区間で ``終わる`` 多次元反復空間の実行ポリシーを定義しています。反復空間はタイルされ、ユーザーはオプションでタイルサイズを設定できます。
+``MDRangePolicy`` は、 ``begin`` タプルから開区間で ``end`` までの多次元反復空間の実行ポリシーを定義しています。反復空間はタイルされ、ユーザーはオプションでタイルサイズを設定できます。
 
 インターフェイス
 -------------------

@@ -4,7 +4,7 @@
 .. role:: cpp(code)
    :language: cpp
 
- ヘッダー ``<Kokkos_Core.hpp>`` に定義。
+ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 使用例
 ------
@@ -17,9 +17,9 @@
                                 .set_num_threads(1));
 
 
- ``ScopeGuard`` は、`RAII <https://en.cppreference.com/w/cpp/language/raii>`_ を使用して Kokkos を初期化および最終処理するためのクラスです。
+``ScopeGuard`` は、`RAII <https://en.cppreference.com/w/cpp/language/raii>`_ を使用して Kokkos を初期化および最終処理するためのクラスです。
 それは、 コンストラクタ内の提供された引数およびデストラクタ内の `Kokkos::finalize <finalize.html#kokkosfinalize>`_ で`Kokkos::initialize <initialize.html#kokkosinitialize>`_ を呼び出します。
-正しい使用法のためには、Kokkosへの呼び出しを発行する前に、必ず``ScopeGuard``の命名済みインスタンスを作成する必要があります。
+正しい使用法のためには、Kokkosへの呼び出しを発行する前に、必ず``ScopeGuard`` の命名済みインスタンスを作成する必要があります。
 
 
 .. warning: バージョン 3.7におけるビヘイビアの変更 (以下参照)。 ``ScopeGuard`` は、:cpp:func:`is_initialized()` または :cpp:func:`is_finalized()` のいずれかが ``true`` を返した場合に中断します。
@@ -92,9 +92,9 @@
 
 - Kokkos バージョン 3.7以降、 ``ScopeGuard`` は与えられた引数を無条件に`Kokkos::initialize <initialize.html#kokkosinitialize>`_ 
   に転送し、それは、それらが同じ必須条件を持つことを
-  意味します。  バージョン3.7まで、 ``ScopeGuard``は、
- ``Kokkos::is_initialized()`` が  ``false`` であった場合にのみ、そのコンストラクタにおいて ``Kokkos::initialize`` を呼び出しており、それは、そのコンストラクタにおいて、
- ``Kokkos::initialize`` を呼び出した場合にのみ、``Kokkos::finalize`` をそのデストラクタにおいて呼び出していました。
+  意味します。  バージョン3.7まで、 ``ScopeGuard`` は、
+  ``Kokkos::is_initialized()`` が  ``false`` であった場合にのみ、そのコンストラクタにおいて ``Kokkos::initialize`` を呼び出しており、それは、そのコンストラクタにおいて、
+  ``Kokkos::initialize`` を呼び出した場合にのみ、``Kokkos::finalize`` をそのデストラクタにおいて呼び出していました。
 
   古いビヘイビアについてのサポートを停止しましが。それが実際に必要であると考えれば、そう考えて構いません:
 

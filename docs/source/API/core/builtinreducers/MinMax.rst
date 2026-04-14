@@ -54,7 +54,7 @@
 
    .. rubric:: パブリック型
 
-   .. cpp:type:: リデューサー
+   .. cpp:type:: reducer_type
 
       自己型。
 
@@ -81,7 +81,7 @@
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
       ``dest``:  ``dest.min_val = (src.min_val < dest.min_val) ? src.min_val :dest.min_val;`` に、 ``src`` および ``dest`` の最小値を格納します。
-     ``dest``:  ``dest.max_val = (src.max_val < dest.max_val) ? src.max_val :dest.max_val;`` に、 ``src`` および ``dest`` の最大値を格納します。
+      ``dest``:  ``dest.max_val = (src.max_val < dest.max_val) ? src.max_val :dest.max_val;`` に、 ``src`` および ``dest`` の最大値を格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 

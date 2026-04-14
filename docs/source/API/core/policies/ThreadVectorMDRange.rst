@@ -45,7 +45,7 @@
 	     ThreadVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK, 範囲の最大値は認められます
 
 
-	*  ``TeamVectorRange`` ポリシー、 ``TeamVectorRange`` ポリシー、 ``TeamVectorMDRange`` ポリシー
+	* ``TeamVectorRange`` ポリシー、 ``TeamVectorRange`` ポリシー、 ``TeamVectorMDRange`` ポリシー
 	  または、 ``ThreadVectorMDRange`` ポリシーを使用して、ディスパッチされた並列演算内で、コンストラクタを呼び出すことは出来ません。
 
 制約

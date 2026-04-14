@@ -77,13 +77,13 @@
         :param min_chunk_size: メモリ割り当てに必要なユーザー指定の最小チャンクサイズで、 より効率的なメモリアクセスのため、2乗に最も近い数値に丸められます。
         :param max_extent: ユーザーに提供された最大サイズで、 チャンクポインタ配列を割り当てる必要があります。
 
-         必要な量のメモリを確保するために、 ``max_extent``で制限し、``resize_serial`` メソッドを構築後に呼び出す必要があります。
+         必要な量のメモリを確保するために、 ``max_extent`` で制限し、``resize_serial`` メソッドを構築後に呼び出す必要があります。
 
     .. rubric:: パブリックデータアクセス関数
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION reference_type operator() (const I0 & i0 , const Args & ... args) const
 
-        :return: それ自身が参照可能であるか否かに関わらず、`reference_type`型の値。 インデックス引数の数は 1 である必要があります (非推奨ではないコードについて)。
+        :return: それ自身が参照可能であるか否かに関わらず、``reference_type`` 型の値。 インデックス引数の数は 1 である必要があります (非推奨ではないコードについて)。
 
     .. rubric:: データリサイズ、ディメンション、ストライド
 
@@ -105,7 +105,7 @@
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION size_t size() const noexcept;
 
-        :return: ``resize_serial`` に渡された数値に基づく割当で利用可能なエントリの数。 この数値 ``allocation_extent``により制限されます。
+        :return: ``resize_serial`` に渡された数値に基づく割当で利用可能なエントリの数。 この数値 ``allocation_extent`` により制限されます。
 
     .. cpp:function:: template< typename iType > KOKKOS_INLINE_FUNCTION size_t extent(const iType& dim) const;
 

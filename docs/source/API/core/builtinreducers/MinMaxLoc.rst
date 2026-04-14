@@ -55,7 +55,7 @@
 
    .. rubric:: Public Types
 
-   .. cpp:type:: リデューサー
+   .. cpp:type:: reducer_type
 
       自己型
 
@@ -107,10 +107,10 @@
 
 * ``MinMaxLoc<T,I,S>::value_type`` は、 非定数 ``T`` および 非定数 ``I`` 上の MinMaxLocScalar の特殊化です。
 
-* ``MinMaxLoc<T,I,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
+* ``MinMaxLoc<T,I,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`` です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
-* 必要条件: ``Scalar`` には、 ``operator =``、 ``operator <`` および ``operator >``  が定義されます。 ``Kokkos::reduction_identity<Scalar>::min()`` および ``Kokkos::reduction_identity<Scalar>::max()`` は有効な式です。
+* 必要条件: ``Scalar`` には、 ``operator =`` 、 ``operator <`` および ``operator >``  が定義されます。 ``Kokkos::reduction_identity<Scalar>::min()`` および ``Kokkos::reduction_identity<Scalar>::max()`` は有効な式です。
 
 * 必要条件: ``Index`` は、定義された ``operator =`` を持ちます。 ``Kokkos::reduction_identity<Scalar>::min()`` は有効な式です。
 
-*  ``Scalar`` または ``Index``のいずれかのカスタム型で   MinMaxLoc を使用するために、 ``Kokkos::reduction_identity<CustomType>``  のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
+*  ``Scalar`` または ``Index`` のいずれかのカスタム型で   MinMaxLoc を使用するために、 ``Kokkos::reduction_identity<CustomType>``  のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。

@@ -13,7 +13,7 @@
 
    old_value =  atomic_fetch_[op](ptr_to_value, update_value);
 
- ``ptr_to_value`` で指定されたアドレスの変数を、関連する演算に従って、原子的に ``update_value`` で更新し、
+``ptr_to_value`` で指定されたアドレスの変数を、関連する演算に従って、原子的に ``update_value`` で更新し、
 そのアドレスで見つけた前の値を返します。
 
 ディスクリプション

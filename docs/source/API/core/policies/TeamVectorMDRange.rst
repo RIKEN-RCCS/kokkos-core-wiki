@@ -11,7 +11,7 @@ TeamVectorMDRange は、階層的並列処理の内部で使用される `nested
 インターフェイス
 ----------------
 
-.. cpp:class:: テンプレート <class Rank, typename TeamHandle> TeamVectorMDRange
+.. cpp:class:: template <class Rank, typename TeamHandle> TeamVectorMDRange
 
    .. rubric:: コンストラクタ
 

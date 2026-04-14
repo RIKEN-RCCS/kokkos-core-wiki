@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
- ``<Kokkos_Core.hpp>`` に含まれる ヘッダー ``<Kokkos_Complex.hpp>`` に定義。
+``<Kokkos_Core.hpp>`` に含まれる ヘッダー ``<Kokkos_Complex.hpp>`` に定義。
 
 ディスクリプション
 ------------------
@@ -42,7 +42,7 @@
 
      変換コンストラクタは、実成分を ``static_cast<T>(z.real())`` に、虚数成分を ``static_cast<T>(z.imag())`` に初期化します。
 
-    制約: ``U`` は、 ``T` に変換可能です。
+    制約: ``U`` は、 ``T`` に変換可能です。
 
   .. cpp:function:: complex(std::complex<T> z) noexcept
   .. cpp:function:: complex& operator=(std::complex<T> z) noexcept
@@ -60,19 +60,19 @@
 
   .. cpp:function:: template<class U> complex(const volatile complex<U>&) noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: void operator=(const complex&) volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: volatile complex& operator=(const volatile complex&) volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: complex& operator=(const volatile complex&) noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: void operator=(const volatile T&) noexcept
   
@@ -80,9 +80,9 @@
 
   .. cpp:function:: void operator=(const T&) volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
-    .. note:
+    .. note::
       
       一部の非推奨の割り当て演算子は、コピー割り当て演算子にならないようにテンプレート化された実装になっています。
 
@@ -118,65 +118,65 @@
   .. cpp:function:: constexpr complex& operator-=(complex v) noexcept
   .. cpp:function:: constexpr complex& operator-=(T v) noexcept
 
-     複素値 ''complex(v)''  を複素値 '*this'' に加え、その和を '*this' に保存します。
+     複素値 ``complex(v)``  を複素値 ``*this`` に加え、その和を ``*this`` に保存します。
 
   .. cpp:function:: constexpr complex& operator*=(complex v) noexcept
   .. cpp:function:: constexpr complex& operator*=(T v) noexcept
 
-    複素値 '*this'' から ``complex(v)`` を差し引き、差分を '*this' に格納します。
+    複素値 ``*this`` から ``complex(v)`` を差し引き、差分を ``*this`` に格納します。
 
   .. cpp:function:: constexpr complex& operator/=(complex v) noexcept
   .. cpp:function:: constexpr complex& operator/=(T v) noexcept
 
-    複素値 ``complex(v)`` に複素値を``*this`` 掛け、積を ``*this`` に格納します。
+    複素値 ``complex(v)`` に複素値を ``*this`` 掛け、積を ``*this`` に格納します。
 
   .. cpp:function:: volatile T& real() volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: T real() const volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: volatile T& imag() volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: T imag() const volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: void operator+=(const volatile complex& v) volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: void operator+=(const volatile T& v) volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: void operator-=(const volatile complex& v) volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: void operator-=(const volatile T& v) volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: void operator*=(const volatile complex& v) volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: void operator*=(const volatile T& v) volatile noexcept
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: void operator/=(const volatile complex& v) volatile noexcept(noexcept(T{}/T{}))
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
   .. cpp:function:: void operator/=(const volatile T& v) volatile noexcept(noexcept(T{}/T{}))
   
-    .. 非推奨:: 4.0.0
+    .. deprecated:: 4.0.0
 
 
   .. rubric:: 非メンバー関数:
@@ -248,7 +248,7 @@
 
   .. cpp:function:: template<typenmame T> complex<T> polar(T rho, T theta = T())
 
-    :return: ``complex``の値は、大きさが ``rho`` 、位相角が ``theta`` である複素数に対応します。
+    :return: ``complex`` の値は、大きさが ``rho`` 、位相角が ``theta`` である複素数に対応します。
 
   .. cpp:function:: template<typename T> T abs(complex<T> x)
 
@@ -268,12 +268,12 @@
 
   .. cpp:function:: template<typename T> complex<T> conj(complex<T> x) noexcept
 
-    :return: 複素共役 ``x``。
+    :return: 複素共役 ``x`` 。
 
   .. cpp:function:: template<typename T> complex<T> exp(complex<T> x)
   .. cpp:function:: template<typename T> complex<T> exp(std::complex<T> x)
 
-    :return: 複素 e 底指数関数  ``complex(x)``。
+    :return: 複素 e 底指数関数  ``complex(x)`` 。
 
   .. cpp:function:: template<typename T> complex<T> log(complex<T> x)
 
@@ -281,11 +281,11 @@
 
   .. cpp:function:: template<typename T> complex<T> log10(complex<T> x)
 
-    :return: ``x`` の複素共通(10進底)対数は ``log(x) / log(10)``と定義されます。
+    :return: ``x`` の複素共通(10進底)対数は ``log(x) / log(10)`` と定義されます。
 
   .. cpp:function:: template<typename T> complex<T> sin(complex<T> x)
 
-    :return:  ``x``の複素正弦。
+    :return:  ``x`` の複素正弦。
 
   .. cpp:function:: template<typename T> complex<T> cos(complex<T> x)
 

@@ -45,7 +45,7 @@
 
   .. rubric:: コンストラクタ
 
-  .. cpp:function:: ビットセット(unsigned arg_size = 0u)
+  .. cpp:function:: Bitset(unsigned arg_size = 0u)
 
     ホスト/デバイス: :cpp:`arg_size` ビットを持つビットセットを構築します。
 
@@ -96,25 +96,25 @@
 
     :cpp:`result.first` が :cpp:`false` の場合、:cpp:`result.second` は新しいヒント位置です。
 
-    :cpp:`scan_direction & BIT_SCAN_REVERSE`\の場合、ビットのスキャンはインデックスの降順で行われます;
+    :cpp:`scan_direction & BIT_SCAN_REVERSE` の場合、ビットのスキャンはインデックスの降順で行われます;
     それ以外の場合は、インデックスの昇順で発生します。
 
-    `scan_direction & MOVE_HINT_BACKWARDS`\の場合、 その後、新しいヒント位置は :cpp:`hint`\ よりも小さいインデックスで発生します;
-    それ以外の場合は、:cpp:`hint`より大きいインデックス位置で発生します。
+    ``scan_direction & MOVE_HINT_BACKWARDS`` の場合、 その後、新しいヒント位置は :cpp:`hint` よりも小さいインデックスで発生します;
+    それ以外の場合は、:cpp:`hint` より大きいインデックス位置で発生します。
 
-  .. cpp:function:: Kokkos::pair<bool, unsigned> find_any_unset_near(符号なし hint, 符号なし scan_direction = BIT_SCAN_FORWARD_MOVE_HINT_FORWARD) const;
+  .. cpp:function:: Kokkos::pair<bool, unsigned> find_any_unset_near(unsigned hint, unsigned scan_direction = BIT_SCAN_FORWARD_MOVE_HINT_FORWARD) const;
 
     ホスト/デバイス: :cpp:`hint` 位置から開始し、最初に ``0`` に設定されたビットを検出します。
 
     :cpp:`pair<bool, unsigned>` を返します。
 
-    :cpp:`result.first` が :cpp:`true` の場合、 :cpp:result.second` は検出されたビット位置です。
+    :cpp:`result.first` が :cpp:`true` の場合、 :cpp:`result.second` は検出されたビット位置です。
 
-    :cpp:`result.first`が :cpp:`false` の場合、:cpp:`result.second` は、新しいヒント位置です。
+    :cpp:`result.first` が :cpp:`false` の場合、:cpp:`result.second` は、新しいヒント位置です。
 
-    :cpp:`scan_direction & BIT_SCAN_REVERSE`\ の場合、ビットのスキャンはインデックスの降順で行われます;それ以外の場合は、インデックスの昇順で発生します。
+    :cpp:`scan_direction & BIT_SCAN_REVERSE` の場合、ビットのスキャンはインデックスの降順で行われます;それ以外の場合は、インデックスの昇順で発生します。
 
-    :cpp:`scan_direction & MOVE_HINT_BACKWARDS`\ の場合には、その後新しいヒント位置は :cpp:`hint`\ よりも小さいインデックスで発生します; それ以外の場合は、:cpp:`hint`より大きいインデックス位置で発生します。
+    :cpp:`scan_direction & MOVE_HINT_BACKWARDS` の場合には、その後新しいヒント位置は :cpp:`hint` よりも小さいインデックスで発生します; それ以外の場合は、:cpp:`hint` より大きいインデックス位置で発生します。
 
   .. cpp:function:: constexpr bool is_allocated() const
 
@@ -136,15 +136,15 @@
 
     ホスト/: ビットを持たないビットセットを構築します。
 
-  .. cpp:function:: ConstBitset(ConstBitset const& rhs) = デフォルト
-  .. cpp:function:: ConstBitset& operator=(ConstBitset const& rhs) = デフォルト
+  .. cpp:function:: ConstBitset(ConstBitset const& rhs) = default
+  .. cpp:function:: ConstBitset& operator=(ConstBitset const& rhs) = default
 
     コンストラクタ/代入 演算子をコピー。
 
   .. cpp:function:: ConstBitset(Bitset<Device> const& rhs)
   .. cpp:function:: ConstBitset& operator=(Bitset<Device> const& rhs)
 
-    ホスト/デバイス: :cpp:`Bitset`を a :cpp:`ConstBitset` にコピー/代入します。
+    ホスト/デバイス: :cpp:`Bitset` を a :cpp:`ConstBitset` にコピー/代入します。
 
   .. cpp:function:: unsigned size() const
 
@@ -161,10 +161,10 @@
 非メンバー関数
 --------------------
 
-  .. cpp:function:: テンプレート <typename DstDevice, typename SrcDevice> void deep_copy(Bitset<DstDevice>& dst, Bitset<SrcDevice> const& src)
+  .. cpp:function:: template <typename DstDevice, typename SrcDevice> void deep_copy(Bitset<DstDevice>& dst, Bitset<SrcDevice> const& src)
 
      ``SrcDevice`` 上の ``src`` から ``DstDevice`` 上の ``dst`` に ``Bitset`` をコピーします。
 
-  .. cpp:function:: テンプレート <typename DstDevice, typename SrcDevice> void deep_copy(Bitset<DstDevice>& dst, ConstBitset<SrcDevice> const& src)
+  .. cpp:function:: template <typename DstDevice, typename SrcDevice> void deep_copy(Bitset<DstDevice>& dst, ConstBitset<SrcDevice> const& src)
 
      ``SrcDevice`` 上の ``src`` から ``DstDevice`` 上の ``Bitset`` ``dst``に ``ConstBitset`` をコピーします。

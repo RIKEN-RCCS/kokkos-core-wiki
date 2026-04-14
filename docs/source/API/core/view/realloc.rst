@@ -53,7 +53,7 @@
 		const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
 		const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-*  ``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
+* ``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
   新たな ``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、：Kokkos::WithoutInitializing を使用して構築されます。
 
   - ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
@@ -113,7 +113,7 @@
    void realloc(const I& arg_prop, Kokkos::View<T, P...>& v,
                 const typename Kokkos::View<T, P...>::array_layout& layout);
 
-*  ``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
+* ``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
   新たな ``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、 Kokkos::WithoutInitializing を使用して構築されます。
 
   - ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
@@ -129,7 +129,7 @@
                 Kokkos::View<T, P...>& v,
 		const typename Kokkos::View<T, P...>::array_layout& layout);
 
-*  ``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
+* ``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
   新たな ``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、 ``Kokkos::view_alloc(Kokkos::WithoutInitializing)`` を使用して構築されます。
 
   - ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。

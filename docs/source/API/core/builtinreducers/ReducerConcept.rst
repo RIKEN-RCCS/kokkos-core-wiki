@@ -97,7 +97,8 @@
     * 参照を結果の保存先に戻します。
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
-Returns a view of the result place.結果の保存先のビューを返します。
+
+    Returns a view of the result place.結果の保存先のビューを返します。
 
 要件
 ~~~~~~~~~~~~
