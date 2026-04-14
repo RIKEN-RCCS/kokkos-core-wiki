@@ -219,20 +219,6 @@ Kokkos::parallel_for(Kokkos::TeamPolicy<>(league_size,team_size).
 ```c++
 using Kokkos::parallel_for;
 using Kokkos::TeamPolicy;
-using Kokkos::TeamThreadRange;
-
-parallel_for (TeamPolicy<> (league_size, team_size),
-                    KOKKOS_LAMBDA (member_type team_member)
-{
-  スカラーることは許可されていません。 しかしながら、[`TeamThreadRange`](../API/core/policies/TeamThreadRange) ポリシーを使用した複数の並列ループが、同じカーネル内で、順番に連続して実行されることは有効です。 ネスト並列層のクロージャ外で、POD データへの書き込みアクセスを行うことは認められないことに注意してください。 これは、スレッドプライベート変数、チーム共有変数、およびグローバル共有変数に関連するデバッグが困難な問題を防止するための意識的な選択です。これを強制する簡単な方法は、ラムダ式で  "capture by value" 句を使用することですが、
-ただし、通常、パフォーマンスが向上するため、リリースビルドでは、"capture by reference" が推奨されます。
-ラムダ式が [`TeamThreadRange`](../API/core/policies/TeamThreadRange) ループ内で`const`と見なされるため、コンパイラは、コンパイル時に `const` 違反として不正なアクセスを検出します。
-
-最も単純な使用例は、カーネル内に別の [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) をネストさせることです。
-
-```c++
-using Kokkos::parallel_for;
-using Kokkos::TeamPolicy;
 using Kokkos::TeamThreadRange
 
 parallel_for (TeamPolicy<> (league_size, team_size),

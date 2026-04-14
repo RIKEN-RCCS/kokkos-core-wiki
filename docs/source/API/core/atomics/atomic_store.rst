@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
- ``<Kokkos_Core.hpp>`` に含まれている、ヘッダー <Kokkos_Atomic.hpp> に定義されています。
+``<Kokkos_Core.hpp>`` に含まれている、ヘッダー <Kokkos_Atomic.hpp> に定義されています。
 
 使用例
 ------

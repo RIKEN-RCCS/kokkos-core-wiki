@@ -1,14 +1,14 @@
 ``atomic_assign``
 =================
 
-.. warning:
+.. warning::
    Kokkos 4.5より、非推奨なので、 代わりに、
    :cpp:func:`atomic_store` をご使用ください。
 
 .. role:: cpp(code)
     :language: cpp
 
- ``<Kokkos_Core.hpp>`` に含まれるヘッダー ``<Kokkos_Atomic.hpp>`` に定義。
+``<Kokkos_Core.hpp>`` に含まれるヘッダー ``<Kokkos_Atomic.hpp>`` に定義。
 
 使用例
 ------
@@ -32,5 +32,5 @@
    :param val: 参照されたオブジェクトに格納する値
    :戻り値: (無し)
 
-   .. 非推奨:: 4.5において
+   .. deprecated:: 4.5において
      代わりに :cpp:func:`atomic_store` を使用します。

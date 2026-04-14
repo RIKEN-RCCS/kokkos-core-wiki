@@ -31,7 +31,7 @@
         assert(Kokkos::is_finalized());
     }    
 
-.. 以下も参照::
+.. seealso::
 
    `Kokkos::InitializationSettings <InitializationSettings.html#kokkosInitializationSettings>`_
       Kokkos をプログラムで初期化する設定を定義します。

@@ -240,7 +240,7 @@
       * ``オン``
 
     * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
-      * CMake 言語機能を使用して構築してください（CUDAまたはHIPのみ）[#cmake_language]_
+      * CMake 言語機能を使用して構築してください（CUDAまたはHIPのみ） [#cmake_language]_
       * ``オフ``
 
     * * ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES``

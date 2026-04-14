@@ -96,14 +96,6 @@
 
 .. |min_element_link| replace:: ``min_element``
 
-- ``exespace``, ``first``, ``last``, ``view``, ``comp``:  |min_element_link|_ と同様。
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. _min_element_link: ./StdMinElement.html
-
-.. |min_element_link| replace:: ``min_element``
-
 - ``exespace``, ``first``, ``last``, ``view``, ``comp``:  |min_element_link|_ におけるのと同様。
 
 - ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス

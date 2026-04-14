@@ -25,7 +25,7 @@
 
    :tparam DataType: ``DynRankView`` の基本的なスカラー型を定義します。
 
-		     .. 注意:: 本パラメータは、必須です。
+		     .. note:: 本パラメータは、必須です。
 
 		     基本構造は、 ``ScalarType`` です。
 		     
@@ -34,7 +34,7 @@
 
    :tparam LayoutType: インデックスの基盤となる1次元メモリストレージへのマッピングを決定します。
 
-		       .. 重要:: 本パラメータは、オプションです。
+		       .. important:: 本パラメータは、オプションです。
 
 		       カスタムレイアウトは実装可能ですが、 Kokkos にはいくつかの組み込みレイアウトが付属しています:
 
@@ -48,13 +48,13 @@
 
    :tparam MemorySpace: 保管場所を管理します。
 
-			.. 重要:: 本パラメータは、オプションです。
+			.. important:: 本パラメータは、オプションです。
 
 			省略された場合、デフォルトの実行領域のデフォルトメモリ領域が使用されます （つまり、 ``Kokkos::DefaultExecutionSpace::memory_space`` )
 
    :tparam MemoryTraits: メモリアクセスに対するより細かい制御
 
-			 .. 重要:: 本パラメータは、オプションです。
+			 .. important:: 本パラメータは、オプションです。
 
 			 * ``Unmanaged``: DynRankView は参照カウントされません。割り当てはコンストラクタに提供されなければなりません。
 			 * ``Atomic``: ビューへのすべてのアクセスには、アトミック演算を使用します。
@@ -62,7 +62,7 @@
 			   ビューもまた ``const`` であれば、これにより、GPU 上で特別なロード演算（すなわちテクスチャフェッチ）がトリガーされます。
 			 * ``Restrict``: 現在のスコープ内で、他のデータ構造によるビューのエイリアシングは存在しません。
 
-   .. 重要::
+   .. important::
 
       ``DataType`` 以外のテンプレートパラメータはオプションですが、順序は強制されます。
       つまり、例えば、 ``LayoutType`` は省略可能ですが、 ``MemorySpace`` および ``MemoryTraits`` の両方が
@@ -167,21 +167,21 @@
 
    .. cpp:type:: array_layout
 
-       ``DynRankView`` のレイアウト。
+      ``DynRankView`` のレイアウト。
 
    .. cpp:type:: size_type
 
       このビューのメモリ空間に関連付けられたインデックス型。
 
-   .. cpp:type:: 
+   .. cpp:type:: dimension
 
       型のような整数配列で、ビューの範囲を表現可能。
 
-   .. cpp:type:: 
+   .. cpp:type:: specialize
 
        ``DynRankView``.Kokkosの ``DynRankView`` の基盤となるマッピング構造の部分的な特殊化に使用される特殊化タグ。
 
-   .. rubric:: コンストラクタ
+   .. rubric:: constructors
 
    .. cpp:function:: DynRankView()
 

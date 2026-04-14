@@ -105,7 +105,7 @@
 
 - ``first, last``: 検索対象となる要素の範囲
 
-  -  *ランダムアクセスイテレータ*である必要があり、例えば、``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
+  -  *ランダムアクセスイテレータ* である必要があり、例えば、``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
   -  ``last >= first ``有効な範囲、つまり、``last >= first`` でなければなりません。
 

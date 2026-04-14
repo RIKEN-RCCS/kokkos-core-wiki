@@ -4,8 +4,8 @@
 .. role::cpp(code)
     :language: cpp
 
-.. role:: ストライク
-    :クラス: ストライク
+.. role:: strike
+    :class: strike
 
 .. _KokkosBitManipulation: https://github.com/kokkos/kokkos/blob/4.1.00/core/src/Kokkos_BitManipulation.hpp
 
@@ -94,5 +94,5 @@ Kokkos 4.1ビット演算関数テンプレートは、Kokkos 4.1以降、Kokkos
 注意事項
 --------
 
-* 上記のテンプレート関数すべてに対して、Kokkos::Experimental::namespace に *_builtin で終わる非 constexpr 対応関数が提供されており、定数式には現れないコンパイラの内在要素を補っています。
-* C++ 標準ライブラリの対応するものとは異なり、Kokkos::bit_cast は定数式 ( constexpr 関数ではありません) では使用できません。ライブラリ機能として実装できず、コンパイラの魔法を必要としますが、利用はできません。
+* 上記のテンプレート関数すべてに対して、 ``Kokkos::Experimental::namespace`` に ``*_builtin`` で終わる非 ``constexpr`` 対応関数が提供されており、定数式には現れないコンパイラの内在要素を補っています。
+* C++ 標準ライブラリの対応するものとは異なり、 ``Kokkos::bit_cast`` は定数式 (``constexpr`` 関数ではありません) では使用できません。ライブラリ機能として実装できず、コンパイラの魔法を必要としますが、利用はできません。

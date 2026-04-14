@@ -70,7 +70,8 @@ and `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
     //  a または b に干渉しない何かを行います。
     Kokkos::parallel_for("Test", N, functor);
 
-    // Kokkos::fence(); を完了するために
-    3つの演算すべてを待ちます。
+    // 3つの演算すべての完了を待ちます。
+    Kokkos::fence();
+    
 
     // a および bを使って何かを行います

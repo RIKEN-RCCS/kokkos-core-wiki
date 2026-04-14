@@ -1,14 +1,14 @@
 ``atomic_compare_exchange_strong``
 ==================================
 
-.. warning:
+.. warning::
    Kokkos 4.5以降非推奨
    代わりに `atomic_compare_exchange <atomic_compare_exchange.html>`_ を使ってください。
 
 .. role:: cpp(code)
    :language: cpp
 
- ``<Kokkos_Core.hpp>`` に含まれている、ヘッダー ``<Kokkos_Atomic.hpp>`` に定義されています。`
+``<Kokkos_Core.hpp>`` に含まれている、ヘッダー ``<Kokkos_Atomic.hpp>`` に定義されています。`
 
 使用例
 ------
@@ -29,12 +29,12 @@
    原子的に、 ``*ptr`` を ``expected`` と比較し、 それらがビット単位で等しい場合には、 前者を ``desired`` と置換します。
    ``desired`` が、``*ptr`` に書き込まれれば、 ``true`` が返されます。
 
-   `` (*ptr == expected) { *ptr = desired; return true; } 以外の場合には、 偽を返します;``
+   ``(*ptr == expected) { *ptr = desired; return true; } 以外の場合には、 偽を返します;``
 
    :param ptr: テストし、変更するオブジェクトのアドレス
    :param expected: オブジェクト内で見つかると予想される値
    :param desired: 予想通りである場合にオブジェクトに格納する値
    :returns: 比較の結果であり、 ``*ptr`` が ``expected`` であれば、``true`` であり、それ以外は ``false``
 
-   .. 非推奨:: 4.5
+   .. deprecated:: 4.5
       :cpp:expr:`expected == atomic_compare_exchange(&obj, expected, desired)` を推奨します。

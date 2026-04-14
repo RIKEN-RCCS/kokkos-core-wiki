@@ -47,7 +47,7 @@
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
-   .. 非推奨:: 4.5
+   .. deprecated:: 4.5
        :cpp:func:'atomic_dec' を使ってください。
 
 .. cpp:function:: template<class T> void atomic_inc(T* ptr_to_value);
@@ -62,7 +62,7 @@
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
-   .. 非推奨:: 4.5
+   .. deprecated:: 4.5
        :cpp:func:'atomic_dec' を使ってください。
 
 .. cpp:function:: template<class T> void atomic_max(T* const ptr_to_value, const T value);

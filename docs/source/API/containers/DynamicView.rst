@@ -23,7 +23,7 @@
 
     .. rubric:: パブリックネスティッド型定義
 
-    .. cpp:type:: Kokkos::ViewTraits< DataType , P ... > 特性
+    .. cpp:type:: Kokkos::ViewTraits< DataType , P ... > traits
 
         ``Kokkos::ViewTraits`` 親クラス型。
 

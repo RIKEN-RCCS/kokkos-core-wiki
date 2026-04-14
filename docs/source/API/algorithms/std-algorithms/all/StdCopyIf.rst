@@ -95,7 +95,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. |copy| replace:: ``コピー``
-.. _コピー: ./StdCopy.html
+.. _copy: ./StdCopy.html
 
 - ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``:  |copy|_ と同様。
 

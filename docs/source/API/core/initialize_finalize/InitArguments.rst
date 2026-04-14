@@ -10,9 +10,9 @@ InitArguments
 .. _KokkosInitializationSetting: InitializationSettings.html
 .. |KokkosInitializationSetting| replace:: ``Kokkos::InitializationSettings``
 
- ``<Kokkos_Core.hpp>`` ヘッダーに定義。
+``<Kokkos_Core.hpp>`` ヘッダーに定義。
 
-.. warning: 3.7以降非推奨、 4.3において削除、 **代わりに** ``Kokkos::InitializationSettings`` を **使用** 
+.. warning:: 3.7以降非推奨、 4.3において削除、 **代わりに** ``Kokkos::InitializationSettings`` を **使用** 
 
 
 インターフェイス

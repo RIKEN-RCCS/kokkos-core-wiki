@@ -10,7 +10,7 @@
 クラスインターフェース
 ----------------------
 
-.. cpp:class:: テンプレート <typename Device> ビットセット
+.. cpp:class:: template <typename Device> Bitset
 
   :cpp:`Kokkos::Bitset` は、固定サイズ（実行時）の N ビットシーケンスへのスレッドセーフビューを表します。
 
@@ -19,15 +19,15 @@
 
   .. rubric:: 静的定数
 
-  .. cpp:member:: static constexpr  BIT_SCAN_REVERSE = 1u
+  .. cpp:member:: static constexpr unsigned BIT_SCAN_REVERSE = 1u
 
     :cpp:`BIT_SCAN_REVERSE` : スキャン方向用ビットマスク
 
-  .. cpp:member:: static constexpr 符号なし MOVE_HINT_BACKWARD = 2u
+  .. cpp:member:: static constexpr unsigned MOVE_HINT_BACKWARD = 2u
 
     :cpp:`MOVE_HINT_BACKWARD` : ヒント方向用ビットマスク
 
-  .. cpp:member:: static constexpr 符号なし BIT_SCAN_FORWARD_MOVE_HINT_FORWARD = 0u
+  .. cpp:member:: static constexpr unsigned BIT_SCAN_FORWARD_MOVE_HINT_FORWARD = 0u
 
     :cpp:`BIT_SCAN_FORWARD_MOVE_HINT_FORWARD` : :cpp:`find_any_set_near(...)` または :cpp:`find_any_reset_near(...)` の :cpp:`scan_direction` として渡された場合、 前方（インデックスが増加する方向）方向に向けてビットをスキャンします。 ビットが見つからなかった場合、現在のヒントの先にある新しいヒントを選択します。
 
@@ -35,7 +35,7 @@
 
     :cpp:`BIT_SCAN_REVERSE_MOVE_HINT_FORWARD`: :cpp:`find_any_set_near(...)` または :cpp:`find_any_reset_near(...)` の :cpp:`scan_direction` として渡された場合、 逆（減少するインデックス）方向のビットをスキャンします。 ビットが見つからなかった場合、現在のヒントの先にある新しいヒントを選択します。
 
-  .. cpp:member:: 静的 constexpr 符号なし BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD = MOVE_HINT_BACKWARD
+  .. cpp:member:: static constexpr unsigned BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD = MOVE_HINT_BACKWARD
 
     :cpp:`BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD`: :cpp:`find_any_set_near(...)` または :cpp:`find_any_reset_near(...)` に対して :cpp:`scan_direction` として渡された場合、前方（インデックスが増加する方向）方向に向けてビットをスキャンします。
 

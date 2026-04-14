@@ -52,7 +52,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
 
 
-.. cpp:class:: テンプレート <class DataType, class Arg1Type = void, class Arg2Type = void, class Arg3Type = void> DualView
+.. cpp:class:: template <class DataType, class Arg1Type = void, class Arg2Type = void, class Arg3Type = void> DualView
 
     |
 
@@ -66,7 +66,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
        Kokkos ホストデバイス型
 
-    .. cpp:type:: View<typename 特性::data_type, Arg1Type, Arg2Type, Arg3Type> t_dev
+    .. cpp:type:: View<typename traits::data_type, Arg1Type, Arg2Type, Arg3Type> t_dev
 
        デバイス上の ``Kokkos::View`` の型。
 

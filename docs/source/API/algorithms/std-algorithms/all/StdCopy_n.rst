@@ -84,8 +84,8 @@
 パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |コピー| replace:: ``コピー``
-.. _コピー: ./StdCopy.html
+.. |copy| replace:: ``コピー``
+.. _copy: ./StdCopy.html
 
 
 - ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_ と同様。

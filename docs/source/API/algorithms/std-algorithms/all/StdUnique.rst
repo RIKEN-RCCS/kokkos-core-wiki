@@ -51,11 +51,9 @@
 
    template <
      class ExecutionSpace,
-     class
-
-DataType, class... Properties,
+     class DataType, class... Properties,
      class BinaryPredicate>
-   自動 unique(const ExecutionSpace& exespace,                               (7)
+   auto unique(const ExecutionSpace& exespace,                               (7)
                const Kokkos::View<DataType, Properties...>& view,
                BinaryPredicate pred);
 

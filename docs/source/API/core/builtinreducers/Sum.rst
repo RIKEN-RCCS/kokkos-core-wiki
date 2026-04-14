@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
- ``add`` 演算を行う `ReducerConcept <ReducerConcept.html>`_ の具体的な実装。
+``add`` 演算を行う `ReducerConcept <ReducerConcept.html>`_ の具体的な実装。
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 

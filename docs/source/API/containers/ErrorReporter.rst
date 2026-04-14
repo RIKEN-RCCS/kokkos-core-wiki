@@ -125,8 +125,8 @@
            "ErrorReporter Example", positions.extent(0),
            KOKKOS_LAMBDA(int i, int& count_lower, int& count_upper) {
              double pos = positions(i);
-             //  (pos < 0. || pos > 100.) の場合、
-             まず範囲外の位置を確認します。{
+	     // まず範囲外の位置を確認します。
+	     if (pos < 0. || pos > 100.) {
                // add_report は、IDおよびペイロードを選択します。
                // いくつのレポートがすでに提出されたかを確認する必要がないことに
                // 注意してください。

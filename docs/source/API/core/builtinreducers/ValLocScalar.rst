@@ -35,10 +35,10 @@
 
    .. rubric:: データメンバー
 
-   .. cpp:var:: スカラー val
+   .. cpp:var:: Scalar val
 
       還元値。
 
-   .. cpp:var:: インデックス loc
+   .. cpp:var:: Index loc
 
       還元値の保存先（イテレーションインデックス）
