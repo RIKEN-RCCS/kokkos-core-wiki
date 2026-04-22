@@ -50,10 +50,10 @@
 * ワークロードは、実行前に記述されるため、バックエンドドライバーおよび/またはコンパイラは、最適化の機会を活用できます。 
 * ローンチオーバーヘッドが削減され、小規模な作業負荷からなる DAG に有利です。
 
-キャンプチャ
+キャプチャ
 ~~~~~~~~~~~~
 
-一部の使用例では、 :cpp:`Kokkos::Graph` にノードを追加し、:cpp:'Kokkos' API ではなく、ネイティブコードで表現されるノード、*例えば*、 `cuBLAS` のような外部数学ライブラリを呼び出す必要がある場合があります。
+一部の使用例では、 :cpp:`Kokkos::Graph` にノードを追加し、:cpp:`Kokkos` API ではなく、ネイティブコードで表現されるノード、*例えば*、 `cuBLAS` のような外部数学ライブラリを呼び出す必要がある場合があります。
 
 このようなシナリオには、ニューラルネットワークの構築/訓練、共役勾配法の実行など、多くの状況で遭遇します。
 
@@ -80,15 +80,15 @@
 
 1. 関数オブジェクトは  :cpp:`Kokkos::Graph` インスタンスによって保存されるため、関数オブジェクトにバインドされたデータはグラフが破壊されるまで必ず存続することが保証されます。 
 2. 実行空間インスタンスの `exec` は、キャプチャされたワークロードをデバイスに関連付けます。
-3. "*キャプチャ* モード"中では、バックエンド固有の制限が適用される場合があります (例えば、Cudaプログラミングガイド <https://docs.nvidia.com/cuda/cuda-c-programming-guide/#prohibited-and-unhandled-operations>`_ を参照)。
+3. "*キャプチャ* モード"中では、バックエンド固有の制限が適用される場合があります (例えば、`Cudaプログラミングガイド <https://docs.nvidia.com/cuda/cuda-c-programming-guide/#prohibited-and-unhandled-operations>`_ を参照)。
 
-   .. warning:
+   .. warning::
 
       "ストリーム" が複数のスレッドで使用されている場合、あるスレッドでのキャプチャが、他のスレッドに影響を与えることがあります(例えば、Cuda ランタイム API 文書上の :cpp:`cudaThreadExchangeStreamCaptureMode` <https://docs.nvidia.com/cuda/cuda-runtime-api/>`_ で を検索してください)。 
 
 現時点では、*キャプチャ* は以下のバックエンドのみでサポートされています:
 
-.. :リスト表:
+.. list-table::
 
   * - バックエンド
     - リソース
@@ -99,9 +99,9 @@
   * - :cpp:`SYCL`
     - `SYCL キューレコーディング <https://github.com/intel/llvm/blob/ee5e1ca95c78576c1b6f12b1c2d461ef4b537a9b/sycl/doc/extensions/experimental/sycl_ext_oneapi_graph.asciidoc?plain=1#L167-LL170>`_
 
-.. note:
+.. note::
 
-    :cpp:'SYCL'の文書では、*キャプチャ* ではなく *レコーディング* という用語が使われていますが、実質的には同じ意味です。
+    :cpp:`SYCL` の文書では、*キャプチャ* ではなく *レコーディング* という用語が使われていますが、実質的には同じ意味です。
 
 例
 --------

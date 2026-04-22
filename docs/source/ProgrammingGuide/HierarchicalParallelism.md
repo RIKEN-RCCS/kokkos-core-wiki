@@ -69,7 +69,7 @@ using Kokkos::Sum;
 using Kokkos::TeamPolicy;
 using Kokkos::parallel_for;
 
-型定義 TeamPolicy<ExecutionSpace>::member_type member_type;
+typedef TeamPolicy<ExecutionSpace>::member_type member_type;
 // ポリシーのインスタンスを作成
 TeamPolicy<ExecutionSpace> policy (league_size, Kokkos::AUTO() );
 // カーネルを起動
@@ -97,7 +97,7 @@ parallel_for (policy, KOKKOS_LAMBDA (member_type team_member) {
 using Kokkos::TeamPolicy;
 using Kokkos::parallel_for;
 
- TeamPolicy<ExecutionSpace>::member_type member_type;
+typedef TeamPolicy<ExecutionSpace>::member_type member_type;
 // ポリシーのインスタンスを作成
 TeamPolicy<ExecutionSpace> policy (league_size, Kokkos::AUTO() );
 // カーネルを起動
@@ -202,7 +202,7 @@ Kokkos::parallel_for(Kokkos::TeamPolicy<>(league_size,team_size).
 リーグやチームの順位インデックスを明示的に使用するコードを書く代わりに、ネスト並列処理を用いて階層的アルゴリズムを実装することが可能です。 Kokkos はユーザーが最大3層のネストされた並列処理を可能にします。 チームレベルとスレッドレベルが、最初の2つのレベルです。第3レベルは、  _vector_ 並列処理です。
 
 各レベル <sup>1</sup> において、3つの並列パターン（for、reduce、scan）のいずれかを使用できます。
-それらをネストしたり、リーグやチームの順位を意識したコードと連携させて使用できます。 異なるレイアは特別な実行ポリシーを介してアクセス可能です: `TeamThreadLoop` および `ThreadVectorLoop`.
+それらをネストしたり、リーグやチームの順位を意識したコードと連携させて使用できます。 異なるレイヤーは特別な実行ポリシーを介してアクセス可能です: `TeamThreadLoop` および `ThreadVectorLoop`.
 
 ***
 <sup>1</sup> スレッドレベルでは、すべての実行空間に対して並列スキャン演算が実装されているわけではなく、最上位レベルでのTeamPolicy もサポートしていません。
@@ -210,7 +210,7 @@ Kokkos::parallel_for(Kokkos::TeamPolicy<>(league_size,team_size).
 
 ### チームループ
 
-最初のネストレベルの並列ループは、チームの各スレッド間でインデックス範囲を分割します。 これが、This motivates the policy name ポリシー名 [`TeamThreadRange`](../API/core/policies/TeamThreadRange) を動かし、 それは、ループがチームによって1回実行され、インデックス範囲がスレッド間で分割されることを示しています。 ループ回数はチーム内のスレッド数に制限されず、インデックス範囲がスレッドにマッピングされる方法はアーキテクチャに依存します。 [`TeamThreadRange`](../API/core/policies/TeamThreadRange) ポリシーを使用して複数の並列ループをネストすることは許可されていません。 しかしながら、[`TeamThreadRange`](../API/core/policies/TeamThreadRange) ポリシーを使用した複数の並列ループが、同じカーネル内で、順番に連続して実行されることは有効です。 ネスト並列層のクロージャ外で、POD データへの書き込みアクセスを行うことは認められないことに注意してください。 これは、スレッドプライベート変数、チーム共有変数、およびグローバル共有変数に関連するデバッグが困難な問題を防止するための意識的な選択です。これを強制する簡単な方法は、ラムダ式で  "capture by value" 句を使用することですが、
+最初のネストレベルの並列ループは、チームの各スレッド間でインデックス範囲を分割します。 これが、ポリシー名 [`TeamThreadRange`](../API/core/policies/TeamThreadRange) の由来であり、ループがチームによって1回実行され、インデックス範囲がスレッド間で分割されることを示しています。 ループ回数はチーム内のスレッド数に制限されず、インデックス範囲がスレッドにマッピングされる方法はアーキテクチャに依存します。 [`TeamThreadRange`](../API/core/policies/TeamThreadRange) ポリシーを使用して複数の並列ループをネストすることは許可されていません。 しかしながら、[`TeamThreadRange`](../API/core/policies/TeamThreadRange) ポリシーを使用した複数の並列ループが、同じカーネル内で、順番に連続して実行されることは有効です。 ネスト並列層のクロージャ外で、POD データへの書き込みアクセスを行うことは認められないことに注意してください。 これは、スレッドプライベート変数、チーム共有変数、およびグローバル共有変数に関連するデバッグが困難な問題を防止するための意識的な選択です。これを強制する簡単な方法は、ラムダ式で  "capture by value" 句を使用することですが、
 ただし、通常、パフォーマンスが向上するため、リリースビルドでは、"capture by reference" が推奨されます。
 ラムダ式が [`TeamThreadRange`](../API/core/policies/TeamThreadRange) ループ内で`const`と見なされるため、コンパイラは、コンパイル時に `const` 違反として不正なアクセスを検出します。
 
@@ -224,7 +224,7 @@ using Kokkos::TeamThreadRange
 parallel_for (TeamPolicy<> (league_size, team_size),
                     KOKKOS_LAMBDA (member_type team_member)
 {
-  スカラー tmp;
+  Scalar tmp;
   parallel_for (TeamThreadRange (team_member, loop_count),
     [=] (int& i) {
       // ...
@@ -238,8 +238,8 @@ parallel_for (TeamPolicy<> (league_size, team_size),
 ```c++
 using Kokkos::parallel_reduce;
 using Kokkos::TeamPolicy;
-Kokkos::TeamThreadRange;
-using parallel_for (TeamPolicy<> (league_size, team_size),
+using Kokkos::TeamThreadRange;
+parallel_for (TeamPolicy<> (league_size, team_size),
                  KOKKOS_LAMBDA (member_type team_member) {
     // デフォルトの削減では、スカラーの += 演算子を使用して
     // スレッドの貢献度を結合します。
@@ -255,8 +255,8 @@ using parallel_for (TeamPolicy<> (league_size, team_size),
 
     // カスタムの還元をファンクタとして提供できます、
     // Kokkos が提供するものの1つ（例：Prod<Scalar>）を含みます。
-    スカラー積;
-    スカラー init_value = 1;
+    Scalar product;
+    Scalar init_value = 1;
     parallel_reduce (TeamThreadRange (team_member, loop_count),
       [=] (int& i, Scalar& lsum) {
         // ...
@@ -298,8 +298,8 @@ parallel_for (TeamPolicy<> (league_size, team_size),
       [&] (int& j) {
       // カスタムの還元をファンクタとして提供できます。
       // Kokkos が提供するもののいずれかを含めることも可能です。例：Prod<Scalar>。
-      スカラー積;
-      スカラー init_value = 1;
+      Scalar product;
+      Scalar init_value = 1;
      parallel_reduce (ThreadVectorRange (team_member, loop_count),
         [=] (int& i, Scalar& lsum) {
           // ...

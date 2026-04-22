@@ -1,4 +1,4 @@
-# Built-In-Reducers
+# 組み込みリデューサー
 
 Kokkos は最も一般的なリダプションタイプ用のリデューサーを提供しています:
 * [BAnd](../API/core/builtinreducers/BAnd): バイナリ “and” リダクションを行います
@@ -82,8 +82,6 @@ Kokkos::parallel_reduce( "MinLocReduce", Kokkos::TeamPolicy<>(N,AUTO),
   int n = team.league_rank();
 
   // 列全体で、チームを使って、ネスト並行還元を実行します
-  Kokkos::parallel_reduce( Kokkos::TeamThreadRange(team, M), 
-
   Kokkos::parallel_reduce( Kokkos::TeamThreadRange(team, M), 
       [=] (const int& m, value_type& thread_minmaxloc) {
     double val = A(n,m);

@@ -118,43 +118,39 @@
 
     * * ``Kokkos_ENABLE_BENCHMARKS``
       * ベンチマークを構築
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_EXAMPLES``
       * 例を構築
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_TESTS``
       * テストを構築
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_3``
-      * Kokkos 3.x シリーズにおける非推奨のコードの有効化 :red:`[バージョン 4.3において削除]`
-      * ``オフ``
+      * Kokkos 3.x 系列における非推奨のコードの有効化 :red:`[バージョン 4.3において削除]`
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_4``
-      * Kokkos 4.x シリーズにおける非推奨のコードの有効化
-      * ``オン``
+      * Kokkos 4.x 系列における非推奨のコードの有効化
+      * ``ON``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_5``
-      * Kokkos 5.x seriesKokkos 5.x シリーズにおける非推奨のコードの有効化
-      * ``オフ``
+      * Kokkos 5.x 系列における非推奨のコードの有効化
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATION_WARNINGS``
       * 非推奨のKokkos機能を使用する際、コンパイル時に警告を表示するかどうか
-      * ``オン``
+      * ``ON``
 
     * * ``Kokkos_ENABLE_TUNING``
       * チューニングツール用のバインディングを作成
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION``
       * 積極的にループをベクトル化
-      * ``オフ``
-
-    * * ``Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION``
-      * 積極的にループをベクトル化
-      * ``オフ``
+      * ``OFF``
 
 デバッグ
 ---------
@@ -169,11 +165,11 @@
   
     * * ``Kokkos_ENABLE_DEBUG``
       * 追加のデバッグ機能を有効化 - コンパイル時間が長くなる可能性があります
-      * ``CMAKE_BUILD_TYPE`` が ``デバッグ`` の場合 ``オン`` 、それ以外の場合は ``オフ``
+      * ``CMAKE_BUILD_TYPE`` が ``Debug`` の場合 ``ON`` 、それ以外の場合は ``OFF``
 
     * * ``Kokkos_ENABLE_DEBUG_BOUNDS_CHECK``
       * 境界チェックを使用 - これにより実行時間が長くなります
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` :red:`[Deprecated since 4.7]`
       * デュアルビューのデバッグチェック
@@ -182,8 +178,8 @@
 
 .. [#dual_view_modify_check] ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` デフォルト値は、以下の通り:
   
-  * ``CMAKE_BUILD_TYPE`` が ``デバッグ`` の場合 ``オン`` 、それ以外の場合は ``オフ`` (Kokkos 4.7まで)
-  * 常に ``オン`` ( Kokkos 4.7以降)
+  * ``CMAKE_BUILD_TYPE`` が ``Debug`` の場合 ``ON`` 、それ以外の場合は ``OFF`` (Kokkos 4.7まで)
+  * 常に ``ON`` ( Kokkos 4.7以降)
 
 .. _keywords_enable_backend_specific_options:
 
@@ -201,7 +197,7 @@
   
     * * ``Kokkos_ENABLE_CUDA_CONSTEXPR``
       * 実験的リラックス型 constexpr 関数を有効化
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_CUDA_LAMBDA`` :red:`[バージョン 4.1以降非推奨]`
       * 実験的ラムダ型機能を有効化
@@ -209,11 +205,11 @@
 
     * * ``Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE``
       * CUDA [#rdc_with_shared_libs]_ のためのリロケータブルデバイスコード（RDC）を有効化
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_CUDA_UVM`` :red:`[4.0以降非推奨]` `代替手段への移行 <../usecases/Moving_from_EnableUVM_to_SharedSpace.html>`_ 参照。
       * CUDA については、デフォルトで統一メモリ（UM）を使用
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC``
       * ``cudaMallocAsync`` ( CUDA Toolkit version 11.2以降が必要 ) を使用。 この最適化により、デバイスあたり複数のCUDAストリームを使用するアプリケーションにおいて、パフォーマンスが向上する可能性がありますが、 MPI ディストリビューションは、古いバージョンの UCX および多くの Cray MPICH インスタンスに基づいて構築されたものとは互換性がないことは広く認識されています。 `既知の課題 <../known-issues.html#cuda>`_ を参照してください。
@@ -221,36 +217,36 @@
 
     * * ``Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS``
       * コンパイル時に複数のカーネルをインスタンス化 - それによってパフォーマンスは向上しますが、コンパイル時間は増加します
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE``
       * HIP [#rdc_with_shared_libs]_ 向けにリロケータブルデバイスコード（RDC）を有効化します 
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_SYCL_RELOCATABLE_DEVICE_CODE``
-      * Enable relocatable device code (RDC) for SYCL [#rdc_with_shared_libs]_ 向けにリロケータブルデバイスコード（RDC）を有効化します (Kokkos 4.5以降)。
-      * ``オフ``
+      * SYCL [#rdc_with_shared_libs]_ 向けにリロケータブルデバイスコード（RDC）を有効化します（Kokkos 4.5以降）。
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_ATOMICS_BYPASS``
       * シリアル専用ビルドにおいて、ホスト並列処理もデバイスバックエンドも有効化されていない場合、アトミック操作を無効化します (Kokkos 4.3以降)
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_IMPL_HPX_ASYNC_DISPATCH``
       * HPX バックエンドの非同期ディスパッチを有効化します
-      * ``オン``
+      * ``ON``
 
     * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
       * CMake 言語機能を使用して構築してください（CUDAまたはHIPのみ） [#cmake_language]_
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES``
       * CXXおよびバックエンド互換言語（CUDAまたはHIP）において、Kokkos のインストールが利用可能となるようにします。 [#multiple_languages]_ (Kokkos 5.0以降)
-      * ``オフ``
+      * ``OFF``
 
 
-.. [#cuda_lambda] ``Kokkos_ENABLE_CUDA_LAMBDA`` デフォルト値 は、 3.7まで ``オフ`` および 4.0以降 ``オン`` 
+.. [#cuda_lambda] ``Kokkos_ENABLE_CUDA_LAMBDA`` デフォルト値 は、 3.7まで ``OFF`` および 4.0以降 ``ON`` 
 
-.. [#cuda_malloc_async] ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` デフォルト値 は、4.2、4.3、 および 4.4以外で ``オフ``  
+.. [#cuda_malloc_async] ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` デフォルト値 は、4.2、4.3、 および 4.4以外で ``OFF``  
 
 .. [#rdc_with_shared_libs] ``Kokkos_ENABLE_<CUDA/HIP/SYCL>_RELOCATABLE_DEVICE_CODE`` は、静的ライブラリのビルドが必要です。
   RDC は共有ライブラリと互換性がありません。従って、このオプションは、 ``BUILD_SHARED_LIBS`` 変数が、偽の場合にのみ有効化可能です。
@@ -286,15 +282,15 @@
 
     * * ``Kokkos_ENABLE_COMPILER_WARNINGS``
       * すべてのコンパイラ警告をプリント
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_HEADER_SELF_CONTAINMENT_TESTS``
       * ヘッダーが自己完結していることを確認
-      * ``オフ``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_LARGE_MEM_TESTS``
       * 大規模な追加メモリテストを実施
-      * ``オフ``
+      * ``OFF``
 
 .. _keywords_tpls:
 
@@ -315,23 +311,23 @@
 
     * * ``Kokkos_ENABLE_HWLOC``
       * HWLOC ライブラリを有効化するかどうか
-      * ``オフ``
+      * ``OFF``
       *
     * * ``Kokkos_ENABLE_LIBDL``
       * LIBDL ライブラリを有効化するかどうか
-      * ``オン``
+      * ``ON``
       *
     * * ``Kokkos_ENABLE_LIBQUADMATH``
       * GCC のクワッド精度数学ライブラリによる、128ビット浮動小数点型のサポートを有効化するかどうか 
-      * ``オフ``
+      * ``OFF``
       *
     * * ``Kokkos_ENABLE_ONEDPL``
       * SYCLバックエンドを使用する際、oneDPL ライブラリを有効化するかどうか
-      * ``オン``
+      * ``ON``
       *
     * * ``Kokkos_ENABLE_ROCTHRUST``
       * HIPバックエンドを使用する際、rocThrust ライブラリを有効にするかどうか
-      * ``オン``
+      * ``ON``
       * ( Kokkos 4.3以降)
 
 以下のオプションは、CMake以外のテンプレート言語（TPL）の検索と設定を制御します:

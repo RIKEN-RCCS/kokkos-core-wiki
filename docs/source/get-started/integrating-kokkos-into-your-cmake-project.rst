@@ -10,7 +10,7 @@ Kokkosは、 ``Kokkos::kokkos`` というターゲットを提供しており、
 1. 外部 Kokkos (ほとんどのユーザーに推奨)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-推奨アプローチは、Kokkosを外部依存関係として利用することです。 これにより管理や更新がより容易になります。  CMake の 'find_package() <https://cmake.org/cmake/help/latest/command/find_package.html>'_ コマンドを使って、既存の Kokkos インストールを特定しリンクしてください:
+推奨アプローチは、Kokkosを外部依存関係として利用することです。 これにより管理や更新がより容易になります。  CMake の `find_package() <https://cmake.org/cmake/help/latest/command/find_package.html>`_ コマンドを使って、既存の Kokkos インストールを特定しリンクしてください:
 
 .. code-block:: cmake
 
@@ -18,7 +18,7 @@ Kokkosは、 ``Kokkos::kokkos`` というターゲットを提供しており、
   # ...
   target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 
-* ``find_package(Kokkos ...)`` は、Kokkos の構築およびインストール時に生成される ``KokkosConfig.cmake`` ファイルを検索します。このファイルには、Kokkos に対抗するために必要な情報が含まれています。
+* ``find_package(Kokkos ...)`` は、Kokkos の構築およびインストール時に生成される ``KokkosConfig.cmake`` ファイルを検索します。このファイルには、Kokkos にリンクするために必要な情報が含まれています。
 *  ``4.2`` 引数は、最低限必要な Kokkos バージョンを指定します。 これは任意ですが、互換性を確保するために推奨されています。 
 * ``Kokkos::kokkos``  は、必要なビルドフラグをすべて提供する名前スペース付きのインポートターゲットです。 
 * ``CONFIG`` キーワードは、CMake に設定ファイルを使うように、指示します。

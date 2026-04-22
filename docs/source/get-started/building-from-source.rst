@@ -11,7 +11,7 @@ Kokkos のソースコード取得
 
 多くのユーザーに推奨されるアプローチは、GitHub からのリリースアーカイブのダウンロードです。
 
-1.  **最新リリースを探す:**  <https://github.com/kokkos/kokkos/releases>`_ にアクセスして最新リリース(または必要な特定のバージョン)を見つけてください。
+1.  **最新リリースを探す:**  `Kokkos リリースページ <https://github.com/kokkos/kokkos/releases>`_ にアクセスして最新リリース（または必要な特定のバージョン）を見つけてください。
 
 2.  **アーカイブとチェックサムをダウンロードしてください:** ``kokkos-X.Y.Z.tar.gz`` アーカイブと対応する ``kokkos-X.Y.Z-SHA-256.txt`` チェックサムファイルの両方をダウンロードしてください。 チェックサムを使ってダウンロードしたアーカイブの整合性を確認することが重要です。
 
@@ -38,7 +38,7 @@ Kokkos のソースコード取得
 Gitリポジトリのクローニング (開発バージョン用)
 -----------------------------------------------------
 
-最新機能が必要な場合、または Kokkos に投稿したい場合、Git レポジトリのクローンが可能です
+最新機能が必要な場合、または Kokkos にコントリビュートしたい場合、Git リポジトリをクローンできます
 
 1.  **レポジトリをクローンします:**
 
@@ -48,26 +48,26 @@ Gitリポジトリのクローニング (開発バージョン用)
 
     これによりリポジトリは、``kokkos`` というディレクトリにクローンされます。
 
-2.  **リリースタグ(開発推奨)をチェックしてください:**
-    ``開発`` 部門は概ね安定していますが、現在も活発に開発が進められています。 より予測可能な動作を求めるなら、特定のリリースタグをチェックしてみてください:
+2.  **リリースタグをチェックアウトします（開発には推奨）:**
+    ``develop`` ブランチは概ね安定していますが、現在も活発に開発が進められています。 より予測可能な動作を求めるなら、特定のリリースタグをチェックアウトしてください:
 
 
     .. code-block:: sh
 
         cd kokkos
-        git チェックアウト 4.5.01  # 所望のバージョンタグを置き換えます
+        git checkout 4.5.01  # 所望のバージョンタグを置き換えます
 
     利用可能なタグを見るために:
 
     .. code-block:: sh
 
-        git タグ
+        git tag
 
    あるいは、最先端を保つために(慎重に使用):
 
     .. code-block:: sh
 
-        git チェックアウト開発
+        git checkout develop
 
 
 どの方法を使うべきでしょうか?
@@ -101,28 +101,28 @@ Kokkos の設定には以下のコマンドを使用します :
 
 これらのオプションは、一般的にはあらゆる CMake プロジェクトに役立ちます：
 
-* ``-DCMAKE_CXX_COMPILER=<compiler>``: CPUs.C++コンパイラへの完全なパスを指定します。例えば、AMD GPUには ``hipcc`` 、  Intel GPUには ``icpx`` 、   CPUには、 ``g++`` または ``clang++`` を使いましょう。
+* ``-DCMAKE_CXX_COMPILER=<compiler>``: C++ コンパイラへの完全なパスを指定します。例えば、AMD GPU には ``hipcc``、Intel GPU には ``icpx``、CPU には ``g++`` または ``clang++`` を使いましょう。
 
-  Example: ``-DCMAKE_CXX_COMPILER=/path/to/hipcc``
+  例: ``-DCMAKE_CXX_COMPILER=/path/to/hipcc``
 
 * ``-DCMAKE_CXX_STANDARD=<standard>``: C++ 標準を設定します  。デフォルトは、``20`` です。
 
-  Example: ``-DCMAKE_CXX_STANDARD=23``
+  例: ``-DCMAKE_CXX_STANDARD=23``
 
 * ``-DCMAKE_BUILD_TYPE=<type>``: 最適化レベルとデバッグ情報を制御します。一般的な選択肢は、 ``Debug`` 、 ``Release`` 、 ``RelWithDebInfo`` (デフォルト)、 および ``MinSizeRel`` です。
 
-  Example: ``-DCMAKE_BUILD_TYPE=Release``
+  例: ``-DCMAKE_BUILD_TYPE=Release``
 
 * ``-DCMAKE_INSTALL_PREFIX=<prefix>``: ディスク上のディレクトリを指定します。
   Kokkos が設置される予定です。
 
 
-  Example: ``-DCMAKE_INSTALL_PREFIX=/path/to/install/dir``
+  例: ``-DCMAKE_INSTALL_PREFIX=/path/to/install/dir``
 
 ** Kokkos 固有の重要なオプション:**
 
 
-* ``-DKokkos_ENABLE_<BACKEND>=ON``: 現在オープンソース化されている実験的バックエンド等、ターゲットデバイス向けの特定のバックエンドを有効にします。完全なリストについては :ref:'keywords_backends' を参照してください。
+* ``-DKokkos_ENABLE_<BACKEND>=ON``: 現在オープンソース化されている実験的バックエンド等、ターゲットデバイス向けの特定のバックエンドを有効にします。完全なリストについては :ref:`keywords_backends` を参照してください。
 
   一般的なバックエンド:
 
@@ -139,7 +139,7 @@ Kokkos の設定には以下のコマンドを使用します :
 
 
 
-  実験的なバックエンドと :ref:'keywords_enable_backend_specific_options' を含めます。
+  実験的なバックエンドと :ref:`keywords_enable_backend_specific_options` を含めます。
 
 
 * ``-DKokkos_ARCH_<ARCHITECTURE>=ON``: コード生成のためのターゲットアーキテクチャを指定します。一部のバックエンドはアーキテクチャを自動検出できますが、明示的に指定するのが最適である場合が多いです。
@@ -175,15 +175,15 @@ Kokkos の設定には以下のコマンドを使用します :
 Kokkos 構築
 ---------------
 
-設定後、Kokkos 使用について構築してください:
+設定後、以下のコマンドで Kokkos をビルドします:
 
 .. code-block:: sh
 
     cmake --build builddir
 
-これによって、Kokkos を編集します。  複数コアを使うには、``-j<N>`` を加えることにより、速く編集をできます ( ``<N>`` をコア数に置換します)。
+これにより Kokkos をコンパイルします。複数コアを使うには、``-j<N>`` を追加することで、高速にコンパイルできます（``<N>`` をコア数に置換します）。
 
-Example: ``cmake --build builddir -j8``
+例: ``cmake --build builddir -j8``
 
 
 Kokkos インストール

@@ -16,7 +16,7 @@ https://packages.fedoraproject.org/pkgs/kokkos/
 
 `Spack <https://spack.io>`_
 ---------------------------
-Kokkos.は HPC向けの、有名なパッケージマネージャーです。  Spack には、 Kokkos のインストールレシピが付属しています。
+Spack は HPC 向けの広く使われているパッケージマネージャーです。Spack には Kokkos のインストールレシピが付属しています。
  
 `Kokkos レシピウェブページ <https://packages.spack.io/package.html?name=kokkos>`_ には  、Kokkosの利用可能なバージョンとそのオプションがまとめられています。
 
@@ -26,7 +26,7 @@ Kokkos.は HPC向けの、有名なパッケージマネージャーです。  S
 
 .. code-block::
 
-    スパック情報 kokkos
+    spack info kokkos
 
 
 Spackを使用する場合、Kokkos のハードウェア自動検出は無効です。 つまり、ユーザーが、常に手動でアーキテクチャを指定しなければならないということです。 しかしながら、CPU の場合、Spack はすでに CPU マイクロアーキテクチャを指定しているため、再度指定する必要はありません。
@@ -100,10 +100,10 @@ Spack で自分だけの Kokkos 依存プロジェクトをパッケージ化す
 
 .. code-block:: python
 
-    spack.package からインポート *
+    from spack.package import *
 
     class Foo(CMakePackage):
-        #  Spack パッケージの有用なディスクリプション
+        # Spack パッケージの通常の説明
 
         depends_on("kokkos")
 

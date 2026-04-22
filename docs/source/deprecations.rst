@@ -26,9 +26,9 @@ Kokkos 4.6 において非推奨
    * ``KokkosSparse::StaticCrsGraph``
    * ``KokkosKernels`` が提供した機能性により整合しています。
 
-* ``native_simd`` and ``native_simd_mask`` types
+* ``native_simd`` および ``native_simd_mask`` 型
    * 置換: ``simd`` and ``simd_mask``
-   * C++ standardC++ 標準との整合性。
+   * C++ 標準との整合性。
 
 * Makefile サポート
    * 置換: CMake
@@ -122,7 +122,7 @@ Kokkos 4.3 において非推奨
    * ADLにより曖昧さを回避
 
 * ``ExecutionSpace::in_parallel``
-   * 置換: ``KOKKOS_IF_ON_HOST``/``KOKKOS_IF_ON_DEVICE`` は、部分的に同様の行動を提供します
+   * 置換: ``KOKKOS_IF_ON_HOST``/``KOKKOS_IF_ON_DEVICE`` は、部分的に同様の動作を提供します
    * 一貫性を欠いた実装、限定的な利用
 
 * ``Cuda::device_arch()``
@@ -162,7 +162,7 @@ Kokkos 4.2 において非推奨
 
 * ``HIP::HIP(hipStream_t stream, bool manage_stream)``
     * 置換 ``HIP::HIP(hipStream_t stream)``
-    *  HIP 実行空間インスタンスの構築には、常に外部管理の ``hipStream`` オブジェクトを使用すべきです。execution space 
+    *  HIP 実行空間インスタンスの構築には、常に外部管理の ``hipStream`` オブジェクトを使用すべきです。
 
 * ``vector``
     * 置換: 無し
@@ -172,8 +172,8 @@ Kokkos 4.2 において非推奨
     * 置換: ``HostSpace::HostSpace()``
     * ``AllocationMechanism`` は使用されず、 整合性を伴う ``operator new`` は、無条件で使用されています。
 
-*  ``Kokkos::Experimental`` 名前空間の中の SIMD 算術関数
-    * 置換: SIMD math function in the ``Kokkos`` namespace
+*  ``Kokkos::Experimental``
+    * 置換: ``Kokkos`` 名前空間内の SIMD 数学関数
     *  ADLの問題、他の数学関数オーバーロードとの一貫性
 
 
@@ -198,7 +198,7 @@ Kokkos 4.0 において非推奨
 
 * ``CudaUVMSpace::available()``
    * 置換: ``SharedSpace``
-   * 移植不可能であり、常に ``真`` を返す
+   * 移植不可能であり、常に ``true`` を返す
 
 * ``Complex`` ``volatile`` オーバーロード
    * 置換: 無し

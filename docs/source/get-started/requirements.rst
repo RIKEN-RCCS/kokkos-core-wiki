@@ -178,7 +178,7 @@ Kokkos 3.x
 =============
 
 * CMake >= 3.16: が必須
-* CMake >= 3.18: Fortranリンク。これは、ほとんどの Fortran/Kokkos 混合構築には、影響しません。 既知の構築問題<https://github.com/kokkos/kokkos/blob/master/BUILD.md#known-issues>`_ を参照してください。
+* CMake >= 3.18: Fortranリンク。これは、ほとんどの Fortran/Kokkos 混合構築には、影響しません。 `ビルドに関する既知の問題 <https://github.com/kokkos/kokkos/blob/master/BUILD.md#known-issues>`_ を参照してください。
 * CMake >= 3.21.1 for NVC++
 
 主要テスト済みコンパイラは、リリースモードにおいて、エラーとして警告を出して、合格しています。 包括的なバックエンドの組み合わせでテストされます（つまり、OpenMP、Pthreads、Serial、OpenMP+Serial 等）。
@@ -218,6 +218,6 @@ Kokkos 3.x
   -Werror -Wsign-compare -Wtype-limits
   -Wuninitialized
 
-.. note: 
+.. note::
 
   他のコンパイラも、時折、特に、開発ブランチからマスターブランチへのプッシュ時にテストされます。 これらは、``-Werror`` なしで、限られたバックエンドに対しては、あまり厳密なテストは行われていません。

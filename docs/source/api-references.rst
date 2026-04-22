@@ -14,17 +14,17 @@ API 参照
 
 :doc:`API/core-index`
 ~~~~~~~~~~~~~~~~~~~~~
-実行の基本抽象化  (``parallel_for``,
+実行のための基本的な抽象化 (``parallel_for``,
 ``parallel_reduce``, ``parallel_scan``) およびデータ (``View``).
 
 :doc:`API/algorithms-index`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-擬似生成乱数用のユーティリティ・クラス、ソートアルゴリズム、
-STL様 並列アルゴリズム
+擬似乱数生成用のユーティリティクラス、ソートアルゴリズム、
+STL ライクな並列アルゴリズム
 
 :doc:`API/containers-index`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
- ``DualView`` 、 ``ScatterView`` 、 または ``OffsetView`` 等、異色ビュー型コンテナ
+特殊なビューベースのコンテナ（``DualView``、``ScatterView``、``OffsetView`` など）
 
 
 :doc:`API/simd-index`

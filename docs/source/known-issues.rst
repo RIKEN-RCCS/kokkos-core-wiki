@@ -7,7 +7,7 @@
 ``Windows.h`` ヘッダー
 =============================
 
-Windows で Kokkos を使用する場合、プログラムやライブラリが `windows.h` を含む場合があります。なぜなら、このヘッダーは、事前に `NOMINMAX` が定義されなければ、`min` と `max` という名前の2つのマクロを定義するため、問題を含みます。プリプロセッサはソースコード内の文字列をマクロで置換するため、解釈不能な結果となり、コンパイルは失敗に終わります。したがって、ヘッダーファイル `Kokkos_Core.hpp` はこれらのマクロに対して保護されており、つまりそれらはヘッダーファイルの先頭では未定義であり、末尾で再定義されるということです。`Kokkos_Core.hpp` 内の定義はマクロに対して保護されているが、外部からのコードは保護されていません。 したがって、定義されるマクロへの対応として、コンパイルラインで、`-DNOMINMAX` または `/DNOMINMAX` を定義する（推奨）ことによる、あるいは `min` または `max` を含む名前に `()` を付けることによるかは、ユーザー次第である。
+Windows で Kokkos を使用する場合、プログラムやライブラリが `windows.h` を含む場合があります。なぜなら、このヘッダーは、事前に `NOMINMAX` が定義されなければ、`min` と `max` という名前の2つのマクロを定義するため、問題を含みます。プリプロセッサはソースコード内の文字列をマクロで置換するため、解釈不能な結果となり、コンパイルは失敗に終わります。したがって、ヘッダーファイル `Kokkos_Core.hpp` はこれらのマクロに対して保護されており、つまりそれらはヘッダーファイルの先頭では未定義であり、末尾で再定義されるということです。`Kokkos_Core.hpp` 内の定義はマクロに対して保護されていますが、外部のコードは保護されていません。 したがって、定義されるマクロへの対応として、コンパイルラインで、`-DNOMINMAX` または `/DNOMINMAX` を定義する（推奨）ことによる、あるいは `min` または `max` を含む名前に `()` を付けることによるかは、ユーザー次第です。
 
 CUDA
 ====
@@ -16,9 +16,9 @@ CUDA
 
   .. code-block::
 
-    'Kokkos::Experimental::CudaRawMemoryAllocationFailure' のインスタンスをスローした後、terminate が呼び出されました。
+     terminate called after throwing an instance of 'Kokkos::Experimental::CudaRawMemoryAllocationFailure'
 
-  フィックスとは、以下の CMake 引数を加えることにより、非同期メモリっ割り当てを無効にすることです:
+  以下の CMake 引数を追加することで、非同期メモリ割り当てを無効にできます:
 
   .. code-block::
 
@@ -89,7 +89,7 @@ SYCL
            |     ^
      [...]
 
-  これは以下によって固定されます
+  以下で修正できます
 
   .. code-block:: cpp
 
@@ -106,7 +106,7 @@ SYCL
 
     #include <Kokkos_Core.hpp>
     
-    using namespace Kokkos;  // avoid using ディレクティブを回避
+    using namespace Kokkos;  // using ディレクティブを回避
 
     KOKKOS_FUNCTION void do_math() {
       auto sqrt5 = sqrt(5);  // error: ambiguous ::sqrt or Kokkos::sqrt?
