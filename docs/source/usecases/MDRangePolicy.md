@@ -119,8 +119,8 @@ Kokkos::parallel_for("mdr_for_all_cells",
 [`MDRangePolicy`](../API/core/policies/MDRangePolicy) は、 [`RangePolicy`](../API/core/policies/RangePolicy) と同じテンプレートパラメータを受け付けますが、また追加の型である `Kokkos::Rank<R>` パラメータを必要とします。そこでは、 `R` がランクであり、 入れ子になった for-loops の数であり、コンパイル時に提供される必要があります。 
 
 ポリシーには、以下の2つの引数が必要です:
-  1) "begin" インデックスの、初期化子リスト、または Kokkos::Array`
-  2) "end" インデックスの、初期化子リスト、または Kokkos::Array`
+  1) "begin" インデックスの、初期化子リスト、または `Kokkos::Array`
+  2) "end" インデックスの、初期化子リスト、または `Kokkos::Array`
 
 内部的には、[`MDRangePolicy`](../API/core/policies/MDRangePolicy) は多次元反復空間に対してタイリングを使用します。カスタマイズのため、ポリシーにはオプションの第三引数を渡すことが可能ですーこれはタイル寸法サイズの初期化子リストとなります。 単純なデフォルトサイズは問題に依存する場合があり、自動的に決定することが難しいため、この引数は、パフォーマンスチューニングの際には重要となる可能性があります。
 

@@ -24,7 +24,7 @@
      - `Kokkos を使ったアプリケーション構築 <https://www.youtube.com/watch?v=rUIcWtFU5qM&feature=youtu.be&t=4986>`_
      -
    * - 2.
-     - `Views and Spacesビューおよび空間 <https://www.youtube.com/watch?v=O-asHTtO7O4>`_
+     - `ビューおよび空間 <https://www.youtube.com/watch?v=O-asHTtO7O4>`_
      - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_02_ViewsAndSpaces.pdf>`__
    * - 2.1.
      - `ビュー <https://www.youtube.com/watch?v=O-asHTtO7O4&feature=youtu.be&t=1413>`_
@@ -36,19 +36,19 @@
      - `パフォーマンスの移植性のためのメモリアクセスパターンの管理 <https://www.youtube.com/watch?v=O-asHTtO7O4&feature=youtu.be&t=4336>`_
      -
    * - 2.4.
-     - 高度な還元 <https://www.youtube.com/watch?v=O-asHTtO7O4&feature=youtu.be&t=5592>`_
+     - `高度なリダクション <https://www.youtube.com/watch?v=O-asHTtO7O4&feature=youtu.be&t=5592>`_
      -
    * - 3.
      - `多次元ループとデータ構造 <https://www.youtube.com/watch?v=nGyJS8u-6GY>`_
-     - `Slides <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_03_MDRangeMoreViews.pdf>`__
+     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_03_MDRangeMoreViews.pdf>`__
    * - 3.1.
      - `MDRangePolicyを使った確実にネストしたループ <https://www.youtube.com/watch?v=nGyJS8u-6GY&feature=youtu.be&t=1319>`_
      -
    * - 3.2.
-     - `サブビュー: Taking slices of Views <https://www.youtube.com/watch?v=nGyJS8u-6GY&feature=youtu.be&t=2185>`_
+     - `サブビュー: ビューのスライス取得 <https://www.youtube.com/watch?v=nGyJS8u-6GY&feature=youtu.be&t=2185>`_
      -
    * - 3.3.
-     - `管理対象外ビュー: Dealing with external memory <https://www.youtube.com/watch?v=nGyJS8u-6GY&feature=youtu.be&t=3189>`_
+     - `管理対象外ビュー: 外部メモリの取り扱い <https://www.youtube.com/watch?v=nGyJS8u-6GY&feature=youtu.be&t=3189>`_
      -
    * - 3.4.
      - `スレッド安全性およびアトミック演算 <https://www.youtube.com/watch?v=nGyJS8u-6GY&feature=youtu.be&t=3901>`_
@@ -96,7 +96,7 @@
      - `MPI - Kokkos Interoperability <https://www.youtube.com/watch?v=1J3JQ3d3cRc&feature=youtu.be&t=2732>`_
      -
    * - 6.4.
-     - `Kokkos リモート空間: Support for PGAS in Kokkos <https://www.youtube.com/watch?v=1J3JQ3d3cRc&feature=youtu.be&t=5050>`_
+     - `Kokkos リモート空間: Kokkos における PGAS のサポート <https://www.youtube.com/watch?v=1J3JQ3d3cRc&feature=youtu.be&t=5050>`_
      -
    * - 7.
      - `Kokkos ツール <https://www.youtube.com/watch?v=MH6zFYGw0HU>`_

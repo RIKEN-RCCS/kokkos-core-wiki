@@ -52,7 +52,7 @@ class ParticleInteractions {
 
 実際には、以下の通りに書かれたかのようです：
 ```c++
-クラス ParticleInteractions {
+class ParticleInteractions {
   ...
   void compute() {
     parallel_for("Compute", KOKKOS_LAMBDA (const int i) {
