@@ -1,7 +1,7 @@
 ``ErrorReporter``
 =================
 
-.. :: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ヘッダー ``<Kokkos_ErrorReporter.hpp>`` において定義。
@@ -60,7 +60,7 @@
 
    .. cpp:function:: int num_report_attempts() const
 
-      :returns: 2つの ``std::vector`` で、1つは報告者の ID を、もう1つは報告内容自体を格納します。 ベクトルのサイズは :cpp:any:`num_reports()` に等しいです。
+      :returns: 試行されたレポートの総数。
 
    .. cpp:function:: std::pair<std::vector<int>, std::vector<report_type>> get_reports() const
 
@@ -68,7 +68,7 @@
 
    .. cpp:function:: bool full() const
 
-      :returns: 試行されたレポートの数が :cpp:any:`capacity()` に等しいか、それを超える場合にのみ、`` 真`` 。
+      :returns: 試行されたレポートの数が :cpp:any:`capacity()` に等しいか、それを超える場合にのみ、 ``真`` 。
 
    .. cpp:function:: void clear() const
 
@@ -80,9 +80,9 @@
 
    .. cpp:function:: bool add_report(int reporter_id, report_type report) const
       
-     エラーの記録を試行します。 スペースがある場合、``report`` が保存され、試行は成功します。
+     エラーの記録を試行します。 スペースがある場合、 ``report`` が保存され、試行は成功します。
 
-      :returns: エラー記録の試行が成功した場合にのみ、`` 真`` 。
+      :returns: エラー記録の試行が成功した場合にのみ、 ``真`` 。
 
 
 例
@@ -151,7 +151,7 @@
            errors.num_report_attempts(), errors.num_reports());
 
        // レポーターIDおよびレポートを獲得するための、構築されたバインディングの使用。
-       自動 [reporter_ids, reports] = errors.get_reports();
+       auto [reporter_ids, reports] = errors.get_reports();
        for (int e = 0; e < errors.num_reports(); e++)
          printf("%i %lf\n", reporter_ids[e], reports[e]);
      }

@@ -1,23 +1,23 @@
 # カスタムリデューサー
 
-カスタムの任意の還元は、還元クラスと "還元" クラスを用いて実装されます。 "reduced" クラスは、 [Built-In Reducers with Custom Scalar Types](Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types) で使われるカスタムスカラータイプに非常に似ており、リダクションクラスは、[ReducerConcept](../API/core/builtinreducers/ReducerConcept) を実装しています。
+カスタムの任意の縮約は、縮約クラスと "縮約" クラスを用いて実装されます。 "reduced" クラスは、 [Built-In Reducers with Custom Scalar Types](Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types) で使われるカスタムスカラータイプに非常に似ており、リダクションクラスは、[ReducerConcept](../API/core/builtinreducers/ReducerConcept) を実装しています。
 
  "reduced" クラスについては、以下の要件を満たす必要があります
      
-   * 適用還元クラスに必要な演算子を実装する必要があります
+   * 適用縮約クラスに必要な演算子を実装する必要があります
    * クラス/構造体はデフォルトのコピーコンストラクタを使用するか、特定のコピーコンストラクタを実装している必要があります。
 
-還元クラスについては、以下の要件を満たす必要があります
+縮約クラスについては、以下の要件を満たす必要があります
      
    * 型定義リデューサー、value_type および result_view_type は、定義される必要があります。詳細については、 [ReducerConcept](../API/core/builtinreducers/ReducerConcept) を参照してください。
    * リデューサーの概念手法は、実装される必要があります。
    * 露出 result_view_type は、オブジェクトが使用されるメモリ空間内で、定義されなければなりません 
 
-注意事項: タグ付き還元の場合でも、すなわちポリシー内でタグを指定する場合であっても、潜在的な `init`/`join`/`final` メンバ関数は `WorkTag` 引数を選択してははいけません。
+注意事項: タグ付き縮約の場合でも、すなわちポリシー内でタグを指定する場合であっても、潜在的な `init`/`join`/`final` メンバ関数は `WorkTag` 引数を選択してははいけません。
 
 ## 例
 
-本例では、カスタムクラスとリデューサーを使って、配列上でカスタム還元を実行します。
+本例では、カスタムクラスとリデューサーを使って、配列上でカスタム縮約を実行します。
 
 ```c++
 #include <Kokkos_Core.hpp>

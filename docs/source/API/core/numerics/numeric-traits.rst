@@ -1,7 +1,7 @@
 数値特性
 ==============
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 .. role:: strike
@@ -21,15 +21,15 @@
 
 .. |P1841| replace:: P1841
 
-|NumericLimits|_ の代替えを提供します。  C++23標準ライブラリに追加される新しい機能を実装し、モノリシックな ``numeric_limits`` クラステンプレートを個別のトレイトテンプレートに分割します。 詳細については、標準ライブラリヘッダー からの |P1841|_.numeric_limit を参照してください。
+|NumericLimits|_ の代替えを提供します。  C++23標準ライブラリに追加される新しい機能を実装し、モノリシックな ``numeric_limits`` クラステンプレートを個別のトレイトテンプレートに分割します。 詳細については、|P1841|_ を参照してください。
 
-数値特性は、Kokkos 3.5以降に、``Kokkos::Experimental`` namespace で定義されています。
+数値特性は、Kokkos 3.5以降に、 ``Kokkos::Experimental`` namespace で定義されています。
 
 以下に利用可能な特性のリストを記載します。
 
 ------------
 
- Kokkos 3.6 に追加された``特性*`` を示しています。
+ Kokkos 3.6 に追加された ``特性*`` を示しています。
 
 :strike:`trait*` は、 Kokkos 4.0 において削除された特性を示しています。
 

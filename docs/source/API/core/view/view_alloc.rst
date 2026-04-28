@@ -6,8 +6,8 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
@@ -31,7 +31,7 @@
 * そのポインタをラップする、管理対象外ビューを作成するためのポインタ。
 
 
-ディスクリプション
+説明
 ------------------
 
 .. cpp:function:: template <class... Args> ALLOC_PROP view_alloc(Args const&... args)

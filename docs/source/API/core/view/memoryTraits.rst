@@ -28,7 +28,7 @@
 
 .. cpp:member::  static constexpr bool is_atomic
 
-  原始的トレイトが有効かどうかを示すブール値。
+  アトミックトレイトが有効かどうかを示すブール値。
 
 .. cpp:member::  static constexpr bool is_restrict
 
@@ -44,7 +44,7 @@
 
 .. _UnmanagedViews: ../../../ProgrammingGuide/View.html#unmanaged-views
 
-.. |UnmanagedViews| replace:: unmanaged views管理対象外ビュー
+.. |UnmanagedViews| replace:: 管理対象外ビュー
 
 非メンバー列挙型
 ^^^^^^^^^^^^^^^^
@@ -65,7 +65,7 @@
 
 .. cpp:enumerator:: Atomic
 
-  このようなビューでは、あらゆる要素へのアクセス（読み取りまたは書き込み）はすべてアトミックである。
+  このようなビューでは、あらゆる要素へのアクセス（読み取りまたは書き込み）はすべてアトミックです。
 
 .. cpp:enumerator:: Restrict
 
@@ -78,14 +78,14 @@
 非メンバー型エイリアス
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-以下の型エイリアスも、``Kokkos`` 名前空間で利用可能です。
+以下の型エイリアスも、 ``Kokkos`` 名前空間で利用可能です。
 
 .. cpp:type:: MemoryManaged = Kokkos::MemoryTraits<>;
 .. cpp:type:: MemoryUnmanaged = Kokkos::MemoryTraits<Kokkos::Unmanaged>;
 .. cpp:type:: MemoryRandomAccess = Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>;
 
 .. deprecated:: 4.7
-  明示的なメモリ特性としての管理対象メモリ（例： ``MemoryManaged = Kokkos::MemoryTraits<> を使用;`` ）は、 Kokkos 4.7 で非推奨となりました。 また、以前のバージョンのKokkosでも、列挙値の ``0`` を明示的に指定する必要がありました。つまり、``Kokkos::MemoryTraits<0>`` のように記述する必要があったのです。 これに関する詳細は、 |UnmanagedViews|_ の項目を参照してください。
+  明示的なメモリ特性としての管理対象メモリ（例： ``MemoryManaged = Kokkos::MemoryTraits<> を使用;`` ）は、 Kokkos 4.7 で非推奨となりました。 また、以前のバージョンのKokkosでも、列挙値の ``0`` を明示的に指定する必要がありました。つまり、 ``Kokkos::MemoryTraits<0>`` のように記述する必要があったのです。 これに関する詳細は、 |UnmanagedViews|_ の項目を参照してください。
 
 管理下にあるビューをランダムアクセス方式で使用するには、メモリ特性として、 ``Kokkos::MemoryTraits<Kokkos::RandomAccess>`` を指定する必要があり、 ``Kokkos::MemoryRandomAccess`` としては指定しないことに注意してください。
 

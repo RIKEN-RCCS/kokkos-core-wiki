@@ -1,7 +1,7 @@
 
 # `reduce`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -88,38 +88,38 @@ ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      
                  ValueType init_reduction_value,
                  BinaryOp joiner);
 
-} //エンド 名前空間 実験的
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
-- オーバーロードセット A (1,2,3,4): 範囲 `[first, last)` (1,2) または `ビュー` (3,4) における要素の還元を実行します。
+- オーバーロードセット A (1,2,3,4): 範囲 `[first, last)` (1,2) または `ビュー` (3,4) における要素の縮約を実行します。
 
-- オーバーロードセット B (5,6,7,8): 初期値 `init_reduction_value` を説明する、範囲 `[first, last)` (5,6) または `ビュー` (7,8) における要素の還元を実行します。
+- オーバーロードセット B (5,6,7,8): 初期値 `init_reduction_value` を説明する、範囲 `[first, last)` (5,6) または `ビュー` (7,8) における要素の縮約を実行します。
 
-- オーバーロードセット C (9,10,11,12): 還元演算の間にオペランドを結合するための、ファンクタ `ジョイナー` を使って、初期値 `init_reduction_value` を説明する、範囲 `[first, last)` (9,10) または `ビュー` (11,12) における要素の還元を実行します。
+- オーバーロードセット C (9,10,11,12): 縮約演算の間にオペランドを結合するための、ファンクタ `ジョイナー` を使って、初期値 `init_reduction_value` を説明する、範囲 `[first, last)` (9,10) または `ビュー` (11,12) における要素の縮約を実行します。
 
 
 ## パラメータおよび要件
 
 - `exespace`:
   - 実行空間インスタンス
-- `label`: デバッグ目的の実装カーネルに名付けるために使用されます。
+- `label`:
   - デバッグ目的の実装カーネルに名付けるために使用されます。
   - 1,5,9について、デフォルト文字列は、: "Kokkos::reduce_iterator_api_default"
   - 3,7,11について、デフォルト文字列は、: "Kokkos::reduce_view_api_default"
 - `first`, `last`:
-  - 還元する要素の範囲
+  - 縮約する要素の範囲
   - *ランダムアクセスイテレータ* でなければなりません。
   - 有効な範囲、つまり、 ``last >= first`` を表す必要があります （デバッグモードで確認済）。
   -  `exespace` からアクセス可能でなければなりません。
 - `view`:
-  - 還元対象のビュー
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 縮約対象のビュー
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
   - `exespace` からアクセス可能でなければなりません。
 - `init_reduction_value`:
-  - 使用する初期還元値
+  - 使用する初期縮約値
 - `joiner`:
   -  *二項* ファンクタであり、2つの要素を結合するために所望の演算を実行します。
   引数として渡された実行空間、またはチームハンドルに関連付けられた実行空間から呼び出されるために、有効でなければならず、 型 (可能性のあるconst) `ValueType` の2つの引数 で呼び出し可能であり、 `a,b` を変更してはいけません。
@@ -137,6 +137,6 @@ ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      
 その動作は非決定的です
 
 
-## 戻し
+## 戻り値
 
-還元結果。
+縮約結果。

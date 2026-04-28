@@ -61,7 +61,7 @@
 
   .. cpp:function:: void set()
 
-    ホスト:  ``1`` に設定されたビット数を返します。
+    ホスト: すべてのビットを ``1`` に設定します。
 
   .. cpp:function:: void reset();
   .. cpp:function:: void clear();
@@ -74,11 +74,11 @@
 
   .. cpp:function:: void reset(unsigned i)
 
-    Device: ``i``\ 'th ビットを to ``0`` に設定します。
+    デバイス: ``i``\ 'th ビットを ``0`` に設定します。
 
   .. cpp:function:: bool test(unsigned i) const
 
-    デバイス: return :cpp: ``i``\ 'th が ``1`` に設定されている場合に限り、`真` となります。
+    デバイス: ``i``\ 番目のビットが ``1`` に設定されている場合にのみ、真を返します。
 
   .. cpp:function:: unsigned max_hint() const
 
@@ -134,7 +134,7 @@
 
   .. cpp:function:: ConstBitset()
 
-    ホスト/: ビットを持たないビットセットを構築します。
+    ホスト/デバイス: ビットを持たないビットセットを構築します。
 
   .. cpp:function:: ConstBitset(ConstBitset const& rhs) = default
   .. cpp:function:: ConstBitset& operator=(ConstBitset const& rhs) = default
@@ -156,7 +156,7 @@
 
   .. cpp:function:: bool test(unsigned i) const
 
-    ホスト/デバイス: ``i``\ 'thビットが ``1`` に設定されている場合、またはその場合に限り、``真`` を返します。
+    ホスト/デバイス: ``i``\ 'thビットが ``1`` に設定されている場合、またはその場合に限り、 ``真`` を返します。
 
 非メンバー関数
 --------------------

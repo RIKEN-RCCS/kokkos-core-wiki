@@ -1,7 +1,7 @@
 
 # `lexicographical_compare`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```cpp
 namespace Kokkos{
@@ -59,16 +59,16 @@ bool lexicographical_compare(
     const ::Kokkos::View<DataType1, Properties1...>& view1,                          (8)
     ::Kokkos::View<DataType2, Properties2...>& view2, ComparatorType comp);
 
-} //エンド 名前空間 実験的
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
 第1の範囲 [first1, last1) が、第2の範囲 [first2, last2) よりも順序の上で、小さい場合に、(1,2,5,6) について、`真` を返します。
 `view1` の要素が `view2`における要素よりも順序の上で、小さい場合に、(3,4,7,8) について、`真` を返します。
 要素 (1,2,3,4)  `<` operator を使って、比較されます。
-Elements (5,6,7,8) は、 `comp` を使って比較されます。
+要素 (5,6,7,8) は、 `comp` を使って比較されます。
 
 ## パラメータおよび要件
 
@@ -87,7 +87,7 @@ Elements (5,6,7,8) は、 `comp` を使って比較されます。
 
 - `view1`, `view2`:
   - 比較対象のビュー
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
   - ``exespace`` からアクセス可能でなければなりません。
 
 - `pred` -  [`equal`](./StdEqual) と同様。

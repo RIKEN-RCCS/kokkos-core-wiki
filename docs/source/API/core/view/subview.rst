@@ -1,13 +1,13 @@
-``サブビュー``
-==============
+``subview``
+===========
 
 .. role:: cpp(code)
     :language: cpp
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
@@ -20,16 +20,16 @@
 
 .. |KokkosAll| replace:: :cpp:func:`Kokkos::ALL`
 
-ディスクリプション
+説明
 ------------------
 
 .. cpp:function:: template<class ViewType, class ... Args> IMPL_DETAIL subview(const ViewType& v, Args ... args)
 
- ``args...`` が特定する ``v`` のサブセットを表す、新たな  ``Kokkos::View`` ``s`` を返します。The return type of subview の返す型は、 実装の詳細であり、  ``Args...`` における型により決定されます。
+ ``args...`` が特定する ``v`` のサブセットを表す、新たな ``Kokkos::View`` ``s`` を返します。subview の返す型は実装の詳細であり、 ``Args...`` における型により決定されます。
 
    .. rubric:: サブセットセレクション:
 
-   * ``args...`` におけるすべての整数引数に対して、返されたビューのランクは、``v``のランクより一つ小さく、 ``s`` により参照された値は、``v`` へのインデックス付けの間に、対応する位置で整数引数を使用することに関連する値に対応します。  
+   * ``args...`` におけるすべての整数引数に対して、返されたビューのランクは、 ``v``のランクより一つ小さく、 ``s`` により参照された値は、 ``v`` へのインデックス付けの間に、対応する位置で整数引数を使用することに関連する値に対応します。  
 
    * ``r``\ th 引数として KokkosAll_ を渡すことは、 ``r``\ th  引数として pair<ptrdiff_t,ptrdiff_t>(0,v.extent(r)) を渡すことに等しいです。
 

@@ -10,8 +10,7 @@
 
     [[nodiscard]] int device_id() noexcept;  // (バージョン4.1以降)
 
-ホストバックエンドのみが有効な場合、 ``DefaultExecutionSpace`` または ``-1`` により使用されるデバイスの
-id を返します。
+``DefaultExecutionSpace`` が使用するデバイスの id を返します。ホストバックエンドのみが有効な場合は ``-1`` を返します。
 
 ----
 

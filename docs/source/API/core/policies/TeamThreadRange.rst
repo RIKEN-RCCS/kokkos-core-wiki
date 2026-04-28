@@ -6,8 +6,8 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
@@ -19,24 +19,24 @@
 
 TeamThreadRange は  、階層的並列処理内で使われる、 `nested execution policy <./NestedPolicies.html>`_ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
 
-シノプシス
+概要
 ----------
 
 .. code-block:: cpp
     
     template<class TeamMemberType, class iType>
-    /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType count);
+    /* 実装により定義 */ TeamThreadRange(TeamMemberType team, iType count);
     
     template<class TeamMemberType, class iType1, class iType2>
-    /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
+    /* 実装により定義 */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
 
-ディスクリプション
+説明
 ------------------
 
 .. code-block:: cpp
 
     template<class TeamMemberType, class iType>
-    /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType count);
+    /* 実装により定義 */ TeamThreadRange(TeamMemberType team, iType count);
 
 \
     チームのスレッド全体でインデックスレンジ ``0`` から ``count-1`` までを分割します。
@@ -45,19 +45,19 @@ TeamThreadRange は  、階層的並列処理内で使われる、 `nested execu
         - ``team``: 呼び出しチーム実行コンテキストへのハンドル。
         - ``count``: インデックス範囲長
 
-    * **返し**    
+    * **戻り値**
         - 実装定義型。
 
     * **必要要件**   
         - ``TeamMemberType`` は、 `TeamHandle <./TeamHandleConcept.html>`_ をモデル化する型です。
         - ``std::is_integral<iType>::value`` は、真です。
-        -  ``team`` のすべてのメンバースレッドは、同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。 
+        -  ``team`` のすべてのメンバースレッドは、同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが別のブランチで呼び出すことは、できません。 
         - ``count >= 0`` は、真です;
  
 .. code-block:: cpp
     
     template<class TeamMemberType, class iType1, class iType2>
-    /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
+    /* 実装により定義 */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
    
 \
     チームのスレッド全体でインデックスレンジ ``begin`` から ``end-1`` までを分割します。
@@ -67,14 +67,14 @@ TeamThreadRange は  、階層的並列処理内で使われる、 `nested execu
         - ``begin``: インデックス範囲開始。
         - ``end``: インデックス範囲終了。
 
-    * **返し**   
+    * **戻り値**
         - 実装定義型
 
     * **必要要件**   
         - ``TeamMemberType`` は、 `TeamHandle <./TeamHandleConcept.html>`_ をモデル化する型です。
         - ``std::is_integral<iType1>::value`` は、真です。
         - ``std::is_integral<iType2>::value`` は、真です。
-        -  ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。
+        -  ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが別のブランチで呼び出すことは、できません。
         - ``end >= begin`` は、真です;
 
 例

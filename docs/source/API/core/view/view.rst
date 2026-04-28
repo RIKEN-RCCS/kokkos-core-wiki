@@ -1,5 +1,5 @@
-``ビュー``
-================
+``View``
+========
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
@@ -32,7 +32,7 @@
 
    :tparam Properties...: レイアウト、メモリ空間、メモリ特性等、:cpp:class:`View` の様々なプロパティを定義します。
    
-      :cpp:class:`View` クラスのテンプレートパラメータにおいて、 `DataType` 以降のパラメータは可変長かつオプションですが、必ず指定順序で指定する必要があります。 例えば、:cpp:any:`LayoutType` は省略可能であることを意味しますが、:cpp:any:`MemorySpace` と :cpp:`MemoryTraits` の両方が指定される場合、:cpp:any:`MemorySpace` は :cpp:any:`MemoryTraits` の前に記述されなければならない。
+      :cpp:class:`View` クラスのテンプレートパラメータにおいて、 `DataType` 以降のパラメータは可変長かつ省略可能ですが、必ず指定順序で指定する必要があります。 例えば、:cpp:any:`LayoutType` は省略可能であることを意味しますが、:cpp:any:`MemorySpace` と :cpp:`MemoryTraits` の両方が指定される場合、:cpp:any:`MemorySpace` は :cpp:any:`MemoryTraits` の前に記述されなければならない。
 
       .. code-block:: cpp
          :caption: ビューテンプレートパラメータの順序付け。
@@ -55,7 +55,7 @@
 
       省略された場合、デフォルトの実行スペースのデフォルトのメモリ領域が使用されます (つまり、:cpp:expr:`DefaultExecutionSpace::memory_space`)。
 
-   :tparam MemoryTraits: 構造体テンプレート :cpp:struct:`MemoryTraits` の列挙型パラメータを介して、アクセプロパティを設定します。可能なテンプレート引数は、以下のフラグの bitwise OR です: 
+   :tparam MemoryTraits: 構造体テンプレート :cpp:struct:`MemoryTraits` の列挙型パラメータを介して、アクセスプロパティを設定します。可能なテンプレート引数は、以下のフラグの bitwise OR です: 
 
       - ``Unmanaged``
       - ``RandomAccess``
@@ -309,7 +309,7 @@
    :tparam IntType: 整数型
 
    :param space: スクラッチメモリハンドル
-     一般的には、``TeamPolicy`` カーネル内の、:cpp:func:`team_shmem`, :cpp:func:`team_scratch`, または、 :cpp:func:`thread_scratch` から返されます。
+     一般的には、 ``TeamPolicy`` カーネル内の、:cpp:func:`team_shmem`, :cpp:func:`team_scratch`, または、 :cpp:func:`thread_scratch` から返されます。
 
    :param extents:  :cpp:class:`View` の範囲。
 
@@ -324,7 +324,7 @@
    スクラッチメモリハンドルからメモリを取得するコンストラクタ。
 
    :param space: スクラッチメモリハンドル。
-       一般的には、``TeamPolicy`` カーネル内の、 :cpp:func:`team_shmem`, :cpp:func:`team_scratch`、または :cpp:func:`thread_scratch` から返されます。
+       一般的には、 ``TeamPolicy`` カーネル内の、 :cpp:func:`team_shmem`, :cpp:func:`team_scratch`、または :cpp:func:`thread_scratch` から返されます。
 
    :param layout: レイアウトクラスのインスタンス。
       有効な範囲の数は、ダイナミックまたはトータルランクと一致する必要があります。 後者の場合、コンパイル時の次元に対応する範囲は、:cpp:class:`View` 型のコンパイル時の範囲と一致する必要があります。

@@ -8,25 +8,25 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
    MinMax<T,S>::value_type result;
    parallel_reduce(N,Functor,MinMax<T,S>(result));
 
-シノプシス
+概要
 ----------
 
 .. code-block:: cpp
 
    template<class Scalar, class Space>
-   クラス MinMax{
-     パブリック:
-       型定義 MinMax リデューサー;
-       型定義 MinMaxScalar<typename std::remove_cv<Scalar>::type> value_type;
-       型定義 Kokkos::View<value_type, Space> result_view_type;
+   class MinMax{
+     public:
+       typedef MinMax reducer;
+       typedef MinMaxScalar<typename std::remove_cv<Scalar>::type> value_type;
+       typedef Kokkos::View<value_type, Space> result_view_type;
 
        KOKKOS_INLINE_FUNCTION
        void join(value_type& dest, const value_type& src) const;
@@ -54,17 +54,17 @@
 
    .. rubric:: パブリック型
 
-   .. cpp:type:: reducer_type
+   .. cpp:type:: reducer
 
       自己型。
 
    .. cpp:type:: value_type
 
-      還元スカラー型 ( `MinMaxScalar <MinMaxScalar.html>`_ の特殊化)。
+      縮約スカラー型 ( `MinMaxScalar <MinMaxScalar.html>`_ の特殊化)。
 
    .. cpp:type:: result_view_type
 
-      還元結果を参照する ``Kokkos::View`` 
+      縮約結果を参照する ``Kokkos::View`` 
 
    .. rubric:: コンストラクタ
 

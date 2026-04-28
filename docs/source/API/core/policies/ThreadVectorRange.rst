@@ -3,7 +3,7 @@
 
 ヘッダーファイル: ``Kokkos_Core.hpp``
 
-使用例: 
+使用方法
 
 .. code-block:: cpp
 
@@ -13,26 +13,26 @@
    parallel_scan(ThreadVectorRange(team,range), 
      [=] (int i, double& lsum, bool final) {...});
 
-.階層的並列処理の中で使われる  `nested execution policy <NestedPolicies.html>`__ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
+階層的並列処理の中で使われる  `nested execution policy <NestedPolicies.html>`__ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
 
-シノプシス 
+概要
 -----------
 
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType>
-   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType count);
+   /* 実装により定義 */ ThreadVectorRange(TeamMemberType team, iType count);
    template<class TeamMemberType, class iType1, class iType2>
-   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
+   /* 実装により定義 */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 
-ディスクリプション
+説明
 ------------------
 
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType>
-   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType count);
+   /* 実装により定義 */ ThreadVectorRange(TeamMemberType team, iType count);
    
 
 チームのスレッドとベクトルレーンのインデックス範囲  ``0`` から ``count-1`` まで分割します。
@@ -43,7 +43,7 @@
 
    * ``count``: インデックス範囲長 
 
-*  **返し**:
+*  **戻り値**:
 
    * 実装定義型。
 
@@ -61,7 +61,7 @@
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType1, class iType2>
-   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
+   /* 実装により定義 */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 
 呼び出しスレッドのベクトルレーン全体で、インデックスレンジ ``begin`` から  ``end-1`` までを分割します。
@@ -74,7 +74,7 @@
 
    * ``end``: インデックス範囲終了。
 
-*  **返し**
+*  **戻り値**
 
    * 実装定義型
 

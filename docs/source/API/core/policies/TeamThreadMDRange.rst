@@ -6,7 +6,7 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
 TeamThreadMDRange は、階層的並列処理の中で使用される、`nested execution policy <./NestedPolicies.html>`_ です。
@@ -34,7 +34,7 @@ TeamThreadMDRange は、階層的並列処理の中で使用される、`nested 
 
 	* ``extent_1, extent_2, ...`` は、ints です。
 
-	*  ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、``team`` の他のスレッドが別のブランチで呼び出すことは、合法ではありません。
+	*  ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが別のブランチで呼び出すことは、できません。
 
 	* ``extent_i`` の条件は、 ``i >= 2 && i <= 8`` が真であることです。
 	  For example:
@@ -50,7 +50,7 @@ TeamThreadMDRange は、階層的並列処理の中で使用される、`nested 
 制約
 ------------
 
- `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、 還元は、合計に限定されることに注意してください。
+ `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、 縮約は、合計に限定されることに注意してください。
 
 例
 --------

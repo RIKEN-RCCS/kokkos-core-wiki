@@ -4,7 +4,7 @@
 
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
 範囲内の要素、またはランク1の ``ビュー`` から、
@@ -13,7 +13,7 @@
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -87,7 +87,7 @@
 
 - ``source``, ``dest``: 逆順での移動元および移動先へのビュー
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります
 
@@ -98,4 +98,4 @@
 - 1,3,5: ``d_last - Kokkos::Experimental::distance(first, last)`` に等しいイテレータ。
 
 - 2,4,6: ``Kokkos::Experimental::end(dest) -
-  Kokkos::Experimental:distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))`` に等しいイテレータ。
+  Kokkos::Experimental::distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))`` に等しいイテレータ。

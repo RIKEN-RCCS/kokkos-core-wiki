@@ -54,7 +54,7 @@
 ``Kokkos::HIPManagedSpace``
 ---------------------------
 
-``Kokkos::HIPManagedSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降`  は、HIP GPU プログラミング環境における GPU 上のページ移行メモリを表す MemorySpaceType です。ページ移行メモリは、ほとんどのホスト実行空間からアクセス可能です。 すべてのオペレーティングシステムと HIP 対応ハードウェアの組み合わせで利用可能ですが、``xnack`` 機能をサポートし有効化するには、オペレーティングシステムとハードウェアの両方が対応している必要があります。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
+``Kokkos::HIPManagedSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降`  は、HIP GPU プログラミング環境における GPU 上のページ移行メモリを表す MemorySpaceType です。ページ移行メモリは、ほとんどのホスト実行空間からアクセス可能です。 すべてのオペレーティングシステムと HIP 対応ハードウェアの組み合わせで利用可能ですが、 ``xnack`` 機能をサポートし有効化するには、オペレーティングシステムとハードウェアの両方が対応している必要があります。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
 
 ``Kokkos::SYCLDeviceUSMSpace``
 --------------------------------------------
@@ -81,7 +81,7 @@
 
 ``Kokkos::SharedSpace`` :sup:`バージョン4.0以降` |MemorySpaceType| の別名であり、有効化された任意の |ExecutionSpaceType| からアクセス可能なメモリを表します。これを実現するため、メモリは「実行空間」で表される処理ユニットのローカルメモリとの間で移動させることができます。この動作は、アクセス時にOSとドライバによって自動的に行われます。アクセスする処理ユニットのローカルメモリに現在存在しない場合、メモリはチャンク単位で移動されます（サイズはバックエンドに依存します）。 これらのチャンクは独立して移動可能であり（例：GPU 上でアクセスされる部分のみをGPUへ移動）、処理ユニット上に存在する間はローカルメモリと同様に扱われます。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
 利用可能性は、プリプロセッサ定義 ``KOKKOS_HAS_SHARED_SPACE`` または ``constexpr bool Kokkos::has_shared_space`` で確認できます。
-以下のバックエンドにおいて、``Kokkos::SharedSpace`` は対応する |MemorySpaceType|_ を指しています:
+以下のバックエンドにおいて、 ``Kokkos::SharedSpace`` は対応する |MemorySpaceType|_ を指しています:
 
 * Cuda -> ``CudaUVMSpace``
 * HIP -> ``HIPManagedSpace``
@@ -93,7 +93,7 @@
 
 ``Kokkos::SharedHostPinnedSpace`` :sup:`バージョン4.0以降` は、|MemorySpaceType|_ の別名であり、有効なすべての |ExecutionSpaceTypes|_ からアクセス可能です。メモリは、ホストに固定されたまま保持され、デバイス上ではゼロコピーアクセスにより小さなチャンク（バックエンドに応じて、キャッシュライン、メモリページ等）単位で利用可能となります。1つの ``実行空間`` への書き込みは、同期イベント時に他の ``実行空間`` で可視化されます。同期をトリガーするイベントは、バックエンドの仕様によって異なります。 しかしながら、フェンスはすべてのバックエンドにおいて同期化イベントです。
 利用可能性は、プリプロセッサ定義 `` KOKKOS_HAS_SHARED_HOST_PINNED_SPACE`` または ``constexpr bool Kokkos::has_shared_host_pinned_space`` で確認できます。
-以下のバックエンドにおいて、``Kokkos::SharedHostPinnedSpace`` は対応する |MemorySpaceType|_ を指しています:
+以下のバックエンドにおいて、 ``Kokkos::SharedHostPinnedSpace`` は対応する |MemorySpaceType|_ を指しています:
 
 * Cuda -> ``CudaHostPinnedSpace``
 * HIP -> ``HipHostPinnedSpace``
@@ -103,20 +103,20 @@
 ``Kokkos::MemorySpaceConcept``
 ------------------------------
 
-``MemorySpace`` の概念は、Kokkos において、割り当ておよびアクセスが発生する "場所" と "方法" を表すための、基本的な抽象化です。Kokkos を使用するコードの大半は、特定のインスタンスよりもむしろ、``MemorySpace`` という *汎用的な概念* について、記述される必要があります。このページでは、Kokkos の実行空間の一般的な機能を 実際にどのように*使用* するかを説明しています；より正式で理論的な処理については、本文書 <KokkosConcepts.html>`_  を参照してください。
+``MemorySpace`` の概念は、Kokkos において、割り当ておよびアクセスが発生する "場所" と "方法" を表すための、基本的な抽象化です。Kokkos を使用するコードの大半は、特定のインスタンスよりもむしろ、 ``MemorySpace`` という *汎用的な概念* について、記述される必要があります。このページでは、Kokkos の実行空間の一般的な機能を 実際にどのように*使用* するかを説明しています；より正式で理論的な処理については、本文書 <KokkosConcepts.html>`_  を参照してください。
 
     *免責事項*: C++における "概念" という用語に目新しい点はありません; C++でテンプレートを使ったことがある人は
     知っていようといまいと、コンセプトを使っています。「概念」という言葉自体に惑わされないでください。
     この言葉は現在、C++20の新たな言語機能と結びつけられることが多くなっています。 ここで "概念" とは単に
     "特定の場所でテンプレートパラメータとなる型に対してできること" を意味します。
 
-シノプシス
+概要
 ~~~~~~~~~~
 
 .. code-block:: cpp
 
     // これは実際のクラスではなく、概念を簡略に記述したものです。
-    クラス MemorySpaceConcept {
+    class MemorySpaceConcept {
     public:
         typedef MemorySpaceConcept memory_space;
         typedef ... execution_space;
@@ -155,14 +155,14 @@
 .. |KokkosSpaceAccessibility| replace:: :cpp:func:`Kokkos::SpaceAccessibility`
 
 * ``memory_space``: 自己型。;
-* ``execution_space``: デフォルトの |ExecutionSpace|_ は、``MemorySpace`` のインスタンスが提供するメモリ内でオブジェクトを構築するとき、または（場合によっては）そのようなメモリからの深部コピーまたは深部コピーを行う際に使用されます（詳細は |DeepCopyDocumentation|_ を参照）。 Kokkos は、``Kokkos::SpaceAccessibility<execution_space, memory_space>::accessible`` が ``true`` であることを保証します（|KokkosSpaceAccessibility|_ を参照）。
+* ``execution_space``: デフォルトの |ExecutionSpace|_ は、 ``MemorySpace`` のインスタンスが提供するメモリ内でオブジェクトを構築するとき、または（場合によっては）そのようなメモリからの深部コピーまたは深部コピーを行う際に使用されます（詳細は |DeepCopyDocumentation|_ を参照）。 Kokkos は、 ``Kokkos::SpaceAccessibility<execution_space, memory_space>::accessible`` が ``true`` であることを保証します（|KokkosSpaceAccessibility|_ を参照）。
 * ``device_type``: ``DeviceType<execution_space,memory_space>``.
 
 コンストラクタ
 ~~~~~~~~~~~~~~
 
 * ``MemorySpaceConcept()``: デフォルトコンストラクタ。
-* ``MemorySpaceConcept(const MemorySpaceConcept& src)``: コピーコンストラク。
+* ``MemorySpaceConcept(const MemorySpaceConcept& src)``: コピーコンストラクタ。
 
 関数
 ~~~~~~~~~

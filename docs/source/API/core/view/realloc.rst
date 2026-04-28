@@ -6,8 +6,8 @@
 .. role:: cpp(code)
     :language: cpp
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
@@ -16,7 +16,7 @@
 
 新たな次元を持つために、ビューを再割り当てします｡ 拡大または縮小でき、内容は保持されません。
 
-ディスクリプション
+説明
 ------------------
 
 .. code-block:: cpp
@@ -38,7 +38,7 @@
 
   - ``n[X]``: 範囲 X の新たな長さ。
 
-* 制約: ``View<T, P...>::array_layout`` は、``LayoutLeft`` または ``LayoutRight`` のいずれかです。
+* 制約: ``View<T, P...>::array_layout`` は、 ``LayoutLeft`` または ``LayoutRight`` のいずれかです。
 
 .. code-block:: cpp
 
@@ -80,7 +80,7 @@
 		const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
 * ``v`` を、その内容を保持せずに、新しい次元にサイズ変更します。
-  新たな ``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、``Kokkos::view_alloc(Kokkos::WithoutInitializing)`` を使用して構築されます。
+  新たな ``Kokkos::View`` は、View コンストラクタのプロパティである ``arg_prop``、 例えば、 ``Kokkos::view_alloc(Kokkos::WithoutInitializing)`` を使用して構築されます。
 
   - ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
 

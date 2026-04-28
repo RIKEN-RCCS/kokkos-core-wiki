@@ -6,7 +6,7 @@
    :header-rows: 1
 
    * - リデューサー
-     - ディスクリプション
+     - 説明
    * - `初期化及び最終処理完了 <core/Initialize-and-Finalize.html>`__
      - Kokkos の初期化及び最終処理完了。
    * - `ビューおよびその関連 <core/View.html>`__
@@ -18,7 +18,7 @@
    * - `実行ポリシー <core/Execution-Policies.html>`__
      - 実行ポリシー。
    * - `空間 <core/Spaces.html>`__
-     - メモリ空間及び実行空間のディスクリプション。
+     - メモリ空間及び実行空間の説明。
    * - `タスク並列処理 <core/Task-Parallelism.html>`__
      - タスクグラフの作成と配信。
    * - `MultiGPU サポート <core/MultiGPUSupport.html>`__

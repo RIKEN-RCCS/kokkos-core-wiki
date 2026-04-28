@@ -4,7 +4,7 @@
 
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
 指定された範囲またはランク1の ``ビュー`` において、対象となるシーケンスまたは値の ``ビュー`` の *最後の* 出現箇所を検索します。
@@ -12,7 +12,7 @@
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -100,12 +100,12 @@
    template <class TeamHandleType, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2, class BinaryPredicateType>
    KOKKOS_FUNCTION
-    find_end(const TeamHandleType& teamHandle,                                      (12)
+   auto find_end(const TeamHandleType& teamHandle,                                 (12)
 		 const ::Kokkos::View<DataType1, Properties1...>& view,
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view,
 		 const BinaryPredicateType& pred);
 
-オーバーロードセット詳細ディスクリプション
+オーバーロードセット詳細説明
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - 1,2,5,6:  ``operator ==`` (1,2) 経由または via ``pred`` (5,6) 経由で要素を比較する範囲 ``[first, last)`` 内のシーケンス ``[s_first, s_last)`` の最後の発生について検索します。
@@ -141,13 +141,13 @@
 
 - ``view``, ``s_view``: 検索対象および検索条件の、それぞれのビュー
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``pred``: 2つの引数が、 "等しい" とみなされる場合、 ``真`` を返す *二項* ファンクタ。
 
-  ``pred(a,b)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして、それぞれ、 型   ``ValueType1`` および ``ValueType2`` の引数 ``a,b`` のすべてのペアについて、ブール型に変換可能で、そこでは、``ValueType1`` および ``ValueType{1,2}`` が、``IteratorType{1,2}`` の値型、または ``(s_)view`` であり、  ``a,b`` を変更してはいけません。
+  ``pred(a,b)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして、それぞれ、 型   ``ValueType1`` および ``ValueType2`` の引数 ``a,b`` のすべてのペアについて、ブール型に変換可能で、そこでは、 ``ValueType1`` および ``ValueType{1,2}`` が、 ``IteratorType{1,2}`` の値型、または ``(s_)view`` であり、  ``a,b`` を変更してはいけません。
 
   - 以下に一致しなければなりません:
 

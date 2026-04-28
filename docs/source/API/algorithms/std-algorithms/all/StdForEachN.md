@@ -1,7 +1,7 @@
 
 # `for_each_n`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```cpp
 namespace Kokkos{
@@ -14,7 +14,7 @@ UnaryFunctorType for_each_n(const ExecutionSpace& exespace,
 
 template <class ExecutionSpace, class InputIterator, class SizeType, class UnaryFunctorType>
 UnaryFunctorType for_each_n(const std::string& label, const ExecutionSpace& exespace,
-                      InputIterator first, SizeType n
+                      InputIterator first, SizeType n,
                       UnaryFunctorType functor);                                     (2)
 
 template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class UnaryFunctorType>
@@ -27,11 +27,11 @@ UnaryFunctorType for_each_n(const std::string& label, const ExecutionSpace& exes
              const Kokkos::View<DataType, Properties...>& view, SizeType n,
              UnaryFunctorType func);                                                 (4)
 
-} //エンド 名前空間 実験的
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
 (1,2) について、各イテレータの参照解除結果に適用し、 (3,4) 内では、ファンクタを、ビューの最初の `n` 個の要素に適用します。
 

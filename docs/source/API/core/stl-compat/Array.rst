@@ -12,12 +12,12 @@
 ..
   物事が行うこと、そして可能であれば、それがなぜ存在するかについての短い説明についての、高レベルの、人間の言語の概要 (2 - 3 文、最大);
 
-ディスクリプション
+説明
 ------------------
 
 ``Array`` は、連続した集合を所有するコンテナで、固定サイズのオブジェクト列（正確にN個の要素を持つモデル）を格納します。
 
-* これは、``std::array<T, N>`` の代替として設計されています。
+* これは、 ``std::array<T, N>`` の代替として設計されています。
 * このコンテナは所有コンテナです（データはコンテナ自体に埋め込まれています）。
 * このコンテナは、この場合 ``N > 0`` であるため、Cスタイル配列 ``T[N]`` を唯一の非静的データメンバーとして保持する構造体と同一の意味論を持つ集合型です；そうでない場合には、それは空のコンテナです。
 * Cスタイルの配列とは異なり、自動的に ``T*`` に型変換されることはありません。
@@ -35,7 +35,7 @@
 
   ..
     テンプレートパラメータ (該当する場合)
-    特殊化専用に使用される／演鐸される／および／またはユーザーに公開すべきでないテンプレートパラメータは省略します。
+    特殊化専用に使用される／型推論される／および／またはユーザーに公開すべきでないテンプレートパラメータは省略します。
 
   .. rubric:: テンプレートパラメータ
 
@@ -47,53 +47,53 @@
   .. cpp:type:: value_type = T
   .. cpp:type:: pointer = T*
   .. cpp:type:: const_pointer = const T*
-  .. cpp:type:: reference = T&  
+  .. cpp:type:: reference = T&
   .. cpp:type:: const_reference = const T&
   .. cpp:type:: size_type = size_t
   .. cpp:type:: difference_type = ptrdiff_t
-  
+
 
   .. rubric:: パブリックメンバー関数
 
   .. cpp:function:: constexpr bool empty() noexcept
 
-    :返し: ``N == 0``
-    :since: ``非定数`` 5.0以降 
+    :returns: ``N == 0``
+    :since: ``非定数`` 5.0以降
 
   .. cpp:function:: static constexpr size_type size() noexcept
   .. cpp:function:: constexpr size_type max_size() const noexcept
 
-    :return: ``N``
+    :returns: ``N``
     :since: ``非定数`` 5.0以降
 
   .. cpp:function:: constexpr reference operator[](size_t i)
   .. cpp:function:: constexpr const_reference operator[](size_t i) const
 
-    :返し: 配列の ``i`` 番目の要素への参照。
+    :returns: 配列の ``i`` 番目の要素への参照。
     :since: 引数が整数型、またはスコープのない列挙型である必要はありません。 (バージョン 5.1以降)
 
   .. cpp:function:: constexpr pointer data() noexcept
   .. cpp:function:: constexpr const_pointer data() const noexcept
 
-    :リターン: 配列の最初の要素へのポインタ。   ``N == 0`` である場合、戻り値は、 特定されておらず、間接参照できません。
+    :returns: 配列の最初の要素へのポインタ。   ``N == 0`` である場合、戻り値は、 特定されておらず、間接参照できません。
     :since: ``非定数`` 5.0以降
 
   .. cpp:function:: constexpr pointer begin() noexcept
   .. cpp:function:: constexpr const_pointer begin() const noexcept
   .. cpp:function:: constexpr const_pointer cbegin() const  noexcept
 
-    :return: ``data()``
+    :returns: ``data()``
     :since: 5.0以降
 
   .. cpp:function:: constexpr pointer end() noexcept
   .. cpp:function:: constexpr const_pointer end() const noexcept
   .. cpp:function:: constexpr const_pointer cend() const noexcept
 
-    :return: ``data() + size()``。 戻り値は、間接参照できません。  ``N == 0`` である場合、 戻り値は、 ``begin()`` に等しくなります。
+    :returns: ``data() + size()``。 戻り値は、間接参照できません。  ``N == 0`` である場合、 戻り値は、 ``begin()`` に等しくなります。
     :since: 5.0以降
 
 
-演鐸ガイド
+型推論ガイド
 ----------------
 
 .. cpp:function:: template<class T, class... U> Array(T, U...) -> Array<T, 1 + sizeof...(U)>
@@ -107,40 +107,40 @@
 
 .. cpp:function:: template<class T, size_t N> constexpr bool operator==(const Array<T, N>& l, const Array<T, N>& r) noexcept
 
-   :return:  ``l`` および ``r`` の ∀ 要素がすべて等しい場合に限り、 ``true`` 
+   :returns:  ``l`` および ``r`` の ∀ 要素がすべて等しい場合に限り、 ``true``
 
 .. cpp:function:: template<class T, size_t N> constexpr bool operator!=(const Array<T, N>& l, const Array<T, N>& r) noexcept
 
-   :return: ``!(l == r)``
+   :returns: ``!(l == r)``
 
 .. cpp:function:: template<class T, size_t N> constexpr kokkos_swap(Array<T, N>& l, Array<T, N>& r) noexcept(N == 0 || is_nothrow_swappable_V<T>)
 
-   :return: ``T`` が交換可能、または  ``N == 0`` の場合、  `l` および `r` の中のそれぞれの要素は、 ``kokkos_swap`` を通じて交換されます。
+   :returns: ``T`` が交換可能、または  ``N == 0`` の場合、  `l` および `r` の中のそれぞれの要素は、 ``kokkos_swap`` を通じて交換されます。
 
 .. cpp:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_array(T (&a)[N])
 .. cpp:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_array(T (&&a)[N])
 
-   :return: ``a`` からコピー/移動した要素を含む ``Array``
+   :returns: ``a`` からコピー/移動した要素を含む ``Array``
 
 .. cpp:function:: template<size_t I, class T, size_t N> constexpr T& get(Array<T, N>& a) noexcept
 .. cpp:function:: template<size_t I, class T, size_t N> constexpr const T& get(const Array<T, N>& a) noexcept
 
-   :return: （タプルプロトコル／構造化バインディングのサポート）についての ``a[I]`` 
+   :returns: （タプルプロトコル／構造化バインディングのサポート）についての ``a[I]``
 
 .. cpp:function:: template<size_t I, class T, size_t N> constexpr T&& get(Array<T, N>&& a) noexcept
 .. cpp:function:: template<size_t I, class T, size_t N> constexpr const T&& get(const Array<T, N>&& a) noexcept
 
-   :return: （タプルプロトコル／構造化バインディングのサポート）についての  ``std::move(a[I])``
+   :returns: （タプルプロトコル／構造化バインディングのサポート）についての  ``std::move(a[I])``
 
 .. cpp:function:: template<class T, size_t N> constexpr T* begin(Array<T, N>& a) noexcept
 .. cpp:function:: template<class T, size_t N> constexpr const T* begin(const Array<T, N>& a) noexcept
 
-   :返し: ``a.data()``
+   :returns: ``a.data()``
 
 .. cpp:function:: template<class T, size_t N> constexpr T* end(Array<T, N>& a) noexcept
 .. cpp:function:: template<class T, size_t N> constexpr const T* end(const Array<T, N>& a) noexcept
 
-   :返し: ``a.data() + a.size()``
+   :returns: ``a.data() + a.size()``
 
 非推奨インターフェイス
 ----------------------
@@ -178,7 +178,7 @@
    .. cpp:type:: contiguous
    .. cpp:type:: strided
 
-* 本仕様は、は、埋め込みタグの種類を定義した型: ``contiguous`` および ``strided`` 。
+* 本仕様は、埋め込みタグの種類を定義した型: ``contiguous`` および ``strided`` 。
 
 例
 ________
@@ -225,7 +225,7 @@ ________
      std::cout << s << ' ';
    std::cout << '\n';
 
-   // 配列作成のための演鐸ガイド
+   // 配列作成のための型推論ガイド
    [[maybe_unused]] Kokkos::Array a4{3.0, 1.0, 4.0}; // Kokkos::Array<double, 3>
 
    // 特定されていない要素のビヘイビアは、組み込み配列と同様
@@ -242,11 +242,11 @@ ________
    auto t1 = Kokkos::to_array("foo");
    static_assert(t1.size() == 4);
 
-   // 要素の型および長さ両方を演鐸
+   // 要素の型および長さ両方を型推論
    auto t2 = Kokkos::to_array({0, 2, 1, 3});
    static_assert(std::is_same_v<decltype(t2), Kokkos::Array<int, 4>>);
 
-   // 特定された要素の型を使って、長さを演鐸
+   // 特定された要素の型を使って、長さを型推論
    // 暗示的変換が発生
    auto t3 = Kokkos::to_array<long>({0, 1, 3});
    static_assert(std::is_same_v<decltype(t3), Kokkos::Array<long, 3>>);

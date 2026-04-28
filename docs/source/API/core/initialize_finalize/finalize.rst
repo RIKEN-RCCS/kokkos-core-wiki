@@ -3,12 +3,12 @@
 ``finalize``
 ============
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
-使用例:
+使用方法
 
 .. code-block:: cpp
 
@@ -21,7 +21,7 @@ Kokkos 実行環境を完了。
 (`Kokkos::initialize <initialize.html>`_ さえも)、
 :cpp:func:`Kokkos::is_initialized() <is_initialized()>` または
 :cpp:func:`Kokkos::is_finalized() <is_finalized()>` 以外、呼び出すことはできません。
-ユーザーは、``Kokkos::finalize`` が呼び出される前に、すべての Kokkos オブジェクト (例えば、 ``Kokkos::View``) 
+ユーザーは、 ``Kokkos::finalize`` が呼び出される前に、すべての Kokkos オブジェクト (例えば、 ``Kokkos::View``) 
 破壊されていることを確認する必要があります。
 
 プログラムは、 `Kokkos::initialize <initialize.html>`_ を呼び出した後、それらがこの関数を呼び出さなければ、不適格となります。
@@ -35,13 +35,13 @@ Kokkos 実行環境を完了。
 
 必要要件
 ~~~~~~~~~~~~
-* ``Kokkos::finalize`` は、 Kokkos が MPI コンテクスト内で使用される場合、``MPI_Finalize`` の前に呼び出される必要があります。
+* ``Kokkos::finalize`` は、 Kokkos が MPI コンテクスト内で使用される場合、 ``MPI_Finalize`` の前に呼び出される必要があります。
 * ``Kokkos::finalize`` は、ユーザーが初期化した Kokkos オブジェクトが、スコープ外になった後に、呼び出される必要があります。
 
 セマンティクス
 ~~~~~~~~~~~~~~
 
-* :cpp:func:`Kokkos::is_initialized() <is_initialized()>` は、``Kokkos::finalize`` 呼び出し後に falseを返す必要があります。
+* :cpp:func:`Kokkos::is_initialized() <is_initialized()>` は、 ``Kokkos::finalize`` 呼び出し後に falseを返す必要があります。
 
 例
 ~~~~~~~

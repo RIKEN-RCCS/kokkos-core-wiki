@@ -3,7 +3,7 @@
 
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
 範囲内、またはランク1の ``ビュー`` において、指定されたターゲット値と等しい要素の数を返します。
@@ -12,7 +12,7 @@
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,7 +37,7 @@
 	      const ::Kokkos::View<DataType, Properties...>& view, const T& value);
 
    template <class ExecutionSpace, class DataType, class... Properties, class T>
-    count(const std::string& label, const ExecutionSpace& exespace,                 (4)
+   auto count(const std::string& label, const ExecutionSpace& exespace,           (4)
 	      const ::Kokkos::View<DataType, Properties...>& view,
 	      const T& value);
 
@@ -87,7 +87,7 @@
 
 - ``view``:
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 

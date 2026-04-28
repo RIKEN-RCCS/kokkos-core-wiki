@@ -1,7 +1,7 @@
 
 # `replace_copy`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -43,11 +43,11 @@ auto replace_copy(const std::string& label,
                   const Kokkos::View<DataType2, Properties2...>& view_to,
                   const T& old_value, const T& new_value);
 
-} //エンド 名前空間 Experimental
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
 `old_value` と等しいすべての要素を `new_value` で置換して、範囲 `[first_from, last_from)` の要素を、別の範囲
 `first_to` から始まる範囲（オーバーロード 1,2）または `view_from` から `view_to` までの範囲
@@ -72,12 +72,12 @@ auto replace_copy(const std::string& label,
   - `exespace` からアクセス可能でなければなりません。
 - `view_from`, `view_to`:
   - ソースおよび宛先のビュー
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
   - `exespace` からアクセス可能でなければなりません。
 - `old_value`, `new_value`:
   - 説明を要しません。
 
 
-## 返し
+## 戻り値
 
 コピーされた最後の要素の *後* の要素へのイテレータ。

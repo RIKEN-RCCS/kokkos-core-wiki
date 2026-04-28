@@ -8,15 +8,15 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
    T result;
    parallel_reduce(N,Functor,Min<T,S>(result));
 
-シノプシス
+概要
 ----------
 
 .. code-block:: cpp
@@ -52,19 +52,19 @@
 
 .. cpp:class:: template<class Scalar, class Space> Min
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: reducer_type
+   .. cpp:type:: reducer
 
       自己型。
 
    .. cpp:type:: value_type
 
-      還元スカラー型。
+      縮約スカラー型。
 
    .. cpp:type:: result_view_type
 
-      還元結果を参照する ``Kokkos::View`` 
+      縮約結果を参照する ``Kokkos::View`` 
 
    .. rubric:: コンストラクタ
 

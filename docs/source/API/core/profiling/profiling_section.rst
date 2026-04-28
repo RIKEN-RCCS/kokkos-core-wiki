@@ -6,8 +6,8 @@
 
 ヘッダー ``<Kokkos_Profiling_ProfileSection.hpp>`` に定義。
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
@@ -24,28 +24,28 @@
 
  ``ProfilingSection`` オブジェクトが作成されると、ユーザーが提供した文字列を用いてプロファイリングセクションが作成され、そのオブジェクトはセクションIDを保持します。
 
-制御が ``ProfilingSection`` オブジェクトが作成されたスコープを離れた場合、``ProfilingSection`` は、破棄され、基盤となるセクションは適切に破棄されます。
+制御が ``ProfilingSection`` オブジェクトが作成されたスコープを離れた場合、 ``ProfilingSection`` は、破棄され、基盤となるセクションは適切に破棄されます。
 
  ``ProfilingSection`` クラスのコピーは不可能です。
 
 
-.. cpp:Function:: ProfilingSection(std::string const& sectionName);
+.. cpp:function:: ProfilingSection(std::string const& sectionName);
 
    ユーザーに提供されたラベルを使って、セクションを構築します。
     ``Profiling::createProfileSection(sectionName, &sectionID);`` を呼び出します。
 
-.. cpp:Function:: ~ProfilingSection();
+.. cpp:function:: ~ProfilingSection();
 
    セクションを削除します。
-    ``Profiling.destroyProfileSection(sectionID);`` を呼び出します。
+    ``Profiling::destroyProfileSection(sectionID);`` を呼び出します。
 
-.. cpp:Function:: void start();
+.. cpp:function:: void start();
 
    セクションを開始します。
     ``Profiling::startSection(sectionID);`` を呼び出します。
 
 
-.. cpp:Function:: void stop();
+.. cpp:function:: void stop();
 
    セクションを終了します。
    ``Profiling::stopSection(sectionID);`` を呼び出します。

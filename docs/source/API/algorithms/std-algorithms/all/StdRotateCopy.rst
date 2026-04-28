@@ -1,17 +1,17 @@
 ``rotate_copy``
 ===============
 
-ヘッダー: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-要素 ``n_first`` または ``view(n_location)`` が新しい範囲の最初の要素となり、``n_first - 1`` が最後の要素となるように、範囲 ``[first_from, last_from)`` の要素を、範囲 ``first_to`` から始まる範囲、または ``view_from`` から ``view_dest`` までの範囲にコピーします。
+要素 ``n_first`` または ``view(n_location)`` が新しい範囲の最初の要素となり、 ``n_first - 1`` が最後の要素となるように、範囲 ``[first_from, last_from)`` の要素を、範囲 ``first_to`` から始まる範囲、または ``view_from`` から ``view_dest`` までの範囲にコピーします。
 
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -117,7 +117,7 @@ Description
 
 - ``source, dest``:
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 

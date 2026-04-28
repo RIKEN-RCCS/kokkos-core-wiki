@@ -9,14 +9,14 @@
 デバイスメモリを参照する ``Kokkos::View`` とホストから、アクセス可能な ``Kokkos::View`` 間のミラーリングを管理するコンテナです。
 このクラスは、同時に2つの異なるメモリ空間に存在するデータを管理する機能を提供します。
 両方の割り当てに対して変更フラグ同様に、同一レイアウトの View を2つのメモリ空間上でサポートします。
-ユーザーは、いずれかのメモリ空間でデータを変更した場合、``modify()`` 関数を呼び出すことで、
+ユーザーは、いずれかのメモリ空間でデータを変更した場合、 ``modify()`` 関数を呼び出すことで、
 変更フラグを手動で更新する責任を負いますが、それは変更されたデータを用いてデバイス上でテンプレート化されます。 
 ユーザーは ``sync()`` メソッドを呼び出すことでデータを同期することもできますが、それは同期を必要とするデバイス上でテンプレート化されます （すなわち、一方向コピー演算の対象）。
 
 DualView クラスは、基盤となる `Kokkos::View <../core/view/view.html>`_ objects の適切なメソッドを呼び出す
 realloc、resize、capacityなどの便利なメソッドも提供します。
 
-4つのテンプレート引数は、``Kokkos::View`` の引数と同じです。
+4つのテンプレート引数は、 ``Kokkos::View`` の引数と同じです。
 
 * DataType, コンテナに格納されるエントリの型。
 
@@ -29,25 +29,25 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 * MemoryTraits (オプショナル) ユーザーの意図するメモリアクセス動作。
   例については、`Kokkos::View <../core/view/view.html>`_ のドキュメントを参照してください。ほとんどのユーザーにとって、デフォルト設定で十分です。
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
-    view_type = Kokkos::DualView<Scalar**,
-                                       Kokkos::LayoutLeft,
-                                       Device> を使用
+    using view_type = Kokkos::DualView<Scalar**,
+                                           Kokkos::LayoutLeft,
+                                           Device>;
     view_type a("A", n, m);
 
     Kokkos::deep_copy(a.view_device(), 1); // デバイス側エントリを1に設定
     a.template modify<typename view_type::execution_space>(); // デバイス側を変更済みとしてマークします
     a.template sync<typename view_type::host_mirror_space>(); // 変更されたデータをデバイスに同期します
 
-    Kokkos::deep_copy(a.view_host(), 2); // set host-side entries to 2
+    Kokkos::deep_copy(a.view_host(), 2); // ホスト側エントリを2に設定
     a.template modify<typename ViewType::host_mirror_space>(); // ホスト側を変更済みとしてマークします
     a.template sync<typename ViewType::execution_space>(); // 変更されたデータをデバイスに同期します
 
-ディスクリプション
+説明
 ------------------
 
 
@@ -151,7 +151,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
     .. cpp:function:: DualView(ALLOC_PROP const& arg_prop, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        ホストとデバイスの両方でViewオブジェクトを割り当てるコンストラクタ。最初の引数として``Kokkos::view_alloc`` で作成されたオブジェクトを渡すことを可能にします。例えば、ラベルを提供し、初期化を回避し、または実行空間インスタンスを指定します。
-       T以下の引数は、View オブジェクトの次元です。
+       以下の引数は、View オブジェクトの次元です。
        例えば、Viewが3次元であれば、最初の3つの整数引数はゼロ以外になり、また、続く整数引数は省略できます。
 
     .. cpp:function:: DualView(const DualView<SS, LS, DS, MS>& src);
@@ -181,12 +181,12 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: template <class Device> static int get_device_side();
 
-       * 特定のデバイス ``Device`` 上のビューを返します。 ``Device`` は、``Kokkos::Device`` 型、メモリ空間、またはデバイスビューもしくはホストアクセス可能ビューに対応する実行空間である可能性があります。 
+       * 特定のデバイス ``Device`` 上のビューを返します。 ``Device`` は、 ``Kokkos::Device`` 型、メモリ空間、またはデバイスビューもしくはホストアクセス可能ビューに対応する実行空間である可能性があります。 
        * 例えば、Cuda上で次のように DualView を作成するとします:
 
          .. code-block:: cpp
 
-           dual_view_type = Kokkos::DualView<float, Kokkos::Cuda> を使用;
+           using dual_view_type = Kokkos::DualView<float, Kokkos::Cuda>;
            dual_view_type DV ("my dual view", 100);
 
          CUDA デバイスのビューを取得したい場合は、次の操作を行ってください:
@@ -216,7 +216,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
        * デバイスまたはホスト上のデータは、他方の領域のデータが変更済みとしてマークされた場合にのみ更新します。
        * ``デバイス`` が、本 DualView のデバイスタイプと同じ場合、ホストからデバイスへデータをコピーします。それ以外の場合には、デバイスからホストへデータをコピーします。いずれの場合も、コピー元のソースが変更された場合にのみコピーしてください。
        * これは一方向の同期のみです。コピー先の対象が変更されている場合、本演算はその変更を破棄します。また、デバイスとホストの変更フラグの両方をリセットします。
-       * 本メソッドでは、どちらのビューでデータを変更したかを独自に判断できません。変更されたデータを、適切なテンプレートパラメータを指定して、``modify()`` メソッドを呼び出すことで、手動で変更済みとしてマークする必要があります。
+       * 本メソッドでは、どちらのビューでデータを変更したかを独自に判断できません。変更されたデータを、適切なテンプレートパラメータを指定して、 ``modify()`` メソッドを呼び出すことで、手動で変更済みとしてマークする必要があります。
 
     .. cpp:function:: template <class Device> bool need_sync() const;
 
@@ -227,7 +227,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
        指定の device \\c Device 上でデータを変更済みとしてマークします。 ``Device`` が 本 DualView のデバイスタイプと同一の場合、そのデバイスのデータを変更済みとしてマークしてください。
        そうでない場合は、ホストのデータを変更済みとしてマークしてください。
 
-    .. rubric:: View オブジェクトの再割り当てまたはサイズ変更のための *Pulbic* Methods
+    .. rubric:: View オブジェクトの再割り当てまたはサイズ変更のための *Public* Methods
 
     .. cpp:function:: constexpr bool is_allocated() const;
 

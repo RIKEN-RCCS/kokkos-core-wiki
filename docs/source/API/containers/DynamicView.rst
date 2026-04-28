@@ -8,7 +8,7 @@
 ヘッダーファイル: ``<Kokkos_DynamicView.hpp>``
 
 
-ディスクリプション
+説明
 ------------------
 
 .. cpp:class:: template<typename DataType , typename ... P> DynamicView : public Kokkos::ViewTraits<DataType , P ...>
@@ -77,13 +77,13 @@
         :param min_chunk_size: メモリ割り当てに必要なユーザー指定の最小チャンクサイズで、 より効率的なメモリアクセスのため、2乗に最も近い数値に丸められます。
         :param max_extent: ユーザーに提供された最大サイズで、 チャンクポインタ配列を割り当てる必要があります。
 
-         必要な量のメモリを確保するために、 ``max_extent`` で制限し、``resize_serial`` メソッドを構築後に呼び出す必要があります。
+         必要な量のメモリを確保するために、 ``max_extent`` で制限し、 ``resize_serial`` メソッドを構築後に呼び出す必要があります。
 
     .. rubric:: パブリックデータアクセス関数
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION reference_type operator() (const I0 & i0 , const Args & ... args) const
 
-        :return: それ自身が参照可能であるか否かに関わらず、``reference_type`` 型の値。 インデックス引数の数は 1 である必要があります (非推奨ではないコードについて)。
+        :return: それ自身が参照可能であるか否かに関わらず、 ``reference_type`` 型の値。 インデックス引数の数は 1 である必要があります (非推奨ではないコードについて)。
 
     .. rubric:: データリサイズ、ディメンション、ストライド
 
@@ -97,7 +97,7 @@
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION size_t allocation_extent() const noexcept;
 
-        :return: チャンクの数とチャンクサイズを掛けた積の合計サイズ。 これは完全なメモリチャンクの総数に対する合計サイズを含むため、``size`` よりも大きくなる可能性があります。
+        :return: チャンクの数とチャンクサイズを掛けた積の合計サイズ。 これは完全なメモリチャンクの総数に対する合計サイズを含むため、 ``size`` よりも大きくなる可能性があります。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION size_t chunk_size() const noexcept;
 
@@ -161,7 +161,7 @@
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr bool span_is_contiguous() const;
 
-        :return: スパンは連続しており、``DynamicView`` については、常に偽となります。
+        :return: スパンは連続しており、 ``DynamicView`` については、常に偽となります。
 
     .. rubric:: その他
 

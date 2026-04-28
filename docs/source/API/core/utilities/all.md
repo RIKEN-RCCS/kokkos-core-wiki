@@ -1,7 +1,7 @@
 (KokkosALL)=
 # `Kokkos::ALL`
 
- ヘッダー `<Kokkos_Core.hpp>` に定義。
+ヘッダー `<Kokkos_Core.hpp>` に定義。
 
 ```c++
 namespace Kokkos{

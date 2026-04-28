@@ -6,14 +6,14 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
+使用方法
 ------------
 
 .. code-block:: cpp
 
    Kokkos::View<float*, Kokkos::LayoutLeft> my_view;
 
-ディスクリプション
+説明
 ---------------------
 
 .. cpp:struct:: LayoutLeft
@@ -51,7 +51,7 @@
 
    .. cpp:function:: LayoutLeft(LayoutLeft&&) = default
 
-       デフォルトの移動コンストラクタは、要素単位で他のレイアウトをコピーします。
+       デフォルトの移動コンストラクタは、要素単位で他のレイアウトを移動します。
 
    .. rubric:: 代入演算子
 

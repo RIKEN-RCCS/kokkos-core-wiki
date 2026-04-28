@@ -1,12 +1,12 @@
 ``parallel_for``
 ================
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例:
+使用方法
 
 .. code-block:: cpp
 
@@ -17,7 +17,7 @@
 
 .. |text| replace:: *ExecutionPolicy*
 
-``functor``で定義された並列作業を、|text|_ ``policy`` に従ってディスパッチします。 オプションのラベル ``name`` は、
+``functor``で定義された並列作業を、|text|_ ``policy`` に従ってディスパッチします。 省略可能なラベル ``name`` は、
 プロファイリングおよびデバッグツールで使用されます。この呼び出しは非同期であり、呼び出し元へ直ちに返る可能性があります。 
 
 インターフェイス
@@ -38,7 +38,7 @@
   - `MDRangePolicy <../policies/MDRangePolicy.html>`_: 多次元反復空間を定義します。
   - `TeamPolicy <../policies/TeamPolicy.html>`_: 1次元の反復範囲を定義し、それぞれがスレッドチームに代入されます。
   - `TeamThreadRange <../policies/TeamVectorRange.html>`_: スレッドチームによって実行される1次元の反復範囲を定義します。  ``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
-  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき1次元反復範囲を定義します。 TeamPolicy または TaskTeam を通じて実行される並列領域内でのみ有効です。 ``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
+  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき1次元反復範囲を定義します。 ``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
 
 * FunctorType: ``ExecPolicy`` のシグネチャに一致する operator() を持つ有効なファンクタ。 詳細については以下の例を参照してください。
 
@@ -46,15 +46,15 @@
 ~~~~~~~~~~~~
 
 * ``ExecPolicy`` が ``IntegerType`` であれば、 ``functor`` は、メンバー関数 ``operator() (const IntegerType& i) const`` を持ちます。
-*  ``ExecPolicy`` が ``MDRangePolicy`` であり、 ``ExecPolicy::work_tag`` が ``void`` であれば、 ``functor`` は、``N`` が ``ExecPolicy::rank-1`` であるメンバー関数 ``operator() (const IntegerType& i0, ... , const IntegerType& iN) const`` を持ちます。 
-* ``ExecPolicy`` が ``MDRangePolicy`` であり、 ``ExecPolicy::work_tag`` が ``void`` でなければ、 ``functor`` は、``N`` が ``ExecPolicy::rank-1`` であるメンバー関数 ``operator() (const ExecPolicy::work_tag, const IntegerType& i0, ... , const IntegerType& iN) const`` を持ちます。
+*  ``ExecPolicy`` が ``MDRangePolicy`` であり、 ``ExecPolicy::work_tag`` が ``void`` であれば、 ``functor`` は、 ``N`` が ``ExecPolicy::rank-1`` であるメンバー関数 ``operator() (const IntegerType& i0, ... , const IntegerType& iN) const`` を持ちます。 
+* ``ExecPolicy`` が ``MDRangePolicy`` であり、 ``ExecPolicy::work_tag`` が ``void`` でなければ、 ``functor`` は、 ``N`` が ``ExecPolicy::rank-1`` であるメンバー関数 ``operator() (const ExecPolicy::work_tag, const IntegerType& i0, ... , const IntegerType& iN) const`` を持ちます。
 * ``ExecPolicy::work_tag`` が ``void`` であれば、 ``functor`` は、 メンバー関数 ``operator() (const ExecPolicy::member_type& handle) const`` を持ちます。
 * ``ExecPolicy::work_tag`` が ``void`` でなければ、 ``functor`` は、 メンバー関数 ``operator() (const ExecPolicy::work_tag, const ExecPolicy::member_type& handle) const`` を持ちます。
 
 セマンティクス
 ------------------
 
-* ``policy`` で定義された反復空間の各要素に対して、ファンクターの呼び出し演算子は正確に1回呼び出されます。ただし、``TeamPolicy`` および ``TeamThreadRange`` については、それぞれチームの各ベクトルレーンおよびスレッドによって呼び出し演算子が呼び出されます。
+* ``policy`` で定義された反復空間の各要素に対して、ファンクターの呼び出し演算子は正確に1回呼び出されます。ただし、 ``TeamPolicy`` および ``TeamThreadRange`` については、それぞれチームの各ベクトルレーンおよびスレッドによって呼び出し演算子が呼び出されます。
 * 並行性も、反復処理の実行順序も、保証されません。
 * この呼び出しは非同期になる可能性があります。 カーネルの終了を保証するには、開発者はカーネルが実行されている実行領域に対してフェンスを呼び出すべきです。
 

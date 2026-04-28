@@ -4,7 +4,7 @@
 
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
 範囲またはランク1の ``ビュー`` 内の要素が、ターゲットの単項述語を入力しない場合に、 ``真`` を返します。
@@ -12,7 +12,7 @@
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,7 +37,7 @@
 
    template <class ExecutionSpace, class DataType, class... Properties,
 	     class Predicate>
-    none_of(const std::string& label, const ExecutionSpace& exespace,    (4)
+   bool none_of(const std::string& label, const ExecutionSpace& exespace,    (4)
 		const ::Kokkos::View<DataType, Properties...>& v,
 		Predicate predicate);
 
@@ -85,13 +85,13 @@
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``ビュー``:
+- ``view``:
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``pred``: ``pred(v)`` が、引数として渡された実行空間、またはチームハンドルに関連付けられた実行空間から呼び出されるために、有効でなければならず、型 ``value_type`` のあらゆる引数 ``v`` についてブール型に変換可能である *一項* ファンクタであり、ここで ``value_type`` は、``IteratorType`` または ``view`` の値型であり、 ``v`` を変更してはなりません。
+- ``pred``: ``pred(v)`` が、引数として渡された実行空間、またはチームハンドルに関連付けられた実行空間から呼び出されるために、有効でなければならず、型 ``value_type`` のあらゆる引数 ``v`` についてブール型に変換可能である *単項* ファンクタであり、ここで ``value_type`` は、 ``IteratorType`` または ``view`` の値型であり、 ``v`` を変更してはなりません。
 
   - 以下に一致しなければなりません:
 

@@ -24,7 +24,7 @@ STL ライクな並列アルゴリズム
 
 :doc:`API/containers-index`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-特殊なビューベースのコンテナ（``DualView``、``ScatterView``、``OffsetView`` など）
+特殊なビューベースのコンテナ（``DualView``、 ``ScatterView``、 ``OffsetView`` など）
 
 
 :doc:`API/simd-index`

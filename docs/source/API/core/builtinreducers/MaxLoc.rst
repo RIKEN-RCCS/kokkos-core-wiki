@@ -8,15 +8,15 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
    MaxLoc<T,I,S>::value_type result;
    parallel_reduce(N,Functor,MaxLoc<T,I,S>(result));
 
-シノプシス
+概要
 ----------
 
 .. code-block:: cpp
@@ -53,19 +53,19 @@
 
 .. cpp:class:: template<class Scalar, class Index, class Space> MaxLoc
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: reducer_type
+   .. cpp:type:: reducer
 
       自己型。
 
    .. cpp:type:: value_type
 
-      還元スカラー型 ( `ValLocScalar <ValLocScalar.html>`_ の特殊化)
+      縮約スカラー型 ( `ValLocScalar <ValLocScalar.html>`_ の特殊化)
 
    .. cpp:type:: result_view_type
 
-      還元結果を参照する ``Kokkos::View`` 
+      縮約結果を参照する ``Kokkos::View`` 
 
    .. rubric:: コンストラクタ
 

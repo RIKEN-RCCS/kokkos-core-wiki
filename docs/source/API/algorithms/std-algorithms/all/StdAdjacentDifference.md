@@ -1,11 +1,11 @@
 
 # `adjacent_difference`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
-名前空間 Kokkos{
-名前空間 Experimental{
+namespace Kokkos{
+namespace Experimental{
 
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
 OutputIteratorType adjacent_difference(const ExecutionSpace& exespace,                    (1)
@@ -73,11 +73,11 @@ auto adjacent_difference(const std::string& label,                              
                          const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                          BinaryOp bin_op);
 
-} //エンド 名前空間 実験的
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
 - (1,3,5,7): 第一に、 `*first_from` のコピーは、(1,3) について `*first_dest` に書き込まれ、
   または、 `view_from(0)` のコピーは、 (5,7) について `view_dest(0)` に書き込まれます。
@@ -130,6 +130,6 @@ auto adjacent_difference(const std::string& label,                              
   または、 `value_type` が、 (5,6,7,8) については、 `view_dest` の値型である型のオブジェクトが、参照解除可能であり、
   型 `return_type` の値が割り当て可能であるようになければなりません。
 
-## 返し
+## 戻り値
 
 書き込まれた最後の要素の *後の* 要素へのイテレータ。

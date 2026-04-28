@@ -6,7 +6,7 @@
    :header-rows: 1
 
    * - コンテナ
-     - ディスクリプション
+     - 説明
    * - `Bitset <containers/Bitset.html>`__
      - 同時実行処理可能なビットセットクラス。
    * - `DualView <containers/DualView.html>`__
@@ -16,7 +16,7 @@
    * - `DynRankView <containers/DynRankView.html>`__
      - Kokkos Runtime-determined-dimension DynRankView クラス。
    * - `ErrorReporter <containers/ErrorReporter.html>`__
-     - レッドセーフなエラー出力を実現するためのクラス。
+     - スレッドセーフなエラー出力を実現するためのクラス。
    * - `OffsetView <containers/Offset-View.html>`__
      - OffsetView コメント。
    * - `ScatterView <containers/ScatterView.html>`__

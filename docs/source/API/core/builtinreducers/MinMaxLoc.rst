@@ -8,15 +8,15 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
    MinMaxLoc<T,I,S>::value_type result;
    parallel_reduce(N,Functor,MinMaxLoc<T,I,S>(result));
 
-シノプシス
+概要
 ----------
 
 .. code-block:: cpp
@@ -27,7 +27,7 @@
        typedef MinMaxLoc reducer;
        typedef MinMaxLocScalar<typename std::remove_cv<Scalar>::type,
                                typename std::remove_cv<Index>::type> value_type;
-        Kokkos::View<value_type, Space> result_view_type;
+       typedef Kokkos::View<value_type, Space> result_view_type;
 
        KOKKOS_INLINE_FUNCTION
        void join(value_type& dest, const value_type& src) const;
@@ -53,19 +53,19 @@
 
 .. cpp:class:: template<class Scalar, class Space> MinMaxLoc
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: reducer_type
+   .. cpp:type:: reducer
 
       自己型
 
    .. cpp:type:: value_type
 
-      還元スカラー型 ( `MinMaxLocScalar <MinMaxLocScalar.html>`_ の特殊化)
+      縮約スカラー型 ( `MinMaxLocScalar <MinMaxLocScalar.html>`_ の特殊化)
 
    .. cpp:type:: result_view_type
 
-      還元結果を参照する ``Kokkos::View`` 
+      縮約結果を参照する ``Kokkos::View`` 
 
    .. rubric:: コンストラクタ
 
@@ -90,9 +90,9 @@
 
        ``Kokkos::reduction_identity<Index>::max()``  メソッドを使って、  ``val.max_val`` を初期化します。 デフォルト実装は、  ``val=<TYPE>_MIN`` を設定します。
 
-       ``Kokkos::reduction_identity<Scalar>::min()``  メソッドを使って、 ``val.min_loc`` を初期化します。 デフォルト実装は、``val=<TYPE>_MAX`` を設定します。
+       ``Kokkos::reduction_identity<Scalar>::min()``  メソッドを使って、 ``val.min_loc`` を初期化します。 デフォルト実装は、 ``val=<TYPE>_MAX`` を設定します。
 
-       ``Kokkos::reduction_identity<Index>::max()``  メソッドを使って、  ``val.max_loc`` を初期化します。 デフォルト実装は、``val=<TYPE>_MAX`` を設定します。
+       ``Kokkos::reduction_identity<Index>::max()``  メソッドを使って、  ``val.max_loc`` を初期化します。 デフォルト実装は、 ``val=<TYPE>_MAX`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 

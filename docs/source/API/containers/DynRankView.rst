@@ -18,7 +18,7 @@
 動的に決定されます。ランクの上限は 7 次元です。
 
 
-ディスクリプション
+説明
 ------------------
 
 .. cpp:class:: template <class DataType, class LayoutType, class MemorySpace, class MemoryTraits> DynRankView;
@@ -34,7 +34,7 @@
 
    :tparam LayoutType: インデックスの基盤となる1次元メモリストレージへのマッピングを決定します。
 
-		       .. important:: 本パラメータは、オプションです。
+		       .. important:: 本パラメータは、省略可能です。
 
 		       カスタムレイアウトは実装可能ですが、 Kokkos にはいくつかの組み込みレイアウトが付属しています:
 
@@ -48,13 +48,13 @@
 
    :tparam MemorySpace: 保管場所を管理します。
 
-			.. important:: 本パラメータは、オプションです。
+			.. important:: 本パラメータは、省略可能です。
 
 			省略された場合、デフォルトの実行領域のデフォルトメモリ領域が使用されます （つまり、 ``Kokkos::DefaultExecutionSpace::memory_space`` )
 
    :tparam MemoryTraits: メモリアクセスに対するより細かい制御
 
-			 .. important:: 本パラメータは、オプションです。
+			 .. important:: 本パラメータは、省略可能です。
 
 			 * ``Unmanaged``: DynRankView は参照カウントされません。割り当てはコンストラクタに提供されなければなりません。
 			 * ``Atomic``: ビューへのすべてのアクセスには、アトミック演算を使用します。
@@ -64,7 +64,7 @@
 
    .. important::
 
-      ``DataType`` 以外のテンプレートパラメータはオプションですが、順序は強制されます。
+      ``DataType`` 以外のテンプレートパラメータは省略可能ですが、順序は強制されます。
       つまり、例えば、 ``LayoutType`` は省略可能ですが、 ``MemorySpace`` および ``MemoryTraits`` の両方が
       特定されれば、 ``MemoryTraits`` の前に  ``MemorySpace`` が来なければなりません。
 
@@ -96,7 +96,7 @@
 
    .. cpp:type:: const_scalar_array_type
 
-       ``scalar_array_type`` の定数バージョンであり、 それが既に定数である場合には、``scalar_array_type`` と同じです。
+       ``scalar_array_type`` の定数バージョンであり、 それが既に定数である場合には、 ``scalar_array_type`` と同じです。
 
    .. cpp:type:: non_const_scalar_array_type
 
@@ -147,7 +147,7 @@
 
    .. cpp:type:: const_type
 
-      本ビュータイプでは、``const`` データ型を使用してすべてのテンプレートパラメータを明示的に定義。
+      本ビュータイプでは、 ``const`` データ型を使用してすべてのテンプレートパラメータを明示的に定義。
 
    .. cpp:type:: HostMirror
 
@@ -219,7 +219,7 @@
 
        要件: ``array_layout::is_regular == true``
 
-       割り当てプロパティを持つ割り当てコンストラクタ。 割り当てプロパティオブジェクトは、``view_alloc`` 関数によって返されます。
+       割り当てプロパティを持つ割り当てコンストラクタ。 割り当てプロパティオブジェクトは、 ``view_alloc`` 関数によって返されます。
 
        * ``indices``: ビューの実行時ディメンション。
 
@@ -251,14 +251,14 @@
 
        スクラッチメモリハンドルからメモリを取得するコンストラクタ。
 
-       * ``space``: スクラッチメモリハンドル。通常、``TeamPolicy`` カーネルの ``team_handles`` から返されます。
+       * ``space``: スクラッチメモリハンドル。通常、 ``TeamPolicy`` カーネルの ``team_handles`` から返されます。
        * ``indices``: ビューの実行時ディメンション。
 
    .. cpp:function:: DynRankView(const ScratchSpace& space, const array_layout& layout)
 
        スクラッチメモリハンドルからメモリを取得するコンストラクタ。
 
-       * ``space``: スクラッチメモリハンドル。通常、``TeamPolicy`` カーネルの ``team_handles`` から返されます。
+       * ``space``: スクラッチメモリハンドル。通常、 ``TeamPolicy`` カーネルの ``team_handles`` から返されます。
        * ``layout``: レイアウトクラスのインスタンス。
 
    .. cpp:function:: DynRankView(const DynRankView<DT, Prop...>& rhs, Args ... args)
@@ -270,7 +270,7 @@
    .. cpp:function:: reference_type operator() (const IntType& ... indices) const
 
       参照型である場合もそうでない場合もある ``reference_type`` の値を返します。
-      インデックス引数の数は、ビューの ``rank`` と一致する必要があります。リターン型の特性については、``reference_type`` の注記を参照してください。
+      インデックス引数の数は、ビューの ``rank`` と一致する必要があります。リターン型の特性については、 ``reference_type`` の注記を参照してください。
 
    .. cpp:function:: reference_type access (const IntType& i0=0, const IntType& i1=0, \
 			   const IntType& i2=0, const IntType& i3=0, const IntType& i4=0, \
@@ -279,7 +279,7 @@
        参照型である場合もそうでない場合もある ``reference_type`` の値を返します。
        インデックス引数の数は、ビューの ``rank`` 以上でなければなりません。
        ``rank`` を超えるインデックス引数は ``0`` でなければならず、 ``KOKKOS_DEBUG`` が定義されている場合に有効になります。
-       戻り値の型の特性については、``reference_type`` の注記を参照してください。
+       戻り値の型の特性については、 ``reference_type`` の注記を参照してください。
 
 
    .. rubric:: データレイアウト、ディメンション、ストライド
@@ -290,16 +290,16 @@
 
    .. cpp:function:: template<class iType> constexpr size_t extent(const iType& dim) const
 
-      指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、``dim`` は ``rank`` より小さくなければなりません。
+      指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、 ``dim`` は ``rank`` より小さくなければなりません。
 
    .. cpp:function:: template<class iType> constexpr int extent_int(const iType& dim) const
 
-      ``int`` として、指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、``dim`` は ``rank`` より小さくなければならない。``extent`` と比較して、この関数は ``int`` 演算が ``size_t`` よりも効率的なアーキテクチャで有用である。
+      ``int`` として、指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、 ``dim`` は ``rank`` より小さくなければならない。``extent`` と比較して、この関数は ``int`` 演算が ``size_t`` よりも効率的なアーキテクチャで有用である。
       また、そうでなければすべてのインデックス操作を ``int`` で行っているアプリケーションにおいて、型キャストの必要性を排除する可能性があります。
 
    .. cpp:function:: template<class iType> constexpr size_t stride(const iType& dim) const
 
-       指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、``dim`` は ``rank`` より小さくなければなりません。 例: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
+       指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、 ``dim`` は ``rank`` より小さくなければなりません。 例: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
 
    .. cpp:function:: constexpr size_t stride_0() const
 
@@ -390,7 +390,7 @@
 * ``std::is_const<SrcType::value_type>::value == true`` が ``std::is_const<DstType::value_type>::value == true`` よりも大きい場合
 * ``MemorySpaceAccess<DstType::memory_space,SrcType::memory_space>::assignable == true``
 
-さらに、``DstType::array_layout`` が ``SrcType::array_layout`` と同じでない場合、充足すべきルールもあります。これらのルールは、両方のレイアウトが、 ``LayoutLeft`` , ``LayoutRight`` or ``LayoutStride`` 、``LayoutRight`` または ``LayoutStride`` のいずれかの場合のみを対象としています。
+さらに、 ``DstType::array_layout`` が ``SrcType::array_layout`` と同じでない場合、充足すべきルールもあります。これらのルールは、両方のレイアウトが、 ``LayoutLeft`` , ``LayoutRight`` or ``LayoutStride`` 、 ``LayoutRight`` または ``LayoutStride`` のいずれかの場合のみを対象としています。
 
 * ``DstType::array_layout`` も ``SrcType::array_layout`` も ``LayoutStride`` ではない場合:
     - ``DstType::array_layout`` よりも``DstType::rank > 1`` である場合、 ``SrcType::array_layout`` と同じである必要があります。

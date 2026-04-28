@@ -1,17 +1,17 @@
 ``remove``
 ==========
 
-ヘッダー: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
-削除されない要素が、範囲の先頭、または ``View`` の先頭に配置されるという条件で、指定された範囲または ``View`` 内の要素を、移動代入によってシフトし、``value`` と等しい要素をすべて削除します。 相対的な順序は保持され、コンテナの物理的なサイズは変更されません。
+削除されない要素が、範囲の先頭、または ``View`` の先頭に配置されるという条件で、指定された範囲または ``View`` 内の要素を、移動代入によってシフトし、 ``value`` と等しい要素をすべて削除します。 相対的な順序は保持され、コンテナの物理的なサイズは変更されません。
 
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -59,7 +59,7 @@
                    Iterator first, Iterator last,
                    const ValueType& value);
 
-   テンプレート <
+   template <
      class TeamHandleType,
      class DataType, class... Properties,
      class ValueType>
@@ -95,7 +95,7 @@
 
 - ``view``: 変更対象の要素のビュー
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 

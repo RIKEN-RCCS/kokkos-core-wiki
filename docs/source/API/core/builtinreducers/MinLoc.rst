@@ -8,26 +8,26 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
    MinLoc<T,I,S>::value_type result;
    parallel_reduce(N,Functor,MinLoc<T,I,S>(result));
 
-シノプシス
+概要
 ----------
 
 .. code-block:: cpp
 
    template<class Scalar, class Index, class Space>
-   クラス MinLoc{
-     パブリック:
-       型定義 MinLoc リデューサー;
-       型定義 ValLocScalar<typename std::remove_cv<Scalar>::type,
+   class MinLoc{
+     public:
+       typedef MinLoc reducer;
+       typedef ValLocScalar<typename std::remove_cv<Scalar>::type,
                             typename std::remove_cv<Index>::type > value_type;
-       型定義 Kokkos::View<value_type, Space> result_view_type;
+       typedef Kokkos::View<value_type, Space> result_view_type;
 
        KOKKOS_INLINE_FUNCTION
        void join(value_type& dest, const value_type& src) const;
@@ -55,17 +55,17 @@
 
    .. rubric:: パブリック型
 
-   .. cpp:type:: reducer_type
+   .. cpp:type:: reducer
 
       自己型。
 
    .. cpp:type:: value_type
 
-      還元スカラー型 ( `ValLocScalar <ValLocScalar.html>`_ の特殊化))
+      縮約スカラー型 ( `ValLocScalar <ValLocScalar.html>`_ の特殊化))
 
    .. cpp:type:: result_view_type
 
-      還元結果を参照する ``Kokkos::View`` 
+      縮約結果を参照する ``Kokkos::View`` 
 
    .. rubric:: コンストラクタ
 
@@ -85,8 +85,8 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-      Initialize using the ``Kokkos::reduction_identity<Scalar>::min()`` メソッドを使って、 ``val.val`` を初期化します。 デフォルト実装は、The default implementation sets ``val=<TYPE>_MAX`` を設定します。
-      Initialize using the ``Kokkos::reduction_identity<Index>::min()``  メソッドを使って、 ``val.loc`` を初期化します。 デフォルト実装は、 ``val=<TYPE>_MAX`` を設定します。
+      ``Kokkos::reduction_identity<Scalar>::min()`` メソッドを使って ``val.val`` を初期化します。デフォルト実装は ``val=<TYPE>_MAX`` を設定します。
+      ``Kokkos::reduction_identity<Index>::min()`` メソッドを使って ``val.loc`` を初期化します。デフォルト実装は ``val=<TYPE>_MAX`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
@@ -94,7 +94,7 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
 
-      特定のビューを結果の保存先として参照するリデューサーを構築します。
+      クラスコンストラクタで提供された結果の保存先のビューを返します。
 
 追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -107,7 +107,7 @@
 
 * 必要条件: ``Index`` は、定義された ``operator =`` を持ちます。 ``Kokkos::reduction_identity<Index>::min()`` は有効な式です。
 
-*  ``Scalar`` または ``Index``のいずれかのカスタム型で  MinLoc を使用するために、``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
+*  ``Scalar`` または ``Index``のいずれかのカスタム型で  MinLoc を使用するために、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
 
 例
 -------
@@ -115,14 +115,14 @@
 .. code-block:: cpp
 
   #include <Kokkos_Core.hpp>
-  構造体 Idx3D_t {
+  struct Idx3D_t {
     int value[3];
     int& operator[](int i) { return value[i]; }
     const int& operator[](int i) const { return value[i]; }
   };
-  テンプレート <>
-  構造体 Kokkos::reduction_identity<Idx3D_t> {
-    静的 constexpr Idx3D_t min() { return {0, 0, 0}; }
+  template <>
+  struct Kokkos::reduction_identity<Idx3D_t> {
+    static constexpr Idx3D_t min() { return {0, 0, 0}; }
   };
   int main(int argc, char* argv[]) {
     Kokkos::initialize(argc, argv);
@@ -130,8 +130,8 @@
       Kokkos::View<double***> a("A", 5, 5, 5);
       Kokkos::deep_copy(a, 10);
       a(2, 3, 1)        = 5;
-      MinLoc_t    = Kokkos::MinLoc<double, Idx3D_t> を使用;
-      MinLocVal_t = typename MinLoc_t::value_type を使用;
+      using MinLoc_t    = Kokkos::MinLoc<double, Idx3D_t>;
+      using MinLocVal_t = typename MinLoc_t::value_type;
       MinLocVal_t result;
       Kokkos::parallel_reduce(
           Kokkos::MDRangePolicy<Kokkos::Rank<3>>({0, 0, 0}, {5, 5, 5}),

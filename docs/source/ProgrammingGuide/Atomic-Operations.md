@@ -91,7 +91,7 @@ void find_indices(View<int*> indices, View<double*> values) {
 
 アトミック演算の完全なリストはこちらで見られます:
 
-| 名前                                                                                  | ライブラリ                   | カテゴリー | ディスクリプション                  |
+| 名前                                                                                  | ライブラリ                   | カテゴリー | 説明                  |
 |:--------------------------------------------------------------------------------------|:--------------------------|:-----------|:----------------------------|
 | [atomic_compare_exchange](../API/core/atomics/atomic_compare_exchange)                | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | 比較対象の値と一致した場合にのみ値を交換し、そうでない場合は元の値を返すアトミック演算。 |
 | [atomic_exchange](../API/core/atomics/atomic_exchange)                                | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | 値を交換し、元の値を返すアトミック演算。 |

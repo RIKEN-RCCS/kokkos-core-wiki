@@ -1,7 +1,7 @@
 ``ValLocScalar``
 ================
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 :cpp:struct:`ValLocScalar` は、 **value** およびそれに対応する  **location** (インデックス)  
@@ -14,8 +14,8 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
@@ -29,7 +29,7 @@
 
 .. cpp:struct::  template<class Scalar, class Index> ValLocScalar
 
-   :tparam Scalar: 還元されている値のデータ型 (例えば、 ``double``、 ``int``)。
+   :tparam Scalar: 縮約されている値のデータ型 (例えば、 ``double``、 ``int``)。
 
    :tparam Index: 保存先またはイテレーションインデックスのデータ型 (例えば、 ``int``、 ``long long``)。
 
@@ -37,8 +37,8 @@
 
    .. cpp:var:: Scalar val
 
-      還元値。
+      縮約値。
 
    .. cpp:var:: Index loc
 
-      還元値の保存先（イテレーションインデックス）
+      縮約値の保存先（イテレーションインデックス）

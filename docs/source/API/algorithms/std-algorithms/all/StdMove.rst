@@ -4,7 +4,7 @@
 
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
 範囲内の要素、またはランク1の ``ビュー`` から、
@@ -13,7 +13,7 @@
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 
 実行空間を受け入れるオーバーロードセット
@@ -38,7 +38,7 @@
 
    template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-    move(const std::string& label, const ExecutionSpace& ex,               (4)
+   auto move(const std::string& label, const ExecutionSpace& ex,           (4)
              const ::Kokkos::View<DataType1, Properties1...>& source,
              ::Kokkos::View<DataType2, Properties2...>& dest);
 
@@ -82,13 +82,13 @@
 
   - 有効な範囲、つまり、 ``last >= first`` を表す必要があります。
 
-  - 必ず `exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``source``, ``dest``: 移動元および移動先へのビュー
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - 必ず `exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 
 戻り値
@@ -97,4 +97,4 @@
 - 1,2,5: ``d_first + Kokkos::Experimental::distance(first, last)`` に等しいイテレータ。
 
 - 3,4,6: ``Kokkos::Experimental::begin(dest) +
-  Kokkos::Experimental:distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))`` に等しいイテレータ。
+  Kokkos::Experimental::distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))`` に等しいイテレータ。

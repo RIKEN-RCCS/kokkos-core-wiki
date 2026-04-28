@@ -1,7 +1,7 @@
 
 # `transform_inclusive_scan`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -99,11 +99,11 @@ auto transform_inclusive_scan(const std::string& label,                         
                               BinaryOpType binary_op, UnaryOpType unary_op,
                               ValueType init_value);
 
-} //エンド 名前空間 実験的
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
 - 1,2: unary_op 演算子を用いて変換し、次に 範囲 [first_from, last_from) 内の各要素を、 結果の範囲に対して、`unary_op` を使用して、インクルーシブプレフィックススキャン演算を計算し、 `first_dest` で始まる範囲に結果を書き込みます。 
 
@@ -125,6 +125,6 @@ auto transform_inclusive_scan(const std::string& label,                         
   - 1,5 について、デフォルト文字列は、: "Kokkos::transform_inclusive_scan_iterator_api_default"
   - 3,7 について、デフォルト文字列は、: "Kokkos::transform_inclusive_scan_view_api_default"
 
-## 返し
+## 戻り値
 
 書き込まれた最後の要素 *後の* 要素へのイテレータ。

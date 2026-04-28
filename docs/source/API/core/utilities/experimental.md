@@ -5,7 +5,7 @@
 
 ```c++
 namespace Kokkos {
-  namespace Experimental{
+  namespace Experimental {
     ...
   }
 }

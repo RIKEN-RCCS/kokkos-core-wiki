@@ -1,12 +1,12 @@
 ``fence``
 =========
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例:
+使用方法
 
 .. code-block:: cpp
 
@@ -14,7 +14,7 @@
 
 未完了の非同期 Kokkos 演算がすべて完了した時点でブロックします。
 それは、三引数 `deep_copy <../view/deep_copy.html>`_ だけでなく、並列ディスパッチ (例えば、 `parallel_for() <parallel_for.html#kokkosparallel_for>`_, `parallel_reduce() <parallel_reduce.html#kokkosparallel_reduce>`_ 
-and `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
+および `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
 含みます。
 
 注意事項: 実行空間インスタンス固有の ``fence`` も存在します。: `ExecutionSpaceConcept <../execution_spaces.html#executionspaceconcept>`_
@@ -38,7 +38,7 @@ and `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
 必要要件
 ~~~~~~~~~~~~
 
-- ```Kokkos::fence()`` は、既存の並列領域内では呼び出すことはできません (つまり、  ファンクタまたはラムダの ``operator()`` 内)。
+- ``Kokkos::fence()`` は、既存の並列領域内では呼び出すことはできません (つまり、  ファンクタまたはラムダの ``operator()`` 内)。
 
 セマンティクス
 ----------------

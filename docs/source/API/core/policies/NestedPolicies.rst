@@ -40,19 +40,19 @@
 
 有効なテンプレートの引数はここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ で説明します。
 
-使用例
+使用方法
 ~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-    parallel_for(TeamThreadRange(チーム,開始,終了), [=] (int i) {});
-    parallel_for(ThreadVectorRange(チーム,開始,終了), [=] (int i) {});
+    parallel_for(TeamThreadRange(team,begin,end), [=] (int i) {});
+    parallel_for(ThreadVectorRange(team,begin,end), [=] (int i) {});
     single(PerTeam(team), [=] () {});
     single(PerThread(team), [=] () {});
 
 ネストポリシーは、ネスト並列パターンに使用できます。グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは関数として実装されており、チームハンドルを通じて実行空間タイプに、暗示的テンプレート化が可能になります。
 
-シノプシス
+概要
 ~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
@@ -64,7 +64,7 @@
     Impl::ThreadSingleStruct PerTeam(TeamMemberType team);
     Impl::VectorSingleStruct PerThread(TeamMemberType team);
 
-ディスクリプション
+説明
 ~~~~~~~~~~~~~~~~~~~~
 
 .. cpp:function:: Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType count);

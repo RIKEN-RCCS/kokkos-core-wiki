@@ -4,9 +4,9 @@
 .. role:: cpp(code)
     :language: cpp
 
-``<Kokkos_Core.hpp>`` 含まれる、ヘッダー ``<Kokkos_Timer.hpp>`` に定義。
+``<Kokkos_Core.hpp>`` に含まれるヘッダー ``<Kokkos_Timer.hpp>`` に定義。
 
-使用例
+使用方法
 ------------------
 
 .. code-block:: cpp
@@ -22,7 +22,7 @@
 
    経過時間を計測するための高精度タイマークラスです。
 
-   .. note:
+   .. note::
 
         このクラスは、"手っ取り早く大まかな" タイミング測定だけでなく、
         タイミング測定を "常時有効" とする状況も想定しています。
@@ -43,7 +43,7 @@
 
    .. cpp:function:: double seconds() const
 
-      :: タイマーが開始または最後にリセットされてから経過した秒数。
+      :returns: タイマーが開始または最後にリセットされてから経過した秒数。
 
    .. cpp:function:: void reset()
 
@@ -55,7 +55,7 @@
    .. cpp:function:: Timer(Timer const&&) = delete
    .. cpp:function:: Timer(Timer&&) = delete
 
-       タイマークラスは、コピーコンストラクタもコピー代入もできません。
+       Timer クラスは、コピー構築もコピー代入もできません。
 
 
 例

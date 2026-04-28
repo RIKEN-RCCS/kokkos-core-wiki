@@ -9,7 +9,7 @@
    :header-rows: 1
 
    * - クラス
-     - ディスクリプション
+     - 説明
    * - `create_mirror[_view] <view/create_mirror.html>`__
      - 別のメモリ空間に、 ``Kokkos::View`` のコピーを作成。
    * - `deep_copy() <view/deep_copy.html>`__
@@ -33,7 +33,7 @@
    * - `view_alloc() <view/view_alloc.html>`__
      -  引数リストからビュー割り当てパラメータバンドルを作成。
    * - `View-like Types <view/view_like.html>`__
-     - おおまかに定義すると、``Kokkos::View`` のように振る舞うクラステンプレートの集合。
+     - おおまかに定義すると、 ``Kokkos::View`` のように振る舞うクラステンプレートの集合。
 
 .. toctree::
    :hidden:

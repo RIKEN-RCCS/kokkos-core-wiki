@@ -12,7 +12,7 @@ Kokkos::pair<int, float> converted_std_pair(std_pair);
 std::pair<int,float> converted_kokkos_pair = kokkos_pair.to_std_pair();
 ```
 
-## シノプシス 
+## 概要 
 ```c++
 template <class T1, class T2>
 struct pair {
@@ -65,11 +65,11 @@ struct pair {
                                   second_type const& s);
   ```
 
-  要素ごとのコンストラクタ。 `first` に `f` の値、 `second` にthe value of `s` の値を割り当てます。
+  要素ごとのコンストラクタ。 `first` に `f` の値、 `second` に `s` の値を割り当てます。
 
   * 
   ```c++
-  テンプレート <class U, class V>
+  template <class U, class V>
   KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const pair<U, V>& p);
   ``` 
       
@@ -79,7 +79,7 @@ struct pair {
 
   * 
   ```c++
-  テンプレート <class U, class V>
+  template <class U, class V>
   KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
   ```
 

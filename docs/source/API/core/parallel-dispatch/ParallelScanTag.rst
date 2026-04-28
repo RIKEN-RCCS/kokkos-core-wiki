@@ -1,7 +1,7 @@
 ``ParallelScanTag``
 ===================
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 ヘッダーファイル: ``<Kokkos_ExecPolicy.hpp>``
@@ -12,7 +12,7 @@
 
 チーム規模の要求対象となるファンクターを示すための、チーム規模計算機能で使用されるタグは、 |parallelScan|_ に使用されています。
 
-使用例
+使用方法
 -------------
 
 .. code-block:: cpp
@@ -22,7 +22,7 @@
     int recommended_team_size = policy.team_size_recommended(
         Functor, Kokkos::ParallelScanTag());
 
-シノプシス
+概要
 ---------------
 
 .. code-block:: cpp

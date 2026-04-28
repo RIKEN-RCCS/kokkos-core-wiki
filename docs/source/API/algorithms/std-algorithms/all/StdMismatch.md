@@ -1,7 +1,7 @@
 
 # `mismatch`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```cpp
 namespace Kokkos{
@@ -21,7 +21,7 @@ Kokkos::pair<IteratorType1, IteratorType2> mismatch(
                 IteratorType1 first1,
                 IteratorType1 last1,                                                 (2)
                 IteratorType2 first2,
-                IteratorType2 last2)
+                IteratorType2 last2);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2, class BinaryPredicate>
 Kokkos::pair<IteratorType1, IteratorType2> mismatch(const ExecutionSpace& exespace,
@@ -64,11 +64,11 @@ auto mismatch(const std::string& label, const ExecutionSpace& exespace,
               const Kokkos::View<DataType2, Properties2...>& view2,
               BinaryPredicateType&& predicate);
 
-} //エンド 名前空間 実験的
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
 2つの範囲から最初の不一致ペアを返します:  (1,2,3,4) については、1つは [first1, last1) により定義され、もう1つは [first2,last2) によって定義されます。
 (5,6,7,8)において、2つのビュー `view1` および `view2` から、最初の不一致ペアを返します。
@@ -92,7 +92,7 @@ auto mismatch(const std::string& label, const ExecutionSpace& exespace,
 
 - `view1`, `view2`:
   - 比較対象のビュー
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
   - `exespace` からアクセス可能でなければなりません。
 
 - `pred`
@@ -107,10 +107,10 @@ auto mismatch(const std::string& label, const ExecutionSpace& exespace,
   };
  ```
 
-## 返し
+## 戻り値
 
 - (1,2) - Kokkos::pair, ここでは、 `.first` および `.second` が `operator==` が偽に評価される IteratorType1 および IteratorType2 インスタンスです。 
-- (3,4) - Kokkos::pair, ここでは、 `.first` および `.second` が `pred` が偽に評価され IteratorType1 およに IteratorType2  インスタンスです。
+- (3,4) - Kokkos::pair, ここでは、 `.first` および `.second` が `pred` が偽に評価され IteratorType1 および IteratorType2  インスタンスです。
 
 ## 例 
 
@@ -136,7 +136,7 @@ view_type b("b", 15);
 // ファンクタ作成
 MismatchFunctor<int, int> p();
 
-Kokkos::pair<int,int> mismatch_index = KE::mismatch(exespace, KE::begin(a), KE::end(a), KE::begin(b), KE::end(b) p);
+Kokkos::pair<int,int> mismatch_index = KE::mismatch(exespace, KE::begin(a), KE::end(a), KE::begin(b), KE::end(b), p);
 
 // OpenMP が有効であると仮定すると、以下を明示的に呼び出すことが可能です
 Kokkos::pair<int,int> mismatch_index = KE::mismatch(Kokkos::OpenMP(), KE::begin(a), KE::end(a), KE::begin(b), KE::end(b), p);

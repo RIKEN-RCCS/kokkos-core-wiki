@@ -10,36 +10,36 @@
    :header-rows: 1
 
    * - リデューサー
-     - ディスクリプション
+     - 説明
    * - `BAnd <builtinreducers/BAnd.html>`__
-     - バイナリ 'And' 還元
+     - バイナリ 'And' 縮約
    * - `BOr <builtinreducers/BOr.html>`__
-     - バイナリ 'Or' 還元
+     - バイナリ 'Or' 縮約
    * - `LAnd <builtinreducers/LAnd.html>`__
-     - 論理的 'And' 還元
+     - 論理的 'And' 縮約
    * - `LOr <builtinreducers/LOr.html>`__
-     - 論理的' Or' 還元
+     - 論理的' Or' 縮約
    * - `Max <builtinreducers/Max.html>`__
-     - 最大還元
+     - 最大縮約
    * - `MaxLoc <builtinreducers/MaxLoc.html>`__
-     - 最大値および関連インデックスを提供する還元
+     - 最大値および関連インデックスを提供する縮約
    * - `Min <builtinreducers/Min.html>`__
-     - 最小還元
+     - 最小縮約
    * - `MinLoc <builtinreducers/MinLoc.html>`__
-     - 最小値および関連インデックスを提供する還元
+     - 最小値および関連インデックスを提供する縮約
    * - `MinMax <builtinreducers/MinMax.html>`__
-     - 最小値および最大値の両方を提供する還元
+     - 最小値および最大値の両方を提供する縮約
    * - `MinMaxLoc <builtinreducers/MinMaxLoc.html>`__
-     - 最小値および最大値の両方並びに関連インデックスを提供する還元
+     - 最小値および最大値の両方並びに関連インデックスを提供する縮約
    * - `Prod <builtinreducers/Prod.html>`__
-     - 乗法的還元
+     - 乗法的縮約
    * - `Sum <builtinreducers/Sum.html>`__
-     - 和の還元
+     - 和の縮約
 
 
-:cpp:struct:`reduction_identity` は、様々な還元演算における中和元（恒等値）を定義します。 特化処理は、組み込みリデューサーがユーザー定義型と連動するために不可欠です。
+:cpp:struct:`reduction_identity` は、様々な縮約演算における中和元（恒等値）を定義します。 特化処理は、組み込みリデューサーがユーザー定義型と連動するために不可欠です。
 
-`還元スカラー型 <builtinreducers/ReductionScalarTypes.html>`__ は、リデューサーのストレージ用テンプレートクラスです。
+`縮約スカラー型 <builtinreducers/ReductionScalarTypes.html>`__ は、リデューサーのストレージ用テンプレートクラスです。
 
 .. toctree::
    :hidden:

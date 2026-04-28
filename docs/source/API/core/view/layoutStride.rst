@@ -6,7 +6,7 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
+使用方法
 ----------
 
 .. code-block:: c++
@@ -15,7 +15,7 @@
     Kokkos::View<float**, Kokkos::LayoutStride> mesh_subcomponent;
     mesh_subcomponent = Kokkos::subview(full_mesh,Kokkos::ALL(), 0, Kokkos::ALL()); //  x および z 成分を選択
 
-ディスクリプション
+説明
 ----------------------
 
 .. cpp:class:: LayoutStride
@@ -31,7 +31,7 @@
 
    .. cpp:member:: size_t stride[ARRAY_LAYOUT_MAX_RANK];
 
-      レイアウトの各次元のサイズを含む配列。
+      レイアウトの各次元のストライドを含む配列。
 
    .. cpp:member:: static constexpr bool is_extent_constructible = false;
 

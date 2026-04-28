@@ -64,7 +64,7 @@ Kokkos は、以下のリストを使用して2つのスペースを選択しま
 .. list-table::
 
   * - 引数
-    - ディスクリプション
+    - 説明
   * - :code:`--kokkos-help`
     - 本メッセージをプリント
   * - :code:`--kokkos-disable-warnings`     

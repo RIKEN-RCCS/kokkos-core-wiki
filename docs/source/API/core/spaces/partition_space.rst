@@ -7,16 +7,16 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-.. warning:
+.. warning::
 
    現在、 ``partition_space`` はまだ、名前空間 ``Kokkos::Experimental`` 内にあります。
 
-使用例
+使用方法
 -------------
 
 .. code-block:: c++
 
-   自動 インスタンス = Kokkos::partition_space(Kokkos::DefaultExecutionSpace(),1,1,1);
+   auto instances = Kokkos::partition_space(Kokkos::DefaultExecutionSpace(),1,1,1);
 
 インターフェイス
 ------------------------
@@ -31,11 +31,11 @@
 
    :param space: 実行空間インスタンス ( ../execution_spaces.html を参照)
 
-   :param args: 作成されたインスタンス数は、``sizeof...(Args)`` に等しい.
+   :param args: 作成されたインスタンス数は、 ``sizeof...(Args)`` に等しい.
 		``args`` の相対的な重みは、新しく作成される各インスタンスに関連付ける
 		``space`` のハードウェアリソースの割合に関するヒントです。
 
-   :param weights: 算術型 ``T``  の ``std::vector`` で、新しく作成される、``space`` の各インスタンスに関連付ける。
+   :param weights: 算術型 ``T``  の ``std::vector`` で、新しく作成される、 ``space`` の各インスタンスに関連付ける。
                    ハードウェアリソースの割合のヒントを提供します。
 
 必要要件
@@ -43,7 +43,7 @@
 
 - ``(std::is_arithmetic_v<Args> && ...)`` は、 ``true`` です。
 
-- ``std::is_arithmetic_v<T>`` は、``true`` です。
+- ``std::is_arithmetic_v<T>`` は、 ``true`` です。
 
 - ``ExecutionSpace().concurrency() >= N_PARTITIONS``
 
@@ -52,8 +52,8 @@
 ~~~~~~~~~~~~~~~~~~~
 
 - いずれのインスタンス間にも、暗示的同期関係は存在せず、特に:
-  - ``instance[i]`` は、``space.fence()`` により囲まれていません。
-  - ``instance[i]`` は、``instance[j].fence()`` により囲まれておらず、そして
+  - ``instance[i]`` は、 ``space.fence()`` により囲まれていません。
+  - ``instance[i]`` は、 ``instance[j].fence()`` により囲まれておらず、そして
   - ``space`` は、 ``instance[i].fence()`` により囲まれていません。
   しかしながら、実際には、これらのインスタンスは、同じハードウェアリソースにディスパッチされるため、互いにブロックし合う可能性があります。
 
@@ -61,7 +61,7 @@
 
 .. important::
 
-   ``Cuda`` については、 それぞれ新たにインスタスを作成した ``HIP`` および ``SYCL`` は、それ自身の *stream*/*queue* と関連します。
+   ``Cuda`` 、 ``HIP`` および ``SYCL`` では、新たに作成された各インスタンスはそれ自身の *stream*/*queue* と結合します。
 
 
 例

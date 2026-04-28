@@ -22,7 +22,7 @@ API
 
     // SFINAE を効果的に活用する便利なメタ関数
     template<class...>
-    VOID_T = void を使用;
+    using VOID_T = void;
 
     // 典型的な Op<Args...> をサポートしない型のためのプライマリテンプレート
     template<class Default, class /* AlwaysVoid */, template<class...> class /* Op */, class... /* Args */>
@@ -42,7 +42,7 @@ API
 
     namespace Kokkos {
 
-    // 提供されたアーキタイプをサポートしない型について、detected_t が返す型の簡略化is_detected は、Op<Args...> が有効な型である場合に std::true_type の別名となります。
+    // 提供されたアーキタイプをサポートしない型について、detected_t が返す型の簡略化。
     struct nonesuch {
         nonesuch(nonesuch&&) = delete;
         ~nonesuch() = delete;
@@ -52,8 +52,8 @@ API
     // そうでない場合には、std::false_type についての別名です。
 
     template <template <class...> class Op, class... Args>
-     is_detected =
-        using typename DETECTOR<nonesuch, void, Op, Args...>::value_t;
+    using is_detected =
+        typename DETECTOR<nonesuch, void, Op, Args...>::value_t;
 
     // detected_t は、Op<Args...> が有効な型である場合に Op<Args...> の別名です。
     //  そうでない場合、 Kokkos::nonesuch の別名です。
@@ -77,8 +77,8 @@ API
     //  そうでない場合、std::false_type の別名です。
 
     template <class To, template <class...> class Op, class... Args>
-    is_detected_convertible =
-        using std::is_convertible<detected_t<Op, Args...>, To>;
+    using is_detected_convertible =
+        std::is_convertible<detected_t<Op, Args...>, To>;
 
     // C++17 またはそれ以降の便利変数
 
@@ -124,7 +124,7 @@ API
 ネストされた型定義を検出
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-ネストされた``MyType::difference_type`` が存在する場合には、それを使用したいと仮定し、そうでない場合には、``std::ptrdiff_t`` の使用を所望します:
+ネストされた``MyType::difference_type`` が存在する場合には、それを使用したいと仮定し、そうでない場合には、 ``std::ptrdiff_t`` の使用を所望します:
 
 まず、アーキタイプヘルパーエイリアスを記述します:
 

@@ -6,7 +6,7 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
 階層的並列処理の中で使われる `nested execution policy <NestedPolicies.html>`_ です。 
@@ -51,7 +51,7 @@
 制約
 ------------
 
- <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、 還元は、合計に限定されることに注意してください。
+`parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、縮約は合計に限定されることに注意してください。
 
 例
 --------

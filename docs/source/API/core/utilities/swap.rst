@@ -28,6 +28,6 @@
 
 .. |std_swap| replace:: ``std::swap``
 
-.``kokkos_swap`` は、 |std_swap|_ と同じ機能性を提供します。  `ADL
-<https://en.cppreference.com/w/cpp/language/adl>`_ が理由で、 単に
-``swap`` と呼ぶことはできない、または、一部の状況において、オーバーロード解決における曖昧性が生じます。
+``kokkos_swap`` は、|std_swap|_ と同じ機能を提供します。`ADL
+<https://en.cppreference.com/w/cpp/language/adl>`_ のため、単に
+``swap`` と呼ぶことはできません。そうしないと、一部の状況でオーバーロード解決に曖昧性が生じます。

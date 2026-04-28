@@ -13,15 +13,14 @@
 
    numerics/mathematical-functions.md
 
-ヘッダー ``<Kokkos_MathematicalFunctions.hpp>`` は、``fabs``, ``sqrt`` および ``sin`` 等の、標準Cライブラリの数学関数に対して、一貫性と移植性を備えたオーバーロードのセットを提供します。
+ヘッダー ``<Kokkos_MathematicalFunctions.hpp>`` は、 ``fabs``, ``sqrt`` および ``sin`` 等の、標準Cライブラリの数学関数に対して、一貫性と移植性を備えたオーバーロードのセットを提供します。
 
 .. toctree::
    :maxdepth: 1
 
    numerics/numeric-traits.md
 
-ヘッダー ``<Kokkos_BitManipulation.hpp>`` は、 C++20 標準ライブラリヘッダー ``<bit>`` のバックポートであり、
-個々のビットおよびビットシーケンスにアクセス、操作および処理するためのいくつかの関数テンプレートを提供します。
+ヘッダー ``<Kokkos_NumericTraits.hpp>`` は、数値型に対する数値特性（最大値・最小値・イプシロン等）を提供します。
 
 .. toctree::
    :maxdepth: 1
@@ -35,4 +34,4 @@
 
    複素数演算 <numerics/complex>
 
-ヘッダー ``<Kokkos_Complex.hpp>`` は、 複素数の Kokko 互換実装を提供し、``std::complex`` の機能性を反映します。
+ヘッダー ``<Kokkos_Complex.hpp>`` は、 複素数の Kokko 互換実装を提供し、 ``std::complex`` の機能性を反映します。

@@ -4,23 +4,23 @@
 .. role:: cpp(code)
     :language: cpp
 
-``<Kokkos_Core.hpp>`` に含まれている、ヘッダー <Kokkos_Atomic.hpp> に定義されています。
+``<Kokkos_Core.hpp>`` に含まれている、ヘッダー ``<Kokkos_Atomic.hpp>`` に定義されています。
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
     atomic_store(&obj, desired);
 
-原子的に、 ``obj`` の現在の値を ``desired`` に置き換えます。
+アトミックに、 ``obj`` の現在の値を ``desired`` に置き換えます。
 
-ディスクリプション
+説明
 ------------------
 
 .. cpp:function:: template<class T> void atomic_store(T* ptr, std::type_identity_t<T> val);
 
-    原子的に、 ``*ptr`` に ``val`` を書き込みます。
+    アトミックに、 ``*ptr`` に ``val`` を書き込みます。
 
    ``{ *ptr = val; }``
 
@@ -31,5 +31,5 @@
 
 以下も参照
 ----------
-* `atomic_load <atomic_load.html>`_: 原子的に、参照対象オブジェクトの値を取得
-* `atomic_exchange <atomic_exchange.html>`_: 原子的に、参照対象の値を置き換え、以前保持していた値を取得
+* `atomic_load <atomic_load.html>`_: アトミックに、参照対象オブジェクトの値を取得
+* `atomic_exchange <atomic_exchange.html>`_: アトミックに、参照対象の値を置き換え、以前保持していた値を取得

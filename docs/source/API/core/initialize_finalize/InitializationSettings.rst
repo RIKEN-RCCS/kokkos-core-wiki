@@ -4,9 +4,9 @@
 .. role:: cpp(code)
    :language: cpp
 
-ヘッダー ``<KokkosCore.cpp>`` に定義。
+ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
-使用例:
+使用方法
 
 .. code-block:: cpp
 
@@ -41,11 +41,11 @@
 
    .. cpp:function:: bool has_PARAMETER_NAME() const;
 
-      オブジェクトが、``PARAMETER_NAME`` 設定の値を含むかどうかを確認します。 それが値を含む場合は、 ``true`` を返し、そうでない場合には、 ``false`` を返します。
+      オブジェクトが、 ``PARAMETER_NAME`` 設定の値を含むかどうかを確認します。 それが値を含む場合は、 ``true`` を返し、そうでない場合には、 ``false`` を返します。
 
    .. cpp:function:: PARAMETER_TYPE get_PARAMETER_NAME() const;
 
-       設定に含まれる値にアクセスします。 オブジェクトが、``PARAMETER_NAME`` 設定の値を含まない場合には、ビヘイビアは定義されません。
+       設定に含まれる値にアクセスします。 オブジェクトが、 ``PARAMETER_NAME`` 設定の値を含まない場合には、ビヘイビアは定義されません。
 
 以下の表は、利用可能な設定を概説しています。
 

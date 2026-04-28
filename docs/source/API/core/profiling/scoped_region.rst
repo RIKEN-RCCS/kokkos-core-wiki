@@ -6,8 +6,8 @@
 
 ヘッダー ``<Kokkos_Profiling_ScopedRegion.hpp>`` に定義
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
@@ -15,9 +15,7 @@
 
 
 
-クラス ``ScopedRegion`` は、RAIIです。 
-オブジェクトが作成された際にユーザー定義のプロファイリング領域を "プッシュし"、スコープが終了する際にその領域を適切に、"ポップする" ラッパー 
-<https://en.cppreference.com/w/cpp/language/raii><https://en.cppreference.com/w/cpp/language/raii>`_ です。これは特に、重要な制御フロー（例：早期リターン）を持つコードのプロファイリングに有用です。 
+クラス ``ScopedRegion`` は、オブジェクトが作成された際にユーザー定義のプロファイリング領域を "プッシュし"、スコープが終了する際にその領域を適切に "ポップする"、`RAIIスタイル <https://en.cppreference.com/w/cpp/language/raii>`_ のラッパーです。これは特に、重要な制御フロー（例：早期リターン）を持つコードのプロファイリングに有用です。
 
 ``ScopedRegion`` クラスのコピーは不可能です。
 
@@ -60,4 +58,4 @@
 
 **以下も参照**
 
-`ProfilingSection <profiling_section.html>`_: Implements a scope-based section ownership wrapper
+`ProfilingSection <profiling_section.html>`_: スコープベースのセクション所有権ラッパーを実装

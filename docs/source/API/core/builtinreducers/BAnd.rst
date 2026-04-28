@@ -8,15 +8,15 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
     T result;
     parallel_reduce(N,Functor,BAnd<T,S>(result));
 
-シノプシス
+概要
 ----------
 
 .. code-block:: cpp
@@ -52,19 +52,19 @@
 
 .. cpp:class:: template<class Scalar, class Space> BAnd
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: reducer_type
+   .. cpp:type:: reducer
 
       自己型
 
    .. cpp:type:: value_type
 
-      還元スカラー型。
+      縮約スカラー型。
 
    .. cpp:type:: result_view_type
 
-      還元結果を参照する ``Kokkos::View`` 
+      縮約結果を参照する ``Kokkos::View`` 
 
    .. rubric:: コンストラクタ
 
@@ -84,7 +84,7 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-       ``Kokkos::reduction_identity<Scalar>::land()`` メソッドを使用して、``val`` を初期化します。 デフォルト実装は、``val=~(0)`` を設定します。
+       ``Kokkos::reduction_identity<Scalar>::land()`` メソッドを使用して、 ``val`` を初期化します。 デフォルト実装は、 ``val=~(0)`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 

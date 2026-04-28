@@ -6,7 +6,7 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
+使用方法
 -------------
 
 .. code-block:: cpp
@@ -16,7 +16,7 @@
     Kokkos::MDRangePolicy<..., Rank<N>, ...>(begin, end, tiling)
     Kokkos::MDRangePolicy<..., Rank<N>, ...>(space, begin, end, tiling)
 
-``MDRangePolicy`` は、 ``begin`` タプルから開区間で ``end`` までの多次元反復空間の実行ポリシーを定義しています。反復空間はタイルされ、ユーザーはオプションでタイルサイズを設定できます。
+``MDRangePolicy`` は、 ``begin`` タプルから開区間で ``end`` までの多次元反復空間の実行ポリシーを定義しています。反復空間はタイルされ、ユーザーは省略可能なタイルサイズを設定できます。
 
 インターフェイス
 -------------------
@@ -32,8 +32,7 @@
 汎用テンプレート引数
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- ``MDRangePolicy`` の有効なテンプレート引数はここ `<../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ に説明されています。
-
+``MDRangePolicy`` の有効なテンプレート引数は `ここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ に説明されています。
 
 MDRangePolicy に特有の必要論拠
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -45,7 +44,7 @@ MDRangePolicy に特有の必要論拠
              Kokkos::Iterate inner = Kokkos::Iterate::Default>
     class Kokkos::Rank;
 
-* インデックス空間のランクや、タイルをどの順序で反復するか、またタイル内でどのように反復するかを決定します。 外側と内側は``outer`` および ``inner`` は、``Kokkos::Iterate::Default``、 ``Kokkos::Iterate::Left``、または``Kokkos::Iterate::Right`` である可能性があります。
+* インデックス空間のランクや、タイルをどの順序で反復するか、またタイル内でどのように反復するかを決定します。``outer`` および ``inner`` は、 ``Kokkos::Iterate::Default``、 ``Kokkos::Iterate::Left``、または ``Kokkos::Iterate::Right`` のいずれかです。
 
 
 パブリッククラスメンバー

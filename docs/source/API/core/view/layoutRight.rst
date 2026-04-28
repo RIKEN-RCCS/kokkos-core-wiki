@@ -6,19 +6,19 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
+使用方法
 ------------
 
 .. code-block:: cpp
 
    Kokkos::View<float*, Kokkos::LayoutRight> my_view;
 
-ディスクリプション
+説明
 --------------------
 
 .. cpp:struct:: LayoutRight
 
-   多次元ビューに提供された場合、  **最後の指数が隣接したものである** ために、
+   多次元ビューに提供された場合、**最後のインデックスが連続したものである** ように、
    メモリを配置します。 これは、割り当てに関する C の慣習に合致します。
 
    .. rubric:: Nested Typedefs

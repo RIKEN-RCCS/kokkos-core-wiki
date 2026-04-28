@@ -12,7 +12,7 @@
     :align: left
 
     * - ポリシー
-      - ディスクリプション
+      - 説明
 
     * * `RangePolicy <policies/RangePolicy.html>`__
       * 各イテレートは、連続範囲内での整数です。
@@ -28,13 +28,13 @@
 
 ネストされた実行ポリシーは、既に実行中の並列領域内で、`TeamPolicy <policies/TeamPolicy.html>`__ またはタスクポリシーによって、配置された並列作業を配置するために使用されます。 `NestedPolicies <policies/NestedPolicies.html>`__ summary。
 
-.. リスト表:
+.. list-table::
     :widths: 25 75
     :header-rows: 1
     :align: left
 
     * - ポリシー
-      - ディスクリプション
+      - 説明
 
     * * `TeamThreadMDRange <policies/TeamThreadMDRange.html>`__
       * TeamPolicy カーネル内で使用され、チームの各スレッドに分割された多次元範囲に対してネストされた並列ループを実行します。
@@ -69,7 +69,7 @@
     :align: left
 
     * - 引数
-      - オプション
+      - 省略可能
       - 目的
 
     * * ExecutionSpace
@@ -90,7 +90,7 @@
 
     * * WorkTag
       * ``SomeClass``
-      * ファンクタ演算子を呼び出す際に、使用する作業タグのタイプを指定します。 任意のタグタイプにすることが可能です (つまり、  [empty](https://en.cppreference.com/w/cpp/types/is_empty) 構造体またはクラス )。デフォルトは、``void`` です。
+      * ファンクタ演算子を呼び出す際に、使用する作業タグのタイプを指定します。 任意のタグタイプにすることが可能です (つまり、  [empty](https://en.cppreference.com/w/cpp/types/is_empty) 構造体またはクラス )。デフォルトは、 ``void`` です。
 
 
 .. toctree::

@@ -2,7 +2,7 @@
 
 ヘッダーファイル: `Kokkos_SIMD.hpp`
 
-使用例:
+使用方法
 
  `Kokkos::Experimental::where_expression` は、ベクトルレジスタ内の値のサブセットを参照します。どの値がサブセット内に含まれるかは、マスクによって記述されます。したがって、`where_expression` は、ベクトル値に対するマスク操作の基礎を形成します。
 
@@ -43,7 +43,7 @@ class where_expression : public const_where_expression;
  * `void where_expression::gather_from(const double* mem, simd<std::int32_t, Abi> const& index)`: 値型 `T` が `Kokkos::Experimental::simd<double, Abi>` の場合、本関数は、マスク値 `i` が真であるとき、`mem[index[i]]` から値を収集します。
 
 ### 代入
- * `template<class U> void where_expression::operator=(U&& x)`:  マスク値 `i` が真の場合にのみ、`ベクトル値 `i` に、x[i]` の値を代入します。
+ * `template<class U> void where_expression::operator=(U&& x)`:  マスク値 `i` が真の場合にのみ、ベクトル値 `i` に `x[i]` の値を代入します。
 
 ## 例
 

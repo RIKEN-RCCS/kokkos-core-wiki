@@ -4,7 +4,7 @@
 
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
 対象範囲または ``ビュー`` 内のいずれかの要素について、別の範囲または ``ビュー`` を検索します。
@@ -12,7 +12,7 @@
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -100,14 +100,14 @@
 			       const BinaryPredicateType& pred);
 
    template <class TeamHandleType, class DataType1, class... Properties1,
-	     クラス DataType2, class... Properties2, class BinaryPredicateType>
+	     class DataType2, class... Properties2, class BinaryPredicateType>
    KOKKOS_FUNCTION
-   自動 find_first_of(const TeamHandleType& teamHandle,                                 (12)
+   auto find_first_of(const TeamHandleType& teamHandle,                                 (12)
 		      const ::Kokkos::View<DataType1, Properties1...>& view,
 		      const ::Kokkos::View<DataType2, Properties2...>& s_view,
 		      const BinaryPredicateType& pred);
 
-詳細ディスクリプション
+詳細説明
 ~~~~~~~~~~~~~~~~~~~~~~
 
 - 1,2,5,6,9,10: ``operator ==`` 経由 または ``pred`` 経由で、要素を比較する範囲 ``[s_first, s_last)`` 内のいずれかの要素について、範囲 ``[first, last)`` を検索します。
@@ -131,9 +131,9 @@
 
 - ``first, last``: 検索対象となる要素の範囲
 
-  -  *ランダムアクセスイテレータ* である必要があり、例えば、``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
+  -  *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - 有効な範囲を表す必要があり、つまり、``last >= first`` でなければなりません。
+  - 有効な範囲を表す必要があり、つまり、 ``last >= first`` でなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
@@ -144,13 +144,13 @@
 
 - ``view``, ``s_view``: 検索対象および検索条件の、それぞれのビュー
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``pred``: 2つの引数が、 "等しい" とみなされる場合、 ``真`` を返す *二項* ファンクタ。
 
-  ``pred(a,b)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして、それぞれ、 型   ``ValueType1`` および ``ValueType2`` の引数 ``a,b`` のすべてのペアについて、ブール型に変換可能で、そこでは、``ValueType1`` および ``ValueType{1,2}`` が、``IteratorType{1,2}`` の値型、または ``(s_)view`` であり、  ``a,b`` を変更してはいけません。
+  ``pred(a,b)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして、それぞれ、 型   ``ValueType1`` および ``ValueType2`` の引数 ``a,b`` のすべてのペアについて、ブール型に変換可能で、そこでは、 ``ValueType1`` および ``ValueType{1,2}`` が、 ``IteratorType{1,2}`` の値型、または ``(s_)view`` であり、  ``a,b`` を変更してはいけません。
 
   - 以下に一致しなければなりません:
 

@@ -1,17 +1,17 @@
 ``shift_left``
 ==============
 
-ヘッダーファイル: ``Kokkos_StdAlgorithms.hpp``
+ヘッダーファイル: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
- *始め* に向けて、``n`` 位置により、範囲または ``view`` 内において、要素をシフトします。
+ *始め* に向けて、 ``n`` 位置により、範囲または ``view`` 内において、要素をシフトします。
 
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -56,7 +56,7 @@
 
    template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
-   自動 shift_left(const TeamHandleType& teamHandle,                       (6)
+   auto shift_left(const TeamHandleType& teamHandle,                       (6)
                    const Kokkos::View<DataType, Properties...>& view,
                    typename decltype(begin(view))::difference_type n);
 
@@ -85,7 +85,7 @@
 
 - ``view``: 変更対象のビュー
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
@@ -96,4 +96,4 @@
 戻り値
 ~~~~~~~~~~~~
 
-結果の範囲の終わり。 ``n`` が  ``last - first`` よりも小さい場合には、 ``first + (last - first - n)`` を返します。 そうでなければ、``first`` を返します。
+結果の範囲の終わり。 ``n`` が  ``last - first`` よりも小さい場合には、 ``first + (last - first - n)`` を返します。 そうでなければ、 ``first`` を返します。

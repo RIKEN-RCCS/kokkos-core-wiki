@@ -3,15 +3,15 @@
 
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
-2つの要素の比較には、``operator<`` を使用するか、ユーザーが提供する比較演算子を使用して、範囲内またはランク1の ``ビュー`` 内で最小および最大の要素を検索します。
+2つの要素の比較には、 ``operator<`` を使用するか、ユーザーが提供する比較演算子を使用して、範囲内またはランク1の ``ビュー`` 内で最小および最大の要素を検索します。
 
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 
 実行空間を受け入れるオーバーロードセット
@@ -23,7 +23,7 @@
    auto minmax_element(const ExecutionSpace& exespace,                        (1)
                        IteratorType first, IteratorType last);
 
-   template <<class ExecutionSpace, class IteratorType>
+   template <class ExecutionSpace, class IteratorType>
    auto minmax_element(const std::string& label,                              (2)
                        const ExecutionSpace& exespace,
                        IteratorType first, IteratorType last);
@@ -54,7 +54,7 @@
                        ComparatorType comp);
 
    template <class ExecutionSpace, class DataType, class ComparatorType, class... Properties>
-    minmax_element(const std::string& label,                              (8)
+   auto minmax_element(const std::string& label,                          (8)
                        const ExecutionSpace& exespace,
                        const ::Kokkos::View<DataType, Properties...>& view,
                        ComparatorType comp);
@@ -131,10 +131,10 @@
    namespace KE = Kokkos::Experimental;
    Kokkos::View<double*> a("a", 11);
 
-    itPair = KE::minmax_element(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a));
+   auto itPair = KE::minmax_element(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a));
 
    // ビューを直接渡す
-    itPair = KE::minmax_element(Kokkos::DefaultExecutionSpace(), a);
+   auto itPair = KE::minmax_element(Kokkos::DefaultExecutionSpace(), a);
 
 
    // カスタムコンパレータを使用

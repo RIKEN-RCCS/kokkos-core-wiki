@@ -4,24 +4,24 @@
 .. role:: cpp(code)
    :language: cpp
 
-``<Kokkos_Core.hpp>`` 含まれているヘッダー ``<Kokkos_Atomic.hpp>`` により、定義されています。
+``<Kokkos_Core.hpp>`` に含まれているヘッダー ``<Kokkos_Atomic.hpp>`` により、定義されています。
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
    auto old = atomic_exchange(&obj, desired);
 
-原子レベルでは、``obj`` の現在の値を、``desired`` に置き換え、呼び出し前に値を返します。
+アトミックに、 ``obj`` の現在の値を、 ``desired`` に置き換え、呼び出し前に値を返します。
 
 
-ディスクリプション
+説明
 ------------------
 
 .. cpp:function:: template<class T> T atomic_exchange(T* ptr, std::type_identity_t<T> val);
 
-   原子レベルでは、``val`` を ``*ptr`` に挿入し、``*ptr`` のもとの値を返します。
+   アトミックに、 ``val`` を ``*ptr`` に挿入し、 ``*ptr`` のもとの値を返します。
 
    ``{ auto old = *ptr; *ptr = val; return old; }``
 
@@ -32,6 +32,6 @@
 
 以下も参照
 ----------
-* `atomic_load <atomic_load.html>`_: 参照対象の値を、原子的に取得
-* `atomic_store <atomic_store.html>`_: 参照対象のオブジェクトの値を原子的に非原子的引数に置換
-* `atomic_compare_exchange <atomic_compare_exchange.html>`_: 原子的に、非原子的引数と 参照対象の値を比較し、等しければ原始的交換を実行し、等しくなければ原始的負荷を実行
+* `atomic_load <atomic_load.html>`_: 参照対象の値を、アトミックに取得
+* `atomic_store <atomic_store.html>`_: 参照対象のオブジェクトの値をアトミックに非原子的引数に置換
+* `atomic_compare_exchange <atomic_compare_exchange.html>`_: アトミックに、非原子的引数と 参照対象の値を比較し、等しければ原始的交換を実行し、等しくなければ原始的負荷を実行

@@ -1,22 +1,22 @@
 ``Max``
 =======
 
-.. :: cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 最大値を格納する `ReducerConcept <ReducerConcept.html>`_ の具体的な実装
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
    T result;
    parallel_reduce(N,Functor,Max<T,S>(result));
 
-シノプシス
+概要
 ----------
 
 .. code-block:: cpp
@@ -52,19 +52,19 @@
 
 .. cpp:class:: template<class Scalar, class Space> Max
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: reducer_type
+   .. cpp:type:: reducer
 
       自己型。
 
    .. cpp:type:: value_type
 
-      還元スカラー型。
+      縮約スカラー型。
 
    .. cpp:type:: result_view_type
 
-     還元結果を参照する ``Kokkos::View``
+     縮約結果を参照する ``Kokkos::View``
 
    .. rubric:: コンストラクタ
 
@@ -84,7 +84,7 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-       ``Kokkos::reduction_identity<Scalar>::max()``  メソッドを使用して、``val`` を初期化します。 デフォルト実装は、 ``val=<TYPE>_MIN`` を設定します。
+       ``Kokkos::reduction_identity<Scalar>::max()``  メソッドを使用して、 ``val`` を初期化します。 デフォルト実装は、 ``val=<TYPE>_MIN`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
@@ -94,7 +94,7 @@
 
       クラスコンストラクタで提供された結果の保存先のビューを返します。
 
-Additional Information
+追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
 
 *  ``LOr<T,S>::value_type`` は、 非定数 ``T`` です。

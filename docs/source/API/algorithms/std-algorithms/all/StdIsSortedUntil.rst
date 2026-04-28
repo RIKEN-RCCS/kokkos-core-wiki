@@ -1,17 +1,17 @@
 ``is_sorted_until``
 ===================
 
-ヘッダー: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
-``first`` または ``Kokkos::Experimental::begin(view)`` から始まる範囲の中で、要素が降順でない順序でソートされている最大の範囲を見つけます。 要素間の比較は、``operator<`` または二項ファンクタ ``comp`` 経由で行われます。
+``first`` または ``Kokkos::Experimental::begin(view)`` から始まる範囲の中で、要素が降順でない順序でソートされている最大の範囲を見つけます。 要素間の比較は、 ``operator<`` または二項ファンクタ ``comp`` 経由で行われます。
 
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -102,10 +102,6 @@
 
 - ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
-
-  - ``exespace`` からアクセス可能でなければなりません。
-
   - 1 & 3: デフォルト文字列は、 "Kokkos::is_sorted_until_iterator_api_default"
 
   - 5 & 7: デフォルト文字列は、 "Kokkos::is_sorted_until_view_api_default"
@@ -116,4 +112,4 @@
 戻り値
 ~~~~~~~~~~~~
 
-- 範囲 ``[first, it)`` がソートされる最後のイテレータ  ``it`` およびかつ以下の条件が真である場合: ``std::is_same_v<decltype(it), IteratorType>`` 、または範囲 ``[Kokkos::Experimental::begin(view), it)`` がソートされている場合。 この2番目の事例については、以下の通りに``it`` が計算されることに注意してください。 ``Kokkos::Experimental::begin(view) + increment`` ：ここで、``increment`` は、アルゴリズム内に認められます。
+- 範囲 ``[first, it)`` がソートされる最後のイテレータ  ``it`` およびかつ以下の条件が真である場合: ``std::is_same_v<decltype(it), IteratorType>`` 、または範囲 ``[Kokkos::Experimental::begin(view), it)`` がソートされている場合。 この2番目の事例については、以下の通りに``it`` が計算されることに注意してください。 ``Kokkos::Experimental::begin(view) + increment`` ：ここで、 ``increment`` は、アルゴリズム内に認められます。

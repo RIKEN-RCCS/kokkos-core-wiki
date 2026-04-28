@@ -6,7 +6,7 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
+使用方法
 -----------------
 
 .. code-block:: cpp
@@ -20,14 +20,14 @@
 
 以下も参照: `TeamMember <TeamHandleConcept.html>`_
 
-ディスクリプション
+説明
 --------------------------
 
 .. cpp:class:: template<class ...Args> TeamPolicy
 
    .. rubric:: テンプレート引数
 
-TeamPolicyの有効なテンプレート引数は、ここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ に説明されています。
+TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ に説明されています。
 
    .. rubric:: パブリックネスト型定義
 
@@ -64,7 +64,7 @@ TeamPolicyの有効なテンプレート引数は、ここ <../Execution-Policie
 
    .. cpp:function:: TeamPolicy(execution_space space, index_type league_size, index_type team_size, index_type vector_length=1)
 
-        ``league_size`` ワークアイテムの起動リクエストで、 ``vector_length`` のベクトル長を使用して、それぞれが Kokkos が決定したサイズのスレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。カーネル起動時に提供された実行空間インスタンスを使用します。
+        ``league_size`` ワークアイテムの起動リクエストで、 ``vector_length`` のベクトル長を使用して、それぞれが ``team_size`` スレッドのスレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。カーネル起動時に提供された実行空間インスタンスを使用します。
 
    .. cpp:function:: TeamPolicy(execution_space space, index_type league_size, Impl::AUTO_t, index_type vector_length=1)
 
@@ -129,7 +129,7 @@ TeamPolicyの有効なテンプレート引数は、ここ <../Execution-Policie
    .. cpp:function:: static int scratch_size_max(int level);
 
       返し: 指定のレベルについて、最大総スクラッチサイズ(バイト単位)。
-      注意事項: カーネルがチームレベルの削減やスキャン演算を行う場合、このメモリのすべてが、動的ユーザーリクエストについて、利用可能になるわけではありません。 これらの最大スクラッチサイズの一部は、内部演算に使われています。これらの内部割り当ての実際のサイズは、還元またはスキャンで使用される値の型によって異なります。
+      注意事項: カーネルがチームレベルの削減やスキャン演算を行う場合、このメモリのすべてが、動的ユーザーリクエストについて、利用可能になるわけではありません。 これらの最大スクラッチサイズの一部は、内部演算に使われています。これらの内部割り当ての実際のサイズは、縮約またはスキャンで使用される値の型によって異なります。
 
    .. rubric:: 照会実行時設定
 
@@ -143,7 +143,7 @@ TeamPolicyの有効なテンプレート引数は、ここ <../Execution-Policie
 
    .. cpp:function:: int scratch_size(int level, int team_size_ = -1) const;
 
-      本関数は、要求されたスクラッチサイズの合計を返します。 ``team_size`` が提供されていない場合は、内部設定から計算用のチームサイズ(すなわち、``this->team_size()`` を呼び出した結果)が使われます。 それ以外の場合は、提供されたチームサイズが使用されます。
+      本関数は、要求されたスクラッチサイズの合計を返します。 ``team_size`` が提供されていない場合は、内部設定から計算用のチームサイズ(すなわち、 ``this->team_size()`` を呼び出した結果)が使われます。 それ以外の場合は、提供されたチームサイズが使用されます。
       返し: 特定されたスクラッチレベルでのチームあたりの総スクラッチサイズ(バイト単位)の値。
 
    .. cpp:function:: int team_scratch_size(int level) const;

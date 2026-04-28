@@ -2,9 +2,9 @@
 ``copy``
 ========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
 ソース範囲またはランク1の ``ビュー`` から、要素を宛先範囲またはランク1にコピー。
@@ -12,7 +12,7 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -44,7 +44,7 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
     class DataType1, class... Properties1,
     class DataType2, class... Properties2
   >
-   copy(const std::string& label, const ExecutionSpace& exespace,          (4)
+   auto copy(const std::string& label, const ExecutionSpace& exespace,     (4)
             const Kokkos::View<DataType1, Properties1...>& view_from,
             const Kokkos::View<DataType2, Properties2...>& view_to);
 
@@ -89,7 +89,7 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 
   - *ランダムアクセスイテレータ* でなければなりません。
 
-  - 有効な範囲、つまり、``last_from >= first_from`` を表さなければなりません。
+  - 有効な範囲、つまり、 ``last_from >= first_from`` を表さなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
@@ -99,7 +99,7 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 
 - ``view_from``, ``view_to``: 要素のコピー元およびコピー先である、ソースおよび宛先
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 

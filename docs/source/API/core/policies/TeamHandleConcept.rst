@@ -6,12 +6,12 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の概念を定義しています。 実際のタイプはポリシーで定義されますが、以下の API を満たしています。 特定のクラスは、``TeamPolicy`` および
+TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の概念を定義しています。 実際のタイプはポリシーで定義されますが、以下の API を満たしています。 特定のクラスは、 ``TeamPolicy`` および
 ``TeamTask`` が提供する公開 API の一部であり、 ``TeamHandleConcept`` で定義された部分のみであることに、注意してください。 
 クラスの実際の名称やテンプレートパラメータ、既存のコンストラクタ、概念を超えたメンバー関数などは公開された Kokkos API の一部ではないため、変更の対象となります。
 
 
-ディスクリプション
+説明
 ------------------
 
 .. cpp:class:: TeamHandleConcept
@@ -21,7 +21,7 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
 
    .. cpp:type:: execution_space
 
-     チームに関連付けられた実行空間 <https://kokkos.github.io/kokkos-core-wiki/API/core/execution_spaces.html>`_ を特定します。
+     チームに関連付けられた `実行空間 <https://kokkos.github.io/kokkos-core-wiki/API/core/execution_spaces.html>`_ を特定します。
 
    .. cpp:type:: scratch_memory_space
 
@@ -39,7 +39,7 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
 
    .. cpp:function:: TeamHandleConcept( TeamHandleConcept const & ) = default
 
-      コピコンストラクタ。
+      コピーコンストラクタ。
 
    .. cpp:function:: ~TeamHandleConcept() = default
 
@@ -59,19 +59,19 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION int team_rank() const noexcept ;
 
-      返し:  ``0 <= i < team_size()`` を使って、チーム内の呼び出しスレッドのインデックス  ``i`` 
+      戻り値: ``0 <= i < team_size()`` を使って、チーム内の呼び出しスレッドのインデックス  ``i`` 
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION int team_size() const noexcept ;
 
-      返し: チームに関連付けられたスレッド数。
+      戻り値:チームに関連付けられたスレッド数。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION int league_rank() const noexcept ;
 
-      返し:  ``0 <= i < league_size()``を使って、リーグ内の呼び出しスレッドのインデックス  ``i``
+      戻り値: ``0 <= i < league_size()``を使って、リーグ内の呼び出しスレッドのインデックス  ``i``
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION int league_size() const noexcept ;
 
-      返し: カーネル内で起動したチーム/ワークアイテムの数。
+      戻り値:カーネル内で起動したチーム/ワークアイテムの数。
 
 
    .. rubric:: スクラッチ空間コントロール
@@ -88,7 +88,7 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
 
       - ``level``: 要求されたスクラッチメモリのレベルは、 ``0`` または ``1`` のいずれかです。
 
-      - 返し: レベルにより特定されたチームで共有するスクラッチメモリへのスクラッチメモリハンドル。
+      - 戻り値: レベルにより特定されたチームで共有するスクラッチメモリへのスクラッチメモリハンドル。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION const scratch_memory_space & thread_scratch(int level) const ;
 
@@ -97,13 +97,13 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
 
       - ``level``: 要求されたスクラッチメモリのレベルは、 ``0`` または ``1`` のいずれかです。
 
-      - 返し: レベルにより特定されたチームで共有するスクラッチメモリへのスクラッチメモリハンドル。
+      - 戻り値: レベルにより特定されたスレッドのスクラッチメモリへのスクラッチメモリハンドル。
 
 
    .. rubric:: チーム集合演算子
 
    以下の関数は、チームの全メンバーがまとめて呼び出さなければなりません。
-   これらの呼び出しは語彙的に同一でなければならず、つまりチームの一部が、一方のブランチでコレクティブを呼び、他のメンバーが別のブランチで呼び出すことは、合法ではありません (例を参照)。
+   これらの呼び出しは語彙的に同一でなければならず、つまりチームの一部が、一方のブランチでコレクティブを呼び、他のメンバーが別のブランチで呼び出すことは、できません (例を参照)。
 
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void team_barrier() const noexcept ;
@@ -112,7 +112,7 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
 
    .. cpp:function:: template<typename T> KOKKOS_INLINE_FUNCTION void team_broadcast( T & value , const int source_team_rank ) const noexcept;
 
-      本呼び出しの後、 ``var`` は、チームの全メンバーに対して、``team_rank() == source_team_rank`` であるスレッドからの ``var`` の値を含みます。
+      本呼び出しの後、 ``var`` は、チームの全メンバーに対して、 ``team_rank() == source_team_rank`` であるスレッドからの ``var`` の値を含みます。
 
       - ``var``: ``T`` の変数で、ソースランクの ``var`` の値によって、上書きされます。
 
@@ -120,23 +120,23 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
 
    .. cpp:function:: template<class Closure, typename T> KOKKOS_INLINE_FUNCTION void team_broadcast( Closure const & f , T & value , const int source_team_rank) const noexcept;
 
-      本呼び出しの後、 ``f`` 適用後に、``var`` は、チームの全メンバーに対して、``team_rank() == source_team_rank`` であるスレッドからの ``var`` の値を含みます。
+      本呼び出しの後、 ``f`` 適用後に、 ``var`` は、チームの全メンバーに対して、 ``team_rank() == source_team_rank`` であるスレッドからの ``var`` の値を含みます。
 
       - ``f``: ブロードキャスト前に ``var`` に適用された ``void operator() ( T & )`` を伴う関数オブジェクト。
 
-      - ``var``: ''T'' 型の変数で、元のランクの値  ``f(var)``  によって、上書きされます。
+      - ``var``: ``T`` 型の変数で、元のランクの値  ``f(var)``  によって、上書きされます。
 
       - ``source_team_rank``: チームのブロードキャストメンバーを特定します。
 
    .. cpp:function:: template< typename ReducerType> KOKKOS_INLINE_FUNCTION void team_reduce( ReducerType const & reducer ) const noexcept;
 
-       ``reducer`` により特定された通りに、チームすべてのメンバーに渡って、還元を実行します。 ``ReducerType`` は、``Kokkos::Reducer`` の概念を満たす必要があります。
+       ``reducer`` により特定された通りに、チームすべてのメンバーに渡って、縮約を実行します。 ``ReducerType`` は、 ``Kokkos::Reducer`` の概念を満たす必要があります。
 
    .. cpp:function:: template< typename T > KOKKOS_INLINE_FUNCTION T team_scan( T const & value , T * const global = 0 ) const noexcept;
 
       チームメンバーが提供する ``var`` に対して、エクスクルーシブスキャンを行います。  ``t = team_rank()`` および ``VALUES[t]`` を、 スレッド ``t`` からの ``var`` の値とします。
 
-      - リターン: ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[t-1]`` または ``t==0`` の0。
+      - 戻り値: ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[t-1]`` または ``t==0`` の0。
 
       - ``global`` が指定されている場合は、 ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[team_size()-1]`` に設定され、すべてのチームメンバーについて、同じポインタでなければなりません。
 

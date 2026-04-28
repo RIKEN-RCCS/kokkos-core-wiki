@@ -1,7 +1,7 @@
 数学定数
 ======================
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 .. _text: https://github.com/kokkos/kokkos/blob/develop/core/src/Kokkos_MathematicalConstants.hpp
@@ -44,7 +44,7 @@
 .. |KnownIssues| replace:: 既知の問題
 
 * 	数学定数は ``Kokkos::Experimental::`` において、Kokkos 3.6以降利用可能です。
-* 	4.0では``Kokkos::numbers`` namespace に「昇格」"昇格"し、4.3では、 ``Kokkos::Experimental::`` から削除されています。
+* 	4.0では``Kokkos::numbers`` namespace に「昇格」し、4.3では、 ``Kokkos::Experimental::`` から削除されています。
 *  数学定数を参照で渡す、またはデバイスコード内でアドレスを取得することは、一部のツールチェーンではサポートされておらず、したがって移植性がありません。 (参照 |KnownIssues|_)。
 *  四重精密浮動小数点 ``__float128`` のサポートは、-DKokkos_ENABLE_LIBQUADMATH=ON により、有効化できます。
 

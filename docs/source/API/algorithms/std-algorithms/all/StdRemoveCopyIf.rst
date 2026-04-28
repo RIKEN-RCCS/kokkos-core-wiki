@@ -1,17 +1,17 @@
 ``remove_copy_if``
 ==================
 
-ヘッダー: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
-``pred`` が  ``真`` を返す要素は除外して、範囲から、``first_to`` から始まる新たな範囲、または ``view_from`` から ``view_dest`` への新しい範囲にコピーします。
+``pred`` が  ``真`` を返す要素は除外して、範囲から、 ``first_to`` から始まる新たな範囲、または ``view_from`` から ``view_dest`` への新しい範囲にコピーします。
 
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -44,7 +44,7 @@
      class DataType1, class... Properties1,
      class DataType2, class... Properties2,
      class UnaryPredicate>
-   自動 remove_copy_if(const ExecutionSpace& exespace,                             (3)
+   auto remove_copy_if(const ExecutionSpace& exespace,                             (3)
                      const Kokkos::View<DataType1, Properties1...>& view_from,
                      const Kokkos::View<DataType2, Properties2...>& view_dest,
                      const UnaryPredicate& pred);
@@ -107,7 +107,7 @@
 
 - ``pred``:
 
-  - *一項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 value_type すべての引数 ``v`` （constの可能性）について、bool型に変換可能で、そこでは、``value_type`` が、``InputIteratorType``  (1,2,5について) の値型、または ``view`` (3,4,6について) の値型であり、  ``v`` を変更してはいけません。
+  - *単項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 value_type すべての引数 ``v`` （constの可能性）について、bool型に変換可能で、そこでは、 ``value_type`` が、 ``InputIteratorType``  (1,2,5について) の値型、または ``view`` (3,4,6について) の値型であり、  ``v`` を変更してはいけません。
 
   - 以下に一致しなければなりません:
 

@@ -1,17 +1,17 @@
 # カスタムスカラータイプを備えた内蔵リデューサー
 
-組み込みの還元を持つカスタムスカラータイプを使用するには、以下の要件を満たす必要があります。
+組み込みの縮約を持つカスタムスカラータイプを使用するには、以下の要件を満たす必要があります。
 
    * 初期化関数は、Kokkos::reduction_identity<T> クラスの特殊化を通じて、提供されなければなりません。 
-   * 適用還元クラスに必要な演算子を、実装する必要があります。
+   * 適用縮約クラスに必要な演算子を、実装する必要があります。
    * クラス/構造体は、デフォルトのコピーコンストラクタを使用するか、特定のコピーコンストラクタを実装している必要があります。 
 
 ## 例
 
- 本例では、組み込みの [`Sum`](../API/core/builtinreducers/Sum) リデューサーを使って配列に対してカスタム還元を行います。
+ 本例では、組み込みの [`Sum`](../API/core/builtinreducers/Sum) リデューサーを使って配列に対してカスタム縮約を行います。
 
 ```c++
-namespace sample {  // 名前空間は、還元識別子における名前解決に役立ちます 
+namespace sample {  // 名前空間は、縮約識別子における名前解決に役立ちます 
    template< class ScalarType, int N >
    struct array_type {
      ScalarType the_array[N];
@@ -36,7 +36,7 @@ namespace sample {  // 名前空間は、還元識別子における名前解決
    };
    typedef array_type<int,4> ValueType;  // 以下のコードの簡易化に使用されます
 }
-namespace Kokkos { //reduction identity 還元識別は、Kokkos namespace に定義されなければなりません
+namespace Kokkos { //reduction identity 縮約識別は、Kokkos namespace に定義されなければなりません
    template<>
    struct reduction_identity< sample::ValueType > {
       KOKKOS_FORCEINLINE_FUNCTION static sample::ValueType sum() {

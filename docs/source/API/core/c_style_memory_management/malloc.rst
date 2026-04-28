@@ -22,25 +22,25 @@
 
 割り当てが成功した場合、任意のスカラー型に適したアラインメントを持つ割り当てメモリブロック内で、最下位（最初の）バイトへのポインタを返す。
 
-割り当てに失敗した場合、``Kokkos::Experimental::RawMemoryAllocationFailure`` 型の例外がスローされます。
+割り当てに失敗した場合、 ``Kokkos::Experimental::RawMemoryAllocationFailure`` 型の例外がスローされます。
 
-.. warning:
+.. warning::
 
     Kokkos の管理対象外であるメモリに対して、メモリの動作を操作する関数（例：memAdvise）を呼び出すと、未定義の動作を引き起こします。
 
-ディスクリプション
+説明
 ------------------
 
 .. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_malloc(const string& label, size_t size);
 
 .. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_malloc(size_t size);
 
-    :tparam MemorySpace: ストレージ先をコントロールします。 省略された場合、デフォルトの実行領域のメモリ領域が使用されます (つまり、``Kokkos::DefaultExecutionSpace::memory_space``)。
+    :tparam MemorySpace: ストレージ先をコントロールします。 省略された場合、デフォルトの実行領域のメモリ領域が使用されます (つまり、 ``Kokkos::DefaultExecutionSpace::memory_space``)。
 
-    :param label: KokkosP プロファイリングツールを介してプロファイリングおよびデバッグツールで使用される、ユーザーが提供した文字列。
+    :param label: Kokkos プロファイリングツールを介してプロファイリングおよびデバッグツールで使用される、ユーザーが提供した文字列。
 
     :param size: 割り当てるバイト数。
 
-    :返し: 成功した場合、新たに割り当てられたメモリの先頭へのポインタを返します。 メモリリークを避けるため、返されたポインタは |Kokkos_kokkos_free|_ または |Kokkos_realloc|_ で解放する必要があります。
+    :returns: 成功した場合、新たに割り当てられたメモリの先頭へのポインタを返します。 メモリリークを避けるため、返されたポインタは |Kokkos_kokkos_free|_ または |Kokkos_realloc|_ で解放する必要があります。
 
-    :スロー: 失敗した場合、``Kokkos::Experimental::RawMemoryAllocationFailure`` をスローします。
+    :throws: 失敗した場合、 ``Kokkos::Experimental::RawMemoryAllocationFailure`` をスローします。

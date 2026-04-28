@@ -6,28 +6,28 @@ Kokkos::initialize
 
 Kokkos の内部オブジェクトと、有効化されたすべての Kokkos バックエンドを初期化します
 
-詳細については、 `Kokkos::finalize <initialize_finalize/finalize.html>`_ を参照してください。
+詳細については、 `Kokkos::initialize <initialize_finalize/initialize.html>`_ を参照してください。
 
 
 Kokkos::finalize
 ----------------
 
-Kokkos の初期化状態を照会することができ、Kokkos が初期化されている場合に、`true` を返します。
+Kokkos の内部オブジェクトを後処理し、有効化されたすべての Kokkos バックエンドをシャットダウンします。
 
-詳細については、 `Kokkos::is_initialized <initialize_finalize/is_Initialized.html>`_ を参照してください。
+詳細については、 `Kokkos::finalize <initialize_finalize/finalize.html>`_ を参照してください。
 
 
 Kokkos::is_initialized
 ----------------------
-Kokkos の最終処理完了状態を照会することができ、Kokkos が最終処理が完了している場合に、`true` を返します。
+Kokkos の初期化状態を照会することができ、Kokkos が初期化されている場合に、`true` を返します。
 
-詳細については、 `Kokkos::is_finalized <initialize_finalize/is_Finalized.html>`_ を参照してください。
+詳細については、 `Kokkos::is_initialized <initialize_finalize/is_Initialized.html>`_ を参照してください。
 
 Kokkos::is_finalized
 --------------------
-Allows to query finalizaton status of Kokkos and returns `true` is Kokkos is finalized.
+Kokkos の最終処理完了状態を照会することができ、Kokkos が最終処理完了している場合に、`true` を返します。
 
-See `Kokkos::is_finalized <initialize_finalize/is_Finalized.html>`_ for details.
+詳細については、 `Kokkos::is_finalized <initialize_finalize/is_Finalized.html>`_ を参照してください。
 
 Kokkos::ScopeGuard
 ------------------
@@ -58,7 +58,7 @@ ScopeGuard は、Kokkos オブジェクトが``Kokkos::finalize``を実行した
     // ScopeGuard destructor が呼び出され、 Kokkos::finalizeを呼び出します
   }
 
-上記の例においては、 ``my_view`` は、 main() 関数の終了時まで、範囲から外れません。  ``ScopeGuard`` がなければ、 ``my_view`` が範囲から外れる前に、 ``Kokkos::finalize`` が呼び出されます。  ``ScopeGuard`` があれば、 ``my_view`` の参照が解除された後に、``ScopeGuard`` の参照が解除されますが (その後、 ``Kokkos::finalize`` を呼び出します) 、それがシャットダウン間の適切な順序を保証します。
+上記の例においては、 ``my_view`` は、 main() 関数の終了時まで、範囲から外れません。  ``ScopeGuard`` がなければ、 ``my_view`` が範囲から外れる前に、 ``Kokkos::finalize`` が呼び出されます。  ``ScopeGuard`` があれば、 ``my_view`` の参照が解除された後に、 ``ScopeGuard`` の参照が解除されますが (その後、 ``Kokkos::finalize`` を呼び出します) 、それがシャットダウン間の適切な順序を保証します。
 
 .. toctree::
    :hidden:

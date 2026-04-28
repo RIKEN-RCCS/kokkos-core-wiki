@@ -10,16 +10,16 @@
 
 ``<Kokkos_Core.hpp>`` に含まれるヘッダー ``<Kokkos_Atomic.hpp>`` に定義。
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
     atomic_assign(&obj, desired);
 
-原子レベルで、``obj`` の現在の値を ``desired`` に置換します。
+原子レベルで、 ``obj`` の現在の値を ``desired`` に置換します。
 
-ディスクリプション
+説明
 ------------------
 
 .. cpp:function:: template<class T> void atomic_assign(T* ptr, std::type_identity_t<T> val);
@@ -32,5 +32,5 @@
    :param val: 参照されたオブジェクトに格納する値
    :戻り値: (無し)
 
-   .. deprecated:: 4.5において
+   .. deprecated:: 4.5
      代わりに :cpp:func:`atomic_store` を使用します。

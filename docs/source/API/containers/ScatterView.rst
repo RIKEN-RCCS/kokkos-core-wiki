@@ -6,7 +6,7 @@
 
 ヘッダーファイル: ``<Kokkos_ScatterView.hpp>``
 
-.. warning:
+.. warning::
 
     ``ScatterView`` は、名前空間 Kokkos::Experimental にまだ存在しています。
 
@@ -27,8 +27,8 @@
 
 .. |create_scatter_view| replace:: ``create_scatter_view()``
 
-使用例
-------
+使用方法
+--------
 
  Kokkos ScatterView は、標準的な Kokkos::|View|_ のインターフェースとして機能し、原子またはデータレプリケーションを通じて散乱加算パターンを実装します。
 
@@ -36,7 +36,7 @@
 
  ScatterView を直接アドレスすることはできません: 並列領域内の各スレッドは |access| に呼び出しを行い、|access|_ の返却値を通じて基礎となるViewにアクセスする必要があります。
 
-並列領域の後、最終還元を行うために自由関数 Kokkos::Experimental::contribute() を呼び出します。
+並列領域の後、最終縮約を行うために自由関数 Kokkos::Experimental::contribute() を呼び出します。
 
 インターフェイス
 ----------------
@@ -63,15 +63,15 @@
 
   - ``Kokkos::Experimental::ScatterMax``: maxを選択します。
 
-* ``重複``:
-  グリッドが重複するかどうか; defaults to ``Kokkos::Experimental::ScatterDuplicated`` のデフォルト、 その他のオプションは、``Kokkos::Experimental::ScatterNonDuplicated`` 。
+* ``Duplication``:
+  グリッドが重複するかどうか; defaults to ``Kokkos::Experimental::ScatterDuplicated`` のデフォルト、 その他のオプションは、 ``Kokkos::Experimental::ScatterNonDuplicated`` 。
 
-* ``貢献``:
-  アトミック使用に貢献するかどうか; defaults to ``Kokkos::Experimental::ScatterAtomics`` のデフォルト、 その他のオプションは、 ``Kokkoss::Experimental::ScatterNonAtomic``.
+* ``Contribution``:
+  アトミック使用に貢献するかどうか; defaults to ``Kokkos::Experimental::ScatterAtomics`` のデフォルト、 その他のオプションは、 ``Kokkos::Experimental::ScatterNonAtomic``.
 
 このインターフェースを使って、デフォルトでない ``Operation``, ``Duplication`` または ``Contribution`` を持つ ScatterView を作成するのは複雑になることがあります。なぜなら、DataType、Layout、ExecSpace の正確なタイプを指定する必要があるからです。 そのため、代わりに Kokkos::Experimental::|create_scatter_view|_ という関数を使うことをお勧めします。
 
-ディスクリプション
+説明
 ------------------
 
 .. cpp:class:: template <typename DataType, typename Layout, typename ExecSpace, typename Op, typename Duplication, typename Contribution> ScatterView
@@ -119,7 +119,7 @@
     .. cpp:function:: ScatterView(ALLOC_PROP const& arg_prop, Dims... dims)
 
         可変長のディメンション引数パックからのコンストラクタ。 ``internal_view`` メンバーを構築します。
-        このコンストラクタは、最初の引数として、``Kokkos::view_alloc`` で作成されたオブジェクトを渡すことを可能にします。例えば、実行空間を指定するために ``Kokkos::view_alloc(exec_space, "label" )`` のように使用します。
+        このコンストラクタは、最初の引数として、 ``Kokkos::view_alloc`` で作成されたオブジェクトを渡すことを可能にします。例えば、実行空間を指定するために ``Kokkos::view_alloc(exec_space, "label" )`` のように使用します。
         
         ``Kokkos::view_alloc(exec_space, )``.
 
@@ -134,7 +134,7 @@
 
     .. cpp:function:: access() const
 
-       カーネル内で使用し、``ScatterAccess`` メンバーを返します; このメンバーは、指定されたスレッドの削減への貢献度を蓄積します。
+       カーネル内で使用し、 ``ScatterAccess`` メンバーを返します; このメンバーは、指定されたスレッドの削減への貢献度を蓄積します。
 
     .. cpp:function:: subview() const
 
@@ -182,7 +182,7 @@
 
 .. cpp:function:: contribute(View<DT1, VP...>& dest, Kokkos::Experimental::ScatterView<DT2, LY, ES, OP, CT, DP> const& src)
 
-    ScatterView の結果を最終的に結果のViewに還元するための便利関数; |parallelReduce|_ の後に呼び出される場合があります。
+    ScatterView の結果を最終的に結果のViewに縮約するための便利関数; |parallelReduce|_ の後に呼び出される場合があります。
 
 
 例

@@ -8,4 +8,4 @@ View-like 型は、 インターフェースの観点から、`Kokkos::View <vie
 * `Kokkos::OffsetView <../../containers/Offset-View.html>`_
 * `Kokkos::DynamicView <../../containers/DynamicView.html>`_
 
-特に、 `Kokkos::DualView <../../containers/DualView.html>`_ and `Kokkos::ScatterView <../../containers/ScatterView.html>`_ は、  このカテゴリーには、含まれ **ません**。
+特に、 `Kokkos::DualView <../../containers/DualView.html>`_ および `Kokkos::ScatterView <../../containers/ScatterView.html>`_ は、  このカテゴリーには、含まれ **ません**。

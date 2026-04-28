@@ -3,7 +3,7 @@
 
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
 ソース範囲またはランク1の ``ビュー`` から最初の ``n`` 個の要素を、別の範囲またはランク1の ``ビュー`` にコピーします。
@@ -11,7 +11,7 @@
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,7 +88,7 @@
 .. _copy: ./StdCopy.html
 
 
-- ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_ と同様。
+- ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``: |copy|_ と同様。
 
 - ``label``: デバッグ目的で実装カーネルに名付けるために使用
 

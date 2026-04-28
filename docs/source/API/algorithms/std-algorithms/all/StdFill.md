@@ -1,7 +1,7 @@
 
 # `fill`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -31,7 +31,7 @@ void fill(const std::string& label, const ExecutionSpace& exespace,          (4)
 } //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
 範囲 `[first, last)` (オーバーロード 1,2) 内、または
  `ビュー` (オーバーロード 3,4) 内に、各要素を代入します。
@@ -48,10 +48,10 @@ void fill(const std::string& label, const ExecutionSpace& exespace,          (4)
 - `first, last`:
   - 割当先の要素の範囲
   - 例えば、 `Kokkos::Experimental::begin/end` など、*ランダムアクセスイテレータ* でなければなりません。
-  - 有効な範囲、つまり、``last_from >= first_from`` を表さなければなりません。 (デバッグモードで確認済み)
+  - 有効な範囲、つまり、 ``last >= first`` を表さなければなりません。 (デバッグモードで確認済み)
   - `exespace` からアクセス可能でなければなりません。
 - `view`:
-  - 必ずランク-1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
   - `exespace` からアクセス可能でなければなりません。
 - `value`:
   - 各要素に割り当てる値

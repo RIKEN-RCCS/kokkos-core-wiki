@@ -1,7 +1,7 @@
 
 # `exclusive_scan`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -92,11 +92,11 @@ auto exclusive_scan(const std::string& label, const ExecutionSpace& exespace,   
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     ValueType init_value, BinaryOpType bin_op);
 
-} //エンド 名前空間 実験的
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
 - 1,2,3,4: 範囲 `[first_from, last_from)` (1,2)または `view_from` (3,4) について、
 `init` を初期値として使用して、排他的累積 *和* を計算し、 結果を
@@ -145,6 +145,6 @@ auto exclusive_scan(const std::string& label, const ExecutionSpace& exespace,   
   `value_type` が (3,4,7,8) について `view_dest` の値型である、型 `value_type` のオブジェクトは、
    型 `return_type` の値について、参照解除および割り当てが可能であるようでなければなりません。
 
-## 戻し
+## 戻り値
 
 最後の要素がコピーされた *後* の宛先へのイテレータ。

@@ -11,7 +11,7 @@
 ``ExecutionPolicy`` とは何ですか?
 ----------------------------------
 
- Kokkos における支配的な並列ディスパッチ機構は、プログラミングガイドの他の部分で説明されているように、parallel_pattern``parallel_pattern`` (例: `Kokkos::parallel_for <../parallel-dispatch/parallel_for.html>`_ または、 `Kokkos::parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ のようなもの)、``ExecutionPolicy``、そして ``Functor`` を含みます。  大まかに言えば:
+ Kokkos における支配的な並列ディスパッチ機構は、プログラミングガイドの他の部分で説明されているように、 ``parallel_pattern`` (例: `Kokkos::parallel_for <../parallel-dispatch/parallel_for.html>`_ または、 `Kokkos::parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ のようなもの)、 ``ExecutionPolicy``、そして ``Functor`` を含みます。  大まかに言えば:
 
 .. code-block:: cpp
         

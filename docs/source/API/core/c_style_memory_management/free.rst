@@ -18,7 +18,7 @@
 
  ``ptr`` がヌルポインタの場合、この関数は何も行いません。
 
-ディスクリプション
+説明
 ------------------
 
 .. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void kokkos_free(void* ptr);
@@ -27,6 +27,6 @@
 
     :param ptr: 指定されたメモリ空間上で割り当て解除するメモリへのポインタ。
 
-    :return: ()
+    :returns: ()
 
-    :throws: 解除に失敗した場合、``std::runtime_error`` をスローします。
+    :throws: 解除に失敗した場合、 ``std::runtime_error`` をスローします。

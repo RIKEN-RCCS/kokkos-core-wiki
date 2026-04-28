@@ -7,17 +7,17 @@
 論理的 ``AND`` 演算を行う `ReducerConcept <ReducerConcept.html>`_ の具体的実装
 
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-使用例
-------
+使用方法
+--------
 
 .. code-block:: cpp
 
    T result;
    parallel_reduce(N,Functor,LAnd<T,S>(result));
 
-シノプシス
+概要
 ----------
 
 .. code-block:: cpp
@@ -53,19 +53,19 @@ Header File: ``<Kokkos_Core.hpp>``
 
 .. cpp:class:: template<class Scalar, class Space> LAnd
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
-   .. cpp:type:: reducer_type
+   .. cpp:type:: reducer
 
       自己型
 
    .. cpp:type:: value_type
 
-      還元スカラー型。
+      縮約スカラー型。
 
    .. cpp:type:: result_view_type
 
-      還元結果を参照する ``Kokkos::View``。
+      縮約結果を参照する ``Kokkos::View``。
 
    .. rubric:: コンストラクタ
 
@@ -86,7 +86,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-       ``Kokkos::reduction_identity<Scalar>::land()`` メソッドを使用して、``val`` を初期化します。 デフォルト実装は、``val=1`` を設定します。
+       ``Kokkos::reduction_identity<Scalar>::land()`` メソッドを使用して、 ``val`` を初期化します。 デフォルト実装は、 ``val=1`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 

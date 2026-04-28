@@ -4,7 +4,7 @@
 
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
 二つの範囲または二つのランク1の ``View`` 間で、要素を入れ替えます。
@@ -12,7 +12,7 @@
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 
 実行空間を受け入れるオーバーロードセット
@@ -86,7 +86,7 @@
 
 - ``source``, ``dest``: 入れ替え対象のビュー
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
@@ -98,5 +98,5 @@
 - 1,3,5: ``first2 + Kokkos::Experimental::distance(first1, last1)`` に等しいイテレータ。
 
 - 2,4,6: ``Kokkos::Experimental::begin(dest) +
-  Kokkos::Experimental:distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))`` に等しいイテレータ。 
+  Kokkos::Experimental::distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))`` に等しいイテレータ。 
   

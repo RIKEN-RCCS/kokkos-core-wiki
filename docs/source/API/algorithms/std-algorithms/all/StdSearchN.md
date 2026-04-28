@@ -1,7 +1,7 @@
 
 # `search_n`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```cpp
 namespace Kokkos{
@@ -27,7 +27,7 @@ auto search_n(const ExecutionSpace& exespace,
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class SizeType, class ValueType>
-自動 search_n(const std::string& label, const ExecutionSpace& exespace,
+auto search_n(const std::string& label, const ExecutionSpace& exespace,
               const ::Kokkos::View<DataType, Properties...>& view,                   (4)
               SizeType count, const ValueType& value);
 
@@ -58,11 +58,11 @@ auto search_n(const std::string& label, const ExecutionSpace& exespace,
               SizeType count, const ValueType& value,
               const BinaryPredicateType& pred);
 
-} //エンド 名前空間 実験的
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
 範囲 [first, last) を、`count` 要素の範囲について、それぞれ `value`   (1,2) と等しいかどうかを比較して、検索します。
 `count` 要素の範囲について、それぞれ `value`  (3,4) と等しいかどうかを比較して、 `view` を検索します。

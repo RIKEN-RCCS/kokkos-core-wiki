@@ -3,15 +3,15 @@
 
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
-2つの要素の比較には、``operator<`` を使用するか、ユーザーが提供する比較演算子を使用して、範囲内またはランク1の ``ビュー`` 内で最小の要素を検索します。
+2つの要素の比較には、 ``operator<`` を使用するか、ユーザーが提供する比較演算子を使用して、範囲内またはランク1の ``ビュー`` 内で最小の要素を検索します。
 
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -111,16 +111,16 @@
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``ビュー``: 検証対象の Kokkos ビュー
+- ``view``: 検証対象の Kokkos ビュー
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``comp``:
 
   - 第1の引数が、第2の引数 *より小さい* 場合に ``真`` を返す *二項* ファンクタ;
-    ``comp(a,b)`` は、 渡された実行空間から呼び出されるためには有効である必要があり、そして、 型 ``value_type`` の引数 ``a,b`` のすべてのペアについて、ブール型に変換可能で、そこでは、``value_type`` が ``IteratorType`` (1,2,3,4について) の値型、または ``ビュー`` (5,6,7,8について) の値型であり、 ``a,b`` を変更してはいけません。
+    ``comp(a,b)`` は、 渡された実行空間から呼び出されるためには有効である必要があり、そして、 型 ``value_type`` の引数 ``a,b`` のすべてのペアについて、ブール型に変換可能で、そこでは、 ``value_type`` が ``IteratorType`` (1,2,3,4について) の値型、または ``ビュー`` (5,6,7,8について) の値型であり、 ``a,b`` を変更してはいけません。
 
   - 以下に一致しなければなりません:
 
@@ -129,8 +129,8 @@
      struct Comparator
      {
        KOKKOS_INLINE_FUNCTION
-       ブール operator()(const value_type & a, const value_type & b) const {
-         返し /*/ "より小さい" という論理に基づき、a が b より小さい場合;
+       bool operator()(const value_type & a, const value_type & b) const {
+         return /* "より小さい" という論理に基づき、a が b より小さい場合 */;
        }
      };
 
@@ -157,17 +157,17 @@
    Kokkos::View<double*> a("a", 13);
    // a を何らかの方法で満たす
 
-    res = KE::min_element(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a));
+   auto res = KE::min_element(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a));
 
    // ビューを直接渡す
-    res = KE::min_element(Kokkos::DefaultExecutionSpace(), a);
+   auto res = KE::min_element(Kokkos::DefaultExecutionSpace(), a);
 
 
    // カスタムコンパレータを使用
    template <class ValueType1, class ValueType2 = ValueType1>
    struct CustomLessThanComparator {
      KOKKOS_INLINE_FUNCTION
-      operator()(const ValueType1& a,
+     bool operator()(const ValueType1& a,
                      const ValueType2& b) const {
        // ここでは < を使用していますが、a が b より小さい場合に、 a < b を返すような任意のカスタムロジックを実装することも可能です。;
      }

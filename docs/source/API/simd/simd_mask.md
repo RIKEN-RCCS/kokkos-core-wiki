@@ -18,7 +18,7 @@ class basic_simd_mask;
 
 ### テンプレートパラメータ
 
-最初のテンプレート引数 `T` は、現在のプラットフォームがベクトルインストリプリズンをサポートする C++ の基本型である必要があります。 Kokkos は、 `T` について、以下の型をサポートしています:
+最初のテンプレート引数 `T` は、現在のプラットフォームがベクトル組み込み関数をサポートする C++ の基本型である必要があります。 Kokkos は、 `T` について、以下の型をサポートしています:
  - `float`
  - `double`
  - `std::int32_t`
@@ -26,14 +26,14 @@ class basic_simd_mask;
  - `std::uint32_t`
  - `std::uint64_t`
 
-2つ目のテンプレートパラメータ `Abi` は、名前空間 Kokkos::Experimental::simd_abi 内で事前定義された ABI 型のいずれかです。本型はベクトルのサイズと、どのアーキテクチャ固有のインストリプリズンが使用されるかを決定します。 以下の型は、その名前空間において常に利用可能です：
- - `scalar`: フォールバックABIは、常にベクトルサイズが1であり、特別なインストリプリズンを使用しません。
+2つ目のテンプレートパラメータ `Abi` は、名前空間 Kokkos::Experimental::simd_abi 内で事前定義された ABI 型のいずれかです。本型はベクトルのサイズと、どのアーキテクチャ固有の組み込み関数が使用されるかを決定します。 以下の型は、その名前空間において常に利用可能です：
+ - `scalar`: フォールバックABIは、常にベクトルサイズが1であり、特別な組み込み関数を使用しません。
  - `native`: Kokkos がコンパイルされたアーキテクチャ向けの "最適な" ABIです。 ( Kokkos 4.6以降非推奨)
 
 ### 型定義
 
- *  `value_type`: Equal to `bool` に等しいです。
- *  `reference`:  本型は `value_type` に変換可能である必要があり、`value_type` は `reference` に代入可能である必要があります。これは単純な参照である場合もあれば、1つのベクトルのレーンを抽出または埋めるためにベクトルインストリプリズンを呼び出す実装定義の型である場合もあります。 ( Kokkos 4.6以降削除)
+ *  `value_type`: `bool` に等しいです。
+ *  `reference`:  本型は `value_type` に変換可能である必要があり、`value_type` は `reference` に代入可能である必要があります。これは単純な参照である場合もあれば、1つのベクトルのレーンを抽出または埋めるためにベクトル組み込み関数を呼び出す実装定義の型である場合もあります。 ( Kokkos 4.6以降削除)
  *  `simd_type`:  `simd<T, Abi>` に等しいです。
  *  `abi_type`: `Abi` に等しいです。
 
@@ -73,14 +73,14 @@ class basic_simd_mask;
   * `simd_mask operator>(const simd_mask& lhs, const simd_mask& rhs)`
   * `simd_mask operator<(const simd_mask& lhs, const simd_mask& rhs)`
 
-### 還元
+### 縮約
   * `bool all_of(const simd_mask&)`: マスク内のベクトル値すべてが真である場合にのみ、真を返します
   * `bool any_of(const simd_mask&)`: マスク内のベクトル値のいずれかが真である場合にのみ、真を返します
   * `bool none_of(const simd_mask&)`: マスク内のベクトル値のいずれも真ではない場合にのみ、真を返します
 
 ### グローバル型定義
-  * `template <class T> Kokkos::Experimental::native_simd_mask`: Alias for `Kokkos::Experimental::simd_mask<T, Kokkos::Experimental::simd_abi::native<T>>`. (Kokkos 4.6以降非推奨)
-  * `template <class T, int N> Kokkos::Experimental::simd_mask`: Alias for `Kokkos::Experimental::basic_simd_mask<T, ...>`. (Kokkos 4.6以降)
+  * `template <class T> Kokkos::Experimental::native_simd_mask`: `Kokkos::Experimental::simd_mask<T, Kokkos::Experimental::simd_abi::native<T>>` の別名。(Kokkos 4.6以降非推奨)
+  * `template <class T, int N> Kokkos::Experimental::simd_mask`: `Kokkos::Experimental::basic_simd_mask<T, ...>` の別名。(Kokkos 4.6以降)
 
 ## 例
 

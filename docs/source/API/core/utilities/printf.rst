@@ -12,10 +12,10 @@
 
 .. code-block:: cpp
 
-    テンプレート <typename... Args>
+    template <typename... Args>
     KOKKOS_FUNCTION void printf(const char* format, Args... args);  // (バージョン 4.2以降)
 
-``format`` および ``args...`` に特定されるデータを ``stdout`` に出力します。
+``format`` および ``args...`` で指定されたデータを ``stdout`` に出力します。
 この動作は、 ``std::printf`` に類似していますが、
 戻り値の型は、バックエンド間で一貫した動作を保証するため、 ``void`` です。
 
@@ -36,5 +36,5 @@
 
 注意事項
 ~~~~~~~~~~~~~~
-*  ``Kokkos::printf()``  関数は、リリース4.2内に、追加されました。
+* ``Kokkos::printf()`` 関数は、リリース 4.2 で追加されました。
 * カーネルから  ``Kokkos::printf()`` を呼び出すことは、レジスタの使用に影響を与え、パフォーマンスに影響を与える可能性があります。

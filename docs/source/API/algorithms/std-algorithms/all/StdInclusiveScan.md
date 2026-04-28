@@ -1,11 +1,11 @@
 
 # `inclusive_scan`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
-namespace 実験的{
+namespace Experimental{
 
 //
 // オーバーロードセット A
@@ -131,11 +131,11 @@ auto inclusive_scan(const std::string& label, const ExecutionSpace& exespace,   
                     BinaryOpType bin_op,
                     ValueType init_value);
 
-} //エンド 名前空間 実験的
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
 - 1,2,3,4: 二つの要素を結合するために、二項演算子 `bin_op` を用いて、範囲 `[first_from, last_from)` (1,2) に対して、
 - あるいは `view_from`  (3,4)  に対して、インクルーシブプレフィックススキャンを計算し、
@@ -158,7 +158,7 @@ auto inclusive_scan(const std::string& label, const ExecutionSpace& exespace,   
 - `label`:
   - デバッグ目的で実装カーネルに名付けるために使用
   - 1,5,9 について、デフォルト文字列は、 : "Kokkos::inclusive_scan_iterator_api_default"
-  - 3,7,11 について、デフォルト文字列は、 : "Kokkos::inclusive_scan_iterator_api_default"
+  - 3,7,11 について、デフォルト文字列は、 : "Kokkos::inclusive_scan_view_api_default"
 
 ## 戻り値
 

@@ -372,7 +372,7 @@ Kokkos-3.7 において非推奨であるクラス
    * - ``Kokkos::is_reducer_type``
      - ``Kokkos::is_reducer``
 
-   * - 生ポインタを使った配列還元
+   * - 生ポインタを使った配列縮約
      - 戻し引数として ``Kokkos::View`` を使用します
 
    * -  ``index_list_type`` を選択する ``OffsetView`` コンストラクタ

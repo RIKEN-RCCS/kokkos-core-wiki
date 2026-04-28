@@ -1,7 +1,7 @@
 
 # `fill_n`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -27,20 +27,20 @@ auto fill_n(const std::string& label, const ExecutionSpace& exespace,           
             const Kokkos::View<DataType, Properties...>& view,
             SizeType n, const T& value);
 
-} // エンド 名前空間 実験的
-} // エンド 名前空間 Kokkos
+} // end namespace Experimental
+} // end namespace Kokkos
 ```
 
-# ディスクリプション
+## 説明
 
  `first` で始まる範囲内の最初の `n` 個の要素 (オーバーロード 1,2) または
 `view` 内の最初の `n` 個の要素 (オーバーロード 3,4) に `値` をコピー割り当てします。
 
 ## パラメータおよび要件
 
-- `exespace`,  `first`, `view`, `value`: same as in  [`fill`](./StdFill) 内と同様。
+- `exespace`,  `first`, `view`, `value`: [`fill`](./StdFill) と同様。
 - `label`:
-  - バッグ目的で実装カーネルに名付けるために使用。
+  - デバッグ目的で実装カーネルに名付けるために使用。
   - 1 について、デフォルト文字列は、: "Kokkos::fill_n_iterator_api_default"
   - 3 について、デフォルト文字列は、: "Kokkos::fill_n_view_api_default"
 - `n`:
@@ -57,7 +57,7 @@ auto fill_n(const std::string& label, const ExecutionSpace& exespace,           
 ## 例
 
 ```c++
-名前空間 KE = Kokkos::Experimental;
+namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
 //  a を使って、何かを行います
 // ...

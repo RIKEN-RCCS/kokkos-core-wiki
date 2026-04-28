@@ -1,17 +1,17 @@
 ``remove_copy``
 ===============
 
-ヘッダー: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-ディスクリプション
+説明
 ------------------
 
-``value`` と等しい要素は除外して、指定された範囲の要素を、``first_to`` から始まる、または ``view_from`` から ``view_dest`` への新しい範囲にコピーします。
+``value`` と等しい要素は除外して、指定された範囲の要素を、 ``first_to`` から始まる、または ``view_from`` から ``view_dest`` への新しい範囲にコピーします。
 
 インターフェイス
 ----------------
 
-.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 実行空間を受け入れるオーバーロードセット
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -85,7 +85,7 @@
      class DataType2, class... Properties2,
      class ValueType>
    KOKKOS_FUNCTION
-   自動 remove_copy(const TeamHandleType& teamHandle,                           (6)
+   auto remove_copy(const TeamHandleType& teamHandle,                           (6)
                     const Kokkos::View<DataType1, Properties1...>& view_from,
                     const Kokkos::View<DataType2, Properties2...>& view_dest,
                     const ValueType& value);
@@ -123,7 +123,7 @@
 
 - ``view_from``, ``view_dest``: ソースおよび宛先のビュー
 
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
   - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 

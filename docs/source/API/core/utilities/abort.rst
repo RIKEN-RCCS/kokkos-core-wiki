@@ -19,5 +19,5 @@
 
 .. |KokkosAbort| replace:: ``<Kokkos_Abort.hpp>``
 
-* バージョン 4.2 より、  ``<Kokkos_Core.hpp>`` の代わりに、|KokkosAbort|_ が含まれる場合があります。
+* バージョン 4.2 より、 ``<Kokkos_Core.hpp>`` の代わりに |KokkosAbort|_ をインクルードすることができます。
 

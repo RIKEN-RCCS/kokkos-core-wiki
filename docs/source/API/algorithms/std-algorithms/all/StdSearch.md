@@ -1,7 +1,7 @@
 
 # `search`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```cpp
 namespace Kokkos{
@@ -55,13 +55,13 @@ template <class ExecutionSpace, class DataType1, class... Properties1,
 auto search(const std::string& label, const ExecutionSpace& exespace,
             const ::Kokkos::View<DataType1, Properties1...>& view,                   (8)
             const ::Kokkos::View<DataType2, Properties2...>& s_view,
-            const BinaryPredicateType& pred)
+            const BinaryPredicateType& pred);
 
-} //エンド 名前空間 実験的
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
  (1,2,5,6) における、[s_first, s_last) の要素列が、範囲 [first, last) の内での最初の出現を検索します。
  (3,4,7,8) における、要素列 `s_view` の最初の出現を検索します。

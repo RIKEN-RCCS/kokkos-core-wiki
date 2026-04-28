@@ -1,7 +1,7 @@
 
 # `replace`
 
-ヘッダーファイル: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -27,15 +27,15 @@ void replace(const std::string& label, const ExecutionSpace& exespace,       (4)
              const Kokkos::View<DataType, Properties...>& view,
              const T& old_value, const T& new_value);
 
-} //エンド 名前空間 実験的
-} //エンド 名前空間 Kokkos
+} //end namespace Experimental
+} //end namespace Kokkos
 ```
 
-## ディスクリプション
+## 説明
 
 範囲 `[first, last)`（オーバーロード1,2）または `view`（オーバーロード3,4）内で、`old_value` と等しい全ての要素を `new_value` で置換します。等価性は `operator==` を使用して、確認されます。
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`:
   - 実行空間インスタンス
@@ -49,13 +49,13 @@ void replace(const std::string& label, const ExecutionSpace& exespace,       (4)
   - 有効範囲、つまり、 ``last >= first`` を表す必要があります。（この条件はデバッグモードで確認されます）。
   - `exespace` からアクセス可能でなければなりません。
 - `view`:
-  - 必ずランク1であり、``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
   - `exespace` からアクセス可能でなければなりません。
 - `old_value`, `new_value`:
   - 説明を要しません。
 
 
-## 返し
+## 戻り値
 
 無し
 

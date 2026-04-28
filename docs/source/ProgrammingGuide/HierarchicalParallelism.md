@@ -40,7 +40,7 @@ Kokkos のスレッドチームは、1次元のインデックス範囲をハー
 
 ### ポリシーインスタンスの作成
 
-Kokkosは、 [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) 実行ポリシーを使用してスレッドチームの使用を明示します。  スレッドチームを使用するには、 [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) のインスタンスを作成する必要があります。並列ディスパッチ呼び出しに対して、インラインで作成できます。 コンストラクタは2つの引数（リーグサイズとチームサイズ）を必要とします：チームサイズの代わりに、 `Kokkos::AUTO` を使用することで、 既定のアーキテクチャに適したチームサイズを推測させることができます。そうすることが、[`TeamPolicy`](../API/core/policies/TeamPolicy)を利用するための、ほとんどの開発者によって推奨される方法です。 [`Kokkos::RangePolicy`](../API/core/policies/RangePolicy)の場合と同様に、特定の実行タグ、特定の実行空間、`Kokkos::IndexType`、および`Kokkos::Schedule`をオプションのテンプレート引数として指定できます。
+Kokkosは、 [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) 実行ポリシーを使用してスレッドチームの使用を明示します。  スレッドチームを使用するには、 [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) のインスタンスを作成する必要があります。並列ディスパッチ呼び出しに対して、インラインで作成できます。 コンストラクタは2つの引数（リーグサイズとチームサイズ）を必要とします：チームサイズの代わりに、 `Kokkos::AUTO` を使用することで、 既定のアーキテクチャに適したチームサイズを推測させることができます。そうすることが、[`TeamPolicy`](../API/core/policies/TeamPolicy)を利用するための、ほとんどの開発者によって推奨される方法です。 [`Kokkos::RangePolicy`](../API/core/policies/RangePolicy)の場合と同様に、特定の実行タグ、特定の実行空間、`Kokkos::IndexType`、および`Kokkos::Schedule`を省略可能なテンプレート引数として指定できます。
 
 ```c++
 // デフォルトの実行スペースを使用し、起動
@@ -253,7 +253,7 @@ parallel_for (TeamPolicy<> (league_size, team_size),
     // ここでスレッドを同期させるためのチームバリアを導入
     team_member.team_barrier();
 
-    // カスタムの還元をファンクタとして提供できます、
+    // カスタムの縮約をファンクタとして提供できます、
     // Kokkos が提供するものの1つ（例：Prod<Scalar>）を含みます。
     Scalar product;
     Scalar init_value = 1;
@@ -285,7 +285,7 @@ parallel_for (TeamPolicy<> (league_size, team_size),
                  KOKKOS_LAMBDA (member_type team_member) {
 
     int k = team_member.team_rank();
-    // デフォルト還元では、スカラーの += 演算子を使用して
+    // デフォルト縮約では、スカラーの += 演算子を使用して
     // スレッドの貢献度を結合します。
     Scalar sum;
     parallel_reduce (ThreadVectorRange (team_member, loop_count),
@@ -296,7 +296,7 @@ parallel_for (TeamPolicy<> (league_size, team_size),
 
     parallel_for (TeamThreadRange (team_member, workset_size),
       [&] (int& j) {
-      // カスタムの還元をファンクタとして提供できます。
+      // カスタムの縮約をファンクタとして提供できます。
       // Kokkos が提供するもののいずれかを含めることも可能です。例：Prod<Scalar>。
       Scalar product;
       Scalar init_value = 1;
@@ -338,7 +338,7 @@ parallel_for (policy, KOKKOS_LAMBDA (const team_member& thread) {
   parallel_for (TeamThreadRange (thread, 100),
     KOKKOS_LAMBDA (const int& i) {
       double sum = 0;
-      // スレッドを使って、ベクター還元を実行
+      // スレッドを使って、ベクター縮約を実行
       parallel_reduce (ThreadVectorRange (thread, 100),
         [=] (int i, double& lsum) {
           // ...
