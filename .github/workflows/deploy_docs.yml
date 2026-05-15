@@ -2,8 +2,9 @@ name: Build and deploy docs
 
 on:
   push:
-    branches: [ main ]
+    branches: [ Japanese ]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -28,7 +29,7 @@ jobs:
           path: ${{ env.docs-directory }}/generated_docs
 
   deploy:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/Japanese' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
