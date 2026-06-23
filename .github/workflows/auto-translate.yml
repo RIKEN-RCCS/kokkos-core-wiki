@@ -1,0 +1,71 @@
+name: Auto-translate to Japanese
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/source/**/*.rst'
+      - 'docs/source/*.rst'
+  workflow_dispatch:
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main-repo
+          fetch-depth: 2
+
+      - name: Checkout Japanese branch
+        uses: actions/checkout@v4
+        with:
+          ref: Japanese
+          path: japanese-repo
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install "anthropic[bedrock]"
+
+      - name: Translate changed RST files
+        env:
+          AWS_BEARER_TOKEN_BEDROCK: ${{ secrets.AWS_BEARER_TOKEN_BEDROCK }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION || 'us-east-1' }}
+        run: |
+          python main-repo/.github/scripts/translate_changes.py \
+            --main-dir main-repo \
+            --japanese-dir japanese-repo \
+            --before-sha ${{ github.event.before }} \
+            --after-sha ${{ github.sha }}
+
+      - name: Create pull request
+        working-directory: japanese-repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          BRANCH="auto-translate/main-${{ github.sha }}"
+          git checkout -b "$BRANCH"
+          git commit -m "Auto-translate: sync with main ${{ github.sha }}"
+          git push origin "$BRANCH"
+          gh pr create \
+            --base Japanese \
+            --head "$BRANCH" \
+            --title "Auto-translate: sync with main $(date -u +%Y-%m-%d)" \
+            --body "Triggered by [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})"
