@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-	  ref: Japanese
+          ref: Japanese
       - run: pip install -r build_requirements.txt
       - run: apt update && apt --yes --no-install-recommends install graphviz
       - name: Build documentation
