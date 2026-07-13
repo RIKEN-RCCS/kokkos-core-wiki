@@ -4,6 +4,7 @@ on:
   push:
     branches: [ Japanese ]
   pull_request:
+    branches: [ Japanese ]
   workflow_dispatch:
 
 jobs:
@@ -15,6 +16,8 @@ jobs:
       image: python:3.12
     steps:
       - uses: actions/checkout@v6
+        with:
+	  ref: Japanese
       - run: pip install -r build_requirements.txt
       - run: apt update && apt --yes --no-install-recommends install graphviz
       - name: Build documentation
