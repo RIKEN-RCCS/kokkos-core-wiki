@@ -1,0 +1,14 @@
+name: Spelling
+
+on: [push, pull_request]
+
+jobs:
+  spell-check-crate:
+    name: Spell Check with Typos
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - uses: crate-ci/typos@v1.39.2
+      with:
+        config: ./.typos.toml
