@@ -8,6 +8,14 @@ on:
       - 'docs/source/*.rst'
       - 'docs/source/**/*.md'
       - 'docs/source/*.md'
+  workflow_dispatch:
+    inputs:
+      before_sha:
+        description: 'Base commit SHA to diff from (exclusive)'
+        required: true
+      after_sha:
+        description: 'Target commit SHA to diff to (inclusive); also checked out as main'
+        required: true
 
 jobs:
   translate:
@@ -17,10 +25,16 @@ jobs:
       pull-requests: write
 
     steps:
+      - name: Resolve SHA range
+        id: shas
+        run: |
+          echo "before=${{ github.event.inputs.before_sha || github.event.before }}" >> "$GITHUB_OUTPUT"
+          echo "after=${{ github.event.inputs.after_sha || github.sha }}" >> "$GITHUB_OUTPUT"
+
       - name: Checkout main branch
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ steps.shas.outputs.after }}
           path: main-repo
           fetch-depth: 0
 
@@ -46,8 +60,8 @@ jobs:
           python main-repo/.github/scripts/translate_changes.py \
             --main-dir main-repo \
             --japanese-dir japanese-repo \
-            --before-sha ${{ github.event.before }} \
-            --after-sha ${{ github.sha }}
+            --before-sha ${{ steps.shas.outputs.before }} \
+            --after-sha ${{ steps.shas.outputs.after }}
 
       - name: Create pull request
         working-directory: japanese-repo
@@ -61,12 +75,19 @@ jobs:
             echo "No changes to commit."
             exit 0
           fi
-          BRANCH="auto-translate/main-${{ github.sha }}"
+          BRANCH="auto-translate/main-${{ steps.shas.outputs.after }}"
           git checkout -b "$BRANCH"
-          git commit -m "Auto-translate: sync with main ${{ github.sha }}"
-          git push origin "$BRANCH"
+          git commit -m "Auto-translate: sync with main ${{ steps.shas.outputs.after }}"
+          # --force: a manual re-run (workflow_dispatch) targeting the same
+          # after_sha as a previous run must overwrite that run's branch, e.g.
+          # to regenerate a PR after fixing a bug in translate_changes.py.
+          git push origin "$BRANCH" --force
+          if gh pr view "$BRANCH" --json number >/dev/null 2>&1; then
+            echo "PR already exists for $BRANCH; branch updated in place."
+            exit 0
+          fi
           gh pr create \
             --base Japanese \
             --head "$BRANCH" \
             --title "Auto-translate: sync with main $(date -u +%Y-%m-%d)" \
-            --body "Triggered by [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})"
+            --body "Triggered by [${{ steps.shas.outputs.after }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.shas.outputs.after }})"

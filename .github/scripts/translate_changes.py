@@ -112,8 +112,13 @@ def fix_underlines(content: str, rel_path: str) -> str:
 # ---------------------------------------------------------------------------
 
 def split_blocks(content: str) -> list[str]:
-    """Split RST/MD content into non-empty blocks separated by blank lines."""
-    return [b.strip() for b in re.split(r"\n{2,}", content.strip()) if b.strip()]
+    """Split RST/MD content into non-empty blocks separated by blank lines.
+
+    Only strips leading/trailing newlines, not spaces: many blocks (literal
+    blocks, indented list continuations, block quotes) are meaningfully
+    indented on their first line, and str.strip() would eat that indentation.
+    """
+    return [b.strip("\n") for b in re.split(r"\n{2,}", content.strip("\n")) if b.strip()]
 
 
 def join_blocks(blocks: list[str]) -> str:
@@ -245,7 +250,7 @@ def translate_blocks_batch(
 
     result: dict[int, str] = {}
     for m in re.finditer(r'<t id="(\d+)">(.*?)</t>', text, re.DOTALL):
-        result[int(m.group(1))] = m.group(2).strip()
+        result[int(m.group(1))] = m.group(2).strip("\n")
     return result
 
 
