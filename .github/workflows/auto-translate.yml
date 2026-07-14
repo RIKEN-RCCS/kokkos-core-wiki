@@ -6,6 +6,8 @@ on:
     paths:
       - 'docs/source/**/*.rst'
       - 'docs/source/*.rst'
+      - 'docs/source/**/*.md'
+      - 'docs/source/*.md'
 
 jobs:
   translate:

@@ -77,8 +77,16 @@ def _is_underline(line: str) -> bool:
     return bool(stripped) and len(set(stripped)) == 1 and stripped[0] in RST_UNDERLINE_CHARS
 
 
-def fix_underlines(content: str) -> str:
-    """Ensure every RST title underline/overline matches the title's display width."""
+def fix_underlines(content: str, rel_path: str) -> str:
+    """Ensure every RST title underline/overline matches the title's display width.
+
+    No-op for non-.rst files: in Markdown a run of identical characters is
+    often a code fence (```) rather than a title underline, and "fixing" it
+    would corrupt the fence.
+    """
+    if not rel_path.lower().endswith(".rst"):
+        return content
+
     lines = content.split("\n")
     result = list(lines)
 
@@ -273,7 +281,7 @@ def translate_with_diff(
                 "→ full retranslation"
             )
             result = translate_whole_file(client, new_en, current_ja, rel_path)
-            return fix_underlines(result)
+            return fix_underlines(result, rel_path)
 
     # Diff old_en blocks vs new_en blocks
     sm = difflib.SequenceMatcher(None, old_blocks, new_blocks, autojunk=False)
@@ -322,7 +330,7 @@ def translate_with_diff(
                 translated, _ = to_translate[item]
             result_blocks.append(translated)
 
-    return fix_underlines(join_blocks(result_blocks))
+    return fix_underlines(join_blocks(result_blocks), rel_path)
 
 
 # ---------------------------------------------------------------------------
@@ -412,11 +420,13 @@ def main() -> None:
                 else:
                     # File is new in this push
                     result = fix_underlines(
-                        translate_whole_file(client, new_en, None, new_rel_path)
+                        translate_whole_file(client, new_en, None, new_rel_path),
+                        new_rel_path,
                     )
             else:
                 result = fix_underlines(
-                    translate_whole_file(client, new_en, current_ja, new_rel_path)
+                    translate_whole_file(client, new_en, current_ja, new_rel_path),
+                    new_rel_path,
                 )
 
             japanese_file.parent.mkdir(parents=True, exist_ok=True)
