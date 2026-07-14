@@ -13,95 +13,63 @@
 
 .. code-block:: cpp
 
-    T result;
-    parallel_reduce(N,Functor,BAnd<T,S>(result));
+T result;
+    parallel_reduce(N, Functor, BAnd<T, S>(result));
 
 概要
-----------
+----
 
 .. code-block:: cpp
 
-    template<class Scalar, class Space>
-    class BAnd{
-        public:
-            typedef BAnd reducer;
-            typedef typename std::remove_cv<Scalar>::type value_type;
-            typedef Kokkos::View<value_type, Space> result_view_type;
+template<class Scalar, class Space>
+    class BAnd {
+      public:
+        using reducer = BAnd<Scalar, Space>;
+        using value_type = typename std::remove_cv<Scalar>::type;
 
-            KOKKOS_INLINE_FUNCTION
-            void join(value_type& dest, const value_type& src) const;
+KOKKOS_INLINE_FUNCTION
+        void join(value_type& dest, const value_type& src) const {
+          dest = dest & src;
+        }
 
-            KOKKOS_INLINE_FUNCTION
-            void init(value_type& val) const;
+KOKKOS_INLINE_FUNCTION
+        void init(value_type& val) const {
+          val = Kokkos::reduction_identity<value_type>::band();
+        }
 
-            KOKKOS_INLINE_FUNCTION
-            value_type& reference() const;
-
-            KOKKOS_INLINE_FUNCTION
-            result_view_type view() const;
-
-            KOKKOS_INLINE_FUNCTION
-            BAnd(value_type& value_);
-
-            KOKKOS_INLINE_FUNCTION
-            BAnd(const result_view_type& value_);
+// ReducerConcept を満たすためのその他のメンバー
     };
 
 インターフェイス
 ----------------
 
+`ReducerConcept <ReducerConcept.html>`_ のすべてのパブリック型、コンストラクター、メソッドが利用可能です。以下の型とメソッドがこのリデューサーによってオーバーライドされます。
+
 .. cpp:class:: template<class Scalar, class Space> BAnd
 
-   .. rubric:: パブリック型
+.. rubric:: パブリック型
 
-   .. cpp:type:: reducer
+.. cpp:type:: reducer
 
-      自己型
+自己型。
 
-   .. cpp:type:: value_type
+.. cpp:type:: value_type
 
-      縮約スカラー型。
+``const`` および/または ``volatile`` 修飾子を取り除いた ``Scalar`` テンプレートパラメーター。
 
-   .. cpp:type:: result_view_type
+.. rubric:: パブリックメンバー関数
 
-      縮約結果を参照する ``Kokkos::View`` 
+.. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-   .. rubric:: コンストラクタ
+``src`` と ``dest`` のビット単位の ``and`` を ``dest`` に格納します: ``dest = src & dest``。
 
-   .. cpp:function:: KOKKOS_INLINE_FUNCTION BAnd(value_type& value_);
+.. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-      結果の保存先としてローカル変数を参照するリデューサを構築します。
-
-   .. cpp:function:: KOKKOS_INLINE_FUNCTION BAnd(const result_view_type& value_);
-
-      特定のビューを結果の保存先として参照するリデューサーを構築します。
-
-   .. rubric:: パブリックメンバー関数
-
-   .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
-
-       ``src`` の ``and`` および ``dest`` を ``dest``:  ``dest = src & dest;`` にビット単位で格納します。
-
-   .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
-
-       ``Kokkos::reduction_identity<Scalar>::land()`` メソッドを使用して、 ``val`` を初期化します。 デフォルト実装は、 ``val=~(0)`` を設定します。
-
-   .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
-
-      クラスコンストラクタで提供された結果への参照を返します。
-
-   .. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
-
-      クラスコンストラクタで提供された結果の保存先のビューを返します。
-
+``Kokkos::reduction_identity<value_type>::band()`` メソッドを使用して ``val`` を初期化します。デフォルト実装は ``val=~(0x0)`` を設定します。
 
 追加情報
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~
 
-* ``BAnd<T,S>::value_type`` は、非定数 ``T`` です。
+* 要件: ``value_type`` に ``operator =`` および ``operator &`` が定義されていること。``Kokkos::reduction_identity<value_type>::band()`` が有効な式であること。
 
-* ``BAnd<T,S>::result_view_type`` は ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`` です。 S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
-
-* 必要条件: ``Scalar`` には、 ``operator =`` および ``operator &`` が定義されます。``Kokkos::reduction_identity<Scalar>::band()`` は有効な式です。
-
-* BAnd をカスタム型で使用するには、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート仕様を定義する必要があります。詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
+* ``BAnd`` をカスタム型で使用するには、``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。詳細については `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。

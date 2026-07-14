@@ -4,7 +4,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 説明
-------------------
+----
 
 TeamVectorMDRange は、階層的並列処理の内部で使用される `nested execution policy <./NestedPolicies.html>`_  です。
 
@@ -13,62 +13,62 @@ TeamVectorMDRange は、階層的並列処理の内部で使用される `nested
 
 .. cpp:class:: template <class Rank, typename TeamHandle> TeamVectorMDRange
 
-   .. rubric:: コンストラクタ
+.. rubric:: コンストラクタ
 
-   .. cpp:function:: TeamVectorMDRange(team, extent_1, extent_2, ...);
+.. cpp:function:: TeamVectorMDRange(team, extent_1, extent_2, ...);
 
-      チームのスレッドにインデックス範囲を分け、ベクトルレーン上でインデックスレンジを分割します。
+チームのスレッドにインデックス範囲を分け、ベクトルレーン上でインデックスレンジを分割します。
       バックエンドによって決定されるスレッドとベクトル化のランクです。
 
-      :param team: 呼び出しチーム実行コンテキストへの TeamHandle
+:param team: 呼び出しチーム実行コンテキストへの TeamHandle
 
-      :param extent_1, extent_2, ...: 各ランクのインデックス範囲長
+:param extent_1, extent_2, ...: 各ランクのインデックス範囲長
 
-      * **必要要件**
+* **必要要件**
 
-	* ``TeamHandle`` は、 `TeamHandle <./TeamHandleConcept.html>`_ をモデル化する型です。
+* ``TeamHandle`` は、 `TeamHandle <./TeamHandleConcept.html>`_ をモデル化する型です。
 
-	* ``extent_1, extent_2, ...`` は、 ints です。
+* ``extent_1, extent_2, ...`` は、 ints です。
 
-	*  ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが  別のブランチで呼び出すことは、できません。
+*  ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが  別のブランチで呼び出すことは、できません。
 
-	* ``extent_i`` の条件は、 ``i >= 2 && i <= 8`` が真であることです。
+* ``extent_i`` の条件は、 ``i >= 2 && i <= 8`` が真であることです。
 	  例えば:
 
-	  .. code-block:: cpp
+.. code-block:: cpp
 
-	     TeamVectorMDRange(team, 4);               // OKではありません i>=2 に違反します。
+TeamVectorMDRange(team, 4);               // OKではありません i>=2 に違反します。
 
-	     TeamVectorMDRange(team, 4,5);             // OK
+TeamVectorMDRange(team, 4,5);             // OK
 	     TeamVectorMDRange(team, 4,5,6);           // OK
 	     TeamVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK、 範囲の最大値は認められます
 
 制約
-------------
+----
 
- `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、 縮約は、合計に限定されることに注意してください。
+`parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、 縮約は、合計に限定されることに注意してください。
 
 例
---------
+--
 
 .. code-block:: cpp
 
-   using TeamHandle = TeamPolicy<>::member_type;
+using TeamHandle = TeamPolicy<>::member_type;
 
-   parallel_for(TeamPolicy<>(N,AUTO),
+parallel_for(TeamPolicy<>(N,AUTO),
      KOKKOS_LAMBDA(TeamHandle const& team) {
 
-       int leagueRank = team.league_rank();
+int leagueRank = team.league_rank();
 
-       auto range = TeamVectorMDRange<Rank<4>, TeamType>(team, n0, n1, n2, n3);
+auto range = TeamVectorMDRange<Rank<4>, TeamHandle>(team, n0, n1, n2, n3);
 
-       parallel_for(range,
+parallel_for(range,
          [=](int i0, int i1, int i2, int i3) {
            A(leagueRank, i0, i1, i2, i3) = B(leagueRank, i1) + C(i1, i2, i3);
        });
        team.team_barrier();
 
-       int teamSum = 0;
+int teamSum = 0;
        parallel_reduce(range,
            [=](int i0, int i1, int i2, int i3, int& vectorSum) {
              vectorSum += v(leagueRank, i, j, k, l);

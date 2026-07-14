@@ -1,10 +1,12 @@
 # `Experimental::where_expression`
 
+（Kokkos 5.0 以降は非推奨）
+
 ヘッダーファイル: `Kokkos_SIMD.hpp`
 
 使用方法
 
- `Kokkos::Experimental::where_expression` は、ベクトルレジスタ内の値のサブセットを参照します。どの値がサブセット内に含まれるかは、マスクによって記述されます。したがって、`where_expression` は、ベクトル値に対するマスク操作の基礎を形成します。
+`Kokkos::Experimental::where_expression` は、ベクトルレジスタ内の値のサブセットを参照します。どの値がサブセット内に含まれるかは、マスクによって記述されます。したがって、`where_expression` は、ベクトル値に対するマスク操作の基礎を形成します。
 
 ## インターフェイス
 

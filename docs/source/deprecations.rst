@@ -1,11 +1,85 @@
 非推奨
-************
+******
+
+Kokkos 5.x において非推奨
+=========================
+
+Kokkos 5.0 において非推奨
+-------------------------
+
+* ``View::stride_N()``
+   * 置換: ``View::stride(N)``
+   * ``std::mdspan`` との整合
+
+* ``KOKKOS_ATTRIBUTE_NODISCARD``
+   * 置換: なし
+   * 内部以外での使用は意図されていません。
+
+* ``{Owning,Observing}RawPtr``
+   * 置換: なし
+   * 内部以外での使用は意図されていません。
+
+* ネストされた OpenMP が有効になっていない状態でのネストされた OpenMP 並列の使用
+   * 置換: なし
+   * 非推奨コードなしでコンパイルされた際に、バグのあるコードパスの使用を回避します。
+
+* OpenMP 並列領域内での ``OpenMP`` インスタンスの生成
+   * 置換: なし
+   * パーティションのスレッド数が 0 のときに ``partition_space`` が中断するのを回避します。
+
+* ``Random_XorShift{64,1024}_Pool::init``
+   * 置換: なし
+   * 内部以外での使用は意図されていません。
+
+* ``[const_]where_expression``
+   * 置換: なし
+   * std::simd インターフェイスと整合しません。
+
+* ``View::HostMirror``
+   * 置換: ``View::host_mirror_type``
+   * 命名スタイルの一貫性
+
+* ``{DynRankView,OffsetView,View}::scalar_array_type``
+   * 置換: ``{DynRankView,OffsetView,View}::data_type``
+   * Kokkos 5 以前の ``View`` 実装での ``{DynRankView, OffsetView, View}`` の特定の外部部分特殊化にのみ関連します。ほとんどの場合 ``data_type`` と等しくなります。
+
+* ``{DynRankView,OffsetView,View}::const_scalar_array_type``
+   * 置換: ``{DynRankView,OffsetView,View}::const_data_type``
+   * Kokkos 5 以前の ``View`` 実装での ``{DynRankView, OffsetView, View}`` の特定の外部部分特殊化にのみ関連します。ほとんどの場合 ``const_data_type`` と等しくなります。
+
+* ``{DynRankView,OffsetView,View}::non_const_scalar_array_type``
+   * 置換: ``{DynRankView,OffsetView,View}::non_const_data_type``
+   * Kokkos 5 以前の ``View`` 実装での ``{DynRankView, OffsetView, View}`` の特定の外部部分特殊化にのみ関連します。ほとんどの場合 ``non_const_data_type`` と等しくなります。
+
+* ``{DynRankView,OffsetView,View}::array_type``
+   * 置換: ``{DynRankView,OffsetView,View}::type``
+   * ``array`` は ``View`` に対する非常に古い呼称です。
+
+* ``DynamicView::array_type``
+   * 置換: ``DynamicView::uniform_type``
+   * ``View`` との一貫性
+
+* ``ErrorReporter::getCapacity``
+   * 置換: ``ErrorReporter::capacity``
+   * 命名スタイルの一貫性
+
+* ``ErrorReporter::getNumReports``
+   * 置換: ``ErrorReporter::num_reports``
+   * 命名スタイルの一貫性
+
+* ``ErrorReporter::getNumReportAttempts``
+   * 置換: ``ErrorReporter::num_report_attempts``
+   * 命名スタイルの一貫性
+
+* ``ErrorReporter::getReports``
+   * 置換: ``ErrorReporter::get_reports``
+   * 命名スタイルの一貫性
 
 Kokkos 4.x において非推奨
-===========================
+=========================
 
 Kokkos 4.7 において非推奨
----------------------------
+-------------------------
 
 * ``KOKKOS_MEMORY_ALIGNMENT[_THRESHOLD]``
    * 置換: 無し
@@ -20,11 +94,11 @@ Kokkos 4.7 において非推奨
    * 非内部利用を意図したものではありません。
 
 Kokkos 4.6 において非推奨
----------------------------
+-------------------------
 
-* ``StaticCrsGraph`` は、 Kokkos Kernels に移動しました。
-   * ``KokkosSparse::StaticCrsGraph``
-   * ``KokkosKernels`` が提供した機能性により整合しています。
+* ``StaticCrsGraph`` は Kokkos Kernels に移動しました。
+   * 置換: ``KokkosSparse::StaticCrsGraph``
+   * ``KokkosKernels`` が提供する機能性により整合しています。
 
 * ``native_simd`` および ``native_simd_mask`` 型
    * 置換: ``simd`` and ``simd_mask``
@@ -39,7 +113,7 @@ Kokkos 4.6 において非推奨
    * DualView において不変条件を実行すること、例えば、参照される2つのビューインスタンス間の一貫性です。
 
 Kokkos 4.5 において非推奨
----------------------------
+-------------------------
 
 * タスク割り当てインターフェイス: ``BasicFuture``, ``TaskSingle``, ``TaskPriority``, ``task_spawn``, ``host_spawn``, ``respawn``, ``when_all``, ``wait``
    * 置換: 無し
@@ -74,7 +148,7 @@ Kokkos 4.5 において非推奨
    * 重複した機能
 
 Kokkos 4.4 において非推奨
----------------------------
+-------------------------
 
 * ``is_layouttiled``
    * 置換: 無し
@@ -112,10 +186,8 @@ Kokkos 4.4 において非推奨
    * 置換: 無し
    * 仕様は文書化されておらず、標準ライブラリに準拠しておらず、テストもされておらず、既知の使用例もありません
 
-
-
 Kokkos 4.3 において非推奨
----------------------------
+-------------------------
 
 * ``Experimental::swap``
    * 置換: ``kokkos_swap``
@@ -137,7 +209,7 @@ Kokkos 4.3 において非推奨
    * 置換: 無し
    * 実行空間間での均一性
 
-* ``HIP::HIP::detect_device_count()``
+* ``HIP::detect_device_count()``
    * 置換: ``num_devices()``
    * 実行空間間での均一性
 
@@ -154,7 +226,7 @@ Kokkos 4.3 において非推奨
    *  `InitializationSettings` の変更により、これらは不要となりました。
 
 Kokkos 4.2 において非推奨
----------------------------
+-------------------------
 
 * ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
    * 置換: ``Cuda::Cuda(cudaStream_t stream)``
@@ -176,9 +248,8 @@ Kokkos 4.2 において非推奨
     * 置換: ``Kokkos`` 名前空間内の SIMD 数学関数
     *  ADLの問題、他の数学関数オーバーロードとの一貫性
 
-
 Kokkos 4.1 において非推奨
----------------------------
+-------------------------
 
 *  ``BinSort``, ``BinOp1D``, and ``BinOp3D`` のためのデフォルトコンストラクタ
    * 置換: 無し
@@ -192,9 +263,8 @@ Kokkos 4.1 において非推奨
    * 置換: ``View::subview(...)``
    * 有用ではなく、使用されていません
 
-
 Kokkos 4.0 において非推奨
----------------------------
+-------------------------
 
 * ``CudaUVMSpace::available()``
    * 置換: ``SharedSpace``
@@ -212,220 +282,6 @@ Kokkos 4.0 において非推奨
    * 置換: 無し
    * 使用されておらず、有用ではありません
 
-
-Kokkos-3.x において非推奨
-===========================
-
-
-
-Kokkos-3.7 において非推奨である型エイリアス
--------------------------------------------
-``ActiveExecutionMemorySpace``, ``host_execution_space``, ``host_memory_space``, ``host_mirror_space``, ``is_array_layout``, ``is_execution_policy``, ``is_execution_space``, ``is_memory_space``, ``is_memory_traits``, ``is_space``, ``Iterate``, ``MDRangePolicy``, ``Rank``, ``SpaceAccessibility``
-
-
-Kokkos-3.7 において非推奨であるマクロ
---------------------------------------
-
-``KOKKOS_RESTRICT_EXECUTION_TO_(DATA_SPACE)``, ``HIP_SAFE_CALL(call)``
-
-
-Kokkos-3.7 において非推奨である自由関数
-----------------------------------------
-
-.. list-table::
-   :widths: 30 70
-   :header-rows: 1
-
-   * - 名前
-     - 場所
-
-   * - .. code-block:: cpp
-
-          std::vector<OpenMP> OpenMP::partition(...)
-
-     - OpenMP
-
-   * - .. code-block:: cpp
-
-          OpenMP OpenMP::create_instance(...)
-
-     - OpenMP
-
-   * - .. code-block:: cpp
-
-          void OpenMP::partition_master(F const& f,
-                                        int num_partitions,
-                                        int partition_size)
-
-     - OpenMP (Kokkos_OpenMP_Instance.hpp)
-
-   * - .. code-block:: cpp
-
-          void Experimental::HIPSpace::access_error()
-
-     - ``namespace Kokkos`` (Kokkos_HIP_Space.cpp)
-
-   * - .. code-block:: cpp
-
-          void Experimental::HIPSpace::access_error(const void* const)
-
-     - ``namespace Kokkos`` (Kokkos_HIP_Space.cpp)
-
-   * - ..  code-block:: cpp
-
-           inline void hip_internal_safe_call_deprecated
-
-     - ``namespace Kokkos::Impl`` (Kokkos_HIP_Error.hpp)
-
-
-Kokkos-3.7 において非推奨
-------------------------------------------
-
-.. list-table::
-   :widths: 70 30
-   :header-rows: 1
-
-   * - メソッド名
-     - クラス
-
-   * - ``static void OpenMP::partition_master()``
-     - ``class OpenMP`` (Kokkos_OpenMP.hpp)
-
-   * - ``static void OpenMPInternal::validate_partition()``
-     - ``class OpenMPInternal`` (Kokkos_OpenMP_Instance.hpp)
-
-   * - ``std::string ProfilingSection::getName()``
-     - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
-
-   * - ``uint32_t ProfilingSection::getSectionID()``
-     - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
-
-   * - ``int TeamPolicyInternal::vector_length() const``
-     - ``class TeamPolicyInternal`` (Kokkos_HIP_Parallel_Team.hpp, Kokkos_SYCL_Parallel_Team.hpp)
-
-   * - ``inline int TeamPolicyInternal::vector_length() const``
-     - ``class TeamPolicyInternal`` (Kokkos_OpenMPTarget_Exec.hpp, Kokkos_Cuda_Parallel_Team.hpp)
-
-   * - ``static void CudaSpace::access_error();``
-     - ``class CudaSpace`` (Kokkos_CudaSpace.hpp), ``class HIPSpace`` (Kokkos_HIP_Space.hpp)
-
-   * - ``static void CudaSpace::access_error(const void* const);``
-     - ``class CudaSpace`` (Kokkos_CudaSpace.hpp), ``class HIPSpace`` (Kokkos_HIP_Space.hpp)
-
-   * - ``static int CudaUVMSpace::number_of_allocations();``
-     - ``class CudaUVMSpace`` (Kokkos_CudaSpace.hpp)
-
-   * - ``HPX::partition(...), HPX::partition_master()``
-     - ``class HPX`` (Kokkos_HPX.hpp)
-
-
-Kokkos-3.7 において非推奨であるクラス
--------------------------------------
-
-.. list-table::
-   :widths: auto
-   :header-rows: 1
-
-   * -
-
-   * - ``class MasterLock<OpenMP>``
-
-   * - ``class KOKKOS_ATTRIBUTE_NODISCARD ScopeGuard``
-
-
-名前空間アップデート
-----------------------
-
-.. list-table::
-   :widths: 40 60
-   :header-rows: 1
-
-   * - 以前
-     - 現在使用すべきもの
-
-   * - ``Kokkos::Experimental::aMathFunction``
-     - ``Kokkos::aMathFunction``
-
-   * - ``Kokkos::Experimental::clamp``
-     - ``Kokkos::clamp``
-
-   * - ``Kokkos::Experimental::max;``
-     - ``Kokkos::max``
-
-   * - ``Kokkos::Experimental::min``
-     - ``Kokkos::min``
-
-   * - ``Kokkos::Experimental::minmax``
-     - ``Kokkos::minmax``
-
-
-他の非推奨
-------------------
-
-.. list-table::
-   :widths: auto
-   :header-rows: 1
-
-   * - 以前
-     - 置換対象
-
-   * - ``Kokkos::is_reducer_type``
-     - ``Kokkos::is_reducer``
-
-   * - 生ポインタを使った配列縮約
-     - 戻し引数として ``Kokkos::View`` を使用します
-
-   * -  ``index_list_type`` を選択する ``OffsetView`` コンストラクタ
-     - ``Kokkos::pair`` (CPU および GPU)
-
-   * - パラメータ ``bool always_use_kokkos_sort`` を選択する ``Kokkos::sort`` のオーバーロード
-     - 必要であれば、 ``Kokkos::BinSort`` を使用するか、または、ブール値パラメータを伴わない ``Kokkos::sort`` を呼びます
-
-   * - 空ではない WorkTag が使用される場合には、非推奨警告を発します
-     - 空の WorkTag クラスを使用します
-
-   * - ``InitArguments`` 構造体
-     - 問い合わせ可能な属性を持つ ``InitializationSettings()`` クラスオブジェクト 
-
-   * - ``finalize_all()``
-     - ``finalize()``
-
-   * -  ``volatile`` キーワードにより修飾された引数を伴う ``join()`` を呼び出す ``parallel_reduce`` 事例について、警告します
-     -  ``volatile`` オーバーロードを削除します
-
-
-   * - 第一引数として、 ``WithOutInitializing`` を選択する ``create_mirror_view`` 
-     - ``create_mirror_view(Kokkos::Impl::WithoutInitializing_t wi, Kokkos::View<T, P...> const& v)``
-
-   * - ``#define KOKKOS_THREAD_LOCAL`` マクロ
-     - ``thread_local``
-
-   * - ``class MasterLock``
-     - クラスを削除します
-
-   * - ``Kokkos::Impl::is_view``
-     - ``Kokkos::is_view``
-
-   * - ``inline void cuda_internal_safe_call_deprecated()``
-     - ``#define CUDA_SAFE_CALL(call)``
-
-   * - 後続引数として、ラベルを選択する ``parallel_*`` オーバーロード
-     - ``Kokkos::parallel_*("KokkosViewLabel", ポリシー, f);``
-
-
-Kokkos-3.7 におけるパブリックヘッダー
--------------------------------------
-
-Kokkos-3.7 より、 以下の項目が、 *パブリック* ヘッダーです:
-
-コア
-~~~~~~~~~~~~
-``Kokkos_Core.hpp``, ``Kokkos_Macros.hpp``, ``Kokkos_Atomic.hpp``, ``Kokkos_DetectionIdiom.hpp``, ``Kokkos_MathematicalConstants.hpp``, ``Kokkos_MathematicalFunctions.hpp``, ``Kokkos_NumericTraits.hpp``, ``Kokkos_Array.hpp``, ``Kokkos_Complex.hpp``, ``Kokkos_Pair.hpp``, ``Kokkos_Half.hpp``, ``Kokkos_Timer.hpp``
-
-アルゴリズム
-~~~~~~~~~~~~~~~~~~
-``Kokkos_StdAlgorithms.hpp``, ``Kokkos_Random.hpp``, ``Kokkos_Sort.hpp``
-
-コンテナ
-~~~~~~~~~~~~~~~~~~
-``Kokkos_Bit.hpp``, ``Kokkos_DualView.hpp``, ``Kokkos_DynRankView.hpp``, ``Kokkos_ErrorReporter.hpp``, ``Kokkos_Functional.hpp``, ``Kokkos_OffsetView.hpp``, ``Kokkos_ScatterView.hpp``, ``Kokkos_StaticCrsGraph.hpp``, ``Kokkos_UnorderedMap.hpp``, ``Kokkos_Vector.hpp``
+* 静的な ``ExecutionSpace::concurrency()``
+   * 置換: 非静的な ``ExecutionSpace::concurrency()`` メンバー関数
+   * 並行性は実行空間インスタンスのプロパティであり、その型のプロパティではありません。

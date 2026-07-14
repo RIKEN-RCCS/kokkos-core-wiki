@@ -11,120 +11,111 @@
 
 .. code-block:: cpp
 
-    Kokkos::ScopeGuard guard(argc, argv);
-    Kokkos::ScopeGuard guard(Kokkos::InitializationSettings()  // ( 3.7以降)
+Kokkos::ScopeGuard guard(argc, argv);
+    Kokkos::ScopeGuard guard(Kokkos::InitializationSettings()
                                 .set_map_device_id_by("random")
                                 .set_num_threads(1));
-
+    Kokkos::ScopeGuard guard;
 
 ``ScopeGuard`` は、 `RAII <https://en.cppreference.com/w/cpp/language/raii>`_ を使用して Kokkos を初期化および最終処理するためのクラスです。
-それは、 コンストラクタ内の提供された引数およびデストラクタ内の `Kokkos::finalize <finalize.html#kokkosfinalize>`_ で `Kokkos::initialize <initialize.html#kokkosinitialize>`_ を呼び出します。
-正しい使用法のためには、Kokkosへの呼び出しを発行する前に、必ず ``ScopeGuard`` の命名済みインスタンスを作成する必要があります。
+それは、コンストラクタ内で提供された引数を用いて :cpp:func:`initialize` を呼び出し、デストラクタ内で :cpp:func:`finalize` を呼び出します。
 
-
-.. warning:: バージョン 3.7におけるビヘイビアの変更 (以下参照)。 ``ScopeGuard`` は、:cpp:func:`is_initialized()` または :cpp:func:`is_finalized()` のいずれかが ``true`` を返した場合に中断します。
-
-説明
-------------------
+インターフェース
+----------------
 
 .. cpp:class:: ScopeGuard
 
-    そのライフサイクルの開始時に ``Kokkos::initialize`` を呼び出し、終了時に、 ``Kokkos::finalize`` を呼び出すクラス。
+そのライフタイムの開始時に :cpp:func:`initialize` を呼び出し、終了時に
+    :cpp:func:`finalize` を呼び出すクラス。
 
-    .. rubric:: Constructors
+.. cpp:function:: template <class... Args> ScopeGuard(Args&&... args);
 
-    .. cpp:function:: ScopeGuard(int& argc, char* argv[]);
+:param args: :cpp:func:`initialize` に引き渡す引数。
 
-       :param argc: コマンドライン引数の数。
-       :param argv: コマンドライン引数を格納するヌル終端文字列への文字ポインタの配列。
+可能な実装:
 
-       .. warning:: 3.7まで有効。
+.. code-block:: cpp
 
-    .. cpp:function:: ScopeGuard(InitArguments const& arguments = InitArguments());
+template <class... Args> ScopeGuard(Args&&... args){
+             initialize(std::forward<Args>(args)...);
+           }
 
-       :param arguments: 有効な初期化引数を持つ ``構造体`` オブジェクト。
+.. cpp:function:: ~ScopeGuard();
 
-       .. warning:: 3.7まで有効。
+可能な実装:
 
-    .. cpp:function:: template <class... Args> ScopeGuard(Args&&... args);
+.. code-block:: cpp
 
-        :param args:  `Kokkos::initialize <initialize.html#kokkosinitialize>`_ に引き渡す引数。
+~ScopeGuard() { finalize(); }
 
+.. cpp:function:: ScopeGuard(ScopeGuard const&) = delete;
 
-	可能な実装:
+コピーコンストラクタ
 
-	.. code-block:: cpp
+.. cpp:function:: ScopeGuard(ScopeGuard&&) = delete;
 
-	   template <class... Args> ScopeGuard(Args&&... args){ initialize(std::forward<Args>(args)...); }
+移動コンストラクタ
 
-    .. cpp:function:: ~ScopeGuard();
+.. cpp:function:: ScopeGuard& operator=(ScopeGuard const&) = delete;
 
-       デストラクタ
+コピー代入演算子
 
-       可能な実装:
+.. cpp:function:: ScopeGuard& operator=(ScopeGuard&&) = delete;
 
-       .. code-block:: cpp
-
-	  ~ScopeGuard() { finalize(); }
-
-    .. cpp:function:: ScopeGuard(ScopeGuard const&) = delete;
-
-       コピーコンストラクタ
-
-    .. cpp:function:: ScopeGuard(ScopeGuard&&) = delete;
-
-       移動コンストラクタ
-
-    .. cpp:function:: ScopeGuard& operator=(ScopeGuard const&) = delete;
-
-       コピー代入演算子
-
-    .. cpp:function:: ScopeGuard& operator=(ScopeGuard&&) = delete;
-
-       移動代入演算子
+移動代入演算子
 
 注意事項
 --------
 
-- コンストラクタでは、すべてのパラメータが内部で呼び出される ``Kokkos::initialize`` に渡される。
-  詳細については、 `Kokkos::initialize <initialize.html#kokkosinitialize>`_ 参照。
+.. caution::
 
-
-- Kokkos バージョン 3.7以降、 ``ScopeGuard`` は与えられた引数を無条件に `Kokkos::initialize <initialize.html#kokkosinitialize>`_ 
-  に転送し、それは、それらが同じ必須条件を持つことを
-  意味します。  バージョン3.7まで、 ``ScopeGuard`` は、
-  ``Kokkos::is_initialized()`` が  ``false`` であった場合にのみ、そのコンストラクタにおいて ``Kokkos::initialize`` を呼び出しており、それは、そのコンストラクタにおいて、
-  ``Kokkos::initialize`` を呼び出した場合にのみ、 ``Kokkos::finalize`` をそのデストラクタにおいて呼び出していました。
-
-  古い挙動についてのサポートを停止しました。それが実際に必要であると考えれば、そう考えて構いません:
-
-  .. code-block:: cpp
-
-      auto guard = std::unique_ptr<Kokkos::ScopeGuard>(
-	  Kokkos::is_initialized() ? new Kokkos::ScopeGuard() : nullptr);
-
-  または、
-
-  .. code-block:: cpp
-
-      auto guard = Kokkos::is_initialized() ? std::make_optional<Kokkos::ScopeGuard>()
-					  : std::nullopt;
-
-  C++17を用いて。  これは、Kokkos バージョンに関わらず、機能します。
-
-
-例
-~~~~~~~
+``ScopeGuard`` の使用は、 :cpp:func:`initialize` と :cpp:func:`finalize` を
+  直接呼び出すこととは相互排他的です。
+  さらに、プログラムのライフタイム中に作成できる ``ScopeGuard`` オブジェクトは
+  1 つだけであり、ほとんどの Kokkos 機能はそのオブジェクトのライフタイム中にのみ
+  使用できます。
 
 .. code-block:: cpp
 
-    int main(int argc, char* argv[]) {
+Kokkos::ScopeGuard(argc, argv);  // 一時オブジェクトは即座に破棄され、
+     //                ^                 それと共に Kokkos 実行環境が最終処理される
+     //                名前付き変数の定義を忘れている
+     Kokkos::View<int> v("v");  // エラー Kokkos は最終処理済み
+
+.. note::
+
+``ScopeGuard`` は、提供された引数を無条件に :cpp:func:`initialize` に
+  転送します。これは、それらが同じ必須条件を持つことを意味します。バージョン 3.7 までは、
+  ``ScopeGuard`` は :cpp:func:`is_initialized` が ``false`` を返す場合にのみ
+  そのコンストラクタで :cpp:func:`initialize` を呼び出しており、また、そのコンストラクタで
+  :cpp:func:`initialize` を呼び出した場合にのみ、そのデストラクタで :cpp:func:`finalize` を
+  呼び出していました。
+
+古い挙動についてのサポートを停止しました。それが実際に必要であると考えれば、そう考えて構いません:
+
+.. code-block:: cpp
+
+auto guard = Kokkos::is_initialized()
+                     ? std::make_optional<Kokkos::ScopeGuard>()
+                     : std::nullopt;
+
+例
+--
+
+.. code-block:: cpp
+
+int main(int argc, char* argv[]) {
         Kokkos::ScopeGuard guard(argc, argv);
         Kokkos::View<double*> my_view("my_view", 10);
         //  Kokkos::finalize の前に呼び出された my_view デストラクタ
         // 呼び出された ScopeGuard デストラクタが Kokkos::finalize を呼び出します
 
 以下も参照
-~~~~~~~~~~
+----------
 
-`Kokkos::initialize <initialize.html#kokkosinitialize>`_, `Kokkos::finalize <finalize.html#kokkosfinalize>`_
+.. seealso::
+
+:doc:`initialize`
+    Kokkos 実行環境を開始する。
+  :doc:`finalize`
+    Kokkos 実行環境を終了する。

@@ -2,7 +2,7 @@
 
 ヘッダーファイル: `Kokkos_SIMD.hpp`
 
-使用例: 
+使用例:
 
 `Kokkos::Experimental::simd` は、プラットフォーム固有のベクトルデータ型の抽象化であり、プラットフォーム固有のベクトル組み込み関数を呼び出します。
 それは、[this document](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/n4808.pdf) で ISO C++ 向けに提案されている `simd` 型に基づいています。
@@ -32,34 +32,29 @@ class basic_simd;
 
 ### 型定義
 
- *  `value_type`:  `T` に等しいです。
+*  `value_type`:  `T` に等しいです。
  *  `reference`: 本型は `value_type` に変換可能である必要があり、`value_type` は `reference` に代入可能である必要があります。これは単純な参照である場合もあれば、1つのベクトルのレーンを抽出または埋めるためにベクトル組み込み関数を呼び出す実装定義の型である場合もあります。 ( Kokkos 4.6以降削除)
- *  `mask_type`:  `simd_mask<T, Abi>` に等しいです。
+ *  `mask_type`:  `basic_simd_mask<T, Abi>` に等しいです。
  *  `abi_type`:  `Abi` に等しいです。
 
 ### 幅
 
- * `static constexpr std::size_t size()`: `simd<T, Abi>::size()` は、ベクトルの幅、すなわちベクトル内の型 `T` の値の数を表すコンパイル時定数です。
+* `static constexpr std::integral_constant<simd_size_t, N> size()`: `basic_simd<T, Abi>::size()` は、ベクトルの幅、すなわちベクトル内の型 `T` の値の数を表すコンパイル時定数です。
 
 ### コンストラクタ
 
-  * `simd()`: デフォルトコンストラクタ。 本コンストラクタではベクトル値は初期化されません。
+* `simd()`: デフォルトコンストラクタ。 本コンストラクタではベクトル値は初期化されません。
   * `template <class U> simd(U&&)`: 単一値コンストラクタです。引数は、`value_type` 型に変換され、ベクトル内の全ての値がその値に設定されます。
   * `template <class G> simd(G&& gen)`: ジェネレータコンストラクタ。ジェネレータ `gen` は、`std::integral_constant<std::size_t, i>()` を引数として受け取り、`value_type` に変換可能な値を返すことができる呼び出し可能型（例：ファンクタ）である必要があります。 ベクトルレーン `i` は、`gen(std::integral_constant<std::size_t, i>())` の値に初期化されます。
 
-### 負荷/格納メソッド
-
-  * `template <class U, class Flags> void copy_from(const U* mem, Flags flags)`: アドレス `mem` から始まる連続した値のベクトル全体を読み込みます。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。
-  * `template <class U, class Flags> void copy_to(U* mem, Flags flags)`: アドレス `mem` から始まる連続した値の完全なベクトルを格納します。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。
-
 #### Simdフラッグ
 
-  * 利用可能な `simd_flags` は、`simd_flag_default` および `simd_flag_aligned` です。
+* 利用可能な `simd_flags` は、`simd_flag_default` および `simd_flag_aligned` です。
   * 下位互換性のため、`Kokkos::Experimental::element_aligned_tag` および `Kokkos::Experimental::vector_aligned_tag` の型が利用可能です。
   * `Kokkos::Experimental::element_aligned_tag` は、 `decltype(simd_flag_default)` の型エイリアスであり、`Kokkos::Experimental::vector_aligned_tag` は、 `decltype(simd_flag_aligned)` の型エイリアスです。
 
 ### 値へのアクセス方法
-  * `value_type operator[](std::size_t) const`: ベクトル値 `i` を返します。
+  * `value_type operator[](simd_size_t) const`: ベクトル値 `i` を返します。
   * `reference operator[](std::size_t)`: 変更可能なベクトル値 `i` への参照を返します。 ( Kokkos 4.6以降で削除)
 
 ### 算術演算子
@@ -145,14 +140,41 @@ class basic_simd;
   * `simd Kokkos::copysign(const simd& mag, const simd& sgn)`
   * `simd Kokkos::fma(const simd& x, const simd& y, const simd& z)`
 
-  以下の関数は、 `value_type=float` および `value_type=double` について `AVX2` and `AVX512` においてのみ定義されます。
+以下の関数は、 `value_type=float` および `value_type=double` について `AVX2` and `AVX512` においてのみ定義されます。
   * `simd Kokkos::cbrt(simd& lhs)`
   * `simd Kokkos::exp(simd& lhs)`
   * `simd Kokkos::log(simd& lhs)`
 
+### ロード/ストア関数
+
+* `template <class U, class Flags> void copy_from(const U* mem, Flags flags)`: アドレス `mem` から始まる連続した値のベクトル全体をロードします。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。 ( Kokkos 5.0以降非推奨)
+  * `template <class U, class Flags> void copy_to(U* mem, Flags flags)`: アドレス `mem` から始まる連続した値のベクトル全体をストアします。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。 ( Kokkos 5.0以降非推奨)
+
+* `template <class U, class Flags> simd simd_unchecked_load(U* mem, Flags flags)`: アドレス `mem` から始まる連続した値のベクトル全体をロードし、Kokkos simd 型を返します。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。 ( Kokkos 5.0以降)
+  * `template <class U, class Flags> simd simd_unchecked_load(U* mem, mask_type mask, Flags flags)`: マスク付きロード操作を実行し、マスク値 mask[i] が true の場合に `mem[i]` のベクトル値 i をロードし、Kokkos simd 型を返します。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。 ( Kokkos 5.0以降)
+  * `template <class U, class Flags> simd simd_partial_load(U* mem, Flags flags)`: アドレス `mem` から始まる連続した値のベクトル全体をロードし、Kokkos simd 型を返します。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。 ( Kokkos 5.0以降)
+  * `template <class U, class Flags> simd simd_partial_load(U* mem, mask_type mask, Flags flags)`: マスク付きロード操作を実行し、マスク値 mask[i] が true の場合に `mem[i]` のベクトル値 i をロードし、Kokkos simd 型を返します。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。 ( Kokkos 5.0以降)
+
+* `template <class U, class Flags> void simd_unchecked_store(simd& s, U* mem, Flags flags)`: アドレス `mem` から始まる連続した値のベクトル全体をストアします。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。 ( Kokkos 5.0以降)
+  * `template <class U, class Flags> void simd_unchecked_store(simd& s, U* mem, mask_type mask, Flags flags)`: マスク付きストア操作を実行し、マスク値 mask[i] が true の場合にベクトル値 i を `mem[i]` にストアします。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。 ( Kokkos 5.0以降)
+  * `template <class U, class Flags> void simd_partial_store(simd& s, U* mem, Flags flags)`: アドレス `mem` から始まる連続した値のベクトル全体をストアします。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。 ( Kokkos 5.0以降)
+  * `template <class U, class Flags> void simd_partial_store(simd& s, U* mem, mask_type mask, Flags flags)`: マスク付きストア操作を実行し、マスク値 mask[i] が true の場合にベクトル値 i を `mem[i]` にストアします。 `Flags` は、アドレス `mem` におけるアラインメントを記述するために使用される `simd_flags` です。 ( Kokkos 5.0以降)
+
+### メモリパーミュート
+
+* `template <class R, class I, class Flags> simd Kokkos::Experimental::unchecked_gather_from(R&& in, const I& indices, Flags flags)`: `in[indices[i]]` から値を収集し、Kokkos simd 型を返します。 ( Kokkos 5.1以降)
+  * `template <class R, class I, class Flags> simd Kokkos::Experimental::unchecked_gather_from(R&& in, const mask_type& mask, const I& indices, Flags flags)`: マスク値 `mask[i]` が true の場合に `in[indices[i]]` から値を収集し、Kokkos simd 型を返します。 ( Kokkos 5.1以降)
+  * `template <class R, class I, class Flags> simd Kokkos::Experimental::partial_gather_from(R&& in, const I& indices, Flags flags)`: `in[indices[i]]` から値を収集し、Kokkos simd 型を返します。 ( Kokkos 5.1以降)
+  * `template <class R, class I, class Flags> simd Kokkos::Experimental::partial_gather_from(R&& in, const mask_type& mask, const I& indices, Flags flags)`: マスク値 `mask[i]` が true の場合に `in[indices[i]]` から値を収集し、Kokkos simd 型を返します。 ( Kokkos 5.1以降)
+
+* `template <class R, class I, class Flags> void Kokkos::Experimental::unchecked_scatter_to(const simd& s, R&& out, const I& indices, Flags flags)`: s から `out[indices[i]]` に値を分散します。 ( Kokkos 5.1以降)
+  * `template <class R, class I, class Flags> void Kokkos::Experimental::unchecked_scatter_from(const simd& s, R&& in, const mask_type& mask, const I& indices, Flags flags)`: マスク値 `mask[i]` が true の場合に s から `out[indices[i]]` に値を分散します。 ( Kokkos 5.1以降)
+  * `template <class R, class I, class Flags> void Kokkos::Experimental::partial_scatter_to(const simd& s, R&& out, const I& indices, Flags flags)`: s から `out[indices[i]]` に値を分散します。 ( Kokkos 5.1以降)
+  * `template <class R, class I, class Flags> void Kokkos::Experimental::partial_scatter_from(const simd& s, R&& in, const mask_type& mask, const I& indices, Flags flags)`: マスク値 `mask[i]` が true の場合に s から `out[indices[i]]` に値を分散します。 ( Kokkos 5.1以降)
 
 ### グローバル型定義
-  * `template <class T> Kokkos::Experimental::native_simd`:  `Kokkos::Experimental::simd<T, Kokkos::Experimental::simd_abi::native<T>>` の別名 ( Kokkos 4.6以降非推奨)
+
+* `template <class T> Kokkos::Experimental::native_simd`:  `Kokkos::Experimental::simd<T, Kokkos::Experimental::simd_abi::native<T>>` の別名 ( Kokkos 4.6以降非推奨)
   * `template <class T, int N> Kokkos::Experimental::simd`: `Kokkos::Experimental::basic_simd<T, ...>` の別名 ( Kokkos 4.6以降)
   * `Kokkos::Experimental::element_aligned_tag`:  `Kokkos::Experimental::simd_flags<>` の別名
   * `Kokkos::Experimental::vector_aligned_tag`: `Kokkos::Experimental::simd_flags<simd_alignment_vector_aligned>` の別名

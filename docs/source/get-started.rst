@@ -5,18 +5,18 @@
    :maxdepth: 1
    :hidden:
 
-   get-started/quick-start
+get-started/quick-start
    get-started/requirements
    get-started/integrating-kokkos-into-your-cmake-project
    get-started/building-from-source
    get-started/configuration-guide
    get-started/package-managers
-
+   get-started/advanced-configuration-and-build
 
 今すぐ Kokkos を試してみませんか？ `Compiler Explorer <https://godbolt.org/z/svrE563Kn>`_ でご確認ください。
 
 :doc:`クイックスタート <get-started/quick-start>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 本ガイドでは、CMake プロジェクトを開始し、Kokkos コードの作成を開始するための最小限の最初の手順を説明します。
 
 :doc:`Kokkos をプロジェクトに統合 <get-started/integrating-kokkos-into-your-cmake-project>`
@@ -38,3 +38,7 @@
 :doc:`パッケージマネージャー <get-started/package-managers>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 本ページでは、ソースからビルドする代わりに便利な代替手段として、ビルド済みの Kokkos パッケージを提供するパッケージマネージャーを紹介しています。
+
+:doc:`高度な構成とビルド <get-started/advanced-configuration-and-build>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+このページでは、Kokkosで利用可能な構成とビルドに関する高度なトピックを一覧で示します。

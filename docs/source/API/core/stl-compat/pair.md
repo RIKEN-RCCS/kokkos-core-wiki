@@ -1,4 +1,4 @@
-# `Kokkos::pair`
+# `pair`
 
 ヘッダーファイル: `Kokkos_Pair.hpp`
 
@@ -17,10 +17,10 @@ std::pair<int,float> converted_kokkos_pair = kokkos_pair.to_std_pair();
 template <class T1, class T2>
 struct pair {
 
-    typedef T1 first_type;
+typedef T1 first_type;
     typedef T2 second_type;
 
-    first_type first;
+first_type first;
     second_type second;
   
     KOKKOS_DEFAULTED_FUNCTION constexpr pair() = default;
@@ -30,7 +30,7 @@ struct pair {
     template <class U, class V>
     KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const pair<U, V>& p);
 
-    template <class U, class V>
+template <class U, class V>
     KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
   
     template <class U, class V>
@@ -42,7 +42,7 @@ struct pair {
 
 ### パブリックメンバー関数
 
-  * `first`: ペア内の1番目の要素
+* `first`: ペア内の1番目の要素
   * `second`: ペア内の2番目の要素
 
 ### 型定義
@@ -52,22 +52,22 @@ struct pair {
 
 ### コンストラクタ
 
-  * 
+* 
   ```c++ 
   KOKKOS_DEFAULTED_FUNCTION constexpr pair() = default;
   ```
 
-  デフォルトコンストラクタ。 そのデフォルトを使って、データメンバーを初期化します。
+デフォルトコンストラクタ。 そのデフォルトを使って、データメンバーを初期化します。
 
-  * 
+* 
   ```c++
   KOKKOS_FORCEINLINE_FUNCTION constexpr pair(first_type const& f,
                                   second_type const& s);
   ```
 
-  要素ごとのコンストラクタ。 `first` に `f` の値、 `second` に `s` の値を割り当てます。
+要素ごとのコンストラクタ。 `first` に `f` の値、 `second` に `s` の値を割り当てます。
 
-  * 
+* 
   ```c++
   template <class U, class V>
   KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const pair<U, V>& p);
@@ -77,18 +77,18 @@ struct pair {
 
 ### 代入および変換
 
-  * 
+* 
   ```c++
   template <class U, class V>
   KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
   ```
 
-    `first` を `p.first` に、`second` を `p.second` に設定します。
+`first` を `p.first` に、`second` を `p.second` に設定します。
   ### 関数
 
-  * 
+* 
   ```c++
   std::pair<T1, T2> to_std_pair() const;
   ```
 
-  コンテンツが、  `Kokkos::pair` のコンテンツに一致する  `std::pair` を返します。明示的に `std::pair` のみを受け入れるライブラリの処理に有用です。
+コンテンツが、  `Kokkos::pair` のコンテンツに一致する  `std::pair` を返します。明示的に `std::pair` のみを受け入れるライブラリの処理に有用です。

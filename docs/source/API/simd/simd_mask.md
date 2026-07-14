@@ -2,9 +2,9 @@
 
 ヘッダーファイル: `Kokkos_SIMD.hpp`
 
-使用例: 
+使用例:
 
- `Kokkos::Experimental::simd_mask` は、プラットフォーム固有のベクトルマスクを抽象化したものであり、プラットフォーム固有のベクトル固有関数を呼び出します。
+`Kokkos::Experimental::simd_mask` は、プラットフォーム固有のベクトルマスクを抽象化したものであり、プラットフォーム固有のベクトル固有関数を呼び出します。
 これは、 [this document](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/n4808.pdf) における ISO C++ 向けに提案された `simd_mask` 型に基づいています。
 
 ## インターフェイス
@@ -32,23 +32,23 @@ class basic_simd_mask;
 
 ### 型定義
 
- *  `value_type`: `bool` に等しいです。
+*  `value_type`: `bool` に等しいです。
  *  `reference`:  本型は `value_type` に変換可能である必要があり、`value_type` は `reference` に代入可能である必要があります。これは単純な参照である場合もあれば、1つのベクトルのレーンを抽出または埋めるためにベクトル組み込み関数を呼び出す実装定義の型である場合もあります。 ( Kokkos 4.6以降削除)
  *  `simd_type`:  `simd<T, Abi>` に等しいです。
  *  `abi_type`: `Abi` に等しいです。
 
 ### 幅
 
- * `static constexpr std::size_t size()`: `simd_mask<T, Abi>::size()` は、ベクトルの幅、すなわちベクトル内の型 `T` の値の数を表すコンパイル時定数です。
+* `static constexpr std::integral_constant<simd_size_t, N> size()`: `basic_simd_mask<T, Abi>::size()` は、ベクトルの幅、すなわちベクトル内の型 `T` の値の数を表すコンパイル時定数です。
 
 ### コンストラクタ
 
-  * `simd_mask()`: デフォルトコンストラクタ。 本コンストラクタではベクトル値は初期化されません。
+* `simd_mask()`: デフォルトコンストラクタ。 本コンストラクタではベクトル値は初期化されません。
   * `simd_mask(bool)`: 単一値コンストラクタです。引数は、`value_type` 型に変換され、マスク内の全ての値が、引数の値に設定されます。
  * `template <class G> simd_mask(G&& gen)`: ジェネレータコンストラクタ。ジェネレータ `gen` は、`std::integral_constant<std::size_t, i>()` を引数として受け取り、`bool` に変換可能な値を返すことができる呼び出し可能型（例：ファンクタ）である必要があります。 ベクトルマスク値 `i` は、`gen(std::integral_constant<std::size_t, i>())` の値に初期化されます。
 
 ### 値アクセスメソッド
-  * `bool operator[](std::size_t) const`: マスク値 `i` を返します。
+  * `bool operator[](simd_size_t) const`: マスク値 `i` を返します。
   * `reference operator[](std::size_t)`: 変更可能なマスク値 `i` に参照を返します。 ( Kokkos 4.6において削除)
 
 ### ブール値演算

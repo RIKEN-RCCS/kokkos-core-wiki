@@ -1,15 +1,14 @@
 必要要件
-############
+########
 
 コンパイラバージョン
-============================
+====================
 
 一般的に、Kokkos は最低限のコンパイラバージョンより新しいすべてのコンパイラで動作することになっています。
 また、可能な限り、最新のコンパイラを使用することを推奨します。
 しかし、複雑なコードでは、コンパイラのバグを回避しなければなりません。 そのため、テストしないコンパイラバージョンには、気付かれていない問題があるかもしれません。
 
 さらに、ここに挙げていないコンパイラも動作する場合があります。
-
 
 Kokkos 5.x
 ----------
@@ -19,40 +18,37 @@ Kokkos 5.x
     :header-rows: 1
     :align: center
 
-    * - コンパイラ
+* - コンパイラ
       - 最小バージョン
 
-    * * GCC 
+* * GCC 
       * 10.4.0
 
-    * * Clang (CPU)
+* * Clang (CPU)
       * 14.0.0
 
-    * * Clang (CUDA)
-      * 15.0.0
+* * Clang (CUDA)
+      * 15.0.0 および CUDA 11.8.0（新しいバージョンは LLVM のサポート状況に依存）
 
-    * * AppleClang 
-      * 8.0
-
-    * * IntelLLVM (CPU)
+* * IntelLLVM (CPU)
       * 2022.0.0
 
-    * * IntelLLVM (SYCL)
+* * IntelLLVM (SYCL)
       * 2024.2.1
 
-    * * NVCC 
+* * NVCC 
       * 12.2
 
-    * * NVC++ 
+* * NVC++ 
       * 22.3
 
-    * * NVC++ (OpenACC) (実験的) 
+* * NVC++ (OpenACC) (実験的) 
       * 23.7
 
-    * * ROCM 
-      * 6.2.0 
+* * ROCM 
+      * 6.2.0
 
-    * * MSVC 
+* * MSVC 
       * 19.30
  
     * * ARM/Clang 
@@ -66,55 +62,55 @@ Kokkos 4.x
     :header-rows: 1
     :align: center
 
-    * - コンパイラ
+* - コンパイラ
       - 最小バージョン
       - 主要テスト済みバージョン
 
-    * * GCC 
+* * GCC 
       * 8.2.0
       * 8.4.0, 最新
 
-    * * Clang (CPU)
+* * Clang (CPU)
       * 8.0.0
       * 8.0.0, 最新
 
-    * * Clang (CUDA)
+* * Clang (CUDA)
       * 10.0.0
       * 12.0.0, 14.0.0
 
-    * * AppleClang 
+* * AppleClang 
       * 8.0
       * latest
 
-    * * Intel Classic (非推奨)  :red:`[ 4.5まで]`
+* * Intel Classic (非推奨)  :red:`[ 4.5まで]`
       * 19.0.5
       * 2021.8.0
 
-    * * IntelLLVM (CPU)
+* * IntelLLVM (CPU)
       * 2021.1.1
       * 2023.2.4
 
-    * * IntelLLVM (SYCL)
+* * IntelLLVM (SYCL)
       * 2023.0.0
       * 2024.2.1 2025.0.0
 
-    * * NVCC 
+* * NVCC 
       * 11.0
       * 11.0, 11.6, 11.7
 
-    * * NVC++ 
+* * NVC++ 
       * 22.3
       * 22.9
 
-    * * NVC++ (OpenACC) (実験的) 
+* * NVC++ (OpenACC) (実験的) 
       * 23.7
       * 23.7
 
-    * * ROCM 
+* * ROCM 
       * 5.2.0
-      * 5.2.0 
+      * 5.2.0
 
-    * * MSVC 
+* * MSVC 
       * 19.29
       * Latest
  
@@ -130,11 +126,11 @@ Kokkos 3.x
     :header-rows: 1
     :align: center
 
-    * - コンパイラ
+* - コンパイラ
       - 最小バージョン
       - 主要テスト済みバージョン
 
-    * * GCC 
+* * GCC 
       * 5.3.0
       * 5.3.0, 6.1.0, 7.3.0, 8.3, 9.2, 10.0
     
@@ -184,12 +180,11 @@ Kokkos 3.x
 主要テスト済みコンパイラは、リリースモードにおいて、エラーとして警告を出して、合格しています。 包括的なバックエンドの組み合わせでテストされます（つまり、OpenMP、Pthreads、Serial、OpenMP+Serial 等）。
 以下のフラッグセットを使用しています:
 
-
 * GCC:
 
 .. code-block:: bash
 
-  -Wall -Wunused-parameter -Wshadow -pedantic
+-Wall -Wunused-parameter -Wshadow -pedantic
   -Werror -Wsign-compare -Wtype-limits
   -Wignored-qualifiers -Wempty-body
   -Wclobbered -Wuninitialized
@@ -198,7 +193,7 @@ Kokkos 3.x
 
 .. code-block:: bash
 
-  -Wall -Wunused-parameter -Wshadow -pedantic
+-Wall -Wunused-parameter -Wshadow -pedantic
   -Werror -Wsign-compare -Wtype-limits
   -Wuninitialized
 
@@ -206,7 +201,7 @@ Kokkos 3.x
 
 .. code-block:: bash
 
-  -Wall -Wunused-parameter -Wshadow -pedantic
+-Wall -Wunused-parameter -Wshadow -pedantic
   -Werror -Wsign-compare -Wtype-limits
   -Wuninitialized
 
@@ -214,10 +209,10 @@ Kokkos 3.x
 
 .. code-block:: bash
 
-  -Wall -Wunused-parameter -Wshadow -pedantic
+-Wall -Wunused-parameter -Wshadow -pedantic
   -Werror -Wsign-compare -Wtype-limits
   -Wuninitialized
 
 .. note::
 
-  他のコンパイラも、時折、特に、開発ブランチからマスターブランチへのプッシュ時にテストされます。 これらは、 ``-Werror`` なしで、限られたバックエンドに対しては、あまり厳密なテストは行われていません。
+他のコンパイラも、時折、特に、開発ブランチからマスターブランチへのプッシュ時にテストされます。 これらは、 ``-Werror`` なしで、限られたバックエンドに対しては、あまり厳密なテストは行われていません。
