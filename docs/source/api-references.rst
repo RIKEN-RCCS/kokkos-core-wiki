@@ -1,4 +1,4 @@
-API References
+API 参照
 ##############
 
 .. toctree::
@@ -14,26 +14,28 @@ API References
 
 :doc:`API/core-index`
 ~~~~~~~~~~~~~~~~~~~~~
-The fundamental abstractions for execution (``parallel_for``,
-``parallel_reduce``, ``parallel_scan``) and data (``View``).
+実行のための基本的な抽象化 (``parallel_for``,
+``parallel_reduce``, ``parallel_scan``) およびデータ (``View``).
 
 :doc:`API/algorithms-index`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Utility classes for pseudo-random number generation, sorting algorithms,
-STL-like parallel algorithms.
+擬似乱数生成用のユーティリティクラス、ソートアルゴリズム、
+STL ライクな並列アルゴリズム
 
 :doc:`API/containers-index`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Exotic view-based containers, such as ``DualView``, ``ScatterView``, or ``OffsetView``.
+特殊なビューベースのコンテナ（``DualView``、 ``ScatterView``、 ``OffsetView`` など）
+
 
 :doc:`API/simd-index`
 ~~~~~~~~~~~~~~~~~~~~~
-Data-parallel vector types.
+データ並列ベクトル型。
 
 :doc:`Alphabetical <API/alphabetical>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-List of all library features in alphabetical order.
+アルファベット順のライブラリ機能一覧。
+
 
 :doc:`deprecations`
 ~~~~~~~~~~~~~~~~~~~
-List of obsolete features that have been deprecated and/or removed.
+廃止および/または削除された非推奨機能の一覧。

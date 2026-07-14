@@ -1,10 +1,9 @@
-Documentation Templates
+文書化テンプレート
 =======================
 
-The following documents are templates that may be useful for documenting new API members. For each template, you can see the source by clicking
-on the "Edit this page" (pencil button) on the top right corner.
+以下の文書は、新たな API メンバーの文書化に有用である可能性のあるテンプレートです。各テンプレートについて、右上隅にある "本ページ編集" (鉛筆ボタン) on the top right corner.をクリックすることにより、ソースを見ることができます。
 
 .. toctree::
    :maxdepth: 1
 
-   Class API Template <class_api>
+   クラス API テンプレート <class_api>

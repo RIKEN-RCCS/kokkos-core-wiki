@@ -2,21 +2,20 @@
 ``equal``
 =========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
+2つの範囲または2つのランク1 ``ビュー`` が等しい場合、真を返します。
 
-Returns true if two ranges or two rank-1 ``View`` s are equal.
+インターフェイス
+----------------
 
-Interface
----------
-
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -94,8 +93,8 @@ Overload set accepting execution space
 	      const Kokkos::View<DataType2, Properties2...>& view2,
 	      BinaryPredicate pred);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -145,58 +144,53 @@ Overload set accepting a team handle
 	      BinaryPredicate pred);
 
 
-Overload Set Detailed Description
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+オーバーロードセット詳細説明
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- (1,2,3,4,13,14): returns true if the range ``[first1, last1)`` is equal to the
-  range ``[first2, first2 + (last1 - first1))``, and false otherwise
+- (1,2,3,4,13,14): 範囲 ``[first1, last1)`` が
+  範囲 ``[first2, first2 + (last1 - first1))`` に等しい場合には、真を返し、そうでない場合には、偽を返します。
 
-- (5,6,7,8,15,16): returns true if the range ``[first1, last1)`` is equal
-  to the range ``[first2, last2)``, and false otherwise
+- (5,6,7,8,15,16): 範囲 ``[first1, last1)`` が 範囲 ``[first2, last2)`` に等しい場合には、真を返し、そうでない場合には、偽を返します。
 
-- (9,10,11,12,17,18): returns true if ``view1`` and ``view2`` are equal and false otherwise
+- (9,10,11,12,17,18): ``view1`` および ``view2`` が等しい場合には、真を返し、そうでない場合には、偽を返します。
 
-- where applicable, the binary predicate ``pred`` is used to check equality between
-  two elements, otherwise ``operator ==`` is used
+- 該当する場合、二項述語 ``pred`` は、二つの要素間の等価性を確認するために使用されます。
+  そうでない場合には、 ``operator ==`` が使用されます。
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - (1,3,5,7): The default string is "Kokkos::equal_iterator_api_default"
+  - (1,3,5,7): デフォルト文字列は、 "Kokkos::equal_iterator_api_default"。
 
-  - (9,11): The default string is "Kokkos::equal_view_api_default"
+  - (9,11):  デフォルト文字列は、"Kokkos::equal_view_api_default"。
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first1``, ``last1``, ``first2``, ``last2``: iterators defining the ranges to read and compare
+- ``first1``, ``last1``, ``first2``, ``last2``: 読み取りおよび比較を行う範囲を定義するイテレータ
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last1 >= first1``
+  - 有効な範囲、つまり、 ``last1 >= first1`` を表す必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view1``, ``view2``: views to compare
+- ``view1``, ``view2``: 比較するためのビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``pred``: *binary* functor returning ``true`` if two arguments should be considered "equal".
+- ``pred``: 二つの引数が "等しい" と見なされる場合に ``真`` を返す *二項* ファンクタ。
 
-  ``pred(a,b)`` must be valid to be called from the execution space passed, or
-  the execution space associated with the team handle, and convertible to bool
-  for every pair of arguments ``a,b`` of type ``ValueType1`` and ``ValueType2``,
-  respectively, ``ValueType1`` and ``ValueType{1,2}`` are the value types of
-  ``IteratorType{1,2}`` or ``view{1,2}``, and must not modify ``a,b``.
+  ``pred(a,b)`` は、引数として渡された実行空間から呼び出されるために、有効でなければならず、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 ``ValueType1`` および ``ValueType2`` の引数が、それぞれ  のすべてのペアについて、ブール型に変換可能で、そこでは、 ``ValueType1`` および ``ValueType{1,2}`` が、 ``IteratorType{1,2}`` または ``view{1,2}`` の値型、または ``view`` であり、  ``a,b`` を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
@@ -208,19 +202,19 @@ Parameters and Requirements
       }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-If the elements of the two ranges or Views are equal, returns ``true``, otherwise ``false``.
+2つの範囲またはビューの要素が等しい場合には、 ``真`` を返し、そうでない場合には、 ``偽`` を返します。
 
-Corner cases when ``false`` is returned:
+ ``偽`` が返される特殊なケース:
 
-- if ``view1.extent(0) != view2.extent(1)`` for all overloads accepting Views
+- ビューを受け入れるすべてのオーバーロードについて、 ``view1.extent(0) != view2.extent(1)`` である場合。
 
-- if the length of the range ``[first1, last)`` is not equal to length of ``[first2,last2)``
+- 範囲 ``[first1, last)`` の長さが、 ``[first2,last2)`` の長さに等しくない場合。
 
 
-Example
+例
 -------
 
 .. code-block:: cpp
@@ -239,14 +233,14 @@ Example
    using view_type = Kokkos::View<exespace, int*>;
    view_type a("a", 15);
    view_type b("b", 15);
-   // fill a,b somehow
+   // 何らかの方法で a,b を満たす
 
-   // create functor
+   // ファンクタを作成
    IsEqualFunctor<int,int> p();
 
    bool isEqual = KE::equal(exespace, KE::begin(a), KE::end(a),
                             KE::begin(b), KE::end(b) p);
 
-   // To run explicitly on the host (assuming a and b are accessible on Host)
+   // ホスト上で明示的に実行（aとbがホスト上でアクセス可能であることを想定）
    bool isEqual = KE::equal(Kokkos::DefaultHostExecutionSpace(), KE::begin(a), KE::end(a),
                             KE::begin(b), KE::end(b), p);

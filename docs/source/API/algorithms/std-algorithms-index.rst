@@ -1,5 +1,5 @@
-Std Algorithms
-##############
+Std アルゴリズム
+#########################
 
 .. toctree::
    :maxdepth: 1

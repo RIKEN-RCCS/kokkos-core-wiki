@@ -1,7 +1,7 @@
 
 # `replace_copy`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -47,38 +47,37 @@ auto replace_copy(const std::string& label,
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-Copies the elements from range `[first_from, last_from)` to another range
-beginning at `first_to` (overloads 1,2) or from `view_from` to `view_to`
-(overloads 3,4) replacing with `new_value` all elements that equal `old_value`.
-Comparison between elements is done using `operator==`.
+`old_value` と等しいすべての要素を `new_value` で置換して、範囲 `[first_from, last_from)` の要素を、別の範囲
+`first_to` から始まる範囲（オーバーロード 1,2）または `view_from` から `view_to` までの範囲
+（オーバーロード 3,4）にコピーします。`operator==` を使用して、要素間の比較を実行します。
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance
+  - 実行空間インスタンス
 - `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1, the default string is: "Kokkos::replace_copy_iterator_api_default"
-  - for 3, the default string is: "Kokkos::replace_copy_view_api_default"
+  - デバッグ目的で実装カーネルに名付けるために使用。
+  - 1 について、デフォルト文字列は、: "Kokkos::replace_copy_iterator_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::replace_copy_view_api_default"
 - `first_from, last_from`:
-  - range of elements to copy from
-  - must be *random access iterators*
-  - must represent a valid range, i.e., `last_from >= first_from` (checked in debug mode)
-  - must be accessible from `exespace`
+  - コピー元への要素の範囲
+  - *ランダムアクセスイテレータ* でなければなりません。
+  - 有効範囲、つまり、 ``last >= first`` を表さなければなりません。 (デバッグモードで確認済み)
+  - `exespace` からアクセス可能でなければなりません。
 - `first_to`:
-  - beginning of the range to copy to
-  - must be a *random access iterator*
-  - must be accessible from `exespace`
+  - コピー先への範囲の始め
+  - *ランダムアクセスイテレータ* でなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `view_from`, `view_to`:
-  - source and destination views
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - ソースおよび宛先のビュー
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `old_value`, `new_value`:
-  - self-explanatory
+  - 説明を要しません。
 
 
-## Return
+## 戻り値
 
-Iterator to the element *after* the last element copied.
+コピーされた最後の要素の *後* の要素へのイテレータ。

@@ -1,21 +1,21 @@
-Reduction Scalar Types
+縮約スカラー型
 ######################
 
 .. list-table::
    :widths: 20 65 15
    :header-rows: 1
 
-   * - Class template
-     - Description
-     - Builtin Reducer
+   * - クラステンプレート
+     - 説明
+     - 組み込みリデューサー
    * - :doc:`MinMaxLocScalar`
-     - stores a minimum, a maximum, and their respective locations
+     - 最小値、最大値、およびそれぞれの保存先を格納します。
      - :cpp:class:`MinMaxLoc`
    * - :doc:`MinMaxScalar`
-     - stores a minimum value and a maximum value
+     - 最小値と最大値を格納します。
      - :cpp:class:`MinMax`
    * - :doc:`ValLocScalar`
-     - stores a single value and its location
+     - 単一の値とその位置を格納します。
      - :cpp:class:`MinLoc`, :cpp:class:`MaxLoc`
 
 .. toctree::

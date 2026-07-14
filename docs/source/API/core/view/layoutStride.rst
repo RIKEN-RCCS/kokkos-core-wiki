@@ -4,46 +4,46 @@
 .. role:: cpp(code)
     :language: cpp
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
------
+使用方法
+----------
 
 .. code-block:: c++
 
     Kokkos::View<float***> full_mesh; // an entire mesh
     Kokkos::View<float**, Kokkos::LayoutStride> mesh_subcomponent;
-    mesh_subcomponent = Kokkos::subview(full_mesh,Kokkos::ALL(), 0, Kokkos::ALL()); // take x and z components
+    mesh_subcomponent = Kokkos::subview(full_mesh,Kokkos::ALL(), 0, Kokkos::ALL()); //  x および z 成分を選択
 
-Description
------------
+説明
+----------------------
 
 .. cpp:class:: LayoutStride
 
-   When provided to a multidimensional View, lays out memory with an arbitrary stride.
-   Most frequently encountered when taking a noncontiguous subview of some larger view.
+   多次元ビューに提供された場合、 任意のストライドでメモリを配置します。
+   より大きなビューの一部として非連続なサブビューを取得する際に最も頻繁に遭遇します。
 
-   .. rubric:: Public Class Members
+   .. rubric:: パブリッククラスメンバー
 
    .. cpp:member:: size_t dimension[ARRAY_LAYOUT_MAX_RANK];
 
-      An array containing the size of each dimension of the Layout
+      レイアウトの各次元のサイズを含む配列。
 
    .. cpp:member:: size_t stride[ARRAY_LAYOUT_MAX_RANK];
 
-      An array containing the stride for each dimension of the Layout
+      レイアウトの各次元のストライドを含む配列。
 
    .. cpp:member:: static constexpr bool is_extent_constructible = false;
 
-      A boolean to allow detection that this class is extent constructible
+      このクラスが拡張可能なコンストラクタを持つかどうかを検出するためのブール値。
 
-   .. rubric:: Public Typedefs
+   .. rubric:: パブリック型定義
 
    .. cpp:type:: array_layout
 
-      A tag signifying that this models the Layout concept
+      このモデルがレイアウト概念を表現していることを示すタグ。
 
-   .. rubric:: Constructors
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION explicit constexpr LayoutStride(size_t N0 = 0, size_t S0 = 0, \
 			   size_t N1 = 0, \
@@ -52,37 +52,38 @@ Description
                            size_t S4 = 0, size_t N5 = 0, size_t S5 = 0, \
                            size_t N6 = 0, size_t S6 = 0, size_t N7 = 0, size_t S7 = 0);
 
-      Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout
+      レイアウトの対応する次元のサイズを設定するための、最大8つのサイズを受け取るコンストラクタ。
 
    .. cpp:function:: LayoutStride(LayoutStride const&) = default;
 
-      Default copy constructor, element-wise copies the other Layout
+      デフォルトのコピーコンストラクタは、要素単位で他のレイアウトをコピーします。
 
    .. cpp:function:: LayoutStride(LayoutStride&&) = default;
 
-      Default move constructor, element-wise moves the other Layout
+      デフォルトの移動コンストラクタは、要素単位で他のレイアウトを移動します。
 
-   .. rubric:: Assignment operators
+   .. rubric:: 代入演算子
 
    .. cpp:function:: LayoutStride& operator=(LayoutStride const&) = default;
 
-      Default copy assignment, element-wise copies the other Layout
+      デフォルトのコピー代入は、要素単位で他のレイアウトをコピーします。
 
    .. cpp:function:: LayoutStride& operator=(LayoutStride&&) = default;
 
-      Default move assignment, element-wise moves the other Layout
+      デフォルトの移動演算子は、要素単位で他のレイアウトを移動します。
 
-   .. rubric:: Functions
+   .. rubric:: 関数
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION static LayoutStride order_dimensions(int const rank, \
 		   iTypeOrder const* const order, iTypeDimen const* const dimen);
 
-      Calculates the strides given ordered dimensions
+      指定された順序の次元に基づいてストライドを計算します。
 
-Example
+
+例
 -------
 
-Creating a 3D unmanaged strided view around a ptr. (You can also just have a view allocate itself by providing a label)
+ptr 周辺に 3D 非管理型ストライド付きビューを作成します。 (ラベルを指定することで、ビュー自体に配置させることもできます。)
 
 .. code-block:: cpp
 
@@ -90,30 +91,30 @@ Creating a 3D unmanaged strided view around a ptr. (You can also just have a vie
     int main(int argc, char* argv[]) {
         Kokkos::initialize(argc,argv);
         {
-            // Some storage
+            // 一部のストレージ
             int* ptr = new int[80];
-            // Creating a layout object
+            // レイアウトオブジェクトを作成
             Kokkos::LayoutStride layout(3,1,3,5,4,20);
-            // Create a unmanaged view from a pointer and a layout
+            // ポインタおよびレイアウトより、管理対象外のビューを作成
             Kokkos::View<int***, Kokkos::LayoutStride, Kokkos::HostSpace> a(ptr,layout);
 
-            // Get strides
+            // ストライドを取得
             int strides[8];
             a.stride(strides);
 
-            // Print extents and strides
+            // 範囲およびストライドをプリント
             printf("Extents: %d %d %d\n",a.extent(0),a.extent(1),a.extent(2));
             printf("Strides: %i %i %i\n",strides[0],strides[1],strides[2]);
 
-            // delete storage
-            delete [] ptr;
+            // ストレージを削除
+            削除 [] ptr;
         }
         Kokkos::finalize();
     }
 
-Output:
+出力:
 
 .. code-block::
 
-    Extents: 3 3 4
-    Strides: 1 5 20
+    範囲: 3 3 4
+    ストライド: 1 5 20

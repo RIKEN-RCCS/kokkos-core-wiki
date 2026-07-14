@@ -2,20 +2,20 @@
 ``reverse``
 ===========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Reverses the order of the elements in a range or in rank-1 ``View``.
+範囲またはランク1の ``View`` 内にある要素の順序を逆にします。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -34,8 +34,8 @@ Overload set accepting execution space
    void reverse(const std::string& label, const ExecutionSpace& ex,                  (4)
                 const ::Kokkos::View<DataType, Properties...>& view);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -51,36 +51,36 @@ Overload set accepting a team handle
    void reverse(const TeamHandleType& teamHandle,                                    (6)
                 const ::Kokkos::View<DataType, Properties...>& view);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - for 1, the default string is: "Kokkos::reverse_iterator_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::reverse_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::reverse_view_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::reverse_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first, last``: range of elements to reverse
+- ``first, last``: 逆にする要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲、つまり、 ``last >= first`` を表す必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``view``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-None
+無し

@@ -1,21 +1,20 @@
 ``remove_copy``
 ===============
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Copies the elements from a range to a new range starting at ``first_to`` or from ``view_from``
-to ``view_dest`` omitting those that are equal to ``value``.
+``value`` と等しい要素は除外して、指定された範囲の要素を、 ``first_to`` から始まる、または ``view_from`` から ``view_dest`` への新しい範囲にコピーします。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -62,8 +61,8 @@ Overload set accepting execution space
                     const ValueType& value);
 
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -91,44 +90,46 @@ Overload set accepting a team handle
                     const Kokkos::View<DataType2, Properties2...>& view_dest,
                     const ValueType& value);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::remove_copy_iterator_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::remove_copy_iterator_api_default".
 
-  - 3: The default string is "Kokkos::remove_copy_view_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::remove_copy_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first_from, last_from``: range of elements to copy from
+- ``first_from, last_from``: コピー元の要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - 例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されるなど、*ランダムアクセスイテレータ* でなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  -有効範囲、つまり、 ``last >= first`` を表す必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``first_to``: beginning of the range to copy to
+- ``first_to``: コピー先への範囲の始め
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
-- ``view_from``, ``view_dest``: source and destination views
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+- ``view_from``, ``view_dest``: ソースおよび宛先のビュー
 
-- ``value``: target value to omit
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-Return Value
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+
+- ``value``: 削除する対象値
+
+戻り値
 ~~~~~~~~~~~~
 
-Iterator to the element after the last element copied.
+コピーされた最後の要素の後の要素へのイテレータ。

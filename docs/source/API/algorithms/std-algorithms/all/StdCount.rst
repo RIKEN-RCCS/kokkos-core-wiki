@@ -1,20 +1,21 @@
 ``count``
 =========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Returns the number of elements in a range or in rank-1 ``View`` that are equal to a target value.
+範囲内、またはランク1の ``ビュー`` において、指定されたターゲット値と等しい要素の数を返します。
 
-Interface
----------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+インターフェイス
+----------------
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -36,12 +37,12 @@ Overload set accepting execution space
 	      const ::Kokkos::View<DataType, Properties...>& view, const T& value);
 
    template <class ExecutionSpace, class DataType, class... Properties, class T>
-   auto count(const std::string& label, const ExecutionSpace& exespace,                 (4)
+   auto count(const std::string& label, const ExecutionSpace& exespace,           (4)
 	      const ::Kokkos::View<DataType, Properties...>& view,
 	      const T& value);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -61,36 +62,36 @@ Overload set accepting a team handle
 	      const T& value);
 
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::count_iterator_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::count_iterator_api_default".
 
-  - 3: The default string is "Kokkos::count_view_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::count_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-- ``first, last``: range of elements to search in
+- ``first, last``: 検索対象となる要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲、つまり、 last >= first を表す必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``view``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Returns the number of elements in the range ``first, last`` or in ``view`` that are equal to ``value``.
+範囲 ``first, last`` または ``値`` に等しい ``ビュー`` の中にある要素数を返します。

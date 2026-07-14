@@ -1,19 +1,13 @@
 .. include:: ../mydefs.rst
 
-Configuration Guide
+設定ガイド
 ###################
 
 .. note::
-   The ``ccmake`` graphical user interface offers a convenient way to explore
-   available CMake options and their current values. It may be more up to date
-   with the Kokkos version that you are using.
-   **A word of warning:** variables with names containing ``IMPL`` are private
-   implementation details. Avoid modifying these unless you have a deep
-   understanding of their implications and are aware that they might change
-   without notice.
+   ``ccmake`` のグラフィカルユーザーインターフェースは、利用可能な CMake オプションとその現在の値を確認する便利な方法を提供します.   使用中のKokkosバージョンによりますが、より最新の状態になっている可能性があります。**警告の文言:** ``IMPL`` という名前を含む変数は、実装の詳細を扱うプライベートな変数です。これらの設定については、その影響について深く理解した上で予告なく変更される可能性があることを認識している場合を除き、変更することは控えてください。 
 
 
-This page is organized in four sections:
+本ページは、四つのセクションに分かれています:
 
 - :ref:`keywords_backends`
 - :ref:`keywords_enable_options`
@@ -22,33 +16,30 @@ This page is organized in four sections:
 
 .. _keywords_backends:
 
-Backend selection
-=================
+バックエンドセクション
+==============================
 
-**Default State:**
-All backends are disabled by default.  This ensures you explicitly choose the
-backends you need for your specific hardware setup.
-If no backend is enabled explicitly, the Serial backend will be enabled.
+**デフォルト状態:**
+すべてのバックエンドはデフォルトで無効化されます。 これにより、
+お客様の特定のハードウェア構成に必要なバックエンドを
+明示的に選択できることが保証されます。
 
-**Enabling Backends:**
-You can enable backends by configuring with ``-DKokkos_ENABLE_<BACKEND>=ON``
-flag, where ``<BACKEND>`` is replaced with the specific backend you want to
-enable (e.g. ``-DKokkos_ENABLE_CUDA=ON`` for CUDA).
+明示的にバックエンドが有効化されていない場合、シリアルバックエンドが有効となります。
 
-**Restrictions:**
-  Mutual Exclusion: You can only have one device backend (e.g., CUDA, HIP,
-  SYCL) and one host parallel backend (e.g., OpenMP, C++ Threads) enabled at
-  the same time. This is because these backends manage parallelism in
-  potentially conflicting ways.
+**バックエンドの有効化:**
+バックエンドは、 ``-DKokkos_ENABLE_<BACKEND>=ON``
+フラグで設定することで有効にできますが、
+そこでは、 ``<BACKEND>`` は有効化することを望む特定のバックエンドに置き換えてください。
+（例：CUDA の場合は、 ``-DKokkos_ENABLE_CUDA=ON`` ）
 
-  Host Backend Requirement: At least one host backend must always be enabled.
-  This is because Kokkos code execution typically starts on the host (CPU)
-  before potentially being offloaded to devices (GPUs, accelerators). If you
-  don't explicitly enable a host backend, Kokkos will automatically enable the
-  Serial backend, which provides a sequential execution model.
+**制約:**
+  相互排斥: 同時に有効にできるデバイスバックエンド（例：CUDA、HIP、SYCL）とホスト並列バックエンド（例：OpenMP、C++スレッド）は、それぞれ1つずつに限られます。なぜなら、これらのバックエンドが並列処理を潜在的な競合が生じる方法で管理するためです。
 
-Serial backend
---------------
+  ホストバックエンド要件: 少なくとも、常に1つのホストを有効化する必要があります。
+  これは、Kokkosのコード実行が通常、ホスト（CPU）上で開始され、その後、デバイス（GPU、アクセラレータ）へオフロードされる可能性があるためです。Kokkos のコード実行が通常、ホスト（CPU）上で開始され、その後、デバイス（GPU、アクセラレータ）へオフロードされる可能性があるためです。ホストバックエンドを明示的に有効化しない場合、Kokkos は自動的にシリアルバックエンドを有効化しますが、それは順次実行モデルを提供します。
+
+シリアルバックエンド
+-----------------------------
 
 .. list-table::
     :widths: 25 65
@@ -56,12 +47,12 @@ Serial backend
     :align: left
 
     * -
-      - Description/info
+      - 説明/情報
 
     * - ``Kokkos_ENABLE_SERIAL``
-      - To build the Serial backend targeting CPUs
+      -  CPU を対象としたシリアルバックエンドの構築
 
-Host parallel backends
+ホスト並列バックエンド
 ----------------------
 
 .. list-table::
@@ -70,19 +61,19 @@ Host parallel backends
     :align: left
 
     * -
-      - Description/info
+      - 説明/情報
 
     * - ``Kokkos_ENABLE_OPENMP``
-      - To build the OpenMP backend targeting CPUs
+      -  CPU を対象とした OpenMP バックエンドの構築
 
     * - ``Kokkos_ENABLE_THREADS``
-      - To build the C++ Threads backend
+      -  C++ スレッドバックエンドの構築
 
     * - ``Kokkos_ENABLE_HPX``
-      - :red:`[Experimental]` To build the HPX backend
+      - :red:`[Experimental]`  HPX バックエンドの構築
 
-Device backends
----------------
+デバイスバックエンド
+---------------------------
 
 .. list-table::
     :widths: 25 65
@@ -90,30 +81,30 @@ Device backends
     :align: left
 
     * -
-      - Description/info
+      - 説明/情報
 
     * - ``Kokkos_ENABLE_CUDA``
-      - To build the CUDA backend targeting NVIDIA GPUs
+      - NVIDIA GPUs 対象とした CUDA バックエンドを構築
 
     * - ``Kokkos_ENABLE_HIP``
-      - To build the HIP backend targeting AMD GPUs
+      - AMD GPUs を対象とした HIP バックエンドを構築
 
     * - ``Kokkos_ENABLE_SYCL``
-      - To build the SYCL backend targeting Intel GPUs
+      - GPUs を対象とした SYCL バックエンドを構築
 
     * - ``Kokkos_ENABLE_OPENMPTARGET``
-      - :red:`[Experimental]` To build the OpenMP Target backend for offloading to accelerator devices
+      - :red:`[Experimental]` アクセラレータデバイスへのオフロードのための OpenMP ターゲットバックエンドを構築
 
     * - ``Kokkos_ENABLE_OPENACC``
-      - :red:`[Experimental]` To build the OpenACC backend for offloading to accelerator devices
+      - :red:`[Experimental]` アクセラレータデバイスへのオフロードのための OpenACC バックエンドを構築
 
 
 .. _keywords_enable_options:
 
-Options
-=======
+オプション
+==================
 
-General options
+一般オプション
 ---------------
 
 .. list-table::
@@ -122,46 +113,46 @@ General options
     :align: left
 
     * -
-      - Description/info
-      - Default
+      - 説明/情報
+      - デフォルト
 
     * * ``Kokkos_ENABLE_BENCHMARKS``
-      * Build benchmarks
+      * ベンチマークを構築
       * ``OFF``
 
     * * ``Kokkos_ENABLE_EXAMPLES``
-      * Build examples
+      * 例を構築
       * ``OFF``
 
     * * ``Kokkos_ENABLE_TESTS``
-      * Build tests
+      * テストを構築
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_3``
-      * Enable deprecated code in the Kokkos 3.x series :red:`[Removed in 4.3]`
+      * Kokkos 3.x 系列における非推奨のコードの有効化 :red:`[バージョン 4.3において削除]`
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_4``
-      * Enable deprecated code in the Kokkos 4.x series
+      * Kokkos 4.x 系列における非推奨のコードの有効化
       * ``ON``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_5``
-      * Enable deprecated code in the Kokkos 5.x series
+      * Kokkos 5.x 系列における非推奨のコードの有効化
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATION_WARNINGS``
-      * Whether to raise warnings at compile time when using deprecated Kokkos facilities
+      * 非推奨のKokkos機能を使用する際、コンパイル時に警告を表示するかどうか
       * ``ON``
 
     * * ``Kokkos_ENABLE_TUNING``
-      * Create bindings for tuning tools
+      * チューニングツール用のバインディングを作成
       * ``OFF``
 
     * * ``Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION``
-      * Aggressively vectorize loops
+      * 積極的にループをベクトル化
       * ``OFF``
 
-Debugging
+デバッグ
 ---------
 .. list-table::
     :widths: 25 65 35
@@ -169,118 +160,116 @@ Debugging
     :align: left
 
     * -
-      - Description/info
-      - Default
-
+      - 説明/情報
+      - デフォルト
+  
     * * ``Kokkos_ENABLE_DEBUG``
-      * Activate extra debug features - may increase compile times
-      * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise
+      * 追加のデバッグ機能を有効化 - コンパイル時間が長くなる可能性があります
+      * ``CMAKE_BUILD_TYPE`` が ``Debug`` の場合 ``ON`` 、それ以外の場合は ``OFF``
 
     * * ``Kokkos_ENABLE_DEBUG_BOUNDS_CHECK``
-      * Use bounds checking - will increase runtime
+      * 境界チェックを使用 - これにより実行時間が長くなります
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` :red:`[Deprecated since 4.7]`
-      * Debug check on dual views
-      * (see below [#dual_view_modify_check]_)
+      * デュアルビューのデバッグチェック
+      * (以下の [#dual_view_modify_check]_ 参照)
 
 
-.. [#dual_view_modify_check] ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is:
+.. [#dual_view_modify_check] ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` デフォルト値は、以下の通り:
   
-  * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise (until Kokkos 4.7)
-  * always ``ON`` (since Kokkos 4.7)
+  * ``CMAKE_BUILD_TYPE`` が ``Debug`` の場合 ``ON`` 、それ以外の場合は ``OFF`` (Kokkos 4.7まで)
+  * 常に ``ON`` ( Kokkos 4.7以降)
 
 .. _keywords_enable_backend_specific_options:
 
-Backend-specific options
-------------------------
+    
+バックエンド特有のオプション
+-------------------------------------
 .. list-table::
     :widths: 25 65 35
     :header-rows: 1
     :align: left
 
     * -
-      - Description/info
-      - Default
-
+      - 説明/情報
+      - デフォルト
+  
     * * ``Kokkos_ENABLE_CUDA_CONSTEXPR``
-      * Activate experimental relaxed constexpr functions
+      * 実験的リラックス型 constexpr 関数を有効化
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_CUDA_LAMBDA`` :red:`[Deprecated since 4.1]`
-      * Activate experimental lambda features
-      * (see below [#cuda_lambda]_)
+    * * ``Kokkos_ENABLE_CUDA_LAMBDA`` :red:`[バージョン 4.1以降非推奨]`
+      * 実験的ラムダ型機能を有効化
+      * (以下の [#cuda_lambda]_ 参照)
 
     * * ``Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE``
-      * Enable relocatable device code (RDC) for CUDA [#rdc_with_shared_libs]_
+      * CUDA [#rdc_with_shared_libs]_ のためのリロケータブルデバイスコード（RDC）を有効化
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_CUDA_UVM`` :red:`[Deprecated since 4.0]` see `Transition to alternatives <../usecases/Moving_from_EnableUVM_to_SharedSpace.html>`_
-      * Use unified memory (UM) by default for CUDA
+    * * ``Kokkos_ENABLE_CUDA_UVM`` :red:`[4.0以降非推奨]` `代替手段への移行 <../usecases/Moving_from_EnableUVM_to_SharedSpace.html>`_ 参照。
+      * CUDA については、デフォルトで統一メモリ（UM）を使用
       * ``OFF``
 
     * * ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC``
-      * Use ``cudaMallocAsync`` (requires CUDA Toolkit version 11.2 or higher). This
-	optimization may improve performance in applications with multiple CUDA streams per device, but it
-	is known to be incompatible with MPI distributions built on older versions of UCX
-	and many Cray MPICH instances. See `known issues <../known-issues.html#cuda>`_.
-      * (see below [#cuda_malloc_async]_)
+      * ``cudaMallocAsync`` ( CUDA Toolkit version 11.2以降が必要 ) を使用。 この最適化により、デバイスあたり複数のCUDAストリームを使用するアプリケーションにおいて、パフォーマンスが向上する可能性がありますが、 MPI ディストリビューションは、古いバージョンの UCX および多くの Cray MPICH インスタンスに基づいて構築されたものとは互換性がないことは広く認識されています。 `既知の課題 <../known-issues.html#cuda>`_ を参照してください。
+      * (以下の [#cuda_malloc_async]_ を参照)
 
     * * ``Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS``
-      * Instantiate multiple kernels at compile time - improve performance but increase compile time
+      * コンパイル時に複数のカーネルをインスタンス化 - それによってパフォーマンスは向上しますが、コンパイル時間は増加します
       * ``OFF``
 
     * * ``Kokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE``
-      * Enable relocatable device code (RDC) for HIP [#rdc_with_shared_libs]_
+      * HIP [#rdc_with_shared_libs]_ 向けにリロケータブルデバイスコード（RDC）を有効化します 
       * ``OFF``
 
     * * ``Kokkos_ENABLE_SYCL_RELOCATABLE_DEVICE_CODE``
-      * Enable relocatable device code (RDC) for SYCL [#rdc_with_shared_libs]_ (since Kokkos 4.5)
+      * SYCL [#rdc_with_shared_libs]_ 向けにリロケータブルデバイスコード（RDC）を有効化します（Kokkos 4.5以降）。
       * ``OFF``
 
     * * ``Kokkos_ENABLE_ATOMICS_BYPASS``
-      * Disable atomics when no host parallel nor device backend is enabled for Serial only builds (since Kokkos 4.3)
+      * シリアル専用ビルドにおいて、ホスト並列処理もデバイスバックエンドも有効化されていない場合、アトミック操作を無効化します (Kokkos 4.3以降)
       * ``OFF``
 
     * * ``Kokkos_ENABLE_IMPL_HPX_ASYNC_DISPATCH``
-      * Enable asynchronous dispatch for the HPX backend
+      * HPX バックエンドの非同期ディスパッチを有効化します
       * ``ON``
 
     * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
-      * Build with the CMake language feature (CUDA or HIP only) [#cmake_language]_
+      * CMake 言語機能を使用して構築してください（CUDAまたはHIPのみ） [#cmake_language]_
       * ``OFF``
 
     * * ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES``
-      * Make Kokkos installation usable in CXX and backend-compatible languages (CUDA or HIP) [#multiple_languages]_ (since Kokkos 5.0)
+      * CXXおよびバックエンド互換言語（CUDAまたはHIP）において、Kokkos のインストールが利用可能となるようにします。 [#multiple_languages]_ (Kokkos 5.0以降)
       * ``OFF``
 
 
-.. [#cuda_lambda] ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
+.. [#cuda_lambda] ``Kokkos_ENABLE_CUDA_LAMBDA`` デフォルト値 は、 3.7まで ``OFF`` および 4.0以降 ``ON`` 
 
-.. [#cuda_malloc_async] ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` except in 4.2, 4.3, and 4.4
+.. [#cuda_malloc_async] ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` デフォルト値 は、4.2、4.3、 および 4.4以外で ``OFF``  
 
-.. [#rdc_with_shared_libs] ``Kokkos_ENABLE_<CUDA/HIP/SYCL>_RELOCATABLE_DEVICE_CODE`` requires a static library build.
-  RDC is not compatible with shared libraries. Therefore, this option can only be enabled when the ``BUILD_SHARED_LIBS`` variable is false.
+.. [#rdc_with_shared_libs] ``Kokkos_ENABLE_<CUDA/HIP/SYCL>_RELOCATABLE_DEVICE_CODE`` は、静的ライブラリのビルドが必要です。
+  RDC は共有ライブラリと互換性がありません。従って、このオプションは、 ``BUILD_SHARED_LIBS`` 変数が、偽の場合にのみ有効化可能です。
 
-.. [#cmake_language] ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE`` Building with the CMake language feature can cause problems in downstream libraries/applications.
-  CMake uses the file endings to determine the language a file should be compiled with. Since Kokkos files are named ``.cpp`` and ``.hpp``, they are associated with ``CXX`` in CMake.
-  This implies that source and header files that use Kokkos might need to be redefined to be treated as another language. Otherwise, the language is detected based on the file endings. This might lead to files not being able to compile (e.g. using Kokkos in a ``.cpp`` file instead of a ``.cu`` file leads to CMake detecting ``CXX`` instead of ``CUDA``).
-  Without specifying the language the compilation might fail depending on the capabilities of the ``CXX`` compiler to compile device code.
-  Furthermore, the architecture needs to be specified for every target in accordance with what ``Kokkos_ARCH_<...>`` is set and not with ``CMAKE_<LANG>_ARCHITECTURES``. This also implies only one architecture can be active.
+.. [#cmake_language] ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE`` CMake の言語機能を使用してビルドを行うと、下流のライブラリやアプリケーションで問題が発生する可能性があります。
+  CMake はファイルの拡張子を用いて、そのファイルがどの言語でコンパイルされるべきかを決定します。Kokkos のファイルは、 ``.cpp`` および``.hpp`` という名前であるため、CMake では``CXX`` に関連付けられています。
+  これは、Kokkosを使用するソースファイルやヘッダーファイルが、別の言語として扱われるよう再定義する必要があるかもしれないことを意味します。それ以外の場合は、ファイルの拡張子に基づいて言語が検出されます。これにより、ファイルがコンパイルできなくなる可能性があります。(例えば、 ``.cu`` ファイルではなく ``.cpp`` ファイルで Kokkos を使用すると、CMake が ``CUDA`` ではなく ``CXX`` を検出することになります)。
+  言語を指定しない場合、 ``CXX`` コンパイラがデバイスコードをコンパイルする能力によっては、コンパイルが失敗に終わる可能性があります。
+  さらに、各ターゲットのアーキテクチャは、 ``CMAKE_<LANG>_ARCHITECTURES`` を使用してではなく、 ``Kokkos_ARCH_<...>`` の設定に基づいて指定する必要があります。これはまた、アクティブなアーキテクチャは一つだけであることを意味します。 これはまた、活動可能なアーキテクチャは、一つだけであることを意味します。
 
-  An example for marking the files accordingly can be found in ``example/build_cmake_installed_kk_as_language``.
+  ファイルを適切にマークする例は、 ``example/build_cmake_installed_kk_as_language`` において、見られます。
 
-.. [#multiple_languages] ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES`` This option allows to use one installed Kokkos library in multiple CMake languages (``CXX`` and the language of the respective backend (``CUDA`` or ``HIP``)).
-  With this option enabled, Kokkos will use its compiler launcher script to redirect the ``CXX`` compiler unless the ``separable_compilation`` component is requested.
-  With the ``separable_compilation`` component, targets/projects/directories that link to Kokkos need to be marked manually via the CMake function ``kokkos_compilation``.
-  Since Kokkos is limited to a single architecture, the ``CMAKE_<LANG>_ARCHITECTURES`` must correspond to the architecture enabled in Kokkos.
+.. [#multiple_languages] ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES`` このオプションにより、インストール済みの Kokkos ライブラリを複数の CMake 言語（ ``CXX`` および対応するバックエンド言語（``CUDA`` または ``HIP`` ））で使用することが可能となります。
+  このオプションを有効にすると、Kokkos は、コンパイラランチャースクリプトを使用して、 ``separable_compilation`` コンポーネントが要求されない限り、 ``CXX`` コンパイラをリダイレクトします。
+  コンポーネントを使用する場合、Kokkos にリンクするターゲット/プロジェクト/ディレクトリは、CMake 関数  ``kokkos_compilation`` を用いて手動でマークする必要があります。
+  Kokkos は、単一のアーキテクチャに限定されているため、 ``CMAKE_<LANG>_ARCHITECTURES`` はKokkos で有効化されたアーキテクチャに対応している必要があります。
 
-  An example for using Kokkos with multiple languages can be found in ``example/build_cmake_installed_multilanguage``.
+  複数の言語でのKokkosの使用例は、 ``example/build_cmake_installed_multilanguage`` で確認できます。
 
-Development
+
+開発
 -----------
-These are intended for developers of Kokkos.  If you are a user, you probably
-should not be setting these.
+これらは、Kokkos の開発者向けです。 ユーザーであれば、おそらくこれらの設定は行うべきではないでしょう。
 
 .. list-table::
     :widths: 25 65 35
@@ -288,27 +277,27 @@ should not be setting these.
     :align: left
 
     * -
-      - Description/info
-      - Default
+      - 説明/情報
+      - デフォルト
 
     * * ``Kokkos_ENABLE_COMPILER_WARNINGS``
-      * Print all compiler warnings
+      * すべてのコンパイラ警告をプリント
       * ``OFF``
 
     * * ``Kokkos_ENABLE_HEADER_SELF_CONTAINMENT_TESTS``
-      * Check that headers are self-contained
+      * ヘッダーが自己完結していることを確認
       * ``OFF``
 
     * * ``Kokkos_ENABLE_LARGE_MEM_TESTS``
-      * Perform extra large memory tests
+      * 大規模な追加メモリテストを実施
       * ``OFF``
 
 .. _keywords_tpls:
 
-Third-Party Libraries (TPLs)
-============================
+サードパーティーライブラリ (TPLs)
+=========================================
 
-The following options control enabling TPLs:
+以下のオプションは、TPL を有効化して以下をコントロールします:
 
 .. list-table::
     :widths: 30 40 10 20
@@ -316,55 +305,55 @@ The following options control enabling TPLs:
     :align: left
 
     * -
-      - Description/info
-      - Default
-      - Notes
+      - 説明/情報
+      - デフォルト
+      - 注意事項
 
     * * ``Kokkos_ENABLE_HWLOC``
-      * Whether to enable the HWLOC library
+      * HWLOC ライブラリを有効化するかどうか
       * ``OFF``
       *
     * * ``Kokkos_ENABLE_LIBDL``
-      * Whether to enable the LIBDL library
+      * LIBDL ライブラリを有効化するかどうか
       * ``ON``
       *
     * * ``Kokkos_ENABLE_LIBQUADMATH``
-      * Whether to enable support for 128-bit floating-point types via GCC's Quad-Precision Math Library 
+      * GCC のクワッド精度数学ライブラリによる、128ビット浮動小数点型のサポートを有効化するかどうか 
       * ``OFF``
       *
     * * ``Kokkos_ENABLE_ONEDPL``
-      * Whether to enable the oneDPL library when using the SYCL backend
+      * SYCLバックエンドを使用する際、oneDPL ライブラリを有効化するかどうか
       * ``ON``
       *
     * * ``Kokkos_ENABLE_ROCTHRUST``
-      * Whether to enable the rocThrust library when using the HIP backend
+      * HIPバックエンドを使用する際、rocThrust ライブラリを有効にするかどうか
       * ``ON``
-      * (since Kokkos 4.3)
+      * ( Kokkos 4.3以降)
 
-The following options control finding and configuring non-CMake TPLs:
-
+以下のオプションは、CMake以外のテンプレート言語（TPL）の検索と設定を制御します:
+    
 .. list-table::
     :widths: 35 45 20
     :header-rows: 1
     :align: left
 
     * -
-      - Description/info
-      - Default
+      - 説明/情報
+      - デフォルト
 
-    * * ``Kokkos_CUDA_DIR`` or ``CUDA_ROOT``
-      * Location of CUDA install prefix for libraries
-      * PATH Default:
+    * * ``Kokkos_CUDA_DIR`` または ``CUDA_ROOT``
+      * ライブラリ用 CUDA インストールプリフィックスの場所
+      * PATH デフォルト:
 
-    * * ``Kokkos_HWLOC_DIR`` or ``HWLOC_ROOT``
-      * Location of HWLOC install prefix
-      * PATH Default:
+    * * ``Kokkos_HWLOC_DIR`` または ``HWLOC_ROOT``
+      * HWLOC インストールプレフィックスの場所
+      * PATH デフォルト:
 
-    * * ``Kokkos_LIBDL_DIR`` or ``LIBDL_ROOT``
-      * Location of LIBDL install prefix
-      * PATH Default:
+    * * ``Kokkos_LIBDL_DIR`` または ``LIBDL_ROOT``
+      * LIBDL インストールプレフィックスの場所
+      * PATH デフォルト:
 
-The following options control ``find_package`` paths for CMake-based TPLs:
+以下のオプションは、CMake ベースの TPL 用の ``find_package`` パスを制御します:
 
 .. list-table::
     :widths: 35 60 25
@@ -372,24 +361,25 @@ The following options control ``find_package`` paths for CMake-based TPLs:
     :align: left
 
     * -
-      - Description/info
-      - Default
+      - 説明/情報
+      - デフォルト
 
     * * ``HPX_DIR`` or ``HPX_ROOT``
-      * Location of HPX prefix (ROOT) or CMake config file (DIR)
-      * PATH Default:
+      * HPX プレフィックス（ROOT）または CMake 設定ファイル（DIR）の場所
+      * PATH デフォルト:
 
 .. _keywords_arch:
 
-Architectures
-=============
 
-CPU architectures
------------------
+アーキテクチャ
+=======================
 
-Kokkos does not automatically add or need compiler flags to optimize for a specific CPU architecture.
-Nevertheless, targeting a specific architecture allows the compiler to use SIMD instructions on the CPU.
-When compiling on the machine that the code also runs on, the easiest way to get the CPU code optimized is using the native option.
+CPU アーキテクチャ
+-----------------------
+
+Kokkos は、特定の CPU アーキテクチャ向けに最適化するため、コンパイラフラグを自動的に追加または必要とすることはありません。
+しかしながら、特定のアーキテクチャを対象とすることで、コンパイラは、CPU 上で SIMD 命令を利用することが可能となります。
+コードが実行されるマシン上でコンパイルする場合、CPUコード最適化ための最も簡単な方法は、ネイティブオプションを使用することです。
 
 .. list-table::
     :widths: 25 75
@@ -397,32 +387,32 @@ When compiling on the machine that the code also runs on, the easiest way to get
     :align: left
 
     * -
-      - Description/info
+      - 説明/情報
 
     * - ``Kokkos_ARCH_NATIVE``
-      - Target the architecture of the compiling CPU (``-march=native``)
+      -  コンパイルする CPU ( ``-march=native`` ) のアーキテクチャを対象とします（ ``-march=native`` ）
 
-If cross-compiling, or if you want to be specific, the CPU architecture can be passed to Kokkos manually. For the available architectures see the following list.
+クロスコンパイルを行う場合、またはより詳細な説明を望む場合には、CPUアーキテクチャは Kokkos に手動で渡すことが可能です。 利用可能なアーキテクチャについては、以下のリストを参照してください。
 
-.. list-table:: AMD CPU architectures
+.. list-table:: AMD CPU アーキテクチャ
     :widths: 30 30 30 30
     :header-rows: 1
     :align: left
 
-    * - CMake keyword
-      - Architecture/Instruction set
-      - Examples
-      - Notes
+    * - CMake キーワード
+      - アーキテクチャ/インストラクションセット
+      - 例
+      - 注意事項
 
     * - ``Kokkos_ARCH_ZEN5``
       - Zen 5/amd64
       -
-      - (since Kokkos 4.7)
+      - (Kokkos 4.7以降)
 
     * - ``Kokkos_ARCH_ZEN4``
       - Zen 4/amd64
       - Epyc Genoa @ LLNL El Capitan
-      - (since Kokkos 4.6)
+      - (Kokkos 4.6以降)
 
     * - ``Kokkos_ARCH_ZEN3``
       - Zen 3/amd64
@@ -443,16 +433,15 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       - Bullozer/amd64
       -
       -
-
-.. list-table:: ARM CPU architectures
+.. list-table:: ARM CPU アーキテクチャ
     :widths: 30 30 30 30
     :header-rows: 1
     :align: left
 
-    * - CMake keyword
-      - Architecture/Instruction set
-      - Examples
-      - Notes
+    * - CMake キーワード
+      - アーキテクチャ/インストラクションセット
+      - 例
+      - 注意事項
 
     * - ``Kokkos_ARCH_ARMV9_GRACE``
       - ARMv9-A/A64/neoverse-v2
@@ -484,15 +473,55 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       - ARMv8.0/A64,A32
       -
       -
+.. list-table:: ARM CPU アーキテクチャ
+    :widths: 30 30 30 30
+    :header-rows: 1
+    :align: left
 
-.. list-table:: IBM CPU architectures
+    * - CMake キーワード
+      - アーキテクチャ/インストラクションセット
+      - 例
+      - 注意事項
+
+    * - ``Kokkos_ARCH_ARMV9_GRACE``
+      - ARMv9-A/A64/neoverse-v2
+      - GH200 @ CSCS ALPS
+      - ( Kokkos 4.4.1以降)
+
+    * - ``Kokkos_ARCH_A64FX``
+      - ARMv8.2/A64
+      - A64FX @ Fugaku
+      -
+
+    * - ``Kokkos_ARCH_ARMV8_THUNDERX2``
+      - ARMv8/A64
+      - ThunderX2 @ SNL Astra
+        ThunderX2 @ CEA BullSequana
+      -
+
+    * - ``Kokkos_ARCH_ARMV81``
+      - ARMv8.1/A64,A32
+      -
+      -
+
+    * - ``Kokkos_ARCH_ARMV8_THUNDERX``
+      - ARMv8/A64
+      -
+      -
+
+    * - ``Kokkos_ARCH_ARMV80``
+      - ARMv8.0/A64,A32
+      -
+      -
+
+.. list-table:: IBM CPU アーキテクチャ
     :widths: 30 30 30
     :header-rows: 1
     :align: left
 
-    * - CMake keyword
-      - Architecture/Instruction set
-      - Examples
+    * - CMake キーワード
+      - アーキテクチャ/インストラクションセット
+      - 例
 
     * - ``Kokkos_ARCH_POWER9``
       - Power9/Power ISA
@@ -500,17 +529,17 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
         POWER9 @ LLNL Sierra
 
     * - ``Kokkos_ARCH_POWER8``
-      - Power8/Power ISA
+      - Power8/パワー ISA
       -
 
-.. list-table:: Intel CPU architectures
+.. list-table:: Intel CPU アーキテクチャ
     :widths: 30 30 30
     :header-rows: 1
     :align: left
 
-    * - CMake keyword
-      - Architecture/Instruction set
-      - Examples
+    * - CMake キーワード
+      - アーキテクチャ/インストラクションセット
+      - 例
 
     * - ``Kokkos_ARCH_SPR``
       - Sapphire Rapids/x86-64
@@ -541,44 +570,43 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       - Sandy Bridge/x86-64
       -
 
-.. list-table:: RISC-V CPU architectures
+.. list-table:: RISC-V CPU アーキテクチャ
     :widths: 30 30 30 30
     :header-rows: 1
     :align: left
 
-    * - CMake keyword
-      - Architecture/Instruction set
-      - Examples
-      - Notes
+    * - CMake キーワード
+      - アーキテクチャ/インストラクションセット
+      - 例
+      - 注意事項
 
     * - ``Kokkos_ARCH_RISCV_RVA22V``
       - RVA22V/RISC-V ISA
       - SpacemiT K1
-      - (since Kokkos 5.0)
+      - (Kokkos 5.0以降)
 
     * - ``Kokkos_ARCH_RISCV_SG2042``
       - SG2042/RISC-V ISA
-      - Milk-V Pioneer
-      - (since Kokkos 5.0)
+      - Milk-V パイオニア
+      - (Kokkos 5.0以降)
 
     * - ``Kokkos_ARCH_RISCV_U74MC``
       - U74MC/RISC-V ISA
       - SiFive Unmatched
-      - (since Kokkos 5.0)
+      - (Kokkos 5.0以降)
 
-GPU Architectures
------------------
+GPU アーキテクチャ
+---------------------------
 
 NVIDIA GPUs
 ~~~~~~~~~~~
 
-The Kokkos naming convention is to aggregate the eponym of the Nvidia GPU
-microarchitecture and the associated CUDA Compute Capability.
+Kokkos の命名規則は、NVIDIA GPU マイクロアーキテクチャの名称と、関連する CUDA コンピュートキャパビリティを組み合わせたものです。
 
 ``Kokkos_ARCH_<MICROARCHITECTURE><COMPUTE_CAPABILITY>``
 
-If the CUDA backend is enabled and no NVIDIA GPU architecture is specified,
-Kokkos will attempt to autodetect the architecture flag at configuration time.
+CUDAバックエンドが有効化されており、NVIDIA GPUアーキテクチャが指定されていない場合、
+Kokkos は。設定時にアーキテクチャフラグの自動検出を試みます。
 
 .. list-table::
     :widths: 20 15 15 25 30
@@ -586,40 +614,40 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
     :align: left
 
     * - **NVIDIA GPUs**
-      - Architecture
-      - Compute Capability
-      - Models
-      - Notes
+      - アーキテクチャ
+      - コンピュートキャパビリティ
+      - モデル
+      - 注意事項
 
     * * ``Kokkos_ARCH_BLACKWELL120``
       * Blackwell
       * 12.0
       * RTX 5080
-      * (since Kokkos 4.7)
+      * (Kokkos 4.7以降)
 
     * * ``Kokkos_ARCH_BLACKWELL100``
       * Blackwell
       * 10.0
       * B200, B100
-      * (since Kokkos 4.7)
+      * (Kokkos 4.7以降)
 
     * * ``Kokkos_ARCH_HOPPER90``
       * Hopper
       * 9.0
       * H100
-      * (since Kokkos 4.0)
+      * (Kokkos 4.0以降)
 
     * * ``Kokkos_ARCH_ADA89``
       * Ada Lovelace
       * 8.9
       * L4, L40
-      * (since Kokkos 4.1)
+      * (Kokkos 4.1以降)
 
     * * ``Kokkos_ARCH_AMPERE87``
       * Ampere
       * 8.7
       * Jetson Orin
-      * (since Kokkos 4.7)
+      * (Kokkos 4.7以降)
 
     * * ``Kokkos_ARCH_AMPERE86``
       * Ampere
@@ -685,36 +713,36 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       * Kepler
       * 3.7
       * K80
-      * (removed in Kokkos 5.0)
+      * (Kokkos 5.0において削除)
 
     * * ``Kokkos_ARCH_KEPLER35``
       * Kepler
       * 3.5
       * K40, K20
-      * (removed in Kokkos 5.0)
+      * (Kokkos 5.0において削除)
 
     * * ``Kokkos_ARCH_KEPLER32``
       * Kepler
       * 3.2
       *
-      * (removed in Kokkos 5.0)
+      * (Kokkos 5.0において削除)
 
     * * ``Kokkos_ARCH_KEPLER30``
       * Kepler
       * 3.0
       * K10
-      * (removed in Kokkos 5.0)
+      * (Kokkos 5.0において削除)
 
 
 AMD GPUs
 ~~~~~~~~
 
-The Kokkos naming convention is to aggregate AMD\_ and the architecture flag.
+Kokkos の命名規則は、AMD\_ とアーキテクチャフラグを結合するものです。
 
 ``Kokkos_ARCH_AMD_<ARCHITECTURE_FLAG>``
 
-If the HIP backend is enabled and no AMD GPU architecture is specified,
-Kokkos will attempt to autodetect the architecture flag at configuration time.
+HIP バックエンドが有効化されており、AMD GPU アーキテクチャが指定されていない場合、
+Kokkos は設定時にアーキテクチャフラグの自動検出を試みます。
 
 .. list-table::
     :widths: 30 15 25 30
@@ -722,96 +750,96 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
     :align: left
 
     * - **AMD GPUs**
-      - Architecture flags
-      - Models
-      - Notes
+      - アーキテクチャフラッグ
+      - モデル
+      - 注意事項
 
     * * ``Kokkos_ARCH_AMD_GFX942_APU``
       * GFX942
       * MI300A
-      * (since Kokkos 4.5)
+      * (Kokkos 4.5以降)
 
     * * ``Kokkos_ARCH_AMD_GFX942``
       * GFX942
       * MI300A, MI300X
-      * (since Kokkos 4.2, since Kokkos 4.5 this should only be used for MI300X)
+      * (Kokkos 4.2以降、 Kokkos 4.5以降、これは、 MI300X用のみに使用されるべきです)
 
     * * ``Kokkos_ARCH_AMD_GFX940``
       * GFX940
-      * MI300A (pre-production)
-      * (since Kokkos 4.2.1)
+      * MI300A (プリプロダクション)
+      * (Kokkos 4.2.1以降)
 
     * * ``Kokkos_ARCH_AMD_GFX90A``
       * GFX90A
       * MI200 series
-      * (since Kokkos 4.2)
+      * (Kokkos 4.2以降)
 
     * * ``Kokkos_ARCH_AMD_GFX908``
       * GFX908
       * MI100
-      * (since Kokkos 4.2)
+      * (Kokkos 4.2以降)
 
     * * ``Kokkos_ARCH_AMD_GFX906``
       * GFX906
       * MI50, MI60
-      * (since Kokkos 4.2)
+      * (Kokkos 4.2以降)
 
     * * ``Kokkos_ARCH_AMD_GFX1201``
       * GFX1201
       * Radeon AI PRO R9700, Radeon RX 9070 XT
-      * (since Kokkos 5.0)
+      * (Kokkos 5.0以降)
 
     * * ``Kokkos_ARCH_AMD_GFX1103``
       * GFX1103
       * Ryzen 8000G Phoenix series APU
-      * (since Kokkos 4.5)
+      * (Kokkos 4.5以降)
 
     * * ``Kokkos_ARCH_AMD_GFX1100``
       * GFX1100
       * 7900xt
-      * (since Kokkos 4.2)
+      * (Kokkos 4.2以降)
 
     * * ``Kokkos_ARCH_AMD_GFX1030``
       * GFX1030
       * V620, W6800
-      * (since Kokkos 4.2)
+      * (Kokkos 4.2以降)
 
     * * ``Kokkos_ARCH_VEGA90A``
       * GFX90A
       * MI200 series
-      * Prefer ``Kokkos_ARCH_AMD_GFX90A``
+      * ``Kokkos_ARCH_AMD_GFX90A`` 優先
 
     * * ``Kokkos_ARCH_VEGA908``
       * GFX908
       * MI100
-      * Prefer ``Kokkos_ARCH_AMD_GFX908``
+      * ``Kokkos_ARCH_AMD_GFX908`` 優先
 
     * * ``Kokkos_ARCH_VEGA906``
       * GFX906
       * MI50, MI60
-      * Prefer ``Kokkos_ARCH_AMD_GFX906``
+      * ``Kokkos_ARCH_AMD_GFX906`` 優先
 
     * * ``Kokkos_ARCH_VEGA900``
       * GFX900
       * MI25
-      * removed in 4.0
+      * 4.0において削除
+
 
 Intel GPUs
 ~~~~~~~~~~
-
 .. list-table::
     :widths: 15 25 35 25
     :header-rows: 1
     :align: left
 
-    * - CMake option
-      - Architecture
-      - Models
-      - Notes
+    * - CMake オプション
+      - アーキテクチャ
+      - モデル
+      - 注意事項
 
     * * ``Kokkos_ARCH_INTEL_PVC``
       * Xe-HPC (Ponte Vecchio)
-      * Intel Data Center GPU Max 1550
+      * Intel データセンター GPU Max 1550
       *
 
     * * ``Kokkos_ARCH_INTEL_XEHP``
@@ -822,7 +850,7 @@ Intel GPUs
     * * ``Kokkos_ARCH_INTEL_DG2``
       * Intel DG2
       * Intel Flex, Intel Arc
-      * (since Kokkos 4.7)
+      * (Kokkos 4.7以降)
 
     * * ``Kokkos_ARCH_INTEL_DG1``
       * Iris Xe MAX (DG1)
@@ -850,18 +878,16 @@ Intel GPUs
       *
 
     * * ``Kokkos_ARCH_INTEL_GEN``
-      * Just-In-Time compilation [#arch_intel_gen]_ for Intel GPUs in particular
+      * 特に、Intel GPU向けに、ジャストインタイムコンパイル [#arch_intel_gen]_ 
       *
       *
 
-.. [#arch_intel_gen] ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation
-  for Intel GPUs whereas all the other flags for Intel compilers request
-  Ahead-Of-Time compilation.
+.. [#arch_intel_gen] ``Kokkos_ARCH_INTEL_GEN`` は、Intel GPU 向けにはジャストインタイムコンパイルを有効にし、
+   一方、Intel コンパイラ向けのその他のフラグはすべて
+   アヘッドオブタイムコンパイルを要求します
 
-  Just-In-Time (JIT) compilation means that the compiler is invoked again when
-  the binaries created are actually executed and only at that point the
-  architecture to compile for is determined.
+  ジャストインタイム（JIT）コンパイルとは、生成されたバイナリが実際に実行される際にコンパイラが再度呼び出され、その時点で初めてコンパイル対象のアーキテクチャが決定されることを意味します
 
-  On the other hand, Ahead-Of-Time (AOT) compilation describes the standard
-  model where the compiler is only invoked once to create the binary and the
-  architecture to compile for is determined before the program is run.
+  一方、アヘッドオブタイム（AOT）コンパイルは、標準モデルを指し、コンパイラはバイナリを生成するために一度だけ呼び出され、
+  コンパイル対象のアーキテクチャは、プログラムの実行前に決定されます。
+

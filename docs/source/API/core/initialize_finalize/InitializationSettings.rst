@@ -4,9 +4,9 @@
 .. role:: cpp(code)
    :language: cpp
 
-Defined in header ``<KokkosCore.cpp>``
+ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
-Usage:
+使用方法
 
 .. code-block:: cpp
 
@@ -16,53 +16,54 @@ Usage:
                     .set_disable_warnings(false);
 
 .. versionadded:: 3.7
-   ``InitializationSettings`` is a class that can be used to define the settings for
-   initializing Kokkos programmatically without having to call the two parameter
-   form (``argc`` and ``argv``) of `Kokkos::initialize() <initialize.html#kokkosinitialize>`_.
-   It was introduced as a replacement for the `Kokkos::InitArguments <InitArguments.html#kokkosInitArguments>`_ structure.
+   ``InitializationSettings`` は、  `Kokkos::initialize() <initialize.html#kokkosinitialize>`_
+   の2つのパラメータ形式 (``argc`` および ``argv``) を呼び出すことなく、
+   Kokkos をプログラムで初期化する設定を定義するために使用可能なクラスです。
+   それは、`Kokkos::InitArguments <InitArguments.html#kokkosInitArguments>`_ structure の代わりに導入されました。
 
-Interface
----------
+
+インターフェイス
+----------------
 
 .. cpp:class:: InitializationSettings
 
    .. cpp:function:: InitializationSettings();
 
-      Constructs a new object that does not contain any value for any of the settings.
+      どの設定に対しても値を一切含まない、新しいオブジェクトを構築します。
 
-   .. cpp:function:: InitializationSettings(InitArguments const& arguments);
+   .. cpp:function:: InitializationSettings(InitArguments const& args);
 
-      **DEPRECATED** Converts the deprecated structure to a new object. Data members from the structure that compare equal to their default value are assumed to be unset. Let ``PARAMETER-NAME`` be a valid setting of type ``PARAMETER-TYPE`` as defined in the table below.
+      **DEPRECATED** は、非推奨の構造体を新しいオブジェクトに変換します。構造体のデータメンバーでデフォルト値と等しいものは、設定されていないものとみなされます。 ``PARAMETER-NAME`` を、以下の表で定義される ``PARAMETER-TYPE`` の有効な設定とします。
 
    .. cpp:function:: InitializationSettings& set_PARAMETER_NAME(PARAMETER_TYPE value);
 
-      Replaces the content of the ``PARAMETER_NAME`` setting with ``value`` and return a reference to the object. ``value`` must be a valid value for ``PARAMETER_NAME``.
+      ``PARAMETER_NAME`` 設定の内容を ``value`` で置き換え、オブジェクトへの参照を返します。 ``value`` は、 ``PARAMETER_NAME`` について有効な値である必要があります。
 
    .. cpp:function:: bool has_PARAMETER_NAME() const;
 
-      Checks whether the object contains a value for the ``PARAMETER_NAME`` setting. Returns ``true`` if it contains a value, ``false`` otherwise.
+      オブジェクトが、 ``PARAMETER_NAME`` 設定の値を含むかどうかを確認します。 それが値を含む場合は、 ``true`` を返し、そうでない場合には、 ``false`` を返します。
 
    .. cpp:function:: PARAMETER_TYPE get_PARAMETER_NAME() const;
 
-      Accesses the contained value for the ``PARAMETER_NAME`` setting. The behavior is undefined if the object does not contain a value for setting ``PARAMETER_NAME``.
+       設定に含まれる値にアクセスします。 オブジェクトが、 ``PARAMETER_NAME`` 設定の値を含まない場合には、ビヘイビアは定義されません。
 
-The table below summarizes what settings are available.
+以下の表は、利用可能な設定を概説しています。
 
 =======================        ==================    ===========
 **PARAMETER_NAME**             **PARAMETER_TYPE**    Description
 =======================        ==================    ===========
-``num_threads``                ``int``               Number of threads to use with the host parallel backend.  Must be greater than zero.
-``device_id``                  ``int``               Device to use with the device parallel backend.  Valid IDs are zero to number of GPU(s) available for execution minus one.
-``map_device_id_by``           ``std::string``       Strategy to select a device automatically from the GPUs available for execution. Must be either ``"mpi_rank"`` for round-robin assignment based on the local MPI rank or ``"random"``.
-``disable_warnings``           ``bool``              Whether to disable warning messages.
-``print_configuration``        ``bool``              Whether to print the configuration after initialization.
-``tune_internals``             ``bool``              Whether to allow autotuning internals instead of using heuristics.
-``tools_libs``                 ``std::string``       Which tool dynamic library to load. Must either be the full path to library or the name of library if the path is present in the runtime library search path (e.g. ``LD_LIBRARY_PATH``)
-``tools_help``                 ``bool``              Query the loaded tool for its command-line options support.
-``tools_args``                 ``std::string``       Options to pass to the loaded tool as command-line arguments.
+``num_threads``                ``int``               ホスト並列バックエンドで使用するスレッド数。  0よりも大であることが必須。
+``device_id``                  ``int``               デバイス並列バックエンドで使用するデバイス。 有効な ID は、 0 から、実行に利用可能な GPU の数から 1 を引いた値までです。
+``map_device_id_by``           ``std::string``       実行可能なGPUからデバイスを自動的に選択するストラテジー。ローカルMPIランクに基づくラウンドロビン割り当てについての ``"mpi_rank"`` 、または ``"random"`` のいずれかである必要があります。
+``disable_warnings``           ``bool``              警告メッセージを無効にできるかどうか。
+``print_configuration``        ``bool``              初期化後に設定をするかどうか。
+``tune_internals``             ``bool``              ヒューリスティックを使用する代わりに、内部の自動調整を許可するかどうか。
+``tools_libs``                 ``std::string``       どのツールのダイナミックライブラリをロードするか。ライブラリの完全なパス、またはランタイムライブラリ検索パス（例: ``LD_LIBRARY_PATH`` ）にパスが存在する場合のライブラリ名である必要があります。
+``tools_help``                 ``bool``              読み込まれたツールのコマンドラインオプションサポートを照会。
+``tools_args``                 ``std::string``       コマンドライン引数としてロードされたツールに渡すオプション。
 =======================        ==================    ===========
 
-Example
+例
 ~~~~~~~
 
 .. code-block:: cpp
@@ -78,7 +79,7 @@ Example
         Kokkos::finalize();
     }
 
-See also
-~~~~~~~~
+以下も参照
+~~~~~~~~~~
 
-* `Kokkos::initialize <initialize.html#kokkosinitialize>`_: initializes the Kokkos execution environment
+* `Kokkos::initialize <initialize.html#kokkosinitialize>`_:  Kokkos の実行環境を初期化。

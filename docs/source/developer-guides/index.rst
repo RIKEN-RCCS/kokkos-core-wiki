@@ -1,9 +1,9 @@
-Developer Guides
-================
+ディベロッパガイド
+==================
 
-The following pages provide information for existing and prospective developers about how to work effectively in the Kokkos team.
+以下のページでは、既存および将来の開発者向けに、Kokkos チームで効果的に活動する方法に関する情報を提供します。
 
 .. toctree::
    :maxdepth: 1
 
-   PRs and Reviews <prs-and-reviews.rst>
+   PR および レビュー <prs-and-reviews.rst>

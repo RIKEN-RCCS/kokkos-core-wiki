@@ -2,39 +2,39 @@
 ==================================
 
 .. warning::
-   Deprecated since Kokkos 4.5,
-   use `atomic_compare_exchange <atomic_compare_exchange.html>`_ instead.
+   Kokkos 4.5以降非推奨
+   代わりに `atomic_compare_exchange <atomic_compare_exchange.html>`_ を使ってください。
 
 .. role:: cpp(code)
    :language: cpp
 
-Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
+``<Kokkos_Core.hpp>`` に含まれている、ヘッダー ``<Kokkos_Atomic.hpp>`` に定義されています。
 
-Usage
------
+使用方法
+--------
 
 .. code-block:: cpp
 
    bool was_exchanged = atomic_compare_exchange_strong(&obj, expected, desired);
 
-Atomically compares the current value of ``obj`` with ``expected``
-and replaces its value with ``desired`` if equal.
-The function returns ``true`` if the exchange has happened, ``false`` otherwise.
+アトミックに、 ``obj`` の現在値を ``expected`` と比較し、
+そして、等しければその値を ``desired`` 値に置き換えます。
+交換が起こった場合には、関数は ``true`` を返しますが、そうでなければ、 ``false`` を返します。
 
-Description
------------
+説明
+------------------
 
 .. cpp:function:: template<class T> bool atomic_compare_exchange_strong(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 
-   Atomically compares ``*ptr`` with ``expected``, and if those are bitwise-equal, replaces the former with ``desired``.
-   If ``desired`` is written into ``*ptr`` then ``true`` is returned.
+   アトミックに、 ``*ptr`` を ``expected`` と比較し、 それらがビット単位で等しい場合には、 前者を ``desired`` と置換します。
+   ``desired`` が、 ``*ptr`` に書き込まれれば、 ``true`` が返されます。
 
-   ``if (*ptr == expected) { *ptr = desired; return true; } else return false;``
+   ``if (*ptr == expected) { *ptr = desired; return true; } else { return false; }``
 
-   :param ptr: address of the object to test and to modify
-   :param expected: value expected to be found in the object
-   :param desired: the value to store in the object if as expected
-   :returns: the result of the comparison, ``true`` if ``*ptr`` was equal to ``expected``, ``false`` otherwise
+   :param ptr: テストし、変更するオブジェクトのアドレス
+   :param expected: オブジェクト内で見つかると予想される値
+   :param desired: 予想通りである場合にオブジェクトに格納する値
+   :returns: 比較の結果であり、 ``*ptr`` が ``expected`` であれば、 ``true`` であり、それ以外は ``false``
 
    .. deprecated:: 4.5
-      Prefer :cpp:expr:`expected == atomic_compare_exchange(&obj, expected, desired)`
+      :cpp:expr:`expected == atomic_compare_exchange(&obj, expected, desired)` を推奨します。

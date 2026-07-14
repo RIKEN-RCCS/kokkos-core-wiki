@@ -1,6 +1,6 @@
 
-Sorting
-#######
+ソーティング
+############
 
 .. toctree::
    :maxdepth: 1

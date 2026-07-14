@@ -8,18 +8,18 @@
 
 .. |KokkosPrintf| replace:: ``<Kokkos_Printf.hpp>``
 
-Defined in header |KokkosPrintf|_ which is included from ``<Kokkos_Core.hpp>``
+``<Kokkos_Core.hpp>`` に含まれる ヘッダー |KokkosPrintf|_ に定義。
 
 .. code-block:: cpp
 
     template <typename... Args>
-    KOKKOS_FUNCTION void printf(const char* format, Args... args);  // (since 4.2)
+    KOKKOS_FUNCTION void printf(const char* format, Args... args);  // (バージョン 4.2以降)
 
-Prints the data specified in ``format`` and ``args...`` to ``stdout``.
-The behavior is analogous to ``std::printf``, but the return type is ``void``
-to ensure a consistent behavior across backends.
+``format`` および ``args...`` で指定されたデータを ``stdout`` に出力します。
+この動作は、 ``std::printf`` に類似していますが、
+戻り値の型は、バックエンド間で一貫した動作を保証するため、 ``void`` です。
 
-Example
+例
 ~~~~~~~
 
 .. code-block:: cpp
@@ -34,7 +34,7 @@ Example
         Kokkos::finalize();
     }
 
-Notes
-~~~~~
-* The ``Kokkos::printf()`` function was added in release 4.2
-* Calling ``Kokkos::printf()`` from a kernel may affect register usage and affect performance.
+注意事項
+~~~~~~~~~~~~~~
+* ``Kokkos::printf()`` 関数は、リリース 4.2 で追加されました。
+* カーネルから  ``Kokkos::printf()`` を呼び出すことは、レジスタの使用に影響を与え、パフォーマンスに影響を与える可能性があります。

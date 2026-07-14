@@ -4,32 +4,32 @@
 .. role:: cpp(code)
     :language: cpp
 
-Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
+``<Kokkos_Core.hpp>`` に含まれている、ヘッダー ``<Kokkos_Atomic.hpp>`` に定義されています。
 
-Usage
------
+使用方法
+--------
 
 .. code-block:: cpp
 
     atomic_store(&obj, desired);
 
-Atomically replaces the current value of ``obj`` with ``desired``.
+アトミックに、 ``obj`` の現在の値を ``desired`` に置き換えます。
 
-Description
------------
+説明
+------------------
 
 .. cpp:function:: template<class T> void atomic_store(T* ptr, std::type_identity_t<T> val);
 
-   Atomically writes ``val`` into ``*ptr``.
+    アトミックに、 ``*ptr`` に ``val`` を書き込みます。
 
    ``{ *ptr = val; }``
 
-   :param ptr: address of the object whose value is to be replaced
-   :param val: the value to store in the referenced object
-   :returns: (nothing)
+   :param ptr: 置換対象のオブジェクトのアドレス。
+   :param val: 参照対象オブジェクトに格納する値。
+   :returns: (無し)
 
 
-See also
---------
-* `atomic_load <atomic_load.html>`_: atomically obtains the value of the referenced object
-* `atomic_exchange <atomic_exchange.html>`_: atomically replaces the value of the referenced object and obtains the value held previously
+以下も参照
+----------
+* `atomic_load <atomic_load.html>`_: アトミックに、参照対象オブジェクトの値を取得
+* `atomic_exchange <atomic_exchange.html>`_: アトミックに、参照対象の値を置き換え、以前保持していた値を取得

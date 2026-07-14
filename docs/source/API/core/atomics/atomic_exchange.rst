@@ -4,33 +4,34 @@
 .. role:: cpp(code)
    :language: cpp
 
-Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
+``<Kokkos_Core.hpp>`` に含まれているヘッダー ``<Kokkos_Atomic.hpp>`` により、定義されています。
 
-Usage
------
+使用方法
+--------
 
 .. code-block:: cpp
 
    auto old = atomic_exchange(&obj, desired);
 
-Atomically replaces the value of ``obj`` with ``desired`` and returns the value before the call.
+アトミックに、 ``obj`` の現在の値を、 ``desired`` に置き換え、呼び出し前に値を返します。
 
-Description
------------
+
+説明
+------------------
 
 .. cpp:function:: template<class T> T atomic_exchange(T* ptr, std::type_identity_t<T> val);
 
-   Atomically writes ``val`` into ``*ptr`` and returns the original value of ``*ptr``.
+   アトミックに、 ``val`` を ``*ptr`` に挿入し、 ``*ptr`` のもとの値を返します。
 
    ``{ auto old = *ptr; *ptr = val; return old; }``
 
-   :param ptr: address of the object to modify
-   :param val: the value to store in the referenced object
-   :returns: the value held previously by the object pointed to by ``ptr``
+   :param ptr: 値を変更するオブジェクトのアドレス
+   :param val: 参照されるオブジェクトに保存する値
+   :returns:  ``ptr`` が指すオブジェクトが以前に保持していた値
 
 
-See also
---------
-* `atomic_load <atomic_load.html>`_: atomically obtains the value of the referenced object
-* `atomic_store <atomic_store.html>`_: atomically replaces the value of the referenced object with a non-atomic argument
-* `atomic_compare_exchange <atomic_compare_exchange.html>`_: atomically compares the value of the referenced object with non-atomic argument and performs atomic exchange if equal or atomic load if not
+以下も参照
+----------
+* `atomic_load <atomic_load.html>`_: 参照対象の値を、アトミックに取得
+* `atomic_store <atomic_store.html>`_: 参照対象のオブジェクトの値をアトミックに非原子的引数に置換
+* `atomic_compare_exchange <atomic_compare_exchange.html>`_: アトミックに、非原子的引数と 参照対象の値を比較し、等しければ原始的交換を実行し、等しくなければ原始的負荷を実行

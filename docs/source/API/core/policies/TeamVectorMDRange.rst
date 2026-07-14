@@ -1,56 +1,54 @@
 ``TeamVectorMDRange``
 =====================
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Description
------------
+説明
+------------------
 
-TeamVectorMDRange is a `nested execution policy <./NestedPolicies.html>`_  used inside of hierarchical parallelism.
+TeamVectorMDRange は、階層的並列処理の内部で使用される `nested execution policy <./NestedPolicies.html>`_  です。
 
-Interface
----------
+インターフェイス
+----------------
 
 .. cpp:class:: template <class Rank, typename TeamHandle> TeamVectorMDRange
 
-   .. rubric:: Constructor
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: TeamVectorMDRange(team, extent_1, extent_2, ...);
 
-      Splits an index range over the threads of the team and another index range over their vector lanes.
-      Ranks for threading and vectorization determined by the backend.
+      チームのスレッドにインデックス範囲を分け、ベクトルレーン上でインデックスレンジを分割します。
+      バックエンドによって決定されるスレッドとベクトル化のランクです。
 
-      :param team: TeamHandle to the calling team execution context
+      :param team: 呼び出しチーム実行コンテキストへの TeamHandle
 
-      :param extent_1, extent_2, ...: index range lengths of each rank
+      :param extent_1, extent_2, ...: 各ランクのインデックス範囲長
 
-      * **Requirements**
+      * **必要要件**
 
-	* ``TeamHandle`` is a type that models `TeamHandle <./TeamHandleConcept.html>`_
+	* ``TeamHandle`` は、 `TeamHandle <./TeamHandleConcept.html>`_ をモデル化する型です。
 
-	* ``extent_1, extent_2, ...`` are ints
+	* ``extent_1, extent_2, ...`` は、 ints です。
 
-	* Every member thread of ``team`` must call the operation in the same branch,
-	  i.e. it is not legal to have some threads call this function in one branch,
-	  and the other threads of ``team`` call it in another branch
+	*  ``team`` のすべてのメンバースレッドは同じブランチで演算を呼び出す必要があり、つまり一部のスレッドが一つのブランチでこの関数を呼び出し、 ``team`` の他のスレッドが  別のブランチで呼び出すことは、できません。
 
-	* ``extent_i`` is such that ``i >= 2 && i <= 8`` is true.
-	  For example:
+	* ``extent_i`` の条件は、 ``i >= 2 && i <= 8`` が真であることです。
+	  例えば:
 
 	  .. code-block:: cpp
 
-	     TeamVectorMDRange(team, 4);               // NOT OK, violates i>=2
+	     TeamVectorMDRange(team, 4);               // OKではありません i>=2 に違反します。
 
 	     TeamVectorMDRange(team, 4,5);             // OK
 	     TeamVectorMDRange(team, 4,5,6);           // OK
-	     TeamVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK, max num of extents allowed
+	     TeamVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK、 範囲の最大値は認められます
 
-Restrictions
+制約
 ------------
 
-Note that when used in `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_, the reduction is limited to a sum.
+ `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、 縮約は、合計に限定されることに注意してください。
 
-Examples
+例
 --------
 
 .. code-block:: cpp

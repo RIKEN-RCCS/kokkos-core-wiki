@@ -4,10 +4,10 @@
 .. role:: cpp(code)
    :language: cpp
 
-Defined in header ``<Kokkos_Profiling_ProfileSection.hpp>``
+ヘッダー ``<Kokkos_Profiling_ProfileSection.hpp>`` に定義。
 
-Usage
------
+使用方法
+--------
 
 .. code-block:: cpp
 
@@ -18,41 +18,39 @@ Usage
     
 
 
-The class ``ProfilingSection`` is a section ID wrapper that provides a
-convenient `RAII-style <https://en.cppreference.com/w/cpp/language/raii>`_
-mechanism to manage a user-defined profiling section.
-
-When a ``ProfilingSection`` object is created, a profiling section is created
-with the user-provided string, and the objects holds on to the section ID.
-
-When control leaves the scope in which the ``ProfilingSection`` object was
-created, the ``ProfilingSection`` is destructed, and the underlying section is
-properly destroyed.
-
-The ``ProfilingSection`` class is non-copyable.
+クラス ``ProfilingSection`` は、ユーザー定義のプロファイリングセクションを管理するための便利な
+`RAIIスタイル <https://en.cppreference.com/w/cpp/language/raii>`_ メカニズムを提供する、セクション ID ラッパーです。
 
 
-.. cpp:Function:: ProfilingSection(std::string const& sectionName);
+ ``ProfilingSection`` オブジェクトが作成されると、ユーザーが提供した文字列を用いてプロファイリングセクションが作成され、そのオブジェクトはセクションIDを保持します。
 
-   Constructs a section with user-provided label.
-   Calls ``Profiling::createProfileSection(sectionName, &sectionID);``
+制御が ``ProfilingSection`` オブジェクトが作成されたスコープを離れた場合、 ``ProfilingSection`` は、破棄され、基盤となるセクションは適切に破棄されます。
 
-.. cpp:Function:: ~ProfilingSection();
-
-   Deletes the section.
-   Calls ``Profiling.destroyProfileSection(sectionID);``
-
-.. cpp:Function:: void start();
-
-   Starts the section.
-   Calls ``Profiling::startSection(sectionID);``
-
-.. cpp:Function:: void stop();
-
-   Ends the section.
-   Calls ``Profiling::stopSection(sectionID);``
+ ``ProfilingSection`` クラスのコピーは不可能です。
 
 
-**See also**
+.. cpp:function:: ProfilingSection(std::string const& sectionName);
 
-`ScopedRegion <scoped_region.html>`_: implements a scope-based region ownership wrapper
+   ユーザーに提供されたラベルを使って、セクションを構築します。
+    ``Profiling::createProfileSection(sectionName, &sectionID);`` を呼び出します。
+
+.. cpp:function:: ~ProfilingSection();
+
+   セクションを削除します。
+    ``Profiling::destroyProfileSection(sectionID);`` を呼び出します。
+
+.. cpp:function:: void start();
+
+   セクションを開始します。
+    ``Profiling::startSection(sectionID);`` を呼び出します。
+
+
+.. cpp:function:: void stop();
+
+   セクションを終了します。
+   ``Profiling::stopSection(sectionID);`` を呼び出します。
+
+
+**以下も参照**
+
+`ScopedRegion <scoped_region.html>`_: スコープベースの領域所有権ラッパーを実装

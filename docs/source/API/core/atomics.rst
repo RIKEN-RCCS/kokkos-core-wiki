@@ -1,5 +1,5 @@
-Atomics
-=======
+アトミック
+==========
 
 .. toctree::
    :maxdepth: 1

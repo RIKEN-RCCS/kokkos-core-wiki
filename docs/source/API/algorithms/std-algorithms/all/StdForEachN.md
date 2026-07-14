@@ -1,7 +1,7 @@
 
 # `for_each_n`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```cpp
 namespace Kokkos{
@@ -14,7 +14,7 @@ UnaryFunctorType for_each_n(const ExecutionSpace& exespace,
 
 template <class ExecutionSpace, class InputIterator, class SizeType, class UnaryFunctorType>
 UnaryFunctorType for_each_n(const std::string& label, const ExecutionSpace& exespace,
-                      InputIterator first, SizeType n
+                      InputIterator first, SizeType n,
                       UnaryFunctorType functor);                                     (2)
 
 template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class UnaryFunctorType>
@@ -31,24 +31,24 @@ UnaryFunctorType for_each_n(const std::string& label, const ExecutionSpace& exes
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-Applies the UnaryFunctorType `func` to the result of dereferencing each iterator in `[first,first+n]` for (1,2) and in (3,4) the functor is applied to the first `n` elements of the view.
+(1,2) について、各イテレータの参照解除結果に適用し、 (3,4) 内では、ファンクタを、ビューの最初の `n` 個の要素に適用します。
 
-- (1,2): overload set accepting iterators
-- (3,4): overload set accepting views
+- (1,2): イテレータを受け入れるオーバーロードセット
+- (3,4): ビューを受け入れるオーバーロードセット
 
-## Parameters and Requirements
+## パラメータおよび要件
 
-- `exespace`, `first`, `view`, `func` : same as in [`for_each`](./StdForEach)
+- `exespace`, `first`, `view`, `func` :  [`for_each`](./StdForEach) において同様。
 
 - `label`:
-  - for 1, the default string is: "Kokkos::for_each_n_iterator_api_default"
-  - for 3, the default string is: "Kokkos::for_each_n_view_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::for_each_n_iterator_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::for_each_n_view_api_default"
 
 - `n`:
-  - number of elements to operate on
+  - 演算対象となる要素数
 
-## Return
+## 戻り値
 
 `func`

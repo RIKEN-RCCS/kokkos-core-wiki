@@ -1,14 +1,14 @@
 
 # `exclusive_scan`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
 namespace Experimental{
 
 //
-// overload set A
+// オーバーロードセット A
 //
 template <
   class ExecutionSpace, class InputIteratorType,
@@ -50,7 +50,7 @@ auto exclusive_scan(const std::string& label, const ExecutionSpace& exespace,   
                     ValueType init_value);
 
 //
-// overload set B
+// オーバーロードセット B
 //
 template <
  class ExecutionSpace, class InputIteratorType,
@@ -96,43 +96,41 @@ auto exclusive_scan(const std::string& label, const ExecutionSpace& exespace,   
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-- 1,2,3,4: computes an exclusive prefix *sum* for the range `[first_from, last_from)` (1,2)
-or `view_from` (3,4), using `init` as the initial value, and writes
-the results to the range beginning at `first_dest` (1,2) or to `view_dest` (3,4).
+- 1,2,3,4: 範囲 `[first_from, last_from)` (1,2)または `view_from` (3,4) について、
+`init` を初期値として使用して、排他的累積 *和* を計算し、 結果を
+`first_dest` (1,2)  から始まる範囲、または `view_dest` (3,4)に書き込みます。
 
-- 5,6,7,8: computes an exclusive prefix scan using the binary functor `bin_op`
-to combine two elements for the range `[first_from, last_from)` (5,6)
-or `view_from` (7,8), using `init` as the initial value, and writes
-the results to the range beginning at `first_dest` (5,6) or to `view_dest` (7,8).
+- 5,6,7,8: `init` を初期値として使用して、 範囲 `[first_from, last_from)` (5,6) または
+  `view_from` (7,8) を組み合わせるために、二項ファンクタ `bin_op` を使用して排他的累積スキャンを計算し、
+  結果を `first_dest` (5,6) で始まる範囲、または `view_dest` (7,8) に書き込みます。
 
-Exclusive means that the i-th input element is not included in the i-th sum.
+排他的とは、i番目の入力は、i番目の和には含まれないことを意味します。
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance
+  - 実行空間インスタンス
 - `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1,2 the default string is: "Kokkos::exclusive_scan_iterator_api_default"
-  - for 5,6 the default string is: "Kokkos::exclusive_scan_view_api_default"
+  - デバッグ目的で内部の並列カーネルに名付けるために使用
+  - 1,2 について、デフォルト文字列は、: "Kokkos::exclusive_scan_iterator_api_default"
+  - 5,6 について、デフォルト文字列は、: "Kokkos::exclusive_scan_view_api_default"
 - `first_from`, `last_from`, `first_dest`:
-  - range of elements to read from (`*_from`) and write to (`first_dest`)
-  - must be *random access iterators*
-  - must represent a valid range, i.e., `last_from >= first_from` (checked in debug mode)
-  - must be accessible from `exespace`
+  - 読み取り (`*_from`) および書き込む (`first_dest`) 要素の範囲
+  -  *ランダムアクセスイテレータ* でなければなりません。
+  - 有効な範囲、つまり、 `last_from >= first_from` (デバッグモード確認済み) を表す必要があります。
+  -  `exespace` からアクセス可能でなければなりません。
 - `view_from`, `view_dest`:
-  - views to read elements from `view_from` and write to `view_dest`
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - `view_from` から要素を読み取り、 `view_dest` にそれらを書き込むためのビュー。
+  - 必ずランク1であり、`LayoutLeft`、 `LayoutRight`、 または `LayoutStride` を持たなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `bin_op`:
-  - *binary* functor representing the operation to combine pair of elements.
-  Must be valid to be called from the execution space passed, and callable with
-  two arguments `a,b` of type (possible const) `value_type`, where `value_type`
-  is the value type of `InputIteratorType` (for 1,2,5,6) or the value type
-  of `view_from` (for 3,4,7,8), and must not modify `a,b`.
-  - must conform to:
+  - 要素のペアを組み合わせる演算を表す *二項* ファンクタ。
+  引数を引き渡された実行空間から呼び出されるために、有効でなければならず、
+ 型 (constの可能性) `value_type` の2つの引数 `a,b` を使って、呼び出し可能でなければなりません。そこでは、`value_type` が `InputIteratorType` (1,2,5,6 について) または、  `view_from` (3,4,7,8について) の値型であり、 ``a,b`` を変更してはいけません。
+
+  - 以下に一致しなければなりません:
   ```c++
   struct BinaryOp
   {
@@ -143,10 +141,10 @@ Exclusive means that the i-th input element is not included in the i-th sum.
      }
   };
   ```
-  The return type `return_type` must be such that an object of type `OutputIteratorType`
-  for (1,2,5,6) or an object of type `value_type` where `value_type` is the
-  value type of `view_dest` for (3,4,7,8) can be dereferenced and assigned a value of type `return_type`.
+  戻り型 `return_type` は、(1,2,5,6) について 型 `OutputIteratorType` のオブジェクト、または
+  `value_type` が (3,4,7,8) について `view_dest` の値型である、型 `value_type` のオブジェクトは、
+   型 `return_type` の値について、参照解除および割り当てが可能であるようでなければなりません。
 
-## Return
+## 戻り値
 
-Iterator to the element *after* the last element written.
+最後の要素がコピーされた *後* の宛先へのイテレータ。

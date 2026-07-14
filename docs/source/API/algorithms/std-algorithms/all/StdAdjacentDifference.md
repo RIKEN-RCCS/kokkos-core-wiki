@@ -1,7 +1,7 @@
 
 # `adjacent_difference`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -77,47 +77,39 @@ auto adjacent_difference(const std::string& label,                              
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-- (1,3,5,7): First, a copy of `*first_from` is written to `*first_dest` for (1,3),
-  or a copy of `view_from(0)` is written to `view_dest(0)` for (5,7).
-  Second, it computes the *difference* between the second and the first
-  of each adjacent pair of elements of the range `[first_from, last_from)` for (1,3)
-  or in `view_from` for (5,7), and writes them to the range beginning at `first_dest + 1` for (1,3),
-  or `view_dest` for (5,7).
+- (1,3,5,7): 第一に、 `*first_from` のコピーは、(1,3) について `*first_dest` に書き込まれ、
+  または、 `view_from(0)` のコピーは、 (5,7) について `view_dest(0)` に書き込まれます。
+  第二に、それは、(1,3) について、または、 (5,7) について `view_from` において、範囲 `[first_from, last_from)` の要素の各隣接ペアの二番目及び一番目の *差* を計算し、それらを (1,3) について、または  (5,7) について `view_dest``first_dest + 1` において範囲の初めに書き込みます。 
 
-- (2,4,6,8): First, a copy of `*first_from` is written to `*first_dest` for (2,4),
-  or a copy of `view_from(0)` is written to `view_dest(0)` for (6,8).
-  Second, it calls the binary functor with the second and the first elements
-  of each adjacent pair of elements of the range `[first_from, last_from)` for (2,4)
-  or in `view_from` for (6,8), and writes them to the range beginning at `first_dest + 1` for (2,4),
-  or `view_dest` for (6,8).
+- (2,4,6,8): 第一に、 `*first_from`  のコピーは、 (2,4) について `*first_dest` に書き込まれ、
+  または、`view_from(0)` のコピーは、 (6,8) について `view_dest(0)` に書き込まれます。
+  第二に、 (2,4) について範囲 `[first_from, last_from)` の、または、 (6,8) について  `view_from` において、要素の各隣接ペアの二番目及び一番目を使ったバイナリファンクタを呼び出し、それらを
+   `first_dest + 1` for (2,4) について、または (6,8) について `view_dest` において、範囲の初めに書き込みます。
 
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance
+  - 実行空間
 - `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1,2 the default string is: "Kokkos::adjacent_difference_iterator_api_default"
-  - for 5,6 the default string is: "Kokkos::adjacent_difference_view_api_default"
+  - デバッグ目的で実装カーネルに名前を付けるために使用されます
+  - 1,2 について、 デフォルト文字列は、: "Kokkos::adjacent_difference_iterator_api_default"
+  - 5,6 について、 デフォルト文字列は、: "Kokkos::adjacent_difference_view_api_default"
 - `first_from`, `last_from`, `first_dest`:
-  - range of elements to read from `*_from` and write to `first_dest`
-  - must be *random access iterators*
-  - must represent a valid range, i.e., `last_from >= first_from` (checked in debug mode)
-  - must be accessible from `exespace`
+  -  `*_from` から読み取り、`first_dest` に書き込むための要素の範囲
+  -  *ランダムアクセスイテレータ* でなければなりません
+  -  有効な範囲、すなわち、`last_from >= first_from` を表す必要があります。（デバッグモードで確認済み）
+  - `exespace` からアクセス可能でなければなりません。
 - `view_from`, `view_dest`:
-  - views to read elements from `view_from` and write to `view_dest`
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - `view_from` から読み取り、`view_dest` に書き込むためのビュー。
+  - 必ずランク1であり、`LayoutLeft`, `LayoutRight`, または `LayoutStride` を持たなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `bin_op`:
-  - *binary* functor representing the operation to apply to each pair of elements.
-  Must be valid to be called from the execution space passed, and callable with
-  two arguments `a,b` of type (possible const) `value_type`, where `value_type`
-  is the value type of `InputIteratorType` (for 1,2,3,4) or the value type
-  of `view_from` (for 5,6,7,8), and must not modify `a,b`.
-  - must conform to:
+  - 各要素のペアに対して適用する演算を表す *二項* ファンクタ。
+  渡された実行空間より呼び出され、そこでは `value_type` が `InputIteratorType` の値型 (1,2,3,4について) または、 `view_from` の値型 (5,6,7,8について) であり、 `a,b` を変更してはいけません。
+  - 以下に一致しなければなりません:
   ```c++
   struct BinaryOp
   {
@@ -127,17 +119,17 @@ auto adjacent_difference(const std::string& label,                              
        return /* ... */;
      }
 
-     // or, also valid
+     // または、また有効
      return_type operator()(value_type a,
 	                        value_type b) const {
        return /* ... */;
      }
   };
   ```
-  The return type `return_type` must be such that an object of type `OutputIteratorType` for (1,2,3,4)
-  or an object of type `value_type` where `value_type` is the value type of `view_dest` for (5,6,7,8)
-  can be dereferenced and assigned a value of type `return_type`.
+  返し型 `return_type` は、 (1,2,3,4) については、型のオブジェクト `OutputIteratorType` 
+  または、 `value_type` が、 (5,6,7,8) については、 `view_dest` の値型である型のオブジェクトが、参照解除可能であり、
+  型 `return_type` の値が割り当て可能であるようになければなりません。
 
-## Return
+## 戻り値
 
-Iterator to the element *after* the last element written.
+書き込まれた最後の要素の *後の* 要素へのイテレータ。

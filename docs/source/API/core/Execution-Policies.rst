@@ -1,96 +1,96 @@
-Execution Policies
+実行ポリシー
 ##################
 
-Top Level Execution Policies
+トップレベル実行ポリシー
 ============================
 
-`ExecutionPolicyConcept <policies/ExecutionPolicyConcept.html>`__ is the fundamental abstraction to represent “how” the execution of a Kokkos parallel pattern takes place.
+`ExecutionPolicyConcept <policies/ExecutionPolicyConcept.html>`__ は、並列パターンの実行が、 “どのように” 行われるかを表すための基本的な抽象化です。
 
 .. list-table::
     :widths: 35 65
     :header-rows: 1
     :align: left
 
-    * - Policy
-      - Description
+    * - ポリシー
+      - 説明
 
     * * `RangePolicy <policies/RangePolicy.html>`__
-      * Each iterate is an integer in a contiguous range
+      * 各イテレートは、連続範囲内での整数です。
 
     * * `MDRangePolicy <policies/MDRangePolicy.html>`_
-      * Each iterate for each rank is an integer in a contiguous range
+      * 各ランクについての各イテレートは、連続範囲内での整数です。
 
     * * `TeamPolicy <policies/TeamPolicy.html>`__
-      * Assigns to each iterate in a contiguous range a team of threads
+      * 連続した範囲の各イテレート処理にスレッドのチームを割り当てます。
 
-Nested Execution Policies
+ネストされた実行ポリシー
 ============================
 
-Nested Execution Policies are used to dispatch parallel work inside of an already executing parallel region either dispatched with a `TeamPolicy <policies/TeamPolicy.html>`__ or a task policy. `NestedPolicies <policies/NestedPolicies.html>`__ summary.
+ネストされた実行ポリシーは、既に実行中の並列領域内で、`TeamPolicy <policies/TeamPolicy.html>`__ またはタスクポリシーによって、配置された並列作業を配置するために使用されます。 `NestedPolicies <policies/NestedPolicies.html>`__ summary。
 
 .. list-table::
     :widths: 25 75
     :header-rows: 1
     :align: left
 
-    * - Policy
-      - Description
+    * - ポリシー
+      - 説明
 
     * * `TeamThreadMDRange <policies/TeamThreadMDRange.html>`__
-      * Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range split over threads of a team.
+      * TeamPolicy カーネル内で使用され、チームの各スレッドに分割された多次元範囲に対してネストされた並列ループを実行します。
 
     * * `TeamThreadRange <policies/TeamThreadRange.html>`__
-      * Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team.
+      * チームの各スレッドに分割されたネストされた並列ループを実行するために、TeamPolicy カーネル内で使用されます。
 
     * * `TeamVectorMDRange <policies/TeamVectorMDRange.html>`__
-      * Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range split over threads of a team and their vector lanes.
+      * チームのスレッドとそのベクトルレーンに分割された多次元範囲に対して、ネストされた並列ループを実行するために、TeamPolicy カーネル内で使用されます。
 
     * * `TeamVectorRange <policies/TeamVectorRange.html>`__
-      * Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team and their vector lanes.
+      * チームのスレッドとそのベクトルレーンに分割された、ネストされた並列ループを実行するために、TeamPolicy カーネル内で使用されます。
 
     * * `ThreadVectorMDRange <policies/ThreadVectorMDRange.html>`__
-      * Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range with vector lanes of a thread.
+      * スレッドのベクトルレーンを用いて多次元範囲に対して、ネストされた並列ループを実行するために、TeamPolicy カーネル内で使用されます。
 
     * * `ThreadVectorRange <policies/ThreadVectorRange.html>`__
-      * Used inside of a TeamPolicy kernel to perform nested parallel loops with vector lanes of a thread.
+      * スレッドのベクトルレーンを用いてネストされた並列ループを実行するために、TeamPolicy カーネル内で使用されます。
 
-Common Arguments for all Execution Policies
+すべての実行ポリシーのための共通引数
 ===========================================
 
-Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.
+実行ポリシーは通常、テンプレート引数を通じてコンパイル時の引数を受け入れ、コンストラクタ引数またはセッター関数を通じて実行時の引数を受け入れます。
 
 .. tip::
 
-    Template arguments can be given in arbitrary order.
+    テンプレート引数は任意の順序で指定できます。
 
 .. list-table::
     :widths: 30 30 40
     :header-rows: 1
     :align: left
 
-    * - Argument
-      - Options
-      - Purpose
+    * - 引数
+      - 省略可能
+      - 目的
 
     * * ExecutionSpace
       * ``Serial``, ``OpenMP``, ``Threads``, ``Cuda``, ``HIP``, ``SYCL``, ``HPX``
-      * Specify the Execution Space to execute the kernel in. Defaults to ``Kokkos::DefaultExecutionSpace``
+      * カーネルを実行する実行スペースを指定します。デフォルトは ``Kokkos::DefaultExecutionSpace`` です。
 
-    * * Schedule
+    * * スケジュール
       * ``Schedule<Dynamic>``, ``Schedule<Static>``
-      * Specify scheduling policy for work items. ``Dynamic`` scheduling is implemented through a work stealing queue. Default is machine and backend specific.
+      * 作業項目のスケジューリングポリシーを指定します。 ``Dynamic`` スケジューリングは、作業窃取キューを通じて実装されます。デフォルトは、マシンおよびバックエンド固有です
 
     * * IndexType
-      * e.g. ``IndexType<int>``
-      * Specify integer type to be used for traversing the iteration space. Defaults to the ``size_type`` of `ExecutionSpaceConcept <execution_spaces.html#typedefs>`__. Can affect the performance depending on the backend.
+      * 例えば ``IndexType<int>``
+      * イテレーション空間を走査するために使用する整数型を指定します。 デフォルトでは、`ExecutionSpaceConcept <execution_spaces.html#typedefs>`__ の ``size_type`` が使用されます。 バックエンドによっては、パフォーマンスに影響を与える可能性があります。
 
     * * LaunchBounds
       * ``LaunchBounds<MaxThreads, MinBlocks>``
-      * Specifies hints to to the compiler about CUDA/HIP launch bounds.
+      * CUDA/HIPの起動境界に関するコンパイラへのヒントを指定します。
 
     * * WorkTag
       * ``SomeClass``
-      * Specify the work tag type used to call the functor operator. Can be any arbitrary tag type (i.e. an [empty](https://en.cppreference.com/w/cpp/types/is_empty) struct or class). Defaults to ``void``.
+      * ファンクタ演算子を呼び出す際に、使用する作業タグのタイプを指定します。 任意のタグタイプにすることが可能です (つまり、  [empty](https://en.cppreference.com/w/cpp/types/is_empty) 構造体またはクラス )。デフォルトは、 ``void`` です。
 
 
 .. toctree::

@@ -1,19 +1,19 @@
 ``ParallelScanTag``
 ===================
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
-Header File: ``<Kokkos_ExecPolicy.hpp>``
+ヘッダーファイル: ``<Kokkos_ExecPolicy.hpp>``
 
 .. _parallelScan: ../parallel-dispatch/parallel_scan.html
 
 .. |parallelScan| replace:: :cpp:func:`parallel_scan`
 
-A tag used in team size calculation functions to indicate that the functor for which a team size is being requested is being used in a |parallelScan|_
+チーム規模の要求対象となるファンクターを示すための、チーム規模計算機能で使用されるタグは、 |parallelScan|_ に使用されています。
 
-Usage
------
+使用方法
+-------------
 
 .. code-block:: cpp
 
@@ -22,29 +22,29 @@ Usage
     int recommended_team_size = policy.team_size_recommended(
         Functor, Kokkos::ParallelScanTag());
 
-Synopsis 
---------
+概要
+---------------
 
 .. code-block:: cpp
 
     struct ParallelScanTag{};
 
-Public Class Members
---------------------
+パブリックメンバー関数
+-------------------------
 
-None
+無し
 
-Typedefs
+型定義
 ~~~~~~~~
    
-None
+無し
 
-Constructors
-~~~~~~~~~~~~
+コンストラクタ
+~~~~~~~~~~~~~~~~~~
  
-Default
+デフォルト
 
-Functions
+関数
 ~~~~~~~~~
 
-None
+無し

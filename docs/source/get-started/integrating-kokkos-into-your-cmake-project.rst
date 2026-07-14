@@ -1,64 +1,51 @@
-Integrating Kokkos into Your Project
+Kokkos をプロジェクトに統合
 ====================================
 
-This document describes how to integrate the Kokkos library into your CMake
-project.
+このドキュメントは、Kokkos ライブラリを CMake プロジェクトに統合する方法を説明しています。
 
-Kokkos provides the ``Kokkos::kokkos`` target, which simplifies the
-process by automatically handling necessary include directories, link
-libraries, compiler options, and other usage requirements.
+Kokkosは、 ``Kokkos::kokkos`` というターゲットを提供しており、必要なディレクトリ、リンクライブラリ、コンパイラオプション、その他の使用要件を自動的に処理することでプロセスを簡素化します。
 
-Here are several integration methods, each with its own advantages:
+以下はそれぞれ利点を持ついくつかの統合方法です：
 
-1. External Kokkos (Recommended for most users)
+1. 外部 Kokkos (ほとんどのユーザーに推奨)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The recommended approach is to use Kokkos as an external dependency. This
-allows for easier management and updates.  Use CMake's
-`find_package() <https://cmake.org/cmake/help/latest/command/find_package.html>`_
-command to locate and link against an existing Kokkos installation:
+推奨アプローチは、Kokkosを外部依存関係として利用することです。 これにより管理や更新がより容易になります。  CMake の `find_package() <https://cmake.org/cmake/help/latest/command/find_package.html>`_ コマンドを使って、既存の Kokkos インストールを特定しリンクしてください:
 
 .. code-block:: cmake
 
-  find_package(Kokkos 4.2 REQUIRED CONFIG) # Find Kokkos version 4.2 or later
+  find_package(Kokkos 4.2 REQUIRED CONFIG) #  バージョン 4.2 以降で確認
   # ...
   target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 
-* ``find_package(Kokkos ...)`` searches for a ``KokkosConfig.cmake`` file, which is
-  generated when Kokkos is built and installed. This file contains the
-  necessary information for linking against Kokkos.
-* The ``4.2`` argument specifies the minimum required Kokkos version. It's
-  optional but recommended for ensuring compatibility.
-* ``Kokkos::kokkos`` is the namespaced imported target that provides all
-  necessary build flags.
-* The ``CONFIG`` keyword tells CMake to use the configuration files.
+* ``find_package(Kokkos ...)`` は、Kokkos の構築およびインストール時に生成される ``KokkosConfig.cmake`` ファイルを検索します。このファイルには、Kokkos にリンクするために必要な情報が含まれています。
+*  ``4.2`` 引数は、最低限必要な Kokkos バージョンを指定します。 これは任意ですが、互換性を確保するために推奨されています。 
+* ``Kokkos::kokkos``  は、必要なビルドフラグをすべて提供する名前スペース付きのインポートターゲットです。 
+* ``CONFIG`` キーワードは、CMake に設定ファイルを使うように、指示します。
 
-You can install Kokkos separately and then point CMake to its location using
-the ``Kokkos_ROOT`` variable.
+Kokkos は別途インストールし、CMake で``Kokkos_ROOT`` 変数を使ってその場所を指すこともできます。
 
 .. code-block:: sh
 
   MyProject> cmake -DKokkos_ROOT=/path/to/kokkos/install/dir -B builddir
 
 
-2. Embedded Kokkos via ``add_subdirectory()`` and Git Submodules
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.  ``add_subdirectory()`` 経由の組み込み Kokkos および Git サブモジュール
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This method embeds the Kokkos source code directly into your project.  It's
-useful when you need very tight control over the Kokkos version or when you
-can't install Kokkos separately.
+本方法は、Kokkos のソースコードを直接プロジェクトに組み込む方法です。 Kokkos バージョンを非常に厳密に管理したい場合や、Kokkos を別途インストールできない場合に便利です。
 
-1. Add Kokkos as a `Git submodule <https://git-scm.com/book/en/v2/Git-Tools-Submodules>`_:
+1.  `Git submodule <https://git-scm.com/book/en/v2/Git-Tools-Submodules>`_ として、Kokkos を追加します
 
 .. code-block:: sh
 
   MyProject> git submodule add -b 4.5.01 https://github.com/kokkos/kokkos.git tpls/kokkos
-  MyProject> git commit -m 'Adding Kokkos v4.5.1 as a submodule'
+  MyProject> git commit -m 'サブモジュールとして Kokkos v4.5.1 を追加'
 
 
-``tpls/kokkos/`` should now contain the full Kokkos source tree.
+``tpls/kokkos/`` は、完全な Kokkos ソースツリーを含む必要があります。
 
-2. Use ``add_subdirectory()`` in your CMakeLists.txt:
+2. CMakeLists.txt 内で、 ``add_subdirectory()`` を使用します:
 
 .. code-block:: cmake
 
@@ -67,12 +54,11 @@ can't install Kokkos separately.
   target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 
 
-3. Embedded Kokkos via ``FetchContent``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3.  ``FetchContent`` 経由での組み込み Kokkos 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    
-`FetchContent <https://cmake.org/cmake/help/latest/module/FetchContent.html>`_
-simplifies the process of downloading and including Kokkos as a dependency
-during the CMake configuration stage.
+`FetchContent <https://cmake.org/cmake/help/latest/module/FetchContent.html>`_ は、
+CMake の設定段階で、Kokkos をダウンロードし依存関係として含めるプロセスを簡素化します。
 
 .. code-block:: cmake
 
@@ -87,25 +73,22 @@ during the CMake configuration stage.
   target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 
 
-* ``URL_HASH`` is highly recommended for verifying the integrity of the
-  downloaded archive. You can find the SHA256 checksums for Kokkos releases in
-  the ``kokkos-X.Y.Z-SHA-256.txt`` file on the `Kokkos releases page
-  <https://github.com/kokkos/kokkos/releases>`_.
+* ダウンロードされたアーカイブの整合性を検証するために、 ``URL_HASH`` を強く推奨します。 Kokkos リリースの SHA256 チェックサムは、
+  `Kokkos リリースページ <https://github.com/kokkos/kokkos/releases>`_ 上 の ``kokkos-X.Y.Z-SHA-256.txt`` ファイル内で、確認できます。
 
 
-4. Supporting Both External and Embedded Kokkos
+4. 外部および組み込み両型の Kokkos のサポート
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   
 
-This approach allows your project to use either an external Kokkos installation
-or an embedded version, providing flexibility for different build environments.
+このアプローチにより、プロジェクトは外部の Kokkos インストールまたは組み込みバージョンのいずれかを使用でき、異なるビルド環境に柔軟性を提供します。
 
 .. code-block:: cmake
 
-  find_package(Kokkos CONFIG) # Try to find Kokkos externally
+  find_package(Kokkos CONFIG) # Kokkos の外部での発見を試みます
   if(Kokkos_FOUND)
       message(STATUS "Found Kokkos: ${Kokkos_DIR} (version \"${Kokkos_VERSION}\")")
   else()
-      message(STATUS "Kokkos not found externally. Fetching via FetchContent.")
+      message(STATUS "Kokkos は外部で確認できません。 FetchContent 経由でフェッチします。")
       include(FetchContent)
       FetchContent_Declare(
           Kokkos
@@ -117,24 +100,23 @@ or an embedded version, providing flexibility for different build environments.
   target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 
 
-Controlling the Kokkos integration:
+Kokkos 統合をコントロール:
 
 * `CMAKE_DISABLE_FIND_PACKAGE_Kokkos <https://cmake.org/cmake/help/latest/variable/CMAKE_DISABLE_FIND_PACKAGE_PackageName.html>`_:
-  Set this variable to ``TRUE`` to force the use of the embedded Kokkos, even if
-  an external installation is found.
+  外部でのインストールが見つかった場合でも、組み込み  Kokkos の使用を強制するために、本変数を ``TRUE`` に設定します。
 * `CMAKE_REQUIRE_FIND_PACKAGE_Kokkos <https://cmake.org/cmake/help/latest/variable/CMAKE_REQUIRE_FIND_PACKAGE_PackageName.html>`_:
-  Set this variable to ``TRUE`` to require an external Kokkos installation. The
-  build will fail if Kokkos is not found.
-* ``Kokkos_ROOT``: Use this variable to specify the directory where CMake should
-  search for Kokkos when using ``find_package()``.
+  外部の Kokkosインストールを要求するために、本変数を ``TRUE`` に設定します。Kokkos が見つからない場合には、構築は失敗します。
+* ``Kokkos_ROOT``: CMake が``find_package()`` を使う際に、Kokkos  を検索すべきディレクトリを指定するために、本変数を使用します。
 
-For example:
+例えば:
 
 .. code-block:: sh
 
   cmake -DCMAKE_REQUIRE_FIND_PACKAGE_Kokkos=ON -DKokkos_ROOT=/path/to/kokkos/install/dir
 
-or
+
+または
+
 
 .. code-block:: sh
 

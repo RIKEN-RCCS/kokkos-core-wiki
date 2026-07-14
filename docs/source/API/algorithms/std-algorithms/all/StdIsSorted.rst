@@ -2,20 +2,20 @@
 ``is_sorted``
 =============
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Checks if the elements in a range or in a rank-1 ``View`` are sorted in non-descending order using either ``operator<`` to compare two elements or a user-provided comparison operator.
+範囲またはランク1の ``ビュー`` 内の要素が、2つの要素を比較する ``operator<`` またはユーザーが提供した比較演算子を用いて、降順でない順序でソートされているかどうかを確認します。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -58,8 +58,8 @@ Overload set accepting execution space
                   const ::Kokkos::View<DataType, Properties...>& view,
                   ComparatorType comp);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -89,48 +89,46 @@ Overload set accepting a team handle
                   ComparatorType comp);
 
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
 
-  - 1: The default string is "Kokkos::is_sorted_iterator_api_default".
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 3: The default string is "Kokkos::is_sorted_view_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::is_sorted_iterator_api_default".
 
-  - 5: The default string is "Kokkos::is_sorted_iterator_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::is_sorted_view_api_default".
 
-  - 7: The default string is "Kokkos::is_sorted_view_api_default".
+  - 5: デフォルト文字列は、 "Kokkos::is_sorted_iterator_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 7: デフォルト文字列は、 "Kokkos::is_sorted_view_api_default".
 
-- ``first, last``: range of elements to search in
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+- ``first, last``: 検索対象の要素の範囲
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されるなど、*ランダムアクセスイテレータ* でなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 有効範囲、つまり、 ``last >= first`` を表す必要があります。
+
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``view``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``comp``:
 
-  - *binary* functor returning ``true`` if the first argument is *less than* the second argument;
-    ``comp(a,b)`` must be valid to be called from the execution space passed,
-    and convertible to bool for every pair of arguments ``a,b`` of type ``value_type``,
-    where ``value_type`` is the value type of ``IteratorType`` (for 1,2,5,6)
-    or the value type of ``view`` (for 3,4,7,8) and must not modify ``a,b``.
+  - *二項* ファンクタで、第1の引数が、2番目の引数 *より小さい* 場合に、 ``真``を返します;
+    ``comp(a,b)`` は、 渡された実行空間から呼び出されるためには有効である必要があり、そして、 型 ``value_type`` の引数 ``a,b`` のすべてのペアについて、ブール型に変換可能で、そこでは、 ``value_type`` が  ``IteratorType`` (1,2,5,6について) の値型、または ``ビュー`` (3,4,7,8について) の値型であり、 ``a,b`` を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
@@ -142,7 +140,7 @@ Parameters and Requirements
        }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Returns ``true`` if the elements are sorted in descending order.
+要素が降順でソートされる場合に、 ``真`` を返します。

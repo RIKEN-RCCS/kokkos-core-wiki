@@ -1,20 +1,20 @@
 ``is_sorted_until``
 ===================
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Finds the largest range beginning at ``first`` or at ``Kokkos::Experimental::begin(view)`` in which the elements are sorted in non-descending order. Comparison between elements is done via ``operator<`` or the binary functor ``comp``.
+``first`` または ``Kokkos::Experimental::begin(view)`` から始まる範囲の中で、要素が降順でない順序でソートされている最大の範囲を見つけます。 要素間の比較は、 ``operator<`` または二項ファンクタ ``comp`` 経由で行われます。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -61,8 +61,8 @@ Overload set accepting execution space
                         const Kokkos::View<DataType, Properties...>& view,
                         ComparatorType comp);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -92,27 +92,24 @@ Overload set accepting a team handle
                         const Kokkos::View<DataType, Properties...>& view,
                         ComparatorType comp);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. |IsSorted| replace:: ``is_sorted``
 .. _IsSorted: ./StdIsSorted.html
 
-- ``exespace``, ``teamHandle``, ``first``, ``last``, ``view``, ``comp``: same as in |IsSorted|_
+- ``exespace``, ``teamHandle``, ``first``, ``last``, ``view``, ``comp``:  |IsSorted|_ と同様。
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 1 & 3: デフォルト文字列は、 "Kokkos::is_sorted_until_iterator_api_default"
 
-  - must be accessible from ``exespace``
+  - 5 & 7: デフォルト文字列は、 "Kokkos::is_sorted_until_view_api_default"
 
-  - 1 & 3: The default string is "Kokkos::is_sorted_until_iterator_api_default"
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-  - 5 & 7: The default string is "Kokkos::is_sorted_until_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
-
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-- The last iterator ``it`` for which range ``[first, it)`` is sorted and where the following is true: ``std::is_same_v<decltype(it), IteratorType>``, or for which range ``[Kokkos::Experimental::begin(view), it)`` is sorted. For this second case, note that ``it`` is computed as: ``Kokkos::Experimental::begin(view) + increment`` where ``increment`` is found in the algorithm.
+- 範囲 ``[first, it)`` がソートされる最後のイテレータ  ``it`` およびかつ以下の条件が真である場合: ``std::is_same_v<decltype(it), IteratorType>`` 、または範囲 ``[Kokkos::Experimental::begin(view), it)`` がソートされている場合。 この2番目の事例については、以下の通りに``it`` が計算されることに注意してください。 ``Kokkos::Experimental::begin(view) + increment`` ：ここで、 ``increment`` は、アルゴリズム内に認められます。

@@ -4,56 +4,56 @@
 .. role::cpp(code)
     :language: cpp
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Description
------------
+説明
+------------------
 
-ThreadVectorMDRange is a `nested execution policy <./NestedPolicies.html>`_  used inside of hierarchical parallelism.
+階層的並列処理の中で使われる `nested execution policy <NestedPolicies.html>`_ です。 
 
-Interface
----------
+インターフェイス
+----------------
 
 .. cpp:class:: template <class Rank, typename TeamHandle> ThreadVectorMDRange
 
-   .. rubric:: Constructor
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: ThreadVectorMDRange(team, extent_1, extent_2, ...);
 
-      Splits the index range ``0`` to ``extent`` over the vector lanes of the calling thread,
-      where ``extent`` is the backend-dependent rank that will be vectorized
+      呼び出しスレッドのベクトルレーン上で、インデックス範囲 ``0`` から ``extent`` を分割します。
+      ここでは、 ``extent`` は、ベクトル化されるバックエンド依存のランクです。
 
-      :param team: TeamHandle to the calling team execution context
+      :param team: 呼び出しチーム実行コンテキストへのTeamHandle
 
-      :param extent_1, extent_2, ...: index range lengths of each rank
+      :param extent_1, extent_2, ...: 各ランクのインデックス範囲長
 
-      * **Requirements**
+      * **必要要件**
 
-	* ``TeamHandle`` is a type that models `TeamHandle <./TeamHandleConcept.html>`_
+	* ``TeamHandle`` は、 `TeamHandle <./TeamHandleConcept.html>`_ をモデル化する型です。
 
-	* ``extent_1, extent_2, ...`` are ints
+	* ``extent_1, extent_2, ...`` は、intsです。
 
-	* ``extent_i`` is such that ``i >= 2 && i <= 8`` is true.
-	  For example:
+	* ``extent_i`` の条件は、 ``i >= 2 && i <= 8`` が真であることです。
+	  例えば:
 
 	  .. code-block:: cpp
 
-	     ThreadVectorMDRange(team, 4);               // NOT OK, violates i>=2
+	     ThreadVectorMDRange(team, 4);               // OKではありません、 i>=2 に違反します
 
 	     ThreadVectorMDRange(team, 4,5);             // OK
 	     ThreadVectorMDRange(team, 4,5,6);           // OK
-	     ThreadVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK, max num of extents allowed
+	     ThreadVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK, 範囲の最大値は認められます
 
-	* The constructor can not be called inside a parallel operation dispatched using a
-	  ``TeamVectorRange`` policy, ``TeamVectorRange`` policy, ``TeamVectorMDRange`` policy
-	  or ``ThreadVectorMDRange`` policy.
 
-Restrictions
+	* ``TeamVectorRange`` ポリシー、 ``TeamVectorRange`` ポリシー、 ``TeamVectorMDRange`` ポリシー
+	  または、 ``ThreadVectorMDRange`` ポリシーを使用して、ディスパッチされた並列演算内で、コンストラクタを呼び出すことは出来ません。
+
+制約
 ------------
 
-Note that when used in `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_, the reduction is limited to a sum.
+`parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、縮約は合計に限定されることに注意してください。
 
-Examples
+例
 --------
 
 .. code-block:: cpp

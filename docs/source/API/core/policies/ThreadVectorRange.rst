@@ -1,9 +1,9 @@
 ``ThreadVectorRange``
 =====================
 
-Header File: ``Kokkos_Core.hpp``
+ヘッダーファイル: ``Kokkos_Core.hpp``
 
-Usage: 
+使用方法
 
 .. code-block:: cpp
 
@@ -13,88 +13,85 @@ Usage:
    parallel_scan(ThreadVectorRange(team,range), 
      [=] (int i, double& lsum, bool final) {...});
 
-ThreadVectorRange is a `nested execution policy <NestedPolicies.html>`__ used inside hierarchical parallelism. 
-In contrast to global policies, the public interface for nested policies is implemented 
-as functions, in order to enable implicit templating on the execution space type via 
-the team handle.
+階層的並列処理の中で使われる  `nested execution policy <NestedPolicies.html>`__ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
 
-Synopsis 
---------
-
-.. code-block:: cpp
-
-   template<class TeamMemberType, class iType>
-   /* implementation defined */ ThreadVectorRange(TeamMemberType team, iType count);
-   template<class TeamMemberType, class iType1, class iType2>
-   /* implementation defined */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
-
-
-Description
+概要
 -----------
 
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType>
-   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType count);
+   /* 実装により定義 */ ThreadVectorRange(TeamMemberType team, iType count);
+   template<class TeamMemberType, class iType1, class iType2>
+   /* 実装により定義 */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
+
+
+説明
+------------------
+
+.. code-block:: cpp
+
+   template<class TeamMemberType, class iType>
+   /* 実装により定義 */ ThreadVectorRange(TeamMemberType team, iType count);
    
 
-Splits the index range ``0`` to ``count-1`` over the vector lanes of the calling thread.
+チームのスレッドとベクトルレーンのインデックス範囲  ``0`` から ``count-1`` まで分割します。
    
-*  **Arguments**:
+*  **引数**:
 
-   * ``team``: a handle to the calling team execution context.
+   * ``team``: 呼び出しチーム実行コンテキストへのハンドルです。
 
-   * ``count``: index range length. 
+   * ``count``: インデックス範囲長 
 
-*  **Returns**:
+*  **戻り値**:
 
-   * Implementation defined type.
+   * 実装定義型。
 
-*  **Requirements**
+*  **必要要件**
 
-   * ``TeamMemberType`` is a type that models `TeamHandle <TeamHandleConcept>`__
+   * ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept>`__ をモデル化する型です
 
-   * ``std::is_integral<iType>::value`` is true.
+   * ``std::is_integral<iType>::value`` は、真です。
 
-   * ``count >= 0`` is true;
+   * ``count >= 0`` は、真です;
 
-   * This function can not be called inside a parallel operation dispatched using a `TeamVectorRange <TeamVectorRange>`__ policy or ``ThreadVectorRange`` policy.
+   * 本関数を、 `TeamVectorRange <TeamVectorRange>`__ ポリシー または ``ThreadVectorRange`` ポリシーを使用してディスパッチされた、並列演算内で呼び出すことはできません。
 
 
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType1, class iType2>
-   /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
+   /* 実装により定義 */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 
-Splits the index range ``begin`` to ``end-1`` over the vector lanes of the calling thread. 
+呼び出しスレッドのベクトルレーン全体で、インデックスレンジ ``begin`` から  ``end-1`` までを分割します。
 
-*  **Arguments**
+*  **引数**
 
-   * ``team``: a handle to the calling team execution context.
+   * ``team``: 呼び出しチーム実行コンテキストへのハンドル
 
-   * ``begin``: index range begin. 
+   * ``begin``: インデックス範囲開始。
 
-   * ``end``: index range end.
+   * ``end``: インデックス範囲終了。
 
-*  **Returns**
+*  **戻り値**
 
-   * Implementation defined type.
+   * 実装定義型
 
-* **Requirements**:
+* **必要要件**:
 
-  * ``TeamMemberType`` is a type that models `TeamHandle <TeamHandleConcept.html>`__   
+  * ``TeamMemberType`` は、 `TeamHandle <TeamHandleConcept.html>`__  をモデル化する型です 
   
-  * ``std::is_integral<iType1>::value`` is true.
+  * ``std::is_integral<iType1>::value`` は、真です。
 
-  * ``std::is_integral<iType2>::value`` is true.
+  * ``std::is_integral<iType2>::value`` は、真です。
 
-  * ``end >= begin`` is true;
+  * ``end >= begin`` は、真です;
 
-  * This function can not be called inside a parallel operation dispatched using a `TeamVectorRange <TeamVectorRange.html>`__ policy or ``ThreadVectorRange`` policy.
+  * 本関数を、`TeamVectorRange <TeamVectorRange>`__ ポリシーまたは、 ``ThreadVectorRange`` ポリシーを使用してディスパッチされた並列演算内で呼び出すことはできません。
 
   
-Examples
+例
 --------
 
 .. code-block:: cpp

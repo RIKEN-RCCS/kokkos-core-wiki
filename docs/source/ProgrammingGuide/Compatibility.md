@@ -1,84 +1,85 @@
-# Backwards & Future Compatibility
+# 後方互換性と将来の互換性
 
-For a sufficiently clever user, effectively any change we make to Kokkos will be a breaking change. The intent of this document is to make it clear about what does and does not constitute supported use of Kokkos, as well as how Kokkos moves forward.
+十分に賢いユーザーにとっては、Kokkos に有効に変更を加えることは、破壊的変更となります。本文書の目的は、 何が Kokkos の支援利用に該当し、何が該当しないかについて、および Kokkos の今後の方針を明確にすることです。
 
-There is a tension between the freedom to make improvements and backward compatibility.  We are presenting a set of rules that allows the Kokkos Team to make improvements going forward while maintaining a high level of backward compatibility (which avoids frustration and pain on the part of users).  While we do not deliberately set out to break users, we'd like to minimize accidental breakage while still allowing the Kokkos Team a good path forward.
+改善の自由と後方互換性の間には緊張関係があります。 Kokkosチームが今後改善を進めつつ、高い後方互換性を維持し(ユーザーのフラストレーションや苦痛を回避できる)ルールセットを提示します。 ユーザーを意図的に壊すつもりはありませんが、誤った破損を最小限に抑えつつ、Kokkosチームに良い道筋を提供したいと考えています。  
 
-Unless we document otherwise, please:
+別途記録がない限り、以下をお願い致します:
 
-* Avoid adding into `namespace Kokkos`
-* Avoid adding/removing/modifying macros starting with `KOKKOS_`
-* Avoid creating/removing/modifying files whose names start with `Kokkos_`
+*  `namespace Kokkos` への追加を回避
+*  `KOKKOS_` で始まるマクロの追加/削除/修正の回避
+*  名前が `Kokkos_` で始まるファイルの作成/削除/改変の回避
 
-This minimizes the chances that either Kokkos or user code is inadvertently broken by future changes.  
+これにより、Kokkos または ユーザーコード の 将来の変更による、意図しない破損の可能性を最小限に抑えます。 
 
-We reserve for the private use of the Kokkos Team:
+ Kokkos Team の私的利用ために、以下を保持します:
 
-* Any nested `namespace Impl` inside `namespace Kokkos` (`Kokkos::Impl`, `Kokkos::Experimental::Impl`)
-* Any macro starting with `KOKKOS_IMPL_`
+*  `namespace Kokkos` 内の、任意のネストされた `namespace Impl`  (`Kokkos::Impl`, `Kokkos::Experimental::Impl`)
+*  `KOKKOS_IMPL_` で始まる任意のマクロ
 
-These things contain the implementation details of Kokkos.  They are subject to change without notice, either in name or in behavior, even in minor point releases.  They should never be referred to directly in user code.
+これらの情報にはKokkosの実装詳細が含まれています。名称や行動、さらには小さなポイントリリースであっても、予告なしに変更されることがあります。 それらは決して、ユーザーコード内で直接参照されるべきではありません。
 
-## API Compatibility
+## API 互換性
 
-The public supported interface for Kokkos is:
+Kokkos のパブリックサポートインターフェースは、以下の通りです:
 
-* The top-level `namespace Kokkos`
-* Macros starting with `KOKKOS_` (excluding those starting with `KOKKOS_IMPL_`)
+* トップレベル `namespace Kokkos`
+*  `KOKKOS_` から始まるマクロ ( `KOKKOS_IMPL_` で始まるものを除く)
 
-While the implementation details may change, the Kokkos Team puts its best effort into limiting changes to either having no functional behavioral differences (apart from bug fixes) or if they must, are changed with compile-time (preferred) or run-time warning and a suitable deprecation period (if possible).
+実装の詳細は変わることがありますが、Kokkos チームは、変更については、機能的な挙動の違いがないもの(バグ修正を除く)に制限するか、必要に応じてコンパイル時(推奨)や実行時警告、可能な場合は、適切な非推奨期間を設けての変更となるよう、最善を尽くしています。
 
-The experimentally support interface for Kokkos is in
+ Kokkos の実験的なサポートインターフェースは、以下の中にあります
 
 * `namespace Kokkos::Experimental` 
 
-This namespace houses experimental features that are not yet ready for prime time.  The feature may be incomplete, and the interface may change between releases.  The intent is to eventually move them into the top level namespace Kokkos (with a suitable deprecation period where they are both in `namespace Kokkos` and `namespace Kokkos::Experimental`).  If you need the functionality (e.g., a new backend), you may use it knowing that you may have to change your code for newer minor releases of Kokkos (and eventually will have to change your code when it moves to the top-level Kokkos namespace). 
+本名前空間には、まだ本格的に使える準備ができていない、実験的な機能が収められています。 機能が不完全で、リリース間でインターフェースが変わることもあります。 最終的には、それらを最上位のネームスペース Kokkos に移すことを目的としています (適切な非推奨期間があり、両方が名前空間 Kokkos および namespace Kokkos::Experimentalに属しています。)。もし機能 (例えば新しいバックエンド) が必要なら、Kokkos の新しいマイナーリリースでコードを変更する必要があることを承知しながら使うかもしれません (最終的には、 Kokkos のトップレベル名前空間に移行した際にコードも変更しなければならないでしょう)。
 
-## User Defined Macros & Compatibility
+## ユーザー定義マクロと互換性
 
-User defined macros can be particularly problematic, as they change what is lexically seen by the compiler and do not obey the language scoping rules.  They could interfere with variable names, functions, etc., including private ones used in Kokkos and other libraries.
+ユーザー定義マクロは、特に問題を抱え、コンパイラが語彙的に認識する内容を変え、言語のスコーピングルールを順守しないことがあります。 これらは、変数名や関数、特に Kokkos や他のライブラリで使われているプライベートなものに、干渉する可能性がありました。
+衝突のリスクを最小限に抑えるために、ユーザー定義のマクロは、MYPROJECT_ (または同様の曖昧さ解消方法)を付け、すべて大文字で表記すべきです(これにより、マクロは通常 C++ の構文や意味ルールに従わないことをコードリーダーに知らせます)。
 
-In order to minimize the risk of collisions, user defined macros should be prefaced with `MYPROJECT_` (or a similar way to disambiguate them) and be in all caps (this informs code readers that macros don't obey the usual syntactic and semantic rules of C++).
 
-## C++ Compatibility
+## C++ 互換性
 
-It is the intent of the Kokkos team for minimal C++ support to be one revision behind the latest published C++ standard (they are published every three years starting with C++11).  These releases are generally considered major.  This drives increasing the minimal supported compiler versions, as well as allowing the Kokkos Team to take advantage of new library and language features, as well removing workarounds for older compiler bugs and limitations.  Kokkos may also optionally support later versions of the C++ standard, giving users features should they be compiling in those modes.
+ Kokkosチームは、C++ サポートを最小限に抑え、最新の公開 C++ 標準(C++11 から3年ごとに公開)  より、1つ遅らせることを目指しています。 これらのリリースは一般的に重要であると見なされています。 これにより、最小限のサポートコンパイラバージョンが増加し、 Kokkos チームは 新しいライブラリや言語機能を活用でき、古いコンパイラのバグおよび制限に対する回避策も削除できます。 Kokkos はオプションで C++ 標準の後期バージョンをサポートすることもあり、ユーザーがこれらのモードでコンパイルする際に機能を提供します。
 
-## ABI Compatibility
+## ABI 互換性
 
-It is expected that Kokkos users recompile their code against new releases or builds of Kokkos.  There are no ABI (Application Binary Interface) guarantees at this level.
+Kokkos ユーザーが、新しいリリースまたは Kokkos の構築に対してコードを再コンパイルすることが予想されています。 本レベルでの ABI (アプリケーションバイナリインターフェース) 保証はありません。
 
-An exception to this are Kokkos Tools, where much care is taken to ensure that already compiled older versions of tools work with newer versions of Kokkos.
+例外として、Kokkos Tools がありますが、既にコンパイルされた古いバージョンのツールにおいて、新しい Kokkos と機能するように、細心の注意を払っています。
 
-## Deprecation
-Occasionally the Kokkos Team needs to remove things for overall improvements to the Kokkos code base.  When doing so, the Kokkos Team puts in a best effort with deprecation warnings as well as a migratory, evolutionary path (ideally both the deprecated version and the new version co-exist for a suitable period of time) for moving to the improved interface and functionality.
+## 非推奨
+時として、KokkosTeam が Kokkos コードベースの全体的な改善のために、削除を行う必要があります。 その際、KokkosTeam は非推奨化警告および移行/進化の道筋 (理想的には廃止版と新バージョンの両方が適切な期間共存) を通じての、改善インターフェースの改善および機能への移行に向けて、最善を尽くしています。
 
-## Headers
+## ヘッダー
 
-Avoid creating/removing/modifying header files whose names start with `Kokkos_`, even under other parts of your project.  Depending on how your build system is set up, this can, for instance, cause the wrong file to be included and lead to many hours of wasted debugging time.
+Kokkos_ で始まるヘッダーファイルの作成/削除/変更は避けてください。プロジェクトの他の部分についても、同じです。ビルドシステムの構成によっては、例えば、誤ったファイルが含まれてしまい、多くのデバッグ時間が無駄になる場合もあります。
 
-The following are public headers:
+
+以下は公開ヘッダーです:
 
     // Core API
     Kokkos_Core.hpp
 
-    Kokkos_Abort.hpp                     // since Kokkos 4.2
+    Kokkos_Abort.hpp                     // Kokkos 4.2以降
     Kokkos_Array.hpp
-    Kokkos_Assert.hpp                    // since Kokkos 4.2
+    Kokkos_Assert.hpp                    // Kokkos 4.2以降
     Kokkos_Atomic.hpp
-    Kokkos_BitManipulation.hpp           // since Kokkos 4.1
-    Kokkos_Clamp.hpp                     // since Kokkos 4.3
+    Kokkos_BitManipulation.hpp           // Kokkos 4.1以降
+    Kokkos_Clamp.hpp                     // Kokkos 4.3以降
     Kokkos_Complex.hpp
     Kokkos_DetectionIdiom.hpp
     Kokkos_Macros.hpp
     Kokkos_MathematicalConstants.hpp
     Kokkos_MathematicalFunctions.hpp
-    Kokkos_MinMax.hpp                    // since Kokkos 4.3
+    Kokkos_MinMax.hpp                    // Kokkos 4.3以降
     Kokkos_Pair.hpp
-    Kokkos_Printf.hpp                    // since Kokkos 4.2
+    Kokkos_Printf.hpp                    // Kokkos 4.2以降
     Kokkos_Profiling_ProfileSection.hpp
     Kokkos_Profiling_ScopedRegion.hpp
-    Kokkos_Swap.hpp                      // since Kokkos 4.3
+    Kokkos_Swap.hpp                      // Kokkos 4.3以降
     Kokkos_Timer.hpp
 
     // Containers API
@@ -98,24 +99,24 @@ The following are public headers:
     Kokkos_StdAlgorithms.hpp
 
 
-If a header is not public, please do not directly `#include` it.  It is not guaranteed to work now or continue to work in the future.  This includes any headers found in subdirectories.
+ ヘッダーが公開されていない場合は、直接 #include を行わないでください。今も効果があるわけでも、将来効果が続くことも保証されていません。これにはサブディレクトリ内のヘッダーも含まれます。
 
-### Other rights the Kokkos Team reserves
+### その他の権利はKokkosチームが留保
 
-* Add new names and entities to `namespace Kokkos`, including but not limited to:
-  * Functions (this includes new member functions and overloads to existing functions)
-  * Enumerations
-  * Namespaces
-  * Aliases (`using`, `typedef`, etc.)
-  * Classes (`struct`/`class`/`union`)
-  * Concepts
-  * Variables
-* Add new default arguments to functions and templates
-* Change return-types of functions in compatible ways (void to anything, etc).
-* Make changes to existing interfaces in a fashion that will be backward compatible, if those interfaces are solely used to instantiate types and invoke functions. Implementation details (the primary name of a type, the implementation details for a function callable) may not be depended upon.
+* `namespace Kokkos` に新しい名前およびエンティティを追加することは、Kokkos には以下が含まれますが、これらに限定されません::
+  * 関数 (これには新しいメンバー関数や既存関数のオーバーロードが含まれます) 
+  * 列挙
+  * 名前空間
+  * エイリアス (`using`, `typedef`, etc.)
+  * クラス (`struct`/`class`/`union`)
+  * 概念
+  * 変数
+* 関数やテンプレートに新しいデフォルト引数を追加
+* 関数のリターンタイプを互換性のある方法で変更します(例えば、任意のものにvoidを出すなど)。
+* 既存のインターフェースを、型のインスタンス化や関数呼び出し専用に使う場合、後方互換性のある方法で変更を加えます。 実装の詳細 (型のプライマリネーム、関数呼び出し可能な実装の詳細) は依存できない場合があります。
 
-### Miscellaneous future proofing
+### その他の将来の準備
 
-* Avoid taking the address of a function or variable in `namespace Kokkos`
-* Avoid `using namespace` declarations (`using namespace Kokkos;`, `using namespace Kokkos::Experimental;`)
+*  `namespace Kokkos` 内の関数や変数のアドレスは避けてください
+*  `using namespace` 宣言 (`using namespace Kokkos;`, `using namespace Kokkos::Experimental;`) を避けてください
 

@@ -1,5 +1,5 @@
-Programming Guide
-#################
+プログラミングガイド
+####################
 
 .. toctree::
    :numbered:

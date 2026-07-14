@@ -2,207 +2,207 @@
 .. role:: cpp(code)
     :language: cpp
 
-``vector`` [DEPRECATED]
+``vector`` [非推奨]
 =======================
 
-Header file: ``<Kokkos_Vector.hpp>`` (deprecated in Kokkos 4.3)
+ヘッダーファイル: ``<Kokkos_Vector.hpp>`` ( Kokkos 4.3において非推奨)
 
-The Kokkos Vector is semantically similar to the std::vector, but it is designed to overcome issues with memory allocations and copies when working with devices that have different memory spaces. The ``Kokkos::Vector`` is a Rank-1 DualView that implements the same interface as the std::vector. This allows programs that rely heavily on std::vector to grant access to program data from within a non-host execution space. Note that many of the std::vector compatible functions are host only, so access may be limited based on kernel complexity. Below is a synopsis of the class and the description for each method specifies whether it is supported on the host, device or both.
+Kokkos Vector は意味的に std::vector に似ていますが、異なるメモリ空間を持つデバイスで作業する際のメモリ割り当てやコピーの問題を克服するよう設計されています。  ``Kokkos::Vector`` は、std::vector と同じインターフェースを実装したランク1の DualView です。 これにより、std::vector に大きく依存するプログラムでも、ホスト以外の実行空間内からプログラムデータへアクセス可能です。 多くの std::vector 互換関数はホスト専用であるため、カーネルの複雑さによってアクセスが制限される場合があります。 以下はクラスの概要であり、各メソッドの説明にはホスト、デバイス、または両方でサポートされているかどうかが明記されています
 
-Usage
------
+使用方法
+--------
 
 .. code-block:: cpp
 
-    Kokkos::vector<Scalar, Device> v(n,1);  // (deprecated since 4.3)
+    Kokkos::vector<Scalar, Device> v(n,1);  // (バージョン 4.3以降非推奨)
     v.push_back(2);
-    v.resize(n+3);
+    v.resize(n+3)
     v.[n+1] = 3;
     v.[n+2] = 4;
 
-Description
------------
+説明
+------------------
 
 .. cpp:class:: template<class Scalar, class Arg1Type = void> vector :  public DualView<Scalar*, LayoutLeft, Arg1Type>
 
-   .. rubric:: Public Typedefs
+   .. rubric:: パブリック型定義
 
    .. cpp:type:: Scalar value_type;
 
-      Scalar value type
+      スカラー値型。
 
    .. cpp:type:: Scalar* pointer;
 
-      Scalar pointer type
+      スカラーポインタ型。
 
    .. cpp:type:: const Scalar* const_pointer;
 
-      Const Scalar pointer type
+      定数スカラー参照型。
 
    .. cpp:type:: Scalar& reference;
 
-      Scalar reference type
+      スカラー参照型。
 
    .. cpp:type:: const Scalar& const_reference;
 
-      Const Scalar reference type
+      定数スカラー参照型。
 
    .. cpp:type:: Scalar* iterator;
 
-      Iterator type
+      イテレータ型
 
    .. cpp:type:: const Scalar* const_iterator;
 
-      Const iterator type
+      定数イテレータ型
 
    .. rubric:: Accessors
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION reference operator()(int i) const;
 
-      Accessor
+      アクセサー
 
-      .. warning:: Host only
+      .. warning: ホストのみ
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION reference operator[](int i) const;
 
-      Accessor
+      アクセサー
 
-      .. warning:: Host only
+      .. warning: ホストのみ
 
-   .. rubric:: Constructors
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: vector();
 
-      Construct empty vector
+      空のベクトルを構築します。
 
    .. cpp:function:: vector(int n, Scalar val = Scalar());
 
-      Construct vector of size n + 10% and initialize values to ``val``
+      サイズ n + 10% のベクトルを構築し、 ``val`` に値を初期化します。
 
    .. rubric:: Other Public Methods
 
    .. cpp:function:: void resize(size_t n);
 
-      Resize vector to size n + 10%
+      サイズ n + 10% にベクトルのサイズを変更します。
 
    .. cpp:function:: void resize(size_t n, const Scalar& val);
 
-      Resize vector to size n + 10% and set values to ``val``
+      サイズ n + 10% にベクトルのサイズを変更し、値を ``val`` に設定します。
 
    .. cpp:function:: void assign(size_t n, const Scalar& val);
 
-      Set n values to ``val`` will auto synchronize between host and device
+      値を ``val`` に設定し、ホストとデバイス間で自動的に同期します。
 
    .. cpp:function:: void reserve(size_t n);
 
-      Same as resize (for compatibility)
+      サイズ変更と同様です（互換性のため）。
 
    .. cpp:function:: void push_back(Scalar val);
 
-      Resize vector to size() + 1 and set last value to val
+      ベクトルをsize() + 1 にサイズ変更し、最後の値を  val に設定します。
 
-      .. warning:: Host only, auto synchronize device
+      .. warning: ホストのみ、 デバイスを自動的に同期
 
    .. cpp:function:: void pop_back();
 
-      Reduce size() by 1
+      size()を 1 削減します。
 
    .. cpp:function:: void clear();
 
-      Set size() to 0
+      Set size() を 0 に設定します。
 
    .. cpp:function:: size_type size() const;
 
-      Return number of elements in vector
+      ベクトル内の要素数を返します。
 
    .. cpp:function:: size_type max_size() const;
 
-      Return maximum possible number of elements
+      可能な限り最大の要素数を返します。
 
    .. cpp:function:: size_type span() const;
 
-      Return memory used by vector
+      ベクターが使用したメモリを返します。
 
    .. cpp:function:: bool empty() const;
 
-      Returns true if vector is empty
+   ベクトルが空である場合には、真を返します。
 
    .. cpp:function:: pointer data() const;
 
-      Returns pointer to the underlying array
+      基盤となる配列に、ポインタを返します。
 
-      .. warning:: Host only
+      .. warning: ホストのみ
 
    .. cpp:function:: iterator begin() const;
 
-      Returns iterator starting at the beginning
+      先頭から始まるイテレータを返します。
 
-      .. warning:: Host only
+      .. warning: ホストのみ
 
    .. cpp:function:: iterator end() const;
 
-      Returns iterator past the last element
+      最後の要素を超えたイテレータを返します。
 
-      .. warning:: Host only
+      .. warning: ホストのみ
 
    .. cpp:function:: reference front();
 
-      Returns reference to the front of the list
+      リストの先頭への参照を返します。
 
-      .. warning:: Host only
+      .. warning: ホストのみ
 
    .. cpp:function:: reference back();
 
-      Returns reference to the last element in the list
+      リスト内の最後のエレメントに参照を返します。
 
-      .. warning:: Host only
+      .. warning: ホストのみ
 
    .. cpp:function:: const_reference front() const;
 
-      Returns const reference to the front of the list
+      リストの先頭への定数参照を返します。
 
-      .. warning:: Host only
+      .. warning: ホストのみ
 
    .. cpp:function:: const_reference back() const;
 
-      Returns const reference to the last element in the list
+      リスト内の最後のエレメントに定数参照を返します。
 
-      .. warning:: Host only
+      .. warning: ホストのみ
 
    .. cpp:function:: size_t lower_bound(const size_t& start, const size_t& theEnd, const Scalar& comp_val) const;
 
-      Return the index of largest value satisfying val < comp_val within the range start-theEnd
+      範囲 start-theEnd 内で val < comp_val を満たす最大値のインデックスを返します。
 
-      .. warning:: Host only
+      .. warning: ホストのみ
 
    .. cpp:function:: bool is_sorted();
 
-      Return true if the list is sorted
+      リストがソートされている場合、真を返します。
 
    .. cpp:function:: iterator find(Scalar val) const;
 
-      Return iterator pointing to element matching ``val``
+       ``val`` に一致する要素を指すイテレータを返します。
 
    .. cpp:function:: void device_to_host();
 
-      Copy data from device to host
+      デバイスからホストへデータをコピーします。
 
    .. cpp:function:: void host_to_device() const;
 
-      Copy data from host to device
+      ホストからデバイスにデータをコピーします。
 
    .. cpp:function:: void on_host();
 
-      Update/synchronize data in dual view from host perspective
+      ホスト側の観点からデュアルビューのデータを更新/同期します。
 
    .. cpp:function:: void on_device();
 
-      Update/synchronize data in dual view from the device perspective
+      デバイス側の観点からデュアルビューのデータを更新/同期します。
 
    .. cpp:function:: void set_overallocation(float extra);
 
-      Set the data buffer available at the end of the vector
+      ベクトルの末尾に利用可能なデータバッファを設定します。
 
    .. cpp:function:: constexpr bool is_allocated() const;
 
-      Returns true if the internal views (host and device) are allocated (non-null pointers).
+      内部ビュー（ホストとデバイス）が割り当てられている場合（NULLでないポインタの場合）、真を返します。

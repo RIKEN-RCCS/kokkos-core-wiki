@@ -1,6 +1,6 @@
 .. _api-execution-spaces:
 
-Execution Spaces
+実行空間
 ================
 
 .. role:: cpp(code)
@@ -45,95 +45,84 @@ Execution Spaces
 ``Kokkos::Cuda``
 ----------------
 
-``Kokkos::Cuda`` is an |ExecutionSpaceConceptType|_ representing execution on a Cuda device.
-Except in rare instances, it should not be used directly, but instead should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
+``Kokkos::Cuda`` は、Cudaデバイス上での実行を表す |ExecutionSpaceConceptType|_ です。
+ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、|DocExecutionSpaceConcept|_ を参照してください。
 
 
 ``Kokkos::HIP``
 ---------------
 
-``Kokkos::HIP`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0` is an |ExecutionSpaceConceptType|_ representing
-execution on a device supported by HIP. Except in rare instances, it should not be used directly,
-but instead should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
+``Kokkos::HIP`` :sup:`昇格` |Experimental|_ :sup:`バージョン 4.0以降` は、HIPがサポートするデバイス上での実行を表す |ExecutionSpaceConceptType|_ です。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、|DocExecutionSpaceConcept|_ を参照してください。
 
 ``Kokkos::SYCL``
 ------------------------------
 
-``Kokkos::SYCL`` :sup:`promoted from` |Experimental|_ :sup:`since 4.5` is an |ExecutionSpaceConceptType|_ representing execution on a device supported by SYCL.
+``Kokkos::SYCL`` :sup:`昇格` |Experimental|_ :sup:`バージョン 4.5以降` は、 SYCLがサポートするデバイス上での実行を表す |ExecutionSpaceConceptType|_ です。
 
-If the SYCL backend is enabled and no GPU architecture is specified, Kokkos will use Just-In-Time compilation without any restriction to a particular SYCL device type.
-Thus, this is the only option to target a CPU with the SYCL backend (which is experimental, untested, and not optimized for).
+SYCL バックエンドが有効化され、 GPU アーキテクチャが指定されていない場合、 Kokkos は、特定の SYCL デバイスタイプへ、制限なしで、Just-In-Timeコンパイルを使用します。
+したがって、SYCLバックエンド（実験的、未検証、最適化されていない）で、CPU をターゲットにする唯一の選択肢がこれです。
 
 ``Kokkos::HPX``
 ---------------
 
-``Kokkos::HPX`` is an |ExecutionSpaceConceptType|_ representing execution with the HPX runtime system.
-Except in rare instances, it should not be used directly, but instead should be used generically as an execution space.
-For details, see |DocExecutionSpaceConcept|_.
+``Kokkos::HPX`` は、HPXランタイムシステムによる実行を表す |ExecutionSpaceConceptType|_ です。
+ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。
+詳細については、|DocExecutionSpaceConcept|_ を参照してください。
 
 ``Kokkos::OpenMP``
 ------------------
 
-``Kokkos::OpenMP`` is an |ExecutionSpaceConceptType|_ representing execution with the OpenMP runtime system.
-Except in rare instances, it should not be used directly, but instead should be used
-generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
+``Kokkos::OpenMP`` は、OpenMP ランタイムシステムによる実行を表す |ExecutionSpaceConceptType|_ です。
+ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、|DocExecutionSpaceConcept|_ を参照してください
 
 ``Kokkos::OpenMPTarget``
 ------------------------
 
-``Kokkos::OpenMPTarget`` is an |ExecutionSpaceConceptType|_ representing execution using the target offloading
-feature of the OpenMP runtime system. Except in rare instances, it should not be used directly, but instead
-should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
+``Kokkos::OpenMPTarget`` は、OpenMP ランタイムシステムのターゲットオフロード機能による実行を表す |ExecutionSpaceConceptType|_ です。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、|DocExecutionSpaceConcept|_ を参照してください。
 
 ``Kokkos::Threads``
 -------------------
 
-``Kokkos::Threads`` is an |ExecutionSpaceConceptType|_ representing parallel execution with std::threads.
-Except in rare instances, it should not be used directly, but instead should be used
-generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
+``Kokkos::Threads`` は、std::threads による並列実行を表す |ExecutionSpaceConceptType|_ です。
+ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、|DocExecutionSpaceConcept|_ を参照してください。
 
 ``Kokkos::Serial``
 ------------------
 
-``Kokkos::Serial`` is an |ExecutionSpaceConceptType|_ representing serial execution the CPU.
-Except in rare instances, it should not be used directly, but instead should be
-used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
+``Kokkos::Serial`` は、CPU上でのシリアル実行を表す |ExecutionSpaceConceptType|_ です。
+ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、|DocExecutionSpaceConcept|_ を参照してください。
 
 ``Kokkos::ExecutionSpaceConcept``
 ---------------------------------
 
-The concept of an ``ExecutionSpace`` is the fundamental abstraction to represent the "where" and the "how"
-that execution takes place in Kokkos.  Most code that uses Kokkos should be written to the *generic concept*
-of an ``ExecutionSpace`` rather than any specific instance.  This page talks practically about how to *use*
-the common features of execution spaces in Kokkos; for a more formal and theoretical treatment, see |KokkosConcepts|_.
+``ExecutionSpace`` の概念は、Kokkos における実行の "場所" と "方法" を表すための、基本的な抽象化です。Kokkos を使用するコードの大半は、特定のインスタンスよりもむしろ、 `` 実行空間`` という *汎用的な概念* について、記述される必要があります。 このページでは、Kokkos の実行空間の一般的な機能を 実際にどのように*使用* するかを説明しています；より正式で理論的な処理については、 |KokkosConcepts|_ を参照してください。
 
-  *Disclaimer*: There is nothing new about the term "concept" in C++; anyone who has ever used templates
-  in C++ has used concepts whether they knew it or not.  Please do not be confused by the word "concept" itself,
-  which is now more often associated with a shiny new C++20 language feature.  Here, "concept" just
-  means "what you're allowed to do with a type that is a template parameter in certain places".
+  *免責事項*: C++における "概念" という用語に目新しい点はありません; C++でテンプレートを使ったことがある人は
+  知っていようといまいと、コンセプトを使っています。「概念」という言葉自体に惑わされないでください。
+  この言葉は現在、C++20の新たな言語機能と結びつけられることが多くなっています。 ここで "概念" とは単に
+  "特定の場所でテンプレートパラメータとなる型に対してできること" を意味します。
 
-Aliases based on configuration
+設定に基づく別名
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Kokkos::DefaultExecutionSpace``
 ---------------------------------
 
-``Kokkos::DefaultExecutionSpace`` is an alias of |ExecutionSpaceConceptType|_ pointing to an ``ExecutionSpace``
-based on the current configuration of Kokkos. It is set to the highest available in the hierarchy ``device,host-parallel,host-serial``.
-It also serves as default for optionally specified template parameters of |ExecutionSpaceConceptType|_.
+``Kokkos::DefaultExecutionSpace`` は、|ExecutionSpaceConceptType|_ の別名であり、Kokkos の現在の構成に基づく 
+``ExecutionSpace`` を指します。これは階層 ``device,host-parallel,host-serial`` で利用可能な最上位に設定されます。
+また、|ExecutionSpaceConceptType|_ の省略可能なテンプレートパラメータのデフォルト値としても、機能します。
 
 ``Kokkos::DefaultHostExecutionSpace``
 -------------------------------------
 
-``Kokkos::DefaultHostExecutionSpace`` is an alias of |ExecutionSpaceConceptType|_ pointing to an ``ExecutionSpace`` based
-on the current configuration of Kokkos. It is set to the highest available in the hierarchy ``host-parallel,host-serial``.
+``Kokkos::DefaultHostExecutionSpace`` は、|ExecutionSpaceConceptType|_ の別名であり、Kokkos の現在の構成に基づく ``ExecutionSpace`` を指しています。 これは階層 ``device,host-parallel,host-serial`` で利用可能な最上位に設定されます。
 
-Very Simplest Use: Not at all?
+最も簡単な使い方：全くない？
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When first starting to use Kokkos, the (surprising) answer to where you'll see |ExecutionSpaceS|_ used explicitly is "nowhere".
-Many of the first things most users learn are "shortcuts" for "do this thing using the default execution space",
-which is a type alias (a.k.a., ``typedef``) named ``Kokkos::DefaultExecutionSpace`` defined based on build system flags. For instance,
+Kokkos を使い始めたばかりの頃、|ExecutionSpaceS|_ が明示的に使用される場所についての（意外な）答えは、"どこにもない" です。
+多くのユーザーが最初に学ぶことの多くは、"デフォルトの実行空間を使ってこの操作を行う" ための "ショートカット" であり、
+それはビルドシステムフラグに基づいて定義された ``Kokkos::DefaultExecutionSpace`` という名前の型エイリアス（別名、 ``typedef`` ）です。 例えば、
 
 .. code-block:: cpp
 
@@ -142,7 +131,7 @@ which is a type alias (a.k.a., ``typedef``) named ``Kokkos::DefaultExecutionSpac
         KOKKOS_LAMBDA (int n) { /* ... */ }
     );
 
-is a "shortcut" for
+は、以下の "ショートカット" 
 
 .. code-block:: cpp
 
@@ -153,12 +142,11 @@ is a "shortcut" for
         KOKKOS_LAMBDA(int n) { /* ... */ }
     );
 
-Being more generic
+より汎用的な項目
 ~~~~~~~~~~~~~~~~~~
 
-For more intermediate and advanced users, however, it is often good practice to write code that is
-explicitly generic over the execution space, so that calling code can pass in a non-default execution space if needed.
-For instance, if the simple version of your function is
+しかし、中級および上級ユーザーにとっては、呼び出し元コードが、必要に応じてデフォルト以外の実行空間を渡すことができるように、実行空間に対して明示的に汎用性を備えたコードを書くことが良い慣行となる場合が多いです。
+例えば、関数の簡易バージョンが以下である場合。
 
 .. code-block:: cpp
 
@@ -171,7 +159,7 @@ For instance, if the simple version of your function is
         );
     }
 
-then a more advanced, more flexible version of your function might look like:
+その場合、より高度で柔軟なバージョンの関数は、以下の通りです:
 
 .. code-block:: cpp
 
@@ -193,75 +181,68 @@ then a more advanced, more flexible version of your function might look like:
     );
     }
 
-More advanced users may also prefer the more explicit form simply to avoid the additional mental
-exercise of translating "shortcuts" when reading the code later. Being explicit about *where* and *how*
-Kokkos parallel patterns are executing tends to reduce bugs, even if it is more verbose.
+上級ユーザーは、また後でコードを読む際に "shortcuts" を解釈するという追加の精神的負荷を避けるため、より明示的な形式を好む場合もあります。 *どこで*、*どのように*
+Kokkos の並列パターンが実行されているかを明示的に記述することは、冗長になる場合あっても、バグを減らす傾向があります。
 
-Functionality
+機能性
 ~~~~~~~~~~~~~
 
-All ``ExecutionSpace`` types expose a common set of functionality. In generic code that uses Kokkos (which is pretty much all user code),
-you should never use any part of an execution space type that isn't common to all execution
-space types (otherwise, you risk losing portability of your code). There are a few expressions guaranteed to be
-valid for any ``ExecutionSpace`` type. Given a type ``Ex`` that is an ``ExecutionSpace`` type,
-and an instance of that type ``ex``, Kokkos guarantees the following expressions will provide the specified functionality:
+すべての ``ExecutionSpace`` 型は、共通の機能セットを公開します。Kokkos を使用する汎用コード（ほぼ全てのユーザーコード）において、すべての実行空間タイプに共通ではない実行空間タイプのいかなる部分も、決して使用すべきではありません（そうしないと、コードの移植性が失われるリスクがあります）。いくつかの式は、あらゆる ``ExecutionSpace`` 型に対して
+確実に有効です。 ``ExecutionSpace`` 型である型 ``Ex`` および
+その型のインスタンス ``ex`` を前提とすれば、 Kokkos は、以下の式が指定された機能を提供することを保証します:
 
 .. code-block:: cpp
 
     ex.name();
 
-*Returns:* a value convertible to ``const char*`` that is guaranteed to be unique to a given ``ExecutionSpace`` instance type.
-*Note:* the pointer returned by this function may not be accessible from the ``ExecutionSpace`` itself (for instance, on a device); use with caution.
+*戻り値:* 指定された `ExecutionSpace` インスタンス型に対して一意であることが保証された、`const char*` に変換可能な値。
+*注意事項:* この関数が返すポインタは、 ``ExecutionSpace`` 自体からはアクセスできない場合があります（例えば、デバイス上など）。; 使用には注意を払ってください。
 
 .. code-block:: cpp
 
     ex.fence(str);
 
-*Effects:* Upon return, all parallel patterns and deep_copy calls executed on the instance ``ex`` are guaranteed to have completed, and their effects are guaranteed visible to the calling thread. The optiopnal ``str`` argument allows customizing the event reported to Kokkos Tools.
-*Returns:* Nothing.
-*Note:* This *cannot* be called from within a parallel pattern.  Doing so will lead to unspecified effects (i.e., it might work, but only for some execution spaces, so be extra careful not to do it).
+*効果:* 戻りの際に、インスタンス ``ex`` に対して実行されたすべての並列パターンおよび deep_copy 呼び出しは、完了していることが保証され、その効果は呼び出し元スレッドに確実に反映されます。省略可能な ``str`` 引数により、Kokkos Tools に報告されるイベントをカスタマイズできます。
+*戻り値:* 無し。
+*注意事項:* これは並列パターン内部から呼び出すことは*できません*。 そうすると不特定の影響が生じる可能性があります（つまり、動作する可能性はあるものの、特定の実行空間でのみ有効となるため、特に注意して実行しないようにしてください）。
 
 .. code-block:: cpp
 
     ex.print_configuration(ostr);
     ex.print_configuration(ostr, detail);
 
-where ``ostr`` is a ``std::ostream`` (like ``std::cout``, for instance) and ``detail`` is a boolean indicating whether a detailed description should be printed.
+ここで、 ``ostr`` は ``std::ostream`` であり（例えば、 ``std::cout`` のように）、また ``detail`` は、詳細な説明を出力するかどうかを示すブール値です。
 
-*Effects:* Outputs the configuration of ``ex`` to the given ``std::ostream``.
-*Returns:* Nothing.
-*Note:* This *cannot* be called from within a parallel pattern.
+*効果:* ``ex`` の構成を与えられた既定の ``std::ostream`` への構成を出力します。
+*戻り値:* 無し。
+*注意事項:* これは、並列パターン内から呼び出すことは、*出来ません*。
 
-Additionally, the following type aliases (a.k.a. ``typedef`` s) will be defined by all execution space types:
+さらに、以下の型の別名 (別名 ``typedef`` ) は、すべての実行空間型により定義されます:
 
-* ``Ex::memory_space``: the default |MemorySpace|_ to use when executing with ``Ex``. Kokkos guarantees that ``Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible`` will be ``true`` (see |KokkosSpaceAccessibility|_)
+* ``Ex::memory_space``:  |MemorySpace|_ は ``Ex`` で実行する際に使用されます。Kokkos は ``Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible`` が ``true`` になることを保証します（|KokkosSpaceAccessibility|_ を参照）。
 
-* ``Ex::array_layout``: the default ``ArrayLayout`` recommended for use with ``View`` types accessed from ``Ex``.
+* ``Ex::array_layout``: デフォルトの ``ArrayLayout`` は、 ``Ex`` からアクセスされる ``View`` タイプとの併用に推奨される ``ArrayLayout`` 。
 
-* ``Ex::scratch_memory_space``: the ``ScratchMemorySpace`` that parallel patterns will use for allocation of scratch memory (for instance, as requested by a |KokkosTeamPolicy|_). Only unmanaged Views can be created using this memory space.
+* ``Ex::scratch_memory_space``: 並列パターンがスクラッチメモリの割り当てに使用する ``ScratchMemorySpace`` （例：|KokkosTeamPolicy|_ によって要求される場合）。このメモリ空間を使用して作成できるのは、管理対象外ビューのみです。
 
-Default Constructibility, Copy Constructibility
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+デフォルトコンストラクタの生成可能性、コピーコンストラクタの生成可能性
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In addition to the above functionality, all ``ExecutionSpace`` types in Kokkos are default
-constructible (you can construct them as ``Ex ex()``) and copy constructible (you can construct them as ``Ex ex2(ex1)``).
-All default constructible instances of an ``ExecutionSpace`` type are guaranteed to have equivalent behavior,
-and all copy constructed instances are guaranteed to have equivalent behavior to the instance they were copied from.
+上記の機能に加え、Kokkos のすべての ``ExecutionSpace`` 型は、デフォルトのコンストラクタを生成可能であり（``Ex ex()`` として構築可能）、コピーのコンストラクタを生成可能（``Ex ex2(ex1)`` として構築可能）です。
+``ExecutionSpace`` 型のデフォルトコンストラクタで生成されるすべてのインスタンスは、同等の動作を持つことが保証され、また、コピーによって構築されたすべてのインスタンスは、コピー元のインスタンスと同等の動作を持つことが保証されます。
 
-Detection
+
+検出
 ^^^^^^^^^
 
-Kokkos provides the convenience type trait ``Kokkos::is_execution_space<T>`` which has a ``value`` compile-time
-accessible value (usable as ``Kokkos::is_execution_space<T>::value``) that is ``true`` if and only if a type ``T``
-meets the requirements of the ``ExecutionSpace`` concept. Any ``ExecutionSpace`` type ``T`` will also
-have the expression ``Kokkos::is_space<T>::value`` evaluate to ``true`` as a compile-time constant.
+Kokkos は、利便性型特性 ``Kokkos::is_execution_space<T>`` を提供し、それは、型 ``T`` が ``ExecutionSpace`` コンセプトの要件を満たす場合にのみ、 ``true`` である、コンパイル時にアクセス可能な値 ``value`` を持ち（``Kokkos::is_execution_space<T>::value`` として使用可能）、 ``true`` を返します。任意の ``ExecutionSpace`` 型 ``T`` は、式 ``Kokkos::is_space<T>::value`` がコンパイル時定数として、 ``true`` を評価する性質も持ちます。
 
-Synopsis
-~~~~~~~~
+概要
+~~~~~~~~~~
 
 .. code-block:: cpp
 
-    // This is not an actual class, it just describes the concept in shorthand
+    // これは実際のクラスではなく、概念を簡略に記述したものです。
     class ExecutionSpaceConcept {
     public:
         typedef ExecutionSpaceConcept execution_space;
@@ -296,44 +277,44 @@ Synopsis
     enum { value = true };
     };
 
-Typedefs
+型定義
 ~~~~~~~~
 
-* ``execution_space``: The self type;
+* ``execution_space``: 自己型;
 
-* ``memory_space``: The default |MemorySpace|_ to use when executing with |ExecutionSpaceConcept|_. Kokkos guarantees that ``Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible`` will be ``true`` (see |KokkosSpaceAccessibility|_)
+* ``memory_space``:  |ExecutionSpaceConcept|_ で実行する際に使用するデフォルトの |MemorySpace|_ 。 Kokkos は、 ``Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible`` が``true`` となることを保証します（|KokkosSpaceAccessibility|_ を参照）。
 
 * ``device_type``: ``DeviceType<execution_space,memory_space>``.
 
-* ``array_layout``: The default ``ArrayLayout`` recommended for use with ``View`` types accessed from |ExecutionSpaceConcept|_.
+* ``array_layout``:  |ExecutionSpaceConcept|_ からアクセスされる ``View`` 型で使用することを推奨されるデフォルトの ``ArrayLayout`` 。
 
-* ``scratch_memory_space``: The ``ScratchMemorySpace`` that parallel patterns will use for allocation of scratch memory (for instance, as requested by a |KokkosTeamPolicy|_). Only unmanaged Views can be created using this memory space.
+* ``scratch_memory_space``: 並列パターンがスクラッチメモリの割り当てに使用する ``ScratchMemorySpace`` （例： |KokkosTeamPolicy|_ で要求される場合）。このメモリ空間を使用して作成できるのは、管理対象外ビューのみです。
 
-* ``size_type``: The default integer type associated with this space. Signed or unsigned, 32 or 64 bit integer type, used as preferred type for indexing.
+* ``size_type`` : このスペースに関連付けられたデフォルトの整数型。符号付きまたは符号なし、32ビットまたは64ビットの整数型で、インデックス付けの優先型として使用されます。
 
-Constructors
-~~~~~~~~~~~~
+コンストラクタ
+~~~~~~~~~~~~~~
 
-* ``ExecutionSpaceConcept()``: Default constructor.
+* ``ExecutionSpaceConcept()`` : デフォルトコンストラクタ。
 
-* ``ExecutionSpaceConcept(const ExecutionSpaceConcept& src)``: Copy constructor.
+* ``ExecutionSpaceConcept(const ExecutionSpaceConcept& src)``: コピーコンストラクタ。
 
-Functions
+関数
 ~~~~~~~~~
 
-* ``const char* name() const;``: *Returns* the label of the execution space instance.
+* ``const char* name() const;`` : 実行空間のインスタンスのラベルを *返します* 。
 
-* ``int concurrency() const;`` *Returns* the maximum amount of concurrently executing work items in a parallel setting, i.e. the maximum number of threads utilized by an execution space instance.
+* ``int concurrency() const;`` 並列環境における同時に実行される作業項目の最大数、すなわち実行空間インスタンスが使用するスレッドの最大数を *返します* 。
 
-* ``void fence(const std::string& label = unspecified-default-value) const;`` *Effects:* Upon return, all parallel patterns executed on the instance |ExecutionSpaceConcept|_ are guaranteed to have completed, and their effects are guaranteed visible to the calling thread. *Note:* This *cannot* be called from within a parallel pattern. Doing so will lead to unspecified effects (i.e., it might work, but only for some execution spaces, so be extra careful not to do it). The optional ``label`` argument allows customizing the event reported to Kokkos Tools.
+* ``void fence(const std::string& label = unspecified-default-value) const;`` *効果:* 返す際に、 インスタンス |ExecutionSpaceConcept|_ 上で実行されたすべての並列パターンは、完了が保証され、そしてそれらの効果は呼び出し元スレッドから確実に可視化されます。*注意事項:* これは、並列パターン内部から呼び出すことは、*できません* 。そうすると、特定されない影響が生じる可能性があります（つまり、動作の可能性はありますが、一部の実行空間のみで可能です。そのため、絶対に実行しないよう、特に注意してください）。 省略可能な ``label`` 引数により、Kokkos Tools に報告されるイベントをカスタマイズできます。
 
-* ``void print_configuration(std::ostream ostr) const;``: *Effects:* Outputs the configuration of ``ex`` to the given ``std::ostream``. *Note:* This *cannot* be called from within a parallel pattern.
+* ``void print_configuration(std::ostream ostr) const;``: *効果:* 既定の ``std::ostream`` に ``ex`` の設定を出力します。 *注意事項:* これは、並列パターン内部から呼び出すことは、*できません* 。
 
-Non Member Facilities
-~~~~~~~~~~~~~~~~~~~~~
+非メンバーファシリティ
+~~~~~~~~~~~~~~~~~~~~~~
 
-* ``template<class MS> struct is_execution_space;``: typetrait to check whether a class is a execution space.
+* ``template<class MS> struct is_execution_space;``: クラスが実行空間であるかどうかを確認するための型特性。
 
-* ``template<class S1, class S2> struct SpaceAccessibility;``: typetraits to check whether two spaces are compatible (assignable, deep_copy-able, accessible). (see |KokkosSpaceAccessibility|_)
+* ``template<class S1, class S2> struct SpaceAccessibility;``: 2つのスペースが互換性があるか（割り当て可能、deep_copy可能、アクセス可能）を確認するための型特性。 ( |KokkosSpaceAccessibility|_ を参照。)
 
-* ``bool operator==(const execution_space& lhs, const execution_space& rhs)``: tests whether the two space instances (of the same type) are identical.
+* ``bool operator==(const execution_space& lhs, const execution_space& rhs)``: 2つの空間インスタンス（同じ型）が同一であるかどうかをテスト。

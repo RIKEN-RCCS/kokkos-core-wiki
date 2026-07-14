@@ -2,21 +2,20 @@
 ``find_end``
 ============
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Searches a given range or rank-1 ``View`` for the *last* occurrence
-of a target sequence or ``View`` of values.
+指定された範囲またはランク1の ``ビュー`` において、対象となるシーケンスまたは値の ``ビュー`` の *最後の* 出現箇所を検索します。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -70,8 +69,8 @@ Overload set accepting execution space
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view,
 		 const BinaryPredicateType& pred);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -101,62 +100,56 @@ Overload set accepting a team handle
    template <class TeamHandleType, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2, class BinaryPredicateType>
    KOKKOS_FUNCTION
-   auto find_end(const TeamHandleType& teamHandle,                                      (12)
+   auto find_end(const TeamHandleType& teamHandle,                                 (12)
 		 const ::Kokkos::View<DataType1, Properties1...>& view,
 		 const ::Kokkos::View<DataType2, Properties2...>& s_view,
 		 const BinaryPredicateType& pred);
 
-Overload Set Detailed Description
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+オーバーロードセット詳細説明
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- 1,2,5,6: searches for the last occurrence of the sequence ``[s_first, s_last)``
-  in the range ``[first, last)`` comparing elements via ``operator ==`` (1,2) or via ``pred`` (5,6)
+- 1,2,5,6:  ``operator ==`` (1,2) 経由または via ``pred`` (5,6) 経由で要素を比較する範囲 ``[first, last)`` 内のシーケンス ``[s_first, s_last)`` の最後の発生について検索します。
 
-- 3,4,7,8: searches for the last occurrence of the ``s_view`` in ``view``
-  comparing elements via ``operator ==`` (3,4 or via ``pred`` (7,8)
+- 3,4,7,8: ``operator ==`` (3,4) 経由または ``pred`` (7,8) 経由で要素を比較する ``ビュー`` 内の ``s_view`` の最後の発生について検索します。
 
-Parameters and Requirements
+パラメータおよび要件
 ---------------------------
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1,5: The default string is "Kokkos::find_end_iterator_api_default".
+  - 1,5: デフォルト文字列は、 "Kokkos::find_end_iterator_api_default".
 
-  - 3,7: The default string is "Kokkos::find_end_view_api_default".
+  - 3,7: デフォルト文字列は、 "Kokkos::find_end_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first, last``: range of elements to search in
+- ``first, last``: 検索する要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - 例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されるなど、*ランダムアクセスイテレータ* でなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効範囲、つまり、 ``last >= first`` を表さなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``s_first, s_last``: range of elements that you want to search for
+- ``s_first, s_last``: 検索を望む要素の範囲
 
-  - same requirements as ``first, last``
+  -  ``first, last`` と同じ要件
 
-- ``view``, ``s_view``: views to search in and for, respectively
+- ``view``, ``s_view``: 検索対象および検索条件の、それぞれのビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``pred``: *binary* functor returning ``true`` if two arguments should be considered "equal".
+- ``pred``: 2つの引数が、 "等しい" とみなされる場合、 ``真`` を返す *二項* ファンクタ。
 
-  ``pred(a,b)`` must be valid to be called from the execution space passed, or
-  the execution space associated with the team handle, and convertible to bool
-  for every pair of arguments ``a,b`` of type ``ValueType1`` and ``ValueType2``,
-  respectively, where ``ValueType1`` and ``ValueType{1,2}`` are the value types of
-  ``IteratorType{1,2}`` or ``(s_)view``, and must not modify ``a,b``.
+  ``pred(a,b)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして、それぞれ、 型   ``ValueType1`` および ``ValueType2`` の引数 ``a,b`` のすべてのペアについて、ブール型に変換可能で、そこでは、 ``ValueType1`` および ``ValueType{1,2}`` が、 ``IteratorType{1,2}`` の値型、または ``(s_)view`` であり、  ``a,b`` を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
@@ -169,12 +162,11 @@ Parameters and Requirements
      };
 
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Iterator to the beginning of the last occurrence of the sequence ``[s_first, s_last)``
-in range ``[first, last)``, or the last occurrence of ``s_view`` in ``view``.
+範囲 ``[first, last)`` における シーケンス ``[s_first, s_last)`` の最後の発生の始め、または  ``ビュー`` における ``s_view`` の最後の発生へのイテレータ。
 
-If ``[s_first, s_last)`` or ``[first, last)`` is empty, ``last`` is returned.
+``[s_first, s_last)`` または ``[first, last)`` が空である場合、 ``last`` が返されます。
 
-If ``view`` or ``s_view`` is empty, ``Kokkos::Experimental::end(view)`` is returned.
+``view`` または ``s_view`` が空である場合、 ``Kokkos::Experimental::end(view)`` が返されます。

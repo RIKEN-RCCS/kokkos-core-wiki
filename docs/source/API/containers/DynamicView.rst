@@ -5,181 +5,180 @@
 ``DynamicView``
 ===============
 
-Header file: ``<Kokkos_DynamicView.hpp>``
+ヘッダーファイル: ``<Kokkos_DynamicView.hpp>``
 
 
-Description
------------
+説明
+------------------
 
 .. cpp:class:: template<typename DataType , typename ... P> DynamicView : public Kokkos::ViewTraits<DataType , P ...>
 
-    A potentially reference-counted rank 1 array, without layout, that can be dynamically resized on the host.
+    ホスト上で動的にサイズ変更可能であり、レイアウトを持たない、参照カウント可能なランク1配列。
 
-    .. rubric:: Public Member Variables
+    .. rubric:: パブリックメンバー変数
 
     .. cpp:member:: static constexpr bool reference_type_is_lvalue_reference
 
-        Whether the reference type is a C++ lvalue reference.
+       レファレンス型が、 C++ lvalueレファレンスかどうか。
 
-    .. rubric:: Public Nested Typedefs
+    .. rubric:: パブリックネスティッド型定義
 
     .. cpp:type:: Kokkos::ViewTraits< DataType , P ... > traits
 
-        ``Kokkos::ViewTraits`` parent class type.
+        ``Kokkos::ViewTraits`` 親クラス型。
 
     .. cpp:type:: array_type
 
-        ``DynamicView`` type templated on ``traits::data_type`` and ``traits::device_type``.
+         ``traits::data_type`` および ``traits::device_type`` 上にテンプレートされた ``DynamicView`` 型。
 
     .. cpp:type:: const_type
 
-        ``DynamicView`` type templated on ``traits::const_data_type`` and ``traits::device_type``.
+         ``traits::const_data_type`` および ``traits::device_type`` 上にテンプレートされた ``DynamicView`` 型。
 
     .. cpp:type:: non_const_type
 
-        ``DynamicView`` type templated on ``traits::non_const_data_type`` and ``traits::device_type``.
+         ``traits::non_const_data_type`` および ``traits::device_type`` 上にテンプレートされた ``DynamicView`` 型。
 
     .. cpp:type:: HostMirror
 
-        The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+        ホストアクセス可能メモリ空間に格納された、同一の ``DataType`` および ``LayoutType`` を持つ互換性のあるビュータイプ。
 
-    .. rubric:: Public Data Handle Types
+    .. rubric:: パブリックデータハンドル型
 
     .. cpp:type:: reference_type
 
-        The return type of the view access operators.
+        ビューアクセス演算子の戻り値型。
 
     .. cpp:type:: pointer_type
 
-        The pointer to scalar type.
+        スカラー型へのポインタ。
 
-    .. rubric:: Constructors
+    .. rubric:: コンストラクタ
 
     .. cpp:function:: DynamicView()
 
-        The default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
+        デフォルトコンストラクタ。割り当ては行われず、参照カウントも発生しません。 すべてのエクステントはゼロであり、そのデータポインタは NULL です。
 
     .. cpp:function:: DynamicView(const DynamicView<RT, RP...>& rhs)
 
-        The copy constructor from a compatible View. Follows View assignment rules.
+        互換性のある View からのコピーコンストラクタ。View 代入ルールに従ってください。
 
     .. cpp:function:: DynamicView(DynamicView&& rhs)
 
-        The move constructor.
+        移動コンストラクタ。
 
     .. cpp:function:: DynamicView(const std::string & arg_label, \
 			    const unsigned min_chunk_size,  \
 			    const unsigned max_extent)
 
-        The standard allocating constructor.
+        標準割り当てコンストラクタ。
 
-        :param arg_label: a user-provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
-        :param min_chunk_size: a user-provided minimum chunk size needed for memory allocation, will be raised to nearest power-of-two for more efficient memory access operations.
-        :param max_extent: a user-provided maximum size, required to allocate a chunk-pointer array.
+        :param arg_label: ユーザーに提供されたレベルで、プロファイリングおよびデバッグ目的に使用されます。 名前がユニークである必要はありません。
+        :param min_chunk_size: メモリ割り当てに必要なユーザー指定の最小チャンクサイズで、 より効率的なメモリアクセスのため、2乗に最も近い数値に丸められます。
+        :param max_extent: ユーザーに提供された最大サイズで、 チャンクポインタ配列を割り当てる必要があります。
 
-        The ``resize_serial`` method must be called after construction to reserve the desired amount of memory, bound by ``max_extent``.
+         必要な量のメモリを確保するために、 ``max_extent`` で制限し、 ``resize_serial`` メソッドを構築後に呼び出す必要があります。
 
-    .. rubric:: Public Data Access Functions
+    .. rubric:: パブリックデータアクセス関数
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION reference_type operator() (const I0 & i0 , const Args & ... args) const
 
-        :return: A value of ``reference_type`` which may or not be referenceable itself. The number of index arguments must be 1 (for non-deprecated code).
+        :return: それ自身が参照可能であるか否かに関わらず、 ``reference_type`` 型の値。 インデックス引数の数は 1 である必要があります (非推奨ではないコードについて)。
 
-    .. rubric:: Data Resizing, Dimensions, Strides
+    .. rubric:: データリサイズ、ディメンション、ストライド
 
 
     .. cpp:function:: template< typename IntType > inline void resize_serial(IntType const & n)
 
-       Resizes the DynamicView with sufficient chunks of memory of ``chunk_size`` to store the requested number of elements ``n``.
-       This method can only be called outside of parallel regions.
-       ``n`` is restricted to be smaller than the ``max_extent`` value passed to the DynamicView constructor.
-       This method must be called after the construction of the DynamicView as the constructor
-       sets the requested sizes for ``chunk_size`` and ``max_extent``, but does not take input for the actual amount of memory to be used.
+       要求された要素数 `n` を格納するのに十分な `chunk_size` のメモリチャンクで、ダイナミックビューのサイズ変更を行います。
+       この方法は並列領域の外側からのみ呼び出し可能です。
+       ``n`` は、DynamicView コンストラクタに渡された ``max_extent`` 値よりも小さい値に制限されます。
+       コンストラクタが ``chunk_size`` および ``max_extent`` について要求サイズを設定するので、このメソッドは DynamicView の構築後に呼び出さなければなりませんが、 実際の使用メモリ量についての入力は選択しません。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION size_t allocation_extent() const noexcept;
 
-        :return: The total size of the product of the number of chunks multiplied by the chunk size. This may be larger than ``size`` as this includes the total size for the total number of complete chunks of memory.
+        :return: チャンクの数とチャンクサイズを掛けた積の合計サイズ。 これは完全なメモリチャンクの総数に対する合計サイズを含むため、 ``size`` よりも大きくなる可能性があります。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION size_t chunk_size() const noexcept;
 
-        :return: The number of entries a chunk of memory may store, always a power of two.
+        :return: メモリのチャンクが格納できるエントリ数は、常に2の累乗です。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION size_t size() const noexcept;
 
-        :return: The number of entries available in the allocation based on the number passed to ``resize_serial``. This number is bound by ``allocation_extent``.
+        :return: ``resize_serial`` に渡された数値に基づく割当で利用可能なエントリの数。 この数値 ``allocation_extent`` により制限されます。
 
     .. cpp:function:: template< typename iType > KOKKOS_INLINE_FUNCTION size_t extent(const iType& dim) const;
 
-        :return: The extent of the specified dimension. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``. Returns 1 for rank > 1.
+        :return: 特定ディメンションの範囲。 ``iType`` は整数型でなければならず、 ``dim`` は、 ``rank`` よりも小さくなければなりません。 rank > 1については、1を返してください。
 
     .. cpp:function:: template< typename iType > KOKKOS_INLINE_FUNCTION int extent_int(const iType& dim) const;
 
-        :return: The extent of the specified dimension as an ``int``. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``. Compared to ``extent`` this function can be useful on architectures where ``int`` operations are more efficient than ``size_t``. It also may eliminate the need for type casts in applications that otherwise perform all index operations with ``int``. Returns 1 for rank > 1.
+        :return: ``int`` としての特定ディメンションの範囲。 ``iType`` は整数型でなければならず、 ``dim`` は、 ``rank`` よりも小さくなければなりません。  ``extent`` と比較して、この関数は ``int`` 演算が ``size_t`` よりも効率的なアーキテクチャにおいて有用です。また、そうでなければすべてのインデックス操作を ``int`` で行っているアプリケーションにおいて、型キャストの必要性を排除する可能性があります。rank > 1については、1 を返してください。
 
     .. cpp:function:: template< typename iType > KOKKOS_INLINE_FUNCTION void stride(const iType& dim) const;
 
-        :return: The stride of the specified dimension, always returns 0 for ``DynamicView``.
+        :return: 特定ディメンションのストライドは、常に ``DynamicView`` については、0 を返します。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_0() const;
 
-        :return: The stride of dimension 0, always returns 0 for ``DynamicView`` s.
+        :return: ディメンション 0 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_1() const;
 
-        :return: The stride of dimension 1, always returns 0 for ``DynamicView`` s.
+        :return: ディメンション 1 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_2() const;
 
-        :return: The stride of dimension 2, always returns 0 for ``DynamicView`` s.
+        :return: ディメンション 2 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_3() const;
 
-        :return: The stride of dimension 3, always returns 0 for ``DynamicView`` s.
+        :return: ディメンション 3 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_4() const;
 
-        :return: The stride of dimension 4, always returns 0 for ``DynamicView`` s.
+        :return: ディメンション 4 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_5() const;
 
-        :return: The stride of dimension 5, always returns 0 for ``DynamicView`` s.
+        :return: ディメンション 5 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_6() const;
 
-        :return: The stride of dimension 6, always returns 0 for ``DynamicView`` s.
+        :return: ディメンション 6 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_7() const;
 
-        :return: The stride of dimension 7, always returns 0 for ``DynamicView`` s.
+        :return: ディメンション 7 のストライドは、常に  ``DynamicView`` については、0 を返します
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t span() const;
 
-        :return: Always returns 0 for ``DynamicView`` s.
+        :return: ``DynamicView`` については、0 を返します。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr pointer_type data() const;
 
-        :return: The pointer to the underlying data allocation.
+        :return: 基盤となるデータ割当てへのポインタ。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr bool span_is_contiguous() const;
 
-        :return: The span is contiguous, always false for ``DynamicView`` s.
+        :return: スパンは連続しており、 ``DynamicView`` については、常に偽となります。
 
-    .. rubric:: Other
+    .. rubric:: その他
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION int use_count() const;
 
-        :return: The current reference count of the underlying allocation.
+        :return: 基盤となる割当ての現在の参照カウント。
 
     .. cpp:function:: inline const std::string label();
 
-        :return: The label of the ``DynamicView``.
+        :return: ``DynamicView`` のラベル。
 
     .. cpp:function:: bool is_allocated() const
 
-        :return: True if the View points to a valid set of allocated memory chunks. Note that this will return false until resize_serial is called with a size greater than 0.
+        :return: ビューが割り当てられたメモリチャンクの有効なセットを指している場合に真です。 resize_serial が 0 より大きいサイズで呼び出されるまで、これが偽を返すことにご注意ください。
 
 
-Example
+例
 -------
 
 .. code-block:: cpp

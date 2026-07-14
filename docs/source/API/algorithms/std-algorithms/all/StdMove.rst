@@ -2,22 +2,22 @@
 ``move``
 ========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Moves the elements from the range or from a rank-1 ``View``
-to the range beginning at ``d_first`` or to a target rank-1 ``View``.
+範囲内の要素、またはランク1の ``ビュー`` から、
+``d_first`` で始まる範囲、またはターゲットとなるランク1の ``ビュー`` へ移動します。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -38,12 +38,12 @@ Overload set accepting execution space
 
    template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   auto move(const std::string& label, const ExecutionSpace& ex,               (4)
+   auto move(const std::string& label, const ExecutionSpace& ex,           (4)
              const ::Kokkos::View<DataType1, Properties1...>& source,
              ::Kokkos::View<DataType2, Properties2...>& dest);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -61,41 +61,40 @@ Overload set accepting a team handle
              const ::Kokkos::View<DataType1, Properties1...>& source,
              ::Kokkos::View<DataType2, Properties2...>& dest);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - for 1, the default string is: "Kokkos::move_iterator_api_default"
+  - 1 について、デフォルト文字列は、 : "Kokkos::move_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::move_view_api_default"
+  - 3 について、デフォルト文字列は、 : "Kokkos::move_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first``, ``last``, ``d_first``: range of elements to move from and to
+- ``first``, ``last``, ``d_first``: 移動元および移動先の要素の範囲
 
-  - must be *random access iterator*
+  - *ランダムアクセスイテレータ* でなければなりません
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲、つまり、 ``last >= first`` を表す必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``source``, ``dest``: views to move from and to
+- ``source``, ``dest``: 移動元および移動先へのビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-- 1,2,5: an iterator equal to ``d_first + Kokkos::Experimental::distance(first, last)``
+- 1,2,5: ``d_first + Kokkos::Experimental::distance(first, last)`` に等しいイテレータ。
 
-- 3,4,6: an iterator equal to
-  ``Kokkos::Experimental::begin(dest) +
-  Kokkos::Experimental:distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))``
+- 3,4,6: ``Kokkos::Experimental::begin(dest) +
+  Kokkos::Experimental::distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))`` に等しいイテレータ。

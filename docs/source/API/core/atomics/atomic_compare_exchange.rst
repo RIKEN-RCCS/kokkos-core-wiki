@@ -4,34 +4,32 @@
 .. role:: cpp(code)
    :language: cpp
 
-Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
+``<Kokkos_Core.hpp>`` に含まれているヘッダー ``<Kokkos_Atomic.hpp>`` で定義されています。
 
-Usage
------
+使用方法
+--------
 
 .. code-block:: cpp
 
    auto old = atomic_compare_exchange(&obj, expected, desired);
 
-Atomically compares the current value of ``obj`` with ``expected``,
-replaces its value with ``desired`` if equal, and
-always returns the previously stored value at the address ``&obj`` regardless of whether the exchange has happened or not.
+アトミックに、 ``*ptr`` を ``expected`` と比較し、 等しい場合には、 ``desired`` と置換し、交換が発生しているか否かに関わらず、アドレス ``&obj`` において、以前に格納した値を常に返します。
 
-Description
------------
+説明
+------------------
 
 .. cpp:function:: template<class T> T atomic_compare_exchange(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 
-   Atomically compares ``*ptr`` with ``expected``, and if those are bitwise-equal, replaces the former with ``desired``, and always returns the actual value that was pointed to by ``ptr`` before the call.
+   アトミックに、 ``*ptr`` を ``expected`` と比較し、 それらがビット単位で等しい場合には、 前者を ``desired`` と置換し、そして、呼び出し前に ``ptr`` が指していた実際の値を常に返します。
 
    ``{ old = *ptr; if (old == expected) *ptr = desired; return old; }``
 
-   :param ptr: address of the object to test and to modify
-   :param expected: value expected to be found in the object
-   :param desired: the value to store in the object if as expected
-   :returns: the value held previously by the object pointed to by ``ptr``
+   :param ptr: テストし、変更するオブジェクトのアドレス
+   :param expected: オブジェクト内で見つかると予想される値
+   :param desired: 予想通りである場合に、オブジェクトに格納する値
+   :returns:  ``ptr`` が指すオブジェクトが以前に保持していた値
 
 
-See also
---------
-* `atomic_exchange <atomic_exchange.html>`_: atomically replaces the value of the referenced object and obtains the value held previously
+以下も参照
+----------
+* `atomic_exchange <atomic_exchange.html>`_: 参照対象の値を、アトミックに置き換え、以前保持していた値を取得します。

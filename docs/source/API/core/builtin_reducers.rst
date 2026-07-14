@@ -1,47 +1,45 @@
-Built-in Reducers
-=================
+組み込みリデューサー
+====================
 
-`ReducerConcept <builtinreducers/ReducerConcept.html>`__ provides the concept for Reducers.
+ `ReducerConcept <builtinreducers/ReducerConcept.html>`__ は、リデューサーの概念を提供します。
 
-Reducer objects used in conjunction with `parallel_reduce <parallel-dispatch/parallel_reduce.html>`__
+ `parallel_reduce <parallel-dispatch/parallel_reduce.html>`__ と組み合わせて使用されるリデューサーオブジェクト。
 
 .. list-table::
    :widths: 25 75
    :header-rows: 1
 
-   * - Reducer
-     - Description
+   * - リデューサー
+     - 説明
    * - `BAnd <builtinreducers/BAnd.html>`__
-     - Binary 'And' reduction
+     - バイナリ 'And' 縮約
    * - `BOr <builtinreducers/BOr.html>`__
-     - Binary 'Or' reduction
+     - バイナリ 'Or' 縮約
    * - `LAnd <builtinreducers/LAnd.html>`__
-     - Logical 'And' reduction
+     - 論理的 'And' 縮約
    * - `LOr <builtinreducers/LOr.html>`__
-     - Logical 'Or' reduction
+     - 論理的' Or' 縮約
    * - `Max <builtinreducers/Max.html>`__
-     - Maximum reduction
+     - 最大縮約
    * - `MaxLoc <builtinreducers/MaxLoc.html>`__
-     - Reduction providing maximum and an associated index
+     - 最大値および関連インデックスを提供する縮約
    * - `Min <builtinreducers/Min.html>`__
-     - Minimum reduction
+     - 最小縮約
    * - `MinLoc <builtinreducers/MinLoc.html>`__
-     - Reduction providing minimum and an associated index
+     - 最小値および関連インデックスを提供する縮約
    * - `MinMax <builtinreducers/MinMax.html>`__
-     - Reduction providing both minimum and maximum
+     - 最小値および最大値の両方を提供する縮約
    * - `MinMaxLoc <builtinreducers/MinMaxLoc.html>`__
-     - Reduction providing both minimum and maximum and associated indices
+     - 最小値および最大値の両方並びに関連インデックスを提供する縮約
    * - `Prod <builtinreducers/Prod.html>`__
-     - Multiplicative reduction
+     - 乗法的縮約
    * - `Sum <builtinreducers/Sum.html>`__
-     - Sum reduction
+     - 和の縮約
 
 
-:cpp:struct:`reduction_identity` defines the neutral elements (identity values)
-for various reduction operations. Specializing it is crucial for enabling
-built-in reducers to work with user-defined types.
+:cpp:struct:`reduction_identity` は、様々な縮約演算における中和元（恒等値）を定義します。 特化処理は、組み込みリデューサーがユーザー定義型と連動するために不可欠です。
 
-`Reduction Scalar Types <builtinreducers/ReductionScalarTypes.html>`__ are template classes for storage for reducers.
+`縮約スカラー型 <builtinreducers/ReductionScalarTypes.html>`__ は、リデューサーのストレージ用テンプレートクラスです。
 
 .. toctree::
    :hidden:

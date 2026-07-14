@@ -1,20 +1,20 @@
 ``partition_copy``
 ==================
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダー: ``Kokkos_StdAlgorithms.hpp``
 
-Description
------------
+説明
+------------------
 
-Copies from a range or a rank-1 ``View`` the elements that satisfy the predicate ``pred`` to ``to_first_true`` or ``view_true``, while the others are copied to ``to_first_false`` or ``view_false``.
+範囲またはランク1の ``ビュー`` から、述語 ``pred`` を満たす要素を ``to_first_true`` または ``view_true`` にコピーし、一方で、その他は、 ``to_first_false`` または ``view_false`` にコピーされます。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -68,8 +68,8 @@ Overload set accepting execution space
                        const ::Kokkos::View<DataType3, Properties3...>& view_dest_false,
                        PredicateType pred);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -95,67 +95,68 @@ Overload set accepting a team handle
        const ::Kokkos::View<DataType3, Properties3...>& view_dest_false,
        PredicateType pred);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicy 使用時に、並列領域内部で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label`` : デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::partition_copy_iterator_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::partition_copy_iterator_api_default".
 
-  - 3: The default string is "Kokkos::partition_copy_view_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::partition_copy_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``from_first, from_last``: range of elements to copy from
+- ``from_first, from_last``: コピー元の要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  -  *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲、つまり、 ``last >= first`` を表す必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``to_first_true``: beginning of the range to copy the elements that satisfy ``pred`` to
+- ``to_first_true``:  ``pred`` を満たす要素をコピーする範囲の始め
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  -  *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``to_first_false``: beginning of the range to copy the elements that do NOT satisfy ``pred`` to
+- ``to_first_false``: ``pred`` を満たさない要素をコピーする範囲の始め
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view_from``: source view of elements to copy from
+- ``view_from``: コピー元の要素のソースビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ず ランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view_dest_true``: destination view to copy the elements that satisfy ``pred`` to
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+- ``view_dest_true``: ``pred`` を満たす要素をコピーするデスティネーションビュー
 
-- ``view_dest_false``: destination view to copy the elements that do NOT satisfy ``pred`` to
+  - 必ず ランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+
+
+- ``view_dest_false``: ``pred`` を満たさない要素をコピーするデスティネーションビュー
+
+  - ``必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+
 
 - ``pred``:
 
-  - *unary* predicate returning ``true`` for the required element to replace; ``pred(v)``
-    must be valid to be called from the execution space passed, and convertible to bool for every
-    argument ``v`` of type (possible const) ``value_type``, where ``value_type``
-    is the value type of ``InputIteratorType`` (for 1,2) or the value type of ``view_from`` (for 3,4),
-    and must not modify ``v``.
+  - 置換するために必要な要素について、 ``真`` を返す *単項* 述語;  ``pred(v)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 value_type のすべての引数 ``v`` （constの可能性）について、ブール型に変換可能で、そこでは、 ``value_type`` が、 ``InputIteratorType``  (1,2について) の値型、または ``ビュー`` (3,4について) の値型であり、  ``v`` を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
@@ -164,13 +165,13 @@ Parameters and Requirements
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const { return /* ... */; }
 
-       // or, also valid
+       // または、また有効
 
        KOKKOS_INLINE_FUNCTION
        bool operator()(value_type v) const { return /* ... */; }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Returns a ``Kokkos::pair`` containing the iterators to the end of two destination ranges (or views)
+イテレータを含む ``Kokkos::pair`` を、2つのデスティネーション範囲（またはビュー）の最後に返します。

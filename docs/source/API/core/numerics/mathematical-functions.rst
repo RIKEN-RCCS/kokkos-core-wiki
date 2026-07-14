@@ -1,4 +1,4 @@
-Common math functions
+一般数学関数
 =====================
 
 .. role:: cpp(code)
@@ -7,22 +7,21 @@ Common math functions
 .. role:: strike
     :class: strike
 
-Motivating example (borrowed from https://llvm.org/docs/CompileCudaWithLLVM.html#standard-library-support)
+モチベーションの例 (https://llvm.org/docs/CompileCudaWithLLVM.html#standard-library-support より引用)
 
 .. code-block:: cpp
 
-    // clang is OK with everything in this function.
+    // 本関数のClangは問題ありません。
     __device__ void test() {
         std::sin(0.); // nvcc - ok
-        std::sin(0);  // nvcc - error, because no std::sin(int) override is available.
-        sin(0);       // nvcc - same as above.
+        std::sin(0);  // nvcc - エラー, std::sin(int) オーバーライドが利用できないため。 
+        sin(0);       // nvcc - 上記に同じ。
 
         sinf(0.);       // nvcc - ok
         std::sinf(0.);  // nvcc - no such function
     }
 
-Kokkos' goal is to provide a consistent overload set that is available on host
-and device and that follows practice from the C++ numerics library.
+Kokkos の目標は、ホストとデバイスの両方で利用可能な一貫したオーバーロードセットを提供し、C++ 数値ライブラリの実践に従うことです。
 
 ------------
 
@@ -30,21 +29,21 @@ and device and that follows practice from the C++ numerics library.
 
 .. |text| replace:: ``<Kokkos_MathematicalFunctions.hpp>``
 
-Defined in header |text|_ which is included from ``<Kokkos_Core.hpp>``
+``<Kokkos_Core.hpp>`` に含まれる ヘッダー |text|_  に定義。
 
 .. _text2: https://en.cppreference.com/w/cpp/numeric/math
 
-.. |text2| replace:: standard C mathematical functions from ``<cmath>``
+.. |text2| replace:: ``<cmath>`` からの標準C数学関数
 
-Provides most of the |text2|_, such as ``fabs``, ``sqrt``, and ``sin``.
+|text2|_ のほとんど、  例えば``fabs``、 ``sqrt``、 および ``sin`` を提供します。
 
-Math functions are available in the ``Kokkos::`` namespace since version 3.7, in ``Kokkos::Experimental`` in previous versions.
+数学関数は、バージョン3.7以降、Kokkos::namespace で利用可能で、以前のバージョンでは、Kokkos::Experimental において利用可能です。
 
-Below is the synopsis for ``sqrt`` as an example of unary math function.
+一項数学関数の例として、 ``sqrt`` 関数の概要は、以下の通りです。
 
 .. code-block:: cpp
 
-    namespace Kokkos {  // (since 3.7)
+    namespace Kokkos {  // (バージョン 3.7以降)
         KOKKOS_FUNCTION float       sqrt ( float x );
         KOKKOS_FUNCTION float       sqrtf( float x );
         KOKKOS_FUNCTION double      sqrt ( double x );
@@ -53,13 +52,13 @@ Below is the synopsis for ``sqrt`` as an example of unary math function.
         KOKKOS_FUNCTION double      sqrt ( IntegralType x );
     }
 
-The function is overloaded for any argument of arithmetic type. Additional functions with ``f`` and ``l`` suffixes that work on ``float`` and ``long double`` respectively are also available.  Please note, that ``long double`` overloads are not available on the device.
+関数は、任意の算術型の引数に対して過負荷されます。 ``float`` および ``long double`` に対応する、サフィックス ``f`` および ``l`` を伴う追加関数も利用可能です。なお、このデバイスには、 ``long double`` オーバーロードは利用できないことに注意してください。
 
-See below the list of common mathematical functions supported. We refer the reader to cppreference.com for the synopsis of each individual function.
+サポートされている一般数学関数の一覧については、以下で見られます。各機能の概要については、読者の cppreference.com を参照してください。
 
 ------------
 
-``func*`` see notes below
+``func*`` 以下の注意事項を参照。
 
 .. _abs: https://en.cppreference.com/w/cpp/numeric/math/fabs
 
@@ -101,7 +100,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |nan| replace:: ``nan``
 
-**Basic operations** |abs|_ |fabs|_ |fmod|_ |remainder|_ |fma*|_ |fmax|_ |fmin|_ |fdim|_ |nan|_ (currently not provided by Kokkos: |remquo|_)
+**基本演算** |abs|_ |fabs|_ |fmod|_ |remainder|_ |fma*|_ |fmax|_ |fmin|_ |fdim|_ |nan|_ (現在は、 Kokkos: |remquo|_ によって提供されていません)
 
 .. _exp: https://en.cppreference.com/w/cpp/numeric/math/exp
 
@@ -131,7 +130,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |log1p| replace:: ``log1p``
 
-**Exponential functions** |exp|_ |exp2|_ |expm1|_ |log|_ |log10|_ |log2|_ |log1p|_
+**指数関数** |exp|_ |exp2|_ |expm1|_ |log|_ |log10|_ |log2|_ |log1p|_
 
 .. _pow: https://en.cppreference.com/w/cpp/numeric/math/pow
 
@@ -149,7 +148,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |hypot*| replace:: ``hypot*``
 
-**Power functions** |pow|_ |sqrt|_ |cbrt|_ |hypot*|_
+**べき関数** |pow|_ |sqrt|_ |cbrt|_ |hypot*|_
 
 .. _sin: https://en.cppreference.com/w/cpp/numeric/math/sin
 
@@ -179,7 +178,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |atan2| replace:: ``atan2``
 
-**Trigonometric functions** |sin|_ |cos|_ |tan|_ |asin|_ |acos|_ |atan|_ |atan2|_
+**三角関数** |sin|_ |cos|_ |tan|_ |asin|_ |acos|_ |atan|_ |atan2|_
 
 .. _sinh: https://en.cppreference.com/w/cpp/numeric/math/sinh
 
@@ -205,7 +204,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |atanh| replace:: ``atanh``
 
-**Hyperbolic functions** |sinh|_ |cosh|_ |tanh|_ |asinh|_ |acosh|_ |atanh|_
+**双曲関数** |sinh|_ |cosh|_ |tanh|_ |asinh|_ |acosh|_ |atanh|_
 
 .. _erf: https://en.cppreference.com/w/cpp/numeric/math/erf
 
@@ -223,7 +222,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |lgamma| replace:: ``lgamma``
 
-**Error and gamma functions** |erf|_ |erfc|_ |tgamma|_ |lgamma|_
+**誤差関数とガンマ関数** |erf|_ |erfc|_ |tgamma|_ |lgamma|_
 
 .. _ceil: https://en.cppreference.com/w/cpp/numeric/math/ceil
 
@@ -265,7 +264,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |llrint| replace:: ``llrint``
 
-**Nearest integer floating point operations** |ceil|_ |floor|_ |trunc|_ |round*|_ |nearbyint*|_ (currently not provided by Kokkos: |lround|_ |llround|_ |rint|_ |lrint|_ |llrint|_)
+**最も近い整数浮動小数点演算** |ceil|_ |floor|_ |trunc|_ |round*|_ |nearbyint*|_ ( 現在 Kokkos によっては、提供されていません: |lround|_ |llround|_ |rint|_ |lrint|_ |llrint|_)
 
 .. _frexp: https://en.cppreference.com/w/cpp/numeric/math/frexp
 
@@ -307,7 +306,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |copysign*| replace:: ``copysign*``
 
-**Floating point manipulation functions** |logb*|_ |nextafter*|_ |copysign*|_ (currently not provided by Kokkos: |frexp|_ |ldexp|_ |modf|_ |scalbn|_ |scalbln|_ |ilog|_ |nexttoward|_)
+**浮動小数点操作関数** |logb*|_ |nextafter*|_ |copysign*|_ ( 現在 Kokkos によっては、提供されていません: |frexp|_ |ldexp|_ |modf|_ |scalbn|_ |scalbln|_ |ilog|_ |nexttoward|_)
 
 .. _fpclassify: https://en.cppreference.com/w/cpp/numeric/math/fpclassify
 
@@ -357,18 +356,18 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |isunordered| replace:: ``isunordered``
 
-**Classification and comparison** |isfinite|_ |isinf|_ |isnan|_ |signbit*|_ (currently not provided by Kokkos: |fpclassify|_ |isnormal|_ |isgreater|_ |isgreaterequal|_ |isless|_ |islessequal|_ |islessgreater|_ |isunordered|_)
+**分類および比較** |isfinite|_ |isinf|_ |isnan|_ |signbit*|_ ( 現在 Kokkos によっては、提供されていません: |fpclassify|_ |isnormal|_ |isgreater|_ |isgreaterequal|_ |isless|_ |islessequal|_ |islessgreater|_ |isunordered|_)
 
 ------------
 
-**Other math functions not provided by the C++ standard library**
+**C++ 標準ライブラリで提供されていないその他の数学関数**
 
-``rsqrt(x)`` reciprocal square root (i.e. computes :math:`\frac{1}{\sqrt(x)}`) (since Kokkos 4.1)
+``rsqrt(x)`` (すなわち computes \frac{1}{\sqrt(x)} を計算) (Kokkos 4.1以降)
 
 ------------
 
-Notes
------
+注意事項
+--------
 
 .. _openIssue: https://github.com/kokkos/kokkos/issues/new
 
@@ -382,24 +381,20 @@ Notes
 
 .. |KnownIssues| replace:: known issues
 
-* **Feel free to** |openIssue|_ **if you need one of the functions that is currently not implemented.** |issue4767|_ **is keeping track of these and has notes about implementability.**
-* ``nearbyint`` is not available with the SYCL backend
-* ``round``, ``logb``, ``nextafter``, ``copysign``, and ``signbit`` are available since version 3.7
-* three-argument version of ``hypot`` is available since 4.0
-* ``fma`` is available since 4.0
-* Beware the using-directive ``using namespace Kokkos;`` will cause
-  compilation errors with unqualified calls to math functions.  Use explicit
-  qualification (``Kokkos::sqrt``) or using-declaration (``using
-  Kokkos::sqrt;``) instead.  (See |KnownIssues|_)
-* Math functions were removed from the ``Kokkos::Experimental::`` namespace in version 4.3
-* Support for quadruple precision floating-point ``__float128`` can be enabled
-  via ``-DKokkos_ENABLE_LIBQUADMATH=ON``.
+* **現在実装されていない機能が必要な場合は**、**遠慮なく**   |openIssue|_  を実行してください。 |issue4767|_  はこれらを記録し、実装可能性に関するメモを掲載しています。**
+*  SYCL バックエンドでは、 ``nearbyint`` は利用できません
+* ``round``、 ``logb``、 ``nextafter``、 ``copysign`` および ``signbit`` は、バージョン3.7以降利用可能です。
+* ``hypot`` の3つの引数のバージョンは、4.0以降利用可能です。
+* ``fma`` は、 4.0以降利用可能です。
+* ``namespace Kokkosを使う`` または、using ダイレクティブには注意してください;無条件の数学関数呼び出しでコンパイルエラーを引き起こします。 代わりに、明示的条件( Kokkos::sqrt) または using-declaration を使ってください (  |KnownIssues|_ を参照)。
+* 数学関数は、バージョン4.3の ``Kokkos::Experimental::`` 内の名前空間から削除されました。
+* 四重精密浮動小数点数  ``__float128``のサポートは、 ``-DKokkos_ENABLE_LIBQUADMATH=ON`` によって有効化できます。
 
 ------------
 
-See also
---------
+以下も参照
+----------
 
-`Mathematical constant <mathematical-constants.html>`_
+`数学定数 <mathematical-constants.html>`_
 
-`Numeric traits <numeric-traits.html>`_  
+`数学特性 <numeric-traits.html>`_  

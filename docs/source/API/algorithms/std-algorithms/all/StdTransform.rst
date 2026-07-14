@@ -2,28 +2,28 @@
 ``transform``
 =============
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-- Overloads (1,2,9): applies the given *unary* operation to all elements in the range ``[first_from, last_from)`` stores the result in the range starting at ``first_to``
+- オーバーロード (1,2,9): 指定された *単項* 演算子を範囲 ``[first_from, last_from)`` 内の全要素に適用し、結果を ``first_to`` から始まる範囲に格納します。
 
-- Overloads (3,4,10): applies the given *unary* operation to all elements in the ``source`` view and stores the result in the ``dest`` view.
+- オーバーロード (3,4,10): 指定された *単項* 演算を ``source`` ビュー内の全要素に適用し、結果を ``dest`` ビューに格納します。
 
-- Overloads (5,6,11): applies the given *binary* operation to pair of elements from the ranges ``[first_from1, last_from1)`` and ``[first_from2, last_from2]`` and stores the result in range starting at ``first_to``
+- オーバーロード (5,6,11): 指定された *二項* 演算を、範囲 ``[first_from1, last_from1)`` および ``[first_from2, last_from2]`` から取得した要素のペアに対して適用し、結果を ``first_to`` から始まる範囲に格納します。
 
-- Overloads (7,8,12): applies the given *binary* operation to pair of elements from the views ``source1, source2`` and stores the result in ``dest`` view
-
-
-Interface
----------
-
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+- オーバーロード (7,8,12): 指定された *二項* 演算を、ビュー ``source1, source2`` から取得した要素のペアに対して適用し、結果を ``dest`` ビューに格納します。
 
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+インターフェイス
+----------------
+
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
+
+
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -113,8 +113,8 @@ Overload set accepting execution space
                  Kokkos::View<DataType3, Properties3...>& dest,
                  BinaryOperation binary_op);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -166,40 +166,41 @@ Overload set accepting a team handle
                  ::Kokkos::View<DataType3, Properties3...>& dest,
                  BinaryOperation binary_op);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: used to name the implementation kernels for debugging purposes
+- ``label``: デバッグ目的で実装カーネルに名付けるために使用。
 
-  - for 1,3,5,7, the default string is: "Kokkos::transform_iterator_api_default"
+  - 1,3,5,7 について、デフォルト文字列は、: "Kokkos::transform_iterator_api_default"
 
-  - for 2,4,6,8, the default string is: "Kokkos::transform_view_api_default"
+  - 2,4,6,8, について、デフォルト文字列は、: "Kokkos::transform_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first_from, last_from, first_from1, first_from2``: ranges of elements to transform
+- ``first_from, last_from, first_from1, first_from2``: 変換対象の要素の範囲
 
-  - must be *random access iterators*
+  -  *ランダムアクセスイテレータ* でなければなりません。
 
-  - must be valid ranges, i.e., ``first_from >= last_from``, ``first_from1 >= last_from2``
+  -  有効な範囲、つまり、 ``first_from >= last_from``, ``first_from1 >= last_from2`` を表す必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``first_to``: beginning of the range to write to
+- ``first_to``: 書き込み先の範囲の先頭
 
-  - must be a *random access iterator*
+  -  *ランダムアクセスイテレータ* でなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``source, source1, source2, dest``: source and destination views
+- ``source, source1, source2, dest``: ソースおよび宛先のビュー
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-Return Value
+
+戻り値
 ~~~~~~~~~~~~
 
-Iterator to the element *after* the last element transformed.
+変換された最後の *後の* 要素へのイテレータ

@@ -8,36 +8,36 @@
 
 .. |subviewfunc| replace:: ``Kokkos::subview()``
 
-Header File: ``Kokkos_Core.hpp``
+ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
-Description
------------
+説明
+------------------
 
-Alias template to deduce the type that is returned by a call to the |subviewfunc|_ function with given arguments.
+|subviewfunc|_ 関数を、指定の引数により呼び出した際に、返される型を推論するためのエイリアステンプレートです。
 
-Interface
----------
+インターフェイス
+----------------
 
 .. code-block:: cpp
 
    template <class ViewType, class... Args>
-   using Subview = IMPL_DETAIL; // deduce subview type from source view traits
+   using Subview = IMPL_DETAIL; // ソースビューの特性からサブビューのタイプを推論します。
 
-Type of the result of ``Kokkos::subview(ViewType view_arg, Args .... args)``
+``Kokkos::subview(ViewType view_arg, Args .... args)`` の結果の型。
 
-Requirements
+必要要件
 ------------
 
-Requires:
+以下を必要とします:
 
-- ``ViewType`` is a specialization of ``Kokkos::View``
+- ``ViewType`` は、 ``Kokkos::View`` の仕様です。
 
-- ``Args...`` are slice specifiers as defined in |subviewfunc|_.
+- ``Args...`` は、 |subviewfunc|_ で定義されているスライス指定子です。
 
 - ``sizeof... (Args) == ViewType::rank()``.
 
 
-Examples
+例
 --------
 
 .. code-block:: cpp

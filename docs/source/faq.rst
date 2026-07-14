@@ -3,8 +3,8 @@ FAQ
 
 .. _join-slack-workspace:
 
-**How do I join the Kokkos slack channel?**
-  You can find the slack channel at `kokkosteam.slack.com <https://kokkosteam.slack.com>`_. Register a new account with your email. We reached the limit of whitelisted organizations, but every member of the Kokkos Slack workspace can invite more people. If no one you know is in the Slack workspace you can contact the Kokkos maintainers (their emails are in the LICENSE file).
+**KokkosのSlackチャンネルに参加するにはどうすればよいですか？**
+ `kokkosteam.slack.com <https://kokkosteam.slack.com>`_ において、スラックチャンネルを見つけることができます。貴方のEメールで新たなアカウントを登録してください。ホワイトリストに登録できる組織の上限に達しましたが、Kokkos Slack ワークスペースの各メンバーは、さらに人々を招待できます。Slack ワークスペースに知り合いがいない場合は、Kokkos の保守担当者に連絡してください (保守担当者のメールアドレスは LICENSE ファイルに記載されています)。
 
-**How do I compile Kokkos with C++20 or C++23?**
-  When configuring Kokkos with cmake, add the flag ``-DCMAKE_CXX_STANDARD=20`` (or ``23``). Ensure that the flag is also set for any downstream applications.
+**C++20 または C++23 を使ってどのように Kokkos をコンパイルできますか？**
+  cmake で Kokkos を設定する際に、フラグ ``-DCMAKE_CXX_STANDARD=20`` (または ``23``) を付けてください。 いずれの下流アプリケーションに対してもフラグが設定されていることを、確認してください。

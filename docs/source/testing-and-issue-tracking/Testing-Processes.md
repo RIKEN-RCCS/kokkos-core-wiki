@@ -1,78 +1,62 @@
-# Kokkos Testing Processes and Change Process
+# Kokkos テストプロセスおよび変更プロセス
 
-Kokkos testing falls into three categories:
+Kokkos のテストは、以下の3つのカテゴリーに属します:
 
- - Pull Request Testing
- - Nightly Testing
- - Integration Testing (Release Testing)
+ - プルリクエストテスト 
+ - 夜間テスト
+ - 統合テスト(リリーステスト)
+
+## プルリクエストテスト
+
+Kokkos のすべての変更は、Kokkos の開発 github.com ブランチに対するプルリクエストを通じて導入されます。 プルリクエストは、GitHub Actions のワークフローや外部のテストサーバーでテストされます。
+
+合併するには2つの条件を満たす必要があります:
+
+1) プルリクエストの自動テストは合格しなければなりません。
+2) Kokkos のコア開発者2名が、Kokkos の開発者標準に適合しているか変更を確認した後、プルリクエストを承認しなければなりません。
+
+プルリクエストテストでテストされた構成は主要な展開システムをカバーし、各種機関のジェンキンスやトラビスによって実行されます。
+
+新しいテスト構成は、Kokkos チームの開発者会議で提案されます。 新しい構成の導入は、テストリソースの可用性、テストパイプライン全体の期間、主要なコンピューティング施設のソフトウェアスタックに基づいて決定されます。
  
-## Pull Request Testing
+プルリクエストテストでは、リポジトリで指定された clang-format スタイルがフォーマットに合っているかの検証も含まれます。
 
-All changes to Kokkos are introduced via pull requests against the github.com develop branch of Kokkos. 
-Pull requests are tested using GitHub actions workflows, as well as external testing servers.
+テスト設定はkokkos/jenkins および `kokkos/.github/workflows/*` ファイルで定義され、公式の主要なソフトウェアスタックサポートを決定します。 テスト済みのコンパイラバージョンもここに掲載しています [here](https://kokkos.github.io/kokkos-core-wiki/requirements.html)。これらのテスト構成は、ハードウェアプラットフォーム (例: NVIDIA、Intel、および AMD)、コンパイラ(例: GCC、Clang、NVC++)、C++標準 (17-23)、Kokkos のバックエンド (例: Cuda、OpenMP、HIP)、Kokkos の設定オプション (例:Debug、Relocateable Device Code) の直積集合 (の一部) をカバーしています。
 
-In order to be merged two conditions must be met:
+clang 形式のファイルは、 `kokkos/.clang-format` です。 使用する clang 形式のバージョンは、`.clang-format` の設定ファイルのヘッダー内のコメントとして指定されています。
 
-1) Automatic testing of the pull request must pass.
-2) Two Kokkos core developer must approve the pull request, after checking the changes for alignment with Kokkos developer standards. 
+プルリクエストを統合できるのは主要な Kokkos の管理者だけで、実施されたレビューが望ましい徹底度を満たしているかどうかを判断する責任があります。
 
-The tested configurations in Pull Request testing cover the major deployment systems
-and are executed via jenkins and travis at various institutions.
+## 夜間テスト
 
-New test configurations are proposed to the Kokkos team in its developer meeting.
-Inclusion of new configurations is decided based on test resource availability,
-duration of the entire testing pipeline, and primary computing facility software stacks.
+夜間テストは、広範なリスト上にある、Kokkos のコンパイラおよび構成の広範囲をカバーしています。
 
-Pull request testing also includes verification that the formatting meets 
-the clang-format style specified in the repository. 
+参加機関は、毎晩の検査を実施するように、求められています。 
+テスト構成は、機関ごとのテスト設定ファイル内の `kokkos/scripts/testings/` で提供されます。
 
-Test configurations are defined in the `kokkos/.jenkins`, and `kokkos/.github/workflows/*` files and determine the official
-primary software stack support.
-The tested compiler versions are also listed [here](https://kokkos.github.io/kokkos-core-wiki/requirements.html).
-These test configurations (sparsely) cover the cross product of hardware platforms (e.g. NVIDIA. Intel, and AMD),
-compilers (e.g. GCC, Clang, NVC++), C++ standards (17-23), Kokkos backends (e.g. Cuda, OpenMP, and HIP) and Kokkos
-configuration options (e.g. Debug, Relocatable Device Code).
+各機関は、テスト POC を指定し、失敗を Kokkos チーム全体に報告し、再生産手順を含む GitHub の課題を提出します。
 
-The clang-format style file is `kokkos/.clang-format`. The clang-format version
-to use is specified as a comment in the header of the `.clang-format`
-configuration file.
+## 統合テスト(リリーステスト)
 
-Only the primary Kokkos maintainers can merge pull requests, they have the responsibility to judge whether conducted reviews meet the desired thoroughness.
+新しい Kokkos バージョンをリリースするためには、統合テストが行われます。
 
-## Nightly Testing
+本テストには、3つの要素があります:
 
-Nightly testing covers a wider range of compilers and configuration of Kokkos
-on an extensive list of platforms.
+### 内部統合テスト
 
-All participating institutions are invited to perform nightly testing.
-Test configurations are given in `kokkos/scripts/testings/` in institution specific test configuration files.
-
-Each institution designates a test POC, who will report failures to the entire Kokkos team,
-and file github issues with reproduction steps.
-
-## Integration Testing (Release Testing)
-
-In order for a new Kokkos version to be released integration testing is performed.
-Integration testing configurations are determined and maintained by the customer projects.
-
-This testing has three components:
-
-### Internal Integration Testing
-
-Kokkos team members will perform integration testing with a select number of customer codes, they are directly involved with.
-Currently that includes two code bases:
+Kokkos のチームメンバーは、直接関与している、選定された顧客コードとの統合テストを行います。
+現在、それは2つのコードベースを含んでいます:
 
 - Trilinos
 - ArborX
 
-Trilinos in particular consists of several million lines of code over multiple packages.
-Both codes are tested on the primary hardware platforms, and possibly multiple software stacks (compilers in particular).
-They are also tested with a limited set of configurations during nightly testing, allowing the Kokkos team to catch issues early.
+特に、Trilinos は、複数のパッケージにまたがる数百万行のコードで構成されています。
+両方のコードは主要なハードウェアプラットフォーム、場合によっては複数のソフトウェアスタック(特にコンパイラ)でテストされます。
+また、夜間のテストでは限られた構成でテストされるため、 Kokkos チームは、早期に問題を発見できます。
 
-### Preferred Customer Testing
+### 優先顧客テスト
 
-Customers funded by the same agencies as Kokkos are explicitly asked to test the release candidate before the actual release, and provide feedback.
-This includes currently NNSA and Office of Science DOE users, specifically:
+Kokkos と同じ機関から資金提供を受けた顧客には、実際のリリース前に候補をテストし、フィードバックを提供するよう、明確に求められています。 これには現在の NNSA (国立科学省) および 科学局 DOE の利用者、具体的には、以下の通り含まれております：
 
 - SNL Empire
 - SNL LAMMPS
@@ -81,10 +65,8 @@ This includes currently NNSA and Office of Science DOE users, specifically:
 - ORNL Cabana
 - ANL PETSc
 
-### General Community testing
+### 一般コミュニティテスト
 
-The release candidate is publicly available as a GitHub branch, and is advertised on the Kokkos Slack channel.
-Any user of Kokkos is encouraged to test the release candidate and provide feedback.
-The testing phase is at least two weeks.
+リリース候補は、GitHub のブランチとして公開されており、Kokkos Slack チャンネル上で宣伝されています。Kokkos のユーザーには、リリース候補をテストし、フィードバックを提供することを奨励しています。検査段階は、少なくとも2週間です。
 
 

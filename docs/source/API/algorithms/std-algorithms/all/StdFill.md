@@ -1,7 +1,7 @@
 
 # `fill`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -31,37 +31,37 @@ void fill(const std::string& label, const ExecutionSpace& exespace,          (4)
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-Copy-assigns `value` to each element in the range `[first, last)` (overloads 1,2)
-or in `view` (overloads 3,4).
+範囲 `[first, last)` (オーバーロード 1,2) 内、または
+ `ビュー` (オーバーロード 3,4) 内に、各要素を代入します。
 
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance
+  - 実行空間インスタンス
 - `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1, the default string is: "Kokkos::fill_iterator_api_default"
-  - for 3, the default string is: "Kokkos::fill_view_api_default"
+  - デバッグ目的で実装カーネルに名付けるために使用
+  - 1 について、 デフォルト文字列は、: "Kokkos::fill_iterator_api_default"
+  - 3 について、 デフォルト文字列は、: "Kokkos::fill_view_api_default"
 - `first, last`:
-  - range of elements to assign to
-  - must be *random access iterators*, e.g., `Kokkos::Experimental::begin/end`
-  - must represent a valid range, i.e., `last >= first` (checked in debug mode)
-  - must be accessible from `exespace`
+  - 割当先の要素の範囲
+  - 例えば、 `Kokkos::Experimental::begin/end` など、*ランダムアクセスイテレータ* でなければなりません。
+  - 有効な範囲、つまり、 ``last >= first`` を表さなければなりません。 (デバッグモードで確認済み)
+  - `exespace` からアクセス可能でなければなりません。
 - `view`:
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `value`:
-  - value to assign to each element
+  - 各要素に割り当てる値
 
 
-## Return
+## 戻り値
 
-None
+無し
 
-## Example
+## 例
 
 ```c++
 namespace KE = Kokkos::Experimental;
@@ -69,9 +69,9 @@ Kokkos::View<double*> a("a", 13);
 
 KE::fill(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a), 4.);
 
-// passing the view directly
+// ビューを直接渡します
 KE::fill(Kokkos::DefaultExecutionSpace(), a, 22.);
 
-// explicitly set execution space (assuming active)
+// 明示的に実行空間を設定します（アクティブと仮定）
 KE::fill(Kokkos::OpenMP(), KE::begin(a), KE::end(a), 14.);
 ```

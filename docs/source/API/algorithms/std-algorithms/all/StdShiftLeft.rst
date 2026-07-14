@@ -1,20 +1,20 @@
 ``shift_left``
 ==============
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+ヘッダーファイル: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Shifts the elements in a range or in ``view`` by ``n`` positions towards the *beginning*.
+ *始め* に向けて、 ``n`` 位置により、範囲または ``view`` 内において、要素をシフトします。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -41,8 +41,8 @@ Overload set accepting execution space
                   typename decltype(begin(view))::difference_type n);
 
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -60,40 +60,40 @@ Overload set accepting a team handle
                    const Kokkos::View<DataType, Properties...>& view,
                    typename decltype(begin(view))::difference_type n);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::shift_left_iterator_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::shift_left_iterator_api_default".
 
-  - 3: The default string is "Kokkos::shift_left_view_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::shift_left_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first, last``: range of elements to shift
+- ``first, last``: 変更対象の要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲、つまり、 ``last >= first`` を表す必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``view``: view to modify
+- ``view``: 変更対象のビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``n``: the number of positions to shift
+- ``n``: シフトする位置の数
 
-  - must be non-negative
+  - 0以上でなければなりません。
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-The end of the resulting range. If ``n`` is less than ``last - first``, returns ``first + (last - first - n)``. Otherwise, returns ``first``.
+結果の範囲の終わり。 ``n`` が  ``last - first`` よりも小さい場合には、 ``first + (last - first - n)`` を返します。 そうでなければ、 ``first`` を返します。

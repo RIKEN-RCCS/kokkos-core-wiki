@@ -2,20 +2,20 @@
 ``count_if``
 ============
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Returns the number of elements in a range or in rank-1 ``View`` that satisfy a given unary prediate.
+指定された単項述語を満たす範囲またはランク1の ``ビュー`` 内の要素数を返します。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -46,8 +46,8 @@ Overload set accepting execution space
 		 Predicate pred);
 
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -67,54 +67,51 @@ Overload set accepting a team handle
 		 const ::Kokkos::View<DataType, Properties...>& view,                   (6)
 		 Predicate pred);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 1: The default string is "Kokkos::count_if_iterator_api_default".
+  - 1: デフォルト文字列は、 "Kokkos::count_if_iterator_api_default".
 
-  - 3: The default string is "Kokkos::count_if_view_api_default".
+  - 3: デフォルト文字列は、 "Kokkos::count_if_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first, last``: range of elements to search in
+- ``first, last``: 検索対象となる要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲、つまり、 ``last >= first`` を表す必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``view``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``pred``: *unary* functor returning ``true`` if an argument satisfies the desired condition.
+- ``pred``: 引数が所望の条件を満たす場合に ``真`` を返す *単項* ファンクタ。
 
-  ``pred(v)`` must be valid to be called from the execution space passed, or the execution space
-  associated with the team handle, and convertible to bool for every argument ``v``
-  of type ``value_type``, where ``value_type`` is the value type of ``IteratorType`` or ``view``
-  and must not modify ``v``.
+  ``pred(v)``  は、引数として渡された実行空間から呼び出されるために、有効でなければならず、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 ``value_type`` の引数 ``v`` のすべてのペアについて、ブール型に変換可能で、そこでは、 ``value_type`` が、 ``IteratorType`` の値型、または ``view`` であり、  ``v`` を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
      struct CustomPredicate{
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const {
-         return /* true if v satisfies your desired condition */;
+          /* vが所望の条件を満たす場合に真 */;
        }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Returns the number of elements in the range ``first,last`` or in ``view`` for which the predicate is true.
+範囲 first, last の中、または述語が真である ``ビュー`` 内にある要素数を返します。  

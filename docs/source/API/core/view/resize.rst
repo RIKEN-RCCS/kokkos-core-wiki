@@ -4,21 +4,22 @@
 .. role:: cpp(code)
    :language: cpp
 
-Header File: <Kokkos_Core.hpp>
+ヘッダーファイル: <Kokkos_Core.hpp>
 
-Usage
------
+使用方法
+--------
 
 .. code-block:: cpp
 
     resize(view,n0,n1,n2,n3);
     resize(view,layout);
 
-Reallocates a view to have the new dimensions. Can grow or shrink, and will preserve content of the common subextents.
+新たな次元を持つために、ビューを再割り当てします。拡大または縮小でき、共通サブビューの内容は保持されます。
 
 
-Description
------------
+
+説明
+------------------
 
 * .. code-block:: cpp
 
@@ -33,14 +34,14 @@ Description
 		 const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
 		 const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-  Resizes ``v`` to have the new dimensions while preserving the contents for the common subview of the old and new view.
+  古いビューおよび新たなビューの共通サブビューの内容を保持しながら、 ``v`` を、新しい次元にサイズ変更します。
 
-  * ``v``: existing view, can be a default constructed one.
-  * ``n[X]``: new length for extent X.
+  * ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
+  * ``n[X]``: 範囲 X の新たな長さ。
 
-  Restrictions:
+  制約:
 
-  * ``View<T, P...>::array_layout`` is either ``LayoutLeft`` or ``LayoutRight``.
+  * ``View<T, P...>::array_layout`` は、 ``LayoutLeft`` または ``LayoutRight`` のいずれかです。
 
 * .. code-block:: cpp
 
@@ -55,19 +56,19 @@ Description
 		  const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
 		  const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-  Resizes ``v`` to have the new dimensions while preserving the contents for the common
-  subview of the old and new view. The new ``Kokkos::View`` is constructed using the
-  View constructor property ``arg_prop``, e.g., Kokkos::WithoutInitializing.
+  古いビューおよび新たなビューの共通サブビューの内容を保持しながら、 ``v`` を、新しい次元にサイズ変更します。
+  新たな ``Kokkos::View`` は、 ビューコンストラクタ特性 ``arg_prop``、
+  例えば、 Kokkos::WithoutInitializing を使って、構築されます。
 
-  * ``v``: existing view, can be a default constructed one.
+  * ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
 
-  * ``n[X]``: new length for extent X.
+  * ``n[X]``: 範囲 X の新たな長さ。
 
-  * ``arg_prop``: View constructor property, e.g., ``Kokkos::WithoutInitializing``.
+  * ``arg_prop``: ビューコンストラクタ特性、例えば、 ``Kokkos::WithoutInitializing``。
 
-  Restrictions:
+  制約:
 
-  * ``View<T, P...>::array_layout`` is either ``LayoutLeft` or `LayoutRight``.
+  * ``View<T, P...>::array_layout`` は、 ``LayoutLeft` または `LayoutRight`` のいずれかです。
 
 * .. code-block:: cpp
 
@@ -83,19 +84,19 @@ Description
 		 const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
 		 const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-  Resizes ``v`` to have the new dimensions while preserving the contents for the common
-  subview of the old and new view. The new ``Kokkos::View`` is constructed using the View constructor
-  properties ``arg_prop``, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
-  If ``arg_prop`` includes an execution space, it is used for allocating memory and for copying elements without using a final fence.
+  古いビューおよび新たなビューの共通サブビューの内容を保持しながら、 ``v`` を、新しい次元にサイズ変更します。
+  新たな ``Kokkos::View`` は、ビューコンストラクタ特性 ``arg_prop``、
+  例えば、 ``Kokkos::view_alloc(Kokkos::WithoutInitializing)`` を使って、構築されます。
+  ``arg_prop`` が、実行空間を含む場合には、 最終フェンスを使用せずに、 メモリ配分およびコピー要素のために使用されます。
 
-  * ``v``: existing view, can be a default constructed one.
-  * ``n[X]``: new length for extent X.
-  * ``arg_prop``: View constructor properties, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
+  * ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
+  * ``n[X]``: ``n[X]``: 範囲 X の新たな長さ。
+  * ``arg_prop``: View constructor properties、例えば ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``。
 
-  Restrictions:
+  制約:
 
-  * ``View<T, P...>::array_layout`` is either ``LayoutLeft`` or ``LayoutRight``.
-  * ``arg_prop`` must not include a pointer to memory, a label, or a memory space.
+  * ``View<T, P...>::array_layout`` は、 ``LayoutLeft`` または ``LayoutRight``  のいずれかです。
+  * ``arg_prop``  は、メモリ、ラベルまたはメモリ空間へのポインタを含んではなりません。
 
 * .. code-block:: cpp
 
@@ -103,10 +104,10 @@ Description
      void resize(Kokkos::View<T, P...>& v,
                  const typename Kokkos::View<T, P...>::array_layout& layout);
 
-  Resizes ``v`` to have the new dimensions while preserving the contents for the common subview of the old and new view.
+  古いビューおよび新たなビューの共通サブビューの内容を保持しながら、 ``v`` を、新しい次元にサイズ変更します。
 
-  * ``v``: existing view, can be a default constructed one.
-  * ``layout``: a layout instance containing the new dimensions.
+  * ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
+  * ``layout``: 新たな次元を含むレイアウトインスタンス。
 
 * .. code-block:: cpp
 
@@ -114,13 +115,13 @@ Description
      void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
 	         const typename Kokkos::View<T, P...>::array_layout& layout);
 
-  Resizes ``v`` to have the new dimensions while preserving the contents for the common subview
-  of the old and new view. The new ``Kokkos::View`` is constructed using the View constructor
-  property ``arg_prop``, e.g., Kokkos::WithoutInitializing.
+  古いビューおよび新たなビューの共通サブビューの内容を保持しながら、 ``v`` を、新しい次元にサイズ変更します。
+  新たな ``Kokkos::View`` は、ビューコンストラクタ特性 ``arg_prop``、
+  例えば、Kokkos::WithoutInitializing を使って、構築されます。
 
-  * ``v``: existing view, can be a default constructed one.
-  * ``layout``: a layout instance containing the new dimensions.
-  * ``arg_prop``: View constructor property, e.g., ``Kokkos::WithoutInitializing``.
+  * ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
+  * ``layout``: 新たな次元を含むレイアウトインスタンス。
+  * ``arg_prop``: ビューコンストラクタ特性、例えば、 ``Kokkos::WithoutInitializing``。
 
 * .. code-block:: cpp
 
@@ -129,30 +130,30 @@ Description
 	         Kokkos::View<T, P...>& v,
 	         const typename Kokkos::View<T, P...>::array_layout& layout);
 
-  Resizes ``v`` to have the new dimensions while preserving the contents for the
-  common subview of the old and new view. The new ``Kokkos::View`` is constructed using
-  the View constructor properties ``arg_prop``, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
-  If ``arg_prop`` includes an execution space, it is used for allocating memory and for copying elements without using a final fence.
+  古いビューおよび新たなビューの共通サブビューの内容を保持しながら、 ``v`` を、新しい次元にサイズ変更します。
+  新たな ``Kokkos::View`` は、ビューコンストラクタ特性 ``arg_prop``、
+  例えば、 ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``を使って、構築されます。
+  ``arg_prop`` が、実行空間を含む場合には、 最終フェンスを使用せずに、 メモリ配分およびコピー要素のために使用されます。
 
-  * ``v``: existing view, can be a default constructed one.
-  * ``layout``: a layout instance containing the new dimensions.
-  * ``arg_prop``: View constructor properties, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
+  * ``v``: 既存のビューであり、デフォルトコンストラクタで生成されたものになる可能性があります。
+  * ``layout``: 新たな次元を含むレイアウトインスタンス。
+  * ``arg_prop``: ビューコンストラクタ特性、例えば、  ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``。
 
-  Restrictions:
+  制約:
 
-  * ``arg_prop`` must not include a pointer to memory, a label, or a memory space.
+  * ``arg_prop`` は、メモリ、ラベルまたはメモリ空間へのポインタを含んではなりません。
 
-Example:
+:
 --------
 
 * .. code-block:: cpp
 
     Kokkos::resize(v, 2, 3);
 
-Resize a ``Kokkos::View`` with dynamic rank 2 to have dynamic extent 2 and 3 respectively preserving previous content.
+それぞれ、以前のコンテンツを保持する動的拡張 2 と 3 を持つように、動的ランク2の Kokkos::View をサイズ変更します。
 
 * .. code-block:: cpp
 
     Kokkos::resize(Kokkos::WithoutInitializing, v, 2, 3);
 
-Resize a ``Kokkos::View`` with dynamic rank 2 to have dynamic extent 2 and 3 respectively preserving previous content. After this call, the new content is uninitialized.
+それぞれ、以前のコンテンツを保持する動的拡張 2 と 3 を持つように、動的ランク2の Kokkos::View をサイズ変更します。本呼び出しの後、 新たなコンテンツは、初期化されていません。

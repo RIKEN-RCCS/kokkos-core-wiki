@@ -1,54 +1,55 @@
-# Programming Model
+# プログラミングモデル
 
-The programming model Kokkos is characterized by 6 core abstractions: Execution Spaces, Execution Patterns, Execution Policies, Memory Spaces, Memory Layout and Memory Traits. These abstraction concepts allow the formulation of generic algorithms and data structures which can then be mapped to different types of architectures. Effectively, they allow for compile time transformation of algorithms to allow for adaptions of varying degrees of hardware parallelism as well as of the memory hierarchy.
+プログラミングモデル Kokkos は、以下の6つのコア抽象化によって特徴づけられます: 実行空間,
+実行パターン、実行ポリシー、メモリ空間、メモリレイアウト、およびメモリ特性。 これらの抽象化概念により、汎用的なアルゴリズムやデータ構造を構築することが可能となり、それらを様々な種類のアーキテクチャに適用することが可能となります。 実質的に、これらはアルゴリズムのコンパイル時変換を可能にし、ハードウェアの並列性の程度やメモリ階層構造に応じて適応させることを可能にします。
 
 ![abstractions](figures/kokkos-abstractions-doc.png)
 
-<h4>Figure 3.1 The Core Abstractions of the Kokkos Programming Model</h4>
+<h4>図 3.1 プログラミングモデルのコア抽象化 </h4>
 
-## Execution Spaces
+## 実行空間
 
-An Execution Space is the place _Where_ code can actually be executed. For example, on current Hybrid GPU/CPU systems there are two types of execution spaces: the GPU cores and the CPU cores. In the future this could include Processing in Memory (PIM) modules or different core types on a heterogeneous CPU. In principle, this can also be used to introduce remote memory spaces, e.g., the capability of sending work to a different node. Execution Spaces thus give an application developer the means to target different parts of a heterogeneous hardware architecture. This corresponds directly to the previously described machine model.
+実行空間とは、コードが実際に実行される場所 _Where_ を指します。 例えば、現在のハイブリッド GPU/CPU システムでは、実行スペースとして2種類が存在します： GPU コアおよび CPU コアです。 将来的には、メモリ内処理（PIM）モジュールや、ヘテロジニアス CPU 上の異なるコアタイプなどが含まれる可能性があります。 原則として、これはリモートメモリ空間の導入にも利用可能です。例えば、異なるノードへ作業を送信する機能などが挙げられます。 実行空間は、アプリケーション開発者が異種混在ハードウェアアーキテクチャの異なる部分をターゲットとする手段を提供します。 これは、以前に説明した機械モデルに直接対応しております。
 
-## Execution Patterns
+## 実行パターン
 
-Execution Patterns are the _fundamental parallel algorithms_ in which an application has to be expressed. Examples are
+実行パターンは、その中でアプリケーションが表現されなければならない、 _基本的パラレルアルゴリズム_ です。 例は、以下の通りです。
 
-* [`parallel_for()`](../API/core/parallel-dispatch/parallel_for): execute a function in undetermined order a specified amount of times,
-* [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce): which combines `parallel_for()` execution with a reduction operation,
-* [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan): which combines a `parallel_for()` operation with a prefix or postfix scan on output values of each operation, and
-* `task`: which executes a single function with dependencies on other functions.
+* [`parallel_for()`](../API/core/parallel-dispatch/parallel_for): 関数を指定された回数だけ、順序を定めずに実行、
+* [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce): `parallel_for()`の実行および縮約演算の組合せ、
+* [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan): 各演算の出力値について、parallel_for() 演算と接頭辞または接尾辞スキャンを組み合わせ、および
+* `task`: 他の関数への依存関係を持つ、単関数を実行。
 
-Expressing an application in these patterns allows the underlying implementation or the used compiler to reason about valid transformations. For example all `parallel_***` patterns allow unspecified execution order and only promise deterministic results of the reductions themselves. This enables different mapping patterns on different hardware such as assignment of iterations to threads or vector lanes.
+アプリケーションをこれらのパターンで表現することで、基盤となる実装および使用されるコンパイラが有効な変換について、推論することが可能となります。例えば、すべての `parallel_***` パターンは、実行順序を設定せず、縮約処理自体の結果のみが確定的であることを、保証します。これにより、異なるハードウェア上で、例えば、反復処理のスレッドおよびベクトルレーンの割り当てといった、異なるマッピングパターンが可能となります。
 
-## Execution Policies
+## 実行ポリシー
 
-An Execution Policy determines, together with an Execution Pattern, _How_ a function is executed. Some policies can be nested in others.
+実行ポリシーは、実行パターンと組み合わせて、関数が _どのように_ 実行されるかを決定します。一部のポリシーは、他のポリシー内にネストすることが可能です。
 
-### Range Policies
+### 範囲ポリシー
 
-The most simple form of execution policies are _Range Policies_. They are used to execute an operation once for each element in a range. There are no prescriptions of order of execution or concurrency, which means that it is not legal to synchronize different iterations.
+実行ポリシーの中で、もっとも単純な形態は、 _範囲ポリシー_ です。それらは、範囲内の各要素に対して一度ずつ演算を実行するために使用されます。 実行順序や並行性に関する規定はありません。つまり、異なる反復処理を同期させることは許可されていません。
 
-### Team Policies
+### チームポリシー
 
-Team policies are used to implement hierarchical parallelism. For that purpose Kokkos groups threads into _teams_. A _thread team_ is a collection of one or more parallel "threads" of execution. Kokkos allows an arbitrary number of teams - the _league size_. Hardware constrains the number of threads in a team - the _team size_. All threads in a team are guaranteed to run concurrently.
+チームポリシーは、階層的並列性を実装するために使用されます。 そのために、Kokkos は、スレッドを  _teams_ にグループ化します。 _thread team_ とは、1つ以上の並列な実行 "スレッド" の集合体です。 Kokkos では、任意の数のチームの作成 - the _league size_ が可能です。 ハードウェアの制約により、チーム内のスレッド数 - the _team size_ は制限されます。 チーム内のすべてのスレッドは、確実に同時に実行されます
 
-Threads in a team can synchronize - they have a "barrier" primitive - and share a "scratch pad" memory which they may use for temporary storage. Note that not all forms of synchronization mechanisms are legal in Kokkos, in particular implementing "spin-locks" for threads in a team may result in dead locks. In Kokkos there is no forward progress guarantee for threads, meaning that a single thread spinning on a lock acquired by another thread of the team may use 100% of the compute engines resources. Calling the explicit Kokkos _team barrier_ is the only safe way to synchronize threads in a team.
+チーム内のスレッドは同期が可能です。これらは "barrier" プリミティブを備えており、一時的な保存に使用できる "スクラッチパッド" メモリを共有します。 Kokkos ではすべての同期メカニズムが有効とは限らないことに注意してください。特に、チーム内のスレッドに対して、"スピンロック" を実装すると、デッドロックが発生する可能性があります。 Kokkos では、スレッドの順序保証は提供されておりません。つまり、チーム内の別のスレッドが取得したロックで待機状態にある単一のスレッドが、コンピューティングエンジンのリソースを、100%使用してしまう可能性があります。 明示的な Kokkos を、 _チームバリア_ と呼ぶことが、チーム内のスレッドを同期させるための唯一の安全な方法です。
 
-Scratch pad memory exists only during parallel operations; allocations in it do not persist across kernels. Teams themselves may run in any order, and may not necessarily run all in parallel. For example, if the user asks for _T_ teams, the hardware may choose to run them one after another in sequence, or in groups of up to _G_ teams at a time in parallel.
+スクラッチパッドメモリは、並列演算中のみ存在します; その内部の割り当てはカーネル間で持続しません。 チーム自体は任意の順序で実行され、必ずしも全てが並行して実行されるとは限りません。 例えば、ユーザーが  _T_ チームを要求する場合、 ハードウェアは、それらを順番に順次実行するか、あるいは最大 _G_ チーム単位のグループで、同時に並列実行することを選択できます。
 
-Users may _nest_ parallel operations. Teams may perform one parallel operation (for, reduce, or scan), and threads within each team may perform another, possibly different parallel operation. Different teams may do entirely different things. For example, all the threads in one team may execute a [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) and all the threads in a different team may execute a [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan). Different threads within a team may also do different things. However, performance may vary if threads in a team "diverge" in their behavior (e.g., take different sides of a branch). [Chapter 8 - Hierarchical Parallelism](HierarchicalParallelism) shows how the C++ implementation of Kokkos exposes thread teams.
+ユーザーは、並列演算を  _ネスト_ することができます。チームは、1つの並列操作（for、reduce、またはscan）を実行することができ、各チーム内のスレッドは別の、場合によっては異なる並列演算を実行できます。異なるチームは、全く異なることを行う場合があります。 例えば、あるチーム内のすべてのスレッドが、 [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) を実行し、異なるチーム内のすべてのスレッドが、 [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan) を実行する場合があります。 チーム内の異なるスレッドは、それぞれ異なる処理を行う場合があります。ただし、チーム内のスレッドが動作において "分岐" した場合（例えば、ブランチの異なる側を選択した場合など）、パフォーマンスにばらつきが生じる可能性があります。 [Chapter 8 - Hierarchical Parallelism](HierarchicalParallelism) は、C++ 実装における Kokkos のスレッドチーム公開方法について、説明しています。
 
-NVIDIA's CUDA programming model inspired Kokkos' thread team model. The scratch pad memory corresponds with CUDA's per-team "shared memory." The "league/team" vocabulary comes from OpenMP 4.0 and has many aspects in common with our thread team model. We have found that programming to this model results in good performance, even on computer architectures that only implement parts of the full model. For example, most multicore processors in common use for high-performance computing lack "scratch pad" hardware. However, if users request a scratch pad size that fits comfortably in the largest cache shared by the threads in a team, programming as if a scratch pad exists forces users to address locality in their algorithms. This also reflects the common experience that rewriting a code for more restrictive hardware, then porting the code _back_ to conventional hardware, tends to improve performance relative to an unoptimized code.
+NVIDIA の CUDA プログラミングモデルは、Kokkos のスレッドチームモデルに影響を与えました。 スクラッチパッドメモリは、CUDA のチームごとの "共有メモリ" に対応しています。 "リーグ/チーム" という用語は、OpenMP 4.0に由来するもので、当社のスレッドチームモデルと多くの共通点があります。 このモデルに向けたプログラミングは、完全なモデルの一部のみを実装するコンピュータアーキテクチャにおいても、良好な性能を発揮することが確認されております。 例えば、高性能コンピューティングで一般的に使用されているマルチコアプロセッサの多くは、"スクラッチパッド" ハードウェアを備えておりません。 ただし、ユーザーがチーム内のスレッド間で共有される最大のキャッシュに収まるサイズのスクレイチパッドを要求した場合、スクレイチパッドが存在するかのようにプログラミングすることで、ユーザーはアルゴリズムにおいて局所性を考慮せざるを得なくなります。 これはまた、より制約の多いハードウェア向けにコードを書き直した後、そのコードを通常のハードウェアに _逆_ 移植することで、最適化されていないコードと比較してパフォーマンスが向上する傾向にあるという、一般的な経験則を反映しています。
 
-## Memory Spaces
+## メモリ空間
 
-Memory Spaces are the places _Where_ data resides. They specify physical location of data as well as certain access characteristics. Different physical locations correspond to things such as high bandwidth memory, on die scratch memory or non-volatile bulk storage. Different logical memory spaces allow for concepts such as UVM memory in the CUDA programming model, which is accessible from Host and GPU. Memory Spaces could also be used in the future to express remote memory locations. Furthermore, they encapsulate functionality such as consistency control and persistence scopes.
+メモリ空間とは、データが存在する場所 _Where_ です。 データの物理的な位置と、特定のアクセス特性を指定します。 異なる物理的な場所には、高帯域幅メモリ、オンダイスクラッチメモリ、あるいは不揮発性バルクストレージといったものが対応しますが、それは、Host および GPU からアクセス可能です。 異なる論理メモリ空間により、CUDAプログラミングモデルにおける UVM メモリのような概念が可能となりますが、これはホストとGPUの両方からアクセスできます。将来的には、メモリ空間を用いてリモートメモリ位置を表現することも可能となるでしょう。 さらに、それらは整合性制御および永続性スコープといった機能を、カプセル化しております
 
-## Memory Layout
+## メモリレイアウト
 
-Layouts express the _mapping_ from logical (or algorithmically) indices to address offset for a data allocation. By adopting appropriate layouts for memory structures, an application can optimise data access patterns in a given algorithm. If an implementation provides polymorphic layouts (i.e. a data structure can be instantiated at compile or runtime with different layouts), an architecture dependent optimisation can be performed.
+レイアウトは、データ配置における論理的（またはアルゴリズム的）インデックスからアドレスオフセットへの _マッピング_ を表現します。 メモリ構造に適したレイアウトを採用することにより、アプリケーションは特定のアルゴリズムにおけるデータアクセスパターンを最適化することが可能です。 実装が多態的レイアウト（すなわち、データ構造がコンパイル時または実行時に異なるレイアウトでインスタンス化可能であること）を提供する場合には、アーキテクチャ依存の最適化を行うことが可能です。
 
-## Memory Traits
+## メモリ特性
 
-Memory Traits specify _how a data structure is accessed_ in an algorithm. Traits express usage scenarios such as atomic access, random access and streaming loads or stores. By putting such attributes on data structures, an implementation of the programming model can insert optimal load and store operations. If a compiler implements the programming model, it could reason about the access modes and use that to inform code transformations.
+メモリ特性とは、アルゴリズムにおいて  _データ構造にどのようにアクセスするか_ を規定するものです。 特性は、アトミックアクセス、ランダムアクセス、ストリーム形式の読み込みまたは保存、といった使用シナリオを表現します。 データ構造にそのような属性を付与することで、 プログラミングモデルの実装では、最適な読み込みおよび保存演算を挿入することが可能です。コンパイラが、プログラミングモデルを実装している場合、アクセスモードについて推論を行い、それをコード変換の指針とすることが可能です。

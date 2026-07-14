@@ -1,20 +1,20 @@
 ``copy_n``
 ==========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Copies the first ``n`` elements from a source range or rank-1 ``View`` to another range or rank-1 ``View``.
+ソース範囲またはランク1の ``ビュー`` から最初の ``n`` 個の要素を、別の範囲またはランク1の ``ビュー`` にコピーします。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -55,8 +55,8 @@ Overload set accepting execution space
               SizeType n,
               const Kokkos::View<DataType2, Properties2...>& view_to);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロード
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -81,29 +81,29 @@ Overload set accepting a team handle
 	      SizeType n,
               ::Kokkos::View<DataType2, Properties2...>& view_to);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |copy| replace:: ``copy``
+.. |copy| replace:: ``コピー``
 .. _copy: ./StdCopy.html
 
 
-- ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_
+- ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``: |copy|_ と同様。
 
-- ``label``: used to name the implementation kernels for debugging purposes
+- ``label``: デバッグ目的で実装カーネルに名付けるために使用
 
-  - for 1, the default string is: "Kokkos::copy_n_if_iterator_api_default"
+  - 1 について、 デフォルト文字列は、: "Kokkos::copy_n_if_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::copy_n_if_view_api_default"
+  - 3 について、 デフォルト文字列は、: "Kokkos::copy_n_if_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``n``: number of elements to copy (must be non-negative)
+- ``n``:  コピーする要素数 (0以上でなければならない)
 
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-If ``n>0``, returns an iterator to the destination element *after* the last element copied.
+ ``n>0`` の場合、 最後の要素がコピーされた *後* 宛先要素に、イテレータを返します。
 
-Otherwise, returns ``first_to`` (for 1,2,5) or ``Kokkos::begin(view_to)`` (for 3,4,6).
+そうでない場合には、 ``first_to`` (1,2,5について) または、 ``Kokkos::begin(view_to)`` (3,4,6について) を返します。

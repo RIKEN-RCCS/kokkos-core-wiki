@@ -1,4 +1,4 @@
-Citing Kokkos
+Kokkos 引用
 =============
 
 .. highlight:: none
@@ -16,7 +16,7 @@ Citing Kokkos
     doi={10.1109/TPDS.2021.3097283}}
 
 
-If you use more than one Kokkos Ecosystem package, please also cite:
+複数の Kokkos エコシステムパッケージを使用する場合は、以下も引用してください:
 
 ::
 
@@ -31,7 +31,7 @@ If you use more than one Kokkos Ecosystem package, please also cite:
     doi={10.1109/MCSE.2021.3098509}}
 
 
-And if you feel generous: feel free to cite the original Kokkos paper which describes most of the basic Kokkos concepts:
+また、差し支えなければ、Kokkos の基本的なコンセプトの大半を説明した Kokkos の原著論文も引用していただけると幸いです:
 
 ::
 

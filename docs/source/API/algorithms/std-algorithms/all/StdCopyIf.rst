@@ -2,21 +2,21 @@
 ``copy_if``
 ===========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Copies the elements for which a predicate returns ``true`` from source range or ``View`` to
-another range or ``View``
+ソース範囲またはビューから、述語が ``真`` を返す要素を
+別の範囲または ``ビュー`` にコピーします。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -62,8 +62,8 @@ Overload set accepting execution space
                UnaryPredicateType pred);
 
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -91,28 +91,25 @@ Overload set accepting a team handle
                UnaryPredicateType pred);
 
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |copy| replace:: ``copy``
+.. |copy| replace:: ``コピー``
 .. _copy: ./StdCopy.html
 
-- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_
+- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``:  |copy|_ と同様。
 
 - ``label``:
 
-  - for 1, the default string is: "Kokkos::copy_if_iterator_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::copy_if_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::copy_if_view_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::copy_if_view_api_default"
 
-- ``pred``: unary predicate which returns ``true`` for the required element to copy
+- ``pred``:コピー対象の必須要素について ``真`` を返す単項述語
 
-  - ``pred(v)`` must be valid to be called from the execution space passed or the execution
-    space associated with the team handle, and convertible to bool for every
-    argument ``v`` of type (possible const) ``value_type``, where ``value_type``
-    is the value type of ``InputIteratorType`` or of ``view_from``, and must not modify ``v``.
+  - ``pred(v)``  は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 ``value_type`` の引数 ``v`` （constの可能性）のすべてのペアについて、ブール型に変換可能で、そこでは、 ``value_type`` が、 ``InputIteratorType`` の値型、または ``view_from`` であり、  ``v`` を変更してはいけません。
 
-  - must conform to:
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
@@ -121,14 +118,15 @@ Parameters and Requirements
       KOKKOS_INLINE_FUNCTION
       bool operator()(const value_type & v) const { return /* ... */; }
 
-      // or, also valid
+      // または、また有効
 
       KOKKOS_INLINE_FUNCTION
       bool operator()(value_type v) const { return /* ... */; }
    };
 
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Iterator to the destination element *after* the last element copied.
+最後の要素がコピーされた *後の* 宛先へのイテレータ。
+

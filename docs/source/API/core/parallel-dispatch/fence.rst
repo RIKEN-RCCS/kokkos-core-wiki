@@ -1,25 +1,26 @@
 ``fence``
 =========
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage:
+使用方法
 
 .. code-block:: cpp
 
     Kokkos::fence();
 
-Blocks on completion of all outstanding asynchronous Kokkos operations.
-That includes parallel dispatch (e.g. `parallel_for() <parallel_for.html#kokkosparallel_for>`_, `parallel_reduce() <parallel_reduce.html#kokkosparallel_reduce>`_ 
-and `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) as well as asynchronous data operations such as three-argument `deep_copy <../view/deep_copy.html>`_.
+未完了の非同期 Kokkos 演算がすべて完了した時点でブロックします。
+それは、三引数 `deep_copy <../view/deep_copy.html>`_ だけでなく、並列ディスパッチ (例えば、 `parallel_for() <parallel_for.html#kokkosparallel_for>`_, `parallel_reduce() <parallel_reduce.html#kokkosparallel_reduce>`_ 
+および `parallel_scan() <parallel_scan.html#kokkosparallel_scan>`_) を
+含みます。
 
-Note: there is a execution space instance specific ``fence`` too: `ExecutionSpaceConcept <../execution_spaces.html#executionspaceconcept>`_
+注意事項: 実行空間インスタンス固有の ``fence`` も存在します。: `ExecutionSpaceConcept <../execution_spaces.html#executionspaceconcept>`_
 
-Interface
----------
+インターフェイス
+------------------
 
 .. code-block:: cpp
 
@@ -29,47 +30,48 @@ Interface
 
     void Kokkos::fence(const std::string& label);
 
-Parameters
+パラメータ
 ~~~~~~~~~~
 
-- ``label``: A label to identify a specific fence in fence profiling operations. ``label`` does not have to be unique.
+- ``label``: フェンスプロファイリング操作において特定のフェンスを識別するためのラベルです。``label`` は、ユニークである必要はありません。
 
-Requirements
+必要要件
 ~~~~~~~~~~~~
 
-- ``Kokkos::fence()`` cannot be called inside an existing parallel region (i.e. inside the ``operator()`` of a functor or lambda).
+- ``Kokkos::fence()`` は、既存の並列領域内では呼び出すことはできません (つまり、  ファンクタまたはラムダの ``operator()`` 内)。
 
-Semantics
----------
+セマンティクス
+----------------
 
-- Blocks on completion of all outstanding asynchronous works. Side effects of outstanding work will be observable upon completion of the ``fence`` call - that means ``Kokkos::fence()`` implies a memory fence.
+- すべての未処理の非同期作業が完了した時点でブロックします。 未処理作業の副作用は、 ``fence`` 呼び出しの完了時に観測可能となります。つまり ``Kokkos::fence()`` は、メモリフェンスを意味します。
 
-Examples
+
 --------
 
-Timing kernels
-~~~~~~~~~~~~~~
+タイミングカーネル
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
     Kokkos::Timer timer;
-    // This operation is asynchronous, without a fence 
-    // one would time only the launch overhead
+    // 本演算は非同期であり、フェンスなしで行われます。
+    // ローンチオーバーヘッドのみを計測します。
     Kokkos::parallel_for("Test", N, functor);
     Kokkos::fence();
     double time = timer.seconds();
 
-Use with asynchronous deep copy
+非同期の深部コピーと併用
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
     Kokkos::deep_copy(exec1, a,b);
     Kokkos::deep_copy(exec2, a,b);
-    // do some stuff which doesn't touch a or b
+    //  a または b に干渉しない何かを行います。
     Kokkos::parallel_for("Test", N, functor);
 
-    // wait for all three operations to finish
+    // 3つの演算すべての完了を待ちます。
     Kokkos::fence();
+    
 
-    // do something with a and b
+    // a および bを使って何かを行います

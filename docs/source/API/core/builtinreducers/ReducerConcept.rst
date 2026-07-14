@@ -4,12 +4,12 @@
 .. role:: cpp(code)
     :language: cpp
 
-The concept of a Reducer is the abstraction that defines the "how" a "Reduction" is performed during the parallel reduce execution pattern. The abstraction of "what" is given as a template parameter and corresponds to the "what" that is being reduced in the `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ operation. This page describes the definitions and functions expected from a Reducer with a hypothetical 'Reducer' class definition. A brief description of built-in reducers is also included.
+リデューサーの概念とは、並列縮約実行パターンにおいて、 "縮約" が"どのように"実行されるかを定義する抽象化です。"何" の抽象化はテンプレート引数として指定され、`parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ 演算において、縮約対象となる "何" に対応します。本ページでは、仮定の 'リデューサー' クラス定義を用いたリデューサーに求められる定義と機能について説明します。 組み込みリデューサーの簡単な説明も含まれます。
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
------
+使用方法
+--------
 
 .. code-block:: cpp
 
@@ -17,14 +17,14 @@ Usage
     parallel_reduce(N,Functor,ReducerConcept<T>(result));
 
 
-Synopsis
---------
+概要
+----------
 
 .. code-block:: cpp
 
-    class Reducer {
+    class Reducer{
         public:
-            //Required for Concept
+            //概念に必要
             typedef Reducer reducer;
             typedef ... value_type;
             typedef Kokkos::View<value_type, ... > result_view_type;
@@ -38,14 +38,14 @@ Synopsis
             KOKKOS_INLINE_FUNCTION
             result_view_type view() const;
 
-            //Optional
+            //オプション
             KOKKOS_INLINE_FUNCTION
             void init(value_type& val) const;
 
             KOKKOS_INLINE_FUNCTION
             void final(value_type& val) const;
 
-            //Part of Build-In reducers for Kokkos
+            // Kokkosの組み込みリデューサーの一部
             KOKKOS_INLINE_FUNCTION
             Reducer(value_type& value_);
 
@@ -53,57 +53,57 @@ Synopsis
             Reducer(const result_view_type& value_);
     };
 
-Public Class Members
+パブリッククラス関数
 --------------------
 
-Typedefs
+型定義
 ~~~~~~~~
 
-* ``reducer``: The self type.
-* ``value_type``: The reduction scalar type.
-* ``result_view_type``: A ``Kokkos::View`` referencing where the reduction result should be placed. Can be an unmanaged view of a scalar or complex datatype (class or struct). Unmanaged views must specify the same memory space where the referenced scalar (or complex datatype) resides.
+* ``reducer``: 自己型。
+* ``value_type``: 縮約スカラー型。
+* ``result_view_type``: 縮約結果を配置すべき場所を参照する ``Kokkos::View`` 。 スカラーまたは複素データ型（クラスまたは構造体）の管理対象外ビューとして使用できます。 管理対象外ビューは、参照されるスカラー（または複素データ型）が存在する場所と同じメモリ空間を指定する必要があります。
 
-Constructors
-~~~~~~~~~~~~
+コンストラクタ
+~~~~~~~~~~~~~~
 
-Constructors are not part of the concept. A custom reducer can have complex custom constructors. All Build-In reducers in Kokkos have the following two constructors:
+コンストラクタは、概念の一部ではありません。カスタムリデューサーは、複雑なカスタムコンストラクタを持つことができます。  Kokkos における組み込みリデューサーは、以下の2つのコンストラクタを持ちます :
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION Reducer(value_type& value_);
 
-    * Constructs a reducer which references a local variable as its result location.
+    * 結果の保存先としてローカル変数を参照するリデューサを構築します。
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION Reducer(const result_view_type& value_);
 
-    * Constructs a reducer which references a specific view as its result location.
+    * 特定のビューを結果の保存先として参照するリデューサーを構築します。
 
-Functions
+関数
 ~~~~~~~~~
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-    * Combine ``src`` into ``dest``. For example, ``Add`` performs ``dest+=src;``.
+    * Combine  into ``dest`` に ``src`` を組み合わせます。 例えば、 ``Add`` は、 ``dest+=src;`` を実行します。
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-    * Optional callback initializing ``val`` with appropriate initial value. For example, 'Add' assigns ``val = 0;``, but Prod assigns ``val = 1;``.
-      Defaults to calling the default constructor.
+    * 適切な初期値を使って、 ``val`` を初期化する省略可能なコールバックです。 例えば、 'Add' は、 ``val = 0;``を代入しますが、 Prod は、 ``val = 1;`` を代入します。
+      デフォルトはデフォルトコンストラクタの呼び出しです。
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION void final(value_type& val) const;
 
-    * Optional callback modifying the result ``val``. Defaults to a no-op.
+    * 結果 ``val`` を修正する省略可能なコールバック。 デフォルトは何もしません。
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
-    * Returns a reference to the result place.
+    * 結果の保存先への参照を返します。
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
 
-    * Returns a view of the result place.
+    * 結果の保存先のビューを返します。
 
-Requirements
+要件
 ~~~~~~~~~~~~
 
-The reducer is assumed to define a commutative monoid with respect to the value type it is used with, i.e., the binary operation
+リデューサーは、使用される値型、つまり、値型に関して可換モノイドを定義すると仮定されます。
 
 .. code-block:: cpp
 
@@ -113,13 +113,12 @@ The reducer is assumed to define a commutative monoid with respect to the value 
       return result;
     }
 
-is commutative and associative with identity element that can be set by calling ``reducer.init(el)``.
+上記は、可換かつ結合的であり、 ``reducer.init(el)`` を呼び出すことで設定できる単位元を持ちます。
 
+組み込みリデューサー
+~~~~~~~~~~~~~~~~~~~~
 
-Built-In Reducers
-~~~~~~~~~~~~~~~~~
-
-Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as ``Kokkos::complex``. In order to use a Built-in reducer with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. A simple example is shown below and more information can be found under `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_.
+Kokkos は、C++ の組み込み型および``Kokkos::complex``に対して自動的に動作する、複数の組み込みリデューサーを提供しております。 組み込みリデューサーをカスタム型で使用するために、   ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。いかに簡単な例を示し、詳細については、 `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_ において閲覧可能です。
 
 * `Kokkos::BAnd <BAnd.html>`_
 * `Kokkos::BOr <BOr.html>`_
@@ -134,7 +133,7 @@ Kokkos provides a number of built-in reducers that automatically work with the i
 * `Kokkos::Prod <Prod.html>`_
 * `Kokkos::Sum <Sum.html>`_
 
-Examples
+例
 --------
 
 .. code-block:: cpp

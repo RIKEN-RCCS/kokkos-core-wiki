@@ -1,72 +1,74 @@
-PRs and Reviews
-===============
+PR およびレビュー
+=============================
 
-The goal of a review is to ensure that the proposed change is useful and maintainable over the long run. Submitters should consider and reviewers should evaluate the below criteria.
+レビューの目的は、提案された変更が長期的に有用かつ維持可能であることを保証することです。投稿者は以下の基準を考慮し、査読者は評価すべきです。
 
-PR Description
----------------
+PR 説明
+---------------------
 
-- Have a meaningful title: it's easier when creating the changelog or when searching through old PRs
-- Motivate why we should merge the PR: adding/changing code risks introducing a new bug. IMO one person asking for a nice to have feature doesn't qualify.
-- Explain what the PR does in the description: it makes it easier/faster to review
-- Make the PR as small as possible: it's much easier to review five PRs 200 lines each than one single PR with 1000 lines 
-- If a PR is known to create conflict with other active PRs, try to coordinate, and link to each other
-  - if appropriate, explain the desired review/merge order 
-- For complex changes that will require multiple PRs, create an issue to keep track of what has been done and what's left to do.
-- Is the PR focused on a single bugfix or feature?
-  - consider moving self contained changes to separate PRs 
+- 意味のあるタイトルを付けます：変更履歴を作成したり、古いPRを検索する際に扱い易いです。
+- なぜPRを統合すべきかについて、動機付けを行ってください:コードの追加や変更は新たなバグを引き起こすリスクがあります。 個人的には、1人の方が「あれば嬉しい機能」を要望されるだけでは、条件に満たないと考えます。
+- PRが説明において、何をするのか説明してください:それによって、レビューの作成が、より簡単かつ迅速になります。
+- PRはできるだけ小規模なものにしてください： 1つのPRで1000行をレビューするよりも、5本(PRs200ライン)をレビューする方が、はるかに簡単です。
+- 他の進行中のPRと競合することがわかっている場合、調整を試み、相互に関連付けを行います。
+  - 適宜、所望の審査/統合の順序を説明してください
+- 複数のPRが必要な複雑な変更については 、何が完了し、何が残っているかを管理するためのイシューを作成します。
+- PRは  単一のバグ修正や機能に焦点を当てているのでしょうか?
+  - 独立した変更を、別々のPRに移すことを検討してください。
 
-Public Interfaces
------------------
+パブリックインターフェイス
+--------------------------
 
-- are there comprehensive tests
-- does the interface meet the use case - and for that matter is there a use case description
-  - is the usage intuitive
-  - do we really want this as a public interface, and maintain it?
-- is the interface API consistent with existing ones?
-  - e.g. if everything else takes execution space instances as the first argument, don't make it the last argument
-  - does the naming style match other Kokkos APIs
-- are the interface semantics consistent with existing ones?
-  - if everything else (or at least the majority) of interfaces taking an execution space instance argument is async, then new interfaces taking one should be too
-- For any routine that's going to launch any parallel work, does it have an overload that takes an execution space instance, and does that overload use the instance for all parallel work?
-- if the functionality is similar to an ISO C++ functionality, is the interface and behavior similar, and in places where it's not is it a conscious decision
-- is there a corresponding API documentation PR
-- Are the corner cases handled (works correctly, won't compile, detected at run time)?
-- Do the C++ defaulted functions do the right thing (including if needed to be marked with KOKKOS_DEFAULTED_FUNCTION)?
+- 包括的なテストはありますか？
+- インターフェースは、使用事例に合っていますか、また使用事例についての説明はありますか？
+  - 直感による使用ですか？
+  - 本当にこれをパブリックインターフェースとして所望し、維持していますか?
+- インターフェース API は  既存のものと一貫していますか?
+  - 例えば、他のすべてのものが実行空間インスタンスを最初の引数にするなら、それを最後の引数にしないでください。
+  - 命名スタイルは、他の Kokkos APIs と一致していますか?
+- インターフェースの意味論は既存のものと一致していますか?
+  - 実行空間インスタンスの引数を持つ他のすべての(少なくとも大多数)のインターフェースが非同期である場合、新しいインターフェースも同様に非同期であるはずです。
+- 並列作業を起動するルーチンについて、実行空間インスタンスを占有するオーバーロードがありますが、そのオーバーロードがすべての並列作業にインスタンスを使いますか?
+- 機能が ISO C++の機能に似ているなら、インターフェースや挙動は似ていますか、そして、そうでない部分では意図的な判断でしょうか？
+- 対応する API ドキュメント PRはありますか?
+- コーナーケースは処理されていますか? (正しく動作し、コンパイルできず、実行時に検出されますか)？
+- C++ のデフォルト関数は、正しい動作を行っていますか (KOKKOS_DEFAULTED_FUNCTION でマークする必要がある場合も含めて)？
 
 
-Internal Implementation
+内部実装
 -----------------------
 
-- is the implementation style consistent with the rest of Kokkos
-- is there unnecessary code duplication
-  - in particular: is code that can be shared across backends shared?
-- did it go in the right sub-part of Kokkos (core, algorithms, containers etc.)
-- are there debug checks we should add?
-  - like do the arguments make sense together etc.
-- are implementation details accidentally exposed?
-- is there unnecessary fencing
-- are there unnecessary allocations/deallocations
-- Avoiding tangle of inclusions: are headers/files including only what is needed?
-- Is the code expressing intent clearly (choosing expressive names for variables, functions, etc)?
-- Are changes in the code and intent properly captured in the description of the PR?
-- consider appropriateness of tests for implementation details
-  - we want to avoid needing to touch many tests for changes in on internal details
+- Kokkos の他の実装スタイルと整合していますか? 
+- 不要なコードの重複はありますか？
+  - 特に:バックエンド間で共有可能なコードは共有されるのでしょうか?
+- Kokkos の正しいサブパート  (コア、アルゴリズム、コンテナなど)に入りましたか？
+- 追加すべきデバッグチェックはありますか？
+  - 例えば、引数が共に理にかなっているかどうかなど。
+- 実装の詳細が誤って暴露してしまうのでしょうか？
+- 不要なフェンシングはありますか?
+- 不要な割り当て/割り当て解除はあるのでしょうか?
+- インクルージョンの混乱を避ける:ヘッダーやファイルは必要なものだけを含んでいるのでしょうか?
+- コードは意図を明確に表現していますか (変数や関数などの表現名など)？
+- コードや意図の変更はPRの説明に適切に説明されていますか?
+- 実装の詳細に対するテストの適切性を考慮します
+  - 内部の詳細変更のために多くのテストに手をつける必要性は避けたいと思っています。
 
-Tests
+
+テスト
 ---------------
 
-- For bug fix PRs: add test which would catch the issue without the fix
-- Do newly added tests have the correct granularity?
-- Do tests have a suitable runtime or are unnecessarily large?
+- バグ修正 PR について: 修正なしで問題を見つけるテストを追加します
+- 新たに追加された検査は、正しい粒度を持っていますか？
+- テストには適切な実行時間があるのか、それとも不必要に大きすぎますか？
 
-Reviewer Behavior
+
+レビュアーの行動
 -----------------
 
-- provide timely feedback and respond to changes by the author of the pull request in a reasonable amount of time; it's best to give feedback to pull requests as quickly as possible.
-- only request changes if they are ready to resolve the request upon changes by the author of the pull request; stalling pull requests for requested changes that have been addressed is a problem.
-- only review pull requests that have been marked as ready; we have a bunch of pull requests that explore the feasibility of ideas and just need the CI to run. Similarly, pull requests should only be marked as "ready for review" if the author is reasonably happy with the status. If the author mostly seeks feedback on general design and direction, this should be clearly communicated in the pull request description (either "draft" or "ready for review").
-- mirror communication with pull request author outside of pull requests (on slack, in person, video calls, etc.) in comments to the pull request.
-- contact authors directly if more clarification is needed.
-- not be afraid of reviewing pull requests even if they are (slightly) outside their comfort zone.
-- work with authors to bring issues/questions that need a quorum/discussion with a larger audience to the developer meeting.
+- プルリクエストの作成者による変更に対してタイムリーなフィードバックを提供し、適切な時間内に対応すること;プルリクエストにはできるだけ早くフィードバックを返すのが最善です。
+- プルリクエストの作成者による変更に対して解決できる準備ができている場合にのみ変更を要求します；対応済みの変更に対してプルリクエストを停止させるのは問題です。
+- 準備完了とマークされたプルリクエストのみをレビューしてください。アイデアの実現可能性を探求するプルリクエストがたくさんあり、CI を実行するだけで済みます. 同様に、プルリクエストは、著者が状況に合理的な満足を得た場合のみ、"レビュー準備済み" とマークすべきです。 著者が主に一般的なデザインや方向性に関するフィードバックを求めている場合は、プルリクエストの説明文("ドラフト" または "レビュー準備済み" )にて、明確に伝えるべきです。
+- プルリクエストの外 (Slack、対面、ビデオ通話など) でプルリクエスト作成者とのコミュニケーションを、プルリクエストへのコメント内に、反映します。
+- さらに明確な説明が必要な場合は、著者に直接お問い合わせください。
+- たとえ(少し)コンフォートゾーンから外れていても、プルリクエストを恐れずに確認しましょう。
+- 著者と協力して、定足数やより多くの聴衆との議論が必要な問題や質問を開発者会議に持ち込みましょう。

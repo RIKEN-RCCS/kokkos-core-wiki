@@ -2,20 +2,20 @@
 ``find_first_of``
 =================
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Searches a range or a ``View`` for any of the elements in a target range or ``View``.
+対象範囲または ``ビュー`` 内のいずれかの要素について、別の範囲または ``ビュー`` を検索します。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -41,7 +41,7 @@ Overload set accepting execution space
 		      const ::Kokkos::View<DataType1, Properties1...>& view,
 		      const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
-   // overload set 2: binary predicate passed
+   // オーバーロードセット 2: 引き渡された二項述語
    template <class ExecutionSpace, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
    IteratorType1 find_first_of(const ExecutionSpace& exespace,                           (5)
@@ -70,8 +70,8 @@ Overload set accepting execution space
 		      const ::Kokkos::View<DataType2, Properties2...>& s_view,
 		      const BinaryPredicateType& pred);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -90,7 +90,7 @@ Overload set accepting a team handle
 		      const ::Kokkos::View<DataType1, Properties1...>& view,
 		      const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
-   // overload set 2: binary predicate passed
+   // オーバーロードセット 2: 引き渡された二項述語
    template <class TeamHandleType, class IteratorType1, class IteratorType2,
 	     class BinaryPredicateType>
    KOKKOS_FUNCTION
@@ -107,58 +107,52 @@ Overload set accepting a team handle
 		      const ::Kokkos::View<DataType2, Properties2...>& s_view,
 		      const BinaryPredicateType& pred);
 
-Detailed Description
-~~~~~~~~~~~~~~~~~~~~
+詳細説明
+~~~~~~~~~~~~~~~~~~~~~~
 
-- 1,2,5,6,9,10: searches the range ``[first, last)`` for any of the elements
-  in the range ``[s_first, s_last)`` comparing elements
-  via ``operator ==`` or via ``pred``
+- 1,2,5,6,9,10: ``operator ==`` 経由 または ``pred`` 経由で、要素を比較する範囲 ``[s_first, s_last)`` 内のいずれかの要素について、範囲 ``[first, last)`` を検索します。
 
-- 3,4,7,8,11,12: searches ``view`` for any of the elements in ``s_view``
-  comparing elements via ``operator ==`` or via ``pred``
+- 3,4,7,8,11,12: ``operator ==`` 経由 または ``pred`` 経由で、要素を比較する ``s_view`` 内のいずれかの要素について、 ``ビュー`` を検索します。
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicy 使用時に、並列領域内部で提供されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-    - 1,5: The default string is "Kokkos::find_first_of_iterator_api_default".
+    - 1,5: デフォルト文字列は、 "Kokkos::find_first_of_iterator_api_default".
 
-    - 3,7: The default string is ""Kokkos::find_first_of_view_api_default".
+    - 3,7: デフォルト文字列は、 "Kokkos::find_first_of_view_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first, last``: range of elements to search in
+- ``first, last``: 検索対象となる要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  -  *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲を表す必要があり、つまり、 ``last >= first`` でなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``s_first, s_last``: range of elements that you want to search for
 
-  - same requirements as ``first, last``
+- ``s_first, s_last``: 検索を望む要素の範囲
 
-- ``view``, ``s_view``: views to search in and for, respectively
+  - ``first, last`` と同じ要件。
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+- ``view``, ``s_view``: 検索対象および検索条件の、それぞれのビュー
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-- ``pred``: *binary* functor returning ``true`` if two arguments should be considered "equal".
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-  ``pred(a,b)`` must be valid to be called from the execution space passed, or
-  the execution space associated with the team handle, and convertible to bool
-  for every pair of arguments ``a,b`` of type ``ValueType1`` and ``ValueType2``,
-  respectively, where ``ValueType1`` and ``ValueType{1,2}`` are the value types of
-  ``IteratorType{1,2}`` or ``(s_)view``, and must not modify ``a,b``.
+- ``pred``: 2つの引数が、 "等しい" とみなされる場合、 ``真`` を返す *二項* ファンクタ。
 
-  - must conform to:
+  ``pred(a,b)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして、それぞれ、 型   ``ValueType1`` および ``ValueType2`` の引数 ``a,b`` のすべてのペアについて、ブール型に変換可能で、そこでは、 ``ValueType1`` および ``ValueType{1,2}`` が、 ``IteratorType{1,2}`` の値型、または ``(s_)view`` であり、  ``a,b`` を変更してはいけません。
+
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 

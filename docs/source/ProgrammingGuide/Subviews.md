@@ -1,37 +1,32 @@
-# Subviews
+# サブビュー
 
-After reading this chapter, you should understand the following:
+本章を読めば、以下のことが理解できるようになります:
 
-*  A _slice_ of a multidimensional array behaves as an array and is a view of a structured subset of that array
-*  A _subview_ is a slice of an existing Kokkos View
-*  A subview has the same reference count as its parent View
-*  Use C++11 type inference (`auto`) to let Kokkos pick the subview's type
+*  多次元配列の _slice_ は、配列として挙動し、その配列の構造化された部分集合のビューです
+*   _subview_ とは、既存の Kokkos ビューのスライスです
+*  サブビューは親ビューと同じ参照数を持ちます
+*   C++11 型推論( `auto` )を使って、Kokkos がサブビュー型を選択できるようにします
 
-## A subview is a slice of a View
+## サブビューとはビューのスライス
 
-In Kokkos, a _subview_ is a slice of a View. A _slice_ of a multidimensional array behaves as an array, and is a view of a
-structured subset of the original array. "Behaves as an array" means that the slice has the same syntax as an array does; one can access its entries using array indexing notation. "View" means that the slice and the original array point to the same data, i.e, the slice sees changes to the original array and vice versa. "Structured subset" means a cross product of indices along each dimension, as for example a plane or face of a cube. If the original array has dimensions $\left(N_0, N_1, ..., N_{k-1}\right)$, then a slice views all entries whose indices are $\left(a_0, a_1, ..., a_{k-1}\right)$, where $a_j$ is an ordered subset of $\left\{N_0, N_1, ..., N_j-1\right\}$.
+Kokkos において、サブビューとはビューのスライスを指します。 多次元配列のスライスは配列として振る舞い、元の配列の構造化部分集合のビューです。 "配列として振る舞う" とは、スライスが配列と同じ構文を持つことを意味します。配列インデックス表記法を使ってそのエントリにアクセスできます。 "ビュー" とは、スライスと元の配列が同じデータを指すことを意味します。つまり、スライスが元の配列の変更を、その逆も同様に認識します。 "構造化部分集合" とは、各次元に沿った添字の叉積を意味し、例えば平面や立方体の面などを指します。 元の配列の次元 $\left(N_0, N_1, ..., N_{k-1}\right)$ がであれば、スライスはインデックスが、$\left(a_0, a_1, ..., a_{k-1}\right)$, where $a_j$ であるすべてのエントリを表示し、そのインデックスは、$\left\{N_0, N_1, ..., N_j-1\right\}$ であり、ここでは、 $a_j$ が、 $\left\{N_0, N_1, ..., N_j-1\right\}$.の順序部分集合です。
 
-Array slices are handy for encapsulation. A slice looks and acts like an array, so you can pass it into functions that expect an array. For example, you can write a function for processing boundaries (as slices) of a structured grid without needing to tell that function properties of the entire grid.
+配列スライスはカプセル化に便利です。 スライスは配列のように見え、動作するので、配列を期待する関数に渡すことができます。 例えば、構造化されたグリッドの境界を(スライスとして)処理する関数を書くことができ、その関数にグリッド全体の性質を伝える必要はありません。
 
-Programming languages like Fortran 90, Matlab, and Python have a special "colon" notation for representing slices. For example, if `A` is an $M \times N$ array, then
+Fortran 90、Matlab、Pythonのようなプログラミング言語には、スライスを表現するための特別な "コロン" 記法があります。例えば、`A` が $M \times N$ 配列であれば、
 
-* `A(:, :)` represents the whole array,
-* `A(:, 3)` represents the fourth column (if the language has zero-based indices,
-   or the third column if the language has one-based indices),
-* `A(4, :)` represents the fifth row,
-* `A(2:4, 3:7)` represent the sub-array of rows 3-4 and columns 4-7 (languages
-   differ on whether the ranges are inclusive or exclusive of the last index --
-   Kokkos, like Python, is exclusive), and
-* `A(3, 4)` represents a "zero-dimensional" slice which views the entry
-   in the fourth row and fifth column of the matrix.
+* `A(:, :)`  は配列全体を表します、
+* `A(:, 3)` は、第4列(言語がゼロ基元インデックスの場合、または1基元インデックスの場合は第3列)を表します。
+* `A(4, :)` は、5行目を表します、
+* `A(2:4, 3:7)` は、3-4行目と4-7列の部分配列を表します(言語によって、範囲が最後のインデックス -- を包含するか排他的かは異なります。Kokkos は Python と同様に排他的です)、
+* `A(3, 4)` は、"ゼロ次元" スライスを表し、マトリクスの 4 行目 5 列目のエントリを表示します。
 
-These languages may have more elaborate notation for expressing sets of indices other than contiguous ranges.  These may include "strided" subsets of indices, like `3:2:9` = `{ 3, 5, 7, 9}`, or even arbitrary sets of indices.
+これらの言語は、連続した範囲以外のインデックスの集合を表現するために、より複雑な表記法を持つ場合があります。 これには`3:2:9` = `{ 3, 5, 7, 9}`3:2:9 = {3, 5, 7, 9} のような "ストライド" 部分集合や、任意のインデックスの集合さえも、含むことがあります。
 
 
-## How to take a subview
+## サブビューの選択方法
 
-To take a subview of a View, you can use the [`Kokkos::subview`](../API/core/view/subview) function. This function is overloaded for all different kinds of Views and index ranges. For example, the following code is equivalent to the above example `A(2:4, 3:7)`:
+ビューのサブビューを取得するには、[`Kokkos::subview`](../API/core/view/subview) 関数をご利用いただけます。この関数は、あらゆる種類のビューとインデックス範囲に対応したオーバーロードされております。 例えば、以下のコードは上記の例 `A(2:4, 3:7)` と同等です:
 
 ```c++
 const size_t N0 = ...;
@@ -41,14 +36,13 @@ Kokkos::View<double**> A ("A", N0, N1);
 auto A_sub = subview (A, make_pair (2, 4), make_pair (3, 7));
 ```
 
-In the above example and those that follow in this chapter, we assume that [`Kokkos::View`](../API/core/view/view), [`Kokkos::subview`](../API/core/view/subview), `Kokkos::ALL`, `std::make_pair`, and `std::pair` have been imported into the working C++ namespace.
+上記の例および本章のその後の例では、[`Kokkos::View`](../API/core/view/view), [`Kokkos::subview`](../API/core/view/subview), `Kokkos::ALL`, `std::make_pair`, および `std::pair が動作する C++ 名前空間にインポートされていると仮定します。
 
-The Kokkos equivalent of a contiguous index range `3:7` is `pair<size_t, size_t>(3, 7)`. The Kokkos equivalent of
-`:` (a colon by itself; the whole index range for that dimension) is `ALL()` (an instance of the `ALL` class, which Kokkos uses only for this purpose). Kokkos does not currently have equivalents of the strided or arbitrary index sets.
+Kokkos における連続指数範囲 `3:7` の  同値値は、 `pair<size_t, size_t>(3, 7)`です。 Kokkosの同値なもの:(単独のコロン;その次元のインデックス範囲全体)は、 `ALL()` ( `ALL` クラスのインスタンスであり、Kokkos はこの目的のみに使用している)。 Kokkos には現在、ストライドまたは任意のインデックス集合と同等のものはありません。
 
-A subview has the same reference count as its parent [`View`](../API/core/view/view), so the parent [`View`](../API/core/view/view) won't be deallocated before all subviews go away. Every subview is also a [`View`](../API/core/view/view). This means that you may take a subview of a subview.
+サブビューは親ビュー [`View`](../API/core/view/view) と同じ参照数を持つため、すべての  サブビューが消える前に親ビューの割り当て解除は、行われません。 つまり、サブビューのサブビューを取ることができるということです。
 
-Another way of getting a subview is through the appropriate [`View`](../API/core/view/view) constructor.
+サブビューを取得する別の方法は、適切な [`View`](../API/core/view/view) コンストラクタを通じて行うことです。
 
 ```c++
 const size_t N0 = ...;
@@ -58,29 +52,29 @@ Kokkos::View<double**> A ("A", N0, N1);
 Kokkos::View<double**,LayoutStride> A_sub(A,make_pair(2,4),make_pair(3,7));
 ```
 
-For this usage you must know the layout type of the subview. On the positive side, such a direct construction is generally a bit cheaper than through the `Kokkos::subview` function.
+この用途ためには、サブビューのレイアウトタイプを知っている必要があります。 良い点としては、このような直接的な構成は、 `Kokkos::subview` 関数を使うよりも一般的に安価です
 
-### C++11 type deduction
+### C++11 型推論
 
-Note the use of the C++11 keyword `auto` in the above example. A subview may have a different type than its parent View. For instance, if `A` has `LayoutRight` and `A_sub` has `LayoutStride`, a subview of an entire row of `A` will have `LayoutRight` as well but a subview of an entire column of `A` will have `LayoutStride`. If you assign the result of the `subview` function to the wrong type, Kokkos will emit a compile-time error. The easiest way to avoid this is to use the C++11 `auto` keyword to let the compiler deduce the correct type for you. That said `auto` comes with its own cost. It generally is more expensive for compilers to deal with `auto` than with explicitly known types.
+ 上記の例では、C++11 のキーワード  `auto` が使われていることに注意してください。`A` サブビューは、親ビューとは異なるタイプを持つことがあります。例えば、 `A` に LayoutRight があり、A_sub に LayoutStride がある場合、A の行全体のサブビューにも LayoutRight が存在しますが、 `A` の列全体のサブビューには LayoutStride が存在します。 `subview` 関数の結果を間違った型に割り当てる場合、Kokkos はコンパイル時エラーを発生させます。 これを回避する最も簡単な方法は、C++11 の自動キーワードを使ってコンパイラに正しい型を導き出すことです。 とはいえ、`auto` には独自のコストがかかります。 一般的に、コンパイラにとっては、明示的に既知の型よりも自動を扱う方がコストがかかります。
 
-### Dimension of a subview
+### サブビューの次元
 
-Suppose that a View has `k` dimensions. Then when calling `subview` on that View, you must pass in `k` arguments. Every argument that is a single index -- that is, not a pair or `ALL()` -- reduces the dimension of the resulting View by 1.
+ あるビューが、 `k` 次元であると仮定します。 そのビューで `subview` を呼び出す際には `k` 個の引数を渡さなければなりません。 単一のインデックスであるすべての引数-- つまりペアまたは-- `ALL()` ではないものは、結果として得られるビューの次元を1減らします。
 
-### Degenerate Views
+### 退化的な見解
 
-Given a View with `k` dimensions, we call that View _degenerate_ if any of its dimensions is zero. Degenerate Views are useful for keeping code simple by avoiding special cases. For example, consider a MPI (Message-Passing Interface) distributed-memory parallel code that uses Kokkos to represent local (per-process) data structures. Suppose that the code distributes a dense matrix (2-D array) in block row fashion over the MPI processes in a communicator. It could be that some processes own zero rows of the matrix. This may not be efficient, since those processes do no work yet participate in collectives, but it might be possible. In this case, allowing Views with zero rows would reduce the number of special cases in the code.
+ `k` 次元のビューが与えられたとき、その次元のいずれかがゼロであれば、その View _degenerate_ を退化と呼びます。退化ビューは、特別なケースを避けることでコードをシンプルに保つのに役立ちます。 例えば、Kokkos を使ってローカル(プロセスごとの)データ構造を表現する MPI (メッセージパッシングインターフェース)分散メモリ並列コードを考えてみましょう。 コードがコミュニケータ内のMPIプロセス上でブロック行形式で密行列(2次元配列)を配布すると仮定します。 あるプロセスが行列のゼロ行を所有している可能性もあります。 これは効率的でないかもしれません。なぜなら、これらのプロセスはまだ作業を行っていないため、集団に参加しているからです。しかし、可能性はあります。 この場合、行数がゼロのビューを許可することで、コード内の特殊ケースの数が減ります。
 
-## Obtaining the type of a subview
+## サブビュー型取得
 
-For some applications, it is useful to know the type of a subview, given the arguments. In these cases, using `auto` type deduction can be inconvenient. While it is possible to use `decltype()` and `std::declval` to obtain this from the `subview` function, Kokkos provides a convenient type alias:
+一部の用途では、引数が与えられたサブビューのタイプを知ることが有用です。 このような場合、`auto` 型控除の利用は不便になることがあります。 d`decltype()` と  `std::declval` を使ってサブビュー関数からこれを得ることも可能ですが、Kokkos は便利な型エイリアスを提供します:
 
 ```c++
 using my_view_type = Kokkos::View<double **>;
-using my_subview_type = Kokkos::Subview<my_view_type,
+my_subview_type = Kokkos::Subview<my_view_type,
                                         std::remove_const_t<decltype(Kokkos::ALL)>,
-                                        Kokkos::pair<unsigned, unsigned>>;
+                                        using Kokkos::pair<unsigned, unsigned>>;
 
 using my_subview_type_deduced = decltype(subview(std::declval<my_view_type>(), Kokkos::ALL, std::make_pair(1u, 1u)));
 

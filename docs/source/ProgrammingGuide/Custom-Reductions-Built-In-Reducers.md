@@ -1,23 +1,24 @@
-# Built-In-Reducers
+# 組み込みリデューサー
 
-Kokkos provides Reducers for the most common reduction types:
-* [BAnd](../API/core/builtinreducers/BAnd): Do a binary “and” reduction
-* [BOr](../API/core/builtinreducers/BOr): Do a binary “or” reduction
-* [LAnd](../API/core/builtinreducers/LAnd): Do a logical “and” reduction
-* [LOr](../API/core/builtinreducers/LOr): Do a logical “or” reduction
-* [Max](../API/core/builtinreducers/Max): Finding the maximum value
-* [MaxLoc](../API/core/builtinreducers/MaxLoc): Retrieve the maximum value as well as its associated index
-* [Min](../API/core/builtinreducers/Min): Finding the minimum value
-* [MinLoc](../API/core/builtinreducers/MinLoc): Retrieve the minimum value as well as its associated index
-* [MinMax](../API/core/builtinreducers/MinMax): Finding the minimum and the maximum value
-* [MinMaxLoc](../API/core/builtinreducers/MinMaxLoc): Find both the maximum and minimum value as well as their associated indices
-* [Prod](../API/core/builtinreducers/Prod): Computing the product of all input values
-* [Sum](../API/core/builtinreducers/Sum): For simple Summations
+Kokkos は最も一般的なリダプションタイプ用のリデューサーを提供しています:
+* [BAnd](../API/core/builtinreducers/BAnd): バイナリ “and” リダクションを行います
+* [BOr](../API/core/builtinreducers/BOr): バイナリ “or” リダクションを行います
+* [LAnd](../API/core/builtinreducers/LAnd): 論理的 “and” リダクションを行います
+* [LOr](../API/core/builtinreducers/LOr): 論理的 “or” リダクションを行います
+* [Max](../API/core/builtinreducers/Max): 最大値を求めます
+* [MaxLoc](../API/core/builtinreducers/MaxLoc): 最大値とそれに関連するインデックスを取得します
+* [Min](../API/core/builtinreducers/Min): 最小値を求めます
+* [MinLoc](../API/core/builtinreducers/MinLoc): 最小値とそれに関連するインデックスを取得します
+* [MinMax](../API/core/builtinreducers/MinMax): 最小値および最大値を求めます
+* [MinMaxLoc](../API/core/builtinreducers/MinMaxLoc): 最大値および最小値の両方、ならびにその関連インデックスを求めます
+* [Prod](../API/core/builtinreducers/Prod): すべての入力値の積を計算します
+* [Sum](../API/core/builtinreducers/Sum): 単純な総和のため
 
-These reducers work only for scalar data, i.e. you can’t have a runtime length array as the reduction type (for example finding the minimum values for each vector in a multi vector concurrently).
-Generally the Reducers are templated on the Scalar type for the reduction as well as an optional template parameter for the memory space of the result (more on that later). The [`MinLoc`](../API/core/builtinreducers/MinLoc), [`MaxLoc`](../API/core/builtinreducers/MaxLoc) and [`MinMaxLoc`](../API/core/builtinreducers/MinMaxLoc) reducers are additionally templated on the index type. 
+これらのリデューサーはスカラーデータにのみ機能し、つまり実行時間の長さの配列を縮約タイプにすることはできません(例えば、多ベクトル内の各ベクトルの最小値を同時に求めるなど)。 
+一般的にリデューサーは縮約のためにスカラー型にテンプレート化されており、結果のメモリ空間にも省略可能なテンプレートパラメータが設定されています(詳細は後述します)。  [`MinLoc`](../API/core/builtinreducers/MinLoc), [`MaxLoc`](../API/core/builtinreducers/MaxLoc) and [`MinMaxLoc`](../API/core/builtinreducers/MinMaxLoc) のリデューサーは、さらにインデックス型上でテンプレート化されています。
 
-The following is an example for doing a simple min-reduction, finding the minimal value in a discretization of a parable.
+以下は、たとえ話の離散化における最小値を求める単純な最小縮約を行う例です。
+
 
 ```c++
 double min;
@@ -30,7 +31,7 @@ Kokkos::parallel_reduce( "MinReduce", N, KOKKOS_LAMBDA (const int& x, double& lm
 printf("Min: %lf\n", min);
 ```
 
-In this example the [`Min`](../API/core/builtinreducers/Min) reducer was templated on the reducing type `double` and the variable to store the result was taken in by reference. Note that the reducer is only used to combine values from different threads. The per thread reduction is still performed explicitly. One could have used the reducer for that as well through a reducer instance:
+本例では、 [`Min`](../API/core/builtinreducers/Min) リデューサーは、リッショニング型 `double` にテンプレート化され、結果を格納する変数は参照として取り込まれました。 リデューサーは異なるスレッドの値を組み合わせるためだけに使われることに注意してください。スレッドごとの削減は、明示的に実行されています。 リデューサーをリデューサーインスタンスを通じて使うこともできました：
 
 ```c++
 double min;
@@ -44,8 +45,8 @@ Kokkos::parallel_reduce( "MinReduce", N, KOKKOS_LAMBDA (const int& x, double& lm
 printf("Min: %lf\n", min);
 ```
 
-For the [`MinLoc`](../API/core/builtinreducers/MinLoc), [`MaxLoc`](../API/core/builtinreducers/MaxLoc) and [`MinMaxLoc`](../API/core/builtinreducers/MinMaxLoc) reducers the reduction type is a complex scalar type which is accessible through a `value_type` typedef. 
-[`MinLoc`](../API/core/builtinreducers/MinLoc) and [`MaxLoc`](../API/core/builtinreducers/MaxLoc) have value types which contain a `val` and `loc` member to store the reduction value and the index respectively. Note that index (`loc`) can be a struct itself, for example to store a multidimensional index result (see later). 
+ [`MinLoc`](../API/core/builtinreducers/MinLoc), [`MaxLoc`](../API/core/builtinreducers/MaxLoc) および [`MinMaxLoc`](../API/core/builtinreducers/MinMaxLoc) リデューサーについては、 縮約型は、  `value_type` 型定義によりアクセス可能な複素スカラー型です。
+ [`MinLoc`](../API/core/builtinreducers/MinLoc) および [`MaxLoc`](../API/core/builtinreducers/MaxLoc) は、それぞれ縮約値とインデックスを格納する `val` および `loc` のメンバーを含む値型を持っています。例えば、多次元インデックス結果を格納するためのものであることに注意してください(後述)。
 
 ```c++
 typedef Kokkos::MinLoc<double,int>::value_type minloc_type;
@@ -59,33 +60,33 @@ Kokkos::parallel_reduce( "MinLocReduce", N, KOKKOS_LAMBDA (const int& x, minloc_
 printf("Min: %lf at %i\n", minloc.val, minloc.loc);
 ```
 
-Reducers can be used in nested reductions. This example also makes use of a 2D index type to find the minimum and maximum value of a matrix as well as their indices. 
+リデューサーは、ネスト型リダクションにおいて、使用できます。本例では、マトリクスの最小値と最大値、そしてそれらのインデックス求めるために、2次元インデックス型も用いています。
 
 ```c++
 Kokkos::View<double**> A("A",N,M);
-// fill A
+//  A を満たします
 
-// Create a variable for the result
+// 結果の変数を作成します
 typedef Kokkos::MinMaxLoc<double, Kokkos::pair<int,int>> reducer_type;
 typedef reducer_type::value_type value_type;
 value_type minmaxloc
 
 typedef Kokkos::TeamPolicy<>::member_type team_type;
 
-// Start a team parallel reduce
+// チーム並列縮約を開始します
 Kokkos::parallel_reduce( "MinLocReduce", Kokkos::TeamPolicy<>(N,AUTO), 
     KOKKOS_LAMBDA (const team_type& team, value_type& team_minmaxloc) {
 
-  // Create a temporary to store the reduction value for the row
+  // 列の縮約値を保存するための一時的なインスタンスを作成します
   value_type row_minmaxloc;
   int n = team.league_rank();
 
-  // Run a nested parallel reduce with the team over the row
+  // 列全体で、チームを使って、ネスト並行縮約を実行します
   Kokkos::parallel_reduce( Kokkos::TeamThreadRange(team, M), 
       [=] (const int& m, value_type& thread_minmaxloc) {
     double val = A(n,m);
     
-    // Check whether this is a new minimum or maximum value
+    // これが新しい最小値か最大値かを確認します
     if(val < thread_minmaxloc.min_val) {
       thread_minmaxloc.min_val = val;
       thread_minmaxloc.min_loc = Kokkos::pair<int,int>(n,m);
@@ -97,9 +98,9 @@ Kokkos::parallel_reduce( "MinLocReduce", Kokkos::TeamPolicy<>(N,AUTO),
 
   }, reducer_type(row_minmaxloc));
   
-  // One guy in the team should contribute to the whole
-  // Note: for a min or max reduction it wouldn't hurt if 
-  //       every team member did this
+  // チームの一人が全体に貢献すべきです
+  // 注意事項: 最小または最大縮約について、
+  // あらゆるチームメンバーがこれを行った場合、それは損なわれません
   Kokkos::single(Kokkos::PerTeam(team), [=] () {
     if( row_minmaxloc.min_val < team_minmaxloc.min_val ) {
       team_minmaxloc.min_val = row_minmaxloc.min_val;

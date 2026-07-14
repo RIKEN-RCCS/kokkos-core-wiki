@@ -2,20 +2,20 @@
 ``copy``
 ========
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Copies the elements from a source range or rank-1 ``View`` to a destination range or rank-1 ``View``.
+ソース範囲またはランク1の ``ビュー`` から、要素を宛先範囲またはランク1にコピー。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -44,12 +44,12 @@ Overload set accepting execution space
     class DataType1, class... Properties1,
     class DataType2, class... Properties2
   >
-  auto copy(const std::string& label, const ExecutionSpace& exespace,          (4)
+   auto copy(const std::string& label, const ExecutionSpace& exespace,     (4)
             const Kokkos::View<DataType1, Properties1...>& view_from,
             const Kokkos::View<DataType2, Properties2...>& view_to);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -70,40 +70,40 @@ Overload set accepting a team handle
             const ::Kokkos::View<DataType1, Properties1...>& view_from,
             ::Kokkos::View<DataType2, Properties2...>& view_to);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``:  used to name the implementation kernels for debugging purposes
+- ``label``:  デバッグ目的で実装カーネルに名付けるために使用
 
-  - for 1, the default string is: "Kokkos::copy_iterator_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::copy_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::copy_view_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::copy_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first_from, last_from``: range of elements to copy from
+- ``first_from, last_from``: コピー元の要素範囲
 
-  - must be *random access iterators*
+  - *ランダムアクセスイテレータ* でなければなりません。
 
-  - must represent a valid range, i.e., ``last_from >= first_from``
+  - 有効な範囲、つまり、 ``last_from >= first_from`` を表さなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``first_to``: beginning of the range to copy to
+- ``first_to``: コピー先への範囲の先頭
 
-  - must be a *random access iterator* and must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - *ランダムアクセスイテレータ* でなければならず、かつチームハンドルに関連付けられた実行空間からアクセス可能でなければなりません。
 
-- ``view_from``, ``view_to``: source and destination views to copy elements from and to
+- ``view_from``, ``view_to``: 要素のコピー元およびコピー先である、ソースおよび宛先
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-Iterator to the destination element *after* the last element copied.
+最後の要素がコピーされた *後の* 宛先へのイテレータ。

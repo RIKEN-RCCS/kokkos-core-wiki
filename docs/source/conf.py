@@ -100,3 +100,6 @@ rst_prolog = """
 .. role:: cpp(code)
    :language: cpp
 """
+
+locale_dirs = ['../locale']
+gettext_compact = False

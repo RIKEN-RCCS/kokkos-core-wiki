@@ -1,4 +1,4 @@
-Minimum/maximum operations
+最小/最大演算
 ==========================
 
 .. role:: cpp(code)
@@ -8,11 +8,11 @@ Minimum/maximum operations
 
 .. |StandardLibraryHeaderAlgorithm| replace:: ``<algorithm>``
 
-Defined in header ``<Kokkos_Core.hpp>``
+ヘッダー ``<Kokkos_Core.hpp>`` に定義
 
-Provides minimum/maximum and related operations from the standard library header |StandardLibraryHeaderAlgorithm|_.
+標準ライブラリヘッダー |StandardLibraryHeaderAlgorithm|_ から最小値/最大値および関連する操作を提供します。
 
-The min/max and clamp function templates are defined in the ``Kokkos::`` namespace since Kokkos 3.7
+min/max および clamp 関数テンプレートは、Kokkos 3.7 以降、 ``Kokkos::`` 名前空間で定義されています。
 
 .. _min: https://en.cppreference.com/w/cpp/algorithm/min
 
@@ -32,14 +32,14 @@ The min/max and clamp function templates are defined in the ``Kokkos::`` namespa
 
 
 ========== ============================================================
-|min|_     returns the smaller of the given values
-|max|_     returns the greater of the given values
-|minmax|_  returns the smaller and larger of the given values
-|clamp|_   clamps a value between a pair of boundary values
+|min|_     与えられた値のうち小さい方を返します。
+|max|_     与えられた値のうち大きい方を返します。
+|minmax|_  与えられた値のうち小さい方と大きい方を返します。
+|clamp|_   値を一対の境界値の間に収めます。
 ========== ============================================================
 
-Notes
------
+注意事項
+---------------
 
 .. _KokkosClamp: https://github.com/kokkos/kokkos/blob/4.3.00/core/src/Kokkos_Clamp.hpp
 
@@ -49,12 +49,12 @@ Notes
 
 .. |KokkosMinMax| replace:: ``<Kokkos_MinMax.hpp>``
 
-* Since version 4.3, one may include |KokkosClamp|_ and |KokkosMinMax|_ respectively to make these functions available.
+* バージョン 4.3 より、これらの関数を利用可能にするために、それぞれ |KokkosClamp|_ および |KokkosMinMax|_ をインクルードすることができます。
 
 ----
 
-See also
---------
+以下も参照
+-------------------
 
 .. _min_element: ../../algorithms/std-algorithms/all/StdMinElement.html
 
@@ -68,8 +68,8 @@ See also
 
 .. |minmax_element| replace:: ``minmax_element``
 
-|min_element|_: returns the smallest element in a range
+|min_element|_: 範囲内で、最小要素を返します。
 
-|max_element|_: returns the largest element in a range
+|max_element|_: 範囲内で、最大要素を返します。
 
-|minmax_element|_: returns the smallest and the largest elements in a range
+|minmax_element|_: 範囲内で、最小及び最大要素を返します。

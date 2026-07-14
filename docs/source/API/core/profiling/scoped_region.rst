@@ -4,37 +4,32 @@
 .. role:: cpp(code)
    :language: cpp
 
-Defined in header ``<Kokkos_Profiling_ScopedRegion.hpp>``
+ヘッダー ``<Kokkos_Profiling_ScopedRegion.hpp>`` に定義
 
-Usage
------
+使用方法
+--------
 
 .. code-block:: cpp
 
-   Kokkos::Profiling::ScopedRegion region("label");  // (since 4.1)
+   Kokkos::Profiling::ScopedRegion region("label");  // (バージョン 4.1以降)
 
 
 
-The class ``ScopedRegion`` is a `RAII
-<https://en.cppreference.com/w/cpp/language/raii>`_ wrapper that "pushes" a
-user-defined profiling region when an object is created and properly "pops"
-that region upon destruction when the scope is exited. This is useful in
-particular to profile code that has non-trivial control flow (e.g.  early
-return).
+クラス ``ScopedRegion`` は、オブジェクトが作成された際にユーザー定義のプロファイリング領域を "プッシュし"、スコープが終了する際にその領域を適切に "ポップする"、`RAIIスタイル <https://en.cppreference.com/w/cpp/language/raii>`_ のラッパーです。これは特に、重要な制御フロー（例：早期リターン）を持つコードのプロファイリングに有用です。
 
-The ``ScopedRegion`` class is non-copyable.
+``ScopedRegion`` クラスのコピーは不可能です。
 
 .. cpp:Function:: ScopedRegion(std::string const& regionName);
 
-   Starts a user-defined region with provided label.
-   Calls ``Profiling::pushRegion(regionName)``
+   提供されたラベルで、ユーザーが定義した領域を開始します。
+    ``Profiling::pushRegion(regionName)`` を呼び出します。
 
 .. cpp:Function:: ~ScopedRegion();
 
-   Ends the region.
-   Calls ``Profiling::popRegion()``
+   領域を終了します。
+    ``Profiling::popRegion()`` を呼び出します。
 
-Example
+例
 -------
 
 .. code-block:: cpp
@@ -61,6 +56,6 @@ Example
 
 
 
-**See also**
+**以下も参照**
 
-`ProfilingSection <profiling_section.html>`_: Implements a scope-based section ownership wrapper
+`ProfilingSection <profiling_section.html>`_: スコープベースのセクション所有権ラッパーを実装

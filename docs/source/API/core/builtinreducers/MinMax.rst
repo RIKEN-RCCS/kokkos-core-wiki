@@ -4,20 +4,20 @@
 .. role:: cpp(code)
     :language: cpp
 
-Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing both the minimum and maximum values
+最小値および最大値の両方を格納する `ReducerConcept <ReducerConcept.html>`_ の具体的な実装
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
------
+使用方法
+--------
 
 .. code-block:: cpp
 
    MinMax<T,S>::value_type result;
    parallel_reduce(N,Functor,MinMax<T,S>(result));
 
-Synopsis
---------
+概要
+----------
 
 .. code-block:: cpp
 
@@ -47,62 +47,61 @@ Synopsis
        MinMax(const result_view_type& value_);
    };
 
-Interface
----------
+インターフェイス
+----------------
 
 .. cpp:class:: template<class Scalar, class Space> MinMax
 
-   .. rubric:: Public Types
+   .. rubric:: パブリック型
 
    .. cpp:type:: reducer
 
-      The self type.
+      自己型。
 
    .. cpp:type:: value_type
 
-      The reduction scalar type (specialization of `MinMaxScalar <MinMaxScalar.html>`_)
+      縮約スカラー型 ( `MinMaxScalar <MinMaxScalar.html>`_ の特殊化)。
 
    .. cpp:type:: result_view_type
 
-      A ``Kokkos::View`` referencing the reduction result
+      縮約結果を参照する ``Kokkos::View`` 
 
-   .. rubric:: Constructors
+   .. rubric:: コンストラクタ
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION MinMax(value_type& value_);
 
-      Constructs a reducer which references a local variable as its result location.
+      結果の保存先としてローカル変数を参照するリデューサを構築します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION MinMax(const result_view_type& value_);
 
-      Constructs a reducer which references a specific view as its result location.
+      特定のビューを結果の保存先として参照するリデューサーを構築します。
 
-   .. rubric:: Public Member Functions
+   .. rubric:: パブリックメンバー関数
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-      Store minimum of ``src`` and ``dest`` into ``dest``:  ``dest.min_val = (src.min_val < dest.min_val) ? src.min_val :dest.min_val;``.
-      Store maximum of ``src`` and ``dest`` into ``dest``:  ``dest.max_val = (src.max_val < dest.max_val) ? src.max_val :dest.max_val;``.
+      ``dest``:  ``dest.min_val = (src.min_val < dest.min_val) ? src.min_val :dest.min_val;`` に、 ``src`` および ``dest`` の最小値を格納します。
+      ``dest``:  ``dest.max_val = (src.max_val < dest.max_val) ? src.max_val :dest.max_val;`` に、 ``src`` および ``dest`` の最大値を格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-      Initialize ``val.min_val`` using the ``Kokkos::reduction_identity<Scalar>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
-      Initialize ``val.max_val`` using the ``Kokkos::reduction_identity<Index>::max()`` method. The default implementation sets ``val=<TYPE>_MIN``.
+       ``val.min_val`` using the ``Kokkos::reduction_identity<Scalar>::min()`` メソッドを使って、初期化します。 デフォルト実装は、 ``val=<TYPE>_MAX`` を設定します。
+       ``val.max_val`` using the ``Kokkos::reduction_identity<Index>::max()`` メソッドを使って、初期化します。 デフォルト実装は、 ``val=<TYPE>_MIN`` を設定します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
-      Returns a reference to the result provided in class constructor.
+      クラスコンストラクタで提供された結果への参照を返します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
 
-      Returns a view of the result place provided in class constructor.
 
-Additional Information
+追加情報
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* ``MinMax<T,S>::value_type`` is Specialization of MinMaxScalar on non-const ``T``
+* ``MinMax<T,S>::value_type`` は、非定数 ``T`` 上の特殊化です。
 
-* ``MinMax<T,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
+* ``MinMax<T,S>::result_view_type`` は、 ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`` です。 .S(メモリ空間)は結果が存在する空間と同じでなければならないことに、注意してください。
 
-* Requires: ``Scalar`` has ``operator =``, ``operator <`` and ``operator >`` defined. ``Kokkos::reduction_identity<Scalar>::min()`` and ``Kokkos::reduction_identity<Scalar>::max()`` are a valid expressions.
+* 必要条件: ``Scalar`` には、 ``operator =``、 ``operator <`` および ``operator >`` が定義されます。 ``Kokkos::reduction_identity<Scalar>::min()`` および ``Kokkos::reduction_identity<Scalar>::max()``  は、有効な式です。
 
-* In order to use MinMax with a custom type of ``Scalar``, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined.  See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
+*  ``Scalar`` のカスタム型で  MinMax を使用するためには、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。

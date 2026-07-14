@@ -2,21 +2,21 @@
 ``reverse_copy``
 ================
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダーファイル: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Copies the elements from the range or from a rank-1 ``View`` and writes them
-in reverse order to the range beginning at ``d_first`` or to a target rank-1 ``View``.
+範囲またはランク1の ``View`` から要素をコピーし、
+逆順で ``d_first`` で始まる範囲、または対象ランク1の ``View`` に書き込みます。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -41,8 +41,8 @@ Overload set accepting execution space
                      const ::Kokkos::View<DataType1, Properties1...>& source,
                      ::Kokkos::View<DataType2, Properties2...>& dest);
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -60,40 +60,41 @@ Overload set accepting a team handle
                      const ::Kokkos::View<DataType1, Properties1...>& source,
                      ::Kokkos::View<DataType2, Properties2...>& dest);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - for 1, the default string is: "Kokkos::reverse_copy_iterator_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::reverse_copy_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::reverse_copy_view_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::reverse_copy_view_api_default"
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-- ``first``, ``last``, ``d_first``: range of elements to copy from and to in reverse order
+- ``first``, ``last``, ``d_first``: 逆順での、コピー元およびコピー先の要素の範囲
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+  - *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must represent a valid range, i.e., ``last >= first``
+  - 有効な範囲、つまり、 ``last >= first`` を表す必要があります。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
-- ``source``, ``dest``: views to copy from and to in reverse order
+- ``source``, ``dest``: 逆順での、コピー元およびコピー先のビュー
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
-Return Value
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+
+戻り値
 ~~~~~~~~~~~~
 
-- 1,2,5: an iterator equal to ``d_first + Kokkos::Experimental::distance(first, last)``
+- 1,2,5:  ``d_first + Kokkos::Experimental::distance(first, last)`` に等しいイテレータ。
 
-- 3,4,6: an iterator equal to
-  ``Kokkos::Experimental::begin(dest) +
-  Kokkos::Experimental:distance(Kokkos::Experimental::cbegin(source), Kokkos::Experimental::cend(source))``
+- 3,4,6:  ``Kokkos::Experimental::begin(dest) +
+  Kokkos::Experimental::distance(Kokkos::Experimental::cbegin(source), Kokkos::Experimental::cend(source))`` に等しいイテレータ。
+ 

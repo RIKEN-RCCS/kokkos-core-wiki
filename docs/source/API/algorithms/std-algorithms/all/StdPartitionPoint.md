@@ -1,7 +1,7 @@
 
 # `partition_point`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -33,24 +33,24 @@ auto partition_point(const std::string& label,                                 (
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-Examines the range `[first, last)` or `view` and locates the
-first element that does not satisfy `pred`.
+範囲  `[first, last)` または  `ビュー` を調べ、
+`pred` を満たさない最初の要素を位置付けます。
 
-Assumes the range (or the view) already to be partitioned.
+範囲（またはビュー）は既にパーティション分割済みであると仮定します。
 
 
-## Parameters and Requirements
+## パラメータおよび要件
 
-- `exespace`, `first`, `last`, `view`, `pred`: same as in [`is_partitioned`](./StdIsPartitioned)
-  - execution space instance
+- `exespace`, `first`, `last`, `view`, `pred`:  [`is_partitioned`](./StdIsPartitioned) と同様。
+  - 実行空間インスタンス
 - `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1, the default string is: "Kokkos::partition_point_iterator_api_default"
-  - for 3, the default string is: "Kokkos::partition_point_view_api_default"
+  - デバッグ目的の実装カーネルに名付けるために使用されます。
+  - 1について、デフォルト文字列は、 : "Kokkos::partition_point_iterator_api_default"
+  - 3について、デフォルト文字列は、 : "Kokkos::partition_point_view_api_default"
 
-## Return
+## 戻り値
 
-Iterator to the element *after* the last element in the first partition,
-or `last` if all elements satisfy `pred`.
+最初のパーティションにおける、最後の要素の *後* の要素へのイテレータ、またはすべての要素が
+ `pred` を満たす場合、`last` へのイテレータ。

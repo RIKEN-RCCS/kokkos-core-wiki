@@ -1,6 +1,6 @@
 # `transform_exclusive_scan`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -58,32 +58,29 @@ auto transform_exclusive_scan(const std::string& label,                         
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-- 1,2: transforms each element in the range `[first_from, last_from)`
-with `unary_op`, then computes an exclusive prefix scan operation using `binary_op`
-over the resulting range, with `init` as the initial value, and writes
-the results to the range beginning at `first_dest`.
-"exclusive" means that the i-th input element is not included in the i-th sum
+- 1,2:`unary_op` 演算子を用いて変換し、次に、  範囲 `[first_from, last_from)` 内の各要素を、
+結果の範囲に対して、`binary_op` を使用して、エクスクルーシブプレフィックススキャン演算を計算し、
+ `init` を初期値として使用して、 `first_dest` で始まる範囲に結果を書き込みます。
+i番目の入力要素を意味する "exclusive" は、i番目の和には含まれません。
 
-- 3,4: same as (1,2) except that the elements are read from `view_from`
-and written to `view_dest`
+- 3,4: 要素が `view_from` から読み込まれ、 `view_dest` に書き込まれた要素である場合を除き、 (1,2) と同様です。
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`, `first_from`, `first_last`, `first_dest`, `view_from`, `view_dest`:
-  - same as [`exclusive_scan`](./StdExclusiveScan)
+  -  [`exclusive_scan`](./StdExclusiveScan) と同様。
 - `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1 the default string is: "Kokkos::transform_exclusive_scan_iterator_api_default"
-  - for 3 the default string is: "Kokkos::transform_exclusive_scan_view_api_default"
+  - デバッグ目的で実装カーネルに名付けるために使用。
+  - 1 について、デフォルト文字列は、: "Kokkos::transform_exclusive_scan_iterator_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::transform_exclusive_scan_view_api_default"
 - `unary_op`:
-  - *unary* functor performing the desired transformation operation to an element.
-  Must be valid to be called from the execution space passed, and callable with
-  an arguments `v` of type (possible const) `value_type`,
-  where `value_type` is the value type of `first_from` (for 1,2)
-  or the value type of `view_from` (for 3,4), and must not modify `v`.
-  - Must conform to:
+  -要素に対して所望の変換演算を実行する *単項* ファンクタ。
+  引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst) `value_type` の引数 `v` について、ブール型に変換可能で、そこでは、`value_type` が、 `first_from` (1,2について) の値型、または `view_from` (3,4について) であり、 `v`  を変更してはいけません。
+
+
+  - 以下に一致しなければなりません:
   ```c++
   struct UnaryOp {
 	KOKKOS_FUNCTION
@@ -93,6 +90,6 @@ and written to `view_dest`
   };
   ```
 
-## Return
+## 戻り値
 
-Iterator to the element *after* the last element written.
+書き込まれた最後の要素 *後の* 要素へのイテレータ。

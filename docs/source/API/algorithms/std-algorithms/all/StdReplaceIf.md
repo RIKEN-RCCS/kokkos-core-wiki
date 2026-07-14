@@ -1,7 +1,7 @@
 
 # `replace_if`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -31,31 +31,26 @@ void replace_if(const std::string& label, const ExecutionSpace& exespace,    (4)
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-Replaces with `new_value` all the elements for which `pred` is `true` in
-the range `[first, last)` (overloads 1,2) or in `view` (overloads 3,4).
+範囲 `[first, last)`（オーバーロード 1,2）または `view`（オーバーロード 3,4）において、`pred` が `true` となる全ての要素を `new_value` と置き換えます。
 
-## Parameters and Requirements
+## パラメータおよび要件
 
-- `exespace`, `first`, `last`, `view`, `new_value`: same as in [`replace`](./StdReplace)
+- `exespace`, `first`, `last`, `view`, `new_value`:  [`replace`](./StdReplace) と同様。
 - `label`:
-  - for 1, the default string is: "Kokkos::replace_if_iterator_api_default"
-  - for 3, the default string is: "Kokkos::replace_if_view_api_default"
+  - 1 について、デフォルト文字列は、: "Kokkos::replace_if_iterator_api_default"
+  - 3 について、デフォルト文字列は、: "Kokkos::replace_if_view_api_default"
 - `pred`:
-  - *unary* predicate returning `true` for the required element to replace; `pred(v)`
-  must be valid to be called from the execution space passed, and convertible to bool for every
-  argument `v` of type (possible const) `value_type`, where `value_type`
-  is the value type of `IteratorType` (for 1,2) or the value type of `view` (for 3,4),
-  and must not modify `v`.
-  - must conform to:
+  - *単項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならず、 型 value_type すべての引数 ``v`` （constの可能性）について、ブール型に変換可能で、そこでは、 ``value_type`` が、  `InputIteratorType`  (1,2,について) の値型、または  `view`  (3,4について) の値型であり、  ``v`` を変更してはいけません。
+  - 以下に一致しなければなりません:
   ```c++
   struct Predicate
   {
      KOKKOS_INLINE_FUNCTION
      bool operator()(const value_type & v) const { return /* ... */; }
 
-     // or, also valid
+     // または、また有効
 
      KOKKOS_INLINE_FUNCTION
      bool operator()(value_type v) const { return /* ... */; }
@@ -63,11 +58,11 @@ the range `[first, last)` (overloads 1,2) or in `view` (overloads 3,4).
   ```
 
 
-## Return
+## 戻り値
 
-None
+無し
 
-## Example
+## 例
 
 ```c++
 template <class ValueType>
@@ -79,7 +74,7 @@ struct IsPositiveFunctor {
 
 namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
-// do something with a
+// a を使って何かを実行
 // ...
 
 const double oldValue{2};
@@ -87,7 +82,7 @@ const double newValue{34};
 KE::replace_if(Kokkos::DefaultExecutionSpace(), KE::begin(a), KE::end(a),
    IsPositiveFunctor<double>(), newValue);
 
-// explicitly set label and execution space (assuming active)
+// 明示的にラベルおよび実行空間を設定（アクティブであると仮定）
 KE::replace_if("mylabel", Kokkos::OpenMP(), a,
    IsPositiveFunctor<double>(), newValue);
 ```

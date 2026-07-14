@@ -2,168 +2,169 @@
 .. role:: cpp(code)
    :language: cpp
 
-``Bitset``
-==========
+``ビットセット``
+================
 
-Header file: ``<Kokkos_Bitset.hpp>``
+ヘッダーファイル: ``<Kokkos_Bitset.hpp>``
 
-Class Interface
----------------
+クラスインターフェース
+----------------------
 
 .. cpp:class:: template <typename Device> Bitset
 
-  :cpp:`Kokkos::Bitset` represents a thread safe view to a fixed-size (at run-time) sequence of N bits.
+  :cpp:`Kokkos::Bitset` は、固定サイズ（実行時）の N ビットシーケンスへのスレッドセーフビューを表します。
 
-  :tparam Device: Device that physically contains the bits.
 
-  .. rubric:: Static Constants
+  :tparam Device: ビットを物理的に収容するデバイス。
+
+  .. rubric:: 静的定数
 
   .. cpp:member:: static constexpr unsigned BIT_SCAN_REVERSE = 1u
 
-    :cpp:`BIT_SCAN_REVERSE` : Bit mask for scanning direction
+    :cpp:`BIT_SCAN_REVERSE` : スキャン方向用ビットマスク
 
   .. cpp:member:: static constexpr unsigned MOVE_HINT_BACKWARD = 2u
 
-    :cpp:`MOVE_HINT_BACKWARD` : Bit mask for hint direction
+    :cpp:`MOVE_HINT_BACKWARD` : ヒント方向用ビットマスク
 
   .. cpp:member:: static constexpr unsigned BIT_SCAN_FORWARD_MOVE_HINT_FORWARD = 0u
 
-    :cpp:`BIT_SCAN_FORWARD_MOVE_HINT_FORWARD` : When passed as :cpp:`scan_direction` to :cpp:`find_any_set_near(...)` or :cpp:`find_any_reset_near(...)`, scans for the bit in the forward (increasing index) direction. If the bit was not found, selects a new hint past the current hint.
+    :cpp:`BIT_SCAN_FORWARD_MOVE_HINT_FORWARD` : :cpp:`find_any_set_near(...)` または :cpp:`find_any_reset_near(...)` の :cpp:`scan_direction` として渡された場合、 前方（インデックスが増加する方向）方向に向けてビットをスキャンします。 ビットが見つからなかった場合、現在のヒントの先にある新しいヒントを選択します。
 
   .. cpp:member:: static constexpr unsigned BIT_SCAN_REVERSE_MOVE_HINT_FORWARD = BIT_SCAN_REVERSE
 
-    :cpp:`BIT_SCAN_REVERSE_MOVE_HINT_FORWARD`: When passed as :cpp:`scan_direction` to :cpp:`find_any_set_near(...)` or :cpp:`find_any_reset_near(...)`, scans for the bit in the reverse (decreasing index) direction. If the bit was not found, selects a new hint past the current hint.
+    :cpp:`BIT_SCAN_REVERSE_MOVE_HINT_FORWARD`: :cpp:`find_any_set_near(...)` または :cpp:`find_any_reset_near(...)` の :cpp:`scan_direction` として渡された場合、 逆（減少するインデックス）方向のビットをスキャンします。 ビットが見つからなかった場合、現在のヒントの先にある新しいヒントを選択します。
 
   .. cpp:member:: static constexpr unsigned BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD = MOVE_HINT_BACKWARD
 
-    :cpp:`BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD`: When passed as :cpp:`scan_direction` to :cpp:`find_any_set_near(...)` or :cpp:`find_any_reset_near(...)`, scans for the bit in the forward (increasing index) direction. If the bit was not found, selects a new hint before the current hint.
+    :cpp:`BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD`: :cpp:`find_any_set_near(...)` または :cpp:`find_any_reset_near(...)` に対して :cpp:`scan_direction` として渡された場合、前方（インデックスが増加する方向）方向に向けてビットをスキャンします。
 
   .. cpp:member:: static constexpr unsigned BIT_SCAN_REVERSE_MOVE_HINT_BACKWARD = BIT_SCAN_REVERSE | MOVE_HINT_BACKWARD
 
-    :cpp:`BIT_SCAN_REVERSE_MOVE_HINT_BACKWARD`: When passed as :cpp:`scan_direction` to :cpp:`find_any_set_near(...)` or :cpp:`find_any_reset_near(...)`, scans for the bit in the reverse (decreasing index) direction. If the bit was not found, selects a new hint before the current hint.
+    :cpp:`BIT_SCAN_REVERSE_MOVE_HINT_BACKWARD`: :cpp:`find_any_set_near(...)` または :cpp:`find_any_reset_near(...)` に対して :cpp:`scan_direction` として渡された場合、逆（減少するインデックス）方向のビットをスキャンします。 ビットが見つからなかった場合、現在のヒントの先にある新しいヒントを選択します。
 
-  .. rubric:: Constructors
+  .. rubric:: コンストラクタ
 
   .. cpp:function:: Bitset(unsigned arg_size = 0u)
 
-    Host/Device: Construct a bitset with :cpp:`arg_size` bits.
+    ホスト/デバイス: :cpp:`arg_size` ビットを持つビットセットを構築します。
 
-  .. rubric:: Data Access Functions
+  .. rubric:: データアクセス関数
 
   .. cpp:function:: unsigned size() const
 
-    Host/Device: return the number of bits.
+    ホスト/デバイス: ビット数を返します。
 
   .. cpp:function:: unsigned count() const
 
-    Host: return the number of bits which are set to ``1``.
+    ホスト: ``1`` に設定されたビット数を返します。
 
   .. cpp:function:: void set()
 
-    Host: set all the bits to ``1``.
+    ホスト: すべてのビットを ``1`` に設定します。
 
   .. cpp:function:: void reset();
   .. cpp:function:: void clear();
 
-    Host/Device: set all the bits to ``0``.
+    ホスト/デバイス:  ``0`` 。 すべてのビットを ``0`` に設定します。
 
   .. cpp:function:: void set(unsigned i)
 
-    Device: set the ``i``\ 'th bit to ``1``.
+    デバイス:  ``i``\ 'th ビットを ``1`` に設定します。
 
   .. cpp:function:: void reset(unsigned i)
 
-    Device: set the ``i``\ 'th bit to ``0``.
+    デバイス: ``i``\ 'th ビットを ``0`` に設定します。
 
   .. cpp:function:: bool test(unsigned i) const
 
-    Device: return :cpp:`true` if and only if the ``i``\ 'th bit is set to ``1``.
+    デバイス: ``i``\ 番目のビットが ``1`` に設定されている場合にのみ、真を返します。
 
   .. cpp:function:: unsigned max_hint() const
 
-    Host/Device: used with :cpp:`find_any_set_near(...)` & :cpp:`find_any_reset_near(...)` functions.
+    ホスト/デバイス:  :cpp:`find_any_set_near(...)` および :cpp:`find_any_reset_near(...)` 関数により使用。
 
-    Returns the max number of times those functions should be call when searching for an available bit.
+    利用可能なビットを検索する際に、それらの関数を呼び出すべき最大回数を返します。
 
   .. cpp:function:: Kokkos::pair<bool, unsigned> find_any_set_near(unsigned hint, unsigned scan_direction = BIT_SCAN_FORWARD_MOVE_HINT_FORWARD) const
 
-    Host/Device: starting at the :cpp:`hint` position, find the first bit set to ``1``.
+    ホスト/デバイス: :cpp:`hint` 位置で開始し、 最初のビットが ``1`` に設定されている位置を検出します。
 
-    Returns a :cpp:`pair<bool, unsigned>`.
+     :cpp:`pair<bool, unsigned>` を返します。
 
-    When :cpp:`result.first` is :cpp:`true` then :cpp:`result.second` is the bit position found.
+    :cpp:`result.first` が :cpp:`true`  の場合、:cpp:`result.second` は検出されたビット位置です。
 
-    When :cpp:`result.first` is :cpp:`false` then :cpp:`result.second` is a new hint position.
+    :cpp:`result.first` が :cpp:`false` の場合、:cpp:`result.second` は新しいヒント位置です。
 
-    If :cpp:`scan_direction & BIT_SCAN_REVERSE`\ , then the scanning for the bit happens in decreasing index order;
-    otherwise, it happens in increasing index order.
+    :cpp:`scan_direction & BIT_SCAN_REVERSE` の場合、ビットのスキャンはインデックスの降順で行われます;
+    それ以外の場合は、インデックスの昇順で発生します。
 
-    If :cpp:`scan_direction & MOVE_HINT_BACKWARDS`\ , then the new hint position occurs at a smaller index than :cpp:`hint`\ ;
-    otherwise, it occurs at a larger index than :cpp:`hint`.
+    ``scan_direction & MOVE_HINT_BACKWARDS`` の場合、 その後、新しいヒント位置は :cpp:`hint` よりも小さいインデックスで発生します;
+    それ以外の場合は、:cpp:`hint` より大きいインデックス位置で発生します。
 
   .. cpp:function:: Kokkos::pair<bool, unsigned> find_any_unset_near(unsigned hint, unsigned scan_direction = BIT_SCAN_FORWARD_MOVE_HINT_FORWARD) const;
 
-    Host/Device: starting at the :cpp:`hint` position, find the first bit set to ``0``.
+    ホスト/デバイス: :cpp:`hint` 位置から開始し、最初に ``0`` に設定されたビットを検出します。
 
-    Returns a :cpp:`pair<bool, unsigned>`.
+    :cpp:`pair<bool, unsigned>` を返します。
 
-    When :cpp:`result.first` is :cpp:`true` then :cpp:`result.second` is the bit position found.
+    :cpp:`result.first` が :cpp:`true` の場合、 :cpp:`result.second` は検出されたビット位置です。
 
-    When :cpp:`result.first` is :cpp:`false` then :cpp:`result.second` is a new hint position.
+    :cpp:`result.first` が :cpp:`false` の場合、:cpp:`result.second` は、新しいヒント位置です。
 
-    If :cpp:`scan_direction & BIT_SCAN_REVERSE`\ , then the scanning for the bit happens in decreasing index order; otherwise, it happens in increasing index order.
+    :cpp:`scan_direction & BIT_SCAN_REVERSE` の場合、ビットのスキャンはインデックスの降順で行われます;それ以外の場合は、インデックスの昇順で発生します。
 
-    If :cpp:`scan_direction & MOVE_HINT_BACKWARDS`\ , then the new hint position occurs at a smaller index than :cpp:`hint`\ ; otherwise, it occurs at a larger index than :cpp:`hint`.
+    :cpp:`scan_direction & MOVE_HINT_BACKWARDS` の場合には、その後新しいヒント位置は :cpp:`hint` よりも小さいインデックスで発生します; それ以外の場合は、:cpp:`hint` より大きいインデックス位置で発生します。
 
   .. cpp:function:: constexpr bool is_allocated() const
 
-    Host/Device: the bits are allocated on the device.
+    ホスト/デバイス: ビットはデバイス上に割り当てられます。
 
 ``ConstBitset``
 ===============
 
-Class Interface
----------------
+クラスインターフェイス
+----------------------
 
 .. cpp:class:: template <typename Device> ConstBitset
 
-  :tparam Device: Device that physically contains the bits.
+  :tparam Device: 物理的にビットを含むデバイス。
 
-  .. rubric:: Constructors / assignment
+  .. rubric:: コンストラクタ / 代入
 
   .. cpp:function:: ConstBitset()
 
-    Host/Device: Construct a bitset with no bits.
+    ホスト/デバイス: ビットを持たないビットセットを構築します。
 
   .. cpp:function:: ConstBitset(ConstBitset const& rhs) = default
   .. cpp:function:: ConstBitset& operator=(ConstBitset const& rhs) = default
 
-    Copy constructor/assignment operator.
+    コンストラクタ/代入 演算子をコピー。
 
   .. cpp:function:: ConstBitset(Bitset<Device> const& rhs)
   .. cpp:function:: ConstBitset& operator=(Bitset<Device> const& rhs)
 
-    Host/Device: Copy/assign a :cpp:`Bitset` to a :cpp:`ConstBitset`.
+    ホスト/デバイス: :cpp:`Bitset` を a :cpp:`ConstBitset` にコピー/代入します。
 
   .. cpp:function:: unsigned size() const
 
-    Host/Device: return the number of bits.
+    ホスト/デバイス: ビット数を返します。
 
   .. cpp:function:: unsigned count() const
 
-     Host/Device: return the number of bits which are set to ``1``.
+     ホスト/デバイス:  ``1`` に設定されたビット数を返します。
 
   .. cpp:function:: bool test(unsigned i) const
 
-    Host/Device: Return ``true`` if and only if the ``i``\ 'th bit set to ``1``.
+    ホスト/デバイス: ``i``\ 'thビットが ``1`` に設定されている場合、またはその場合に限り、 ``真`` を返します。
 
-Non-Member Functions
+非メンバー関数
 --------------------
 
   .. cpp:function:: template <typename DstDevice, typename SrcDevice> void deep_copy(Bitset<DstDevice>& dst, Bitset<SrcDevice> const& src)
 
-    Copy a ``Bitset`` from ``src`` on ``SrcDevice`` to ``dst`` on ``DstDevice``.
+     ``SrcDevice`` 上の ``src`` から ``DstDevice`` 上の ``dst`` に ``Bitset`` をコピーします。
 
   .. cpp:function:: template <typename DstDevice, typename SrcDevice> void deep_copy(Bitset<DstDevice>& dst, ConstBitset<SrcDevice> const& src)
 
-    Copy a ``ConstBitset`` from ``src`` on ``SrcDevice`` to a ``Bitset`` ``dst`` on ``DstDevice``.
+     ``SrcDevice`` 上の ``src`` から ``DstDevice`` 上の ``Bitset`` ``dst``に ``ConstBitset`` をコピーします。

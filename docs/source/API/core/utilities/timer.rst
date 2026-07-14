@@ -4,10 +4,10 @@
 .. role:: cpp(code)
     :language: cpp
 
-Defined in header ``<Kokkos_Timer.hpp>`` which is included from ``<Kokkos_Core.hpp>``
+``<Kokkos_Core.hpp>`` に含まれるヘッダー ``<Kokkos_Timer.hpp>`` に定義。
 
-Usage
------
+使用方法
+------------------
 
 .. code-block:: cpp
 
@@ -15,48 +15,50 @@ Usage
     double time = timer.seconds();
     timer.reset();
 
-Interface
----------
+インターフェイス
+----------------------
 
 .. cpp:class:: Timer
 
-   A high-resolution timer class for measuring elapsed time.
+   経過時間を計測するための高精度タイマークラスです。
 
    .. note::
 
-        This class is intended for "quick and dirty" timing as well as situations where
-        timing is meant to be "always on". For serious performance profiling, it is
-        recommended to use the **Kokkos Tools** API. Kokkos Tools provides the
-        flexibility to enable or disable profiling at runtime without modifying
-        your application, avoiding the need to clutter your code with explicit
-        timer objects.
+        このクラスは、"手っ取り早く大まかな" タイミング測定だけでなく、
+        タイミング測定を "常時有効" とする状況も想定しています。
+        本格的なパフォーマンスプロファイリングには、
+        **Kokkos Tools** APIの使用が推奨されます。
+        Kokkos Toolsは、アプリケーションを変更することなく、
+        実行時にプロファイリングを有効化または無効化する柔軟性を提供し
+        明示的なタイマーオブジェクトでコードを煩雑にする
+        必要性を回避します。
+
+
 
    .. cpp:function:: Timer()
 
-      Constructs a new Timer instance and immediately starts the clock.
+       新しいタイマーインスタンスを構築し、直ちにタイマーを開始します。
 
-      The timer is initialized with the current time, marking the beginning of
-      the measurement period.
+      タイマーは、現在時刻で初期化され、測定期間の開始が記録されます。
 
    .. cpp:function:: double seconds() const
 
-      :returns: The number of seconds that have elapsed since the timer was
-        started or last reset.
+      :returns: タイマーが開始または最後にリセットされてから経過した秒数。
 
    .. cpp:function:: void reset()
 
-      Resets the timer, setting the start time to the current time.
+      タイマーをリセットし、開始時刻を現在の時刻に設定します。
 
-      This function effectively restarts the measurement period without
-      creating a new Timer object.
+      この関数は、新しいタイマーオブジェクトを作成せずに、測定期間を効果的に再起動します
+
 
    .. cpp:function:: Timer(Timer const&&) = delete
    .. cpp:function:: Timer(Timer&&) = delete
 
-      The Timer class is neither copy-constructible nor copy-assignable.
+       Timer クラスは、コピー構築もコピー代入もできません。
 
 
-Example
+例
 -------
 
 .. code-block:: cpp

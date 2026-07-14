@@ -4,11 +4,11 @@
 .. role:: cpp(code)
 	:language: cpp
 
-Header File: ``<Kokkos_ScatterView.hpp>``
+ヘッダーファイル: ``<Kokkos_ScatterView.hpp>``
 
 .. warning::
 
-   ``ScatterView`` is still in the namespace ``Kokkos::Experimental``
+    ``ScatterView`` は、名前空間 Kokkos::Experimental にまだ存在しています。
 
 
 .. _parallelReduce: ../core/parallel-dispatch/parallel_reduce.html
@@ -27,126 +27,128 @@ Header File: ``<Kokkos_ScatterView.hpp>``
 
 .. |create_scatter_view| replace:: ``create_scatter_view()``
 
-Usage
------
+使用方法
+--------
 
-A Kokkos ScatterView serves as an interface for a standard Kokkos::|View|_ implementing a scatter-add pattern either via atomics or data replication.
+ Kokkos ScatterView は、標準的な Kokkos::|View|_ のインターフェースとして機能し、原子またはデータレプリケーションを通じて散乱加算パターンを実装します。
 
-Construction of a ScatterView can be expensive, so you should try to reuse the same one if possible, in which case, you should call |reset|_ between uses.
+ ScatterView の構築は  コストがかかることがあるため、可能であれば同じものを再利用するようにし、その場合は  使用の間に |reset|_ を呼び出してください。
 
-ScatterView can not be addressed directly: each thread inside a parallel region needs to make a call to |access|_ and access the underlying View through the return value of |access|_.
+ ScatterView を直接アドレスすることはできません: 並列領域内の各スレッドは |access| に呼び出しを行い、|access|_ の返却値を通じて基礎となるViewにアクセスする必要があります。
 
-Following the parallel region, a call to the free function Kokkos::Experimental::|contribute|_ should be made to perform the final reduction.
+並列領域の後、最終縮約を行うために自由関数 Kokkos::Experimental::contribute() を呼び出します。
 
-Interface
----------
+インターフェイス
+----------------
 .. code-block:: cpp
 
     template <typename DataType [, typename Layout [, typename ExecSpace [, typename Operation [, typename Duplication [, typename Contribution]]]]]>
     class ScatterView
 
-Parameters
+パラメータ
 ~~~~~~~~~~
-Template parameters other than ``DataType`` are optional, but if one is specified, preceding ones must also be specified.
-That means for example that ``Operation`` can be omitted but if it is specified, ``Layout`` and ``ExecSpace`` must also be specified.
+``DataType`` 以外のテンプレートパラメータは任意ですが、指定されている場合は、前のパラメータも指定しなければなりません。
+つまり、例えば動作は省略できますが、指定されている場合は、 ``Layout`` and ``ExecSpace`` も指定しなければなりません。
 
-* ``DataType``, ``Layout`` and ``ExecSpace`` need to be the same types as the one from the Kokkos::View this ScatterView is interfacing.
+*  ``DataType``, ``Layout`` および ``ExecSpace`` は、Kokkos::View のものと同じ型である必要があります。 本 ScatterView はインターフェースされています。
 
-* ``Operation``:
-  Can take the values:
+* ``Op``:
+  次の値を選択可能です:
 
-  - ``Kokkos::Experimental::ScatterSum``: performs a Sum. It is the default value.
+  - ``Kokkos::Experimental::ScatterSum``: Sum を実行します。それがデフォルトの値です。
 
-  - ``Kokkos::Experimental::ScatterProd``: performs a Multiplication.
+  - ``Kokkos::Experimental::ScatterProd``: 乗算を実行します。
 
-  - ``Kokkos::Experimental::ScatterMin``: takes the min.
+  - ``Kokkos::Experimental::ScatterMin``: minを選択します。
 
-  - ``Kokkos::Experimental::ScatterMax``: takes the max.
+  - ``Kokkos::Experimental::ScatterMax``: maxを選択します。
 
 * ``Duplication``:
-  Whether to duplicate the grid or not; defaults to ``Kokkos::Experimental::ScatterDuplicated``, other option is ``Kokkos::Experimental::ScatterNonDuplicated``.
+  グリッドが重複するかどうか; defaults to ``Kokkos::Experimental::ScatterDuplicated`` のデフォルト、 その他のオプションは、 ``Kokkos::Experimental::ScatterNonDuplicated`` 。
 
 * ``Contribution``:
-  Whether to contribute to use atomics; defaults to ``Kokkos::Experimental::ScatterAtomics``, other option is ``Kokkoss::Experimental::ScatterNonAtomic``.
+  アトミック使用に貢献するかどうか; defaults to ``Kokkos::Experimental::ScatterAtomics`` のデフォルト、 その他のオプションは、 ``Kokkos::Experimental::ScatterNonAtomic``.
 
-Creating a ScatterView with non default ``Operation``, ``Duplication`` or ``Contribution`` using this interface can become complicated, because you need to specify the exact type for ``DataType``, ``Layout`` and ``ExecSpace``. This is why it is advised that you instead use the function Kokkos::Experimental::|create_scatter_view|_.
+このインターフェースを使って、デフォルトでない ``Operation``, ``Duplication`` または ``Contribution`` を持つ ScatterView を作成するのは複雑になることがあります。なぜなら、DataType、Layout、ExecSpace の正確なタイプを指定する必要があるからです。 そのため、代わりに Kokkos::Experimental::|create_scatter_view|_ という関数を使うことをお勧めします。
 
-Description
------------
+説明
+------------------
 
 .. cpp:class:: template <typename DataType, typename Layout, typename ExecSpace, typename Op, typename Duplication, typename Contribution> ScatterView
 
-    .. rubric:: Public Member Variables
+    .. rubric:: パブリックメンバー変数
 
     .. cpp:type:: original_view_type
 
-        Type of View passed to ScatterView constructor.
+        コンストラクタに渡されたビュー型。
 
     .. cpp:type:: original_value_type
 
-        Value type of the original_view_type.
+         original_view_type の値型。
 
     .. cpp:type:: original_reference_type
 
-        Reference type of the original_view_type.
+         original_view_type の参照型。
 
     .. cpp:type:: data_type_info
 
-        DuplicatedDataType, a newly created DataType that has a new runtime dimension which becomes the largest-stride dimension, from the given View DataType.
+        DuplicatedDataType で、指定されたビューデータ型から新たなランタイム次元を持つ、新規作成されたデータ型。この新たなディメンションが最大ストライドディメンションとなります。
 
     .. cpp:type:: internal_data_type
 
-        Value type of data_type_info.
+        data_type_info の値型。
 
     .. cpp:type:: internal_view_type
 
-        A View type created from the internal_data_type.
+        internal_data_type から作成したビュー型。
 
-    .. rubric:: Constructors
+    .. rubric:: コンストラクタ
 
     .. cpp:function:: ScatterView()
 
-        The default constructor. Default constructs members.
+        デフォルトコンストラクタで、デフォルトがメンバーを構築します。
 
     .. cpp:function:: ScatterView(View<RT, RP...> const&)
 
-        Constructor from a ``Kokkos::View``. ``internal_view`` member is copy constructed from this input view.
+         ``Kokkos::View`` からのコンストラクタ。 ``internal_view`` メンバーは、この入力ビューから構築されたコピー。
 
     .. cpp:function:: ScatterView(std::string const& name, Dims ... dims)
 
-        Constructor from variadic pack of dimension arguments. Constructs ``internal_view`` member.
+        可変長のディメンション引数パックからのコンストラクタ。 ``internal_view`` member を構築します。
 
     .. cpp:function:: ScatterView(ALLOC_PROP const& arg_prop, Dims... dims)
 
-        Constructor from variadic pack of dimension arguments. Constructs ``internal_view`` member.
-        This constructor allows passing an object created by ``Kokkos::view_alloc`` as first argument, e.g., for specifying an execution space via
-        ``Kokkos::view_alloc(exec_space, "label")``.
+        可変長のディメンション引数パックからのコンストラクタ。 ``internal_view`` メンバーを構築します。
+        このコンストラクタは、最初の引数として、 ``Kokkos::view_alloc`` で作成されたオブジェクトを渡すことを可能にします。例えば、実行空間を指定するために ``Kokkos::view_alloc(exec_space, "label" )`` のように使用します。
+        
+        ``Kokkos::view_alloc(exec_space, )``.
 
-    .. rubric:: Public Methods
+    .. rubric:: パブリックメソッド
 
     .. cpp:function:: constexpr bool is_allocated() const
 
-        :return: true if the ``internal_view`` points to a valid memory location. This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
+        :return: ビューが有効なメモリ領域を指している場合に真となります。この関数は、管理対象ビューと管理対象外ビューの両方で機能します。
+		管理対象外ビューでは、参照されるアドレスが有効である保証はなく、単にヌルポインタであることのみが保証されます。
 
     .. _access:
 
     .. cpp:function:: access() const
 
-       use within a kernel to return a ``ScatterAccess`` member; this member accumulates a given thread's contribution to the reduction.
+       カーネル内で使用し、 ``ScatterAccess`` メンバーを返します; このメンバーは、指定されたスレッドの削減への貢献度を蓄積します。
 
     .. cpp:function:: subview() const
 
-        :return: a subview of a ``ScatterView``
+        :return:  ``ScatterView`` のサブビュー。
 
     .. cpp:function:: contribute_into(View<DT, RP...> const& dest) const
 
-       contribute ``ScatterView`` array's results into the input View ``dest``
+        ``ScatterView`` の配列の結果を、入力ビュー ``dest`` に貢献します。
 
     .. _reset:
 
     .. cpp:function:: reset()
 
-       performs reset on destination array
+       目的の配列に対してリセットを実行します。
 
     .. cpp:function:: reset_except(View<DT, RP...> const& view)
 
@@ -154,11 +156,11 @@ Description
 
     .. cpp:function:: resize(const size_t n0 = 0, const size_t n1 = 0, const size_t n2 = 0, const size_t n3 = 0, const size_t n4 = 0, const size_t n5 = 0, const size_t n6 = 0, const size_t n7 = 0)
 
-       resize a view with copying old data to new data at the corresponding indices
+       ビューのサイズを変更し、対応するインデックスで古いデータを新しいデータにコピーします。
 
     .. cpp:function:: realloc(const size_t n0 = 0, const size_t n1 = 0, const size_t n2 = 0, const size_t n3 = 0, const size_t n4 = 0, const size_t n5 = 0, const size_t n6 = 0, const size_t n7 = 0)
 
-       resize a view with discarding old data
+       古いデータを破棄してビューのサイズを変更します。
 
 
     .. rubric:: *Private* Members
@@ -167,24 +169,23 @@ Description
     :member: internal_view_type internal_view;
 
 
-.. rubric:: Free Functions
+.. rubric:: 自由関数
 
 .. _create_scatter_view:
 
 .. cpp:function:: template <typename Operation, typename Duplication, typename Contribution> create_scatter_view(const View<DT1, VP...>& view)
 
-   create a new ScatterView interfacing the View ``view``.
-   Default value for ``Operation`` is ``Kokkos::Experimental::ScatterSum``, ``Duplication`` and ``Contribution`` are chosen to make the ScatterView as efficient as possible when running on its ``ExecSpace``.
+   ``view`` をインターフェースとする新しい ScatterView を作成します。
+   `Operation`` のデフォルト値は、 is ``Kokkos::Experimental::ScatterSum`` であり、 ``Duplication`` および ``Contribution`` は、ScatterView が``ExecSpace`` 上で動作する際に可能な限り効率的になるよう選択されます。
 
 .. _contribute:
 
 .. cpp:function:: contribute(View<DT1, VP...>& dest, Kokkos::Experimental::ScatterView<DT2, LY, ES, OP, CT, DP> const& src)
 
-   convenience function to perform final reduction of ScatterView
-   results into a resultant View; may be called following |parallelReduce|_.
+    ScatterView の結果を最終的に結果のViewに縮約するための便利関数; |parallelReduce|_ の後に呼び出される場合があります。
 
 
-Example
+例
 -------
 
 .. code-block:: cpp

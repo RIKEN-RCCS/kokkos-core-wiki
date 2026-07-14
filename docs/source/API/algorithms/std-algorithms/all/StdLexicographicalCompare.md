@@ -1,7 +1,7 @@
 
 # `lexicographical_compare`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```cpp
 namespace Kokkos{
@@ -63,33 +63,33 @@ bool lexicographical_compare(
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-Returns `true` for (1,2,5,6) if the first range [first1, last1) is lexicographically less than the second range [first2, last2).
-Returns `true` for (3,4,7,8) if elements in `view1` are lexicographically less than elements in `view2`.
-Elements (1,2,3,4) are compared using the `<` operator.
-Elements (5,6,7,8) are compared using `comp`.
+第1の範囲 [first1, last1) が、第2の範囲 [first2, last2) よりも順序の上で、小さい場合に、(1,2,5,6) について、`真` を返します。
+`view1` の要素が `view2`における要素よりも順序の上で、小さい場合に、(3,4,7,8) について、`真` を返します。
+要素 (1,2,3,4)  `<` operator を使って、比較されます。
+要素 (5,6,7,8) は、 `comp` を使って比較されます。
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance
+  - 実行空間インスタンス
 
 - `label`:
-    - 1,5: The default string is "Kokkos::lexicographical_compare_iterator_api_default".
-    - 3,7: The default string is "Kokkos::lexicographical_compare_view_api_default".
+    - 1,5: デフォルト文字列は、 "Kokkos::lexicographical_compare_iterator_api_default".
+    - 3,7: デフォルト文字列は、 "Kokkos::lexicographical_compare_view_api_default".
 
-- `first1`, `last1`, `first2`, `last2`:
-  - range of elements to compare
-  - must be *random access iterators*
-  - must represent valid ranges, i.e., `last1 >= first1` and `last2 >= first2` 
-  - must be accessible from `exespace`
+- `first1`, `last1`, `first2`, `last2` :
+  - 比較対象の要素の範囲
+  - *ランダムアクセスイテレータ* でなければなりません。
+  - 有効な範囲、つまり `last1 >= first1` および `last2 >= first2` を表さなければなりません。
+  - `exespace`からアクセス可能でなければなりません。
 
 - `view1`, `view2`:
-  - views to compare
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - 比較対象のビュー
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - ``exespace`` からアクセス可能でなければなりません。
 
-- `pred` - similar to [`equal`](./StdEqual)
+- `pred` -  [`equal`](./StdEqual) と同様。
 
 

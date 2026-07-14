@@ -1,126 +1,121 @@
-Package Managers
-================
+パッケージマネージャー
+======================
 
-Use your favorite package manager to install Kokkos.
+好みのパッケージマネージャーを使って、Kokkos をインストールしてください。
 
-System package managers
-~~~~~~~~~~~~~~~~~~~~~~~
+システムパッケージマネージャー
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 DNF
 ---
-
-You may use the Fedora Project package manager to install Kokkos
+Kokkos をインストールするには、Fedora Project パッケージマネージャーを使うことができます 
 https://packages.fedoraproject.org/pkgs/kokkos/
 
-Other package managers
-~~~~~~~~~~~~~~~~~~~~~~
+他のパッケージマネージャー
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 `Spack <https://spack.io>`_
 ---------------------------
+Spack は HPC 向けの広く使われているパッケージマネージャーです。Spack には Kokkos のインストールレシピが付属しています。
+ 
+`Kokkos レシピウェブページ <https://packages.spack.io/package.html?name=kokkos>`_ には  、Kokkosの利用可能なバージョンとそのオプションがまとめられています。
 
-Spack is a popular package manager for HPC.  Spack comes with installation recipes for Kokkos.
+ほとんどの場合、Spack Kokkos のバリアントは、Kokkosの `CMake options <./configuration-guide.html>`_. と同じオプションに従っています。
+利用可能なバリアントのリストは、以下の実行により、見つけることができます
 
-The `Kokkos recipe webpage <https://packages.spack.io/package.html?name=kokkos>`_ summarizes the available versions of Kokkos
-and their options.
-
-Most of the time, Spack Kokkos' variants follow the same options as the Kokkos `CMake options <./configuration-guide.html>`_.
-List of available variants can be found by running
 
 .. code-block::
 
     spack info kokkos
 
 
-When using Spack, Kokkos hardware autodetection is disabled. That means that the user always has to manually specify the 
-architecture. However, for CPU, Spack already specify the CPU micro-architecture, so it is not needed to specify it again.
-For GPU, no such mechanism exists in Spack and the user always need to specify the correct architecture, using a dedicated
-backend keyword (see next section).
+Spackを使用する場合、Kokkos のハードウェア自動検出は無効です。 つまり、ユーザーが、常に手動でアーキテクチャを指定しなければならないということです。 しかしながら、CPU の場合、Spack はすでに CPU マイクロアーキテクチャを指定しているため、再度指定する必要はありません。
+GPUに関しては、Spack にはそのような仕組みは存在せず、ユーザーは専用のバックエンドキーワードを使って、正しいアーキテクチャを指定する必要があります(次の節参照)。
 
 
-Installing Kokkos with Spack
+
+Spack で Kokkos インストール
+
 ++++++++++++++++++++++++++++
 
-To install Kokkos with Spack with default options, run:
+デフォルトのオプションを使って、 Spack で Kokkos をインストールするには、以下を実行してください:
 
 .. code-block::
 
     spack install kokkos
 
 
-To install Kokkos with CUDA backend enabled, run:
+ CUDA バックエンドを有効にした状態で、Kokkos をインストールするには、以下を実行してください:
 
 .. code-block::
 
     spack install kokkos +cuda cuda_arch=90
 
 
-Note that the `cuda_arch` option is specific to the target GPU architecture.  Here, the `cuda_arch` value `90` corresponds
-to the NVIDIA Hopper architecture. With Spack, the architecture must be specified explicitly (no auto-detection).
+`cuda_arch`オプションが、ターゲット GPU アーキテクチャ専用であることに注意してください。  ここでの `cuda_arch` 値 `90` は、NVIDIA Hopper アーキテクチャに対応しています。 Spack ではアーキテクチャを明示的に指定する必要があります (自動検出なし)。
 
 
-For AMD GPU, the traditional Spack's keyword is `rocm` instead of `hip` in Kokkos' CMake. So to install Kokkos with the HIP backend enable, run:
+AMD GPU に関しては、従来の Spack のキーワードはKokkosのCMakeでは `hip` ではなく、`rocm` です。HIP バックエンドを有効にした Kokkos をインストールするには、以下を実行してください:
 
 .. code-block::
 
     spack install kokkos +rocm amdgpu_target=gfx942
 
 
-Note that the `amdgpu_target` option is specific to the target GPU architecture.
-With Spack, the architecture must be specified explicitly (no auto-detection).
+ `amdgpu_target` オプションは、対象 GPU アーキテクチャ固有のものです。Spack ではアーキテクチャを明示的に指定する必要があります(自動検出なし)。
 
 
-For Intel GPU, using the SYCL backend, run:
+Intel GPU に関しては、 SYCL バックエンドを使用して、 以下を実行します:
 
 .. code-block::
 
     spack spec kokkos +sycl intel_gpu_arch=intel_pvc
 
 
-Note that the `intel_gpu_arch` option is specific to the target GPU architecture.
-With Spack, the architecture must be specified explicitly (no auto-detection).
+`intel_gpu_arch` オプションは、対象のGPU アーキテクチャ専用であることに、注意してください。
+Spack ではアーキテクチャを明示的に指定する必要があります(自動検出なし)。
 
 
-To use the installed Kokkos, you can simply load the Kokkos module:
+Kokkosモジュールをロードするだけで、インストール済みの Kokkos を使用できます:
 
 .. code-block::
 
     spack load kokkos
 
 
-This will inject the Kokkos environment into your shell session.
+これにより Kokkos 環境がシェルセッションに注入されます。
 
-Packaging your own Kokkos dependent project with Spack
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Spack で自分だけの Kokkos 依存プロジェクトをパッケージ化する方法
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Let's say you have a project `Foo` that depends on `Kokkos`. You can package your project with Spack and include `Kokkos` as a dependency.
 
-You have to create a recipe that is contained in a file named `package.py` in the `foo` directory of your recipe repository.
-You can package as usual with Spack (for example, you can follow the `packaging tutorial <https://spack-tutorial.readthedocs.io/en/latest/tutorial_packaging.html>`_),
-but you have to take into account that for certain backends, you might need to specify the compiler to use.
+例えば、プロジェクト `Foo` が  `Kokkos` に依存しているとしましょう。 プロジェクトを Spack でパッケージ化し、 `Kokkos` を依存関係として含めることもできます。
 
-The compiler might be a wrapper, like `nvcc_wrapper` for CUDA. It is exported by the Kokkos package as the `kokkos_cxx` attribute.
+レシピリポジトリの `foo` ディレクトリにある  `package.py` というファイルにレシピを作成する必要があります。
+通常通りSpackでパッケージ化できます(例えば,  <https://spack-tutorial.readthedocs.io/en/latest/tutorial_packaging.html>`_ に従うことができます)が、特定のバックエンドでは、それを考慮に入れる必要があり、使用するコンパイラを指定する必要がある場合もあります。
 
-Here is an example of a `package.py` file that includes Kokkos as a dependency:
+コンパイラは、CUDA の `nvcc_wrapper` のようなラッパーかもしれません。 Kokkosパッケージでは、`kokkos_cxx` 属性としてエクスポートされます。
+
+以下は、Kokkos を依存関係として含む  `package.py` ファイルの例です:
 
 .. code-block:: python
 
     from spack.package import *
 
     class Foo(CMakePackage):
-        # Usual description of a Spack package
+        # Spack パッケージの通常の説明
 
         depends_on("kokkos")
 
         def cmake_args(self):
             args = []
-            # Ensure that the proper compiler is used
-            # It might be nvcc_wrapper
+            # 適切なコンパイラが使用されていることを保証します
+            # それは、 nvcc_wrapper かもしれません。
             args.append(self.define("CMAKE_CXX_COMPILER", self["kokkos"].kokkos_cxx))
             return args
 
 
-For more complete examples, you can look at already existing recipes in the *Required by* section of
-`Kokkos Spack recipe <https://packages.spack.io/package.html?name=kokkos>`_ or by running:
+より完全な例としては、`Kokkos Spack recipe <https://packages.spack.io/package.html?name=kokkos>`_ の *Required by* セクション内にある既存のレシピを参照するか、以下を実行してください:
 
 .. code-block::
 

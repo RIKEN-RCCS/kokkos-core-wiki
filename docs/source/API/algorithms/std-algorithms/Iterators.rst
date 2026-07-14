@@ -1,5 +1,5 @@
-Iterators
-=========
+イテレータ
+====================
 
 .. role:: cpp(code)
     :language: cpp
@@ -7,40 +7,41 @@ Iterators
 ``Kokkos::Experimental::{begin, cbegin, end, cend}``
 ----------------------------------------------------
 
-Header File: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダーファイル: ``<Kokkos_StdAlgorithms.hpp>``
 
 
 .. cpp:function:: template <class DataType, class... Properties> KOKKOS_INLINE_FUNCTION auto begin(const Kokkos::View<DataType, Properties...>& view);
 
-   Returns a Kokkos **random access** iterator to the beginning of ``view``
+   ``view`` の先頭へ Kokkos **ランダムアクセス** イテレータを返します。
 
 .. cpp:function:: template <class DataType, class... Properties> KOKKOS_INLINE_FUNCTION auto cbegin(const Kokkos::View<DataType, Properties...>& view);
 
-   Returns a Kokkos const-qualified **random access** iterator to the beginning of ``view``
+   ``view`` の先頭へ Kokkos const修飾 **ランダム** イテレータを返します。
 
 .. cpp:function:: template <class DataType, class... Properties> KOKKOS_INLINE_FUNCTION auto end(const Kokkos::View<DataType, Properties...>& view);
 
-   Returns a Kokkos **random access** iterator to the element past the end of ``view``
+   ``view`` の要素の末尾を過ぎた位置まで Kokkos **ランダムアクセス** イテレータを返します。
+
 
 .. cpp:function:: template <class DataType, class... Properties> KOKKOS_INLINE_FUNCTION auto cend(const Kokkos::View<DataType, Properties...>& view);
 
-   Returns a const-qualified Kokkos **random access** iterator to the element past the end of ``view``
+   ``view`` の要素の末尾を過ぎた位置まで Kokkos **ランダムアクセス** イテレータを返します。
 
-Notes
-~~~~~
+注意事項
+~~~~~~~~~~~~~~~~~~
 
-* the returned iterator is a **random access** for performance reasons
+* 返されたイテレーターは、パフォーマンス上の理由から、 **ランダムアクセス** です。
 
-* ``view`` is taken as ``const`` because, within each function, we are not changing the view itself: the returned iterator operates on the view without changing its structure.
+* 各関数内では、view そのものを変更しないため、 ``view`` は、 ``const`` として扱われます: 返されたイテレータは、構造を変更せずに view 上で動作します。
 
-* dereferencing an iterator must be done within an execution space where ``view`` is accessible
+* イテレータの参照解除は、 ``view`` がアクセス可能な実行空間内で行う必要があります。
 
-Parameters and Requirements
+パラメータと要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* ``view``: must be a rank-1 view with ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+* ``view``: ``LayoutLeft``、 ``LayoutRight``、または ``LayoutStride`` を持つランク1 viewでなければなりません。
 
-Example
+例
 ~~~~~~~
 
 .. code-block:: cpp
@@ -50,10 +51,10 @@ Example
     view_type a("a", 15);
 
     auto it = KE::begin(a);
-    // if dereferenced (within a proper execution space), can modify the content of `a`
+    //  `a` の内容を変更できます。
 
     auto itc = KE::cbegin(a);
-    // if dereferenced (within a proper execution space), can only read the content of `a`
+    // 間接参照された場合（適切な実行空間内で）、 `a` の内容の読み取りのみが可能です。
 
 ------------------
 
@@ -62,21 +63,21 @@ Example
 
 .. cpp:function:: template <class IteratorType> KOKKOS_INLINE_FUNCTION constexpr typename IteratorType::difference_type distance(IteratorType first, IteratorType last);
 
-   Returns the number of steps needed to go from ``first`` to ``last``.
+    ``first`` から ``last`` に行くまでに必要なステップ数を返します。
 
-Parameters and Requirements
+パラメータと要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* ``first, last``: range to calculate the distance of
+* ``first, last``: 距離を計算するための範囲
 
-Return
+戻り値
 ~~~~~~
 
-The number of steps needed to go from ``first`` to ``last``.
-The value may be negative if random-access iterators are used.
+``first`` から ``last`` に行くまでに必要なステップ数。
+ランダムアクセスイテレータを使用する場合、値が負になることがあります。
 
 
-Example
+例
 ~~~~~~~
 
 .. code-block:: cpp
@@ -87,10 +88,10 @@ Example
     auto it1 = KE::begin(a);
     auto it2 = it1 + 4;
     const auto stepsA = KE::distance(it1, it2);
-    // stepsA should be equal to 4
+    // stepsA は、4に等しくなる必要があります
 
     const auto stepsB = KE::distance(it2, it1);
-    // stepsB should be equal to -4
+    // stepsB は、‐4に等しくなる必要があります
 
 ------------------
 
@@ -99,24 +100,24 @@ Example
 
 .. cpp:function:: template <class IteratorType> void iter_swap(IteratorType first, IteratorType last);
 
-   Swaps the values of the elements the given iterators are pointing to.
+   指定されたイテレータが指す要素の値を入れ替えます。
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* ``first, last``: iterators to swap
+* ``first, last``: 入れ替えるためのイテレータ
 
-Notes
-~~~~~
+注意事項
+~~~~~~~~~~~~~~~
 
-Currently, the API does not have an execution space parameter because the operation is performed in the *default execution space*. The operation fences the default execution space.
+現在、操作がデフォルトの実行スペースで実行されるため、API には実行スペースパラメータがありません。この操作はデフォルトの実行領域をフェンスします。
 
-Return
+戻り値
 ~~~~~~
 
-None
+無し
 
-Example
+例
 ~~~~~~~
 
 .. code-block:: cpp

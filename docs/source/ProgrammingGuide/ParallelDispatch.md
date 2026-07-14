@@ -1,138 +1,135 @@
-# Parallel dispatch
+# 並列ディスパッチ
 
-You probably started reading this Guide because you wanted to learn how Kokkos can parallelize your code. This chapter will teach you different kinds of parallel operations that Kokkos can execute. We call these operations collectively _parallel dispatch_, because Kokkos "dispatches" them for execution by a particular execution space. Kokkos provides three different parallel operations:
+おそらく、Kokkos がどのようにコードの並列化を実現するのかを学びたいと考えられたので、本ガイドを読み始めたのでしょう。 本章では、Kokkos が実行可能な各種の並列演算について解説いたします。 Kokkos が特定の実行空間による実行のためにそれらを "ディスパッチ" するため、これらの操作を総称して、 _並列ディスパッチ_ と呼びます。 Kokkos は、3つの異なる並列演算を提供します:
 
-* [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) implements a "for loop" with independent iterations.
-* [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) implements a reduction.
-* [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan) implements a prefix scan.
+* [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) 独立した反復処理を持つ "forループ" を実装します。
+* [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) 縮約を実装。
+* [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan) プレフィックススキャンを実施。
 
-Kokkos gives users two options for defining the body of a parallel loop: functors and lambdas. It also lets users control how the parallel operation executes, by specifying an _execution policy_. Later chapters will cover more advanced execution policies that allow nested parallelism.
+ Kokkos は、並列ループの本体を定義する際に、ユーザーに2つの選択肢を提供します: ファンクタおよびラムダ。 また、ユーザーは _実行ポリシー_ を指定することで、並列操作の実行方法を制御することも可能です。 後述の章では、ネストされた並列処理を可能にするより高度な実行ポリシーについて解説いたします。
 
-Important notes on syntax:
+構文に関する重要な注意事項:
 
-* Use the `KOKKOS_INLINE_FUNCTION` macro to mark a   functor's methods that Kokkos will call in parallel
-* Use the `KOKKOS_LAMBDA` macro to replace a lambda's capture clause when giving the lambda to Kokkos for parallel
-  execution
+* Kokkos が並列で呼び出すファンクタのメソッドには、`KOKKOS_INLINE_FUNCTION` マクロを使用して、明示的にマークしてください
+* `KOKKOS_LAMBDA` マクロを使用し、ラムダ式を Kokkos に並列実行のために渡す際に、ラムダのキャプチャ句を置き換えてください
 
-## Specifying the parallel loop body
+## 並列ループボディを指定
 
-### Functors
+### ファンクタ
 
-A _functor_ is one way to define the body of a parallel loop. It is a class or struct<sup>1</sup> with a public `operator()` instance method. That method's arguments depend on both which parallel operation you want to execute (for, reduce, or scan), and on the loop's execution policy (e.g., range or team). For an example of a functor see the section in this chapter for each type of parallel operation. In the most common case of a [`parallel_for()`](../API/core/parallel-dispatch/parallel_for), it takes an integer argument which is the for loop's index. Other arguments are possible; see [Chapter 8 - Hierarchical Parallelism](HierarchicalParallelism).
+ _ファンクタ_ は、並列ループの本体を定義する方法の一つです。 それは、パブリックな `operator()` インスタンスメソッドを持つクラスまたは struct<sup>1</sup> です。 そのメソッドの引数は、実行したい並列操作（for、reduce、または scan）、およびループの実行ポリc（例えば、範囲またはチーム）の両方に依存します。ファンクタの一例については、 各並列操作の種類についての、本章の該当セクションを参照してください。 最も一般的なケースである [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) では、for ループのインデックスである、整数型の引数を取ります。これはとなります。他の引数である可能性もあります;[Chapter 8 - Hierarchical Parallelism](HierarchicalParallelism)を参照してください。
 
-The `operator()` method must be const, and must be marked with the `KOKKOS_FUNCTION` or `KOKKOS_INLINE_FUNCTION` macro. For some backends (such as CUDA and HIP) this macro is necessary to mark your method as suitable for running on both accelerator devices and the host. If not building with any backends requiring markup, `KOKKOS_INLINE_FUNCTION` expands to `inline`, and `KOKKOS_FUNCTION` is unnecessary but harmless. Here is an example of the signature of such a method:
+ `operator()` メソッドは、const でなければならず、`KOKKOS_FUNCTION` または `KOKKOS_INLINE_FUNCTION` マクロでマークされなければなりません。一部のバックエンド (CUDA および HIP等) については、このマクロは、ご自身のメソッドがアクセラレータデバイスとホストの両方で実行可能であることを示すために必要です。 マークアップを必要とするバックエンドでビルドしない場合、`KOKKOS_INLINE_FUNCTION` は `inline` に展開され、そして `KOKKOS_FUNCTION` は不要ですが、害はありません。 そのようなメソッドのシグネチャの例を以下に示します：
 
 ```c++
 KOKKOS_INLINE_FUNCTION void operator() (...) const;
 ```
 
-The entire parallel operation (for, reduce, or scan) shares the same instance of the functor. However, any variables declared inside the `operator()` method are local to that iteration of the parallel loop. Kokkos may pass the functor instance by "copy," not by pointer or reference, to the execution space that executes the code. In particular, the functor might need to be copied to a different execution space than the host. For this reason, it is generally not valid to have any pointer or reference members in the functor. Pass in Kokkos Views by copy as well; this works by shallow copy. The functor is also passed as a const object, so it is not valid to change members of the functors. (However, it is valid for the functor to change the contents of, for example, a View or a raw array which is a member of the functor.)
+並列演算全体（for、reduce、または scan）は、同じファンクタのインスタンスを共有します。 ただし、`operator()` メソッド内で宣言された変数は、その並列ループの反復内でのみ有効です。Kokkos は、コードを実行する実行領域に対して、ファンクタインスタンスをポインタや参照ではなく、"コピー，によって渡すことがあります。 特に、ファンクターはホストとは異なる実行空間にコピーする必要がある場合があります。 Kokkos ビューもコピーで渡してください。これは浅いコピーとして機能します。 ファンクタも、const オブジェクトとして渡されますので、ファンクタのメンバを変更することはできません。 (ただし、ファンクターが、例えばビューやファンクターのメンバーである生の配列といった内容を変更することは有効です。)
 
 ***
-<sup>1</sup>  A "struct" in C++ is just a class, all of whose members are public by default.
+<sup>1</sup> C++ 内の  "構造体" は、ほんの一例であり、そのメンバーのすべてが、デフォルトで公開されています。
 ***
 
-### Lambdas
+### ラムダ
 
-The 2011 version of the C++ standard ("C++11") provides a new language construct, the _lambda_, also called "anonymous function" or "closure." Kokkos lets users supply parallel loop bodies as either functors (see above) or lambdas. Lambdas work like automatically generated functors. Just like a class, a lambda may have state.  The only difference is that with a lambda, the state comes in from the environment. (The name "closure" means that the function "closes over" state from the environment.) Just like with functors, lambdas must bring in state by "value" (copy), not by reference or pointer.
+2011年版の C++ 標準 ("C++11") では、新しい言語構文であるラムダ式（_ラムダ_）が提供されています。Kokkos では、並列ループ本体をファンクタ（上記参照）またはラムダ式として指定することが可能です。 ラムダ関数は、自動的に生成されるファンクタのように機能します。 クラスと同様に、ラムダ式にも状態が存在する可能性があります。 唯一の違いは、ラムダ関数の場合、状態が環境から渡される点です。（ "closure" という名称は、関数が環境から状態を "closes over" ことを意味します。）ファンクタによる場合と同様に、ラムダ式は状態を "value" で（コピーによって）取り込む必要があり、参照やポインタによって取り込むことはできません。
 
-By default, lambdas capture nothing (as the default capture specifier `[]` specifies). This is not likely to be useful, since [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) generally works by its side effects. Because Kokkos reserves the right to make copies of the closure, and its operations are potentially asynchronous users must ``capture by value'' to be semantically correct. We recommend doing so via the KOKKOS_LAMBDA macro for the outermost level of parallelism (see [Chapter 8](HierarchicalParallelism)).
-For some backends, this just turns into the usual capture-by-value clause `[=]`. That captures variables from the surrounding scope by value. Do NOT capture them by reference! For other backends (e.g. CUDA and HIP), this macro may have a special definition
-that makes the lambda work correctly, same as the `KOKKOS_INLINE_FUNCTION` macro. 
+デフォルトでは、ラムダ式は何もキャプチャしません（デフォルトのキャプチャ指定子 `[]` が示す通りです）。 [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) は、一般的にその副作用によって動作するため、これはおそらく役に立たないでしょう。 Kokkos では閉鎖のコピーを作成する権利を留保しており、その動作は非同期となる可能性があるため、意味論的に正しい動作を実現するには、 ``capture by value'' を行う必要があります。 最外層の並列化については、KOKKOS_LAMBDA マクロを介して行うことをお勧めいたします（詳細は、[Chapter 8](HierarchicalParallelism)を参照してください）。
+一部のバックエンドでは、これは通常のcapture-by-value 句 `[=]` に置き換わります。 それは周囲のスコープから変数を値渡しで取得します。 参照渡しで取得しないでください！ その他のバックエンドについては (例えば、 CUDA および HIP)、 このマクロには、`KOKKOS_INLINE_FUNCTION` マクロ同様に、ラムダ式を正しく動作させるようにする、特別な定義が存在する可能性があります。 
 
-It is a violation of Kokkos semantics to capture by reference `[&]` for two reasons. First Kokkos might give the lambda to an execution space which can not access the stack of the dispatching thread. Secondly, capturing by reference allows the programmer to violate the const semantics of the lambda. For correctness and portability reasons lambdas and functors are treated as const objects inside the parallel code section. Capturing by reference allows a circumvention of that const property, and enables many more possibilities of writing non-threads-safe code.
+参照渡し `[&]` を用いることは、二つの理由から Kokkos のセマンティクスに違反します。 第一の理由は、Kokkos が、ラムダを、ディスパッチングスレッドのスタックにアクセスできない実行空間に渡す可能性があることです。第二の理由は、参照渡しによる取得により、プログラマーはラムダの const セマンティクスを破ることができるということです。 正確性と移植性の観点から、ラムダ式およびファンクタは並列コードセクション内で const オブジェクトとして扱われます。 参照渡しによる取得は、その const プロパティを回避することを可能にし、スレッドセーフでないコードを書く可能性をさらに多く生み出します。
 
-When using lambdas for nested parallelism (see [Chapter 8](HierarchicalParallelism) for details) using capture by reference can be useful for performance reasons, but the code is only valid Kokkos code if it also works with capturing by copy.
+ラムダ式を用いたネストされた並列処理（詳細は、[第8章](HierarchicalParallelism) を参照してください。）において、参照による取得は、パフォーマンス上の理由から、有用な場合がありますが、そのコードは、コピーによるキャプチャでも動作する場合にのみ、Kokkos コードとして有効です。
 
-### Should I use a functor or a lambda?
+### ファンクタまたはラムダを使用するべきでしょうか？
 
-Kokkos lets users choose whether to use a functor or a lambda. Lambdas are convenient for short loop bodies. For a much more complicated loop body, you might find it easier for testing to separate it out and name it as a functor. Lambdas by definition are "anonymous functions," meaning that they have no name. This makes it harder to test them. Furthermore, if you would like to use lambdas with CUDA, you must have a sufficiently new version of CUDA. At the time of writing, CUDA 7.5 and later versions support host-device lambda with the special flag. CUDA 8.0 has improved interoperability with the host compiler. To enable this support, use the `KOKKOS_CUDA_OPTIONS=enable_lambda` option.
+Kokkosでは、ユーザーがファンクタとラムダのどちらを使用するかを選択できます。 ラムダ式は短いループ本体に便利です。 より複雑なループ本体については、テストを容易にするために、それを分離してファンクタとして名前を付ける方が良いかもしれません。 ラムダ関数は、定義上 "無名関数"、であり、つまり名前を持たないものです。これにより、それらのテストを行うことが難しくなります。 さらに、 CUDA でラムダ式をご利用になる場合には、十分に新しいバージョンの CUDA が必要です。 書き込み時点において、CUDA 7.5以降のバージョンでは、特別なフラグを用いたホスト-デバイスラムダ式をサポートしております。 CUDA 8.0では、ホストコンパイラとの相互運用性が向上しました。このサポートを有効にするためには、`KOKKOS_CUDA_OPTIONS=enable_lambda` オプションをご使用ください
 
-Finally, the "execution tag" feature, which lets you put together several different parallel loop bodies into a single functor, only works with functors.  (See [Chapter 8](HierarchicalParallelism) for details.)
+最後に、"実行タグ" 機能は、複数の異なる並列ループ本体を、単一のファンクタにまとめることができますが、ファンクタでのみ動作します。  (詳細についは、[第8章](HierarchicalParallelism) 参照してください。)
 
-### Specifying the execution space
+### 実行空間の指定
 
-If a functor has an `execution_space` public typedef, a parallel dispatch will only run the functor in that execution space. That's a good way to mark a functor as specific to an execution space. If the functor lacks this typedef, [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) will run it in the default execution space unless you tell it otherwise (that's an advanced topic; see "execution policies"). Lambdas do not have typedefs, so they run on the default execution space unless you tell Kokkos otherwise.
+ファンクタに、 `execution_space` パブリック型定義がある場合には、 並列ディスパッチでは、その実行空間内でのみファンクタが動作します。 その方法は、ファンクタを特定の実行領域に固有のものとしてマークする良い方法です。 このファンクタに、この `型定義` が指定されていない場合、[`parallel_for()`](../API/core/parallel-dispatch/parallel_for) は、特に指定がない限り、デフォルトの実行空間でこれを実行します（これは高度なトピックです；"実行ポリシー" を参照してください）。 ラムダ式には、型定義がありません。そのため、Kokkosに別の指定をしない限り、デフォルトの実行空間で動作します。
 
-## Parallel for
+## 並列for
 
-The most common parallel dispatch operation is a [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) call. It corresponds to the OpenMP construct `#pragma omp parallel for`. [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) splits the index range over the available hardware resources and executes the loop body in parallel. Each iteration is executed independently. Kokkos promises nothing about the loop order or the amount of work which actually runs concurrently. This means in particular that not all loop iterations are active at the same time. Consequently, it is not legal to use wait constructs (e.g., wait for a prior iteration to finish). Kokkos also doesn't guarantee that it will use all available parallelism. For example, it can decide to execute in serial if the loop count is very small, and it would typically be faster to run in serial instead of introducing parallelization overhead. The `RangePolicy` allows you to specify minimal chunk sizes in order to control potential concurrency for low trip count loops.
+最も一般的な並列ディスパッチ演算は、 [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) 呼び出しです。 それは、OpenMP の構文 `#pragma omp parallel for`に対応します。 [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) は、インデックス範囲を利用可能なハードウェアリソースに分割し、ループ本体を並列に実行します。各反復処理は独立して実行されます。 Kokkos は、ループの順序や実際に同時に実行される作業量について、一切保証しません。 これは、特にすべてのループ反復が同時に有効であるわけではないことを意味します。 したがって、待機構造（例：前の反復処理が終了するのを待つ）を使用することは、法的に認められていません。 Kokkosは、利用可能な並列処理をすべて使用することを保証するものではありません。 例えば、 ループ回数が非常に少ない場合、シリアル実行を選択することが可能であり、また、並列化のオーバーヘッドを導入するよりも、シリアルで実行する方が通常は高速となります。 実行回数の少ないループにおける潜在的な並列処理を制御するために、 `RangePolicy` の使用が、最小チャンクサイズの指定を可能にします。
 
-The lambda or the `operator()` method of the functor takes one argument. That argument is the parallel loop "index." The type of the index depends on the execution policy used for the [`parallel_for()`](../API/core/parallel-dispatch/parallel_for). It is an integer type for the implicit or explicit [`RangePolicy`](../API/core/policies/RangePolicy). The former is used if the first argument to [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) is an integer.
+ラムダ式またはファンクタの`operator()` メソッドは、1つの引数を取ります。 その引数は、並列ループの "インデックス" です。インデックスの型は、[`parallel_for()`](../API/core/parallel-dispatch/parallel_for) で使用される実行ポリシーによって異なります。 それは、暗示的または明示的な[`RangePolicy`](../API/core/policies/RangePolicy). の整数型です。  [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) への最初の引数は、整数である場合に、前者が使用されます。
 
-## Parallel reduce
+## 並列リデュース
 
-Kokkos' [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) operation implements a reduction. It is like [`parallel_for()`](../API/core/parallel-dispatch/parallel_for), except that each iteration produces a value and these iteration values are accumulated into a single value with a user-specified associative binary operation. It corresponds to the OpenMP construct `#pragma omp parallel reduction` but with fewer restrictions on the reduction operation.
+ Kokkos の [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) 演算は、縮約を実装します。  各反復処理では値が生成され、これらの反復値はユーザーが指定した連想二項演算によって単一の値に集約される場合を除いて、 [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) の様なものです。 これは、OpenMP の構文 `#pragma omp parallel reduction`に対応しますが、縮約演算に対する制限が少なくなっています。
 
-In addition to the execution policy and the functor, [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) takes an additional argument which is either the place where the final reduction result is stored (a simple scalar, or a [`Kokkos::View`](../API/core/view/view)) or a reducer argument which encapsulates both the place where to store the final result as well as the type of reduction operation desired (see [Custom Reductions](Custom-Reductions)). 
+実行ポリシーとファンクタに加えて、 [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) は、最終的な集約結果を格納する場所（単純なスカラー、または`Kokkos::View` (../API/core/view/view)) であるか、または最終結果の保存場所と希望する縮約演算の型の両方をカプセル化したリデューサー引数である追加の引数を取ります。 ( [Custom Reductions](Custom-Reductions) を参照してください)。
 
-The lambda or the `operator()` method of the functor takes two arguments. The first argument is the parallel loop "index," the type of which depends on the execution policy used for the [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce). For example: when calling [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) with a [`RangePolicy`](../API/core/policies/RangePolicy), the first argument to the operator is an integer type, but if you call it with a [`TeamPolicy`](../API/core/policies/TeamPolicy) the first argument is a *team handle*. The second argument is a non-const reference to a thread-local variable of the same type as the reduction result.
+ファンクタのラムダ式または `operator()` メソッドは、2つの引数を取ります。 第一の引数は、並列ループの "インデックス" であり、その型は [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) に使用される実行ポリシーによって異なります。 例えば: [`RangePolicy`](../API/core/policies/RangePolicy) で [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) を呼び出す場合、 演算への第一の引数は、整数型ですが、もし  [`TeamPolicy`](../API/core/policies/TeamPolicy) でそれを呼び出した場合には、第一の引数は、 *チームハンドル* です。 第二引数は、縮約結果と同じ型のスレッドローカル変数への、非 const 参照です。
 
-When not providing a `reducer` the reduction is performed with a sum reduction using the + or += operator of the scalar type. Custom reduction can also be implemented by providing a functor with a `join` and an `init` function. 
+ `リデューサ`を指定しない場合、スカラー型の `+` または `+=` 演算子を用いた、合計による縮約処理が行われます。 カスタム縮約はまた、 `join` および  `init` 関数をファンクタに提供することにより、実装可能です。
 
-### Example using lambda
+### ラムダ使用例
 
-Here is an example reduction using a lambda, where the reduction result is a `double`.
+以下にラムダを使用した縮約例を示します。ここでは、縮約結果は、 `double` です。
 
 ```c++
 const size_t N = ...;
 View<double*> x ("x", N);
-// ... fill x with some numbers ...
+// ...  x をいくつかの数で満たします ...
 double sum = 0.0;
-// KOKKOS_LAMBDA macro includes capture-by-value specifier [=].
+// KOKKOS_LAMBDA マクロは、 capture-by-value 指定子 [=] を含みます。
 parallel_reduce ("Reduction", N, KOKKOS_LAMBDA (const int i, double& update) {
   update += x(i); 
 }, sum);
 ```
 
-### Example using functor with `join` and `init`.
+### `join` および `init`を伴うファンクタ使用例。
 
-The following example shows a reduction using the _max-plus semiring_, where `max(a,b)` corresponds to addition and ordinary addition corresponds to multiplication:
+以下の例は、 _max-plus semiring_ を用いた縮約を示しており、ここでは、`max(a,b)` は加法に対応し、通常の加法は乗法に対応します:
 
 ```c++
 class MaxPlus {
 public:
-  // Kokkos reduction functors need the value_type typedef.
-  // This is the type of the result of the reduction.
+  // Kokkos の縮約ファンクタには、value_type の型定義が必要です。
+  // これは縮約結果の型です。
   using value_type = double;
 
-  // Just like with parallel_for functors, you may specify
-  // an execution_space typedef. If not provided, Kokkos
-  // will use the default execution space by default.
+  // parallel_forファンクタと同様に
+  // execution_space の型定義を指定することができます。指定がない場合、
+  // Kokkos はデフォルトでデフォルトの実行スペースを使用します。
 
-  // Since we're using a functor instead of a lambda,
-  // the functor's constructor must do the work of capturing
-  // the Views needed for the reduction.
+  // ラムダ式の代わりに、ファンクタを使用しているため
+  // ファンクタのコンストラクタは、
+  // 縮約に必要なビューをキャプチャする作業を必ず行わなければなりません。
   MaxPlus (const View<double*>& x) : x_ (x) {}
 
-  // This is helpful for determining the right index type,
-  // especially if you expect to need a 64-bit index.
+  // これは適切なインデックスの種類を決定するのに役立ちます.
+  // 特に、ビットインデックスを必要とすることが予測される場合
   using size_type = View<double*>::size_type;
 
   KOKKOS_INLINE_FUNCTION void
   operator() (const size_type i, value_type& update) const
-  { // max-plus semiring equivalent of "plus"
+  { // "plus" に相当する最大プラス半環
     if (update < x_(i)) {
       update = x_(i);
     }
   }
 
-  // "Join" intermediate results from different threads.
-  // This should normally implement the same reduction
-  // operation as operator() above.
+  // 異なるスレッドからの中間結果を"結合"。
+  // 通常、これは上記の operator() と同じ演算を
+  // 実装する必要があります。
   KOKKOS_INLINE_FUNCTION void
   join (value_type& dst,
         const value_type& src) const
-  { // max-plus semiring equivalent of "plus"
+  { // "plus" に相当する最大プラス半環
     if (dst < src) {
       dst = src;
     }
   }
 
-  // Tell each thread how to initialize its reduction result.
-  KOKKOS_INLINE_FUNCTION void
+  // 各スレッドに対し、その縮約結果を初期化する方法を指示。
   init (value_type& dst) const
-  { // The identity under max is -Inf.
+  { // 最大値の下での値は、-Inf。
      dst = reduction_identity<value_type>::max();
   }
 
@@ -141,58 +138,58 @@ private:
 };
 ```
 
-This example shows how to use the above functor:
+この例は、上記のファンクターの使用方法を示します:
 
 ```c++
 const size_t N = ...;
 View<double*> x ("x", N);
-// ... fill x with some numbers ...
+// ... いくつかの数で、ⅹ を満たす ...
 
-double result;
+ result;
 parallel_reduce ("Reduction", N, MaxPlus (x), result);
 ```
 
-### Reductions with an array of results
+### 結果の配列を用いた削減
 
-Kokkos lets you compute reductions with an array of reduction results, as long as that array has a (run-time) constant number of entries. This currently only works with functors. Here is an example functor that computes column sums of a 2-D View.
+ Kokkos では、(実行時の)定数個の要素を持つ配列であれば、その配列を用いて縮約結果の計算を行うことが可能です。 以下に、2次元ビューの列の合計を計算するファンクタの例を示します。
 
 ```c++
 struct ColumnSums {
-  // In this case, the reduction result is an array of float.
+  // この場合、縮約結果は浮動小数点数の配列となります。
   using value_type = float[];
 
   using size_type = View<float**>::size_type;
 
-  // Tell Kokkos the result array's number of entries.
-  // This must be a public value in the functor.
+  // Kokkos に結果配列の要素数を伝達します。
+  // これはファンクタ内のパブリック値である必要があります。
   size_type value_count;
 
   View<float**> X_;
 
-  // As with the above examples, you may supply an
-  // execution_space typedef. If not supplied, Kokkos
-  // will use the default execution space for this functor.
+  // 上記の例により、 execution_space 型定義を
+  // 行うことができます。 定義されない場合には、 
+  // Kokkos は、このファンクタのデフォルト実行空間を使用します。
 
-  // Be sure to set value_count in the constructor.
+  // コンストラクタ内で、必ず value_count を設定してください。
   ColumnSums (const View<float**>& X) :
     value_count (X.extent(1)), // # columns in X
     X_ (X)
   {}
 
-  // value_type here is already a "reference" type,
-  // so we don't pass it in by reference here.
+  // ここでの value_type は、既に "参照" 型ですので、
+  // ここでは参照によっては、それを渡しません。
   KOKKOS_INLINE_FUNCTION void
   operator() (const size_type i, value_type sum) const {
-    // You may find it helpful to put pragmas above this loop
-    // to convince the compiler to vectorize it. This is 
-    // probably only helpful if the View type has LayoutRight.
+    // このループの上部にプリプロセッサディレクティブを記述すると、
+    // コンパイラにベクトル化を促すのに役立つかもしれません。  
+    // おそらく、この機能はビューのタイプに LayoutRight が設定されている場合にのみ有効です。
     for (size_type j = 0; j < value_count; ++j) {
       sum[j] += X_(i, j);
     }
   }
 
-  // value_type here is already a "reference" type,
-  // so we don't pass it in by reference here.
+  // ここでの value_type は、既に "参照" 型ですので、
+  // ここでは参照によっては、それを渡しません。
   KOKKOS_INLINE_FUNCTION void
   join (value_type dst,
         const value_type src) const {
@@ -209,71 +206,73 @@ struct ColumnSums {
 };
 ```
 
-We show how to use this functor here. The results are
-stored in the 1D View `sums`.
+ここでは、このファンクターの使い方を説明します。 結果は、
+一次元ビュー `sums` 内に格納されます。
 ```c++
 const size_t numRows = 10000;
 const size_t numCols = 10;
 
 View<float**> X ("X", numRows, numCols);
-// ... fill X before the following ...
+// ... 以下の前に X を ...
 ColumnSums cs (X);
 Kokkos::View<float*> sums ("sums", numCols);
 parallel_reduce (X.extent(0), cs, sums);
 ```
 
-The result view could also use `Kokkos::HostSpace`, in which case
-accessing the results on the host requires a fence:
+結果ビューでは、 `Kokkos::HostSpace` を使用することも可能です。その場合、
+ホスト上で結果にアクセスするにはフェンスが必要となります:
 
 ```c++
 Kokkos::View<float*, Kokkos::HostSpace> sums ("sums", numCols);
 parallel_reduce (X.extent(0), cs, sums);
 Kokkos::fence();
 std::cout << sums(0) << '\n';
+```
 
-If the number of elements in the reduced array is a compile-time constant,
-it is also possible to place the results directly into a C array:
+縮約された配列の要素数がコンパイル時の定数である場合、
+結果をC言語の配列に直接格納することも可能です：
 ```
 float sums[10];
 parallel_reduce (X.extent(0), cs, sums);
 ```
 
-## Parallel scan
+## 並列スキャン
 
-Kokkos' [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan) operation implements a _prefix scan_. A prefix scan is like a reduction over a 1-D array, but it also stores all intermediate results ("partial sums"). It can use any associative binary operator. The default is `operator+` and we call a scan with that operator a "sum scan" if we need to distinguish it from scans with other operators. The scan operation comes in two variants. An _exclusive scan_ excludes (hence the name) the i<sup>th</sup> entry of the input array while computing the i<sup>th</sup> prefix scan and an _inclusive scan_ includes that entry. Given an example array `(1, 2, 3, 4, 5)`, an exclusive sum scan overwrites the array with `(0, 1, 3, 6, 10)`, and an inclusive sum scan overwrites the array with `(1, 3, 6, 10, 15)`.
+ Kokkos の `parallel_scan()` 演算は、_プレフィックススキャン_ を実装します。 プレフィックススキャンは、1次元配列に対する縮約演算に似ていますが、中間結果（ "部分和" ）をすべて保存する点も特徴であります。それは、任意の結合性を持つ二項演算子を使用できます。デフォルトは、 `operator+` であり、他の演算子を用いたスキャンと区別する必要がある場合、その演算子を用いたスキャンを、"和スキャン" と呼びます。スキャン演算には、２種類あります。 _エクスクルーシブスキャン_ は、入力配列のi<sup>th</sup> 入力を計算対象から除外し（名称の通り）、一方では、_インクルーシブスキャン_では、その要素を含みます。 例の配列 `(1, 2, 3, 4, 5)` を前提とすれば、 エクスクルーシブサムスキャンは、 `(0, 1, 3, 6, 10)` を使った配列を上書きし、インクルーシブサムスキャンは、`(1, 3, 6, 10, 15)` を使った配列を上書きします。
 
-Many operations that "look" sequential can be parallelized with a scan. To learn more, refer to Guy Blelloch's book<sup>2</sup> (a version of his PhD dissertation).
+ "一見" 連続的であるような演算の多くは、走査処理によって並列化することが可能です。 詳細については、Guy Blelloch氏の著書 <sup>2</sup>（博士論文を基にした書籍）を参照してください。
 
-Kokkos lets users specify a scan by either a functor or a lambda. Both look like their [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) equivalents, except that the `operator()` method or lambda takes three arguments: the loop index, the "update" value by non const reference, and a `bool`. Here is a lambda example where the intermediate results have type `float`.
+ Kokkos では、関数型またはラムダ式によってスキャンを指定することが可能です。 `operator()` メソッドまたはラムダ式が3つの引数を取る点が異なりますことを除いて:具体的には、ループインデックス、非 const 参照による「更新」値、そして`bool`型、どちらも[`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) の対応する関数のように見えます。
+以下に、中間結果は、`浮動小数点` 型となるラムダの例を示します。
 
 ```c++
-View<float*> x = ...; // assume filled with input values
+View<float*> x = ...; // 入力値が入力されると仮定
 const size_t N = x.extent(0);
 parallel_scan (N, KOKKOS_LAMBDA (const int i,
           float& update, const bool final) {
-    // Load old value in case we update it before accumulating
+    // 蓄積する前に更新した場合に備え、古い値を読み込みます
     const float val_i = x(i); 
     if (final) {
-      x(i) = update; // only update array on final pass
+      x(i) = update; // 最終パスに関する配列の更新のみを実行
     }
-    // For exclusive scan, change the update value after
-    // updating array, like we do here. For inclusive scan,
-    // change the update value before updating array.
+    // エクスクルーシブスキャンについては、
+    // ここで行った通りに、配列更新後、更新値を変えます。インクルーシブスキャンについては、
+    // 配列更新前に、更新値を変えます。
     update += val_i;
   });
 ```
 
-Kokkos may use a multiple-pass algorithm to implement scan. This means that it may call your `operator()` or lambda multiple times per loop index value. The `final` Boolean argument tells you whether Kokkos is on the final pass. You must only update the array on the final pass.
+ Kokkos は、スキャンを実装するために複数パスアルゴリズムを使用する場合があります。 これは、ループのインデックス値ごとに、`operator()` またはラムダ式が複数回呼び出される可能性があることを意味します。 `最終`ブール引数は、Kokkos が最終パス中であるかどうかを示します。 配列の更新は、最終パスでのみ行う必要があります。
 
-For an exclusive scan, change the `update` value after updating the array, as in the above example. For an inclusive scan, change `update` _before_ updating the array. Just as with reductions, your functor may need to specify a non-default `join` or `init` method if the defaults do not do what you want.
+エクスクルーシブスキャンについては、上記例にある通り、配列 `更新` 後、 `更新` 値を変えます。 インクルーシブスキャンについては、 配列 `更新` _前_ に、更新値を変えます。 同様に、縮約により、デフォルト値が、望むものでない場合には、ファンクタが、非デフォルト `結合` または `init` メソッドを指定する必要がある場合があります。
 
 ***
-<sup>2</sup>  Blelloch, Guy, _Vector Models for Data-Parallel Computing_, The MIT Press, 1990.
+<sup>2</sup>  Blelloch, Guy, _データ並列計算のベクトルモデル_, MIT 出版, 1990年。
 ***
 
-## Function Name Tags
+## 関数ネームタグ
 
-When writing class-based applications it is often useful to make the classes themselves functors. Using that approach allows the kernels to access all other class members, both data and functions. An issue coming up in that case is the necessity for multiple parallel kernels in the same class. Kokkos supports that through function name tags. An application can use optional (unused) first arguments to differentiate multiple operators in the same class. Execution policies can take the type of that argument as an optional template parameter. The same applies to init, join and final functions.
+クラスベースのアプリケーションを作成する際には、クラス自体をファンクターとして扱うことがしばしば有用です。 の方法を用いることで、カーネルは他のすべてのクラスメンバー（データと関数の両方）にアクセスすることが可能となります。 その場合の問題点として、同一クラス内に複数の並列カーネルが必要となる点が挙げられます。 Kokkos は、関数ネームタグを通じてそれをサポートしております。 アプリケーションは、同じクラス内の複数の演算子を区別するために、省略可能（未使用）の第一引数を使用することができます。 実行ポリシーは、その引数の型を省略可能なテンプレートパラメータとして指定できます。 init 関数、join 関数、final 関数についても同様です。
 
 ```c++
 class Foo {
@@ -306,4 +305,4 @@ class Foo {
 };
 ```
 
-This approach can also be used to template the operators by templating the tag classes which is useful to enable compile time evaluation of appropriate conditionals.
+本アプローチは、タグクラスをテンプレート化することで演算子をテンプレート化するのにも利用可能であり、これにより、適切な条件式をコンパイル時に評価できるようになる点が有用です。

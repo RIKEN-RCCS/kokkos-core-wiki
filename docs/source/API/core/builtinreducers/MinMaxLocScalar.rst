@@ -1,22 +1,21 @@
 ``MinMaxLocScalar``
 ===================
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
-The :cpp:struct:`MinMaxLocScalar` is a class template that stores both a
-minimum, a maximum, and their respective locations as a single unit. It's
-designed to hold the result of :cpp:func:`parallel_reduce` operations using
-a :cpp:class:`MinMaxLoc` builtin reducer.
+:cpp:struct:`MinMaxLocScalar` は、最小値・最大値およびそれぞれの保存先を一つの単位として格納するクラステンプレートです。 :cpp:class:`MinMaxLoc` 組み込みリデューサーを使った :cpp:func:`parallel_reduce` 演算の結果を保持するために設計されています。
 
-It is generally recommended to get this type by using the reducer's
-``::value_type`` member (e.g., ``MinMaxLoc<Scalar,Index,Space>::value_type``)
-to ensure the correct template parameters are used.
 
-Header File: ``<Kokkos_Core.hpp>``
+正しいテンプレートパラメータが使用されていることを確認するために、一般的には、リデューサーの``::value_type`` メンバー (例えば、 ``MinMaxLoc<Scalar,Index,Space>::value_type``) を使って、本タイプを取得することが推奨されています
 
-Usage
------
+
+
+
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
+
+使用方法
+--------
 
 .. code-block:: cpp
 
@@ -27,28 +26,28 @@ Usage
    I minLoc = result.min_loc;
    I maxLoc = result.max_loc;
 
-Interface
----------
+インターフェイス
+----------------
 
 .. cpp:struct::  template<class Scalar, class Index> MinMaxLocScalar
 
-   :tparam Scalar: The data type of the value being reduced.
-   :tparam Index: The data type of the locations (indices) of the values.
+   :tparam Scalar: 縮約された値のデータ型。
+   :tparam Index: 値の保存先 （インデックス）のデータ型。
 
-   .. rubric:: Data members
+   .. rubric:: データメンバー
 
    .. cpp:var:: Scalar min_val
 
-      The reduced minimum value.
+      縮約された最小値。
 
    .. cpp:var:: Scalar max_val
 
-      The reduced maximum value.
+      縮約された最大値。
 
    .. cpp:var:: Index min_loc
 
-      The location (iteration index) of the minimum value
+      最小値の保存先（イテレーションインデックス）
 
    .. cpp:var:: Index max_loc
 
-      The location (iteration index) of the maximum value
+      最大値の保存先（イテレーションインデックス）

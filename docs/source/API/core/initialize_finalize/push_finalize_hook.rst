@@ -1,39 +1,39 @@
 ``push_finalize_hook``
 ======================
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
-Defined in header ``<Kokkos_Core.hpp>``
+ヘッダー  ``<Kokkos_Core.hpp>`` に定義。
 
-Usage
------
+使用方法
+--------
 
 .. code-block:: cpp
 
     Kokkos::push_finalize_hook(func);
 
-Registers the callable object ``func`` to be called when the Kokkos execution
-environment is terminated.
+Kokkos 実行環境が完了した場合に、呼び出されるべき、呼び出し可能なオブジェクト ``func`` を
+登録。
 
-The functions registered via ``Kokkos::push_finalize_hook()`` will be called in
-reverse order when entering ``Kokkos::finalize()``, before releasing acquired
-resources and finalizing all backends.
+``Kokkos::push_finalize_hook()`` 経由で登録された関数は、
+取得したリソースを解放し、すべてのバックエンドの最終処理を完了する前に、
+``Kokkos::finalize()`` を入力する際、逆順で呼び出されます。
 
-If a function exits via a thrown exception, ``std::terminate`` is called.
+関数が例外をスローして終了した場合、 ``std::terminate`` が呼び出されます。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. cpp:Function:: void push_finalize_hook(std::function<void()> func);
+.. cpp:function:: void push_finalize_hook(std::function<void()> func);
 
-   Register the function object ``func`` to be called when entering
-   ``Kokkos::finalize()``
-
-
+    ``Kokkos::finalize()`` 入力の際に
+    呼び出されるべき関数オブジェクト ``func`` を登録。
 
 
-Example
+
+
+例
 -------
 
 .. code-block:: cpp
@@ -54,7 +54,7 @@ Example
     }
 
 
-Output:
+出力:
 
 .. code-block::
 
@@ -63,6 +63,6 @@ Output:
     Cruel world!
 
 
-See also
---------
-* `Kokkos::finalize <finalize.html>`_: terminates the Kokkos execution environment
+以下も参照
+----------
+* `Kokkos::finalize <finalize.html>`_: 実行環境を完了。

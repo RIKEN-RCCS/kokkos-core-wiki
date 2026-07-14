@@ -1,73 +1,63 @@
-Graphs
+グラフ
 ======
 
-Usage
------
+使用方法
+--------
 
-:cpp:`Kokkos::Graph` is an abstraction that describes
-asynchronous workloads organised as a direct acyclic graph (DAG).
+:cpp:`Kokkos::Graph` は、非同期ワークロードを直接非巡回グラフ(DAG)として組織化した抽象化です。
 
-Once defined, the graph can be executed many times.
+一度定義されれば、グラフは何度も実行可能です
 
-:cpp:`Kokkos::Graph` is specialized for some backends:
+:cpp:`Kokkos::Graph` は一部のバックエンドに特化しています:
 
 * :cpp:`Cuda`
 * :cpp:`HIP`
 * :cpp:`SYCL`
 
-On these backends, the :cpp:`Kokkos::Graph` specialisations map to the native graph API, namely, the CUDA Graph API, the HIP Graph API, and the SYCL (command) Graph API, respectively.
+これらのバックエンドでは、:cpp:`Kokkos::Graph` の特殊化はネイティブのグラフ API、すなわち、CUDA Graph API、HIP Graph API、およびSYCL(コマンド)グラフAPIに、それぞれマッピングされます。
 
-For other backends, :cpp:`Kokkos::Graph` provides a defaulted implementation.
 
-Execution space instance versus graph
+
+他のバックエンドについては、 :cpp:`Kokkos::Graph` がデフォルトの実装を提供します。
+
+実行空間インスタンスとグラフの比較
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Workloads submitted on :cpp:`Kokkos` execution space instances execute *eagerly*, *i.e.*,
-once the :cpp:`Kokkos::parallel_` function is called, the workload is immediately launched on the device.
+ :cpp:`Kokkos` の実行空間インスタンス上に提出されたワークロード は、*熱心に* 実行されます。*すなわち*、:cpp:`Kokkos::parallel_` 関数が呼び出されると、デバイス上で即座にワークロードが起動されます。 
 
-By contrast, the :cpp:`Kokkos::Graph` abstraction follows *lazy* execution,
-*i.e*, workloads added to a :cpp:`Kokkos::Graph` are **not** executed *until*
-the whole graph is ready and submitted.
+対照的に、:cpp:`Kokkos::Graph` 抽象化は、*怠惰* な実行に従い、*すなわち* :cpp:`Kokkos::Graph` に追加されたワークロードは、グラフ全体が準備できて提出される *まで* 実行されません。
 
-Always in 3 phases
+常に3段階で
 ~~~~~~~~~~~~~~~~~~
 
-Typically, 3 phases are needed:
+常、3段階が必要です:
 
-1. definition
-2. instantiation
-3. submission
+1. 定義
+2. インスタンス化
+3. 提出
 
-The *definition* phase consists in describing the workloads: what they do, as well as their dependencies.
-In other words, this phase creates a *topological* graph of workloads.
+*定義* フェーズは、ワークロードが何をするのか、そして依存関係を記述することから成り立っています。言い換えれば、このフェーズでは、ワークロードの *トポロジカル* グラフが作成されます。
 
-The *instantiation* phase **locks** the topology, *i.e.*, it cannot be changed anymore.
-During this phase, the graph will be checked for flaws.
-The backend creates an *executable* graph.
+*インスタンス化* フェーズは  位相を *ロックし*、 *つまり*、もはや変更できない状態にします。 この段階では、グラフに欠陥がないかチェックされます。バックエンドは、*実行可能な* グラフを作成します。
 
-The last phase is *submission*. It will execute the workloads, observing their dependencies.
-This phase can be run multiple times.
+最後の段階は、*提出* です。 ワークロードを実行し、その依存関係を観察します。 このフェーズは、複数回実行可能です。
 
-Advantages
+利点
 ~~~~~~~~~~
 
-There are many advantages. Here are a few:
+多くの利点がありますので、いくつか紹介します:
 
-* Since the workloads are described ahead of execution,
-  the backend driver and/or compiler can leverage optimization opportunities.
-* Launch overhead is reduced, benefitting DAGs consisting of small workloads.
+* ワークロードは、実行前に記述されるため、バックエンドドライバーおよび/またはコンパイラは、最適化の機会を活用できます。 
+* ローンチオーバーヘッドが削減され、小規模な作業負荷からなる DAG に有利です。
 
-Capture
-~~~~~~~
+キャプチャ
+~~~~~~~~~~~~
 
-Some use cases might require adding nodes to a :cpp:`Kokkos::Graph`
-with workloads that aren't expressed in terms of :cpp:`Kokkos` API
-but rather in native code, *e.g.*, calling external math libraries like `cuBLAS`.
+一部の使用例では、 :cpp:`Kokkos::Graph` にノードを追加し、:cpp:`Kokkos` API ではなく、ネイティブコードで表現されるノード、*例えば*、 `cuBLAS` のような外部数学ライブラリを呼び出す必要がある場合があります。
 
-Such a scenario can be encountered in many situations like building and training a neural network,
-running a conjugate gradient method, and so on.
+このようなシナリオには、ニューラルネットワークの構築/訓練、共役勾配法の実行など、多くの状況で遭遇します。
 
-Capturing into a :cpp:`Kokkos::Graph` boils down to writing the following snippet:
+キャプチャーを  :cpp:`Kokkos::Graph` にまとめるには、以下のようなスニペットを書き込むことになります:
 
 .. code:: c++
 
@@ -84,47 +74,42 @@ Capturing into a :cpp:`Kokkos::Graph` boils down to writing the following snippe
         MyCudaCapture{.data = my_data}
     );
 
-When the node is added to the :cpp:`Kokkos::Graph`, the workloads are not directly dispatched to the device.
-Rather, the backend operations are "saved" for later "reuse" in the *capture* node.
+ノードが、 :cpp:`Kokkos::Graph`  に追加されると、ワークロードは、直接デバイスにディスパッチされません。むしろ、バックエンド演算は、後で *キャプチャ* ノードで "再利用"するために、"保存" されます  。
 
-Some important aspects of *capture* are worth pointing out:
+ *キャプチャ* の重要な側面を、一部指摘しておく価値があります:
 
-1. The function object will be stored by the :cpp:`Kokkos::Graph` instance,
-   thereby ensuring that any data bound to the function object is guaranteed to
-   stay alive until the graph is destroyed.
-2. The execution space instance `exec` associates the captured workloads to a device.
-3. While in "*capture* mode", backend-specific restrictions may apply (see `the Cuda programming guide <https://docs.nvidia.com/cuda/cuda-c-programming-guide/#prohibited-and-unhandled-operations>`_
-   for instance).
+1. 関数オブジェクトは  :cpp:`Kokkos::Graph` インスタンスによって保存されるため、関数オブジェクトにバインドされたデータはグラフが破壊されるまで必ず存続することが保証されます。 
+2. 実行空間インスタンスの `exec` は、キャプチャされたワークロードをデバイスに関連付けます。
+3. "*キャプチャ* モード"中では、バックエンド固有の制限が適用される場合があります (例えば、`Cudaプログラミングガイド <https://docs.nvidia.com/cuda/cuda-c-programming-guide/#prohibited-and-unhandled-operations>`_ を参照)。
 
    .. warning::
 
-      When a "stream" is used by multiple threads, capturing on one thread may affect other threads
-      (search for :cpp:`cudaThreadExchangeStreamCaptureMode` on `Cuda runtime API documentation <https://docs.nvidia.com/cuda/cuda-runtime-api/>`_ for instance).
+      "ストリーム" が複数のスレッドで使用されている場合、あるスレッドでのキャプチャが、他のスレッドに影響を与えることがあります(例えば、Cuda ランタイム API 文書上の :cpp:`cudaThreadExchangeStreamCaptureMode` <https://docs.nvidia.com/cuda/cuda-runtime-api/>`_ で を検索してください)。 
 
-For now, *capture* is only supported for the following backends:
+現時点では、*キャプチャ* は以下のバックエンドのみでサポートされています:
 
 .. list-table::
 
-  * - Backend
-    - Resources
+  * - バックエンド
+    - リソース
   * - :cpp:`Cuda`
-    - `CUDA stream capture <https://docs.nvidia.com/cuda/cuda-c-programming-guide/#creating-a-graph-using-stream-capture>`_
+    - `CUDA ストリームキャプチャ <https://docs.nvidia.com/cuda/cuda-c-programming-guide/#creating-a-graph-using-stream-capture>`_
   * - :cpp:`HIP`
-    - `HIP stream capture <https://rocm.docs.amd.com/projects/HIP/en/latest/reference/hip_runtime_api/modules/graph_management.html#_CPPv421hipStreamBeginCapture11hipStream_t20hipStreamCaptureMode>`_
+    - `HIP ストリームキャプチャ <https://rocm.docs.amd.com/projects/HIP/en/latest/reference/hip_runtime_api/modules/graph_management.html#_CPPv421hipStreamBeginCapture11hipStream_t20hipStreamCaptureMode>`_
   * - :cpp:`SYCL`
-    - `SYCL queue recording <https://github.com/intel/llvm/blob/ee5e1ca95c78576c1b6f12b1c2d461ef4b537a9b/sycl/doc/extensions/experimental/sycl_ext_oneapi_graph.asciidoc?plain=1#L167-LL170>`_
+    - `SYCL キューレコーディング <https://github.com/intel/llvm/blob/ee5e1ca95c78576c1b6f12b1c2d461ef4b537a9b/sycl/doc/extensions/experimental/sycl_ext_oneapi_graph.asciidoc?plain=1#L167-LL170>`_
 
 .. note::
 
-    The :cpp:`SYCL` documentation will use the term *recording* instead of *capture*, but it is essentially the same thing.
+    :cpp:`SYCL` の文書では、*キャプチャ* ではなく *レコーディング* という用語が使われていますが、実質的には同じ意味です。
 
-Examples
+例
 --------
 
-Diamond DAG
-~~~~~~~~~~~
+ダイヤモンド DAG
+~~~~~~~~~~~~~~~~
 
-Consider a diamond-like DAG.
+ダイヤモンド様の DAG を考えてみましょう。
 
 .. graphviz::
 
@@ -135,8 +120,7 @@ Consider a diamond-like DAG.
         C -> D;
     }
 
-The following snippet defines, instantiates and submits a :cpp:`Kokkos::Graph`
-for this DAG.
+以下のスニペットは、この DAG に対して、 :cpp:`Kokkos::Graph` を定義し、インスタンス化し、提出します。
 
 .. code-block:: c++
 
@@ -153,12 +137,10 @@ for this DAG.
 
     graph.submit();
 
-Capture of a `cuBLAS` call
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+`cuBLAS` 呼び出しのキャプチャ
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This example shows how to create a node that captures a `cuBLAS` call.
-It also demonstrates how data is kept alive during
-the whole lifetime of the :cpp:`Kokkos::Graph` (*e.g.* the `cuBLAS` handle).
+本例は、 `cuBLAS` コールをキャプチャするノードの作成方法を示しています。また、 :cpp:`Kokkos::Graph` (*例* `cuBLAS` ハンドル) の全寿命を通じて、データがどのように保存されているかも示しています。
 
 .. literalinclude:: examples/graph_capture.cpp
    :language: c++

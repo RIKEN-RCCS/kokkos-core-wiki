@@ -4,10 +4,10 @@
 .. role:: cpp(code)
     :language: cpp
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-List
-----
+リスト
+--------------
 
 ``Kokkos::PerTeam``
 ~~~~~~~~~~~~~~~~~~~
@@ -35,13 +35,13 @@ List
 
 |
 
-General Template Arguments
+汎用テンプレート引数
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Valid template arguments are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
+有効なテンプレートの引数はここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ で説明します。
 
-Usage
-~~~~~
+使用方法
+~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -50,10 +50,10 @@ Usage
     single(PerTeam(team), [=] () {});
     single(PerThread(team), [=] () {});
 
-Nested policies can be used for nested parallel patterns. In contrast to global policies, the public interface for nested policies is implemented as functions, in order to enable implicit templating on the execution space type via the team handle.
+ネストポリシーは、ネスト並列パターンに使用できます。グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは関数として実装されており、チームハンドルを通じて実行空間タイプに、暗示的テンプレート化が可能になります。
 
-Synopsis
-~~~~~~~~
+概要
+~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -64,46 +64,46 @@ Synopsis
     Impl::ThreadSingleStruct PerTeam(TeamMemberType team);
     Impl::VectorSingleStruct PerThread(TeamMemberType team);
 
-Description
-~~~~~~~~~~~
+説明
+~~~~~~~~~~~~~~~~~~~~
 
 .. cpp:function:: Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType count);
 
-    Splits the index range ``0`` to ``count-1`` over the threads of the team. This call is potentially a synchronization point for the team, and thus must meet the requirements of ``team_barrier``.
-        - ``team``: object meeting the requirements of TeamHandle
-        - ``count``: index range length.
+    チームのスレッド上でインデックス範囲 ``0`` から ``count-1`` まで分割します。このコールはチームにとって同期ポイントとなる可能性があり、 ``team_barrier`` の要件を満たす必要があります .
+        - ``team``: TeamHandleの要件を満たすオブジェクト
+        - ``count``: インデックス範囲長
 
 .. cpp:function:: Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType begin, IndexType end);
 
-    Splits the index range ``begin`` to ``end-1`` over the threads of the team. This call is potentially a synchronization point for the team, and thus must meet the requirements of ``team_barrier``.
-        - ``team``: object meeting the requirements of TeamHandle
-        - ``begin``: start index.
-        - ``end``: end index.
+    チームのスレッドでインデックス範囲 ``begin`` から ``end-1`` まで分割  します。このコールはチームの同期ポイントとなる可能性があり、 ``team_barrier`` の要件を満たす必要があります。
+        - ``team``: TeamHandleの要件を満たすオブジェクト
+        - ``begin``: 開始インデックス。
+        - ``end``: 終了インデックス。
 
 .. cpp:function:: Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType count);
 
-    Splits the index range ``0`` to ``count-1`` over the vector lanes of the calling thread. It is not legal to call this function inside of a vector level loop.
-        - ``team``: object meeting the requirements of TeamHandle
-        - ``count``: index range length.
+    呼び出しスレッドのベクトルレーン上でインデックスレンジ  ``0`` から ``count-1`` まで分割します。この関数をベクトルレベルループ内で呼び出すことは、合法ではありません。
+        - ``team``: TeamHandleの要件を満たすオブジェクト
+        - ``count``: インデックス範囲長
 
 .. cpp:function:: Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType begin, IndexType end);
 
-    Splits the index range ``begin`` to ``end-1`` over the vector lanes of the calling thread. It is not legal to call this function inside of a vector level loop.
-        - ``team``: object meeting the requirements of TeamHandle
-        - ``begin``: start index.
-        - ``end``: end index.
+    呼び出しスレッドのベクトルレーン上でインデックス範囲 ``begin`` から ``end-1`` まで分割します。この関数をベクトルレベルループ内で呼び出すことは、合法ではありません。
+        - ``team``: TeamHandleの要件を満たすオブジェクト
+        - ``begin``: 開始インデックス。
+        - ``end``: 終了インデックス。
 
 .. cpp:function:: Impl::ThreadSingleStruct PerTeam(TeamMemberType team);
 
-    When used in conjunction with the ``single`` pattern restricts execution to a single vector lane in the calling team. While not a synchronization event, this call must be encountered by the entire team, and thus meet the calling requirements of ``team_barrier``.
-        - ``team``: object meeting the requirements of TeamHandle
+     ``single`` パターンと組み合わせて使用すると、コールチーム内の単一のベクターレーンへの実行が、制限されます。同期イベントではありませんが、このコールはチーム全体が遭遇し、 ``team_barrier`` の呼び出し要件を満たす必要があります。
+        - ``team``: TeamHandleの要件を満たすオブジェクト
 
 .. cpp:function:: Impl::VectorSingleStruct PerThread(TeamMemberType team);
 
-    When used in conjunction with the ``single`` pattern restricts execution to a single vector lane in the calling thread. It is not legal to call this function inside of a vector level loop.
-        - ``team``: object meeting the requirements of TeamHandle
+     ``single`` パターンと組み合わせて使用すると、呼び出しスレッド内の単一のベクターレーンへの実行が、制限されます。 この関数をベクトルレベルループ内で呼び出すことは合法ではありません。
+        - ``team``: TeamHandle の要件を満たすオブジェクト
 
-Examples
+例
 ~~~~~~~~
 
 .. code-block:: cpp

@@ -1,5 +1,5 @@
-Numeric
-#######
+数値計算
+###############
 
 .. toctree::
    :maxdepth: 1

@@ -1,13 +1,13 @@
 # `Experimental::simd_mask`
 
-Header File: `Kokkos_SIMD.hpp`
+ヘッダーファイル: `Kokkos_SIMD.hpp`
 
-Usage: 
+使用例: 
 
-`Kokkos::Experimental::simd_mask` is an abstraction over platform-specific vector masks and calls platform-specific vector intrinsics.
-It is based on the `simd_mask` type proposed for ISO C++ in [this document](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/n4808.pdf)
+ `Kokkos::Experimental::simd_mask` は、プラットフォーム固有のベクトルマスクを抽象化したものであり、プラットフォーム固有のベクトル固有関数を呼び出します。
+これは、 [this document](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/n4808.pdf) における ISO C++ 向けに提案された `simd_mask` 型に基づいています。
 
-## Interface
+## インターフェイス
 
 ```c++
 namespace Experimental {
@@ -16,9 +16,9 @@ class basic_simd_mask;
 }
 ```
 
-### Template Parameters
+### テンプレートパラメータ
 
-The first template parameter `T` should be a C++ fundamental type for which the current platform supports vector intrinsics. Kokkos supports the following types for `T`:
+最初のテンプレート引数 `T` は、現在のプラットフォームがベクトル組み込み関数をサポートする C++ の基本型である必要があります。 Kokkos は、 `T` について、以下の型をサポートしています:
  - `float`
  - `double`
  - `std::int32_t`
@@ -26,37 +26,37 @@ The first template parameter `T` should be a C++ fundamental type for which the 
  - `std::uint32_t`
  - `std::uint64_t`
 
-The second template parameter `Abi` is one of the pre-defined ABI types in the namespace `Kokkos::Experimental::simd_abi`. This type determines the size of the vector and what architecture-specific intrinsics will be used. The following types are always available in that namespace:
- - `scalar`: a fallback ABI which always has vector size of 1 and uses no special intrinsics.
- - `native`: the "best" ABI for the architecture for which Kokkos was compiled. (deprecated since Kokkos 4.6)
+2つ目のテンプレートパラメータ `Abi` は、名前空間 Kokkos::Experimental::simd_abi 内で事前定義された ABI 型のいずれかです。本型はベクトルのサイズと、どのアーキテクチャ固有の組み込み関数が使用されるかを決定します。 以下の型は、その名前空間において常に利用可能です：
+ - `scalar`: フォールバックABIは、常にベクトルサイズが1であり、特別な組み込み関数を使用しません。
+ - `native`: Kokkos がコンパイルされたアーキテクチャ向けの "最適な" ABIです。 ( Kokkos 4.6以降非推奨)
 
-### Typedefs
+### 型定義
 
- *  `value_type`: Equal to `bool`
- *  `reference`: This type should be convertible to `bool` and `bool` should be assignable to `reference`. It may be a plain reference or it may be a special class that calls vector intrinsics to extract or fill in one mask bit. (removed in Kokkos 4.6)
- *  `simd_type`: Equal to `simd<T, Abi>`
- *  `abi_type`: Equal to `Abi`
+ *  `value_type`: `bool` に等しいです。
+ *  `reference`:  本型は `value_type` に変換可能である必要があり、`value_type` は `reference` に代入可能である必要があります。これは単純な参照である場合もあれば、1つのベクトルのレーンを抽出または埋めるためにベクトル組み込み関数を呼び出す実装定義の型である場合もあります。 ( Kokkos 4.6以降削除)
+ *  `simd_type`:  `simd<T, Abi>` に等しいです。
+ *  `abi_type`: `Abi` に等しいです。
 
-### Width
+### 幅
 
- * `static constexpr std::size_t size()`: `simd_mask<T, Abi>::size()` is a compile-time constant of the width of the vector, i.e. the number of values of type `T` in the vector.
+ * `static constexpr std::size_t size()`: `simd_mask<T, Abi>::size()` は、ベクトルの幅、すなわちベクトル内の型 `T` の値の数を表すコンパイル時定数です。
 
-### Constructors
+### コンストラクタ
 
-  * `simd_mask()`: Default Constructor. The vector values are not initialized by this constructor.
-  * `simd_mask(bool)`: Single-value constructor. All values in the mask will be set to the value of the argument.
-  * `template <class G> simd_mask(G&& gen)`: Generator constructor. The generator `gen` should be a callable type (e.g. functor) that can accept `std::integral_constant<std::size_t, i>()` as an argument and return something convertible to `bool`. Vector mask value `i` will be initialized to the value of `gen(std::integral_constant<std::size_t, i>())`.
+  * `simd_mask()`: デフォルトコンストラクタ。 本コンストラクタではベクトル値は初期化されません。
+  * `simd_mask(bool)`: 単一値コンストラクタです。引数は、`value_type` 型に変換され、マスク内の全ての値が、引数の値に設定されます。
+ * `template <class G> simd_mask(G&& gen)`: ジェネレータコンストラクタ。ジェネレータ `gen` は、`std::integral_constant<std::size_t, i>()` を引数として受け取り、`bool` に変換可能な値を返すことができる呼び出し可能型（例：ファンクタ）である必要があります。 ベクトルマスク値 `i` は、`gen(std::integral_constant<std::size_t, i>())` の値に初期化されます。
 
-### Value Access Methods
-  * `bool operator[](std::size_t) const`: returns the mask value `i`.
-  * `reference operator[](std::size_t)`: returns a reference to mask value `i` that can be modified. (removed in Kokkos 4.6)
+### 値アクセスメソッド
+  * `bool operator[](std::size_t) const`: マスク値 `i` を返します。
+  * `reference operator[](std::size_t)`: 変更可能なマスク値 `i` に参照を返します。 ( Kokkos 4.6において削除)
 
-### Boolean Operators
+### ブール値演算
   * `simd_mask simd_mask::operator!() const`
   * `simd_mask operator&&(const simd_mask& lhs, const simd_mask& rhs)`
   * `simd_mask operator||(const simd_mask& lhs, const simd_mask& rhs)`
 
-### Bitwise Operators
+### ビット単位演算
   * `simd_mask simd_mask::operator~() const`
   * `simd_mask operator&(const simd_mask& lhs, const simd_mask& rhs)`
   * `simd_mask operator|(const simd_mask& lhs, const simd_mask& rhs)`
@@ -65,7 +65,7 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `simd_mask operator|=(simd_mask& lhs, const simd_mask& rhs)`
   * `simd_mask operator^=(simd_mask& lhs, const simd_mask& rhs)`
 
-### Comparison Operators
+### 比較演算子
   * `simd_mask operator==(const simd_mask& lhs, const simd_mask& rhs)`
   * `simd_mask operator!=(const simd_mask& lhs, const simd_mask& rhs)`
   * `simd_mask operator>=(const simd_mask& lhs, const simd_mask& rhs)`
@@ -73,16 +73,16 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `simd_mask operator>(const simd_mask& lhs, const simd_mask& rhs)`
   * `simd_mask operator<(const simd_mask& lhs, const simd_mask& rhs)`
 
-### Reductions
-  * `bool all_of(const simd_mask&)`: returns true iff all of the vector values in the mask are true
-  * `bool any_of(const simd_mask&)`: returns true iff any of the vector values in the mask are true
-  * `bool none_of(const simd_mask&)`: returns true iff none of the vector values in the mask are true
+### 縮約
+  * `bool all_of(const simd_mask&)`: マスク内のベクトル値すべてが真である場合にのみ、真を返します
+  * `bool any_of(const simd_mask&)`: マスク内のベクトル値のいずれかが真である場合にのみ、真を返します
+  * `bool none_of(const simd_mask&)`: マスク内のベクトル値のいずれも真ではない場合にのみ、真を返します
 
-### Global Typedefs
-  * `template <class T> Kokkos::Experimental::native_simd_mask`: Alias for `Kokkos::Experimental::simd_mask<T, Kokkos::Experimental::simd_abi::native<T>>`. (deprecated since Kokkos 4.6)
-  * `template <class T, int N> Kokkos::Experimental::simd_mask`: Alias for `Kokkos::Experimental::basic_simd_mask<T, ...>`. (since Kokkos 4.6)
+### グローバル型定義
+  * `template <class T> Kokkos::Experimental::native_simd_mask`: `Kokkos::Experimental::simd_mask<T, Kokkos::Experimental::simd_abi::native<T>>` の別名。(Kokkos 4.6以降非推奨)
+  * `template <class T, int N> Kokkos::Experimental::simd_mask`: `Kokkos::Experimental::basic_simd_mask<T, ...>` の別名。(Kokkos 4.6以降)
 
-## Examples
+## 例
 
 ```c++
 #include <Kokkos_SIMD.hpp>

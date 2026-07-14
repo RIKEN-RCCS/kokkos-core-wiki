@@ -1,7 +1,7 @@
-Numeric traits
+数値特性
 ==============
 
-.. role::cpp(code)
+.. role:: cpp(code)
     :language: cpp
 
 .. role:: strike
@@ -11,31 +11,29 @@ Numeric traits
 
 .. |KokkosNumericTraits| replace:: ``<Kokkos_NumericTraits.hpp>``
 
-Defined in header |KokkosNumericTraits|_ which is included from ``<Kokkos_Core.hpp>``
+``<Kokkos_Core.hpp>`` に含まれる ヘッダー |KokkosNumericTraits|_ に定義。
 
 .. _NumericLimits: https://en.cppreference.com/w/cpp/types/numeric_limits
 
-.. |NumericLimits| replace:: ``numeric_limits`` from the standard library header ``<limits>``
+.. |NumericLimits| replace:: 標準ライブラリヘッダー ``<limits>`` からの ``numeric_limits``。
 
 .. _P1841 : http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p1841r2.pdf
 
 .. |P1841| replace:: P1841
 
-Provides a replacement for |NumericLimits|_. Implements a new facility that is being added to the C++23 standard library and that
-breaks the monolithic ``numeric_limits`` class template apart into individual
-trait templates. For details, please refer to |P1841|_.
+|NumericLimits|_ の代替えを提供します。  C++23標準ライブラリに追加される新しい機能を実装し、モノリシックな ``numeric_limits`` クラステンプレートを個別のトレイトテンプレートに分割します。 詳細については、|P1841|_ を参照してください。
 
-Numeric traits are defined in the ``Kokkos::Experimental`` namespace since Kokkos 3.5
+数値特性は、Kokkos 3.5以降に、 ``Kokkos::Experimental`` namespace で定義されています。
 
-See below the list of available traits.
+以下に利用可能な特性のリストを記載します。
 
 ------------
 
-``trait*`` denotes traits that were added in Kokkos 3.6  
+ Kokkos 3.6 に追加された ``特性*`` を示しています。
 
-:strike:`trait*` denotes traits that were removed in Kokkos 4.0
+:strike:`trait*` は、 Kokkos 4.0 において削除された特性を示しています。
 
-**Numeric distinguished value traits**
+**数値的顕著価値**
 ``infinity``
 ``finite_min``
 ``finite_max``
@@ -47,7 +45,7 @@ See below the list of available traits.
 ``quiet_NaN*``
 ``signaling_NaN*``
 
-**Numeric characteristics traits**
+**数値的特徴トレイト**
 ``digits``
 ``digits10``
 ``max_digits10``
@@ -59,51 +57,51 @@ See below the list of available traits.
 
 ------------
 
-+---------------------------------------------------------+------------------------------------------------+
-| Standard library                                        | Kokkos with C++17                              |
-+=========================================================+================================================+
-| ``std::numeric_limits<Integral>::min()``                | ``finite_min_v<Integral>``                     |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::min()``           | ``norm_min_v<FloatingPoint>``                  |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<Arithmetic>::lowest()``           | ``finite_min_v<Arithmetic>``                   |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<Arithmetic>::max()``              | ``finite_max_v<Arithmetic>``                   |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::epsilon()``       | ``epsilon_v<FloatingPoint>``                   |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::round_error()``   | ``round_error_v<FloatingPoint>``               |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::infinity()``      | ``infinity_v<FloatingPoint>``                  |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::quiet_NaN()``     | ``quiet_NaN_v<FloatingPoint>`` (since 3.6)     |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::signaling_NaN()`` | ``signaling_NaN_v<FloatingPoint>`` (since 3.6) |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::denorm_min()``    | ``denorm_min_v<FloatingPoint>`` (since 3.6)    |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<Arithmetic>::digits``             | ``digits_v<Arithmetic>``                       |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<Arithmetic>::digits10``           | ``digits10_v<Arithmetic>``                     |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::max_digits10``    | ``max_digits10_v<FloatingPoint>``              |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<Arithmetic>::radix``              | ``radix_v<Arithmetic>``                        |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::min_exponent``    | ``min_exponent_v<FloatingPoint>``              |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::min_exponent10``  | ``min_exponent10_v<FloatingPoint>``            |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::max_exponent``    | ``max_exponent_v<FloatingPoint>``              |
-+---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::max_exponent10``  | ``max_exponent10_v<FloatingPoint>``            |
-+---------------------------------------------------------+------------------------------------------------+
++---------------------------------------------------------+---------------------------------------------------------+
+| 標準ライブラリ                                          |   C++17  を伴うKokkos                                   |
++=========================================================+=========================================================+
+| ``std::numeric_limits<Integral>::min()``                | ``finite_min_v<Integral>``                              |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::min()``           | ``norm_min_v<FloatingPoint>``                           |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<Arithmetic>::lowest()``           | ``finite_min_v<Arithmetic>``                            |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<Arithmetic>::max()``              | ``finite_max_v<Arithmetic>``                            |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::epsilon()``       | ``epsilon_v<FloatingPoint>``                            |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::round_error()``   | ``round_error_v<FloatingPoint>``                        |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::infinity()``      | ``infinity_v<FloatingPoint>``                           |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::quiet_NaN()``     | ``quiet_NaN_v<FloatingPoint>`` (バージョン 3.6以降)     |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::signaling_NaN()`` | ``signaling_NaN_v<FloatingPoint>`` (バージョン 3.6以降) |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::denorm_min()``    | ``denorm_min_v<FloatingPoint>`` (バージョン 3.6以降)    |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<Arithmetic>::digits``             | ``digits_v<Arithmetic>``                                |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<Arithmetic>::digits10``           | ``digits10_v<Arithmetic>``                              |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::max_digits10``    | ``max_digits10_v<FloatingPoint>``                       |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<Arithmetic>::radix``              | ``radix_v<Arithmetic>``                                 |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::min_exponent``    | ``min_exponent_v<FloatingPoint>``                       |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::min_exponent10``  | ``min_exponent10_v<FloatingPoint>``                     |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::max_exponent``    | ``max_exponent_v<FloatingPoint>``                       |
++---------------------------------------------------------+---------------------------------------------------------+
+| ``std::numeric_limits<FloatingPoint>::max_exponent10``  | ``max_exponent10_v<FloatingPoint>``                     |
++---------------------------------------------------------+---------------------------------------------------------+
 
-Individual traits have ``value`` member constant that can be used with C++14 (e.g. ``epsilon<float>::value``).
+個々の特性には、C++14 で使用できる値メンバー定数があります  (例:  ``epsilon<float>::value``)。
 
 ------------
 
-Individual traits are SFINAE-friendly, you can detect value presence/absence.
+個々の特性は、SFINAE に配慮した、価値の存在/不在を検出できます。
 
 .. code-block:: cpp
 
@@ -129,7 +127,7 @@ Individual traits are SFINAE-friendly, you can detect value presence/absence.
 
 ------------
 
-**See also**
+**以下も参照**
 
 .. _MathematicalConstants : mathematical-constants.html
 
@@ -137,7 +135,7 @@ Individual traits are SFINAE-friendly, you can detect value presence/absence.
 
 .. _CommonMathematicalFunctions : mathematical-functions.html 
 
-.. |CommonMathematicalFunctions| replace:: Common mathematical functions
+.. |CommonMathematicalFunctions| replace:: 一般数学関数
 
 |MathematicalConstants|_
 

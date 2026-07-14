@@ -1,14 +1,14 @@
 
 # `transform_reduce`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
 namespace Experimental{
 
 //
-// overload set A
+// オーバーロードセット A
 //
 template <
   class ExecutionSpace, class IteratorType1,
@@ -49,7 +49,7 @@ ValueType transform_reduce(const std::string& label,                            
                            ValueType init_reduction_value);
 
 //
-// overload set B
+// オーバーロードセット B
 //
 template <
   class ExecutionSpace,
@@ -104,7 +104,7 @@ ValueType transform_reduce(const std::string& label,                            
                            BinaryTransform binary_transformer);
 
 //
-// overload set C
+// オーバーロードセット C
 //
 template <
   class ExecutionSpace,
@@ -152,61 +152,57 @@ ValueType transform_reduce(const std::string& label,                            
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-- (1,2): performs the *product* (via `operator*`) between each pair
-  of elements in the range `[first1, last1)` and the range starting at `first2`,
-  and reduces the results along with the initial value `init_reduction_value`
+- (1,2): 範囲 `[first1, last1)` 内の各要素と、`first2` から始まる範囲の要素との間で、
+*積*（`演算子*` 経由）を実行し、結果を初期値 `init_reduction_value` と共に縮約します。
+  
+- (3,4): `first_view` と `second_view` の各要素ペア間で
+*積*（`演算子*` 経由）を実行し、結果を初期値 `init_reduction_value` と共に縮約します。
 
-- (3,4): performs the *product* (via `operator*`) between each pair
-  of elements in `first_view` and `second_view`,
-  and reduces the results along with the initial value `init_reduction_value`
+- (5,6): ファンクタ `binary_transformer` を、
+範囲 `[first1, last1)` および `first2` から始まる範囲内の各要素のペアに適用し、
+  結合演算を *バイナリ* ファンクタ `joiner` を通じて実行して、結果を初期値
+  `init_reduction_value` と共に縮約します。
 
-- (5,6): applies the functor `binary_transformer` to each pair of elements
-  in the range `[first1, last1)` and the range starting at `first2`,
-  and reduces the results along with the initial value `init_reduction_value`
-  with the join operation done via the *binary* functor `joiner`
-
-- (7,8): applies the functor `binary_transformer` to each pair of elements
-  in `first_view` and `second_view`,
-  and reduces the result along with the initial value `init_reduction_value`
-  with the join operation done via the *binary* functor `joiner`
-
-- (9,10): applies the functor `unary_transformer` to each element
-  in the range `[first, last)`, and reduces the results along with
-  the initial value `init_reduction_value`
-  with the join operation done via the *binary* functor `joiner`
-
-- (11,12): applies the functor `unary_transformer` to each element
-  in `view`, and reduces the results along with
-  the initial value `init_reduction_value`
-  with the join operation done via the *binary* functor `joiner`
+- (7,8): ファンクタ `binary_transformer` を、
+`first_view` および `second_view` 範囲内の各要素のペアに適用し、
+  結合演算を *バイナリ* ファンクタ `joiner` を通じて実行して、結果を初期値
+  `init_reduction_value` と共に縮約します。
 
 
-## Parameters and Requirements
+- (9,10):  ファンクタ `unary_transformer` を範囲 `[first, last)` の各要素に適用し、
+  結合演算を *バイナリ* ファンクタ `joiner` を通じて実行して、結果を初期値
+  `init_reduction_value` と共に縮約します。
+
+- (11,12): `view` 内の各要素に対してファンクタ `unary_transformer` を適用し、 
+  結合演算を *バイナリ* ファンクタ `joiner` を通じて実行して、結果を初期値
+  `init_reduction_value` と共に縮約します。
+
+
+## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance
+  - 実行空間インスタンス
 - `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1,5,9 the default string is: "Kokkos::transform_reduce_iterator_api_default"
-  - for 3,7,11 the default string is: "Kokkos::transform_reduce_view_api_default"
+  - デバッグ目的で実装カーネルに名付けるために使用。
+  - 1,5,9 について、デフォルト文字列は、: "Kokkos::transform_reduce_iterator_api_default"
+  - 3,7,11 について、デフォルト文字列は、: "Kokkos::transform_reduce_view_api_default"
 - `first1`, `last1`, `first2`:
-  - ranges of elements to transform and reduce
-  - must be *random access iterators*
-  - must represent a valid range, i.e., `last1 >= first1` (checked in debug mode)
-  - must be accessible from `exespace`
+  - 変換および縮約対象の要素の範囲
+  -  *ランダムアクセスイテレータ* でなければなりません。
+  - 有効な範囲を表す必要があり、つまり、 `last1 >= first1` (デバッグモードで確認済み)でなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `first_view`, `second_view`:
-  - views to transform and reduce
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - 変換および縮約対象のビュー
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `init_reduction_value`:
-  - initial reduction value to use
+  - 使用する初期縮約値
 - `joiner`:
-  - *binary* functor performing the desired operation to join two elements.
-  Must be valid to be called from the execution space passed, and callable with
-  two arguments `a,b` of type (possible const) `ValueType`, and must not modify `a,b`.
-  - Must conform to:
+  - 2つの要素結合のために所望の変換演算を実行する *二項* ファンクタ。
+   引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst) `ValueType`  の2つの引数 `a,b` を使って、呼び出し可能であり、 `a,b` を変更してはいけません。
+  - 以下に一致しなければなりません:
   ```c++
   struct JoinFunctor {
 	KOKKOS_FUNCTION
@@ -216,16 +212,14 @@ ValueType transform_reduce(const std::string& label,                            
 	}
   };
   ```
-  - The behavior is non-deterministic if the `joiner` operation
-  is not associative or not commutative.
+  - `joiner` 演算が、結合法則または交換法則に従わない場合、その挙動は非決定的です。
 
 - `binary_transformer`:
-  - *binary* functor applied to each pair of elements *before* doing the reduction.
-  Must be valid to be called from the execution space passed, and callable with
-  two arguments `a,b` of type (possible const) `value_type_a` and `value_type_b`,
-  where `value_type_{a,b}` are the value types of `first1` and `first2` (for 1,2,5,6)
-  or the value types of `first_view` and `second_view` (for 3,4,7,8), and must not modify `a,b`.
-  - Must conform to:
+  - 縮約 *前* に、要素の各ペアに適用される *二項* ファンクタ。
+  引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst) `value_type_a` および `value_type_b` の2つの引数 `a,b` を使って、呼び出し可能であり、ここで、
+  `value_type_{a,b}` は、 `first1` および `first2` (1,2,5,6について) の値型であり、または
+ `first_view` および `second_view` (3,4,7,8について) の値型であり、  `a,b` を変更してはいけません。
+  - 以下に一致しなければなりません:
   ```c++
   struct BinaryTransformer {
 	KOKKOS_FUNCTION
@@ -234,15 +228,12 @@ ValueType transform_reduce(const std::string& label,                            
 	}
   };
   ```
-  - the `return_type` is such that it can be accepted by the `joiner`
+  - `return_type`  は、それが `joiner`により受け入れ可能であるという条件下にあります。
 
 - `unary_transformer`:
-  - *unary* functor performing the desired operation to an element.
-  Must be valid to be called from the execution space passed, and callable with
-  an arguments `v` of type (possible const) `value_type`,
-  where `value_type` is the value type of `first1` (for 9,10)
-  or the value type of `first_view` (for 11,12), and must not modify `v`.
-  - Must conform to:
+  - 要素に対して所望の演算を実行する *単項* ファンクタ。
+  引数として渡された実行空間から呼び出されるためには、有効でなければならない、そして 型 (可能性のあるconst) `value_type` の引数 `v` を使って呼び出し可能で、そこでは、`value_type` が、 `first1` (9,10について) の値型、または  `first_view` (11,12について) であり、`v` を変更してはいけません。
+  - 以下に一致しなければなりません:
   ```c++
   struct UnaryTransformer {
 	KOKKOS_FUNCTION
@@ -252,6 +243,6 @@ ValueType transform_reduce(const std::string& label,                            
   };
   ```
 
-## Return
+## 戻り値
 
-The reduction result.
+縮約結果。

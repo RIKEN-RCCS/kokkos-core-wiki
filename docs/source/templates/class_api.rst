@@ -1,21 +1,21 @@
 ..
-  Use the following convention for headings:
+  見出しの表記については、以下の規則を使用してください：
 
-    # with overline, for parts (collections of chapters)
+    # 各部に対して、オーバーラインを使用 （章の集まり）
 
-    * with overline, for chapters
+    * 各部に対して、オーバーラインを使用
 
-    = for sections
+    = 節用
 
-    - for subsections
+    - 小節用
 
-    ^ for subsubsections
+    ^ 小々節用
 
-    " for paragraphs
+    " パラグラフ用
 
 ..
-  Class / method / container name)
-  for free functions that are callable, preserve the naming convention, `view_alloc()`
+  クラス / メソッド / コンテナ名)
+  呼び出し可能なフリー関数について、命名規則を保持、 `view_alloc()`
 
 ``CoolerView``
 ==============
@@ -24,138 +24,135 @@
     :language: cpp
 
 ..
-  The (public header) file the user will include in their code
+  ユーザーがそのコードに含める (パブリックヘッダー) ファイル 
 
-Header File: ``Kokkos_Core.hpp``
-
-..
-  High-level, human-language summary of what the thing does, and if possible, brief statement about why it exists (2 - 3 sentences, max);
-
-Description
------------
+ヘッダーファイル: ``Kokkos_Core.hpp``
 
 ..
-  The API of the entity.
+  そのものが何を行うのかについて、高レベルで、人間が理解しやすい言葉で簡潔にまとめた概要、そして可能であれば、それが存在する理由についての簡潔な説明 （最高で2，3文）；
 
-Interface
----------
+説明
+-------------------------
 
 ..
-  The declaration or signature of the entity.
+  エンティティの API 。
+
+インターフェイス
+-----------------------
+
+..
+  エンティティの宣言または署名。
 
 .. cpp:class:: template <class DataType, class... Traits> CoolerView
 
   ..
-    Template parameters (if applicable)
-    Omit template parameters that are just used for specialization/are deduced/ and/or should not be exposed to the user.
+    テンプレートパラメータ (該当すれば)
+     特殊化/演鐸/のためにだけ使用され、 および/または ユーザーに暴露されるべきではない、テンプレートパラメータを省略してください。
 
-  :tparam Foo: Description of the Foo template parameter
+  :tparam Foo: Foo テンプレートパラメータの説明
 
   ..
-    Parameters (if applicable)
+    パラメータ (該当すれば)
 
-  :param bar: Description of the bar parameter
+  :param bar: バーパラメータの説明
 
-  .. rubric:: Public Types:
+  .. rubric:: パブリック型:
 
   .. cpp:type:: data_type
 
-    Some interesting description of the type and how to use it.
+    型についての何らかの興味深い説明およびその使用方法。
 
-  .. rubric:: Static Public Member Variables:
+  .. rubric:: 静的パブリックメンバー変数:
 
   .. cpp:member:: int some_var = 5;
 
-    Description of some_var
+    some_var の説明
 
     ..
-      If you have related info
+      関連情報を持つ場合
 
     .. seealso::
 
       ..
-        We can cross-reference entities
+        エンティティを相互参照できます。
 
       The :cpp:func:`frobrnicator` free function.
 
-  .. rubric:: Constructors:
+  .. rubric:: Constructorsコンストラクタ:
 
   .. cpp:function:: CoolerView(CoolerView&& rhs)
 
-    Whether it's a move/copy/default constructor. Describe what it does.
+    それが、移動/コピー/デフォルト コンストラクタかどうか。それが何であるかを記述します。
 
   ..
-    Only include the destructor if it does something interesting as part of the API, such as RAII classes that release a resource on their destructor. Classes that merely
-    clean up or destroy their members don't need this member documented.
+    デストラクタでリソースを解放するRAIIクラス等、APIの一部として何か有用な処理を行う場合にのみ、デストラクタを含めてください。メンバの処理や破棄を行うだけのクラスについては、そのメンバを記録する必要はありません。
 
-  .. rubric:: Destructor:
+  .. rubric:: デストラクタ:
 
   .. cpp:function:: ~CoolerView()
 
-    Performs some special operation when destroyed.
+    破棄された場合、何らかの特別な演算を実行します。
 
-  .. rubric:: Public Member Functions:
+  .. rubric:: パブリックメンバー関数:
 
   .. cpp:function:: template<class U> foo(U x)
 
-    Brief description of the function.
+    関数の簡単な説明。
 
-    :tparam U: Description of U
+    :tparam U:  U の説明
 
-    :param: description of x
+    :param:  x の説明
 
     ..
       Describe any API changes between versions.
 
     .. versionchanged:: 3.7.1
 
-      What changed between versions: e.g. Only takes one parameter for foo-style operations instead of two.
+      バージョン間で変更された事柄What changed between versions: 例えば、2つのパラメータの代わりに、fooスタイル演算については、1つのパラメータのみを選択します。
 
   ..
-    Use the C++ syntax for deprecation (don't use the Kokkos deprecated macro) as Sphinx will recognize it. We may in the future
-    add extra parsing after the html is generated to render this more nicely.
+   非推奨の表記には、C++ の構文を使用してください（Kokkosの非推奨マクロは使用しないでください）。Sphinx がこれを認識します。将来的には、HTML生成後に追加の解析を行い、より好ましい状態で表示する可能性があります。
 
   .. cpp:type:: [[deprecated("in version 4.0.1")]] foobar
 
-    Represents the foobar capability.
+    foobar機能を表示します。
 
     .. deprecated:: 4.0.1
 
-      Use :cpp:type:`foobat` instead.
+      代わりに、 :cpp:type:`foobat` を使用します。
 
   .. cpp:type:: foobat
 
-    A better version of foobar.
+   フットバーのより好ましいバージョン
 
     .. versionadded:: 4.0.1
 
 
-Non-Member Functions
+非メンバー関数
 --------------------
 
 ..
-  These should only be listed here if they are closely related. E.g. friend operators. However,
-  something like view_alloc shouldn't be here for view
+  これらは、例えば、フレンド関数等、緊密に関連している場合にのみ、ここに示される必要があります。 しかしながら、view_alloc 等は、ここに、ビューを目的としてここに示すべきではありません。
 
 .. cpp:function:: template<class ViewSrc> bool operator==(CoolerView, ViewSrc);
 
-  :tparam ViewDst: the other
+  :tparam ViewDst: その他
 
-  :return: true if :cpp:type:`View::value_type`, :cpp:type:`View::array_layout`, :cpp:type:`View::memory_space`, :cpp:func:`View::rank`, :cpp:func:`View::data()` and :cpp:expr:`View::extent(r)`, for :cpp:expr:`0<=r<rank`, match.
+  :return:  :cpp:expr:`0<=r<rank` について、:cpp:type:`View::value_type`, :cpp:type:`View::array_layout`, :cpp:type:`View::memory_space`, :cpp:func:`View::rank`, :cpp:func:`View::data()` and :cpp:expr:`View::extent(r)` が、 一致すれば、真
 
 .. cpp:function:: void frobrnicator(CoolerView &v) noexcept
 
-  :param: v the :cpp:class:`CoolerView` to frobnicate
+  :param: v the :cpp:class: 意味不明化のための`CoolerView` 
 
-  Frobnicates a CoolerView.
+  CoolerView を意味不明化
 
-Examples
+例
 --------
 
 ..
-  It may be useful to also have examples for individual functions above.
+  上記の個々の関数についても、例を挙げておくと役立つかもしれません。
 
-  Prefer working and compilable examples to prose descriptions (such as "Usage").
+  文章による説明（ "使用例" 等）よりも、実際に動作するコンパイル可能な例を優先いたします。
 
 .. code-block:: cpp
 

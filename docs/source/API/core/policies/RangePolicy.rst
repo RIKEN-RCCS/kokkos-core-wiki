@@ -4,10 +4,10 @@
 .. role::cpp(code)
     :language: cpp
 
-Header File: ``<Kokkos_Core.hpp>``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-Usage
------
+使用方法
+---------------
 
 .. code-block:: cpp
 
@@ -16,16 +16,16 @@ Usage
     Kokkos::RangePolicy<...>(exec, begin, end)
     Kokkos::RangePolicy<...>(exec, begin, end, chunk_size)
 
-    // CTAD Constructors (since 4.3)
+    // CTAD コンストラクタ (バージョン 4.3以降)
     Kokkos::RangePolicy(begin, end)
     Kokkos::RangePolicy(begin, end, chunk_size)
     Kokkos::RangePolicy(exec, begin, end)
     Kokkos::RangePolicy(exec, begin, end, chunk_size)
 
-RangePolicy defines an execution policy for a 1D iteration space starting at ``begin`` and going to ``end`` with an open interval.
+RangePolicy は、 ``begin`` から開始して、開区間で ``end`` に行く、1次元反復空間の実行方針を、定義します。
 
-Synopsis
---------
+概要
+--------------------
 
 .. code-block:: cpp
 
@@ -38,7 +38,7 @@ Synopsis
         using execution_policy = RangePolicy;
         using member_type = PolicyTraits<Args...>::index_type;
 
-        // Inherited from PolicyTraits<Args...>
+        // PolicyTraits<Args...> より継承
         using execution_space   = PolicyTraits<Args...>::execution_space;
         using schedule_type     = PolicyTraits<Args...>::schedule_type;
         using work_tag          = PolicyTraits<Args...>::work_tag;
@@ -46,7 +46,7 @@ Synopsis
         using iteration_pattern = PolicyTraits<Args...>::iteration_pattern;
         using launch_bounds     = PolicyTraits<Args...>::launch_bounds;
 
-        // Constructors
+        // コンストラクタ
         RangePolicy(const RangePolicy&) = default;
         RangePolicy(RangePolicy&&) = default;
 
@@ -68,89 +68,89 @@ Synopsis
                    , index_type work_end
                    , ChunkSize chunk_size );
 
-        // retrieve chunk_size
+        // chunk_size を復旧
         index_type chunk_size() const;
-        // set chunk_size to a discrete value
+        // chunk_size を非連続値に設定します。
         RangePolicy& set_chunk_size(int chunk_size_);
 
-        // return ExecSpace instance provided to the constructor
+        // コンストラクタに提供された ExecSpace インスタンスを返します
         KOKKOS_FUNCTION const execution_space & space() const;
-        // return Range begin
+        // Range begin を返します
         KOKKOS_FUNCTION member_type begin() const;
-        // return Range end
+        // return Range end を返します
         KOKKOS_FUNCTION member_type end()   const;
     };
 
-Parameters
+パラメータ
 ----------
 
-General Template Arguments
+汎用テンプレート引数
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Valid template arguments for ``RangePolicy`` are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
+有効なテンプレート引数は、ここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ で説明します。
 
-Public Class Members
---------------------
+パブリッククラスメンバー
+-----------------------------
 
-Constructors
-~~~~~~~~~~~~
+コンストラクタ
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. cpp:function:: explicit ChunkSize(int value_)
 
-   Provide a hint for optimal chunk-size to be used during scheduling.
-   For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this passed to ``RangePolicy``.
+   スケジューリング時に最適なチャンクサイズのヒントを提供します。
+   SYCLバックエンドでは、 ``parallel_for`` カーネルで使われるワークグループサイズを、 ``RangePolicy`` に渡すことで設定できます。
 
-   .. note:: ``ChunkSize`` constructor ``explicit`` since Kokkos 4.4
+   .. note:: ``ChunkSize`` コンストラクタは Kokkos 4.4 以降 ``explicit`` になりました。
 
 .. cpp:function:: RangePolicy()
 
-   Default Constructor uninitialized policy.
+   デフォルトコンストラクタ非初期化ポリシー。
 
 .. cpp:function:: RangePolicy(int64_t begin, int64_t end)
 
-   Provide a start and end index.
+   開始インデックスおよび終了インデックスを提供します。
 
 .. cpp:function:: RangePolicy(int64_t begin, int64_t end, ChunkSize chunk_size)
 
-   Provide a start and end index as well as a ``ChunkSize``.
+    ``ChunkSize`` 同様に、開始インデックスおよび終了インデックスを提供します。
 
 .. cpp:function:: RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end)
 
-   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource.
+   開始と終了のインデックスと、実行リソースとして使うための ``ExecutionSpace`` インスタンスを提供します。
 
 .. cpp:function:: RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end, ChunkSize chunk_size)
 
-   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as a ``ChunkSize``.
+    ``ChunkSize`` 同様に、 開始と終了のインデックスと、実行リソースとして使うための ``ExecutionSpace`` インスタンスを提供します。
 
-Preconditions:
+前提条件:
 ^^^^^^^^^^^^^^
 
-* The start index must not be greater than the end index.
-* The actual constructors are templated so we can check that they are converted to ``index_type`` safely (see `#6754 <https://github.com/kokkos/kokkos/pull/6754>`_).
+* 開始インデックスは終了インデックスより大きくあってはなりません。
+* •	実際のコンストラクターはテンプレート化されており、安全に ``index_type`` に変換されているか確認できます( `#6754 <https://github.com/kokkos/kokkos/pull/6754>`_ 参照 ) 。
 
-CTAD Constructors (since 4.3):
+CTAD コンストラクタ (4.3以降):
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: cpp
 
-   int64_t work_begin = /* ... */; // conversions as well
-   int64_t work_end   = /* ... */; // conversions as well
-   ChunkSize cs       = /* ... */; // conversions as well
-   DefaultExecutionSpace des;      // conversions as well
-   SomeExecutionSpace ses;         // different from DefaultExecutionSpace
+   int64_t work_begin = /* ... */; // 同様に変換
+   int64_t work_end   = /* ... */; // 同様に変換
+   ChunkSize cs       = /* ... */; // 同様に変換
+   DefaultExecutionSpace des;      // 同様に変換
+   SomeExecutionSpace ses;         // DefaultExecutionSpaceとは異なります
 
-   // Deduces to RangePolicy<>
+   // RangePolicy<> に演繹します
    RangePolicy rp0;
    RangePolicy rp1(work_begin, work_end);
    RangePolicy rp2(work_begin, work_end, cs);
    RangePolicy rp3(des, work_begin, work_end);
    RangePolicy rp4(des, work_begin, work_end, cs);
 
-   // Deduces to RangePolicy<SomeExecutionSpace>
+   // RangePolicy<SomeExecutionSpace> に演繹します
    RangePolicy rp5(ses, work_begin, work_end);
    RangePolicy rp6(ses, work_begin, work_end, cs);
 
-Examples
+例
 --------
 
 .. code-block:: cpp
@@ -162,10 +162,10 @@ Examples
     RangePolicy<> policy_6(-3,N+3, ChunkSize(8));
     RangePolicy<OpenMP> policy_7(OpenMP(), 0, N, ChunkSize(4));
 
-Note: providing a single integer as a policy to a parallel pattern, implies a defaulted ``RangePolicy``
+注意事項: 並列パターンに対して単一の整数をポリシーとして提供することは、デフォルトされた ``RangePolicy`` を意味します。 
 
 .. code-block:: cpp
 
-    // These two calls are identical
-    parallel_for("Loop", N, functor);
-    parallel_for("Loop", RangePolicy<>(0, N), functor);
+    // 以下の2つの呼び出しは同一です
+    parallel_for("Loop", N, ファンクタ);
+    parallel_for("Loop", RangePolicy<>(0, N), ファンクタ);

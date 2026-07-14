@@ -1,7 +1,7 @@
 
 # `transform_inclusive_scan`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
@@ -103,30 +103,28 @@ auto transform_inclusive_scan(const std::string& label,                         
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-- 1,2: transforms each element in the range `[first_from, last_from)`
-with `unary_op`, then computes an inclusive prefix scan operation using `binary_op`
-over the resulting range, and writes the results to the range beginning at `first_dest`.
+- 1,2: unary_op 演算子を用いて変換し、次に 範囲 [first_from, last_from) 内の各要素を、 結果の範囲に対して、`unary_op` を使用して、インクルーシブプレフィックススキャン演算を計算し、 `first_dest` で始まる範囲に結果を書き込みます。 
 
-- 3,4: same as (1,2) except that the elements are read from `view_from`
-and written to `view_dest`
+- 3,4: 要素が `view_from` から読み込まれ、 `view_dest` に書き込まれた要素である場合を除き、 (1,2) と同様です。
 
-- 5,6: same as (1,2) but the scan accounts for the `init_value`.
+- 5,6:  (1,2) と同様ですが、スキャンは、 `init_value` を示します。
 
-- 7,8: same as (3,4) but the scan accounts for the `init_value`.
+- 7,8: (3,4) と同様ですが、スキャンは、 `init_value` を示します。
 
-Inclusive means that the i-th input element is included in the i-th sum.
+インクルーシブは、i番目の入力要素が、i番目の和に含まれることを意味します。
 
-## Parameters and Requirements
+
+## パラメータおよび要件
 
 - `exespace`, `first_from`, `first_last`, `first_dest`, `view_from`, `view_dest`, `init_value`, `bin_op`, `unary_op`:
-  - same as [`transform_exclusive_scan`](./StdTransformExclusiveScan)
+  -  [`transform_exclusive_scan`](./StdTransformExclusiveScan) と同様。
 - `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1,5 the default string is: "Kokkos::transform_inclusive_scan_iterator_api_default"
-  - for 3,7 the default string is: "Kokkos::transform_inclusive_scan_view_api_default"
+  - デバッグ目的で実装カーネルに名付けるために使用。
+  - 1,5 について、デフォルト文字列は、: "Kokkos::transform_inclusive_scan_iterator_api_default"
+  - 3,7 について、デフォルト文字列は、: "Kokkos::transform_inclusive_scan_view_api_default"
 
-## Return
+## 戻り値
 
-Iterator to the element *after* the last element written.
+書き込まれた最後の要素 *後の* 要素へのイテレータ。

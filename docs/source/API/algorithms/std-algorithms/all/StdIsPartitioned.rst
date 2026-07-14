@@ -1,22 +1,22 @@
 ``is_partitioned``
 ==================
 
-Header: ``<Kokkos_StdAlgorithms.hpp>``
+ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
-Description
------------
+説明
+------------------
 
-Returns ``true`` if all elements in a range or in a rank-1 ``View`` satisfying
-the predicate ``pred`` appear *before* all elements that don't.
-If the range or the ``view`` is empty, returns ``true``.
+範囲内の全要素、またはランク1の ``View`` 内の全要素が
+述語 ``pred`` を満たす場合、 その *前に* 述語を満たさない要素が存在すれば、`true` を返します。
+範囲または ``ビュー`` が空である場合、 ``真`` を返します。
 
-Interface
----------
+インターフェイス
+----------------
 
-.. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
+.. warning:: これは、現在 ``Kokkos::Experimental`` 名前空間内部にあります。
 
-Overload set accepting execution space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+実行空間を受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -41,8 +41,8 @@ Overload set accepting execution space
                        PredicateType pred);
 
 
-Overload set accepting a team handle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+チームハンドルを受け入れるオーバーロードセット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 4.2
 
@@ -60,44 +60,43 @@ Overload set accepting a team handle
                        const ::Kokkos::View<DataType, Properties...>& view,
                        PredicateType pred);
 
-Parameters and Requirements
+パラメータおよび要件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``: execution space instance
+- ``exespace``: 実行空間インスタンス
 
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``teamHandle``: TeamPolicyを使用する際、並列領域内で指定されたチームハンドルインスタンス
 
-- ``label``: string forwarded to internal parallel kernels for debugging purposes
 
-  - 1: The default string is "Kokkos::is_partitioned_iterator_api_default".
+- ``label``: デバッグ目的で内部の並列カーネルに転送された文字列
 
-  - 3: The default string is "Kokkos::is_partitioned_view_api_default".
+  - 1:デフォルト文字列は、"Kokkos::is_partitioned_iterator_api_default".
 
-  - NOTE: overloads accepting a team handle do not use a label internally
+  - 3:デフォルト文字列は、"Kokkos::is_partitioned_view_api_default".
 
-- ``first, last``: range of elements to search in
+  - 注意事項: チームハンドルを受け取るオーバーロードは、内部でラベルを使用しません。
 
-  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
+- ``first, last``: 検索対象となる要素の範囲
 
-  - must represent a valid range, i.e., ``last >= first``
+  - *ランダムアクセスイテレータ* である必要があり、例えば、 ``Kokkos::Experimental::(c)begin/(c)end`` から返されなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 有効な範囲、つまり、 ``last >= first`` を表す必要があります。
+
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
+
 
 - ``view``:
 
-  - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
 
-  - must be accessible from ``exespace`` or from the execution space associated with the team handle
+  - 必ず ``exespace`` またはチームハンドルに関連付けられた実行空間からアクセス可能である必要があります。
 
 - ``pred``:
 
-  - *unary* predicate returning ``true`` for the required element to replace; ``pred(v)``
-    must be valid to be called from the execution space passed, and convertible to bool for every
-    argument ``v`` of type (possible const) ``value_type``, where ``value_type``
-    is the value type of ``IteratorType`` (for 1,2) or the value type of ``view`` (for 3,4),
-    and must not modify ``v``.
+  - *単項* 述語：置換対象の必須要素に対して「真」を返す述語; ``pred(v)`` は、引数として渡された実行空間から呼び出されるためには、有効でなければならない、またはチームハンドルに関連付けられた実行空間でなければならず、そして 型 ``value_type`` の引数 ``v`` （constの可能性）のすべてのペアについて、ブール型に変換可能で、そこでは、 ``value_type`` が、 ``InputIteratorType``  (1,2について) の値型、または ``ビュー`` (3,4について) の値型であり、  ``v`` を変更してはいけません。
 
-  - must conform to:
+
+  - 以下に一致しなければなりません:
 
   .. code-block:: cpp
 
@@ -106,19 +105,19 @@ Parameters and Requirements
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const { return /* ... */; }
 
-       // or, also valid
+       // または、また有効
 
        KOKKOS_INLINE_FUNCTION
        bool operator()(value_type v) const { return /* ... */; }
      };
 
-Return Value
+戻り値
 ~~~~~~~~~~~~
 
-- ``true``: if range is partitioned according to ``pred`` or if range is empty
-- ``false``: otherwise
+- ``真``: 範囲が ``pred`` に従って分割されている場合、または範囲が空の場合
+- ``偽``: その他の場合
 
-Example
+例
 ~~~~~~~
 
 .. code-block:: cpp
@@ -137,7 +136,7 @@ Example
 
    using view_type = Kokkos::View<int*>;
    view_type a("a", 15);
-   // fill a somehow
+   // 何らかの方法で a を満たす
 
    auto exespace  = Kokkos::DefaultExecutionSpace;
    const auto res = KE::is_partitioned(exespace, KE::cbegin(a), KE::cend(a), IsNegative<int>());

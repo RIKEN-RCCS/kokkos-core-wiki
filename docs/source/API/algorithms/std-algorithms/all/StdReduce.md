@@ -1,14 +1,14 @@
 
 # `reduce`
 
-Header File: `Kokkos_StdAlgorithms.hpp`
+ヘッダーファイル: `<Kokkos_StdAlgorithms.hpp>`
 
 ```c++
 namespace Kokkos{
 namespace Experimental{
 
 //
-// overload set A
+// オーバーロードセット A
 //
 template <class ExecutionSpace, class IteratorType>
 typename IteratorType::value_type reduce(const ExecutionSpace& exespace,        (1)
@@ -30,7 +30,7 @@ auto reduce(const std::string& label, const ExecutionSpace& exespace,           
             const ::Kokkos::View<DataType, Properties...>& view);
 
 //
-// overload set B
+// オーバーロードセット B
 //
 template <class ExecutionSpace, class IteratorType, class ValueType>
 ValueType reduce(const ExecutionSpace& exespace,                                (5)
@@ -54,7 +54,7 @@ ValueType reduce(const std::string& label,                                      
                  ValueType init_reduction_value);
 
 //
-// overload set C
+// オーバーロードセット C
 //
 template <
   class ExecutionSpace, class IteratorType, class ValueType,
@@ -92,45 +92,39 @@ ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      
 } //end namespace Kokkos
 ```
 
-## Description
+## 説明
 
-- Overload set A (1,2,3,4): performs a reduction of the elements
-  in the range `[first, last)` (1,2) or in `view` (3,4).
+- オーバーロードセット A (1,2,3,4): 範囲 `[first, last)` (1,2) または `ビュー` (3,4) における要素の縮約を実行します。
 
-- Overload set B (5,6,7,8): performs a reduction of the elements
-  in the range `[first, last)` (5,6) or in `view` (7,8) accounting for
-  the initial value `init_reduction_value`.
+- オーバーロードセット B (5,6,7,8): 初期値 `init_reduction_value` を説明する、範囲 `[first, last)` (5,6) または `ビュー` (7,8) における要素の縮約を実行します。
 
-- Overload set C (9,10,11,12): performs a reduction of the elements
-  in the range `[first, last)` (9,10)
-  or in `view` (11,12) accounting for the initial value `init_reduction_value`
-  using the functor  `joiner` to join operands during the reduction operation.
+- オーバーロードセット C (9,10,11,12): 縮約演算の間にオペランドを結合するための、ファンクタ `ジョイナー` を使って、初期値 `init_reduction_value` を説明する、範囲 `[first, last)` (9,10) または `ビュー` (11,12) における要素の縮約を実行します。
 
 
-## Parameters and Requirements
+## パラメータおよび要件
 
 - `exespace`:
-  - execution space instance
+  - 実行空間インスタンス
 - `label`:
-  - used to name the implementation kernels for debugging purposes
-  - for 1,5,9 the default string is: "Kokkos::reduce_iterator_api_default"
-  - for 3,7,11 the default string is: "Kokkos::reduce_view_api_default"
+  - デバッグ目的の実装カーネルに名付けるために使用されます。
+  - 1,5,9について、デフォルト文字列は、: "Kokkos::reduce_iterator_api_default"
+  - 3,7,11について、デフォルト文字列は、: "Kokkos::reduce_view_api_default"
 - `first`, `last`:
-  - range of elements to reduce over
-  - must be *random access iterators*
-  - must represent a valid range, i.e., `last >= first` (checked in debug mode)
-  - must be accessible from `exespace`
+  - 縮約する要素の範囲
+  - *ランダムアクセスイテレータ* でなければなりません。
+  - 有効な範囲、つまり、 ``last >= first`` を表す必要があります （デバッグモードで確認済）。
+  -  `exespace` からアクセス可能でなければなりません。
 - `view`:
-  - view to reduce
-  - must be rank-1, and have `LayoutLeft`, `LayoutRight`, or `LayoutStride`
-  - must be accessible from `exespace`
+  - 縮約対象のビュー
+  - 必ずランク1であり、 ``LayoutLeft`` 、  ``LayoutRight`` 、または ``LayoutStride`` を持たなければなりません。
+  - `exespace` からアクセス可能でなければなりません。
 - `init_reduction_value`:
-  - initial reduction value to use
+  - 使用する初期縮約値
 - `joiner`:
-  - *binary* functor performing the desired operation to join two elements.
-  Must be valid to be called from the execution space passed, and callable with
-  two arguments `a,b` of type (possible const) `ValueType`, and must not modify `a,b`.
-  - Must conform to:
+  -  *二項* ファンクタであり、2つの要素を結合するために所望の演算を実行します。
+  引数として渡された実行空間、またはチームハンドルに関連付けられた実行空間から呼び出されるために、有効でなければならず、 型 (可能性のあるconst) `ValueType` の2つの引数 で呼び出し可能であり、 `a,b` を変更してはいけません。
+
+  - 以下に一致しなければなりません:
   ```c++
   struct JoinFunctor {
 	KOKKOS_FUNCTION
@@ -139,10 +133,10 @@ ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      
 	}
   };
   ```
-  - The behavior is non-deterministic if the `joiner` operation
-  is not associative or not commutative.
+  - `join` 演算が、結合法則または交換法則を満たさない場合、
+その動作は非決定的です
 
 
-## Return
+## 戻り値
 
-The reduction result.
+縮約結果。
