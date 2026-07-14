@@ -222,6 +222,25 @@ def translate_whole_file(
     return _call_claude(client, msg)
 
 
+def _leading_spaces(line: str) -> str:
+    return line[: len(line) - len(line.lstrip(" "))]
+
+
+def _reapply_first_line_indent(source_block: str, translated_block: str) -> str:
+    """Claude frequently drops the leading whitespace on just the first line
+    of a translated block (right after the `<t id="N">` tag) even though it
+    faithfully keeps the indentation on every other line of the same block.
+    Restore it from the source block's own first-line indent when that
+    mismatch is detected."""
+    src_indent = _leading_spaces(source_block.split("\n", 1)[0])
+    if not src_indent:
+        return translated_block
+    lines = translated_block.split("\n")
+    if not lines[0].startswith(src_indent):
+        lines[0] = src_indent + lines[0].lstrip(" ")
+    return "\n".join(lines)
+
+
 def translate_blocks_batch(
     client: AnthropicBedrockMantle,
     items: list[tuple[str, Optional[str]]],  # (new_en_block, prev_ja_block | None)
@@ -250,7 +269,11 @@ def translate_blocks_batch(
 
     result: dict[int, str] = {}
     for m in re.finditer(r'<t id="(\d+)">(.*?)</t>', text, re.DOTALL):
-        result[int(m.group(1))] = m.group(2).strip("\n")
+        idx = int(m.group(1))
+        translated = m.group(2).strip("\n")
+        if 0 <= idx < len(items):
+            translated = _reapply_first_line_indent(items[idx][0], translated)
+        result[idx] = translated
     return result
 
 
