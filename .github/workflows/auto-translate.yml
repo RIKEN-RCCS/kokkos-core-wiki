@@ -82,8 +82,11 @@ jobs:
           # after_sha as a previous run must overwrite that run's branch, e.g.
           # to regenerate a PR after fixing a bug in translate_changes.py.
           git push origin "$BRANCH" --force
-          if gh pr view "$BRANCH" --json number >/dev/null 2>&1; then
-            echo "PR already exists for $BRANCH; branch updated in place."
+          # gh pr view finds PRs regardless of state, so check state explicitly:
+          # a closed/merged PR for this branch must not block creating a new one.
+          STATE=$(gh pr view "$BRANCH" --json state -q .state 2>/dev/null || true)
+          if [ "$STATE" = "OPEN" ]; then
+            echo "Open PR already exists for $BRANCH; branch updated in place."
             exit 0
           fi
           gh pr create \
