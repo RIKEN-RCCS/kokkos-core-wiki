@@ -7,11 +7,11 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用方法
-----------
+--------
 
 .. code-block:: cpp
 
-    Kokkos::parallel_scan( name, policy, functor, result );
+Kokkos::parallel_scan( name, policy, functor, result );
     Kokkos::parallel_scan( name, policy, functor );
     Kokkos::parallel_scan( policy, functor, result);
     Kokkos::parallel_scan( policy, functor );
@@ -19,7 +19,7 @@
 ``functor`` で定義された並列作業を、*ExecutionPolicy* ``policy`` に従ってディスパッチし、作業項目が提供する成果物に対して排他的または包括的なスキャンを実行します。 省略可能なラベル ``name`` はプロファイリングおよびデバッグツールで使用されます。提供された場合、最終結果は、 ``result`` に格納されます。
 
 インターフェイス
--------------------
+----------------
 
 .. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_scan(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
 
@@ -35,25 +35,27 @@
 * ``name``: ユーザーが提供した文字列で、Kokkos Profiling Hooksを介してプロファイリングおよびデバッグツールで使用されます。
 * 反復空間およびその他の実行プロパティを定義する  *ExecutionPolicy*  。 有効なポリシーは以下の通り:
 
-  - ``IntegerType``: 1D反復範囲を定義し、0からカウント値までを範囲とします。
+- ``IntegerType``: 1D反復範囲を定義し、0からカウント値までを範囲とします。
   - `RangePolicy <../policies/RangePolicy.html>`_: 1D反復範囲を定義します。
-  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: チーム内のスレッドにより実行されるべき1次元反復範囲を定義します。``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
-  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき1次元反復範囲を定義します。 ``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
-* FunctorType: 有効なファンクタで、（少なくとも）  ``ExecPolicy`` と縮小型との組み合わせに対応するシグネチャを持つ ``operator()`` を備えるもの。
+  - `TeamPolicy <../policies/TeamPolicy.html>`_: 1D反復範囲を定義し、それぞれをスレッドチームに割り当てます。
+  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: スレッドチームにより実行されるべき1次元反復範囲を定義します。``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: チームのスレッドに範囲を分割するスレッド並列化を通じて実行されるべき1次元反復範囲を定義します。``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき1次元反復範囲を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+* FunctorType: 有効なファンクタで、（少なくとも） ``ExecPolicy`` と ``ReturnType`` に対応するシグネチャを持つ ``operator()`` を備えるもの。
 * ReturnType: ``operator +=`` および ``operator =`` を持つ POD 型 または ``Kokkos::View``.
 
 必要要件:
-~~~~~~~~~~~~~
+~~~~~~~~~
 
 * ``functor`` は、 ``operator() (const HandleType& handle, ReturnType& value, const bool final) const`` または ``operator() (const WorkTag, const HandleType& handle, ReturnType& value, const bool final) const`` の形式のメンバー関数を持ちます。
 
-  - ExecPolicy が IntegerType または ExecPolicy::work_tag が void である場合、 WorkTag を持たない ``operator()`` オーバーロードが使用されます。
+- ExecPolicy が IntegerType または ExecPolicy::work_tag が void である場合、 WorkTag を持たない ``operator()`` オーバーロードが使用されます。
   - HandleType は、ExecPolicy が IntegerType の場合、IntegerType であり、そうでない場合は ExecPolicy::member_type です。
 * ``functor`` の ``ReturnType`` 型は、parallel_scanの ``ReturnType`` と互換性があり、提供されていれば、 ``init`` および ``join`` 関数の引数に一致しなければなりません。 ファンクタが、 ``init`` メンバー関数を持たない場合には、 スキャン演算の同一性は、値型のデフォルトコンストラクタによって与えられるものと仮定されます。（`reduction_identity <../builtinreducers/reduction_identity.html>`_ によってではありません）。
 * ファンクタは、 ``ReturnType`` と同様に、 ``FunctorType::value_type`` を定義する必要があります。
 
 セマンティクス
--------------------
+--------------
 
 * 並行性または実行順序は、保証されません。
 * ``ReturnType`` の内容は上書きされます。つまり、値を縮約中立要素に初期化する必要はありません。
@@ -63,14 +65,14 @@
 * ファンクタは、 ``final = false`` で複数回呼び出される可能性があり、ユーザーはこの場合の動作が繰り返しの呼び出しでも、それが一貫していることを保証する必要があります。
 
 例
---------
+--
 
 .. code-block:: cpp
 
-    #include<Kokkos_Core.hpp>
+#include<Kokkos_Core.hpp>
     #include<cstdio>
 
-    int main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
       Kokkos::initialize(argc,argv);
       {
         int N = argc>1?atoi(argv[1]):100;
@@ -78,14 +80,14 @@
         Kokkos::View<int64_t*> in_scan("inclusive_scan",N);
         Kokkos::View<int64_t*> ex_scan("exclusive_scan",N);
 
-        Kokkos::parallel_scan("Loop1", N,
+Kokkos::parallel_scan("Loop1", N,
           KOKKOS_LAMBDA(int64_t i, int64_t& partial_sum, bool is_final) {
           if (is_final) ex_scan(i) = partial_sum;
           partial_sum += i;
           if (is_final) in_scan(i) = partial_sum;
         }, result);
 
-        // エクスクルーシブスキャン: 0,0,1,3,6,10,...
+// エクスクルーシブスキャン: 0,0,1,3,6,10,...
         // インクルーシブスキャン: 0,1,3,6,10,...
         // リザルト: N*(N-1)/2
         printf("Result: %i %li\n", N, result);

@@ -1,74 +1,31 @@
 初期化及び最終処理完了
-=======================
+======================
 
-Kokkos::initialize
-------------------
+以下の関数とクラスは、Kokkos の実行環境とリソースのクリーンアップを管理します:
 
-Kokkos の内部オブジェクトと、有効化されたすべての Kokkos バックエンドを初期化します
+.. list-table::
+   :align: left
 
-詳細については、 `Kokkos::initialize <initialize_finalize/initialize.html>`_ を参照してください。
-
-
-Kokkos::finalize
-----------------
-
-Kokkos の内部オブジェクトを後処理し、有効化されたすべての Kokkos バックエンドをシャットダウンします。
-
-詳細については、 `Kokkos::finalize <initialize_finalize/finalize.html>`_ を参照してください。
-
-
-Kokkos::is_initialized
-----------------------
-Kokkos の初期化状態を照会することができ、Kokkos が初期化されている場合に、`true` を返します。
-
-詳細については、 `Kokkos::is_initialized <initialize_finalize/is_Initialized.html>`_ を参照してください。
-
-Kokkos::is_finalized
---------------------
-Kokkos の最終処理完了状態を照会することができ、Kokkos が最終処理完了している場合に、`true` を返します。
-
-詳細については、 `Kokkos::is_finalized <initialize_finalize/is_Finalized.html>`_ を参照してください。
-
-Kokkos::ScopeGuard
-------------------
-
-``Kokkos::ScopeGuard`` は、Kokkos によって管理されるリソースを集約するクラスです。 ScopeGuard は構築時に``Kokkos::initialize``を呼び出し、破棄時に ``Kokkos::finalize`` を呼び出します。このように、 Kokkos のコンテキストは、ScopeGuard オブジェクトの範囲を通じて、自動的に管理されます。
-
-詳細については、 `Kokkos::ScopeGuard <initialize_finalize/ScopeGuard.html>`_ を参照してください。
-
-ScopeGuard は、Kokkos オブジェクトが``Kokkos::finalize``を実行した後も存続してしまうという、一般的なミスを防ぐのに役立ちます:
-
-.. code-block:: cpp
-
-  int main(int argc, char** argv) {
-    Kokkos::initialize(argc, argv);
-    Kokkos::View<double*> my_view("my_view", 10);
-    Kokkos::finalize();
-    // Kokkos::finalize の後に呼び出される my_view デストラクタ !
-  }
-
-``Kokkos::ScopeGuard`` に切り替えると修正されます:
-
-.. code-block:: cpp
-
-  int main(int argc, char** argv) {
-    Kokkos::ScopeGuard kokkos(argc, argv);
-    Kokkos::View<double*> my_view("my_view", 10);
-    // Kokkos::finalize の前に呼び出される my_view デストラクタ
-    // ScopeGuard destructor が呼び出され、 Kokkos::finalizeを呼び出します
-  }
-
-上記の例においては、 ``my_view`` は、 main() 関数の終了時まで、範囲から外れません。  ``ScopeGuard`` がなければ、 ``my_view`` が範囲から外れる前に、 ``Kokkos::finalize`` が呼び出されます。  ``ScopeGuard`` があれば、 ``my_view`` の参照が解除された後に、 ``ScopeGuard`` の参照が解除されますが (その後、 ``Kokkos::finalize`` を呼び出します) 、それがシャットダウン間の適切な順序を保証します。
+* - :doc:`initialize_finalize/initialize`
+     - Kokkos の内部オブジェクトと、有効化されたすべての Kokkos バックエンドを初期化します。
+   * - :doc:`initialize_finalize/finalize`
+     - Kokkos の実行環境をシャットダウンし、内部で管理されているリソースを解放します。
+   * - :doc:`initialize_finalize/InitializationSettings`
+     - ランタイムの動作を制御するノブ（スレッド数やデバイス ID など）を表すクラスです。
+   * - :doc:`initialize_finalize/ScopeGuard`
+     - 初期化と終了処理が正しく行われることを保証する RAII ベースのアプローチです。
+   * - :doc:`initialize_finalize/push_finalize_hook`
+     - :cpp:func:`finalize` の呼び出し時に呼び出される関数を登録します。
+   * - :doc:`initialize_finalize/is_initialized_or_finalized`
+     - Kokkos の初期化状態を照会します
 
 .. toctree::
    :hidden:
    :maxdepth: 1
 
-   ./initialize_finalize/initialize
+./initialize_finalize/initialize
    ./initialize_finalize/finalize
-   ./initialize_finalize/is_Initialized
-   ./initialize_finalize/is_Finalized
-   ./initialize_finalize/ScopeGuard
    ./initialize_finalize/InitializationSettings
-   ./initialize_finalize/InitArguments
+   ./initialize_finalize/ScopeGuard
    ./initialize_finalize/push_finalize_hook
+   ./initialize_finalize/is_initialized_or_finalized

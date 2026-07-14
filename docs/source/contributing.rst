@@ -5,21 +5,35 @@
    :maxdepth: 1
    :hidden:
 
-   templates/index
+templates/index
    developer-guides/index
    testing-and-issue-tracking
 
-私たちは、外部デベロッパーからの貢献を積極的に促す準備ができており、そのように努めています。
-そのためには、まず貢献内容を示すイシューを開き、次に開発ブランチに対するプルリクエストを発行してください。
-大規模な機能については、まず GitHub のイシューを通じてコア開発チームからガイダンスを得ることをお勧めします。
+外部からの貢献を歓迎します。変更内容について、まず `イシューを開いて
+<https://github.com/kokkos/kokkos/issues>`_ 議論してください（特に大規模な機能については重要です）。その後、``develop`` ブランチに対してプルリクエストを送信してください。
+イシューを開くべきか迷う場合は、最初のフィードバックを得るために気軽に `Slack で連絡
+<https://kokkos.org/community/chat/#slack>`__ してください。
 
-Kokkos Coreは、標準3条項 BSD 利用規約に基づいて、ライセンスを受けていることに注意してください。 つまり、Kokkos に貢献することにより、他の誰でも貴方の貢献を公共目的のみならず、 クローズドソースの商用プロジェクトのためにも利用できることを意味します。詳細については、 `LICENSE <license.html>`__ を参照してください。
+法的要件
+----------
+ライセンス
+^^^^^^^^^^
+Kokkos Core に貢献することにより、あなたは **Apache License 2.0
+with LLVM Exception** に同意することに注意してください。これにより、あなたの貢献はクローズドソースの商用の文脈でも利用できるようになります。詳細については `LICENSE <license.html>`__ を参照してください。著者は自身の貢献に対する著作権を保持します。
 
+開発者原産地証明（DCO）
+^^^^^^^^^^^^^^^^^^^^^^^
+オープンソースソフトウェアの明確な管理の連鎖を確保するために、すべての貢献が `開発者原産地証明
+<https://developercertificate.org/>`_ に従って「サインオフ」されることを要求します。
 
-イシュー/機能リクエストを開く `ISSUES <https://github.com/kokkos/kokkos/issues>`_
+コミットメッセージに ``Signed-off-by`` 行を追加することで、あなたはプロジェクトのライセンスの下でその作業を提出する権利を持っていることを証明します。これはコミット時に ``-s`` フラグを使用することで自動化できます。
+
+.. code-block:: bash
+
+git commit -s -m "My informative commit message"
 
 文書投稿
---------------------------
+--------
 
 文書構築に関する指示全般については、`README <https://github.com/kokkos/kokkos-core-wiki/blob/main/README.md>`_ を参照してください。
 
@@ -31,4 +45,3 @@ Kokkos Coreは、標準3条項 BSD 利用規約に基づいて、ライセンス
 * :doc:`ディベロッパーガイド  <developer-guides/index>`
 
 * :doc:`Kokkos 計画および試験 <testing-and-issue-tracking>`
-

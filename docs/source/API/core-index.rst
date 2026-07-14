@@ -5,7 +5,7 @@
    :widths: 20 80
    :header-rows: 1
 
-   * - リデューサー
+* - リデューサー
      - 説明
    * - `初期化及び最終処理完了 <core/Initialize-and-Finalize.html>`__
      - Kokkos の初期化及び最終処理完了。
@@ -26,7 +26,7 @@
    * - `アトミック <core/atomics.html>`__
      - アトミックス。
    * - `数値計算 <core/Numerics.html>`__
-     - 一般的な数学関数、数学定数、数値特性。
+     - 一般的な数学関数、数学定数、数値特性、複素数、半精度浮動小数点型。
    * - `C-スタイルメモリ管理 <core/c_style_memory_management.html>`__
      - C-スタイルメモリ管理
    * - `特性 <core/Prod.html>`__
@@ -41,14 +41,12 @@
      - SFINAE に配慮した方法で、任意の C++ 式が有効かどうかを認識するために使用。
    * - `マクロ <core/Macros.html>`__
      - グローバルマクロであり、アーキテクチャや一般的な設定等に使用。
-   * - `半精度型 <core/Half-precision-types.html>`__
-     - 半精度型へのポータブルなアクセスを実現する補助関数。
 
 .. toctree::
    :hidden:
    :maxdepth: 1
 
-   ./core/Initialize-and-Finalize
+./core/Initialize-and-Finalize
    ./core/View
    ./core/ParallelDispatch
    ./core/builtin_reducers
@@ -66,4 +64,3 @@
    ./core/Detection-Idiom
    ./core/Macros
    ./core/Profiling
-   ./core/Half-precision-types

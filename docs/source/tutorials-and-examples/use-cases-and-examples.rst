@@ -1,12 +1,11 @@
 ユースケースおよび例
-######################
+####################
 
 .. toctree::
    :maxdepth: 1
 
-   ../usecases/MPI-Halo-Exchange
+../usecases/MPI-Halo-Exchange
    ../usecases/Average-To-Nodes
-   ../usecases/MDRangePolicy
    ../usecases/TaggedOperators
    ../usecases/OverlappingHostAndDeviceWork
    ../usecases/Tasking

@@ -5,13 +5,14 @@
    :numbered:
    :maxdepth: 1
 
-   ./ProgrammingGuide/Introduction
+./ProgrammingGuide/Introduction
    ./ProgrammingGuide/Machine-Model
    ./ProgrammingGuide/ProgrammingModel
    ./ProgrammingGuide/Initialization
    ./ProgrammingGuide/View
    ./ProgrammingGuide/ParallelDispatch
    ./ProgrammingGuide/HierarchicalParallelism
+   ./ProgrammingGuide/Multi-Dimensional-Parallelism
    ./ProgrammingGuide/Custom-Reductions
    ./ProgrammingGuide/Atomic-Operations
    ./ProgrammingGuide/Subviews

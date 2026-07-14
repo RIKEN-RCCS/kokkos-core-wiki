@@ -6,4 +6,5 @@
 .. toctree::
    :maxdepth: 1
 
-   PR および レビュー <prs-and-reviews.rst>
+PR および レビュー <prs-and-reviews.rst>
+   コーディング規約 <coding-standards>
