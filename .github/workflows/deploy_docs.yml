@@ -13,7 +13,7 @@ jobs:
     container:
       image: python:3.12
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - run: pip install -r build_requirements.txt
       - run: apt update && apt --yes --no-install-recommends install graphviz
       - name: Build documentation
@@ -22,7 +22,7 @@ jobs:
           make html
       - name: Updload documentation as artifact
         id: deployment
-        uses: actions/upload-pages-artifact@v4.0.0
+        uses: actions/upload-pages-artifact@v5.0.0
         with:
           name: github-pages
           path: ${{ env.docs-directory }}/generated_docs
@@ -41,4 +41,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4.0.5
+        uses: actions/deploy-pages@v5.0.0

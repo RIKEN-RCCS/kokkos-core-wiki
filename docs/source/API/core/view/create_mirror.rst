@@ -47,13 +47,13 @@ Description
 .. |MemorySpaceConcept| replace:: :cpp:func:`MemorySpaceConcept`
 
 
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror(ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror(ViewType const& src);
 
    Creates a new host accessible |View|_ with the same layout and padding as ``src``
 
    - ``src``: a ``Kokkos::View``.
 
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror(decltype(Kokkos::WithoutInitializing), ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror(decltype(Kokkos::WithoutInitializing), ViewType const& src);
 
    Creates a new host accessible |View|_ with the same layout and padding as ``src``. The new view will have uninitialized data.
 
@@ -94,14 +94,14 @@ Description
 	``arg_prop`` must not include a pointer to memory, or a label, or allow padding.
 
 
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror_view(ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror_view(ViewType const& src);
 
    If ``src`` is not host accessible (i.e. if ``SpaceAccessibility<HostSpace,ViewType::memory_space>::accessible`` is ``false``)
    it creates a new host accessible |View|_ with the same layout and padding as ``src``. Otherwise returns ``src``.
 
    - ``src``: a ``Kokkos::View``.
 
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::WithoutInitializing), ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror_view(decltype(Kokkos::WithoutInitializing), ViewType const& src);
 
    If ``src`` is not host accessible (i.e. if ``SpaceAccessibility<HostSpace,ViewType::memory_space>::accessible`` is ``false``)
    it creates a new host accessible |View|_ with the same layout and padding as ``src``. The new view will have uninitialized data. Otherwise returns ``src``.
@@ -173,3 +173,11 @@ Description
      .. important::
 
 	``arg_prop`` must not include a pointer to memory, or a label, or allow padding and ``arg_prop`` must include a memory space.
+
+.. cpp:function:: template <class ViewType> ImplMirrorType create_mirror_view_and_copy(ViewType const& src);
+
+   Equivalent to calling ``create_mirror_view_and_copy(typename ViewType::host_mirror_type::memory_space{}, src)``, i.e, returns a host-accessible View
+   containing the same values as the original |View|_. If the |View|_ was already host-accessible, a (shallow) copy of the original |View|_ is returned.
+   Otherwise a new |View|_ is allocated. :sup:`since Kokkos 5.2`
+
+   - ``src``: a ``Kokkos::View``.

@@ -149,8 +149,6 @@ is enabled. They can be tested for existence (e.g. ``#ifdef KOKKOS_ENABLE_SERIAL
 +--------------------------------+--------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_OPENMP``       | Defined if the |OpenMP|_ execution space is enabled.                     |
 +--------------------------------+--------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_OPENMPTARGET`` | Defined if the experimental ``OpenMPTarget`` execution space is enabled. |
-+--------------------------------+--------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_THREADS``      | Defined if the |Threads|_ execution space is enabled.                    |
 +--------------------------------+--------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_CUDA``         | Defined if the |Cuda|_ execution space is enabled.                       |
@@ -348,6 +346,8 @@ Architectures
 | ``KOKKOS_ARCH_BLACKWELL``         | Set if any NVIDIA Blackwell architecture has been enabled :sup:`since Kokkos 4.7`               |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_BLACKWELL100``      | Optimize for NVIDIA Blackwell generation CC 10.0 (GPU) :sup:`since Kokkos 4.7`                  |
++-----------------------------------+-------------------------------------------------------------------------------------------------+
+| ``KOKKOS_ARCH_BLACKWELL103``      | Optimize for NVIDIA Blackwell generation CC 10.3 (GPU) :sup:`since Kokkos 5.1`                  |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_BLACKWELL120``      | Optimize for NVIDIA Blackwell generation CC 12.0 (GPU) :sup:`since Kokkos 4.7`                  |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+

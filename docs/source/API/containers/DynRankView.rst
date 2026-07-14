@@ -308,33 +308,58 @@ Description
 
        Return the stride of dimension 0.
 
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynRankView::stride` instead.
+
+
    .. cpp:function:: constexpr size_t stride_1() const
 
        Return the stride of dimension 1.
+
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynRankView::stride` instead.
 
    .. cpp:function:: constexpr size_t stride_2() const
 
        Return the stride of dimension 2.
 
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynRankView::stride` instead.
+
    .. cpp:function:: constexpr size_t stride_3() const
 
        Return the stride of dimension 3.
+
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynRankView::stride` instead.
 
    .. cpp:function:: constexpr size_t stride_4() const
 
        Return the stride of dimension 4.
 
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynRankView::stride` instead.
+
    .. cpp:function:: constexpr size_t stride_5() const
 
        Return the stride of dimension 5.
+
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynRankView::stride` instead.
 
    .. cpp:function:: constexpr size_t stride_6() const
 
        Return the stride of dimension 6.
 
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynRankView::stride` instead.
+
    .. cpp:function:: constexpr size_t stride_7() const
 
        Return the stride of dimension 7.
+
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynRankView::stride` instead.
 
    .. cpp:function:: constexpr size_t span() const
 

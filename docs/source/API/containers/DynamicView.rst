@@ -39,9 +39,17 @@ Description
 
         ``DynamicView`` type templated on ``traits::non_const_data_type`` and ``traits::device_type``.
 
+    .. cpp:type:: host_mirror_type
+
+        The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+
+        .. versionadded:: 5.0
+
     .. cpp:type:: HostMirror
 
         The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+
+        .. deprecated:: 5.0
 
     .. rubric:: Public Data Handle Types
 
@@ -124,33 +132,57 @@ Description
 
         :return: The stride of dimension 0, always returns 0 for ``DynamicView`` s.
 
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynamicView::stride` instead.
+
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_1() const;
 
         :return: The stride of dimension 1, always returns 0 for ``DynamicView`` s.
+
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynamicView::stride` instead.
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_2() const;
 
         :return: The stride of dimension 2, always returns 0 for ``DynamicView`` s.
 
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynamicView::stride` instead.
+
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_3() const;
 
         :return: The stride of dimension 3, always returns 0 for ``DynamicView`` s.
+
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynamicView::stride` instead.
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_4() const;
 
         :return: The stride of dimension 4, always returns 0 for ``DynamicView`` s.
 
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynamicView::stride` instead.
+
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_5() const;
 
         :return: The stride of dimension 5, always returns 0 for ``DynamicView`` s.
+
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynamicView::stride` instead.
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_6() const;
 
         :return: The stride of dimension 6, always returns 0 for ``DynamicView`` s.
 
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynamicView::stride` instead.
+
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_7() const;
 
         :return: The stride of dimension 7, always returns 0 for ``DynamicView`` s.
+
+       .. deprecated:: 5.0
+          Use :cpp:func:`DynamicView::stride` instead.
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t span() const;
 

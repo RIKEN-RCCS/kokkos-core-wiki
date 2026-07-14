@@ -101,9 +101,6 @@ Device backends
     * - ``Kokkos_ENABLE_SYCL``
       - To build the SYCL backend targeting Intel GPUs
 
-    * - ``Kokkos_ENABLE_OPENMPTARGET``
-      - :red:`[Experimental]` To build the OpenMP Target backend for offloading to accelerator devices
-
     * - ``Kokkos_ENABLE_OPENACC``
       - :red:`[Experimental]` To build the OpenACC backend for offloading to accelerator devices
 
@@ -143,11 +140,11 @@ General options
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_4``
       * Enable deprecated code in the Kokkos 4.x series
-      * ``ON``
+      * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_5``
       * Enable deprecated code in the Kokkos 5.x series
-      * ``OFF``
+      * ``ON``
 
     * * ``Kokkos_ENABLE_DEPRECATION_WARNINGS``
       * Whether to raise warnings at compile time when using deprecated Kokkos facilities
@@ -161,8 +158,27 @@ General options
       * Aggressively vectorize loops
       * ``OFF``
 
+.. _debugging:
+
 Debugging
 ---------
+
+Debug behavior in Kokkos is both affected by the build type and additional debug CMake options:
+
+CMake build type and compiler flags:
+   * ``CMAKE_BUILD_TYPE=Debug``: Commonly enables flags for debug symbols (``-g``) without specifying optimization flags. Enables ``Kokkos_ENABLE_DEBUG`` by default. Enables ``KOKKOS_ASSERT``.
+
+   * ``CMAKE_BUILD_TYPE=RelWithDebInfo``: Commonly enables flags for debug symbols (``-g``) with optimization flags (``-O2``).
+
+   **NVCC Specifics:** To get full device debug symbols, you must manually add
+    * ``CMAKE_CXX_FLAGS="-G"`` use ``nvcc_wrapper`` as ``CMAKE_CXX_COMPILER``.
+    * If building with ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``, specify ``CMAKE_CUDA_FLAGS="-G"`` instead.
+
+   .. warning:: ``-G`` disables nearly all GPU optimizations and will significantly slow down your kernels.
+
+
+The following options allow to toggle specific debugging features regardless of the build type.
+
 .. list-table::
     :widths: 25 65 35
     :header-rows: 1
@@ -173,17 +189,18 @@ Debugging
       - Default
 
     * * ``Kokkos_ENABLE_DEBUG``
-      * Activate extra debug features - may increase compile times
+      * Activate extra debug features such as ``KOKKOS_ASSERT`` - may increase compile times. Adds ``-lineinfo`` to the compiler flags when compiling with ``nvcc``.
       * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise
 
     * * ``Kokkos_ENABLE_DEBUG_BOUNDS_CHECK``
-      * Use bounds checking - will increase runtime
+      * Use bounds checking - will increase runtime. Implies synchronization after every kernel with the CUDA or HIP backend
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` :red:`[Deprecated since 4.7]`
       * Debug check on dual views
       * (see below [#dual_view_modify_check]_)
 
+Also, see the :ref:`FAQ <setup-debug-build>` for recommended "Full debug" or "Fast debug" configurations.
 
 .. [#dual_view_modify_check] ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is:
   
@@ -517,6 +534,10 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       - Xeon 9470C @ ANL Aurora
         Xeon @ LANL Crossroads
 
+    * - ``Kokkos_ARCH_ICX``
+      - Icelake/x86-64
+      -
+
     * - ``Kokkos_ARCH_SKX``
       - Skylake/x86-64
       - 6130 @ OSU Pete
@@ -596,6 +617,12 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       * 12.0
       * RTX 5080
       * (since Kokkos 4.7)
+
+    * * ``Kokkos_ARCH_BLACKWELL103``
+      * Blackwell
+      * 10.3
+      * B300
+      * (since Kokkos 5.1)
 
     * * ``Kokkos_ARCH_BLACKWELL100``
       * Blackwell
@@ -726,6 +753,11 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       - Models
       - Notes
 
+    * * ``Kokkos_ARCH_AMD_GFX950``
+      * GFX950
+      * MI355X, MI350X
+      * (since Kokkos 5.1)
+
     * * ``Kokkos_ARCH_AMD_GFX942_APU``
       * GFX942
       * MI300A
@@ -761,14 +793,29 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       * Radeon AI PRO R9700, Radeon RX 9070 XT
       * (since Kokkos 5.0)
 
+    * * ``Kokkos_ARCH_AMD_GFX1152``
+      * GFX1152
+      * Radeon 860M
+      * (since Kokkos 5.2)
+
+    * * ``Kokkos_ARCH_AMD_GFX1151``
+      * GFX1151
+      * Strix Halo
+      * (since Kokkos 5.2)
+
     * * ``Kokkos_ARCH_AMD_GFX1103``
       * GFX1103
       * Ryzen 8000G Phoenix series APU
       * (since Kokkos 4.5)
 
+    * * ``Kokkos_ARCH_AMD_GFX1101``
+      * GFX1101
+      * Radeon RX 7800 XT, RX 7700 XT, RX 7700
+      * (since Kokkos 5.2)
+
     * * ``Kokkos_ARCH_AMD_GFX1100``
       * GFX1100
-      * 7900xt
+      * Radeon RX 7900 XT
       * (since Kokkos 4.2)
 
     * * ``Kokkos_ARCH_AMD_GFX1030``

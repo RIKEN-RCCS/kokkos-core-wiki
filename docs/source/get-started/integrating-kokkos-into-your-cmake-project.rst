@@ -20,7 +20,7 @@ command to locate and link against an existing Kokkos installation:
 
 .. code-block:: cmake
 
-  find_package(Kokkos 4.2 REQUIRED CONFIG) # Find Kokkos version 4.2 or later
+  find_package(Kokkos 4.2 REQUIRED CONFIG) # Find Kokkos version 4.2 or any newer version
   # ...
   target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 
@@ -28,7 +28,18 @@ command to locate and link against an existing Kokkos installation:
   generated when Kokkos is built and installed. This file contains the
   necessary information for linking against Kokkos.
 * The ``4.2`` argument specifies the minimum required Kokkos version. It's
-  optional but recommended for ensuring compatibility.
+  optional but recommended for ensuring compatibility.  Note that it will setup
+  your project to accept any newer version, including the next major release
+  (e.g., ``5.0``).
+
+  * If you need to strictly stay on Kokkos ``4.x`` (to avoid breaking changes
+    in ``5.0``), you must specify a version range instead:
+
+    .. code-block:: cmake
+
+      # Find Kokkos 4.2+, but stop before 5.0
+      find_package(Kokkos 4.2...<5.0 REQUIRED CONFIG)
+
 * ``Kokkos::kokkos`` is the namespaced imported target that provides all
   necessary build flags.
 * The ``CONFIG`` keyword tells CMake to use the configuration files.
@@ -116,7 +127,6 @@ or an embedded version, providing flexibility for different build environments.
   # ...
   target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 
-
 Controlling the Kokkos integration:
 
 * `CMAKE_DISABLE_FIND_PACKAGE_Kokkos <https://cmake.org/cmake/help/latest/variable/CMAKE_DISABLE_FIND_PACKAGE_PackageName.html>`_:
@@ -139,3 +149,32 @@ or
 .. code-block:: sh
 
   cmake -DCMAKE_DISABLE_FIND_PACKAGE_Kokkos=ON
+
+.. note::
+   CMake version >= 3.24 introduced canonical ways of integrating ``FetchContent`` with ``find_package()``.
+   As in the above example, for trying to find Kokkos via `find_package()` first before falling back to download and build from source, one can use the following terser syntax:
+
+   .. code-block:: cmake
+
+      FetchContent_Declare(
+          Kokkos
+          URL https://github.com/kokkos/kokkos/archive/refs/tags/4.4.01.tar.gz
+          FIND_PACKAGE_ARGS 4.2 CONFIG 
+      )
+      FetchContent_MakeAvailable(Kokkos)
+
+   The `FIND_PACKAGE_ARGS <https://cmake.org/cmake/help/latest/module/FetchContent.html#integrating-with-find-package>`_ keyword tells CMake to first try call ``find_package()`` with the provided arguments, before downloading it via ``FetchContent``.
+   To always use the fetched ``Kokkos``, add the `OVERRIDE_FIND_PACKAGE <https://cmake.org/cmake/help/latest/module/FetchContent.html#integrating-with-find-package>`_ option:
+
+   .. code-block:: cmake
+
+      FetchContent_Declare(
+          Kokkos
+          URL https://github.com/kokkos/kokkos/archive/refs/tags/4.4.01.tar.gz
+          OVERRIDE_FIND_PACKAGE
+      )
+      # The following will automatically forward through to FetchContent_MakeAvailable()
+      find_package(Kokkos 4.4 CONFIG)
+
+   This option tells CMake to use the fetched ``Kokkos`` and bypass all following ``find_package(Kokkos)`` calls.
+   This also means the version requirements of ``find_package(Kokkos)`` calls will be ignored.

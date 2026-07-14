@@ -30,7 +30,7 @@ You should use Hierarchical Parallelism in particular in a number of cases:
 1. Data gather + reuse: If you gather data for a particular iteration of an outer loop, and then repeatably use it in an inner loop, Hierarchical Parallelism with scratch memory may match the use case well.
 1. Force Cache Blocking: Using Hierarchical Parallelism forces a developer into algorithmic choices which are good for cache blocking. This can sometimes lead to better performing algorithms than a simple flat parallelism.
 
-On the other hand you should probably not use Hierarchical Parallelism if you have tightly nested loops. For that use case, a multidimensional Range Policy is the better fit.
+On the other hand you should probably not use Hierarchical Parallelism if you have tightly nested loops. For that use case, a Multidimensional Range Policy ([`Kokkos::MDRangePolicy`](./Multi-Dimensional-Parallelism)) is the better fit.
 
 (HP_thread_teams)=
 ## Thread teams
@@ -265,7 +265,7 @@ parallel_for (TeamPolicy<> (league_size, team_size),
       }, Kokkos::Experimental::Prod<Scalar>(product);
   });
 ```
-Note that custom reductions must employ one of the functor join patterns recognized by Kokkos; these include `Sum, Prod, Min, Max, LAnd, LOr, BAnd, BOr, ValLocScalar, MinLoc, MaxLoc, MinMaxScalar, MinMax, MinMaxLocScalar` and `MinMaxLoc`.
+Note that custom reductions must employ one of the functor join patterns recognized by Kokkos; these include `Sum, Prod, Min, Max, LAnd, LOr, BAnd, BOr, ValLocScalar, MinLoc, MaxLoc, MinMaxScalar, MinMax, MinMaxLocScalar, MinMaxLoc, FirstLoc, FirstLocScalar, LastLoc, LastLocScalar, MinFirstLoc, MaxFirstLoc` and `MinMaxFirstLastLoc`.
 
 The third pattern is [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan) which can be used to perform prefix scans.
 
@@ -370,7 +370,8 @@ parallel_for (policy, KOKKOS_LAMBDA (const team_member& thread) {
 });
 ```
 
-Here is an example of using the broadcast capabilities to determine the start offset for a team in a buffer:
+Here is an example of using the broadcast capabilities to determine the start offset for a team in a buffer.
+All threads within the team will observe the same value for ``team_offset`` after the call to ``single``.
 
 ```c++
 using Kokkos::parallel_for;
@@ -392,9 +393,10 @@ parallel_for (policy, KOKKOS_LAMBDA (const team_member& thread) {
     KOKKOS_LAMBDA (const int& i, int& lsum) {
       if(...) lsum++;
   });
+  int team_offset;
   Kokkos::single (PerTeam (thread), [=] (int& my_offset) {
    my_offset = Kokkos::atomic_fetch_add(&offset(),lsum);
-  });
+  }, team_offset);
   ...
 });
 ```

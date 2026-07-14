@@ -41,6 +41,8 @@ CUDA
 
 - Building an application that uses Kokkos with Microsoft Visual Studio and the `Cuda` backend enabled, requires the use of the CMake language feature, see :ref:`keywords_enable_backend_specific_options`.
 
+- Using `clang` version 17 and 18 with the `Cuda` backend enabled result in compile errors related to `__float128`. This originates from the definition in `<limits>` in libstdc++. For more details see `llvm/llvm-project#83918 <https://github.com/llvm/llvm-project/pull/83918>`_ and the linked issues.
+
 HIP
 ===
 
@@ -59,8 +61,35 @@ HIP
 
   gcc 7, 9, and later do not have this issue.
 
+- When compiling for architectures gfx10+ or gfx11+, the amd compiler can generate illegal instructions (https://github.com/ROCm/ROCm/issues/5826).
+  A possible work around is to replace the ``-O0`` optimization flag with ``-Og``. This can be set via ``DCMAKE_CXX_FLAGS_DEBUG="-Og -g"`` (https://rocm.docs.amd.com/en/7.11.0-preview/about/release-notes.html#clang-illegal-instruction-error-on-radeon-gpus).
+
 SYCL
 ====
+
+- Compiling with debug symbols might result in compilation errors such as
+
+  .. code-block:: console
+
+     /usr/lib/../lib64/crti.o: in function `_init':
+     /home/abuild/rpmbuild/BUILD/glibc-2.31/csu/../sysdeps/x86_64/crti.S:68:(.init+0x7): relocation truncated to fit: R_X86_64_REX_GOTPCRELX against undefined symbol `__gmon_start__'
+     /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `KokkosKernels::eager_initialize()':
+     /tmp/Trilinos/packages/kokkos-kernels/common/src/KokkosKernels_EagerInitialize.cpp:33:(.text+0x34): relocation truncated to fit: R_X86_64_REX_GOTPCRELX against symbol `typeinfo for std::runtime_error@@GLIBCXX_3.4' defined in .data.rel.ro section in /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../lib64/libstdc++.so
+     /tmp/Trilinos/packages/kokkos-kernels/common/src/KokkosKernels_EagerInitialize.cpp:33:(.text+0x3b): relocation truncated to fit: R_X86_64_REX_GOTPCRELX against symbol `std::runtime_error::~runtime_error()@@GLIBCXX_3.4' defined in .text section in /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../lib64/libstdc++.so
+     /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `sycl::_V1::detail::(anonymous namespace)::__sycl_device_global_registration::__sycl_device_global_registration()':
+     /tmp/icpx-f67500da4c/KokkosKernels_EagerInitialize-footer-f7ef7c.h:6:(.text.startup+0x4): relocation truncated to fit: R_X86_64_PC32 against `.bss'
+     /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `std::_Rb_tree_header::_Rb_tree_header()':
+     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:175:(.text.startup+0x29): relocation truncated to fit: R_X86_64_PC32 against `.bss'
+     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:210:(.text.startup+0x54): additional relocation overflows omitted from the output
+     packages/kokkos-kernels/libkokkoskernels.so.16.2.0: PC-relative offset overflow in PLT entry for `_ZN10KokkosBlas4Impl15Nrm2_MV_FunctorIN6Kokkos4SYCLENS2_4ViewIPdJNS2_18SYCLDeviceUSMSpaceEEEENS4_IPPKdJNS2_10LayoutLeftENS2_6DeviceIS3_S6_EENS2_12MemoryTraitsILj1EEEEEElED2Ev'
+
+  This is fixed by adding ``-flink-huge-device-code``, also see https://www.intel.com/content/www/us/en/docs/dpcpp-cpp-compiler/developer-guide-reference/2025-2/flink-huge-device-code.html, to the link line for the respective target, e.g.,
+
+  .. code-block:: console
+    
+     cmake -D CMAKE_EXE_LINKER_FLAGS="-fsycl -flink-huge-device-code"
+
+  for executables.
 
 - Several of the Kokkos algorithm functions use third-party libraries like oneDPL.
   When using these, Kokkos doesn't control the kernel launch and thus the user has to make sure that all arguments

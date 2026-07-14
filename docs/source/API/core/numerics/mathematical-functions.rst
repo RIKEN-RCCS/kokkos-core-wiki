@@ -38,13 +38,11 @@ Defined in header |text|_ which is included from ``<Kokkos_Core.hpp>``
 
 Provides most of the |text2|_, such as ``fabs``, ``sqrt``, and ``sin``.
 
-Math functions are available in the ``Kokkos::`` namespace since version 3.7, in ``Kokkos::Experimental`` in previous versions.
-
 Below is the synopsis for ``sqrt`` as an example of unary math function.
 
 .. code-block:: cpp
 
-    namespace Kokkos {  // (since 3.7)
+    namespace Kokkos {
         KOKKOS_FUNCTION float       sqrt ( float x );
         KOKKOS_FUNCTION float       sqrtf( float x );
         KOKKOS_FUNCTION double      sqrt ( double x );
@@ -59,7 +57,13 @@ See below the list of common mathematical functions supported. We refer the read
 
 ------------
 
-``func*`` see notes below
+.. [#since_kokkos_4_0] (since Kokkos 4.0)
+.. [#since_kokkos_4_1] (since Kokkos 4.1)
+.. [#since_kokkos_5_1] (since Kokkos 5.1)
+.. [#not_available_with_sycl] (not available with SYCL)
+
+Basic operations
+^^^^^^^^^^^^^^^^
 
 .. _abs: https://en.cppreference.com/w/cpp/numeric/math/fabs
 
@@ -81,9 +85,9 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |remquo| replace:: ``remquo``
 
-.. _fma*: https://en.cppreference.com/w/cpp/numeric/math/fma
+.. _fma: https://en.cppreference.com/w/cpp/numeric/math/fma
 
-.. |fma*| replace:: ``fma*``
+.. |fma| replace:: ``fma``
 
 .. _fmax: https://en.cppreference.com/w/cpp/numeric/math/fmax
 
@@ -101,7 +105,31 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |nan| replace:: ``nan``
 
-**Basic operations** |abs|_ |fabs|_ |fmod|_ |remainder|_ |fma*|_ |fmax|_ |fmin|_ |fdim|_ |nan|_ (currently not provided by Kokkos: |remquo|_)
+.. list-table::
+   :align: left
+
+   * - |abs|_
+       |fabs|_
+     - absolute value of a floating point value (:math:`|x|`)
+   * - |fmod|_
+     - remainder of the floating point division operation
+   * - |remainder|_
+     - signed remainder of the division operation
+   * - |remquo|_ [#since_kokkos_5_1]_
+     - signed remainder as well as the three last bits of the division operation
+   * - |fma|_ [#since_kokkos_4_0]_
+     - fused multiply-add operation
+   * - |fmax|_
+     - larger of two floating-point values
+   * - |fmin|_
+     - smaller of two floating point values
+   * - |fdim|_
+     - positive difference of two floating point values (:math:`\max(0, x-y)`)
+   * - |nan|_
+     - not-a-number (NaN)
+
+Exponential functions
+^^^^^^^^^^^^^^^^^^^^^
 
 .. _exp: https://en.cppreference.com/w/cpp/numeric/math/exp
 
@@ -131,7 +159,26 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |log1p| replace:: ``log1p``
 
-**Exponential functions** |exp|_ |exp2|_ |expm1|_ |log|_ |log10|_ |log2|_ |log1p|_
+.. list-table::
+   :align: left
+
+   * - |exp|_
+     - returns :math:`e` raised to the given power (:math:`e^x`)
+   * - |exp2|_
+     - returns :math:`2` raised to the given power (:math:`2^x`)
+   * - |expm1|_
+     - returns :math:`e` raised to the given power, minus :math:`1` (:math:`e^x-1`)
+   * - |log|_
+     - base :math:`e` logarithm of the given number (:math:`\log(x)`)
+   * - |log10|_
+     - base :math:`10` logarithm of the given number (:math:`\log_{10}(x)`)
+   * - |log2|_
+     - base :math:`2` logarithm of the given number (:math:`\log_{2}(x)`)
+   * - |log1p|_
+     - natural logarithm (to base :math:`e`) of 1 plus the given number (:math:`\ln(1+x)`)
+
+Power functions
+^^^^^^^^^^^^^^^
 
 .. _pow: https://en.cppreference.com/w/cpp/numeric/math/pow
 
@@ -145,11 +192,26 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |cbrt| replace:: ``cbrt``
 
-.. _hypot*: https://en.cppreference.com/w/cpp/numeric/math/hypot
+.. _hypot: https://en.cppreference.com/w/cpp/numeric/math/hypot
 
-.. |hypot*| replace:: ``hypot*``
+.. |hypot| replace:: ``hypot``
 
-**Power functions** |pow|_ |sqrt|_ |cbrt|_ |hypot*|_
+.. list-table::
+   :align: left
+
+   * - |pow|_
+     - raises a number to the given power (:math:`x^y`)
+   * - |sqrt|_
+     - computes square root (:math:`\sqrt{x}`)
+   * - |cbrt|_
+     - computes cube root (:math:`\sqrt[3]{x}`)
+   * - |hypot|_ [#3_argument_overload_since_kokkos_4_0]_
+     - computes hypotenuse (:math:`\sqrt{x^2 + y^2}` and :math:`\sqrt{x^2 + y^2 + z^2}`)
+
+.. [#3_argument_overload_since_kokkos_4_0] 3-argument overload available since Kokkos 4.0
+
+Trigonometric functions
+^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _sin: https://en.cppreference.com/w/cpp/numeric/math/sin
 
@@ -179,7 +241,26 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |atan2| replace:: ``atan2``
 
-**Trigonometric functions** |sin|_ |cos|_ |tan|_ |asin|_ |acos|_ |atan|_ |atan2|_
+.. list-table::
+   :align: left
+
+   * - |sin|_
+     - computes sine (:math:`\sin(x)`)
+   * - |cos|_
+     - computes cosine (:math:`\cos(x)`)
+   * - |tan|_
+     - computes tangent (:math:`\tan(x)`)
+   * - |asin|_
+     - computes arc sine (:math:`\arcsin(x)`)
+   * - |acos|_
+     - computes arc cosine (:math:`\arccos(x)`)
+   * - |atan|_
+     - computes arc tangent (:math:`\arctan(x)`)
+   * - |atan2|_
+     - arc tangent, using signs to determine quadrants
+
+Hyperbolic functions
+^^^^^^^^^^^^^^^^^^^^
 
 .. _sinh: https://en.cppreference.com/w/cpp/numeric/math/sinh
 
@@ -205,7 +286,24 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |atanh| replace:: ``atanh``
 
-**Hyperbolic functions** |sinh|_ |cosh|_ |tanh|_ |asinh|_ |acosh|_ |atanh|_
+.. list-table::
+   :align: left
+
+   * - |sinh|_
+     - computes hyperbolic sine (:math:`\sinh(x)`)
+   * - |cosh|_
+     - computes hyperbolic cosine (:math:`\cosh(x)`)
+   * - |tanh|_
+     - computes hyperbolic tangent (:math:`\tanh(x)`)
+   * - |asinh|_
+     - computes the inverse hyperbolic sine (:math:`\text{arsinh}(x)`)
+   * - |acosh|_
+     - computes the inverse hyperbolic cosine (:math:`\text{arcosh}(x)`)
+   * - |atanh|_
+     - computes the inverse hyperbolic tangent (:math:`\text{artanh}(x)`)
+
+Error and gamma functions
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _erf: https://en.cppreference.com/w/cpp/numeric/math/erf
 
@@ -223,7 +321,20 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |lgamma| replace:: ``lgamma``
 
-**Error and gamma functions** |erf|_ |erfc|_ |tgamma|_ |lgamma|_
+.. list-table::
+   :align: left
+
+   * - |erf|_
+     - error function
+   * - |erfc|_
+     - complementary error function
+   * - |tgamma|_
+     - gamma function
+   * - |lgamma|_
+     - natural logarithm of the gamma function
+
+Nearest integer floating point operations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _ceil: https://en.cppreference.com/w/cpp/numeric/math/ceil
 
@@ -237,9 +348,9 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |trunc| replace:: ``trunc``
 
-.. _round*: https://en.cppreference.com/w/cpp/numeric/math/round
+.. _round: https://en.cppreference.com/w/cpp/numeric/math/round
 
-.. |round*| replace:: ``round*``
+.. |round| replace:: ``round``
 
 .. _lround: https://en.cppreference.com/w/cpp/numeric/math/round
 
@@ -249,9 +360,9 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |llround| replace:: ``llround``
 
-.. _nearbyint*: https://en.cppreference.com/w/cpp/numeric/math/nearbyint
+.. _nearbyint: https://en.cppreference.com/w/cpp/numeric/math/nearbyint
 
-.. |nearbyint*| replace:: ``nearbyint*``
+.. |nearbyint| replace:: ``nearbyint``
 
 .. _rint: https://en.cppreference.com/w/cpp/numeric/math/rint
 
@@ -265,7 +376,28 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |llrint| replace:: ``llrint``
 
-**Nearest integer floating point operations** |ceil|_ |floor|_ |trunc|_ |round*|_ |nearbyint*|_ (currently not provided by Kokkos: |lround|_ |llround|_ |rint|_ |lrint|_ |llrint|_)
+.. list-table::
+   :align: left
+
+   * - |ceil|_
+     - nearest integer not less than the given value
+   * - |floor|_
+     - nearest integer not greater than the given value
+   * - |trunc|_
+     - nearest integer not greater in magnitude than the given value
+   * - |round|_
+       |lround|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
+       |llround|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
+     - nearest integer, rounding away from zero in halfway cases
+   * - |nearbyint|_ [#not_available_with_sycl]_
+     - nearest integer using current rounding mode
+   * - |rint|_ [#since_kokkos_5_1]_
+       |lrint|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
+       |llrint|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
+     - nearest integer using current rounding mode with exception if the result differs
+
+Floating point manipulation functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _frexp: https://en.cppreference.com/w/cpp/numeric/math/frexp
 
@@ -287,27 +419,51 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |scalbln| replace:: ``scalbln``
 
-.. _ilog: https://en.cppreference.com/w/cpp/numeric/math/ilog
+.. _ilogb: https://en.cppreference.com/w/cpp/numeric/math/ilogb
 
-.. |ilog| replace:: ``ilog``
+.. |ilogb| replace:: ``ilogb``
 
-.. _logb*: https://en.cppreference.com/w/cpp/numeric/math/logb
+.. _logb: https://en.cppreference.com/w/cpp/numeric/math/logb
 
-.. |logb*| replace:: ``logb*``
+.. |logb| replace:: ``logb``
 
-.. _nextafter*: https://en.cppreference.com/w/cpp/numeric/math/nextafter 
+.. _nextafter: https://en.cppreference.com/w/cpp/numeric/math/nextafter 
 
-.. |nextafter*| replace:: ``nextafter*``
+.. |nextafter| replace:: ``nextafter``
 
-.. _nexttoward: https://en.cppreference.com/w/cpp/numeric/math/nexttoward
+.. Next line is not a typo, nexttoward is documented on the same page as nextafter.
+.. _nexttoward: https://en.cppreference.com/w/cpp/numeric/math/nextafter
 
 .. |nexttoward| replace:: ``nexttoward``
 
-.. _copysign*: https://en.cppreference.com/w/cpp/numeric/math/copysign
+.. _copysign: https://en.cppreference.com/w/cpp/numeric/math/copysign
 
-.. |copysign*| replace:: ``copysign*``
+.. |copysign| replace:: ``copysign``
 
-**Floating point manipulation functions** |logb*|_ |nextafter*|_ |copysign*|_ (currently not provided by Kokkos: |frexp|_ |ldexp|_ |modf|_ |scalbn|_ |scalbln|_ |ilog|_ |nexttoward|_)
+.. list-table::
+   :align: left
+
+   * - |frexp|_ [#since_kokkos_5_1]_
+     - decomposes a number into significand and base-:math:`2` exponent
+   * - |ldexp|_ [#since_kokkos_5_1]_
+     - multiplies a number by :math:`2` raised to an integral power
+   * - |modf|_ [#since_kokkos_5_1]_
+     - decomposes a number into integer and fractional parts
+   * - |scalbn|_ [#since_kokkos_5_1]_
+       |scalbln|_ [#since_kokkos_5_1]_
+     - multiplies a number by ``FLT_RADIX`` raised to a power
+   * - |ilogb|_ [#since_kokkos_5_1]_
+     - extracts exponent of the number
+   * - |logb|_
+     - extracts exponent of the number
+   * - |nextafter|_
+       |nexttoward|_ [#since_kokkos_5_1]_
+     - next representable floating-point value towards the given value
+   * - |copysign|_
+     - copies the sign of a floating point value
+
+Classification and comparison
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _fpclassify: https://en.cppreference.com/w/cpp/numeric/math/fpclassify
 
@@ -329,9 +485,9 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |isnormal| replace:: ``isnormal``
 
-.. _signbit*: https://en.cppreference.com/w/cpp/numeric/math/signbit
+.. _signbit: https://en.cppreference.com/w/cpp/numeric/math/signbit
 
-.. |signbit*| replace:: ``signbit*``
+.. |signbit| replace:: ``signbit``
 
 .. _isgreater: https://en.cppreference.com/w/cpp/numeric/math/isgreater
 
@@ -357,13 +513,49 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |isunordered| replace:: ``isunordered``
 
-**Classification and comparison** |isfinite|_ |isinf|_ |isnan|_ |signbit*|_ (currently not provided by Kokkos: |fpclassify|_ |isnormal|_ |isgreater|_ |isgreaterequal|_ |isless|_ |islessequal|_ |islessgreater|_ |isunordered|_)
+.. list-table::
+   :align: left
+
+   * - |fpclassify|_ [#since_kokkos_5_1]_
+     - categorizes the given floating-point value
+   * - |isfinite|_
+     - checks if the given number has finite value
+   * - |isinf|_
+     - checks if the given number is infinite
+   * - |isnan|_
+     - checks if the given number is NaN
+   * - |isnormal|_ [#since_kokkos_5_1]_
+     - checks if the given number is normal
+   * - |signbit|_
+     - checks if the given number is negative
+   * - |isgreater|_ [#since_kokkos_5_1]_
+     - checks if the first floating-point argument is greater than the second
+   * - |isgreaterequal|_ [#since_kokkos_5_1]_
+     - checks if the first floating-point argument is greater than or equal to the second
+   * - |isless|_ [#since_kokkos_5_1]_
+     - checks if the first floating-point argument is less than the second
+   * - |islessequal|_ [#since_kokkos_5_1]_
+     - checks if the first floating-point argument is less than or equal to the second
+   * - |islessgreater|_ [#since_kokkos_5_1]_
+     - checks if the first floating-point argument is less or greater than the second
+   * - |isunordered|_ [#since_kokkos_5_1]_
+     - checks if two floating-point values are unordered
 
 ------------
 
-**Other math functions not provided by the C++ standard library**
+Other (non-standard) functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``rsqrt(x)`` reciprocal square root (i.e. computes :math:`\frac{1}{\sqrt(x)}`) (since Kokkos 4.1)
+.. note:: These functions are not provided by the C++ standard library.
+
+
+.. list-table::
+   :align: left
+
+   * - ``rsqrt`` [#since_kokkos_4_1]_
+     - computes the reciprocal square root (:math:`1/\sqrt{x}`)
+   * - ``rcp`` [#since_kokkos_5_1]_
+     - computes the reciprocal (:math:`1/x`)
 
 ------------
 
@@ -383,10 +575,6 @@ Notes
 .. |KnownIssues| replace:: known issues
 
 * **Feel free to** |openIssue|_ **if you need one of the functions that is currently not implemented.** |issue4767|_ **is keeping track of these and has notes about implementability.**
-* ``nearbyint`` is not available with the SYCL backend
-* ``round``, ``logb``, ``nextafter``, ``copysign``, and ``signbit`` are available since version 3.7
-* three-argument version of ``hypot`` is available since 4.0
-* ``fma`` is available since 4.0
 * Beware the using-directive ``using namespace Kokkos;`` will cause
   compilation errors with unqualified calls to math functions.  Use explicit
   qualification (``Kokkos::sqrt``) or using-declaration (``using

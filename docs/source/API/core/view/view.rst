@@ -145,7 +145,7 @@ Spaces
 
 .. cpp:type:: host_mirror_space
 
-   Host accessible memory space used in :cpp:type:`HostMirror`.
+   Host accessible memory space used in :cpp:type:`host_mirror_type`.
 
 View Types
 ^^^^^^^^^^
@@ -158,10 +158,17 @@ View Types
 
    this :cpp:class:`View` type with :cpp:type:`const_data_type` passed as the :cpp:any:`DataType` template parameter
 
+.. cpp:type:: host_mirror_type
+
+   compatible view type with the same :cpp:type:`data_type` and :cpp:type:`array_layout` stored in host accessible memory space.
+
+   .. versionadded:: 5.0
+
 .. cpp:type:: HostMirror
 
    compatible view type with the same :cpp:type:`data_type` and :cpp:type:`array_layout` stored in host accessible memory space.
 
+   .. deprecated:: 5.0
 
 Data Handles
 ^^^^^^^^^^^^
@@ -486,33 +493,57 @@ Data Layout, Dimensions, Strides
 
    :return: the stride of dimension 0.
 
+   .. deprecated:: 5.0
+      Use :cpp:func:`View::stride` instead.
+
 .. cpp:function:: constexpr size_t stride_1() const
 
    :return: the stride of dimension 1.
+
+   .. deprecated:: 5.0
+      Use :cpp:func:`View::stride` instead.
 
 .. cpp:function:: constexpr size_t stride_2() const
 
    :return: the stride of dimension 2.
 
+   .. deprecated:: 5.0
+      Use :cpp:func:`View::stride` instead.
+
 .. cpp:function:: constexpr size_t stride_3() const
 
    :return: the stride of dimension 3.
+
+   .. deprecated:: 5.0
+      Use :cpp:func:`View::stride` instead.
 
 .. cpp:function:: constexpr size_t stride_4() const
 
    :return: the stride of dimension 4.
 
+   .. deprecated:: 5.0
+      Use :cpp:func:`View::stride` instead.
+
 .. cpp:function:: constexpr size_t stride_5() const
 
    :return: the stride of dimension 5.
+
+   .. deprecated:: 5.0
+      Use :cpp:func:`View::stride` instead.
 
 .. cpp:function:: constexpr size_t stride_6() const
 
    :return: the stride of dimension 6.
 
+   .. deprecated:: 5.0
+      Use :cpp:func:`View::stride` instead.
+
 .. cpp:function:: constexpr size_t stride_7() const
 
    :return: the stride of dimension 7.
+
+   .. deprecated:: 5.0
+      Use :cpp:func:`View::stride` instead.
 
 .. cpp:function:: template<class iType> void stride(iType* strides) const
 

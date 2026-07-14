@@ -17,6 +17,13 @@ Usage
 Copies data from ``src`` to ``dest``, where ``src`` and ``dest``
 can be `Kokkos::Views <view.html>`_ or scalars under certain circumstances.
 
+If the provided execution space can access ``src`` and ``dest`` (for
+the three-argument overload) or the execution space corresponding to
+the source or destination's memory space can access both views,
+deep_copy() can convert value types and different layouts by assigning
+entry by entry. Otherwise, value types and layouts have to be
+identical and contiguous as a memcopy is performed.
+
 Interface
 ---------
 
@@ -46,13 +53,15 @@ Requirements
 
 * If ``src`` and ``dest`` are `Kokkos::View <view.html>`_ s, then all the following are true:
 
-  - ``std::is_same<ViewDest::non_const_value_type, ViewSrc::non_const_value_type>::value == true``
-
-  - ``src.rank == dest.rank`` (or, for ``Kokkos::DynRankView`` , ``src.rank() == dest.rank()`` )
+  - ``src.rank() == dest.rank()``
 
   - For all ``k`` in ``[0, dest.rank)`` ``dest.extent(k) == src.extent(k)`` (or the same as ``dest.rank()``)
 
-  - ``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value``, *or* there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (either given or defaulted) such that both ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` and ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true``.
+  - One of the following set of conditions must be true:
+
+    - Either ``std::is_assignable_v<ViewSrc::value_type, DestView::value_type>`` and there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (either given or defaulted) such that both ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` and ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true``.
+
+    - Or ``src.span_is_contiguous() && dest.span_is_contiguous()``, ``std::is_same_v<ViewDest::array_layout,ViewSrc::array_layout>``, and ``std::is_same_v<DestView::value_type, SrcView::non_const_value_type>``.
 
 * If ``src`` is a `Kokkos::View <view.html>`_ and ``dest`` is a scalar, then ``src.rank == 0`` is true.
 
@@ -66,7 +75,7 @@ Semantics
 Examples
 --------
 
-Some Things you can and cannot do
+Some things you can and cannot do
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
@@ -116,6 +125,9 @@ Some Things you can and cannot do
 
 How to get layout incompatible views copied
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To move data from a device view to an incompatible host view, the operation
+needs to be done in two steps by using a temporary allocation:
 
 .. code-block:: cpp
 
