@@ -6,7 +6,6 @@ on:
     paths:
       - 'docs/source/**/*.rst'
       - 'docs/source/*.rst'
-  workflow_dispatch:
 
 jobs:
   translate:
@@ -21,7 +20,7 @@ jobs:
         with:
           ref: main
           path: main-repo
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Checkout Japanese branch
         uses: actions/checkout@v4

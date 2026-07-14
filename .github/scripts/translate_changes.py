@@ -116,21 +116,42 @@ def join_blocks(blocks: list[str]) -> str:
 # Git helpers
 # ---------------------------------------------------------------------------
 
-def get_changed_files(repo_dir: str, before_sha: str, after_sha: str = "HEAD") -> list[str]:
-    """Return relative paths of RST/MD files changed between two commits."""
+def get_changed_files(
+    repo_dir: str, before_sha: str, after_sha: str = "HEAD"
+) -> list[tuple[Optional[str], Optional[str]]]:
+    """Return (old_rel_path, new_rel_path) pairs for RST/MD files added,
+    modified, copied, deleted, or renamed between two commits.
+    old_rel_path is None for additions/copies; new_rel_path is None for
+    deletions; both are set (and may differ) for renames."""
     if before_sha == "0" * 40:
         # First push or force push — translate all tracked RST/MD files
         out = subprocess.run(
             ["git", "ls-files", "--", "*.rst", "*.md"],
             cwd=repo_dir, capture_output=True, text=True, check=True,
         ).stdout
-    else:
-        out = subprocess.run(
-            ["git", "diff", "--name-only", "--diff-filter=ACM",
-             before_sha, after_sha, "--", "*.rst", "*.md"],
-            cwd=repo_dir, capture_output=True, text=True, check=True,
-        ).stdout
-    return [p for p in out.strip().splitlines() if p]
+        return [(None, p) for p in out.strip().splitlines() if p]
+
+    out = subprocess.run(
+        ["git", "diff", "--name-status", "-M", "--diff-filter=ACMDR",
+         before_sha, after_sha, "--", "*.rst", "*.md"],
+        cwd=repo_dir, capture_output=True, text=True, check=True,
+    ).stdout
+
+    changes: list[tuple[Optional[str], Optional[str]]] = []
+    for line in out.strip().splitlines():
+        if not line:
+            continue
+        fields = line.split("\t")
+        status = fields[0]
+        if status.startswith("R"):
+            changes.append((fields[1], fields[2]))
+        elif status.startswith("C"):
+            changes.append((None, fields[2]))
+        elif status == "D":
+            changes.append((fields[1], None))
+        else:  # A or M
+            changes.append((fields[1] if status == "M" else None, fields[1]))
+    return changes
 
 
 def get_file_at_commit(repo_dir: str, rel_path: str, sha: str) -> Optional[str]:
@@ -327,7 +348,7 @@ def main() -> None:
     )
 
     if args.files:
-        changed = args.files
+        changed = [(f, f) for f in args.files]
         use_diff = False
     elif args.before_sha:
         changed = get_changed_files(args.main_dir, args.before_sha, args.after_sha)
@@ -340,36 +361,62 @@ def main() -> None:
         return
 
     print(f"Files to process ({len(changed)}):")
-    for f in changed:
-        print(f"  {f}")
+    for old_rel_path, new_rel_path in changed:
+        if new_rel_path is None:
+            print(f"  {old_rel_path} (deleted)")
+        elif old_rel_path and old_rel_path != new_rel_path:
+            print(f"  {old_rel_path} -> {new_rel_path} (renamed)")
+        else:
+            print(f"  {new_rel_path}")
 
     errors: list[tuple[str, Exception]] = []
 
-    for rel_path in changed:
-        main_file = Path(args.main_dir) / rel_path
-        japanese_file = Path(args.japanese_dir) / rel_path
+    for old_rel_path, new_rel_path in changed:
+        if new_rel_path is None:
+            # Deleted from main — remove the corresponding Japanese file.
+            japanese_file = Path(args.japanese_dir) / old_rel_path
+            if japanese_file.exists():
+                japanese_file.unlink()
+                print(f"[delete] {old_rel_path} removed from main; deleted {japanese_file}")
+            else:
+                print(f"[skip] deleted: {old_rel_path} (no Japanese file to remove)")
+            continue
+
+        main_file = Path(args.main_dir) / new_rel_path
+        japanese_file = Path(args.japanese_dir) / new_rel_path
 
         if not main_file.exists():
-            print(f"[skip] deleted: {rel_path}")
+            print(f"[skip] missing in main: {new_rel_path}")
             continue
+
+        renamed = old_rel_path is not None and old_rel_path != new_rel_path
+        if renamed:
+            old_japanese_file = Path(args.japanese_dir) / old_rel_path
+            if old_japanese_file.exists() and not japanese_file.exists():
+                japanese_file.parent.mkdir(parents=True, exist_ok=True)
+                old_japanese_file.rename(japanese_file)
+                print(f"[move] {old_japanese_file} -> {japanese_file}")
+            elif old_japanese_file.exists():
+                # A file already exists at the new path — drop the stale duplicate.
+                old_japanese_file.unlink()
 
         new_en = main_file.read_text(encoding="utf-8")
         current_ja = japanese_file.read_text(encoding="utf-8") if japanese_file.exists() else None
 
-        print(f"[translate] {rel_path} ...", flush=True)
+        print(f"[translate] {new_rel_path} ...", flush=True)
         try:
-            if use_diff and current_ja and args.before_sha:
-                old_en = get_file_at_commit(args.main_dir, rel_path, args.before_sha)
+            if use_diff and current_ja and old_rel_path:
+                old_en = get_file_at_commit(args.main_dir, old_rel_path, args.before_sha)
                 if old_en:
-                    result = translate_with_diff(client, old_en, new_en, current_ja, rel_path)
+                    result = translate_with_diff(client, old_en, new_en, current_ja, new_rel_path)
                 else:
                     # File is new in this push
                     result = fix_underlines(
-                        translate_whole_file(client, new_en, None, rel_path)
+                        translate_whole_file(client, new_en, None, new_rel_path)
                     )
             else:
                 result = fix_underlines(
-                    translate_whole_file(client, new_en, current_ja, rel_path)
+                    translate_whole_file(client, new_en, current_ja, new_rel_path)
                 )
 
             japanese_file.parent.mkdir(parents=True, exist_ok=True)
@@ -377,7 +424,7 @@ def main() -> None:
             print(f"    written: {japanese_file}")
         except Exception as exc:
             print(f"    ERROR: {exc}")
-            errors.append((rel_path, exc))
+            errors.append((new_rel_path, exc))
 
     if errors:
         print("\nFailed files:")
