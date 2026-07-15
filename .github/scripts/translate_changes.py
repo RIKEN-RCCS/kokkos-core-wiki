@@ -178,6 +178,23 @@ def get_file_at_commit(repo_dir: str, rel_path: str, sha: str) -> Optional[str]:
         return None
 
 
+def read_main_file(main_dir: str, rel_path: str, ref: Optional[str]) -> Optional[str]:
+    """Read a main-branch file's content.
+
+    When ref is given, read it via `git show ref:path` so the content
+    reflects that exact commit regardless of what's currently checked out in
+    main_dir (main_dir just needs to be a clone of main with enough history
+    to contain ref — this keeps translation results independent of whichever
+    commit happens to be checked out, e.g. an older SHA targeted by a manual
+    workflow_dispatch re-run). Otherwise read directly from the working tree
+    (used by --files, which has no associated commit).
+    """
+    if ref is None:
+        path = Path(main_dir) / rel_path
+        return path.read_text(encoding="utf-8") if path.exists() else None
+    return get_file_at_commit(main_dir, rel_path, ref)
+
+
 # ---------------------------------------------------------------------------
 # Translation via Claude API
 # ---------------------------------------------------------------------------
@@ -386,9 +403,11 @@ def main() -> None:
     if args.files:
         changed = [(f, f) for f in args.files]
         use_diff = False
+        after_ref: Optional[str] = None
     elif args.before_sha:
         changed = get_changed_files(args.main_dir, args.before_sha, args.after_sha)
         use_diff = args.before_sha != "0" * 40
+        after_ref = args.after_sha
     else:
         parser.error("Provide either --before-sha or --files.")
 
@@ -418,10 +437,10 @@ def main() -> None:
                 print(f"[skip] deleted: {old_rel_path} (no Japanese file to remove)")
             continue
 
-        main_file = Path(args.main_dir) / new_rel_path
         japanese_file = Path(args.japanese_dir) / new_rel_path
 
-        if not main_file.exists():
+        new_en = read_main_file(args.main_dir, new_rel_path, after_ref)
+        if new_en is None:
             print(f"[skip] missing in main: {new_rel_path}")
             continue
 
@@ -436,7 +455,6 @@ def main() -> None:
                 # A file already exists at the new path — drop the stale duplicate.
                 old_japanese_file.unlink()
 
-        new_en = main_file.read_text(encoding="utf-8")
         current_ja = japanese_file.read_text(encoding="utf-8") if japanese_file.exists() else None
 
         print(f"[translate] {new_rel_path} ...", flush=True)
