@@ -14,7 +14,7 @@ on:
         description: 'Base commit SHA to diff from (exclusive)'
         required: true
       after_sha:
-        description: 'Target commit SHA to diff to (inclusive); also checked out as main'
+        description: 'Target commit SHA to diff to (inclusive)'
         required: true
 
 jobs:
@@ -34,7 +34,7 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ steps.shas.outputs.after }}
+          ref: main
           path: main-repo
           fetch-depth: 0
 
