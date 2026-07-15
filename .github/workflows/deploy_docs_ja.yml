@@ -3,8 +3,6 @@ name: Build and deploy Japanese docs
 on:
   push:
     branches: [ Japanese ]
-  pull_request:
-    branches: [ Japanese ]
   workflow_dispatch:
 
 jobs:
