@@ -73,8 +73,17 @@ def display_width(text: str) -> int:
 
 
 def _is_underline(line: str) -> bool:
-    stripped = line.strip()
+    # Real section adornment lines are always flush-left; indented runs of a
+    # single repeated character are list-table/bullet-list artifacts (e.g. a
+    # bare "-" or "*" marking an empty cell), not title underlines.
+    if not line or line[0] in (" ", "\t"):
+        return False
+    stripped = line.rstrip()
     return bool(stripped) and len(set(stripped)) == 1 and stripped[0] in RST_UNDERLINE_CHARS
+
+
+def _is_title(line: str) -> bool:
+    return bool(line.strip()) and line == line.lstrip() and not _is_underline(line)
 
 
 def fix_underlines(content: str, rel_path: str) -> str:
@@ -95,12 +104,12 @@ def fix_underlines(content: str, rel_path: str) -> str:
             continue
         char = line.strip()[0]
         # Overline pattern: [i] overline, [i+1] title, [i+2] underline
-        if i + 2 < len(lines) and _is_underline(lines[i + 2]) and lines[i + 1].strip():
+        if i + 2 < len(lines) and _is_underline(lines[i + 2]) and _is_title(lines[i + 1]):
             width = display_width(lines[i + 1].strip())
             result[i] = char * width
             result[i + 2] = char * width
         # Underline pattern: [i-1] title, [i] underline
-        elif i > 0 and lines[i - 1].strip() and not _is_underline(lines[i - 1]):
+        elif i > 0 and _is_title(lines[i - 1]):
             width = display_width(lines[i - 1].strip())
             result[i] = char * width
 
