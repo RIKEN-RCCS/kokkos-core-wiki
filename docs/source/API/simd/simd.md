@@ -47,7 +47,7 @@ class basic_simd;
   * `template <class U> simd(U&&)`: 単一値コンストラクタです。引数は、`value_type` 型に変換され、ベクトル内の全ての値がその値に設定されます。
   * `template <class G> simd(G&& gen)`: ジェネレータコンストラクタ。ジェネレータ `gen` は、`std::integral_constant<std::size_t, i>()` を引数として受け取り、`value_type` に変換可能な値を返すことができる呼び出し可能型（例：ファンクタ）である必要があります。 ベクトルレーン `i` は、`gen(std::integral_constant<std::size_t, i>())` の値に初期化されます。
 
-#### Simdフラッグ
+#### Simdフラグ
 
   * 利用可能な `simd_flags` は、`simd_flag_default` および `simd_flag_aligned` です。
   * 下位互換性のため、`Kokkos::Experimental::element_aligned_tag` および `Kokkos::Experimental::vector_aligned_tag` の型が利用可能です。
