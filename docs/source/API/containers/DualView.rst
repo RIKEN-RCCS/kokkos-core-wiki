@@ -259,10 +259,10 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: template <typename iType> KOKKOS_INLINE_FUNCTION constexpr typename std::enable_if<std::is_integral<iType>::value, size_t>::type extent(const iType& r) const;
 
-       要求されたランクの範囲を返します。
+       要求されたランクのextentを返します。
 
     .. cpp:function:: template <typename iType> KOKKOS_INLINE_FUNCTION constexpr typename std::enable_if<std::is_integral<iType>::value, int>::type extent_int(const iType& r) const;
 
-       要求されたランクについて、整数の範囲を返します。
+       要求されたランクについて、整定数のextentを返します。
 
        Return integral extent for the requested rank
