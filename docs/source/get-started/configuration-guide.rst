@@ -168,12 +168,9 @@ CMake ビルドタイプとコンパイラフラグ:
     :header-rows: 1
     :align: left
 
-デバッグ
---------
-.. list-table::
-    :widths: 25 65 35
-    :header-rows: 1
-    :align: left
+    * -
+      - 説明/情報
+      - デフォルト
 
     * * ``Kokkos_ENABLE_DEBUG``
       * ``KOKKOS_ASSERT`` などの追加のデバッグ機能を有効化 - コンパイル時間が長くなる可能性があります。``nvcc`` でコンパイルする場合、コンパイラフラグに ``-lineinfo`` を追加します。
@@ -916,6 +913,12 @@ Intel GPUs
       *
 
     * * ``Kokkos_ARCH_INTEL_GEN``
-      * 特に、Intel GPU向けに、ジャストインタイムコンパイル [#arch_intel_gen]_ 
+      * 特に、Intel GPU向けに、ジャストインタイムコンパイル [#arch_intel_gen]_
       *
       *
+
+.. [#arch_intel_gen] ``Kokkos_ARCH_INTEL_GEN`` は、Intel GPU 向けにジャストインタイムコンパイルを有効化しますが、他の Intel コンパイラ向けフラグはすべて Ahead-Of-Time コンパイルを要求します。
+
+  ジャストインタイム (JIT) コンパイルとは、作成されたバイナリが実際に実行される際にコンパイラが再度呼び出され、その時点で初めて対象アーキテクチャが決定されることを意味します。
+
+  一方、Ahead-Of-Time (AOT) コンパイルとは、コンパイラが一度だけ呼び出されてバイナリが作成され、プログラム実行前に対象アーキテクチャが決定される、標準的なモデルを指します。

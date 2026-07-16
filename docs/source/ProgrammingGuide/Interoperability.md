@@ -87,23 +87,6 @@ void MyKokkosFunction(double* a, const double** b, int n, int m) {
   typedef View<double*,ExecutionSpace> t_1d_device_view;
   typedef View<double**,ExecutionSpace> t_2d_device_view;
 
-  // ビューを ExecutionSpace のメモリ空間に割り当て
-  t_1d_device_view d_a("a",n);
-  // そのビューのホストコピーを作成
-  typename t_1d_device_view::HostMirror h_a = create_mirror_view(a);
-  // 外部割り当てからホストビューへデータをコピー
-  parallel_for(RangePolicy<host_space>(0,n),
-    KOKKOS_LAMBDA (const int& i) {
-    h_a(i) = a[i];
-  });
-  // ホストビューからデバイスビューへデータをコピー
-  deep_copy(d_a,h_a);
-
-  // ExecutionSpace のメモリ空間内に2Dビューを割り当て
-  t_2d_device_view d_b("b",n,m);
-  // そのビューのホストコピーを作成
-  typename t_2d_device_view::HostMirror h_b = create_mirror_view(b);
-
   // ExecutionSpace のメモリ空間にビューを割り当てる
   t_1d_device_view d_a("a",n);
   // そのビューのホストコピーを作成
@@ -120,6 +103,23 @@ void MyKokkosFunction(double* a, const double** b, int n, int m) {
   t_2d_device_view d_b("b",n,m);
   // そのビューのホストコピーを作成
   typename t_2d_device_view::host_mirror_type h_b = create_mirror_view(b);
+
+  // チームポリシーの member_type を取得
+  typedef TeamPolicy<host_space>::member_type t_team;
+  // TeamPolicy を使用して 2D コピーカーネルを実行
+  parallel_for(TeamPolicy<host_space>(n,m),
+    KOKKOS_LAMBDA (const t_team& t) {
+    const int i = t.team_rank();
+    parallel_for(TeamThreadRange(t,m), [&] (const int& j) {
+      h_b(i,j) = b[i][j];
+    });
+  });
+  // ホストからデバイスへデータをコピー
+  deep_copy(d_b,h_b);
+}
+```
+
+また、外部の割り当てを直接参照するビューを作成することもできます。データが多次元ビューである場合は、レイアウトを明示的に指定することが重要です。さらに、すべてのデータは同一の割り当てに属している必要があります。
 
 ```c++
 void MyKokkosFunction(int* a, const double* b, int n, int m) {
