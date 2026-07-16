@@ -15,7 +15,6 @@
 
 ``ptr_to_value`` と ``update_value`` で与えられたアドレスの ``value`` を、関連する演算に従って、アトミックに更新します。
 
-
 説明
 ----
 
@@ -41,6 +40,14 @@
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
+.. cpp:function:: template<class T> void atomic_div(T* const ptr_to_value, const T value);
+
+   ``*ptr_to_value /= value`` をアトミックに実行します。
+
+   * ``ptr_to_value``: 更新される値のアドレス。
+
+   * ``value``: 除算に使用する値。
+
 .. cpp:function:: template<class T> void atomic_decrement(T* const ptr_to_value);
 
     ``(*ptr_to_value)--`` アトミックに実行、または  ``atomic_fetch_sub(ptr_to_value, T(-1))`` を呼び出します。
@@ -65,6 +72,14 @@
    .. deprecated:: 4.5
        :cpp:func:`atomic_dec` を使ってください。
 
+.. cpp:function:: template<class T> void atomic_lshift(T* const ptr_to_value, const unsigned shift);
+
+   ``*ptr_to_value << shift;`` をアトミックに実行します。
+
+   * ``ptr_to_value``: 更新される値のアドレス。
+
+   * ``shift``: 元の変数をシフトする値。
+
 .. cpp:function:: template<class T> void atomic_max(T* const ptr_to_value, const T value);
 
     ``if (value > *ptr_to_value) *ptr_to_value = value`` をアトミックに実行します。
@@ -81,6 +96,30 @@
 
    * ``value``: 最小値を取るべき値。
 
+.. cpp:function:: template<class T> void atomic_mod(T* const ptr_to_value, const T value);
+
+   ``*ptr_to_value %= value`` をアトミックに実行します。
+
+   * ``ptr_to_value``: 更新される値のアドレス。
+
+   * ``value``: 法として使用する値。
+
+.. cpp:function:: template<class T> void atomic_mul(T* const ptr_to_value, const T value);
+
+   ``*ptr_to_value *= value`` をアトミックに実行します。
+
+   * ``ptr_to_value``: 更新される値のアドレス。
+
+   * ``value``: 乗算する値。
+
+.. cpp:function:: template<class T> void atomic_nand(T* const ptr_to_value, const T value);
+
+   ``*ptr_to_value = ~(*ptr_to_value & value)`` をアトミックに実行します。
+
+   * ``ptr_to_value``: 更新される値のアドレス。
+
+   * ``value``: 元の値と結合する値。
+
 .. cpp:function:: template<class T> void atomic_or(T* const ptr_to_value, const T value);
 
     ``*ptr_to_value |= value`` をアトミックに実行します。
@@ -89,6 +128,14 @@
 
    * ``value``: 元の値を組み合わせるための値。
 
+.. cpp:function:: template<class T> void atomic_rshift(T* const ptr_to_value, const unsigned shift);
+
+   ``*ptr_to_value >> shift;`` をアトミックに実行します。
+
+   * ``ptr_to_value``: 更新される値のアドレス。
+
+   * ``shift``: 元の変数をシフトする値。
+
 .. cpp:function:: template<class T> void atomic_sub(T* const ptr_to_value, const T value);
 
     ``*ptr_to_value -= value`` をアトミックに実行します。
@@ -96,3 +143,11 @@
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
    * ``value``: 差し引かれる値。
+
+.. cpp:function:: template<class T> void atomic_xor(T* const ptr_to_value, const T value);
+
+   ``*ptr_to_value ^= value`` をアトミックに実行します。
+
+   * ``ptr_to_value``: 更新される値のアドレス。
+
+   * ``value``: 元の値と結合する値。

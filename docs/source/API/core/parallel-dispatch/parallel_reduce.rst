@@ -74,14 +74,14 @@
 
   - ``IntegerType``: 1D反復範囲を定義し、0からカウント値までを範囲とします。
   - `RangePolicy <../policies/RangePolicy.html>`_: 1次元反復範囲を定義します。
-  - `MDRangePolicy <../policies/MDRangePolicy.html>`_: 次元反復空間を定義します。
+  - `MDRangePolicy <../policies/MDRangePolicy.html>`_: 多次元反復空間を定義します。
   - `TeamPolicy <../policies/TeamPolicy.html>`_: 1次元反復範囲を定義し、それぞれがスレッドチームに代入されます。
-  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: スレッドチームによって実行される1次元の反復範囲を定義します。 ``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です
-  - `TeamVectorMDRange <../policies/TeamVectorMDRange.html>`_: チーム内のスレッドにより実行されるべき多次元反復範囲を定義します。
-  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: チーム内のスレッドにより実行されるべき1次元反復範囲を定義します。``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
-  - `TeamThreadMDRange <../policies/TeamThreadMDRange.html>`_: チーム内のスレッドにより実行されるべき多次元反復範囲を定義します。``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
-  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき1次元反復範囲を定義します。 ``TeamPolicy`` または  ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
-  - `ThreadVectorMDRange <../policies/ThreadVectorMDRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき多次元反復範囲を定義します。``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
+  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: スレッドチームによって実行される1次元の反復範囲を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `TeamVectorMDRange <../policies/TeamVectorMDRange.html>`_: スレッドチームによって実行されるべき多次元反復空間を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: スレッドチームによって実行されるべき1次元反復範囲を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `TeamThreadMDRange <../policies/TeamThreadMDRange.html>`_: スレッドチームによって実行されるべき多次元反復空間を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき1次元反復範囲を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `ThreadVectorMDRange <../policies/ThreadVectorMDRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき多次元反復空間を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
 * FunctorType: 有効なファンクタで、（少なくとも） ``ExecPolicy`` と縮小型との組み合わせに対応するシグネチャを持つ ``operator()`` を備えるもの。
 * ReducerArgument: ``Reducer`` の概念を満たすクラス、または ``Kokkos::View`` のいずれか。
 * ReducerArgumentNonConst: スカラー型または配列型; ファンクタの要件については以下を参照してください。
@@ -97,10 +97,10 @@
 
   - ``ExecPolicy::work_tag`` が ``void`` の場合,  ``WorkTag`` 引数を持たないオーバーロードが使用されます。
   - ``N`` は ``ExecPolicy::rank`` と一致する必要があります。
-* ``functor`` がラムダ式である場合、 ``ReducerArgument`` が ``Reducer`` 概念を満たす、または ``ReducerArgumentNonConst`` が、 ``operator +=`` および ``operator =`` の POD型または ``Kokkos::View`` である必要があります。  後者の場合、値型のデフォルトコンストラクタ（ ``reduction_identity``` ではなく）によって同一性が与えられると仮定する場合、和の削減が適用されます。 提供されている場合、 ``init``/ ``join``/ ``final`` メンバ関数は、タグ付き削減であっても ``WorkTag`` 引数を取ってはいけません。
-* ``ExecPolicy`` が ``TeamThreadRange`` である場合、 "reducing" ``functor`` は認められず、   ``ReducerArgument`` が ``Reducer`` 概念を満たす、または ``ReducerArgumentNonConst`` が、 ``operator +=`` および ``operator =`` の POD型または ``Kokkos::View`` である必要があります。後者の場合、値型のデフォルトコンストラクタ（ ``reduction_identity``` ではなく）によって同一性が与えられると仮定する場合、和の削減が適用されます。
-* ``ExecPolicy`` が ``TeamVectorMDRange``、 ``TeamThreadMDRange`` または ``ThreadVectorMDRange`` である場合、 ``ReducerArgumentNonConst`` のみが認められ、  ``operator +=`` and ``operator =`` を持つ POD 型でなければなりません。
-* ``functor`` 演算子の削減引数 ``ReducerValueType`` は、 ``ReducerArgument`` (または ``ReducerArgumentNonConst``) と互換性がなければならず、 ``init``、 ``join``、および``final``関数の引数が存在し、リデューサーが特定されない場合には、ファクターのそれらの引数は一致する必要があります（``ReducerArgument`` は ``Reducer`` 概念を満たさないが、スカラー、配列、または ``Kokkos::View`` です）。タグ削減の場合、つまりポリシー内でタグを特定する場合には、ファンクタの潜在的な ``init``/``join``/``final`` メンバ関数もタグ付けされる必要があります。
+* ``functor`` がラムダ式である場合、 ``ReducerArgument`` が ``Reducer`` 概念を満たす、または ``ReducerArgumentNonConst`` が、 ``operator +=`` および ``operator =`` を持つ POD型または ``Kokkos::View`` である必要があります。  後者の場合、値型のデフォルトコンストラクタ（ ``reduction_identity``` ではなく）によって同一性が与えられると仮定して、和の縮小が適用されます。 提供されている場合、 ``init``/ ``join``/ ``final`` メンバ関数は、タグ付き縮小であっても ``WorkTag`` 引数を取ってはいけません。
+* ``ExecPolicy`` が ``TeamThreadRange`` である場合、"reducing" ``functor`` は認められず、 ``ReducerArgument`` が ``Reducer`` 概念を満たす、または ``ReducerArgumentNonConst`` が、 ``operator +=`` および ``operator =`` を持つ POD型または ``Kokkos::View`` である必要があります。  後者の場合、値型のデフォルトコンストラクタ（ ``reduction_identity``` ではなく）によって同一性が与えられると仮定して、和の縮小が適用されます。
+* ``ExecPolicy`` が ``TeamVectorMDRange``、 ``TeamThreadMDRange`` または ``ThreadVectorMDRange`` である場合、 ``ReducerArgumentNonConst`` のみが認められ、 ``operator +=`` および ``operator =`` を持つ POD 型でなければなりません。
+* ``functor`` 演算子の縮小引数型 ``ReducerValueType`` は、 ``ReducerArgument`` (または ``ReducerArgumentNonConst``) と互換性がなければならず、リデューサーが指定されていない場合（ ``ReducerArgument`` が ``Reducer`` 概念を満たさず、スカラー、配列、または ``Kokkos::View`` である場合）、ファンクタの ``init``、 ``join``、および ``final`` 関数が存在するならば、それらの引数と一致しなければなりません。タグ付き縮小の場合、つまりポリシー内でタグを指定する場合には、ファンクタの潜在的な ``init``/ ``join``/ ``final`` メンバ関数もタグ付けされる必要があります。
 * ``ReducerArgument`` (または ``ReducerArgumentNonConst``) が
 
   - スカラー型の場合には、 ``ReducerValueType`` は、同型である必要があります。

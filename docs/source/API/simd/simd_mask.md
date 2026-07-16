@@ -39,7 +39,7 @@ class basic_simd_mask;
 
 ### 幅
 
- * `static constexpr std::size_t size()`: `simd_mask<T, Abi>::size()` は、ベクトルの幅、すなわちベクトル内の型 `T` の値の数を表すコンパイル時定数です。
+ * `static constexpr std::integral_constant<simd_size_t, N> size()`: `basic_simd_mask<T, Abi>::size()` は、ベクトルの幅、すなわちベクトル内の型 `T` の値の数を表すコンパイル時定数です。
 
 ### コンストラクタ
 
@@ -48,7 +48,7 @@ class basic_simd_mask;
  * `template <class G> simd_mask(G&& gen)`: ジェネレータコンストラクタ。ジェネレータ `gen` は、`std::integral_constant<std::size_t, i>()` を引数として受け取り、`bool` に変換可能な値を返すことができる呼び出し可能型（例：ファンクタ）である必要があります。 ベクトルマスク値 `i` は、`gen(std::integral_constant<std::size_t, i>())` の値に初期化されます。
 
 ### 値アクセスメソッド
-  * `bool operator[](std::size_t) const`: マスク値 `i` を返します。
+  * `bool operator[](simd_size_t) const`: マスク値 `i` を返します。
   * `reference operator[](std::size_t)`: 変更可能なマスク値 `i` に参照を返します。 ( Kokkos 4.6において削除)
 
 ### ブール値演算

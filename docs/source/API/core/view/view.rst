@@ -105,14 +105,12 @@
 
    :cpp:type:`scalar_array_type` の non-:cpp:`const` バージョンであり、それがすでに  non-:cpp:`const` であれば、 :cpp:type:`scalar_array_type` と同じです。
 
-
 スカラー型
 ^^^^^^^^^^
 
 .. cpp:type:: value_type
 
    配列指定子を削除した :cpp:type:`data_type`、つまり、 ビューが参照しているデータのスカラー型 (例えば、:cpp:type:`data_type` が :cpp:`const int**[3]` であれば、 :cpp:type:`value_type` は、 :cpp:`const int` です)。
-
 
 .. cpp:type:: const_value_type
 
@@ -121,7 +119,6 @@
 .. cpp:type:: non_const_value_type
 
    :cpp:type:`value_type` の non-:cpp:`const` バージョン。
-
 
 空間
 ^^^^
@@ -144,7 +141,7 @@
 
 .. cpp:type:: host_mirror_space
 
-   :cpp:type:`HostMirror` で使用されるホストアクセス可能メモリ領域。
+   :cpp:type:`host_mirror_type` で使用されるホストアクセス可能メモリ領域。
 
 ビュー型
 ^^^^^^^^
@@ -157,10 +154,17 @@
 
    :cpp:any:`DataType` テンプレートパラメータとして渡された、:cpp:type:`const_data_type` を持つ、本 :cpp:class:`View`。
 
+.. cpp:type:: host_mirror_type
+
+   ホストアクセス可能メモリ領域に格納された、同じ :cpp:type:`data_type` および :cpp:type:`array_layout` を持つ互換性のあるビュー型。
+
+   .. versionadded:: 5.0
+
 .. cpp:type:: HostMirror
 
    同じ :cpp:type:`data_type` を持つ、互換性のあるビュー型、およびホストアクセスっ可能なメモリ空間内に格納された :cpp:type:`array_layout` 。
 
+   .. deprecated:: 5.0
 
 データハンドル
 ^^^^^^^^^^^^^^
@@ -174,11 +178,9 @@
 
       :cpp:func:`access()`
 
-
 .. cpp:type:: pointer_type
 
    :cpp:type:`value_type` へのポインタ。
-
 
 他の型
 ^^^^^^
@@ -198,7 +200,6 @@
 .. cpp:type:: specialize
 
    :cpp:class:`View` の基盤となるマッピング構造の部分的な特殊化に使用される特殊化タグ。
-
 
 コンストラクタ
 ^^^^^^^^^^^^^^
@@ -377,7 +378,6 @@
 
    .. versionadded:: 4.4.0
 
-
 データアクセス関数
 ^^^^^^^^^^^^^^^^^^
 
@@ -407,7 +407,6 @@
    cpp:type:`reference_type` の値を返しますが、この型自体は参照可能である場合もあれば、そうでない場合もあります。
    インデックス引数の数は、ビューの :cpp:func:`rank` 以上である必要があります。
    :cpp:func:`rank` を超えるインデックス引数は、 :cpp:`0` でなければなりませんが、これは、 :cpp:any:`KOKKOS_DEBUG` が定義されている場合に、必ず行われます。
-
 
 データレイアウト、次元、ストライド
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -441,7 +440,6 @@
 .. cpp:function:: constexpr array_layout layout() const
 
    :return:  同じ寸法で他のビューを構築するために使用可能なレイアウトオブジェクト。
-
 
 .. cpp:function:: template<class iType> constexpr size_t extent( const iType& dim) const
 
@@ -483,33 +481,57 @@
 
    :return:  次元 0 のストライド
 
+   .. deprecated:: 5.0
+      代わりに :cpp:func:`View::stride` を使用してください。
+
 .. cpp:function:: constexpr size_t stride_1() const
 
    :return: 次元 1 のストライド。
+
+   .. deprecated:: 5.0
+      代わりに :cpp:func:`View::stride` を使用してください。
 
 .. cpp:function:: constexpr size_t stride_2() const
 
    :return: 次元 2 のストライド。
 
+   .. deprecated:: 5.0
+      代わりに :cpp:func:`View::stride` を使用してください。
+
 .. cpp:function:: constexpr size_t stride_3() const
 
    :return: 次元 3 のストライド。
+
+   .. deprecated:: 5.0
+      代わりに :cpp:func:`View::stride` を使用してください。
 
 .. cpp:function:: constexpr size_t stride_4() const
 
    :return: 次元 4 のストライド。
 
+   .. deprecated:: 5.0
+      代わりに :cpp:func:`View::stride` を使用してください。
+
 .. cpp:function:: constexpr size_t stride_5() const
 
    :return: 次元 5 のストライド。
+
+   .. deprecated:: 5.0
+      代わりに :cpp:func:`View::stride` を使用してください。
 
 .. cpp:function:: constexpr size_t stride_6() const
 
    :return: 次元 6 のストライド。
 
+   .. deprecated:: 5.0
+      代わりに :cpp:func:`View::stride` を使用してください。
+
 .. cpp:function:: constexpr size_t stride_7() const
 
    :return: 次元 7 のストライド。
+
+   .. deprecated:: 5.0
+      代わりに :cpp:func:`View::stride` を使用してください。
 
 .. cpp:function:: template<class iType> void stride(iType* strides) const
 
@@ -612,7 +634,6 @@ mdspan への変換
    :return: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>` ですが、 :cpp:any:`other_accessor` から構築されたアクセサポリシーを伴います。
 
 .. cpp:namespace-pop::
-
 
 非メンバー関数
 --------------

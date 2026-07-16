@@ -4,6 +4,9 @@
 .. role:: cpp(code)
     :language: cpp
 
+.. attention::
+   C++20 以前は、Detection Idiom は組み込みの typedef や C++ 式の妥当性を検出するための最良の仕組みでした。 C++20 で追加された言語機能である Concepts は、Detection Idiom よりも優れており、使いやすいため、今後は最初に検討すべきアプローチです。
+
 検出イディオムは、SFINAE に配慮した方法で、あらゆる C++ 式が有効かどうかを認識するために使用されます。
 
 ヘッダーファイル: ``<Kokkos_DetectionIdiom.hpp>``
@@ -97,8 +100,69 @@ API
 例
 --
 
-式を検出
-~~~~~~~~
+Concepts による式の検出
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Concepts: https://eel.is/c++draft/concepts
+
+ある型 ``T`` がコピー代入可能かどうかを検出したいと仮定します。
+
+まず、それを検出するためのコンセプトを記述します:
+
+.. code-block:: cpp
+
+   template<class T>
+   concept CopyAssignable = requires(T& lhs, const T& rhs) {
+      lhs = rhs;
+   };
+
+次に、関数テンプレートを制約します:
+
+.. code-block:: cpp
+
+   template<class U>
+       requires(CopyAssignable<U>)
+   void DoSomething(U& u) {
+    // ...
+   }
+
+別の簡潔な構文:
+
+.. code-block:: cpp
+
+   template<CopyAssignable U>
+   void DoSomething(U& u) {
+    // ...
+   }
+
+コピー代入の戻り値の型が ``T&`` であることも確認したい場合、以下を使用します:
+
+.. code-block:: cpp
+
+   #include <concepts>
+
+   template<class T>
+   concept CanonicalCopyAssignable = requires(T& lhs, const T& rhs) {
+       { lhs = rhs } -> std::same_as<T&>;
+   };
+
+.. important::
+   Kokkos と C++ 標準ライブラリの両方で、多くのコンセプトがすでに定義されています。 独自に作成するよりも、それらを使用することを推奨します。 標準化されているだけでなく、コーナーケースを網羅する点で厳密です。 標準ライブラリが提供するコンセプトは <https://eel.is/c++draft/concepts> で確認できます（ただし、このリストには C++20 以降に追加されたコンセプトが含まれている場合があります）。
+
+標準ライブラリのコンセプト ``std::assignable_from`` で関数テンプレートを制約する:
+
+.. code-block:: cpp
+
+   #include <concepts>
+
+   template<class U>
+       requires std::assignable_from<U&, const U&>
+   void DoSomething(U& u) {
+    // ...
+   }
+
+Detection Idiom による式の検出
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ある型 ``T`` がコピー代入可能かどうかを検出する型特性を記述する必要があると仮定します。 まず、アーキタイプヘルパーエイリアスを記述します:
 
@@ -121,8 +185,46 @@ API
     template<class T>
     using is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>;
 
-ネストされた型定義を検出
-~~~~~~~~~~~~~~~~~~~~~~~~
+Concepts によるネストされた typedef の検出
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ネストされた ``MyType::difference_type`` が存在する場合にはそれを使用し、そうでない場合には ``std::ptrdiff_t`` を使用したいと仮定します:
+
+まず、``MyType`` がネストされた ``difference_type`` を持つかどうかを検出するためのコンセプトが必要です:
+
+.. code-block:: cpp
+
+   template<class T>
+   concept HasDifferenceType = requires {
+       typename T::difference_type;
+   };
+
+次に、その型を抽出するためのヘルパー構造体を記述します:
+
+.. code-block:: cpp
+
+   template<class In, class U>
+   struct Select {
+       using type = U;
+   };
+
+   template<class In, class U>
+       requires HasDifferenceType<In>
+   struct Select<In, U> {
+       using type = typename In::difference_type;
+   };
+
+   template<class In, class U>
+   using Select_t = typename Select<In, U>::type;
+
+その後、型を宣言することができます:
+
+.. code-block:: cpp
+
+   using our_difference_type = Select_t<MyType, std::ptrdiff_t>;
+
+Detection Idiom によるネストされた typedef の検出
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ネストされた``MyType::difference_type`` が存在する場合には、それを使用したいと仮定し、そうでない場合には、 ``std::ptrdiff_t`` の使用を所望します:
 

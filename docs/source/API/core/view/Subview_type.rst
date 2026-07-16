@@ -1,5 +1,5 @@
-``Kokkos::Subview``
-===================
+``Subview``
+===========
 
 .. role:: cpp(code)
    :language: cpp
@@ -35,7 +35,6 @@
 - ``Args...`` は、 |subviewfunc|_ で定義されているスライス指定子です。
 
 - ``sizeof... (Args) == ViewType::rank()``.
-
 
 例
 --

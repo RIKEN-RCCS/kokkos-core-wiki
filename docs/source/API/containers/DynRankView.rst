@@ -1,4 +1,3 @@
-
 .. include:: ../../mydefs.rst
 
 .. role:: cpp(code)
@@ -9,14 +8,12 @@
 
 ヘッダーファイル: ``<Kokkos_DynRankView.hpp>``
 
-
 -----
 
 ``DynRankView`` は、コンパイル時にレイアウトとメモリ空間が確保される、参照カウント型の多次元配列です。
 ``DynRankView`` は、ランクが ``std::shared_ptr`` テンプレートパラメータで提供されない点で 
 [[View|Kokkos::View]] とは異なります; それは、コンストラクタに渡された引数の数に基づいて動的に決定されます。
 動的に決定されます。ランクの上限は 7 次元です。
-
 
 説明
 ----
@@ -68,13 +65,11 @@
       つまり、例えば、 ``LayoutType`` は省略可能ですが、 ``MemorySpace`` および ``MemoryTraits`` の両方が
       特定されれば、 ``MemoryTraits`` の前に  ``MemorySpace`` が来なければなりません。
 
-
    .. rubric:: パブリック静的変数
 
    * ``rank``: ビューのランク (つまり、次元性)。
    * ``rank_dynamic``: 実行時に決定される次元の数。
    * ``reference_type_is_lvalue_reference``: 参照型が C++ の左辺値参照であるかどうか。
-
 
    .. rubric:: パブリックデータ型 型定義
 
@@ -107,7 +102,6 @@
    .. cpp:type:: value_type
 
       配列指定子を削除した ``data_type`` で、つまりビューが参照しているデータのスカラー型です (例えば、 ``data_type`` が  ``const int*******`` である場合、 ``value_type`` は ``const int`` です)。
-
 
    .. cpp:type:: const_value_type
 
@@ -281,7 +275,6 @@
        ``rank`` を超えるインデックス引数は ``0`` でなければならず、 ``KOKKOS_DEBUG`` が定義されている場合に有効になります。
        戻り値の型の特性については、 ``reference_type`` の注記を参照してください。
 
-
    .. rubric:: データレイアウト、ディメンション、ストライド
 
    .. cpp:function:: constexpr array_layout layout() const
@@ -305,33 +298,57 @@
 
        ディメンション 0 の範囲を返します。
 
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynRankView::stride` を使用してください。
+
    .. cpp:function:: constexpr size_t stride_1() const
 
        ディメンション 1 のストライドを返します。
+
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynRankView::stride` を使用してください。
 
    .. cpp:function:: constexpr size_t stride_2() const
 
        ディメンション 2 のストライドを返します。
 
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynRankView::stride` を使用してください。
+
    .. cpp:function:: constexpr size_t stride_3() const
 
        ディメンション 3 のストライドを返します。
+
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynRankView::stride` を使用してください。
 
    .. cpp:function:: constexpr size_t stride_4() const
 
        ディメンション 4 のストライドを返します。
 
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynRankView::stride` を使用してください。
+
    .. cpp:function:: constexpr size_t stride_5() const
 
        ディメンション 5 のストライドを返します。
+
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynRankView::stride` を使用してください。
 
    .. cpp:function:: constexpr size_t stride_6() const
 
        ディメンション 6 のストライドを返します。
 
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynRankView::stride` を使用してください。
+
    .. cpp:function:: constexpr size_t stride_7() const
 
        ディメンション 7 のストライドを返します。
+
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynRankView::stride` を使用してください。
 
    .. cpp:function:: constexpr size_t span() const
 
@@ -398,7 +415,6 @@
 * ``DstType::array_layout`` または ``SrcType::array_layout`` が ``LayoutStride`` である場合:
     - 各ディメンション ``k`` については、その ``dst_view.extent(k) == src_view.extent(k)`` を保持する必要があります。
 
-
 例
 --
 
@@ -433,6 +449,9 @@
                 c(i0,i1) = a(i0) * b(i1);
             });
         }
+
+        Kokkos::finalize();
+    }
 
         Kokkos::finalize();
     }

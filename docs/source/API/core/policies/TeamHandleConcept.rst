@@ -6,16 +6,13 @@
 
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
-TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の概念を定義しています。 実際のタイプはポリシーで定義されますが、以下の API を満たしています。 特定のクラスは、 ``TeamPolicy`` および
-``TeamTask`` が提供する公開 API の一部であり、 ``TeamHandleConcept`` で定義された部分のみであることに、注意してください。 
+TeamHandleConcept は、 ``TeamPolicy`` の ``member_type`` の概念を定義しています。実際のタイプはポリシーで定義されますが、以下の API を満たしています。特定のクラスは、 ``TeamPolicy`` が提供する公開 API の一部であり、 ``TeamHandleConcept`` で定義された部分のみであることに、注意してください。
 クラスの実際の名称やテンプレートパラメータ、既存のコンストラクタ、概念を超えたメンバー関数などは公開された Kokkos API の一部ではないため、変更の対象となります。
-
 
 説明
 ----
 
 .. cpp:class:: TeamHandleConcept
-
 
    .. rubric:: Public nested aliases
 
@@ -73,7 +70,6 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
 
       戻り値:カーネル内で起動したチーム/ワークアイテムの数。
 
-
    .. rubric:: スクラッチ空間コントロール
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION const scratch_memory_space & team_shmem() const ;
@@ -94,17 +90,14 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
 
       本関数は、呼び出しスレッド固有のスクラッチメモリハンドルを返し、それにより、プライベートなスクラッチメモリへのアクセスが可能になります。 本ハンドルは、 ``Kokkos::View`` の最初の引数として与えられ、スクラッチメモリとして、それを使用することができます。
 
-
       - ``level``: 要求されたスクラッチメモリのレベルは、 ``0`` または ``1`` のいずれかです。
 
       - 戻り値: レベルにより特定されたスレッドのスクラッチメモリへのスクラッチメモリハンドル。
-
 
    .. rubric:: チーム集合演算子
 
    以下の関数は、チームの全メンバーがまとめて呼び出さなければなりません。
    これらの呼び出しは語彙的に同一でなければならず、つまりチームの一部が、一方のブランチでコレクティブを呼び、他のメンバーが別のブランチで呼び出すことは、できません (例を参照)。
-
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void team_barrier() const noexcept ;
 

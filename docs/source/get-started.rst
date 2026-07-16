@@ -11,7 +11,7 @@
    get-started/building-from-source
    get-started/configuration-guide
    get-started/package-managers
-
+   get-started/advanced-configuration-and-build
 
 今すぐ Kokkos を試してみませんか？ `Compiler Explorer <https://godbolt.org/z/svrE563Kn>`_ でご確認ください。
 
@@ -38,3 +38,7 @@
 :doc:`パッケージマネージャー <get-started/package-managers>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 本ページでは、ソースからビルドする代わりに便利な代替手段として、ビルド済みの Kokkos パッケージを提供するパッケージマネージャーを紹介しています。
+
+:doc:`高度な構成とビルド <get-started/advanced-configuration-and-build>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+このページでは、Kokkos で利用可能な構成とビルドに関する高度なトピックを一覧で紹介します。

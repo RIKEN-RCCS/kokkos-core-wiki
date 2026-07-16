@@ -37,8 +37,12 @@
   - `RangePolicy <../policies/RangePolicy.html>`_: 1D反復範囲を定義します。
   - `MDRangePolicy <../policies/MDRangePolicy.html>`_: 多次元反復空間を定義します。
   - `TeamPolicy <../policies/TeamPolicy.html>`_: 1次元の反復範囲を定義し、それぞれがスレッドチームに代入されます。
-  - `TeamThreadRange <../policies/TeamVectorRange.html>`_: スレッドチームによって実行される1次元の反復範囲を定義します。  ``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
-  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき1次元反復範囲を定義します。 ``TeamPolicy`` または ``TaskTeam`` を通じて実行される並列領域内でのみ有効です。
+  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: スレッドチームによって実行される1次元の反復範囲を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: スレッドチームによって実行される1次元の反復範囲を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき1次元反復範囲を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `TeamVectorMDRange <../policies/TeamVectorMDRange.html>`_: スレッドチームによって実行される多次元反復空間を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `TeamThreadMDRange <../policies/TeamThreadMDRange.html>`_: スレッドチームによって実行される多次元反復空間を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
+  - `ThreadVectorMDRange <../policies/ThreadVectorMDRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき多次元反復空間を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
 
 * FunctorType: ``ExecPolicy`` のシグネチャに一致する operator() を持つ有効なファンクタ。 詳細については以下の例を参照してください。
 

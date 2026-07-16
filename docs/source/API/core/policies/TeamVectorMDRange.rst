@@ -60,7 +60,7 @@ TeamVectorMDRange は、階層的並列処理の内部で使用される `nested
 
        int leagueRank = team.league_rank();
 
-       auto range = TeamVectorMDRange<Rank<4>, TeamType>(team, n0, n1, n2, n3);
+       auto range = TeamVectorMDRange<Rank<4>, TeamHandle>(team, n0, n1, n2, n3);
 
        parallel_for(range,
          [=](int i0, int i1, int i2, int i3) {

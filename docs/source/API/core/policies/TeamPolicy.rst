@@ -39,7 +39,6 @@ TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policie
    .. cpp:type:: launch_bounds
    .. cpp:type:: member_type
 
-
    .. rubric:: コンストラクタ
 
    .. cpp:function:: TeamPolicy()
@@ -58,7 +57,7 @@ TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policie
 
        ``league_size`` ワークアイテムの起動リクエストで、 ``vector_length`` のベクトル長を使用して、それぞれが ``team_size`` スレッドで、スレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。
 
-   .. cpp:function:: TeamPolicy(index_type league_size, Impl::AUTO_t, index_type vector_length=1)
+   .. cpp:function:: TeamPolicy(index_type league_size, AUTO_t, index_type vector_length=1)
 
       ``league_size`` ワークアイテムの起動リクエストで、 ``vector_length`` のベクトル長を使用して、それぞれが Kokkos が決定したサイズのスレッドチームに代入されます。 チームの規模は、ファンクタの性質を考慮して起動時に遅れて決定することができます。
 
@@ -66,7 +65,7 @@ TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policie
 
         ``league_size`` ワークアイテムの起動リクエストで、 ``vector_length`` のベクトル長を使用して、それぞれが ``team_size`` スレッドのスレッドチームに代入されます。 並列ポリシーを呼び出した際にチームサイズが設定できない場合、そのカーネルの起動がスローされる場合があります。カーネル起動時に提供された実行空間インスタンスを使用します。
 
-   .. cpp:function:: TeamPolicy(execution_space space, index_type league_size, Impl::AUTO_t, index_type vector_length=1)
+   .. cpp:function:: TeamPolicy(execution_space space, index_type league_size, AUTO_t, index_type vector_length=1)
 
        ``league_size`` ワークアイテムの起動リクエストで、 ``vector_length`` のベクトル長を使用して、それぞれが Kokkos が決定したサイズのスレッドチームに代入されます。チームの規模は、ファンクタの性質を考慮して起動時に遅れて決定することができます。カーネル起動時に提供された実行空間インスタンスを使用します。
 
@@ -188,6 +187,18 @@ TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policie
         },team_sum);
         
         //  A_rowsum ベクトルの対応する入力における列の合計を格納
+        single(PerTeam(team),[&] () {
+            A_rowsum(n) = team_sum;
+        });
+    });
+
+        // Compute the sum of the nth row of matrix A, stored as a rank-2 view
+        int team_sum;
+        parallel_reduce(TeamThreadRange(team,M), [&] (const int& i, int& lsum) {
+            lsum += A(n,i);
+        },team_sum);
+        
+        // store the sum of the row in corresponding entry of A_rowsum vector
         single(PerTeam(team),[&] () {
             A_rowsum(n) = team_sum;
         });
