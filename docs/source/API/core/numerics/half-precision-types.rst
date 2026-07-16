@@ -15,7 +15,10 @@ Kokkos はポータブルな半精度型を、 ``Kokkos::Experimental::half_t`` 
 
 マクロ ``KOKKOS_HALF_T_IS_FLOAT`` および ``KOKKOS_BHALF_T_IS_FLOAT`` は、 ``half_t`` および ``bhalf_t`` が ``float`` にマッピングされる場合は ``true`` に、それ以外の場合は ``false`` に設定されます。
 
-マクロ ``KOKKOS_HALF_T_IS_FLOAT`` および ``KOKKOS_BHALF_T_IS_FLOAT`` は、 ``half_t`` および ``bhalf_t`` が 、 ``float`` にマップされる場合に、 ``true`` に設定され、それ自身の独立した型にマップされる場合には、 ``false`` に設定されます。
+関数
+----
+
+以下の表は、 ``half_t`` および ``bhalf_t`` 型で使用可能な標準数学関数を一覧表示します。
 
 さらに、Cuda、SYCL、および HIP バックエンドでは、マークされた関数は特定の半精度関数を使用して実行されるため、より高いパフォーマンスを発揮する可能性があります。
 特定の関数が存在しない場合のデフォルト動作は、半精度浮動小数点数を ``float`` にキャストし、標準関数で演算を実行した後、結果を半精度に再キャストすることです。
