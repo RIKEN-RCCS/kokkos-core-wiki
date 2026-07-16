@@ -748,5 +748,3 @@ View の標準的イディオムとしては、可能な限り少ないテンプ
     Kokkos::View<int*> -> Kokkos::View<int*,HostSpace> // ok if default memory space is HostSpace
 
 #. メモリ特性
-
-#. Memory Traits
