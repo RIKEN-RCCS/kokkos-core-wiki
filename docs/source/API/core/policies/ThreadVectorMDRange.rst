@@ -7,7 +7,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 説明
-------------------
+----
 
 階層的並列処理の中で使われる `nested execution policy <NestedPolicies.html>`_ です。 
 
@@ -49,12 +49,12 @@
 	  または、 ``ThreadVectorMDRange`` ポリシーを使用して、ディスパッチされた並列演算内で、コンストラクタを呼び出すことは出来ません。
 
 制約
-------------
+----
 
 `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、縮約は合計に限定されることに注意してください。
 
 例
---------
+--
 
 .. code-block:: cpp
 

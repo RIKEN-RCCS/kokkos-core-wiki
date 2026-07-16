@@ -7,7 +7,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用方法
-----------
+--------
 
 .. code-block:: cpp
 
@@ -18,7 +18,7 @@
 特定状況下で、`Kokkos::Views <view.html>`_ またはスカラーである可能性があります。
 
 インターフェイス
-------------------
+----------------
 
 .. cpp:function:: template <class ExecSpace, class ViewDest, class ViewSrc> void Kokkos::deep_copy(const ExecSpace& exec_space, const ViewDest& dest, const ViewSrc& src);
 
@@ -42,7 +42,7 @@
 * ViewSrc:  `view-like type <view_like.html>`_.
 
 必要要件
-~~~~~~~~~~~~
+~~~~~~~~
 
 *  ``src`` および ``dest`` が `Kokkos::View <view.html>`_ である場合には、 以下のすべてが真です:
 
@@ -57,7 +57,7 @@
 * ``src`` が `Kokkos::View <view.html>`_ で、 ``dest`` が、スカラーである場合には、 ``src.rank == 0`` は真です。
 
 セマンティクス
-------------------
+--------------
 
 * `ExecutionSpace <../execution_spaces.html>`_ argument が提供されなければ、  いかなる実行空間のすべての優れた演算子 （カーネル、コピー演算子）は、コピーが実行される前に終了し、コピー演算子は、呼び出しが返される前に終了します。
 
@@ -67,7 +67,7 @@
 --------
 
 実行可能な事柄と不可能な事柄
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -115,7 +115,7 @@
     }
 
 レイアウト互換性のないビューをコピーする方法
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 

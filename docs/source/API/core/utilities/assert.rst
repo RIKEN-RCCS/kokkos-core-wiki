@@ -26,7 +26,7 @@
 式のテキストを含む診断情報を使って、 ``Kokkos::abort`` を呼び出します。
 
 例
--------
+--
 
 .. code-block:: cpp
 
@@ -43,7 +43,7 @@
 
 
 注意事項
----------------
+--------
 
 .. _KokkosAssert: https://github.com/kokkos/kokkos/blob/4.2.00/core/src/Kokkos_Assert.hpp
 
@@ -53,5 +53,5 @@
 * C++ 標準ライブラリの `assert` とは異なり、 ``KOKKOS_FUNCTION`` から ``KOKKOS_ASSERT`` を呼び出すことができます。
 
 以下も参照
------------------
+----------
 * `Kokkos::abort() <abort.html>`_ は、プログラムの異常終了を引き起こします。

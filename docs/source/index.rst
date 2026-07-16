@@ -4,7 +4,7 @@
 .. include:: mydefs.rst
 
 Kokkos: プログラミングモデル
-=============================
+============================
 
 .. admonition:: :medium:`C++ Performance Portability Programming Model`
     :class: important
@@ -47,7 +47,7 @@ Kokkos: プログラミングモデル
      - `GitHub リンク <https://github.com/kokkos/kokkos-resilience>`__
 
 C++ 標準ライブラリのための関連作業
------------------------------------------
+----------------------------------
 
 関連する取り組みには以下が含まれます:
 
@@ -72,12 +72,12 @@ C++ 標準ライブラリのための関連作業
      - `GitHub リンク <https://github.com/kokkos/stdBLAS>`__
 
 質問？
-----------
+------
 
 Slack (https://kokkosteam.slack.com) でご質問いただくか、`github <https://github.com/kokkos/kokkos/issues>`_ にイシューを作成してください。
 
 ウェブサイトコンテンツ
------------------------------
+----------------------
 
 .. toctree::
    :maxdepth: 1

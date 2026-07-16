@@ -16,7 +16,7 @@
 今すぐ Kokkos を試してみませんか？ `Compiler Explorer <https://godbolt.org/z/svrE563Kn>`_ でご確認ください。
 
 :doc:`クイックスタート <get-started/quick-start>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 本ガイドでは、CMake プロジェクトを開始し、Kokkos コードの作成を開始するための最小限の最初の手順を説明します。
 
 :doc:`Kokkos をプロジェクトに統合 <get-started/integrating-kokkos-into-your-cmake-project>`

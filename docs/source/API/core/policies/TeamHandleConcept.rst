@@ -12,7 +12,7 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
 
 
 説明
-------------------
+----
 
 .. cpp:class:: TeamHandleConcept
 
@@ -141,7 +141,7 @@ TeamHandleConcept は、 ``TeamPolicy`` と ``TeamTask`` の ``member_type`` の
       - ``global`` が指定されている場合は、 ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[team_size()-1]`` に設定され、すべてのチームメンバーについて、同じポインタでなければなりません。
 
 例
---------
+--
 
 .. code-block:: cpp
 

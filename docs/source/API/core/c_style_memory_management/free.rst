@@ -19,7 +19,7 @@
  ``ptr`` がヌルポインタの場合、この関数は何も行いません。
 
 説明
-------------------
+----
 
 .. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void kokkos_free(void* ptr);
 

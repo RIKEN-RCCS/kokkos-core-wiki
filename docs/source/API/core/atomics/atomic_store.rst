@@ -16,7 +16,7 @@
 アトミックに、 ``obj`` の現在の値を ``desired`` に置き換えます。
 
 説明
-------------------
+----
 
 .. cpp:function:: template<class T> void atomic_store(T* ptr, std::type_identity_t<T> val);
 

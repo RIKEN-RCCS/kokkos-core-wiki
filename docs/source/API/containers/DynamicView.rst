@@ -9,7 +9,7 @@
 
 
 説明
-------------------
+----
 
 .. cpp:class:: template<typename DataType , typename ... P> DynamicView : public Kokkos::ViewTraits<DataType , P ...>
 
@@ -179,7 +179,7 @@
 
 
 例
--------
+--
 
 .. code-block:: cpp
 

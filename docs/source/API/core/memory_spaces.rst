@@ -1,7 +1,7 @@
 .. _api-memory-spaces:
 
 メモリ空間
-=============
+==========
 
 .. role:: cpp(code)
     :language: cpp
@@ -57,17 +57,17 @@
 ``Kokkos::HIPManagedSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降`  は、HIP GPU プログラミング環境における GPU 上のページ移行メモリを表す MemorySpaceType です。ページ移行メモリは、ほとんどのホスト実行空間からアクセス可能です。 すべてのオペレーティングシステムと HIP 対応ハードウェアの組み合わせで利用可能ですが、 ``xnack`` 機能をサポートし有効化するには、オペレーティングシステムとハードウェアの両方が対応している必要があります。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
 
 ``Kokkos::SYCLDeviceUSMSpace``
---------------------------------------------
+------------------------------
 
 ``Kokkos::SYCLDeviceUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPU プログラミング環境において、GPU 上のデバイスメモリを表します。本メモリは、SYCL 実行空間からのみアクセス可能です。
 
 ``Kokkos::SYCLHostUSMSpace``
-------------------------------------------
+----------------------------
 
 ``Kokkos::SYCLHostUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPUプログラミング環境において、GPUからアクセス可能なホスト側の固定メモリを表す |MemorySpaceType|_ です。このメモリは、ホスト実行空間とSYCL 実行空間の両方からアクセス可能です。 
 
 ``Kokkos::SYCLSharedUSMSpace``
---------------------------------------------
+------------------------------
 
 ``Kokkos::SYCLSharedUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPUプログラミング環境において、GPU上のページ移行メモリを表す |MemorySpaceType|_ です。 このメモリは、ホスト実行空間とSYCL 実行空間の両方からアクセス可能です。 
 
@@ -111,7 +111,7 @@
     "特定の場所でテンプレートパラメータとなる型に対してできること" を意味します。
 
 概要
-~~~~~~~~~~
+~~~~
 
 .. code-block:: cpp
 
@@ -140,7 +140,7 @@
     };  
 
 型定義
-~~~~~~~~
+~~~~~~
 
 .. _ExecutionSpace: execution_spaces.html#executionspaceconcept
 
@@ -165,7 +165,7 @@
 * ``MemorySpaceConcept(const MemorySpaceConcept& src)``: コピーコンストラクタ。
 
 関数
-~~~~~~~~~
+~~~~
 
 * ``const char* name() const;``: メモリ空間のインスタンスのラベルを返します。
 * ``void * allocate(ptrdiff_t size) const;``: ``MemorySpaceConcept`` が表すメモリリソースを使用して、少なくとも ``size`` バイトのバッファを割り当てます。

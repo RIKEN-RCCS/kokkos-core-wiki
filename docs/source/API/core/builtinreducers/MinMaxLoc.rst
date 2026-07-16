@@ -17,7 +17,7 @@
    parallel_reduce(N,Functor,MinMaxLoc<T,I,S>(result));
 
 概要
-----------
+----
 
 .. code-block:: cpp
 
@@ -103,7 +103,7 @@
       特定のビューを結果の保存先として参照するリデューサーを構築します。
 
 追加情報
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
 
 * ``MinMaxLoc<T,I,S>::value_type`` は、 非定数 ``T`` および 非定数 ``I`` 上の MinMaxLocScalar の特殊化です。
 

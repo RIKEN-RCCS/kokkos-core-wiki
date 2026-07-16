@@ -17,7 +17,7 @@
    parallel_reduce(N,Functor,MinLoc<T,I,S>(result));
 
 概要
-----------
+----
 
 .. code-block:: cpp
 
@@ -97,7 +97,7 @@
       クラスコンストラクタで提供された結果の保存先のビューを返します。
 
 追加情報
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
 
 * ``MinLoc<T,I,S>::value_type`` は、 非定数 ``T`` および 非定数 ``I`` 上の ValLocScalar の特殊化です。
 
@@ -110,7 +110,7 @@
 *  ``Scalar`` または ``Index``のいずれかのカスタム型で  MinLoc を使用するために、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
 
 例
--------
+--
 
 .. code-block:: cpp
 

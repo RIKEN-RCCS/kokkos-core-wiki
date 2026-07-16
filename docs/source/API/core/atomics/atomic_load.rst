@@ -16,7 +16,7 @@
 アトミックに、 ``obj`` の現在の値を取得します。
 
 説明
-------------------
+----
 
 .. cpp:function:: template<class T> T atomic_load(T* ptr);
 

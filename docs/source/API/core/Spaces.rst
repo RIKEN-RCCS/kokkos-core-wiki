@@ -1,5 +1,5 @@
 空間
-======
+====
 
 .. toctree::
    :maxdepth: 2

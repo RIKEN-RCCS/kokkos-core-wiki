@@ -19,7 +19,7 @@ Kokkos Coreは、標準3条項 BSD 利用規約に基づいて、ライセンス
 イシュー/機能リクエストを開く `ISSUES <https://github.com/kokkos/kokkos/issues>`_
 
 文書投稿
---------------------------
+--------
 
 文書構築に関する指示全般については、`README <https://github.com/kokkos/kokkos-core-wiki/blob/main/README.md>`_ を参照してください。
 

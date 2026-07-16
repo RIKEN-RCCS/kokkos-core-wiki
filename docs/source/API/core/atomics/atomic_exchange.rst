@@ -17,7 +17,7 @@
 
 
 説明
-------------------
+----
 
 .. cpp:function:: template<class T> T atomic_exchange(T* ptr, std::type_identity_t<T> val);
 

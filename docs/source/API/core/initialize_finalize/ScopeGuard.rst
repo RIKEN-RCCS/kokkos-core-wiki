@@ -25,7 +25,7 @@
 .. warning:: バージョン 3.7におけるビヘイビアの変更 (以下参照)。 ``ScopeGuard`` は、:cpp:func:`is_initialized()` または :cpp:func:`is_finalized()` のいずれかが ``true`` を返した場合に中断します。
 
 説明
-------------------
+----
 
 .. cpp:class:: ScopeGuard
 
@@ -114,7 +114,7 @@
 
 
 例
-~~~~~~~
+~~
 
 .. code-block:: cpp
 

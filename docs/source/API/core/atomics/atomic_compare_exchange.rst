@@ -16,7 +16,7 @@
 アトミックに、 ``*ptr`` を ``expected`` と比較し、 等しい場合には、 ``desired`` と置換し、交換が発生しているか否かに関わらず、アドレス ``&obj`` において、以前に格納した値を常に返します。
 
 説明
-------------------
+----
 
 .. cpp:function:: template<class T> T atomic_compare_exchange(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 

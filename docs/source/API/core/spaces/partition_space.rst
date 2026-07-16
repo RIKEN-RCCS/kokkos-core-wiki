@@ -12,14 +12,14 @@
    現在、 ``partition_space`` はまだ、名前空間 ``Kokkos::Experimental`` 内にあります。
 
 使用方法
--------------
+--------
 
 .. code-block:: c++
 
    auto instances = Kokkos::partition_space(Kokkos::DefaultExecutionSpace(),1,1,1);
 
 インターフェイス
-------------------------
+----------------
 
 .. cpp:function:: template<class ExecSpace, class ... Args> std::array<ExecSpace, sizeof...(Args)> partition_space(const ExecSpace& space, Args...args);
 
@@ -39,7 +39,7 @@
                    ハードウェアリソースの割合のヒントを提供します。
 
 必要要件
-~~~~~~~~~~~~
+~~~~~~~~
 
 - ``(std::is_arithmetic_v<Args> && ...)`` は、 ``true`` です。
 
@@ -49,7 +49,7 @@
 
 
 セマンティクス
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 - いずれのインスタンス間にも、暗示的同期関係は存在せず、特に:
   - ``instance[i]`` は、 ``space.fence()`` により囲まれていません。
@@ -65,7 +65,7 @@
 
 
 例
---------
+--
 
 同時実行カーネルで使用するための既存インスタンスを分割。
 

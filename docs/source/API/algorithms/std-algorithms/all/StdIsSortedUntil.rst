@@ -4,7 +4,7 @@
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
 説明
-------------------
+----
 
 ``first`` または ``Kokkos::Experimental::begin(view)`` から始まる範囲の中で、要素が降順でない順序でソートされている最大の範囲を見つけます。 要素間の比較は、 ``operator<`` または二項ファンクタ ``comp`` 経由で行われます。
 
@@ -93,7 +93,7 @@
                         ComparatorType comp);
 
 パラメータおよび要件
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 .. |IsSorted| replace:: ``is_sorted``
 .. _IsSorted: ./StdIsSorted.html
@@ -110,6 +110,6 @@
 
 
 戻り値
-~~~~~~~~~~~~
+~~~~~~
 
 - 範囲 ``[first, it)`` がソートされる最後のイテレータ  ``it`` およびかつ以下の条件が真である場合: ``std::is_same_v<decltype(it), IteratorType>`` 、または範囲 ``[Kokkos::Experimental::begin(view), it)`` がソートされている場合。 この2番目の事例については、以下の通りに``it`` が計算されることに注意してください。 ``Kokkos::Experimental::begin(view) + increment`` ：ここで、 ``increment`` は、アルゴリズム内に認められます。

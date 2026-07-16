@@ -17,7 +17,7 @@
    parallel_reduce(N,Functor,MaxLoc<T,I,S>(result));
 
 概要
-----------
+----
 
 .. code-block:: cpp
 
@@ -97,7 +97,7 @@
       クラスコンストラクタで提供された結果の保存先のビューを返します。
 
 追加情報
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
 
 * ``MaxLoc<T,I,S>::value_type`` は  非定数 ``T`` および 非定数 ``I`` 上の ValLocScalar の特殊化です。
 

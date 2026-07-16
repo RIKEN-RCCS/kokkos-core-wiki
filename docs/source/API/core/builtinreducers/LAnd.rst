@@ -18,7 +18,7 @@
    parallel_reduce(N,Functor,LAnd<T,S>(result));
 
 概要
-----------
+----
 
 .. code-block:: cpp
 
@@ -98,7 +98,7 @@
 
 
 追加情報
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
 
 *  ``LAnd<T,S>::value_type`` は、非定数 ``T`` です。
 

@@ -7,7 +7,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用方法
------------------
+--------
 
 .. code-block:: cpp
 
@@ -21,7 +21,7 @@
 以下も参照: `TeamMember <TeamHandleConcept.html>`_
 
 説明
---------------------------
+----
 
 .. cpp:class:: template<class ...Args> TeamPolicy
 
@@ -159,7 +159,7 @@ TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policie
       返し:  ``set_chunk_size()`` 経由で設定された、チャンクサイズ。
 
 例
---------
+--
 
 .. code-block:: cpp
 

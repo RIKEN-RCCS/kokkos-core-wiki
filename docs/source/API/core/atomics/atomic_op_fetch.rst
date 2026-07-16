@@ -16,7 +16,7 @@
 ``ptr_to_value`` で与えられたアドレスの変数を、関連する演算に従って、アトミックに ``update_value`` で更新し、 更新後の新しい値を返します。
 
 説明
-------------------
+----
 
 .. cpp:function:: template<class T> T atomic_add_fetch(T* const ptr_to_value, const T value);
 

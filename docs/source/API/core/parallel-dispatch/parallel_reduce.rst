@@ -7,7 +7,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用方法
------------
+--------
 
 .. code-block:: cpp
 
@@ -21,7 +21,7 @@
 ``functor`` で定義された並列作業を、*ExecutionPolicy* に従ってディスパッチし、実行ポリシーで定義されたワーカーからの貢献を削減します。省略可能なラベル名は、プロファイリングおよびデバッグツールで使用されます。 縮約型は、 ``sum`` であるか、 ``reducer`` によって定義されるか、あるいはファンクタ上の省略可能な ``join`` 演算子から演繹されます。削減結果は、 ``result`` に格納されるか、 ``reducer`` ハンドルを通じて格納されます。 また、そのような関数が存在する場合、 ``functor.final()`` 関数にも提供されます。 単一の ``parallel_reduce`` 内で複数の ``reducers`` を使用できるため、単一の ``parallel_reduce`` 内で ``min`` 値と ``max`` 値を計算することが可能です。
 
 インターフェイス
----------------------
+----------------
 
 .. code-block:: cpp
 
@@ -87,7 +87,7 @@
 * ReducerArgumentNonConst: スカラー型または配列型; ファンクタの要件については以下を参照してください。
 
 必要要件:
-~~~~~~~~~~~~~
+~~~~~~~~~
 
 * ``ExecPolicy`` が ``MDRangePolicy`` ではない場合、 ``functor`` は、 ``operator() (const HandleType& handle, ReducerValueType& value) const`` または ``operator() (const WorkTag, const HandleType& handle, ReducerValueType& value) const`` の形式のメンバー関数を持ちます。
 
@@ -116,7 +116,7 @@
     + ファンクタが ``final`` 関数を実装する場合、 引数もまた init のそれに一致し、加わる必要があります。
 
 セマンティクス
-------------------
+--------------
 
 * ``policy`` で定義された反復空間の各要素に対して、ファンクターの呼び出し演算子は正確に1回呼び出されますが、ただし、それぞれチームの各ベクトルレーンおよびスレッドによって呼び出し演算子が呼び出される ``TeamPolicy`` および ``TeamThreadRange`` については除外します。
 * 並行性または実行順序は、保証されません。
@@ -125,7 +125,7 @@
 * 演算子への入力値には部分的な削減結果が含まれる可能性があり、Kokkos はスレッドローカルな寄与を最終段階で結合するのみである場合があります。 演算子は、要求された削減タイプに応じて入力削減値を変更しなければなりません。
 
 例
---------
+--
 
 そのほかの例は、`Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_ および `ExecutionPolicy <../policies/ExecutionPolicyConcept.html>`_ に示されています。
 

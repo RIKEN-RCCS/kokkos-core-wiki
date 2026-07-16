@@ -4,7 +4,7 @@
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
 説明
-------------------
+----
 
 ``pred`` が  ``真`` を返す要素は除外して、範囲から、 ``first_to`` から始まる新たな範囲、または ``view_from`` から ``view_dest`` への新しい範囲にコピーします。
 
@@ -90,7 +90,7 @@
                        const UnaryPredicate& pred);
 
 パラメータおよび要件
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 .. |RemoveCopy| replace:: ``remove_copy``
 .. _RemoveCopy: ./StdRemoveCopy.html
@@ -125,6 +125,6 @@
      };
 
 戻り値
-~~~~~~~~~~~~
+~~~~~~
 
 コピーされた最後の要素の後の要素へのイテレータ。

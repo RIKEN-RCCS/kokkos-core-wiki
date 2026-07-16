@@ -22,7 +22,7 @@
 交換が起こった場合には、関数は ``true`` を返しますが、そうでなければ、 ``false`` を返します。
 
 説明
-------------------
+----
 
 .. cpp:function:: template<class T> bool atomic_compare_exchange_strong(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 

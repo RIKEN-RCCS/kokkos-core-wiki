@@ -4,7 +4,7 @@
 ヘッダー: ``<Kokkos_StdAlgorithms.hpp>``
 
 説明
-------------------
+----
 
  終りに向けて、 ``n`` 位置により、範囲または ``view`` 内において、要素をシフトします。
 
@@ -61,7 +61,7 @@
                     typename decltype(begin(view))::difference_type n);
 
 パラメータおよび要件
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 .. |ShiftLeft| replace:: ``shift_left``
 .. _ShiftLeft: ./StdShiftLeft.html
@@ -82,7 +82,7 @@
   - 0以上でなければなりません。
 
 戻り値
-~~~~~~~~~~~~
+~~~~~~
 
 結果の範囲の始め。 ``n`` が  ``last - first`` よりも小さい場合には、 ``first + n`` を返します。 そうでなければ ``last`` を返します。
 

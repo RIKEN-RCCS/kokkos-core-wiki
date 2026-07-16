@@ -4,7 +4,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 説明
-------------------
+----
 
 TeamVectorMDRange は、階層的並列処理の内部で使用される `nested execution policy <./NestedPolicies.html>`_  です。
 
@@ -44,12 +44,12 @@ TeamVectorMDRange は、階層的並列処理の内部で使用される `nested
 	     TeamVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK、 範囲の最大値は認められます
 
 制約
-------------
+----
 
  `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ において使用される場合には、 縮約は、合計に限定されることに注意してください。
 
 例
---------
+--
 
 .. code-block:: cpp
 

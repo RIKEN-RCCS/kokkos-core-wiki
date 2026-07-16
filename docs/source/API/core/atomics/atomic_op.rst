@@ -17,7 +17,7 @@
 
 
 説明
-------------------
+----
 
 .. cpp:function:: template<class T> void atomic_add(T* const ptr_to_value, const T value);
 

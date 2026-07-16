@@ -12,7 +12,7 @@
 .. |ProgrammingGuide| replace:: Programming Guide
 
 クラスインターフェイス
---------------------------
+----------------------
 
 .. cpp:class:: template <class DataType, class... Properties> View
 
@@ -72,14 +72,14 @@
 .. cpp:namespace-push:: template <class DataType, class... Properties> View
 
 パブリック定数
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 .. cpp:member:: static constexpr bool reference_type_is_lvalue_reference
 
    参照型が、C++左辺値参照であるかどうかの確認。
 
 データ型
-^^^^^^^^^^
+^^^^^^^^
 
 .. cpp:type:: data_type
 
@@ -107,7 +107,7 @@
 
 
 スカラー型
-^^^^^^^^^^^^
+^^^^^^^^^^
 
 .. cpp:type:: value_type
 
@@ -124,7 +124,7 @@
 
 
 空間
-^^^^^^
+^^^^
 
 .. cpp:type:: execution_space
 
@@ -147,7 +147,7 @@
    :cpp:type:`HostMirror` で使用されるホストアクセス可能メモリ領域。
 
 ビュー型
-^^^^^^^^^^
+^^^^^^^^
 
 .. cpp:type:: non_const_type
 
@@ -163,7 +163,7 @@
 
 
 データハンドル
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 .. cpp:type:: reference_type
 
@@ -181,7 +181,7 @@
 
 
 他の型
-^^^^^^^^^^^
+^^^^^^
 
 .. cpp:type:: array_layout
 
@@ -201,7 +201,7 @@
 
 
 コンストラクタ
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 .. cpp:function:: View()
 
@@ -379,7 +379,7 @@
 
 
 データアクセス関数
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 .. cpp:function:: template<class IntType> reference_type operator() (const IntType& ... indices) const
 
@@ -410,7 +410,7 @@
 
 
 データレイアウト、次元、ストライド
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. cpp:function:: static constexpr size_t rank()
 
@@ -565,7 +565,7 @@
    :返し: 提供されたレイアウトの管理対象外である :cpp:class:`View` に必要なバイト数。
 
 その他のユーティリティメソッド
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. cpp:function:: int use_count() const;
 
@@ -590,7 +590,7 @@
    管理対象外ビューでは、参照されるアドレスが有効であることが保証されるのではなく、単にヌルポインタでないことのみが保証されます。
 
 mdspan への変換
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
 .. cpp:function:: template <class OtherElementType, class OtherExtents, class OtherLayoutPolicy, class OtherAccessor> constexpr operator mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>()
 
@@ -615,7 +615,7 @@ mdspan への変換
 
 
 非メンバー関数
---------------------
+--------------
 
 .. cpp:function:: template <class... ViewTDst, class... ViewTSrc> bool is_assignable(const View<ViewTDst...>& dst, const View<ViewTSrc...>& src)
 
@@ -634,7 +634,7 @@ mdspan への変換
 .. _api-view-assignment:
 
 代入ルール
-----------------
+----------
 
 代入規則は、代入演算子とコピーコンストラクタの両方に適用されます。
 論理的に合法な代入をすべて可能にすることを目指しつつ、一方では、違法な代入はコンパイル時に可能な限り介入し、それが不可能な場合には実行時に介入します。
@@ -690,7 +690,7 @@ mdspan への変換
 .. _api-view-natural-mdspans:
 
 ナチュラル mdspans
------------------------
+------------------
 
 .. versionadded:: 4.4.0
 
@@ -717,7 +717,7 @@ C++23 は、非所有の多次元配列ビュー` である、mdspan <https://en
 さらに、*natural mdspan* は、:cpp:`m.data() == v.data()` および、各範囲  :cpp:`r` について、 :cpp:`m.extents().extent(r) == v.extent(r)` となるように、構築されています。
 
 例
---------
+--
 
 .. code-block:: cpp
 

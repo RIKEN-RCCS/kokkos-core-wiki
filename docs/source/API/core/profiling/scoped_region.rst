@@ -30,7 +30,7 @@
     ``Profiling::popRegion()`` を呼び出します。
 
 例
--------
+--
 
 .. code-block:: cpp
 

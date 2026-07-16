@@ -1,11 +1,11 @@
 非推奨
-************
+******
 
 Kokkos 4.x において非推奨
-===========================
+=========================
 
 Kokkos 4.7 において非推奨
----------------------------
+-------------------------
 
 * ``KOKKOS_MEMORY_ALIGNMENT[_THRESHOLD]``
    * 置換: 無し
@@ -20,7 +20,7 @@ Kokkos 4.7 において非推奨
    * 非内部利用を意図したものではありません。
 
 Kokkos 4.6 において非推奨
----------------------------
+-------------------------
 
 * ``StaticCrsGraph`` は、 Kokkos Kernels に移動しました。
    * ``KokkosSparse::StaticCrsGraph``
@@ -39,7 +39,7 @@ Kokkos 4.6 において非推奨
    * DualView において不変条件を実行すること、例えば、参照される2つのビューインスタンス間の一貫性です。
 
 Kokkos 4.5 において非推奨
----------------------------
+-------------------------
 
 * タスク割り当てインターフェイス: ``BasicFuture``, ``TaskSingle``, ``TaskPriority``, ``task_spawn``, ``host_spawn``, ``respawn``, ``when_all``, ``wait``
    * 置換: 無し
@@ -74,7 +74,7 @@ Kokkos 4.5 において非推奨
    * 重複した機能
 
 Kokkos 4.4 において非推奨
----------------------------
+-------------------------
 
 * ``is_layouttiled``
    * 置換: 無し
@@ -115,7 +115,7 @@ Kokkos 4.4 において非推奨
 
 
 Kokkos 4.3 において非推奨
----------------------------
+-------------------------
 
 * ``Experimental::swap``
    * 置換: ``kokkos_swap``
@@ -154,7 +154,7 @@ Kokkos 4.3 において非推奨
    *  `InitializationSettings` の変更により、これらは不要となりました。
 
 Kokkos 4.2 において非推奨
----------------------------
+-------------------------
 
 * ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
    * 置換: ``Cuda::Cuda(cudaStream_t stream)``
@@ -178,7 +178,7 @@ Kokkos 4.2 において非推奨
 
 
 Kokkos 4.1 において非推奨
----------------------------
+-------------------------
 
 *  ``BinSort``, ``BinOp1D``, and ``BinOp3D`` のためのデフォルトコンストラクタ
    * 置換: 無し
@@ -194,7 +194,7 @@ Kokkos 4.1 において非推奨
 
 
 Kokkos 4.0 において非推奨
----------------------------
+-------------------------
 
 * ``CudaUVMSpace::available()``
    * 置換: ``SharedSpace``
@@ -214,7 +214,7 @@ Kokkos 4.0 において非推奨
 
 
 Kokkos-3.x において非推奨
-===========================
+=========================
 
 
 
@@ -224,13 +224,13 @@ Kokkos-3.7 において非推奨である型エイリアス
 
 
 Kokkos-3.7 において非推奨であるマクロ
---------------------------------------
+-------------------------------------
 
 ``KOKKOS_RESTRICT_EXECUTION_TO_(DATA_SPACE)``, ``HIP_SAFE_CALL(call)``
 
 
 Kokkos-3.7 において非推奨である自由関数
-----------------------------------------
+---------------------------------------
 
 .. list-table::
    :widths: 30 70
@@ -279,7 +279,7 @@ Kokkos-3.7 において非推奨である自由関数
 
 
 Kokkos-3.7 において非推奨
-------------------------------------------
+-------------------------
 
 .. list-table::
    :widths: 70 30
@@ -334,7 +334,7 @@ Kokkos-3.7 において非推奨であるクラス
 
 
 名前空間アップデート
-----------------------
+--------------------
 
 .. list-table::
    :widths: 40 60
@@ -360,7 +360,7 @@ Kokkos-3.7 において非推奨であるクラス
 
 
 他の非推奨
-------------------
+----------
 
 .. list-table::
    :widths: auto
@@ -419,13 +419,13 @@ Kokkos-3.7 におけるパブリックヘッダー
 Kokkos-3.7 より、 以下の項目が、 *パブリック* ヘッダーです:
 
 コア
-~~~~~~~~~~~~
+~~~~
 ``Kokkos_Core.hpp``, ``Kokkos_Macros.hpp``, ``Kokkos_Atomic.hpp``, ``Kokkos_DetectionIdiom.hpp``, ``Kokkos_MathematicalConstants.hpp``, ``Kokkos_MathematicalFunctions.hpp``, ``Kokkos_NumericTraits.hpp``, ``Kokkos_Array.hpp``, ``Kokkos_Complex.hpp``, ``Kokkos_Pair.hpp``, ``Kokkos_Half.hpp``, ``Kokkos_Timer.hpp``
 
 アルゴリズム
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
 ``Kokkos_StdAlgorithms.hpp``, ``Kokkos_Random.hpp``, ``Kokkos_Sort.hpp``
 
 コンテナ
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~
 ``Kokkos_Bit.hpp``, ``Kokkos_DualView.hpp``, ``Kokkos_DynRankView.hpp``, ``Kokkos_ErrorReporter.hpp``, ``Kokkos_Functional.hpp``, ``Kokkos_OffsetView.hpp``, ``Kokkos_ScatterView.hpp``, ``Kokkos_StaticCrsGraph.hpp``, ``Kokkos_UnorderedMap.hpp``, ``Kokkos_Vector.hpp``

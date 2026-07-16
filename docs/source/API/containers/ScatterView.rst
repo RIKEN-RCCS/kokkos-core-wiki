@@ -72,7 +72,7 @@
 このインターフェースを使って、デフォルトでない ``Operation``, ``Duplication`` または ``Contribution`` を持つ ScatterView を作成するのは複雑になることがあります。なぜなら、DataType、Layout、ExecSpace の正確なタイプを指定する必要があるからです。 そのため、代わりに Kokkos::Experimental::|create_scatter_view|_ という関数を使うことをお勧めします。
 
 説明
-------------------
+----
 
 .. cpp:class:: template <typename DataType, typename Layout, typename ExecSpace, typename Op, typename Duplication, typename Contribution> ScatterView
 
@@ -186,7 +186,7 @@
 
 
 例
--------
+--
 
 .. code-block:: cpp
 

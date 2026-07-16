@@ -16,7 +16,7 @@
    :returns:  :cpp:func:`initialize` が呼び出されている場合には、 ``true`` 。そうでない場合には、 `false` 。
 
 例
---------
+--
 
 .. code-block:: cpp
 

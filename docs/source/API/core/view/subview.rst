@@ -21,7 +21,7 @@
 .. |KokkosAll| replace:: :cpp:func:`Kokkos::ALL`
 
 説明
-------------------
+----
 
 .. cpp:function:: template<class ViewType, class ... Args> IMPL_DETAIL subview(const ViewType& v, Args ... args)
 
@@ -66,7 +66,7 @@
      - ``arg_r < v.extent(r)``
 
 例
---------
+--
 
 .. code-block:: cpp
 

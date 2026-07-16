@@ -20,7 +20,7 @@
 TeamThreadRange は  、階層的並列処理内で使われる、 `nested execution policy <./NestedPolicies.html>`_ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
 
 概要
-----------
+----
 
 .. code-block:: cpp
     
@@ -31,7 +31,7 @@ TeamThreadRange は  、階層的並列処理内で使われる、 `nested execu
     /* 実装により定義 */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
 
 説明
-------------------
+----
 
 .. code-block:: cpp
 
@@ -78,7 +78,7 @@ TeamThreadRange は  、階層的並列処理内で使われる、 `nested execu
         - ``end >= begin`` は、真です;
 
 例
---------
+--
 
 .. code-block:: cpp
 

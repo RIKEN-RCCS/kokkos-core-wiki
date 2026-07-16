@@ -32,7 +32,7 @@
 
 
 説明
-------------------
+----
 
 .. cpp:function:: template <class... Args> ALLOC_PROP view_alloc(Args const&... args)
 

@@ -17,7 +17,7 @@
    parallel_reduce(N,Functor,MinMax<T,S>(result));
 
 概要
-----------
+----
 
 .. code-block:: cpp
 
@@ -96,7 +96,7 @@
 
 
 追加情報
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
 
 * ``MinMax<T,S>::value_type`` は、非定数 ``T`` 上の特殊化です。
 

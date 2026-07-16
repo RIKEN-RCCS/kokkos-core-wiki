@@ -3,7 +3,7 @@
     :language: cpp
 
 ``vector`` [非推奨]
-=======================
+===================
 
 ヘッダーファイル: ``<Kokkos_Vector.hpp>`` ( Kokkos 4.3において非推奨)
 
@@ -21,7 +21,7 @@ Kokkos Vector は意味的に std::vector に似ていますが、異なるメ�
     v.[n+2] = 4;
 
 説明
-------------------
+----
 
 .. cpp:class:: template<class Scalar, class Arg1Type = void> vector :  public DualView<Scalar*, LayoutLeft, Arg1Type>
 

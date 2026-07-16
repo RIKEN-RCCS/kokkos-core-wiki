@@ -18,7 +18,7 @@
 階層的並列処理の中で使われる `nested execution policy <NestedPolicies.html>`_ です。 グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは、チームハンドルを通じて実行空間タイプに暗示的なテンプレート化が可能になるように、関数として実装されています。
 
 概要
-----------
+----
 
 .. code-block:: cpp
 
@@ -28,7 +28,7 @@
    /* 実装により定義 */ TeamVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 説明
-------------------
+----
 
 .. code-block:: cpp
 
@@ -73,7 +73,7 @@
     - ``end >= begin`` は、真です;
 
 例
---------
+--
 
 .. code-block:: cpp
 

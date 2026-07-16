@@ -7,7 +7,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用方法
-----------
+--------
 
 .. code-block:: c++
 
@@ -16,7 +16,7 @@
     mesh_subcomponent = Kokkos::subview(full_mesh,Kokkos::ALL(), 0, Kokkos::ALL()); //  x および z 成分を選択
 
 説明
-----------------------
+----
 
 .. cpp:class:: LayoutStride
 
@@ -81,7 +81,7 @@
 
 
 例
--------
+--
 
 ptr 周辺に 3D 非管理型ストライド付きビューを作成します。 (ラベルを指定することで、ビュー自体に配置させることもできます。)
 

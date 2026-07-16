@@ -7,7 +7,7 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 リスト
---------------
+------
 
 ``Kokkos::PerTeam``
 ~~~~~~~~~~~~~~~~~~~
@@ -36,12 +36,12 @@
 |
 
 汎用テンプレート引数
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 有効なテンプレートの引数はここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ で説明します。
 
 使用方法
-~~~~~~~~~~~~~
+~~~~~~~~
 
 .. code-block:: cpp
 
@@ -53,7 +53,7 @@
 ネストポリシーは、ネスト並列パターンに使用できます。グローバルポリシーとは異なり、ネストポリシーのパブリックインターフェースは関数として実装されており、チームハンドルを通じて実行空間タイプに、暗示的テンプレート化が可能になります。
 
 概要
-~~~~~~~~~~~~~~~~~
+~~~~
 
 .. code-block:: cpp
 
@@ -65,7 +65,7 @@
     Impl::VectorSingleStruct PerThread(TeamMemberType team);
 
 説明
-~~~~~~~~~~~~~~~~~~~~
+~~~~
 
 .. cpp:function:: Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType count);
 
@@ -104,7 +104,7 @@
         - ``team``: TeamHandle の要件を満たすオブジェクト
 
 例
-~~~~~~~~
+~~
 
 .. code-block:: cpp
 

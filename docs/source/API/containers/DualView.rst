@@ -48,7 +48,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
     a.template sync<typename ViewType::execution_space>(); // 変更されたデータをデバイスに同期します
 
 説明
-------------------
+----
 
 
 

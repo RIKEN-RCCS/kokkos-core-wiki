@@ -1,5 +1,5 @@
 最小/最大演算
-==========================
+=============
 
 .. role:: cpp(code)
     :language: cpp
@@ -39,7 +39,7 @@ min/max および clamp 関数テンプレートは、Kokkos 3.7 以降、 ``Kok
 ========== ============================================================
 
 注意事項
----------------
+--------
 
 .. _KokkosClamp: https://github.com/kokkos/kokkos/blob/4.3.00/core/src/Kokkos_Clamp.hpp
 
@@ -54,7 +54,7 @@ min/max および clamp 関数テンプレートは、Kokkos 3.7 以降、 ``Kok
 ----
 
 以下も参照
--------------------
+----------
 
 .. _min_element: ../../algorithms/std-algorithms/all/StdMinElement.html
 

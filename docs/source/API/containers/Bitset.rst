@@ -159,7 +159,7 @@
     ホスト/デバイス: ``i``\ 'thビットが ``1`` に設定されている場合、またはその場合に限り、 ``真`` を返します。
 
 非メンバー関数
---------------------
+--------------
 
   .. cpp:function:: template <typename DstDevice, typename SrcDevice> void deep_copy(Bitset<DstDevice>& dst, Bitset<SrcDevice> const& src)
 

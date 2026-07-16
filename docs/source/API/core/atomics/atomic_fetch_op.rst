@@ -17,7 +17,7 @@
 そのアドレスで見つけた前の値を返します。
 
 説明
-------------------
+----
 
 .. cpp:function:: template<class T> T atomic_fetch_add(T* const ptr_to_value, const T value);
 

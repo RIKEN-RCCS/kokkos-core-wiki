@@ -7,14 +7,14 @@
 ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用方法
-------------
+--------
 
 .. code-block:: cpp
 
    Kokkos::View<float*, Kokkos::LayoutLeft> my_view;
 
 説明
----------------------
+----
 
 .. cpp:struct:: LayoutLeft
 
