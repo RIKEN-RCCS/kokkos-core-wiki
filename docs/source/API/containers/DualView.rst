@@ -1,4 +1,3 @@
-
 ``DualView``
 ============
 
@@ -50,8 +49,6 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 説明
 ----
 
-
-
 .. cpp:class:: template <class DataType, class Arg1Type = void, class Arg2Type = void, class Arg3Type = void> DualView
 
     |
@@ -70,7 +67,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
        デバイス上の ``Kokkos::View`` の型。
 
-    .. cpp:type:: typename t_dev::HostMirror t_host
+    .. cpp:type:: typename t_dev::host_mirror_type t_host
 
         ``t_dev`` の``Kokkos::View`` ホストミラーの型。
 
@@ -78,7 +75,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
        デバイス上のconst Viewの型。
 
-    .. cpp:type:: typename t_dev_const::HostMirror t_host_const
+    .. cpp:type:: typename t_dev_const::host_mirror_type t_host_const
 
         ``t_dev_const`` のconst Viewホストミラーの型。
 
@@ -86,7 +83,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
       デバイス上の const、 random-access View の型。
 
-    .. cpp:type::  t_dev_const_randomread::HostMirror t_host_const_randomread
+    .. cpp:type:: typename t_dev_const_randomread::host_mirror_type t_host_const_randomread
 
        ``t_dev_const_randomread`` の const, random-access View ホストミラーの型。
 
@@ -110,7 +107,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
        デバイス上の const, random-access View の型。
 
-    .. cpp:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread_um
+    .. cpp:type:: typename t_dev_const_randomread::host_mirror_type t_host_const_randomread_um
 
         ``t_dev_const_randomread`` の const, random-access View ミラーの型。
 
@@ -164,14 +161,13 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: DualView(const t_dev& d_view_, const t_host& h_view_);
 
-
        既存のデバイスおよびホストビューオブジェクトからデュアルビューを作成します。本コンストラクタは、デバイスとホストのView オブジェクトが同期されていることを前提としています。
        発信者は、このコンストラクタを呼び出す前にこれが事実であることを確認する責務を負います。本コンストラクタが戻った後、DualView の ``sync()`` および ``modify()`` メソッドを使用して、
        View オブジェクトの同期を確保できます。 デュアルビューが1つのビューのみを格納する場合、すなわちデュアルビューのメモリ領域がホストからアクセス可能な場合、両引数は同一の割り当てを参照しなければなりません。
 
        - ``d_view_`` デバイスビュー
 
-       - ``h_view_``  ( ``t_host = t_dev::HostMirror`` 型を持つ必要があります)
+       - ``h_view_`` ホスト View ( ``t_host = t_dev::host_mirror_type`` 型を持つ必要があります)
 
     |
 
@@ -263,8 +259,8 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: template <typename iType> KOKKOS_INLINE_FUNCTION constexpr typename std::enable_if<std::is_integral<iType>::value, size_t>::type extent(const iType& r) const;
 
-       要求されたランクの範囲を返します。
+       要求されたランクのextentを返します。
 
     .. cpp:function:: template <typename iType> KOKKOS_INLINE_FUNCTION constexpr typename std::enable_if<std::is_integral<iType>::value, int>::type extent_int(const iType& r) const;
 
-       要求されたランクについて、整数の範囲を返します。
+       要求されたランクについて、整定数のextentを返します。

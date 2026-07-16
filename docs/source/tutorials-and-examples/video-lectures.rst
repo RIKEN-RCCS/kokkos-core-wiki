@@ -10,7 +10,7 @@
      - スライド
    * - 1.
      - `イントロ、ビルド、並列ディスパッチ <https://www.youtube.com/watch?v=rUIcWtFU5qM>`_
-     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_01_Introduction.pdf>`__
+     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_01_Introduction.pdf>`__
    * - 1.1.
      - `導入部 <https://www.youtube.com/watch?v=rUIcWtFU5qM&feature=youtu.be&t=698>`_
      -
@@ -25,7 +25,7 @@
      -
    * - 2.
      - `ビューおよび空間 <https://www.youtube.com/watch?v=O-asHTtO7O4>`_
-     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_02_ViewsAndSpaces.pdf>`__
+     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_02_ViewsAndSpaces.pdf>`__
    * - 2.1.
      - `ビュー <https://www.youtube.com/watch?v=O-asHTtO7O4&feature=youtu.be&t=1413>`_
      -
@@ -40,7 +40,7 @@
      -
    * - 3.
      - `多次元ループとデータ構造 <https://www.youtube.com/watch?v=nGyJS8u-6GY>`_
-     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_03_MDRangeMoreViews.pdf>`__
+     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_03_MDRangeMoreViews.pdf>`__
    * - 3.1.
      - `MDRangePolicyを使った確実にネストしたループ <https://www.youtube.com/watch?v=nGyJS8u-6GY&feature=youtu.be&t=1319>`_
      -
@@ -61,7 +61,7 @@
      -
    * - 4.
      - `階層的並列処理 <https://www.youtube.com/watch?v=s9ecpeWRePs>`_
-     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_04_HierarchicalParallelism.pdf>`__
+     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_04_HierarchicalParallelism.pdf>`__
    * - 4.1.
      - `階層的並列処理 <https://www.youtube.com/watch?v=s9ecpeWRePs&feature=youtu.be&t=2036>`__
      -
@@ -73,7 +73,7 @@
      -
    * - 5.
      - `SIMD, ストリーム, タスク <https://www.youtube.com/watch?v=xEAyOod57-c>`_
-     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_05_SIMDStreamsTasking.pdf>`__
+     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_05_SIMDStreamsTasking.pdf>`__
    * - 5.1.
      - `SIMD <https://www.youtube.com/watch?v=xEAyOod57-c&feature=youtu.be&t=1510>`_
      -
@@ -85,7 +85,7 @@
      -
    * - 6.
      - `Fortran/Python interop, MPI, PGAS <https://www.youtube.com/watch?v=1J3JQ3d3cRc&t=1s>`_
-     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_06_FortranPythonMPIAndPGAS.pdf>`__
+     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_06_FortranPythonMPIAndPGAS.pdf>`__
    * - 6.1.
      - `Fortran InterOp <https://www.youtube.com/watch?v=1J3JQ3d3cRc&feature=youtu.be&t=1298>`_
      -
@@ -100,7 +100,7 @@
      -
    * - 7.
      - `Kokkos ツール <https://www.youtube.com/watch?v=MH6zFYGw0HU>`_
-     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_07_Tools.pdf>`__
+     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_07_Tools.pdf>`__
    * - 7.1.
      - `Kokkos ツール <https://www.youtube.com/watch?v=MH6zFYGw0HU&feature=youtu.be&t=1275>`__
      -
@@ -118,7 +118,7 @@
      -
    * - 8.
      - `Kokkos カーネル: 数学ライブラリ <https://www.youtube.com/watch?v=_qD4X66MQF8&t=1s>`_
-     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_08_KokkosKernels.pdf>`__
+     - `スライド <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_08_KokkosKernels.pdf>`__
    * - 8.1.
      - `Kokkos カーネル: パフォーマンスポータブルスパース/密集線型代数およびグラフカーネルのためのライブラリベースのアプローチ <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=1166>`_
      -
@@ -156,4 +156,3 @@
    6. Fortran/Python interop, MPI, PGAS <https://www.youtube.com/watch?v=1J3JQ3d3cRc&t=1s>
    7. Kokkos ツール <https://www.youtube.com/watch?v=MH6zFYGw0HU>
    8. Kokkos カーネル数学ライブラリ <https://www.youtube.com/watch?v=_qD4X66MQF8&t=1s>
-

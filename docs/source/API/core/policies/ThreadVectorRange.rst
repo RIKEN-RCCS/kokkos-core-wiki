@@ -1,7 +1,7 @@
 ``ThreadVectorRange``
 =====================
 
-ヘッダーファイル: ``Kokkos_Core.hpp``
+ヘッダーファイル: ``<Kokkos_Core.hpp>``
 
 使用方法
 
@@ -24,7 +24,6 @@
    /* 実装により定義 */ ThreadVectorRange(TeamMemberType team, iType count);
    template<class TeamMemberType, class iType1, class iType2>
    /* 実装により定義 */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
-
 
 説明
 ----
@@ -57,12 +56,10 @@
 
    * 本関数を、 `TeamVectorRange <TeamVectorRange>`__ ポリシー または ``ThreadVectorRange`` ポリシーを使用してディスパッチされた、並列演算内で呼び出すことはできません。
 
-
 .. code-block:: cpp
 
    template<class TeamMemberType, class iType1, class iType2>
    /* 実装により定義 */ ThreadVectorRange(TeamMemberType team, iType1 begin, iType2 end);
-
 
 呼び出しスレッドのベクトルレーン全体で、インデックスレンジ ``begin`` から  ``end-1`` までを分割します。
 

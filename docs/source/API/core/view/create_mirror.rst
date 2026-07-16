@@ -30,7 +30,6 @@
     auto mirror = create_mirror(memory_space_instance, a_view);
     auto mirror_view = create_mirror_view(memory_space_instance, a_view);
 
-
 説明
 ----
 
@@ -46,14 +45,13 @@
 
 .. |MemorySpaceConcept| replace:: :cpp:func:`MemorySpaceConcept`
 
-
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror(ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror(ViewType const& src);
 
    ``src`` と同じレイアウトとパディングを持ち、ホストからアクセス可能な新たな |View|_ を生成します。
 
    - ``src``: ``Kokkos::View``.
 
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror(decltype(Kokkos::WithoutInitializing), ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror(decltype(Kokkos::WithoutInitializing), ViewType const& src);
 
    ``src`` と同じレイアウトとパディングを持ち、ホストからアクセス可能な新たな |View|_ を生成します。新たなビューは、 初期化されていないデータを持ちます。
 
@@ -88,20 +86,18 @@
 
    - ``arg_prop``:  |View|_ コンストラクタ特性、例えば、  ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``。
 
-
      .. important::
 
 	 ``arg_prop`` は、メモリまたはラベルへのポインタを含んではならず、 またはパディングを認めてはなりません。
 
-
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror_view(ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror_view(ViewType const& src);
 
     ``src`` が、ホストアクセス可能でない場合には (つまり、 ``SpaceAccessibility<HostSpace,ViewType::memory_space>::accessible`` が ``false`` である場合)、
     ``src`` と同じレイアウトおよびパディングを使って、 |View|_ とアクセス可能な新たなホストを作成します。そうでない場合には、 ``src`` を返します。
 
    - ``src``: ``Kokkos::View``.
 
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::WithoutInitializing), ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror_view(decltype(Kokkos::WithoutInitializing), ViewType const& src);
 
    ``src`` が、ホストアクセス可能でない場合には (つまり ``SpaceAccessibility<HostSpace,ViewType::memory_space>::accessible`` が ``false`` である場合)、
     ``src`` と同じレイアウトおよびパディングを使って、 |View|_ とアクセス可能な新たなホストを作成します。 新たなビューは、 初期化されていないデータを持ちます。 そうでない場合には、 ``src`` を返します。
@@ -165,3 +161,10 @@
      .. ::
 
 	``arg_prop`` は、メモリまたはラベルへのポインタを含んではならず、 またはパディングを認めてはなりません。そして、 ``arg_prop`` は、メモリ空間を含まなければなりません。
+
+.. cpp:function:: template <class ViewType> ImplMirrorType create_mirror_view_and_copy(ViewType const& src);
+
+   ``create_mirror_view_and_copy(typename ViewType::host_mirror_type::memory_space{}, src)`` を呼び出すことと同等です。つまり、元の |View|_ と同じ値を含むホストからアクセス可能な View を返します。|View|_ がすでにホストからアクセス可能な場合、元の |View|_ の（浅い）コピーが返されます。
+   それ以外の場合は、新しい |View|_ が割り当てられます。:sup:`since Kokkos 5.2`
+
+   - ``src``: ``Kokkos::View``。

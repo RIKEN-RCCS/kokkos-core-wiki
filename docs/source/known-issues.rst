@@ -32,6 +32,8 @@ CUDA
 
 - Microsoft Visual Studio と Cuda バックエンドを有効化した状態で、Kokkos を利用するアプリケーションを構築するには、CMake 言語機能の使用が必要です。 :ref:`keywords_enable_backend_specific_options` を参照してください。
 
+- `Cuda` バックエンドを有効にした状態で `clang` バージョン 17 および 18 を使用すると、`__float128` に関連するコンパイルエラーが発生します。これは libstdc++ の `<limits>` 内の定義に起因します。詳細については `llvm/llvm-project#83918 <https://github.com/llvm/llvm-project/pull/83918>`_ およびリンクされている issue を参照してください。
+
 HIP
 ===
 
@@ -50,8 +52,35 @@ HIP
 
   gcc 7, 9, 以降では、この問題は発生していません。
 
+- gfx10+ または gfx11+ アーキテクチャ向けにコンパイルする場合、amd コンパイラが不正な命令を生成する可能性があります (https://github.com/ROCm/ROCm/issues/5826)。
+  回避策として、``-O0`` 最適化フラグを ``-Og`` に置き換えることができます。これは ``DCMAKE_CXX_FLAGS_DEBUG="-Og -g"`` で設定できます (https://rocm.docs.amd.com/en/7.11.0-preview/about/release-notes.html#clang-illegal-instruction-error-on-radeon-gpus)。
+
 SYCL
 ====
+
+- デバッグシンボル付きでコンパイルすると、次のようなコンパイルエラーが発生する場合があります
+
+  .. code-block:: console
+
+     /usr/lib/../lib64/crti.o: in function `_init':
+     /home/abuild/rpmbuild/BUILD/glibc-2.31/csu/../sysdeps/x86_64/crti.S:68:(.init+0x7): relocation truncated to fit: R_X86_64_REX_GOTPCRELX against undefined symbol `__gmon_start__'
+     /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `KokkosKernels::eager_initialize()':
+     /tmp/Trilinos/packages/kokkos-kernels/common/src/KokkosKernels_EagerInitialize.cpp:33:(.text+0x34): relocation truncated to fit: R_X86_64_REX_GOTPCRELX against symbol `typeinfo for std::runtime_error@@GLIBCXX_3.4' defined in .data.rel.ro section in /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../lib64/libstdc++.so
+     /tmp/Trilinos/packages/kokkos-kernels/common/src/KokkosKernels_EagerInitialize.cpp:33:(.text+0x3b): relocation truncated to fit: R_X86_64_REX_GOTPCRELX against symbol `std::runtime_error::~runtime_error()@@GLIBCXX_3.4' defined in .text section in /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../lib64/libstdc++.so
+     /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `sycl::_V1::detail::(anonymous namespace)::__sycl_device_global_registration::__sycl_device_global_registration()':
+     /tmp/icpx-f67500da4c/KokkosKernels_EagerInitialize-footer-f7ef7c.h:6:(.text.startup+0x4): relocation truncated to fit: R_X86_64_PC32 against `.bss'
+     /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `std::_Rb_tree_header::_Rb_tree_header()':
+     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:175:(.text.startup+0x29): relocation truncated to fit: R_X86_64_PC32 against `.bss'
+     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:210:(.text.startup+0x54): additional relocation overflows omitted from the output
+     packages/kokkos-kernels/libkokkoskernels.so.16.2.0: PC-relative offset overflow in PLT entry for `_ZN10KokkosBlas4Impl15Nrm2_MV_FunctorIN6Kokkos4SYCLENS2_4ViewIPdJNS2_18SYCLDeviceUSMSpaceEEEENS4_IPPKdJNS2_10LayoutLeftENS2_6DeviceIS3_S6_EENS2_12MemoryTraitsILj1EEEEEElED2Ev'
+
+  これは、それぞれのターゲットのリンク行に ``-flink-huge-device-code`` を追加することで修正されます。https://www.intel.com/content/www/us/en/docs/dpcpp-cpp-compiler/developer-guide-reference/2025-2/flink-huge-device-code.html も参照してください。例えば、
+
+  .. code-block:: console
+    
+     cmake -D CMAKE_EXE_LINKER_FLAGS="-fsycl -flink-huge-device-code"
+
+  実行ファイルの場合です。
 
 - Kokkosアルゴリズムのいくつかの関数は、oneDPL のようなサードパーティによるライブラリを使用しています。これらを使用する場合、Kokkos はカーネル起動を制御しませんので、ユーザーは、コンパイラエラーを回避するために、TPLに渡されるすべての引数が sycl::is_device_copyable トレイトを満たしていることを確認する必要があります。これは特に、Kokkos 4.7以前のバージョンおよび oneDPL 2022.8.0 以前のバージョンで、 Kokkos::sort と共に使用される比較関数に当てはまります。例えば、Kokkos::Viewsの代わりに生のポインタを使用するなど、各パラメータが単純にコピー可能であることを確認することを、最も推奨します。それが不可能な場合で、oneDPLのバージョンが少なくとも、2022.8.0 であるならば、sycl::is_device_copyable を特化させることで、別の回避策を提供できます。
 
@@ -96,7 +125,6 @@ SYCL
     struct sycl::is_device_copyable<MyComparator>
       : std::true_type {};
 
-
 数学関数
 ========
 
@@ -111,7 +139,6 @@ SYCL
     KOKKOS_FUNCTION void do_math() {
       auto sqrt5 = sqrt(5);  // error: ambiguous ::sqrt or Kokkos::sqrt?
     }
-
 
 .. _Compatibility: ./ProgrammingGuide/Compatibility.html
 

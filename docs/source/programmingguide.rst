@@ -12,6 +12,7 @@
    ./ProgrammingGuide/View
    ./ProgrammingGuide/ParallelDispatch
    ./ProgrammingGuide/HierarchicalParallelism
+   ./ProgrammingGuide/Multi-Dimensional-Parallelism
    ./ProgrammingGuide/Custom-Reductions
    ./ProgrammingGuide/Atomic-Operations
    ./ProgrammingGuide/Subviews

@@ -1,4 +1,3 @@
-
 .. role:: cpp(code)
     :language: cpp
 
@@ -6,7 +5,6 @@
 ===============
 
 ヘッダーファイル: ``<Kokkos_DynamicView.hpp>``
-
 
 説明
 ----
@@ -39,9 +37,17 @@
 
          ``traits::non_const_data_type`` および ``traits::device_type`` 上にテンプレートされた ``DynamicView`` 型。
 
+    .. cpp:type:: host_mirror_type
+
+        ホストアクセス可能なメモリ空間に格納された、同じ ``DataType`` と ``LayoutType`` を持つ互換性のあるビュー型。
+
+        .. versionadded:: 5.0
+
     .. cpp:type:: HostMirror
 
         ホストアクセス可能メモリ空間に格納された、同一の ``DataType`` および ``LayoutType`` を持つ互換性のあるビュータイプ。
+
+        .. deprecated:: 5.0
 
     .. rubric:: パブリックデータハンドル型
 
@@ -87,7 +93,6 @@
 
     .. rubric:: データリサイズ、ディメンション、ストライド
 
-
     .. cpp:function:: template< typename IntType > inline void resize_serial(IntType const & n)
 
        要求された要素数 `n` を格納するのに十分な `chunk_size` のメモリチャンクで、ダイナミックビューのサイズ変更を行います。
@@ -123,33 +128,57 @@
 
         :return: ディメンション 0 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynamicView::stride` を使用してください。
+
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_1() const;
 
         :return: ディメンション 1 のストライドは、常に  ``DynamicView`` については、0 を返します。
+
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynamicView::stride` を使用してください。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_2() const;
 
         :return: ディメンション 2 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynamicView::stride` を使用してください。
+
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_3() const;
 
         :return: ディメンション 3 のストライドは、常に  ``DynamicView`` については、0 を返します。
+
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynamicView::stride` を使用してください。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_4() const;
 
         :return: ディメンション 4 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynamicView::stride` を使用してください。
+
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_5() const;
 
         :return: ディメンション 5 のストライドは、常に  ``DynamicView`` については、0 を返します。
+
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynamicView::stride` を使用してください。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_6() const;
 
         :return: ディメンション 6 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynamicView::stride` を使用してください。
+
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_7() const;
 
         :return: ディメンション 7 のストライドは、常に  ``DynamicView`` については、0 を返します
+
+       .. deprecated:: 5.0
+          代わりに :cpp:func:`DynamicView::stride` を使用してください。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t span() const;
 
@@ -176,7 +205,6 @@
     .. cpp:function:: bool is_allocated() const
 
         :return: ビューが割り当てられたメモリチャンクの有効なセットを指している場合に真です。 resize_serial が 0 より大きいサイズで呼び出されるまで、これが偽を返すことにご注意ください。
-
 
 例
 --

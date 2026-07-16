@@ -1,5 +1,7 @@
 # `Experimental::where_expression`
 
+（Kokkos 5.0 以降は非推奨）
+
 ヘッダーファイル: `Kokkos_SIMD.hpp`
 
 使用方法

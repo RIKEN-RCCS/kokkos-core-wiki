@@ -35,3 +35,10 @@
    複素数演算 <numerics/complex>
 
 ヘッダー ``<Kokkos_Complex.hpp>`` は、 複素数の Kokko 互換実装を提供し、 ``std::complex`` の機能性を反映します。
+
+.. toctree::
+   :maxdepth: 1
+
+   縮小精度浮動小数点型 <numerics/half-precision-types>
+
+ヘッダー ``<Kokkos_Half.hpp>`` は、16ビットの「半精度」 ``half_t`` および「brain浮動小数点」 ``bhalf_t`` 浮動小数点を実装しています。

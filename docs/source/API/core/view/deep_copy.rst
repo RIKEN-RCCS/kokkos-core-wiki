@@ -17,6 +17,8 @@
 データを、 ``src`` から ``dest`` にコピーしますが、その中で ``src`` および ``dest`` が
 特定状況下で、`Kokkos::Views <view.html>`_ またはスカラーである可能性があります。
 
+指定された実行空間が ``src`` および ``dest`` にアクセスできる場合（3引数のオーバーロードの場合）、またはソースもしくはデスティネーションのメモリ空間に対応する実行空間が両方のビューにアクセスできる場合、deep_copy() はエントリごとに代入することで値型や異なるレイアウトを変換できます。それ以外の場合、memcopy が実行されるため、値型とレイアウトは同一かつ連続していなければなりません。
+
 インターフェイス
 ----------------
 
@@ -46,13 +48,15 @@
 
 *  ``src`` および ``dest`` が `Kokkos::View <view.html>`_ である場合には、 以下のすべてが真です:
 
-  - ``std::is_same<ViewDest::non_const_value_type, ViewSrc::non_const_value_type>::value == true``
-
-  - ``src.rank == dest.rank`` (または、 ``Kokkos::DynRankView`` , ``src.rank() == dest.rank()`` について)
+  - ``src.rank() == dest.rank()``
 
   - ``[0, dest.rank)`` 内のすべての  ``k`` については、 ``dest.extent(k) == src.extent(k)`` (または、 ``dest.rank()`` と同じ)
 
-  - ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` および ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true`` 両方であるための、 ``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value``、 *または* there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (規定またはデフォルト)
+  - 以下の条件のうち、いずれか1つが真でなければなりません。
+
+    - ``std::is_assignable_v<ViewSrc::value_type, DestView::value_type>`` であり、かつ ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` および ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true`` の両方を満たす `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` （指定またはデフォルト）が存在すること。
+
+    - または ``src.span_is_contiguous() && dest.span_is_contiguous()``、 ``std::is_same_v<ViewDest::array_layout,ViewSrc::array_layout>``、および ``std::is_same_v<DestView::value_type, SrcView::non_const_value_type>`` であること。
 
 * ``src`` が `Kokkos::View <view.html>`_ で、 ``dest`` が、スカラーである場合には、 ``src.rank == 0`` は真です。
 
@@ -62,7 +66,6 @@
 * `ExecutionSpace <../execution_spaces.html>`_ argument が提供されなければ、  いかなる実行空間のすべての優れた演算子 （カーネル、コピー演算子）は、コピーが実行される前に終了し、コピー演算子は、呼び出しが返される前に終了します。
 
 * `ExecutionSpace <../execution_spaces.html>`_ argument ``exec_space`` が提供されば、 呼び出しは、同期可能ーつまり、コピー演算子が実行される前に、呼び出しは、返されます。 その場合には、コピー演算子は、 ``exec_space`` に既に送信された作業がすべて完了した後にのみ発生し、コピー演算子は、 ``deep_copy`` 呼び出し返しの実行後に、 ``exec_space`` に送信されたいずれかの作業の前に完了します。注意事項: コピー演算子は、特定実行空間インスタンスにおける作業に関してのみ、同期的ですが、必ずしも同じ型の他のインスタンスにおける作業を伴っていません。 これは、追加の同期処理なしに、特定の CUDA ストリームに対して、 ``cudaMemcpyAsync`` を発行するのと同様の動作をします
-
 
 --------
 
@@ -116,6 +119,8 @@
 
 レイアウト互換性のないビューをコピーする方法
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+デバイスビューから互換性のないホストビューへデータを移動するには、一時的なアロケーションを使用して2段階で操作を行う必要があります。
 
 .. code-block:: cpp
 

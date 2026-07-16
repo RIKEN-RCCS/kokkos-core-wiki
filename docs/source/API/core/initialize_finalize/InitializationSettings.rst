@@ -7,6 +7,7 @@
 ヘッダー ``<Kokkos_Core.hpp>`` に定義。
 
 使用方法
+--------
 
 .. code-block:: cpp
 
@@ -15,12 +16,7 @@
                     .set_device_id(0)
                     .set_disable_warnings(false);
 
-.. versionadded:: 3.7
-   ``InitializationSettings`` は、  `Kokkos::initialize() <initialize.html#kokkosinitialize>`_
-   の2つのパラメータ形式 (``argc`` および ``argv``) を呼び出すことなく、
-   Kokkos をプログラムで初期化する設定を定義するために使用可能なクラスです。
-   それは、`Kokkos::InitArguments <InitArguments.html#kokkosInitArguments>`_ structure の代わりに導入されました。
-
+``InitializationSettings`` は、:cpp:func:`initialize` の2つのパラメータ形式 (``argc`` および ``argv``) を呼び出すことなく、Kokkos をプログラムで初期化する設定を定義するために使用可能なクラスです。
 
 インターフェイス
 ----------------
@@ -30,10 +26,6 @@
    .. cpp:function:: InitializationSettings();
 
       どの設定に対しても値を一切含まない、新しいオブジェクトを構築します。
-
-   .. cpp:function:: InitializationSettings(InitArguments const& args);
-
-      **DEPRECATED** は、非推奨の構造体を新しいオブジェクトに変換します。構造体のデータメンバーでデフォルト値と等しいものは、設定されていないものとみなされます。 ``PARAMETER-NAME`` を、以下の表で定義される ``PARAMETER-TYPE`` の有効な設定とします。
 
    .. cpp:function:: InitializationSettings& set_PARAMETER_NAME(PARAMETER_TYPE value);
 
@@ -79,7 +71,9 @@
         Kokkos::finalize();
     }
 
-以下も参照
-~~~~~~~~~~
+.. seealso::
 
-* `Kokkos::initialize <initialize.html#kokkosinitialize>`_:  Kokkos の実行環境を初期化。
+  :doc:`initialize`
+    Kokkos の実行環境を開始します。
+  :doc:`ScopeGuard`
+    初期化と終了処理が正しく行われることを保証するための RAII ベースのアプローチです。

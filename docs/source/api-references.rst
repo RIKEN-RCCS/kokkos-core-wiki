@@ -9,7 +9,6 @@ API 参照
    API/algorithms-index
    API/containers-index
    API/simd-index
-   API/alphabetical
    deprecations
 
 :doc:`API/core-index`
@@ -26,15 +25,9 @@ STL ライクな並列アルゴリズム
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 特殊なビューベースのコンテナ（``DualView``、 ``ScatterView``、 ``OffsetView`` など）
 
-
 :doc:`API/simd-index`
 ~~~~~~~~~~~~~~~~~~~~~
 データ並列ベクトル型。
-
-:doc:`Alphabetical <API/alphabetical>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-アルファベット順のライブラリ機能一覧。
-
 
 :doc:`deprecations`
 ~~~~~~~~~~~~~~~~~~~

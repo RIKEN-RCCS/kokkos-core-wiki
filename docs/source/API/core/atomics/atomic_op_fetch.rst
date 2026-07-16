@@ -34,6 +34,12 @@
 
    * ``value``: 元の値を組み合わせるための値。
 
+.. cpp:function:: template<class T>  T atomic_dec_fetch(T* const ptr_to_value);
+
+   ``(*ptr_to_value)--; return *ptr_to_value;`` をアトミックに実行します。
+
+   * ``ptr_to_value``: 更新される値のアドレス
+
 .. cpp:function:: template<class T> T atomic_div_fetch(T* const ptr_to_value, const T value);
 
     ``*ptr_to_value /= value; return *ptr_to_value;`` をアトミックに実行します。
@@ -41,6 +47,12 @@
    * ``ptr_to_value``: 更新対象の値のアドレス。
 
    * ``value``: 元の値を割るための値。
+
+.. cpp:function:: template<class T>  T atomic_inc_fetch(T* const ptr_to_value);
+
+   ``(*ptr_to_value)++; return *ptr_to_value;`` をアトミックに実行します。
+
+   * ``ptr_to_value``: 更新される値のアドレス
 
 .. cpp:function:: template<class T> T atomic_lshift_fetch(T* const ptr_to_value, const unsigned shift);
 
@@ -79,6 +91,14 @@
     ``*ptr_to_value %= value; return *ptr_to_value;`` をアトミックに実行します。
 
    * ``ptr_to_value``: 更新対象の値のアドレス。
+
+   * ``value``: 法（モジュラス）として使用される値。
+
+.. cpp:function:: template<class T> T atomic_nand_fetch(T* const ptr_to_value, const T value);
+
+   ``*ptr_to_value = ~(*ptr_to_value & val); return *ptr_to_value;`` をアトミックに実行します。
+
+   * ``ptr_to_value``: 更新される値のアドレス。
 
    * ``value``: 元の値を組み合わせるための値。
 
