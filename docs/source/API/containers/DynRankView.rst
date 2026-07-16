@@ -452,6 +452,3 @@
 
         Kokkos::finalize();
     }
-
-        Kokkos::finalize();
-    }
