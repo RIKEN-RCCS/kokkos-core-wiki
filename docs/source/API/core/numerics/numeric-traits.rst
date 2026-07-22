@@ -23,7 +23,7 @@
 
 |NumericLimits|_ の代替えを提供します。  C++23標準ライブラリに追加される新しい機能を実装し、モノリシックな ``numeric_limits`` クラステンプレートを個別のトレイトテンプレートに分割します。 詳細については、|P1841|_ を参照してください。
 
-数値特性は、Kokkos 3.5以降に、 ``Kokkos::Experimental`` namespace で定義されています。
+数値特性は、Kokkos 5.2以降は ``Kokkos`` namespace で、それ以前のバージョンでは ``Kokkos::Experimental`` namespace で定義されています。
 
 以下に利用可能な特性のリストを記載します。
 
@@ -107,7 +107,7 @@
 
     template <class T>
     constexpr auto has_infinity(T)
-            -> decltype(Kokkos::Experimental::infinity<T>::value, std::true_type{}) {
+            -> decltype(Kokkos::infinity<T>::value, std::true_type{}) {
         return {};
     }
 
@@ -116,7 +116,7 @@
     template <class T>
     KOKKOS_FUNCTION constexpr std::enable_if_t<has_infinity(T{}), T>
     legacy_std_numeric_limits_infinity() {
-        return Kokkos::Experimental::infinity<T>::value;
+        return Kokkos::infinity<T>::value;
     }
 
     template <class T>
