@@ -34,6 +34,8 @@
      -  引数リストからビュー割り当てパラメータバンドルを作成。
    * - `View-like Types <view/view_like.html>`__
      - おおまかに定義すると、 ``Kokkos::View`` のように振る舞うクラステンプレートの集合。
+   * - `Iterators <view/iterators.html>`__
+     -  ``Kokkos::View`` 上でイテレータを扱うためのヘルパー関数
 
 .. toctree::
    :hidden:
@@ -52,3 +54,4 @@
    ./view/view
    ./view/view_alloc
    ./view/view_like
+   ./view/iterators
