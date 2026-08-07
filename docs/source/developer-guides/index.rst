@@ -8,3 +8,4 @@
 
    PR および レビュー <prs-and-reviews.rst>
    コーディング規約 <coding-standards>
+   リリースプロセス <release-process>
