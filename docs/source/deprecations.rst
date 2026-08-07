@@ -4,6 +4,17 @@
 Kokkos 5.x において非推奨
 =========================
 
+Kokkos 5.2 で非推奨
+-------------------
+
+* ``Kokkos::Experimental::HIP``, ``Kokkos::Experimental::HIPSpace``, ``Kokkos::Experimental::HIPHostPinnedSpace``, ``Kokkos::Experimental::HIPManagedSpace``
+   * 代替: ``Kokkos::HIP``, ``Kokkos::HIPSpace``, ``Kokkos::HIPHostPinnedSpace``, ``Kokkos::HIPManagedSpace``
+   * HIP バックエンドの成熟化
+
+* ``Kokkos::Experimental::SYCL``, ``Kokkos::Experimental::SYCLDeviceUSMSpace``, ``Kokkos::Experimental::SYCLHostUSMSpace``, ``Kokkos::Experimental::SYCLSharedUSMSpace``
+   * 代替: ``Kokkos::SYCL``, ``Kokkos::SYCLDeviceUSMSpace``, ``Kokkos::SYCLHostUSMSpace``, ``Kokkos::SYCLSharedUSMSpace``
+   * SYCL バックエンドの成熟化
+
 Kokkos 5.0 において非推奨
 -------------------------
 

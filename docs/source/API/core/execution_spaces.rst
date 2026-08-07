@@ -48,11 +48,11 @@
 ``Kokkos::Cuda`` は、Cudaデバイス上での実行を表す |ExecutionSpaceConceptType|_ です。
 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、|DocExecutionSpaceConcept|_ を参照してください。
 
-
 ``Kokkos::HIP``
 ---------------
 
 ``Kokkos::HIP`` :sup:`昇格` |Experimental|_ :sup:`バージョン 4.0以降` は、HIPがサポートするデバイス上での実行を表す |ExecutionSpaceConceptType|_ です。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、|DocExecutionSpaceConcept|_ を参照してください。
+``Kokkos::Experimental::HIP`` はバージョン 5.2 で非推奨になりました。
 
 ``Kokkos::SYCL``
 ----------------
@@ -61,6 +61,7 @@
 
 SYCL バックエンドが有効化され、 GPU アーキテクチャが指定されていない場合、 Kokkos は、特定の SYCL デバイスタイプへ、制限なしで、Just-In-Timeコンパイルを使用します。
 したがって、SYCLバックエンド（実験的、未検証、最適化されていない）で、CPU をターゲットにする唯一の選択肢がこれです。
+``Kokkos::Experimental::SYCL`` はバージョン 5.2 で非推奨になりました。
 
 ``Kokkos::HPX``
 ---------------
@@ -231,7 +232,6 @@ Kokkos の並列パターンが実行されているかを明示的に記述す�
 上記の機能に加え、Kokkos のすべての ``ExecutionSpace`` 型は、デフォルトのコンストラクタを生成可能であり（``Ex ex()`` として構築可能）、コピーのコンストラクタを生成可能（``Ex ex2(ex1)`` として構築可能）です。
 ``ExecutionSpace`` 型のデフォルトコンストラクタで生成されるすべてのインスタンスは、同等の動作を持つことが保証され、また、コピーによって構築されたすべてのインスタンスは、コピー元のインスタンスと同等の動作を持つことが保証されます。
 
-
 検出
 ^^^^
 
@@ -316,5 +316,3 @@ Kokkos は、利便性型特性 ``Kokkos::is_execution_space<T>`` を提供し�
 * ``template<class MS> struct is_execution_space;``: クラスが実行空間であるかどうかを確認するための型特性。
 
 * ``template<class S1, class S2> struct SpaceAccessibility;``: 2つのスペースが互換性があるか（割り当て可能、deep_copy可能、アクセス可能）を確認するための型特性。 ( |KokkosSpaceAccessibility|_ を参照。)
-
-* ``bool operator==(const execution_space& lhs, const execution_space& rhs)``: 2つの空間インスタンス（同じ型）が同一であるかどうかをテスト。

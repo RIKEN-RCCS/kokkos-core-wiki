@@ -1,4 +1,3 @@
-
 ``関数アノテーションマクロ``
 ============================
 
@@ -16,7 +15,9 @@
     KOKKOS_FORCEINLINE_FUNCTION void foo();
     KOKKOS_RELOCATABLE_FUNCTION void foo();
     auto l = KOKKOS_LAMBDA(int i) { ... };
+    auto l = KOKKOS_FORCEINLINE_LAMBDA(int i) { ... };
     auto l = KOKKOS_CLASS_LAMBDA(int i) { ... };
+    auto l = KOKKOS_FORCEINLINE_CLASS_LAMBDA(int i) { ... };
 
 これらのマクロは、デバイスコードとホストコードの分割コンパイルの管理を行います。
 それらは、CUDAおよびHIPにおける ``__host__ __device__`` マークアップと同じ目的を果たします。
@@ -45,7 +46,6 @@
 
     template<class T>
     KOKKOS_FUNCTION void foo(T v) { ... }
-
 
 ``KOKKOS_INLINE_FUNCTION``
 --------------------------
@@ -145,6 +145,28 @@ C++ラムダ式を作成するよりも、Kokkosの並列ディスパッチ機�
 
 .. warning:: クラスメンバ関数内でラムダ式を作成する場合、代わりに ``KOKKOS_CLASS_LAMBDA`` を使用する必要がある場合があります。
 
+``KOKKOS_FORCEINLINE_LAMBDA``
+-----------------------------
+
+このマクロは CUDA および HIP における ``[=] __host__ __device__`` マークアップに相当しますが、インライン化を強制するためにコンパイラ依存のヒント（利用可能な場合）も使用します。
+これは頻繁に使用されるラムダのランタイム性能を向上させるのに役立ちますが、コンパイル時間が長くなる原因になる場合もあります。
+``KOKKOS_FORCEINLINE_FUNCTION`` と同様に、テンプレートを多用するコードで過度にインライン化を行うと、テンプレートの肥大化を招き、コンパイルエラーの原因となることがあります。
+
+.. versionadded:: 5.2
+.. code-block:: cpp
+
+    void foo(...) {
+      ...
+      parallel_for("Name", N, KOKKOS_FORCEINLINE_LAMBDA(int i) {
+        ...
+      });
+      ...
+      parallel_reduce("Name", N, KOKKOS_FORCEINLINE_LAMBDA(int i, double& v) {
+        ...
+      }, result);
+      ...
+    }
+
 ``KOKKOS_CLASS_LAMBDA``
 -----------------------
 
@@ -194,12 +216,36 @@ C++ラムダ式を作成するよりも、Kokkosの並列ディスパッチ機�
         }
     };
 
+``KOKKOS_FORCEINLINE_CLASS_LAMBDA``
+-----------------------------------
+
+このマクロは、クラスメンバ関数内で作成されるラムダに対して、デフォルトのキャプチャ句とホストデバイスマークアップを提供します。これは CUDA および HIP における ``[=, *this] __host__ __device__`` マークアップに相当しますが、インライン化を強制するためにコンパイラ依存のヒント（利用可能な場合）も使用します。
+``KOKKOS_FORCEINLINE_FUNCTION`` と同様に、テンプレートを多用するコードで過度にインライン化を行うと、テンプレートの肥大化を招き、コンパイルエラーの原因となることがあります。
+
+.. versionadded:: 5.2
+.. code-block:: cpp
+
+    class Foo {
+      public:
+        Foo() { ... };
+        int data;
+
+        KOKKOS_FUNCTION print_data() const {
+          printf("Data: %i\n",data);
+        }
+        void bar() const {
+          parallel_for("Name", N, KOKKOS_FORCEINLINE_CLASS_LAMBDA(int i) {
+            ...
+            print_data();
+            printf("%i %i\n",i,data);
+          });
+        }
+    };
 
 ``KOKKOS_DEDUCTION_GUIDE``
 --------------------------
 
 本マクロは、ユーザーにより定義された型推論ガイドの注釈用に使用されます。
-
 
 .. code-block:: cpp
 

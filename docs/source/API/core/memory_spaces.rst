@@ -44,32 +44,38 @@
 ``Kokkos::HIPSpace``
 --------------------
 
-``Kokkos::HIPSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降` は、HIP GPUプログラミング環境においてGPU上のデバイスメモリを表すMemorySpaceTypeです。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。 
+``Kokkos::HIPSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降` は、HIP GPUプログラミング環境においてGPU上のデバイスメモリを表す |MemorySpaceType|_ です。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的なメモリ空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
+``Kokkos::Experimental::HIPSpace`` はバージョン5.2で非推奨となりました。
 
 ``Kokkos::HIPHostPinnedSpace``
 ------------------------------
 
-``Kokkos::HIPHostPinnedSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降` は、HIP GPU プログラミング環境において、GPU からアクセス可能なホスト側の固定メモリを表す MemorySpaceType です。このメモリはホストとデバイスの両方の実行空間からアクセス可能です。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
+``Kokkos::HIPHostPinnedSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降` は、HIP GPU プログラミング環境において、GPU からアクセス可能なホスト側の固定メモリを表す |MemorySpaceType|_ です。このメモリはホストとデバイスの両方の実行空間からアクセス可能です。 ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的なメモリ空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
+``Kokkos::Experimental::HIPHostPinnedSpace`` はバージョン5.2で非推奨となりました。
 
 ``Kokkos::HIPManagedSpace``
 ---------------------------
 
-``Kokkos::HIPManagedSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降`  は、HIP GPU プログラミング環境における GPU 上のページ移行メモリを表す MemorySpaceType です。ページ移行メモリは、ほとんどのホスト実行空間からアクセス可能です。 すべてのオペレーティングシステムと HIP 対応ハードウェアの組み合わせで利用可能ですが、 ``xnack`` 機能をサポートし有効化するには、オペレーティングシステムとハードウェアの両方が対応している必要があります。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的な実行空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
+``Kokkos::HIPManagedSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.0以降`  は、HIP GPU プログラミング環境における GPU 上のページ移行メモリを表す |MemorySpaceType|_ です。ページ移行メモリは、ほとんどのホスト実行空間からアクセス可能です。 すべてのオペレーティングシステムと HIP 対応ハードウェアの組み合わせで利用可能ですが、 ``xnack`` 機能をサポートし有効化するには、オペレーティングシステムとハードウェアの両方が対応している必要があります。ごく稀な場合を除き、直接使用すべきではなく、代わりに汎用的なメモリ空間として使用される必要があります。 詳細については、 |TheDocumentationOnTheMemorySpaceConcept|_ を参照してください。
+``Kokkos::Experimental::HIPManagedSpace`` はバージョン5.2で非推奨となりました。
 
 ``Kokkos::SYCLDeviceUSMSpace``
 ------------------------------
 
-``Kokkos::SYCLDeviceUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPU プログラミング環境において、GPU 上のデバイスメモリを表します。本メモリは、SYCL 実行空間からのみアクセス可能です。
+``Kokkos::SYCLDeviceUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPU プログラミング環境において、GPU 上のデバイスメモリを表す |MemorySpaceType|_ です。本メモリは、SYCL 実行空間からのみアクセス可能です。
+``Kokkos::Experimental::SYCLDeviceUSMSpace`` はバージョン5.2で非推奨となりました。
 
 ``Kokkos::SYCLHostUSMSpace``
 ----------------------------
 
-``Kokkos::SYCLHostUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPUプログラミング環境において、GPUからアクセス可能なホスト側の固定メモリを表す |MemorySpaceType|_ です。このメモリは、ホスト実行空間とSYCL 実行空間の両方からアクセス可能です。 
+``Kokkos::SYCLHostUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPUプログラミング環境において、GPUからアクセス可能なホスト側の固定メモリを表す |MemorySpaceType|_ です。このメモリは、ホスト実行空間とSYCL 実行空間の両方からアクセス可能です。
+``Kokkos::Experimental::SYCLHostUSMSpace`` はバージョン5.2で非推奨となりました。
 
 ``Kokkos::SYCLSharedUSMSpace``
 ------------------------------
 
-``Kokkos::SYCLSharedUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPUプログラミング環境において、GPU上のページ移行メモリを表す |MemorySpaceType|_ です。 このメモリは、ホスト実行空間とSYCL 実行空間の両方からアクセス可能です。 
+``Kokkos::SYCLSharedUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`バージョン4.5以降` は、SYCL GPUプログラミング環境において、GPU上のページ移行メモリを表す |MemorySpaceType|_ です。 このメモリは、ホスト実行空間とSYCL 実行空間の両方からアクセス可能です。
+``Kokkos::Experimental::SYCLSharedUSMSpace`` はバージョン5.2で非推奨となりました。
 
 ``Kokkos::HostSpace``
 ---------------------

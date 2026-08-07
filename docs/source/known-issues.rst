@@ -125,6 +125,10 @@ SYCL
     struct sycl::is_device_copyable<MyComparator>
       : std::true_type {};
 
+.. _known-issues-sycl-abort:
+
+- SYCL バックエンドで並列領域から :cpp:func:`abort` を呼び出し、かつ ``NDEBUG`` が定義されている場合、この関数は異常終了を **引き起こしません**。その代わり、標準出力ストリームに出力を行い、プログラムの実行を継続します。``NDEBUG`` は通常、``CMake`` の ``RelWithDebInfo`` および ``Release`` ビルドタイプでは定義されますが、``Debug`` では定義されないことに注意してください。
+
 数学関数
 ========
 
