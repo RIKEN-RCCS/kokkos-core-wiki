@@ -37,15 +37,15 @@
     class Foo {
       public:
         // インライン定義されたコンストラクタ
-        KOKKOS_FUNCTION Foo() { ... };
+        KOKKOS_FUNCTION Foo() { /* ... */ };
 
         // インライン定義されたメンバー関数
-        template<class T>
-        KOKKOS_FUNCTION void bar() const { ... }
+        template <class T>
+        KOKKOS_FUNCTION void bar() const { /* ... */ }
     };
 
-    template<class T>
-    KOKKOS_FUNCTION void foo(T v) { ... }
+    template <class T>
+    KOKKOS_FUNCTION void foo(T v) { /* ... */ }
 
 ``KOKKOS_INLINE_FUNCTION``
 --------------------------
@@ -74,16 +74,16 @@
     class Foo {
       public:
         KOKKOS_FORCEINLINE_FUNCTION
-        Foo() { ... };
+        Foo() { /* ... */ };
 
-        template<class T>
+        template <class T>
         KOKKOS_FORCEINLINE_FUNCTION
-        void bar() const { ... }
+        void bar() const { /* ... */ }
     };
 
-    template<class T>
+    template <class T>
     KOKKOS_FORCEINLINE_FUNCTION
-    void foo(T v) { ... }
+    void foo(T v) { /* ... */ }
 
 ``KOKKOS_RELOCATABLE_FUNCTION``
 -------------------------------
@@ -129,16 +129,17 @@ C++ラムダ式を作成するよりも、Kokkosの並列ディスパッチ機�
 
 .. code-block:: cpp
 
-    void foo(...) {
-      ...
-      parallel_for("Name", N, KOKKOS_LAMBDA(int i) {
-        ...
+    constexpr auto n = 10;
+
+    void foo() {
+      parallel_for("Name", n, KOKKOS_LAMBDA(int i) {
+        /* ... */
       });
-      ...
-      parallel_reduce("Name", N, KOKKOS_LAMBDA(int i, double& v) {
-        ...
+
+      double result = 0.0;
+      parallel_reduce("Name", n, KOKKOS_LAMBDA(int i, double& v) {
+        /* ... */
       }, result);
-      ...
     }
 
 .. warning:: ``KOKKOS_FUNCTION`` などのマークが付いた関数内や、 ``KOKKOS_LAMBDA`` でマークされたラムダ式内で ``KOKKOS_LAMBDA`` を使用しないでください。 特に、ネストされた並列呼び出し用のラムダ式を定義する際には、 ``KOKKOS_LAMBDA`` を使用しないでください。CUDAはこれをサポートしていません。代わりに通常のC++構文を使用してください：``[=] (int i) {...}``。
@@ -155,16 +156,17 @@ C++ラムダ式を作成するよりも、Kokkosの並列ディスパッチ機�
 .. versionadded:: 5.2
 .. code-block:: cpp
 
-    void foo(...) {
-      ...
+    void foo() {
+      constexpr auto N = 10;
+
       parallel_for("Name", N, KOKKOS_FORCEINLINE_LAMBDA(int i) {
-        ...
+        /* ... */
       });
-      ...
+
+      double result = 0.0;
       parallel_reduce("Name", N, KOKKOS_FORCEINLINE_LAMBDA(int i, double& v) {
-        ...
+        /* ... */
       }, result);
-      ...
     }
 
 ``KOKKOS_CLASS_LAMBDA``
@@ -177,17 +179,19 @@ C++ラムダ式を作成するよりも、Kokkosの並列ディスパッチ機�
 
     class Foo {
       public:
-        Foo() { ... };
+        Foo() { /* ... */ };
         int data;
 
-        KOKKOS_FUNCTION print_data() const {
+        KOKKOS_FUNCTION void print_data() const {
           printf("Data: %i\n",data);
         }
+
         void bar() const {
-          parallel_for("Name", N, KOKKOS_CLASS_LAMBDA(int i) {
-            ...
+          constexpr auto n = 10;
+          parallel_for("Name", n, KOKKOS_CLASS_LAMBDA(int i) {
+            /* ... */
             print_data();
-            printf("%i %i\n",i,data);
+            printf("%i %i\n", i, data);
           });
         }
     };
@@ -198,20 +202,22 @@ C++ラムダ式を作成するよりも、Kokkosの並列ディスパッチ機�
 
     class Foo {
       public:
-        Foo() { ... };
+        Foo() { /* ... */ };
         int data;
 
-        KOKKOS_FUNCTION print_data() const {
-          printf("Data: %i\n",data);
+        KOKKOS_FUNCTION void print_data() const {
+          printf("Data: %i\n", data);
         }
         void bar() const {
+          constexpr auto n = 10;
           int data_copy = data;
-          parallel_for("Name", N, KOKKOS_LAMBDA(int i) {
-            ...
-            // メンバー関数呼び出し不可能
+          parallel_for("Name", n, KOKKOS_LAMBDA(int i) {
+            /* ... */
+
+            // メンバー関数を呼び出せません
             // print_data();
-            // データのコピーしよう
-            printf("%i %i\n",i,data_copy);
+            // dataのコピーを使用します
+            printf("%i %i\n", i, data_copy);
           });
         }
     };
@@ -227,15 +233,16 @@ C++ラムダ式を作成するよりも、Kokkosの並列ディスパッチ機�
 
     class Foo {
       public:
-        Foo() { ... };
+        Foo() { /* ... */ };
         int data;
 
-        KOKKOS_FUNCTION print_data() const {
+        KOKKOS_FUNCTION void print_data() const {
           printf("Data: %i\n",data);
         }
+
         void bar() const {
+          constexpr auto N = 10;
           parallel_for("Name", N, KOKKOS_FORCEINLINE_CLASS_LAMBDA(int i) {
-            ...
             print_data();
             printf("%i %i\n",i,data);
           });
@@ -267,7 +274,7 @@ C++ラムダ式を作成するよりも、Kokkosの並列ディスパッチ機�
     Foo(T, Args...) -> Foo<T, 1+sizeof...(Args)>;
 
     void bar() {
-      Kokkos::parallel_for(1, KOKKOS_LAMBDA(int) {
+      parallel_for(1, KOKKOS_LAMBDA(int) {
         Foo f(1, 2., 3.2f);
         f.print(0);
         f.print(1);
