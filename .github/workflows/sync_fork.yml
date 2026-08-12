@@ -14,5 +14,5 @@ jobs:
     steps:
       - name: Sync main with upstream (kokkos/kokkos-core-wiki)
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: gh repo sync ${{ github.repository }} --branch main
