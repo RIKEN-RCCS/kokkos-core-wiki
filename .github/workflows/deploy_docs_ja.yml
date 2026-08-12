@@ -3,6 +3,8 @@ name: Build and deploy Japanese docs
 on:
   push:
     branches: [ Japanese ]
+  pull_request:
+    branches: [ Japanese ]
   workflow_dispatch:
 
 jobs:
@@ -24,13 +26,13 @@ jobs:
           make html
       - name: Updload documentation as artifact
         id: deployment
-        uses: actions/upload-pages-artifact@v4.0.0
+        uses: actions/upload-pages-artifact@v5.0.0
         with:
           name: github-pages
           path: ${{ env.docs-directory }}/generated_docs
 
   deploy:
-    if: ${{ github.ref == 'refs/heads/main' }}
+#    if: ${{ github.ref == 'refs/heads/main' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -43,4 +45,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4.0.5
+        uses: actions/deploy-pages@v5.0.0
