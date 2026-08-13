@@ -24,5 +24,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           gh repo sync ${{ github.repository }} --branch main
-          gh workflow disable deploy_docs.yml
-          gh workflow disable typos.yml
+          gh workflow disable deploy_docs.yml --repo ${{ github.repository }}
+          gh workflow disable typos.yml --repo ${{ github.repository }}
