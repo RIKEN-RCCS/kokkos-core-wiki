@@ -12,6 +12,13 @@ jobs:
       contents: write
 
     steps:
+      - name: Check environment
+        run: |
+          pwd
+          gh --version
+          git --version
+          ls -la
+      
       - name: Sync main with upstream (kokkos/kokkos-core-wiki)
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
