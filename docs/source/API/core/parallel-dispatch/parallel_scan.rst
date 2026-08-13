@@ -37,7 +37,6 @@
 
   - ``IntegerType``: 1D反復範囲を定義し、0からカウント値までを範囲とします。
   - `RangePolicy <../policies/RangePolicy.html>`_: 1D反復範囲を定義します。
-  - `TeamPolicy <../policies/TeamPolicy.html>`_: 1D反復範囲を定義し、それぞれをスレッドチームに割り当てます。
   - `TeamVectorRange <../policies/TeamVectorRange.html>`_: スレッドチームにより実行されるべき1次元反復範囲を定義します。``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
   - `TeamThreadRange <../policies/TeamThreadRange.html>`_: チームのスレッドに範囲を分割するスレッド並列化を通じて実行されるべき1次元反復範囲を定義します。``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
   - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: チーム内のスレッドを分割するベクトル並列化を通じて実行されるべき1次元反復範囲を定義します。 ``TeamPolicy`` を通じて実行される並列領域内でのみ有効です。
