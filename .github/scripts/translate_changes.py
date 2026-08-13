@@ -49,6 +49,15 @@ substitutions, footnotes, code blocks, tables, and indentation.
 - For section title underlines/overlines, the underline must be as long as \
 the display width of the title. CJK characters count as width 2; ASCII \
 characters count as width 1. Adjust the underline length accordingly.
+- RST inline markup (**strong**, *emphasis*, ``literal``, `interpreted text`, \
+roles, and `references`_) requires whitespace or punctuation immediately \
+before its opening marker and immediately after its closing marker. Japanese \
+has no spaces between words, so a literal translation often glues a particle \
+or word directly onto the marker (e.g. "**3月**に"), which breaks RST parsing. \
+When natural Japanese phrasing would place a kana/kanji character directly \
+against a markup delimiter, insert an escaped space — a backslash followed \
+by a space, e.g. "**3月**\\ に" — right there. It satisfies the whitespace \
+requirement without producing a visible space in the rendered output.
 - Do not add explanations, comments, or extra blank lines outside the RST.
 - Output only the translated RST content.\
 """
@@ -114,6 +123,66 @@ def fix_underlines(content: str, rel_path: str) -> str:
             result[i] = char * width
 
     return "\n".join(result)
+
+
+# RST requires whitespace or punctuation immediately outside an inline-markup
+# delimiter; a Hiragana/Katakana/Kanji letter butted directly against one
+# breaks that rule (see docutils' start_string_prefix / end_string_suffix).
+# Punctuation like "、"/"。" is already accepted by docutils, so only flag
+# actual CJK *letters* — this also keeps the check from ever firing inside
+# real code (which is ASCII), so it can't corrupt a literal block.
+def _needs_markup_escape(ch: Optional[str]) -> bool:
+    if ch is None:
+        return False
+    return (
+        unicodedata.category(ch) in ("Lo", "Lm")
+        and unicodedata.east_asian_width(ch) in ("W", "F")
+    )
+
+
+# Matches **strong**, ``literal``, *emphasis*, and `interpreted text`/`role`/
+# `reference`_/`anonymous reference`__ spans (longest delimiter tried first
+# via the backreference). Requires no whitespace just inside either
+# delimiter and no blank line inside the body, mirroring docutils' own
+# start-/end-string rules closely enough to avoid matching bullet-list "* "
+# markers or spanning across paragraph breaks.
+_INLINE_MARKUP_RE = re.compile(
+    r"(?P<delim>\*\*|``|\*|`)(?!\s)"
+    r"(?:(?!(?P=delim))[^\n]|\n(?!\n))+?"
+    r"(?<!\s)(?P=delim)(?:__|_)?"
+)
+
+
+def fix_inline_markup_spacing(content: str, rel_path: str) -> str:
+    """Insert an escaped space (``\\ ``) around RST inline markup whose
+    delimiter directly touches a CJK letter, e.g. turn ``**3月**に`` into
+    ``**3月**\\ に``. Without it, Sphinx's ``-W`` build fails with
+    "Inline strong start-string without end-string" (or the interpreted-text/
+    phrase-reference equivalent).
+
+    This is a backstop for translations that don't follow the escaped-space
+    instruction in SYSTEM_PROMPT. No-op for non-.rst files, matching
+    fix_underlines: Markdown has no such adjacency rule.
+    """
+    if not rel_path.lower().endswith(".rst"):
+        return content
+
+    def repl(m: re.Match) -> str:
+        start, end = m.span()
+        before = content[start - 1] if start > 0 else None
+        after = content[end] if end < len(content) else None
+        prefix = "\\ " if _needs_markup_escape(before) else ""
+        suffix = "\\ " if _needs_markup_escape(after) else ""
+        return prefix + m.group(0) + suffix
+
+    return _INLINE_MARKUP_RE.sub(repl, content)
+
+
+def postprocess_rst(content: str, rel_path: str) -> str:
+    """Run all deterministic, non-LLM RST fixups on translated content."""
+    content = fix_underlines(content, rel_path)
+    content = fix_inline_markup_spacing(content, rel_path)
+    return content
 
 
 # ---------------------------------------------------------------------------
@@ -335,7 +404,7 @@ def translate_with_diff(
                 "→ full retranslation"
             )
             result = translate_whole_file(client, new_en, current_ja, rel_path)
-            return fix_underlines(result, rel_path)
+            return postprocess_rst(result, rel_path)
 
     # Diff old_en blocks vs new_en blocks
     sm = difflib.SequenceMatcher(None, old_blocks, new_blocks, autojunk=False)
@@ -384,7 +453,7 @@ def translate_with_diff(
                 translated, _ = to_translate[item]
             result_blocks.append(translated)
 
-    return fix_underlines(join_blocks(result_blocks), rel_path)
+    return postprocess_rst(join_blocks(result_blocks), rel_path)
 
 
 # ---------------------------------------------------------------------------
@@ -474,12 +543,12 @@ def main() -> None:
                     result = translate_with_diff(client, old_en, new_en, current_ja, new_rel_path)
                 else:
                     # File is new in this push
-                    result = fix_underlines(
+                    result = postprocess_rst(
                         translate_whole_file(client, new_en, None, new_rel_path),
                         new_rel_path,
                     )
             else:
-                result = fix_underlines(
+                result = postprocess_rst(
                     translate_whole_file(client, new_en, current_ja, new_rel_path),
                     new_rel_path,
                 )
