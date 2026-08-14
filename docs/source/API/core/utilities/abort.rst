@@ -21,6 +21,8 @@
 
 .. cpp:function:: KOKKOS_FUNCTION void abort(const char * msg);
 
+   .. versionadded:: 4.2
+
    :param msg: プロセスを中止する前に表示するエラーメッセージを含む、ヌル終端文字列。
    :returns: 返しません
 
