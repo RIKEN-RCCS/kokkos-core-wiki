@@ -4,7 +4,7 @@
 .. role:: cpp(code)
    :language: cpp
 
-ヘッダー ``<Kokkos_Core.hpp>`` に定義。
+ヘッダー ``<Kokkos_ScopeGuard.hpp>``:sup:`Kokkos 5.3 以降` に定義されており、これは ``<Kokkos_Core.hpp>`` からインクルードされます。
 
 使用方法
 --------
