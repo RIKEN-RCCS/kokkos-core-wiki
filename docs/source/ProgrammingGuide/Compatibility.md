@@ -39,7 +39,6 @@ Kokkos のパブリックサポートインターフェースは、以下の通�
 ユーザー定義マクロは、特に問題を抱え、コンパイラが語彙的に認識する内容を変え、言語のスコーピングルールを順守しないことがあります。 これらは、変数名や関数、特に Kokkos や他のライブラリで使われているプライベートなものに、干渉する可能性がありました。
 衝突のリスクを最小限に抑えるために、ユーザー定義のマクロは、MYPROJECT_ (または同様の曖昧さ解消方法)を付け、すべて大文字で表記すべきです(これにより、マクロは通常 C++ の構文や意味ルールに従わないことをコードリーダーに知らせます)。
 
-
 ## C++ 互換性
 
  Kokkosチームは、C++ サポートを最小限に抑え、最新の公開 C++ 標準(C++11 から3年ごとに公開)  より、1つ遅らせることを目指しています。 これらのリリースは一般的に重要であると見なされています。 これにより、最小限のサポートコンパイラバージョンが増加し、 Kokkos チームは 新しいライブラリや言語機能を活用でき、古いコンパイラのバグおよび制限に対する回避策も削除できます。 Kokkos はオプションで C++ 標準の後期バージョンをサポートすることもあり、ユーザーがこれらのモードでコンパイルする際に機能を提供します。
@@ -56,7 +55,6 @@ Kokkos ユーザーが、新しいリリースまたは Kokkos の構築に対�
 ## ヘッダー
 
 Kokkos_ で始まるヘッダーファイルの作成/削除/変更は避けてください。プロジェクトの他の部分についても、同じです。ビルドシステムの構成によっては、例えば、誤ったファイルが含まれてしまい、多くのデバッグ時間が無駄になる場合もあります。
-
 
 以下は公開ヘッダーです:
 
@@ -82,14 +80,26 @@ Kokkos_ で始まるヘッダーファイルの作成/削除/変更は避けて�
     Kokkos_Swap.hpp                      // Kokkos 4.3以降
     Kokkos_Timer.hpp
 
-    // Containers API
-    Kokkos_Bitset.hpp
-    Kokkos_DualView.hpp
-    Kokkos_DynamicView.hpp
-    Kokkos_DynRankView.hpp
-    Kokkos_OffsetView.hpp
-    Kokkos_ScatterView.hpp
-    Kokkos_UnorderedMap.hpp
+    Kokkos_Abort.hpp                     // Kokkos 4.2 以降
+    Kokkos_Array.hpp
+    Kokkos_Assert.hpp                    // Kokkos 4.2 以降
+    Kokkos_Atomic.hpp
+    Kokkos_BitManipulation.hpp           // Kokkos 4.1 以降
+    Kokkos_Clamp.hpp                     // Kokkos 4.3 以降
+    Kokkos_Complex.hpp
+    Kokkos_DetectionIdiom.hpp
+    Kokkos_InitializeFinalize.hpp        // Kokkos 5.3 以降
+    Kokkos_Macros.hpp
+    Kokkos_MathematicalConstants.hpp
+    Kokkos_MathematicalFunctions.hpp
+    Kokkos_MinMax.hpp                    // Kokkos 4.3 以降
+    Kokkos_Pair.hpp
+    Kokkos_Printf.hpp                    // Kokkos 4.2 以降
+    Kokkos_Profiling_ProfileSection.hpp
+    Kokkos_Profiling_ScopedRegion.hpp
+    Kokkos_ScopeGuard.hpp                // Kokkos 5.3 以降
+    Kokkos_Swap.hpp                      // Kokkos 4.3 以降
+    Kokkos_Timer.hpp
 
     // Algorithms API
     Kokkos_NestedSort.hpp
@@ -97,7 +107,6 @@ Kokkos_ で始まるヘッダーファイルの作成/削除/変更は避けて�
     Kokkos_Sort.cppm
     Kokkos_Sort.hpp
     Kokkos_StdAlgorithms.hpp
-
 
  ヘッダーが公開されていない場合は、直接 #include を行わないでください。今も効果があるわけでも、将来効果が続くことも保証されていません。これにはサブディレクトリ内のヘッダーも含まれます。
 
@@ -120,3 +129,5 @@ Kokkos_ で始まるヘッダーファイルの作成/削除/変更は避けて�
 *  `namespace Kokkos` 内の関数や変数のアドレスは避けてください
 *  `using namespace` 宣言 (`using namespace Kokkos;`, `using namespace Kokkos::Experimental;`) を避けてください
 
+* Avoid taking the address of a function or variable in `namespace Kokkos`
+* Avoid `using namespace` declarations (`using namespace Kokkos;`, `using namespace Kokkos::Experimental;`)
