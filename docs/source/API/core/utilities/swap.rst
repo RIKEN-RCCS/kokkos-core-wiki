@@ -1,5 +1,5 @@
-``Kokkos::kokkos_swap``
-=======================
+``kokkos_swap``
+===============
 
 .. role:: cpp(code)
     :language: cpp
@@ -16,7 +16,6 @@
     template <class T2, std::size_t N>
     KOKKOS_FUNCTION constexpr void
     kokkos_swap(T2 (&a)[N], T2 (&b)[N]) noexcept(noexcept(*a, *b));  // (2) (バージョン 4.3以降)
-
 
 1) 値 ``a`` および ``b`` を入れ替えます。 ``std::is_move_constructible_v<T> && std::is_move_assignable_v<T>`` が ``true`` でなければ、このオーバーロードは、オーバーロード解決に関与しません。
 

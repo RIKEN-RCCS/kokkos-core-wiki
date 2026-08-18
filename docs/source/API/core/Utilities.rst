@@ -1,9 +1,9 @@
 ユーティリティ
 ==============
 
+
 エラー処理と診断
 ----------------
-
 Kokkos は、ホストコードとデバイスコードの両方で一貫して動作する、エラー処理、デバッグ、および出力のためのユーティリティ関数を提供します。
 
 .. list-table::
@@ -26,9 +26,9 @@ Kokkos は、ホストコードとデバイスコードの両方で一貫して�
    ./utilities/assert
    ./utilities/printf
 
+
 その他
 ------
-
 .. toctree::
    :maxdepth: 1
 
@@ -39,4 +39,3 @@ Kokkos は、ホストコードとデバイスコードの両方で一貫して�
    ./utilities/device_id
    ./utilities/num_devices
    ./utilities/num_threads
-   ./utilities/experimental

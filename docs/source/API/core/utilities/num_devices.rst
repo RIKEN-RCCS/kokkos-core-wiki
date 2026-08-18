@@ -1,5 +1,5 @@
-``Kokkos::num_devices``
-=======================
+``num_devices``
+===============
 
 .. role:: cpp(code)
     :language: cpp
@@ -38,7 +38,6 @@
      Kokkos::finalize();
      return 0;
    }
-
 
 ----
 
