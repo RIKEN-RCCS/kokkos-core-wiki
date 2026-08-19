@@ -28,6 +28,8 @@
      -  ``Kokkos::View`` のサイズ変更。
    * - `subview <view/subview.html>`__
      -  ``Kokkos::View`` からスライスを取得。
+   * - :doc:`view/ALL`
+     - :cpp:func:`subview` を使用して、ある次元の全インデックス範囲を選択。
    * - `View <view/view.html>`__
      -   Kokkos 主要データ構造、多次元メモリ空間およびレイアウト認識配列。
    * - `view_alloc() <view/view_alloc.html>`__
@@ -51,6 +53,7 @@
    ./view/resize
    ./view/subview
    ./view/Subview_type
+   ./view/ALL
    ./view/view
    ./view/view_alloc
    ./view/view_like

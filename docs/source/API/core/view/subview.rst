@@ -15,7 +15,6 @@
 
 別の ``Kokkos::View`` のサブセットを表す ``Kokkos::View`` を作成します。
 
-
 .. _KokkosAll: ../utilities/all.html#kokkosall
 
 .. |KokkosAll| replace:: :cpp:func:`Kokkos::ALL`
@@ -29,13 +28,11 @@
 
    .. rubric:: サブセットセレクション:
 
-   * ``args...`` におけるすべての整数引数に対して、返されたビューのランクは、 ``v``のランクより一つ小さく、 ``s`` により参照された値は、 ``v`` へのインデックス付けの間に、対応する位置で整数引数を使用することに関連する値に対応します。  
+   * ``args...`` におけるすべての整数引数に対して、返されたビューのランクは、 ``v``\ のランクより一つ小さく、 ``s`` により参照された値は、 ``v`` へのインデックス付けの間に、対応する位置で整数引数を使用することに関連する値に対応します。  
 
-   * ``r``\ th 引数として KokkosAll_ を渡すことは、 ``r``\ th  引数として pair<ptrdiff_t,ptrdiff_t>(0,v.extent(r)) を渡すことに等しいです。
+   * ``r``\ 番目の引数として :cpp:var:`ALL` を渡すことは、 ``r``\ 番目の引数として ``pair<ptrdiff_t,ptrdiff_t>(0,v.extent(r))`` を渡すことに等しいです。
 
-   * ``r``\ th 引数 ``arg_r`` が``s.extent(d) = arg_r.second-arg_r.first``\ よりも、 引数リストにある ``d``\ th 範囲 (\ ``std::pair``\ ``Kokkos::pair`` または、|KokkosAll|_ ) である場合には、 
-      ``s`` の次元 ``d`` は、 ``v``の次元 ``r`` の範囲 ``[arg_r.first,arg_r.second)`` を参照します。
-
+   * ``r``\ 番目の引数 ``arg_r`` が引数リストにおける ``d``\ 番目の範囲 (\ ``std::pair``\ 、 ``Kokkos::pair`` または :cpp:var:`ALL` ) である場合、 ``s.extent(d) = arg_r.second-arg_r.first``\ となり、 ``s`` の次元 ``d`` は ``v`` の次元 ``r`` の範囲 ``[arg_r.first,arg_r.second)`` を参照します。
 
    .. rubric:: 制約:
 
@@ -49,7 +46,7 @@
 
      - ``std::is_integral<iType>::value`` を伴う、真である ``iType`` 。
 
-     - ``std::remove_const_t< decltype(``\ |KokkosAll|_ ``)>``
+     - ``std::remove_const_t< decltype(``\ :cpp:var:`ALL` ``)>`` (:cpp:struct:`ALL_t` と同じ)
 
    * ``r``\ th 引数 ``arg_r`` が  ``std::pair<iType,iType>`` または ``Kokkos::pair<iType,iType>`` の型である場合には、以下を満たす必要があります:
 
