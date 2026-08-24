@@ -19,7 +19,24 @@ jobs:
           git --version
           ls -la
       
+      - name: Check for pending auto-translate PR
+        id: check_pending
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          # If a translation PR from a previous sync is still open, advancing
+          # main now would let a second auto-translate run start from a stale
+          # (not-yet-merged) Japanese tip, producing overlapping/conflicting
+          # translation PRs. Wait for it to merge (or be closed) first.
+          PENDING=$(gh pr list --repo ${{ github.repository }} --base Japanese --state open \
+            --json headRefName -q '[.[] | select(.headRefName | startswith("auto-translate/"))] | length')
+          echo "pending=$PENDING" >> "$GITHUB_OUTPUT"
+          if [ "$PENDING" -gt 0 ]; then
+            echo "Found $PENDING open auto-translate PR(s) against Japanese; skipping sync."
+          fi
+
       - name: Sync main with upstream (kokkos/kokkos-core-wiki)
+        if: steps.check_pending.outputs.pending == '0'
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
