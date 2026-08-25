@@ -56,40 +56,50 @@
 
   .. cpp:function:: constexpr bool empty() noexcept
 
-    :returns: ``N == 0``
-    :since: ``非定数`` 5.0以降
+    :return: ``N == 0``
+
+    .. versionadded:: 5.0
+       ``noexcept`` 指定子が追加されました
 
   .. cpp:function:: static constexpr size_type size() noexcept
   .. cpp:function:: constexpr size_type max_size() const noexcept
 
-    :returns: ``N``
-    :since: ``非定数`` 5.0以降
+    :return: ``N``
+
+    .. versionadded:: 5.0
+       ``noexcept`` 指定子が追加されました
 
   .. cpp:function:: constexpr reference operator[](size_t i)
   .. cpp:function:: constexpr const_reference operator[](size_t i) const
 
-    :returns: 配列の ``i`` 番目の要素への参照。
-    :since: 引数が整数型、またはスコープのない列挙型である必要はありません。 (バージョン 5.1以降)
+    :return: 配列の ``i`` 番目の要素への参照。
+
+    .. versionadded:: 5.1
+      引数が整数型、またはスコープのない列挙型である必要はなくなりました。
 
   .. cpp:function:: constexpr pointer data() noexcept
   .. cpp:function:: constexpr const_pointer data() const noexcept
 
-    :returns: 配列の最初の要素へのポインタ。   ``N == 0`` である場合、戻り値は、 特定されておらず、間接参照できません。
-    :since: ``非定数`` 5.0以降
+    :return: 配列の最初の要素へのポインタ。 ``N == 0`` である場合、戻り値は特定されておらず、間接参照できません。
+
+    .. versionadded:: 5.0
+       ``noexcept`` 指定子が追加されました
 
   .. cpp:function:: constexpr pointer begin() noexcept
   .. cpp:function:: constexpr const_pointer begin() const noexcept
   .. cpp:function:: constexpr const_pointer cbegin() const  noexcept
 
-    :returns: ``data()``
-    :since: 5.0以降
+    :return: ``data()``
+
+    .. versionadded:: 5.0
 
   .. cpp:function:: constexpr pointer end() noexcept
   .. cpp:function:: constexpr const_pointer end() const noexcept
   .. cpp:function:: constexpr const_pointer cend() const noexcept
 
-    :returns: ``data() + size()``。 戻り値は、間接参照できません。  ``N == 0`` である場合、 戻り値は、 ``begin()`` に等しくなります。
-    :since: 5.0以降
+    :return: ``data() + size()``。戻り値は間接参照できません。 ``N == 0`` である場合、戻り値は ``begin()`` に等しくなります。
+
+    .. versionadded:: 5.0
 
 型推論ガイド
 ------------
