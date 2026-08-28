@@ -18,7 +18,6 @@ Kokkos コーディング規約
 
   // The rest of the file content follows here.
 
-
 ヘッダーガード
 ^^^^^^^^^^^^^^
 ヘッダーファイルのガードは、すべて大文字にしたファイル名とパスを反映し、
@@ -132,7 +131,6 @@ C++ では、クラス本体内で定義されたメンバー関数は暗黙的�
       KOKKOS_INLINE_FUNCTION void baz() { /* ... */ }
     };
 
-
 良い例:
 
 .. code-block:: cpp
@@ -145,3 +143,49 @@ C++ では、クラス本体内で定義されたメンバー関数は暗黙的�
     // Correct: Provides __host__ __device__ tags; inlining is implicit
     KOKKOS_FUNCTION void baz() { /* ... */ }
   };
+
+指定子と修飾子の配置に一貫性を持たせる
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``const West`` スタイル（指定子/修飾子を左側に置く）と ``East const`` スタイル（指定子/修飾子を右側に置く）のどちらも許容されます。どちらか一方を強制することはありません。同じコードブロック内で2つのスタイルを混在させないことのみをお願いしています。
+
+1つだけ例外があります。``constexpr West`` は常に使用していただくようお願いします。
+
+さらに、複数の修飾子が存在する場合、それらは同じ側に配置する必要があります。それらを分割しないでください（例: ``const int volatile``）。
+
+悪い例:
+
+.. code-block:: cpp
+
+    // Mixing left and right alignment in the same block
+    const int i  = 42;
+    auto const f = 3.14f;
+
+    // constexpr on the right
+    int constexpr c = 3;
+
+    // Qualifiers split on both sides
+    const int volatile d = 4;
+
+良い例:
+
+.. code-block:: cpp
+
+    // Consistent left alignment within the block
+    const int i  = 42;
+    const auto f = 3.14f;
+
+    // Or consistent right alignment within the block
+    int const i  = 42;
+    auto const f = 3.14f;
+
+    // constexpr always on the left
+    constexpr int c = 3;
+
+    // Qualifiers grouped on the same side
+    const volatile int d = 4;
+    // or
+    int const volatile d = 4;
+
+    // A const pointer to a const, using either style
+    const int* const p   = &i;
+    float const* const q = &f;
