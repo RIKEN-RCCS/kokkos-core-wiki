@@ -129,6 +129,15 @@ SYCL
 
 - SYCL バックエンドで並列領域から :cpp:func:`abort` を呼び出し、かつ ``NDEBUG`` が定義されている場合、この関数は異常終了を **引き起こしません**。その代わり、標準出力ストリームに出力を行い、プログラムの実行を継続します。``NDEBUG`` は通常、``CMake`` の ``RelWithDebInfo`` および ``Release`` ビルドタイプでは定義されますが、``Debug`` では定義されないことに注意してください。
 
+HIP を使用した Cray Clang
+=========================
+
+Cray Clang で HIP バックエンド向けにコンパイルすると、Kokkos のリダクションに対して誤ったコードが生成される場合があります。
+これは Cray Clang 19 および 20 で確認されています（issue `#9476 <https://github.com/kokkos/kokkos/issues/9476>`_\ を参照）。
+この問題が実際に Cray の拡張機能に起因するかどうかを確認するには、コンパイラフラグに ``-fno-cray`` を追加して、ベースとなる Clang/LLVM の挙動にフォールバックできます。
+HPE Cray Programming Environment のサポートは終息に近づいています。この `HPE community post <https://community.hpe.com/t5/high-performance-computing/when-software-moves-faster-than-supercomputers/td-p/7271549>`_\ を参照してください。
+別のコンパイラに切り替えられる場合は、代わりに ``hipcc`` でビルドすることをお勧めします。
+
 数学関数
 ========
 
