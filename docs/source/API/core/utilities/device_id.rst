@@ -1,41 +1,57 @@
 ``device_id``
 =============
 
-.. role:: cpp(code)
-    :language: cpp
-
 ヘッダー ``<Kokkos_Core.hpp>`` に定義
+
+使い方
+------
 
 .. code-block:: cpp
 
-    [[nodiscard]] int device_id() noexcept;  // (バージョン4.1以降)
+    Kokkos::device_id();
 
 ``DefaultExecutionSpace`` が使用するデバイスの id を返します。ホストバックエンドのみが有効な場合は ``-1`` を返します。
 
+インターフェース
+----------------
+
+.. cpp:function:: [[nodiscard]] int device_id() noexcept
+
+   :return: ``DefaultExecutionSpace`` が使用するデバイスの id。ホストバックエンドのみが有効な場合は ``-1``。
+
+   .. versionadded:: 4.1
+
+例
+--
+
+.. code-block:: cpp
+
+   #include <Kokkos_Core.hpp>
+   #include <iostream>
+
+   int main(int argc, char* argv[]) {
+       Kokkos::initialize(argc, argv);
+       {
+         std::cout << "device_id: " << Kokkos::device_id() << '\n';
+       }
+       Kokkos::finalize();
+   }
+
+参照
 ----
+.. seealso::
 
-**以下も参照**
+   :doc:`num_devices`
+      Kokkos に利用可能なデバイスの数を返します。
 
-.. _num_devices : num_devices.html
+   :doc:`num_threads`
+      Kokkos が使用するスレッド数を返します。
 
-.. |num_devices| replace:: ``num_devices``
+   :doc:`print_configuration`
+      Kokkos の構成情報を出力ストリームに出力します。
 
-.. _num_threads : num_threads.html
+   :doc:`../initialize_finalize/initialize`
+     Kokkos 実行環境を初期化します。
 
-.. |num_threads| replace:: ``num_threads``
-
-.. _initialize: ../initialize_finalize/initialize.html
-
-.. |initialize| replace:: ``initialize``
-
-.. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
-
-.. |InitializationSettings| replace:: ``InitializationSettings``
-
-|num_devices|_: Kokkos に利用可能なデバイスの数を返します。
-
-|num_threads|_: Kokkos が使用するスレッド数を返します。
-
-|initialize|_: Kokkos 実行環境を初期化します。
-
-|InitializationSettings|_: Kokkos を初期化するための設定
+   :doc:`../initialize_finalize/InitializationSettings`
+     Kokkos を初期化するための設定

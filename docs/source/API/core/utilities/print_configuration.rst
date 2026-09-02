@@ -17,7 +17,7 @@ Kokkos の構成情報を出力ストリームに出力します。
 実行時情報（ホスト並列バックエンドのスレッド数、あるいはデバイス
 バックエンドで可視なデバイス数やデバイス ID など）の両方が含まれます。
 
-API リファレンス
+インターフェース
 ----------------
 
 .. cpp:function:: void print_configuration(std::ostream& os, bool verbose = false)
@@ -27,7 +27,6 @@ API リファレンス
    :param os: 構成情報を書き込む出力ストリーム
    :param verbose: ``true`` の場合、追加の詳細情報を出力します
 
-
 例
 --
 
@@ -35,11 +34,10 @@ API リファレンス
 
    #include <Kokkos_Core.hpp>
    #include <iostream>
-   
+
    int main(int argc, char* argv[]) {
        Kokkos::initialize(argc, argv);
        {
-       
          // 基本的な構成を標準出力に出力する
          Kokkos::print_configuration(std::cout);
 
@@ -49,7 +47,6 @@ API リファレンス
              Kokkos::print_configuration(log_file, /*verbose=*/ true);
              log_file.close();
          }
-       
        }
        Kokkos::finalize();
    }
