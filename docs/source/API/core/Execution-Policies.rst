@@ -82,7 +82,7 @@
 
     * * IndexType
       * 例えば ``IndexType<int>``
-      * イテレーション空間を走査するために使用する整数型を指定します。 デフォルトでは、`ExecutionSpaceConcept <execution_spaces.html#typedefs>`__ の ``size_type`` が使用されます。 バックエンドによっては、パフォーマンスに影響を与える可能性があります。
+      * イテレーション空間を走査するために使用する整数型を指定します。 `ExecutionSpaceConcept <execution_spaces.html#typedefs>`__ で定義されている ``ExecutionSpace::index_type`` （Kokkos 5.2 までは ``ExecutionSpace::size_type``）がデフォルトになります。 バックエンドによっては、パフォーマンスに影響を与える可能性があります。
 
     * * LaunchBounds
       * ``LaunchBounds<MaxThreads, MinBlocks>``
@@ -91,7 +91,6 @@
     * * WorkTag
       * ``SomeClass``
       * ファンクタ演算子を呼び出す際に、使用する作業タグのタイプを指定します。 任意のタグタイプにすることが可能です (つまり、  [empty](https://en.cppreference.com/w/cpp/types/is_empty) 構造体またはクラス )。デフォルトは、 ``void`` です。
-
 
 .. toctree::
    :hidden:
