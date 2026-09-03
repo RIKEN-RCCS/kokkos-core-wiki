@@ -27,8 +27,11 @@ Kokkos 実行環境が完了した場合に、呼び出されるべき、呼び�
 
 .. cpp:function:: void push_finalize_hook(std::function<void()> func);
 
-   :cpp:func:`finalize` 入力の際に
-   呼び出されるべき関数オブジェクト ``func`` を登録。
+   :param func: :cpp:func:`finalize` 入力の際に呼び出される関数オブジェクト
+
+   .. versionchanged:: 5.3
+
+      スレッドセーフ: 追加の同期なしに複数のスレッドから同時に呼び出すことができます。
 
 補足
 ----
