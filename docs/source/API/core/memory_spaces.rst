@@ -97,19 +97,19 @@
 ``Kokkos::SharedHostPinnedSpace``
 ---------------------------------
 
-``Kokkos::SharedHostPinnedSpace`` :sup:`バージョン4.0以降` は、|MemorySpaceType|_ の別名であり、有効なすべての |ExecutionSpaceTypes|_ からアクセス可能です。メモリは、ホストに固定されたまま保持され、デバイス上ではゼロコピーアクセスにより小さなチャンク（バックエンドに応じて、キャッシュライン、メモリページ等）単位で利用可能となります。1つの ``実行空間`` への書き込みは、同期イベント時に他の ``実行空間`` で可視化されます。同期をトリガーするイベントは、バックエンドの仕様によって異なります。 しかしながら、フェンスはすべてのバックエンドにおいて同期化イベントです。
-利用可能性は、プリプロセッサ定義 `` KOKKOS_HAS_SHARED_HOST_PINNED_SPACE`` または ``constexpr bool Kokkos::has_shared_host_pinned_space`` で確認できます。
+``Kokkos::SharedHostPinnedSpace`` :sup:`バージョン4.0以降` は、|MemorySpaceType|_ の別名であり、有効なすべての |ExecutionSpaceTypes|_ からアクセス可能です。メモリは、ホストに固定されたまま保持され、デバイスから直接アクセス可能です。1つの ``ExecutionSpace`` への書き込みは、同期イベント時に他の ``ExecutionSpace`` で可視化されます。同期をトリガーするイベントは、バックエンドの仕様によって異なります。しかしながら、フェンスはすべてのバックエンドにおいて同期イベントです。
+利用可能性は、プリプロセッサ定義 ``KOKKOS_HAS_SHARED_HOST_PINNED_SPACE`` または ``constexpr bool Kokkos::has_shared_host_pinned_space`` で確認できます。
 以下のバックエンドにおいて、 ``Kokkos::SharedHostPinnedSpace`` は対応する |MemorySpaceType|_ を指しています:
 
 * Cuda -> ``CudaHostPinnedSpace``
-* HIP -> ``HipHostPinnedSpace``
+* HIP -> ``HIPHostPinnedSpace``
 * SYCL -> ``SYCLHostUSMSpace``
 * Only backends running on host -> ``HostSpace``
 
 ``Kokkos::MemorySpaceConcept``
 ------------------------------
 
-``MemorySpace`` の概念は、Kokkos において、割り当ておよびアクセスが発生する "場所" と "方法" を表すための、基本的な抽象化です。Kokkos を使用するコードの大半は、特定のインスタンスよりもむしろ、 ``MemorySpace`` という *汎用的な概念* について、記述される必要があります。このページでは、Kokkos の実行空間の一般的な機能を 実際にどのように*使用* するかを説明しています；より正式で理論的な処理については、本文書 <KokkosConcepts.html>`_  を参照してください。
+``MemorySpace`` の概念は、Kokkos において、割り当ておよびアクセスが発生する "場所" と "方法" を表すための、基本的な抽象化です。Kokkos を使用するコードの大半は、特定のインスタンスよりもむしろ、 ``MemorySpace`` という *汎用的な概念* について、記述される必要があります。このページでは、Kokkos の実行空間の一般的な機能を 実際にどのように\ *使用* するかを説明しています；より正式で理論的な処理については、本文書 <KokkosConcepts.html>`_  を参照してください。
 
     *免責事項*: C++における "概念" という用語に目新しい点はありません; C++でテンプレートを使ったことがある人は
     知っていようといまいと、コンセプトを使っています。「概念」という言葉自体に惑わされないでください。
