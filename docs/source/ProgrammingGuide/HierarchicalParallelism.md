@@ -40,7 +40,7 @@ Kokkos のスレッドチームは、1次元のインデックス範囲をハー
 
 ### ポリシーインスタンスの作成
 
-Kokkosは、 [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) 実行ポリシーを使用してスレッドチームの使用を明示します。  スレッドチームを使用するには、 [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) のインスタンスを作成する必要があります。並列ディスパッチ呼び出しに対して、インラインで作成できます。 コンストラクタは2つの引数（リーグサイズとチームサイズ）を必要とします：チームサイズの代わりに、 `Kokkos::AUTO` を使用することで、 既定のアーキテクチャに適したチームサイズを推測させることができます。そうすることが、[`TeamPolicy`](../API/core/policies/TeamPolicy)を利用するための、ほとんどの開発者によって推奨される方法です。 [`Kokkos::RangePolicy`](../API/core/policies/RangePolicy)の場合と同様に、特定の実行タグ、特定の実行空間、`Kokkos::IndexType`、および`Kokkos::Schedule`を省略可能なテンプレート引数として指定できます。
+Kokkosは、 [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) 実行ポリシーを使用してスレッドチームの使用を明示します。  スレッドチームを使用するには、 [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) のインスタンスを作成する必要があります。並列ディスパッチ呼び出しに対して、インラインで作成できます。 コンストラクタは2つの引数（リーグサイズとチームサイズ）を必要とします：チームサイズの代わりに、 [`Kokkos::AUTO`](../API/core/policies/AUTO) を使用することで、 既定のアーキテクチャに適したチームサイズを推測させることができます。そうすることが、[`TeamPolicy`](../API/core/policies/TeamPolicy)を利用するための、ほとんどの開発者によって推奨される方法です。 [`Kokkos::RangePolicy`](../API/core/policies/RangePolicy)の場合と同様に、特定の実行タグ、特定の実行空間、`Kokkos::IndexType`、および`Kokkos::Schedule`を省略可能なテンプレート引数として指定できます。
 
 ```c++
 // デフォルトの実行スペースを使用し、起動
