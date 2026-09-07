@@ -108,3 +108,4 @@
    ./policies/TeamVectorRange
    ./policies/ThreadVectorMDRange
    ./policies/ThreadVectorRange
+   ./policies/AUTO
