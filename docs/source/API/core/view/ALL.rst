@@ -53,7 +53,7 @@ Example
 
    // Select all elements in dimensions 1 and 2, fix dimension 0 to index 5
    auto s = Kokkos::subview(a, 5, Kokkos::ALL, Kokkos::ALL);
-   // Result: s has type View<double[5]> with dimensions (N1, 5)
+   // Result: s has type View<double*[5]> with dimensions (N1, 5)
 
    // Both syntaxes work
    auto s1 = Kokkos::subview(a, 5, Kokkos::ALL,   Kokkos::ALL);
