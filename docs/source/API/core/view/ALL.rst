@@ -11,7 +11,6 @@
    Kokkos::subview(v, i, Kokkos::ALL);
    Kokkos::subview(v, i, Kokkos::ALL());
 
-
 :cpp:var:`ALL` は、次元に沿ったすべての要素を選択するために :cpp:func:`subview` とともに使用されるスライス指定子です。
 
 ``Kokkos::ALL`` と ``Kokkos::ALL()`` の両方の構文がサポートされています。
@@ -35,8 +34,6 @@
 
       :returns: ``true``
 
-      
-
 .. cpp:var:: inline constexpr ALL_t ALL{};
    
    次元内のすべてのインデックスを選択するために使用される :cpp:struct:`ALL_t` の定数インスタンスです。
@@ -50,7 +47,7 @@
 
    // 次元 1 と 2 のすべての要素を選択し、次元 0 をインデックス 5 に固定する
    auto s = Kokkos::subview(a, 5, Kokkos::ALL, Kokkos::ALL);
-   // 結果: s は次元 (N1, 5) を持つ View<double[5]> 型になる
+   // 結果: s は次元 (N1, 5) を持つ View<double*[5]> 型になる
 
    // どちらの構文も動作する
    auto s1 = Kokkos::subview(a, 5, Kokkos::ALL,   Kokkos::ALL);
