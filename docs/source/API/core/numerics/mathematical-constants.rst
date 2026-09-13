@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
-.. _source_math_constants: https://github.com/kokkos/kokkos/blob/develop/core/src/Kokkos_MathematicalConstants.hpp
+.. _source_math_constants: https://github.com/kokkos/kokkos/blob/5.2.0/core/src/Kokkos_MathematicalConstants.hpp
 
 .. |source_math_constants| replace:: ``<Kokkos_MathematicalConstants.hpp>``
 
@@ -97,7 +97,7 @@
 注意事項
 --------
 
-.. _KnownIssues: ../../../known-issues.html#mathematical-constants
+.. _KnownIssues: ../../../known-issues.html#mathematical-constants-and-numeric-traits
 
 .. |KnownIssues| replace:: 既知の問題
 

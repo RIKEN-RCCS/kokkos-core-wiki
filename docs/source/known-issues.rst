@@ -160,10 +160,10 @@ HPE Cray Programming Environment のサポートは終息に近づいていま�
 using ディレクティブ   ``using namespace Kokkos;`` の使用は、大いに避けるべきです(
 |Compatibility|_ 参照) 。 数学関数への修飾子なしの呼び出しが存在する場合、コンパイルエラーが発生するからです。代わりに、  ローカルスコープでは、明示的な修飾子 ``Kokkos::sqrt`` または、using宣言 ``using Kokkos::sqrt;`` を選択してください。
 
-数学定数
-========
+数学定数と数値特性
+==================
 
-- デバイスコード内での数学定数のアドレス取得は避けてください。 一部のツールチェーンではサポートされていないため、移植性がありません。
+- デバイスコード内で数学定数や数値特性を参照渡ししたり、そのアドレスを取得したりすることは避けてください。一部のツールチェーンではサポートされていないため、移植性がありません。
 
 .. code-block:: cpp
 
@@ -174,10 +174,13 @@ using ディレクティブ   ``using namespace Kokkos;`` の使用は、大い�
       Kokkos::complex z1(Kokkos::numbers::pi);
       // エラー: 識別子 "Kokkos::numbers::pi" は、 デバイスコード内で未定義です
 
-      // 1*pi は、 一時的なものです
+      // 1*pi と +pi は一時的なものです
       Kokkos::complex z2(1 * Kokkos::numbers::pi);  // OK
+      Kokkos::complex z2b(+Kokkos::numbers::pi);    // OK
 
       // ローカル変数にコピー
       auto pi = Kokkos::numbers::pi;
       Kokkos::complex z3(pi);  // OK
     }
+
+同じことが数値特性にも当てはまります。例えば ``Kokkos::infinity_v<float>`` です。
