@@ -87,7 +87,7 @@
 
 .. cpp:type:: const_data_type
 
-   `DataType`の :cpp:`const` バージョンであり,  それがすでに  :cpp:`const` であれば、:cpp:type:`data_type` と同じです。
+   `DataType`\ の :cpp:`const` バージョンであり,  それがすでに  :cpp:`const` であれば、:cpp:type:`data_type` と同じです。
 
 .. cpp:type:: non_const_data_type
 
@@ -120,6 +120,14 @@
 
    :cpp:type:`value_type` の non-:cpp:`const` バージョン。
 
+.. cpp:type:: element_type
+
+   :cpp:`std::mdspan` の規約に従う :cpp:class:`View` の要素型です。
+   読み取り専用のビューでは :cpp:`const` 修飾される場合があります（例: :cpp:`const double`）。
+   Kokkos ビューにおいては :cpp:type:`value_type` と同等です。
+
+   .. versionadded:: 4.5
+
 空間
 ^^^^
 
@@ -146,6 +154,10 @@
 ビュー型
 ^^^^^^^^
 
+.. cpp:type:: type
+
+   この :cpp:class:`View` 自身の完全に指定された型です。
+
 .. cpp:type:: non_const_type
 
    :cpp:any:`DataType` テンプレートパラメータとして渡された、:cpp:class:type with :cpp:type:`non_const_data_type` を持つ、本 :cpp:class:`View` 。
@@ -169,6 +181,45 @@
 データハンドル
 ^^^^^^^^^^^^^^
 
+.. cpp:type:: array_type
+
+   :cpp:type:`type` のエイリアスです。
+
+   .. deprecated:: 5.0
+      代わりに :cpp:type:`type` を使用してください。
+
+.. cpp:type:: uniform_type
+
+   静的な範囲を保持したこの :cpp:class:`View` の正規形です。
+
+.. cpp:type:: uniform_const_type
+
+   :cpp:type:`uniform_type` の :cpp:`const` 要素版です。
+
+.. cpp:type:: uniform_runtime_type
+
+   すべての範囲を動的にした :cpp:type:`uniform_type` の版です。
+
+.. cpp:type:: uniform_runtime_const_type
+
+   :cpp:type:`uniform_runtime_type` の :cpp:`const` 要素版です。
+
+.. cpp:type:: uniform_nomemspace_type
+
+   メモリ空間として :cpp:class:`Kokkos::AnonymousSpace` を使用する :cpp:type:`uniform_type` の版です。
+
+.. cpp:type:: uniform_const_nomemspace_type
+
+   :cpp:type:`uniform_nomemspace_type` の :cpp:`const` 要素版です。
+
+.. cpp:type:: uniform_runtime_nomemspace_type
+
+   メモリ空間として :cpp:class:`Kokkos::AnonymousSpace` を使用する :cpp:type:`uniform_runtime_type` の版です。
+
+.. cpp:type:: uniform_runtime_const_nomemspace_type
+
+   :cpp:type:`uniform_runtime_nomemspace_type` の :cpp:`const` 要素版です。
+
 .. cpp:type:: reference_type
 
    ビューアクセス演算子の戻り値の型。
@@ -185,7 +236,20 @@
 他の型
 ^^^^^^
 
+.. cpp:type:: data_handle_type
+
+   :cpp:`std::mdspan` の規約に従うデータハンドル型です。
+   管理されたビューではこれは参照カウントされたハンドルであり、管理されていないビューでは生ポインタ（例: :cpp:`double*`）です。
+
+   .. versionadded:: 4.5
+
 .. cpp:type:: array_layout
+
+.. cpp:type:: traits
+
+   この :cpp:class:`View` に対する :cpp:class:`ViewTraits` の特殊化です。
+   :cpp:type:`data_type`、:cpp:type:`array_layout`、:cpp:type:`memory_space`、:cpp:type:`memory_traits` など、
+   すべてのコンパイル時プロパティへのアクセスを提供します。
 
    :cpp:class:`View` の :cpp:any:`LayoutType`。
 
@@ -193,7 +257,22 @@
 
    本 :cpp:class:`View` のメモリ空間に関するインデックス型。
 
-.. cpp:type:: dimension
+   :cpp:`std::mdspan` の規約に従う :cpp:type:`index_type` の符号なし版です。
+   デフォルトは :cpp:`std::size_t` です。
+
+.. cpp:type:: index_type
+
+   :cpp:`std::mdspan` の規約に従う、インデックス付けに使用される整数型です。
+   デフォルトは :cpp:`std::size_t` です。
+
+   .. versionadded:: 4.5
+
+.. cpp:type:: rank_type
+
+   :cpp:class:`View` のランク（すなわち :cpp:func:`rank` および :cpp:func:`rank_dynamic` の型）を表すために使用される型です。
+   これは :cpp:`std::size_t` です。
+
+   .. versionadded:: 4.5
 
    :cpp:class:`View` の範囲を表すことができる整数配列のような型。
 
@@ -205,6 +284,51 @@
 ^^^^^^^^^^^^^^
 
 .. cpp:function:: View()
+
+mdspan 型
+^^^^^^^^^
+
+以下の型は :cpp:`std::mdspan`（C++23）との互換性を提供します。
+これらは :cpp:class:`View` の :ref:`自然な mdspan <api-view-natural-mdspans>` を記述します。
+
+.. cpp:type:: mdspan_type
+
+   この :cpp:class:`View` に対応する自然な :cpp:`std::mdspan` 型です。
+   :cpp:type:`array_layout` が :cpp:struct:`LayoutLeft`、:cpp:struct:`LayoutRight`、
+   または :cpp:class:`LayoutStride` のいずれかである場合にのみ利用可能です。
+
+   .. versionadded:: 5.0
+
+   .. seealso:: :ref:`自然な mdspan <api-view-natural-mdspans>`
+
+.. cpp:type:: extents_type
+
+   :cpp:type:`mdspan_type` の :cpp:`std::extents` 型で、:cpp:class:`View` のランクおよび
+   静的/動的な範囲情報をエンコードします。
+
+   .. versionadded:: 5.0
+
+.. cpp:type:: layout_type
+
+   :cpp:type:`mdspan_type` の mdspan レイアウトポリシー型です。
+   これは mdspan レイアウト型（例: :cpp:`std::layout_left`）であり、
+   :cpp:type:`array_layout`（Kokkos レイアウトタグ、例: :cpp:struct:`LayoutLeft`）とは区別されることに注意してください。
+
+   .. versionadded:: 5.0
+
+.. cpp:type:: accessor_type
+
+   :cpp:type:`mdspan_type` の mdspan アクセサポリシー型です。
+   メモリ空間とアクセスプロパティ（例: アトミックアクセス）をエンコードします。
+
+   .. versionadded:: 5.0
+
+.. cpp:type:: mapping_type
+
+   :cpp:type:`mdspan_type` の mdspan マッピング型、すなわち :cpp:`layout_type::mapping<extents_type>` です。
+   多次元インデックスから線形オフセットへのマッピングを記述します。
+
+   .. versionadded:: 5.0
 
    デフォルトコンストラクタ。 割り当ては行われず、参照カウントも発生しません。すべての領域はゼロであり、データ指針は :cpp:`nullptr` です。
 
@@ -761,6 +885,19 @@ C++23 は、非所有の多次元配列ビュー` である、mdspan <https://en
         Kokkos::parallel_for("InitB", N1, KOKKOS_LAMBDA (const int& i) {
             b(i) = i;
         });
+
+        Kokkos::View<double**,Kokkos::LayoutLeft> c("C",N0,N1);
+        {
+            Kokkos::View<const double*> const_a(a);
+            Kokkos::View<const double*> const_b(b);
+            Kokkos::parallel_for("SetC", Kokkos::MDRangePolicy<Kokkos::Rank<2,Kokkos::Iterate::Left>>({0,0},{N0,N1}),
+                KOKKOS_LAMBDA (const int& i0, const int& i1) {
+                c(i0,i1) = a(i0) * b(i1);
+            });
+        }
+
+        Kokkos::finalize();
+    }
 
         Kokkos::View<double**,Kokkos::LayoutLeft> c("C",N0,N1);
         {
