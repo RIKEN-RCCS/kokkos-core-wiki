@@ -288,7 +288,7 @@
 mdspan 型
 ^^^^^^^^^
 
-以下の型は :cpp:`std::mdspan`（C++23）との互換性を提供します。
+以下の型は :cpp:`std::mdspan`\ （C++23）との互換性を提供します。
 これらは :cpp:class:`View` の :ref:`自然な mdspan <api-view-natural-mdspans>` を記述します。
 
 .. cpp:type:: mdspan_type
@@ -312,7 +312,7 @@ mdspan 型
 
    :cpp:type:`mdspan_type` の mdspan レイアウトポリシー型です。
    これは mdspan レイアウト型（例: :cpp:`std::layout_left`）であり、
-   :cpp:type:`array_layout`（Kokkos レイアウトタグ、例: :cpp:struct:`LayoutLeft`）とは区別されることに注意してください。
+   :cpp:type:`array_layout`\ （Kokkos レイアウトタグ、例: :cpp:struct:`LayoutLeft`）とは区別されることに注意してください。
 
    .. versionadded:: 5.0
 

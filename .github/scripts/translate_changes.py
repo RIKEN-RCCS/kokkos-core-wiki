@@ -57,7 +57,11 @@ or word directly onto the marker (e.g. "**3月**に"), which breaks RST parsing.
 When natural Japanese phrasing would place a kana/kanji character directly \
 against a markup delimiter, insert an escaped space — a backslash followed \
 by a space, e.g. "**3月**\\ に" — right there. It satisfies the whitespace \
-requirement without producing a visible space in the rendered output.
+requirement without producing a visible space in the rendered output. The \
+same problem occurs with a fullwidth bracket: a closing marker directly \
+followed by an opening bracket like "（" (e.g. ":cpp:`x`（例）"), or a closing \
+bracket like "）" directly followed by an opening marker, both need the same \
+escaped-space treatment, e.g. ":cpp:`x`\\ （例）".
 - Do not add explanations, comments, or extra blank lines outside the RST.
 - Output only the translated RST content.\
 """
@@ -131,13 +135,38 @@ def fix_underlines(content: str, rel_path: str) -> str:
 # Punctuation like "、"/"。" is already accepted by docutils, so only flag
 # actual CJK *letters* — this also keeps the check from ever firing inside
 # real code (which is ASCII), so it can't corrupt a literal block.
-def _needs_markup_escape(ch: Optional[str]) -> bool:
+def _is_cjk_letter(ch: Optional[str]) -> bool:
     if ch is None:
         return False
     return (
         unicodedata.category(ch) in ("Lo", "Lm")
         and unicodedata.east_asian_width(ch) in ("W", "F")
     )
+
+
+# docutils' start_string_prefix additionally accepts an *opening* bracket
+# immediately before an opening delimiter (e.g. "(**foo**"), and its
+# end_string_suffix accepts a *closing* bracket immediately after a closing
+# delimiter (e.g. "**foo**)"). The other pairing is not accepted: a fullwidth
+# closing bracket right before an opening delimiter ("）**foo**") or a
+# fullwidth opening bracket right after a closing delimiter ("**foo**（") both
+# break RST parsing the same way a bare CJK letter does. Scoped to the common
+# Japanese bracket pairs rather than all Unicode punctuation, to keep the
+# false-positive risk (accidentally rewriting real code) low.
+_FULLWIDTH_OPENERS = "（「『【〔《〈｛［"
+_FULLWIDTH_CLOSERS = "）」』】〕》〉｝］"
+
+
+def _needs_prefix_escape(ch: Optional[str]) -> bool:
+    """Whether `ch`, sitting immediately before an opening delimiter, needs
+    an escaped space inserted after it."""
+    return _is_cjk_letter(ch) or (ch is not None and ch in _FULLWIDTH_CLOSERS)
+
+
+def _needs_suffix_escape(ch: Optional[str]) -> bool:
+    """Whether `ch`, sitting immediately after a closing delimiter, needs
+    an escaped space inserted before it."""
+    return _is_cjk_letter(ch) or (ch is not None and ch in _FULLWIDTH_OPENERS)
 
 
 # Matches **strong**, ``literal``, *emphasis*, and `interpreted text`/`role`/
@@ -155,10 +184,11 @@ _INLINE_MARKUP_RE = re.compile(
 
 def fix_inline_markup_spacing(content: str, rel_path: str) -> str:
     """Insert an escaped space (``\\ ``) around RST inline markup whose
-    delimiter directly touches a CJK letter, e.g. turn ``**3月**に`` into
-    ``**3月**\\ に``. Without it, Sphinx's ``-W`` build fails with
-    "Inline strong start-string without end-string" (or the interpreted-text/
-    phrase-reference equivalent).
+    delimiter directly touches a CJK letter or an unpaired fullwidth bracket,
+    e.g. turn ``**3月**に`` into ``**3月**\\ に``, or
+    ``:cpp:`x`（例）`` into ``:cpp:`x`\\ （例）``. Without it, Sphinx's ``-W``
+    build fails with "Inline strong/interpreted text start-string without
+    end-string" (or, inside a C++ role, an "Unparseable C++ cross-reference").
 
     This is a backstop for translations that don't follow the escaped-space
     instruction in SYSTEM_PROMPT. No-op for non-.rst files, matching
@@ -171,8 +201,8 @@ def fix_inline_markup_spacing(content: str, rel_path: str) -> str:
         start, end = m.span()
         before = content[start - 1] if start > 0 else None
         after = content[end] if end < len(content) else None
-        prefix = "\\ " if _needs_markup_escape(before) else ""
-        suffix = "\\ " if _needs_markup_escape(after) else ""
+        prefix = "\\ " if _needs_prefix_escape(before) else ""
+        suffix = "\\ " if _needs_suffix_escape(after) else ""
         return prefix + m.group(0) + suffix
 
     return _INLINE_MARKUP_RE.sub(repl, content)
