@@ -189,3 +189,31 @@ C++ では、クラス本体内で定義されたメンバー関数は暗黙的�
     // A const pointer to a const, using either style
     const int* const p   = &i;
     float const* const q = &f;
+
+シンボル命名スタイルの規約
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+以下の規約は、Kokkos Core で最も一般的に使用されているパターンに基づいています。
+これらはガイドラインであり、常に一貫して守られてきたわけではありません。
+
+* **クラスとコンセプト**: ``UpperCamelCase`` を使用します（例: ``View``、
+  ``Device``、``ExecutionSpace``、``GraphNodeImpl``）。
+* **テンプレートパラメータ**: 型パラメータには意味のある ``UpperCamelCase``
+  の名前を使用します（例: ``ExecutionSpace``、``MemorySpace``、``DataType``、
+  ``FunctorType``）。可変長パックは通常、``Properties`` や ``Args`` のような
+  説明的な複数形の名前を使用します。短い名前（``T``、``P`` など）は主に
+  ローカルまたは内部のコンテキストで使用されます。
+* **マクロ**: アンダースコアを伴うすべて大文字で、``KOKKOS_`` プレフィックスを
+  使用します。内部専用のマクロには ``KOKKOS_IMPL_`` を使用します。
+* **関数（メンバ関数を含む）**: ``lower_snake_case`` の名前を使用します
+  （例: ``parallel_for``、``create_mirror_view_and_copy``、
+  ``impl_static_fence``、``print_configuration``）。実装上の理由で
+  ``private`` にできない非公開のメンバ関数には ``impl_`` プレフィックスを
+  使用します。
+* **クラスのデータメンバ**: ``m_`` + ``lower_snake_case`` を使用します（例:
+  ``m_space_instance``、``m_thread_team_data``、``m_queue``）。
+* **名前空間**: パブリック API には ``Kokkos`` を使用し、内部または実験的な
+  シンボルのスコープには ``Kokkos::Impl`` と ``Kokkos::Experimental`` を
+  使用します。
+* **型エイリアスと特性エイリアス**: 有用な場合は ``_type`` サフィックスを
+  伴う ``lower_snake_case`` を一般的に使用します（例: ``execution_space``、
+  ``value_type``、``device_type``）。
