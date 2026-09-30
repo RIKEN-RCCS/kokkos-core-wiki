@@ -825,25 +825,25 @@ Kokkos は設定時にアーキテクチャフラグの自動検出を試みま�
       * Radeon AI PRO R9700, Radeon RX 9070 XT
       * (Kokkos 5.0以降)
 
-    * * ``Kokkos_ARCH_AMD_GFX1103``
-      * GFX1103
-      * Ryzen 8000G Phoenix series APU
-      * (Kokkos 4.5以降)
-
-    * * ``Kokkos_ARCH_AMD_GFX1100``
-      * GFX1100
-      * 7900xt
-      * (Kokkos 4.2以降)
-
-    * * ``Kokkos_ARCH_AMD_GFX1030``
-      * GFX1030
-      * V620, W6800
-      * (Kokkos 4.2以降)
-
     * * ``Kokkos_ARCH_VEGA90A``
       * GFX90A
       * MI200 series
-      * ``Kokkos_ARCH_AMD_GFX90A`` 優先
+      * (Kokkos 5.3で削除)
+
+    * * ``Kokkos_ARCH_VEGA908``
+      * GFX908
+      * MI100
+      * (Kokkos 5.3で削除)
+
+    * * ``Kokkos_ARCH_VEGA906``
+      * GFX906
+      * MI50, MI60
+      * (Kokkos 5.3で削除)
+
+    * * ``Kokkos_ARCH_VEGA900``
+      * GFX900
+      * MI25
+      * (Kokkos 4.0で削除)
 
     * * ``Kokkos_ARCH_VEGA908``
       * GFX908
