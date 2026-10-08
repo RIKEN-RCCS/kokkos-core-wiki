@@ -466,6 +466,11 @@ Kokkos は、特定の CPU アーキテクチャ向けに最適化するため�
         ThunderX2 @ CEA BullSequana
       -
 
+    * - ``Kokkos_ARCH_ARMV9_VERA``
+      - ARMv9.2-A/A64
+      - Vera CPUs @ LANL Vision
+      - (Kokkos 5.3 以降)
+
     * - ``Kokkos_ARCH_ARMV81``
       - ARMv8.1/A64,A32
       -
