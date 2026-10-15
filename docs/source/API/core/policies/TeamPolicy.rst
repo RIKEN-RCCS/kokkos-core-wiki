@@ -111,7 +111,7 @@ TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policie
 
       特定のファンクタが与えられた場合、最大チームサイズを参照します。タグは、これが、 |parallelFor|_ か |parallelReduce|_ かを示します。
       注意事項:  これは静的な関数ではありません! 関数は、ベクター長と ``*this`` のスクラッチサイズの設定を考慮します。 戻り値より大きい値を使うと、ディスパッチ失敗になります。 戻り値が正でない場合、有効なチームサイズは見つかりません。 一般的な理由は、スクラッチキャッシュメモリへの要求が過剰であったことです。
-      返し:  ``f`` をディスパッチするために、他に同一の ``TeamPolicy`` と組み合わせて使用できることを可能にした``team_size`` の最大値。
+      返し:  ``f`` をディスパッチするために、他に同一の ``TeamPolicy`` と組み合わせて使用できることを可能にした\ ``team_size`` の最大値。
 
    .. cpp:function:: template<class FunctorType> int team_size_recommended(const FunctorType& f, const ParallelForTag&) const;
 
@@ -119,7 +119,7 @@ TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policie
 
       特定のファンクタ ``f`` について推奨されるチームサイズを照会します。タグは、これが |parallelFor|_  か |parallelReduce|_ かを示します。
       注意事項: これは静的な関数ではありません! 関数は、ベクター長と ``*this`` のスクラッチサイズの設定を考慮します。 戻り値が正でない場合、有効なチームサイズは見つかりません。 一般的な理由は、スクラッチキャッシュメモリへの要求が過剰であったことです。
-      返し:  ``f`` をディスパッチするために、他に同一の ``TeamPolicy`` と組み合わせて使用できることを可能にした``team_size`` の最大値。
+      返し:  ``f`` をディスパッチするために、他に同一の ``TeamPolicy`` と組み合わせて使用できることを可能にした\ ``team_size`` の最大値。
 
    .. cpp:function:: static int vector_length_max();
 
@@ -133,6 +133,10 @@ TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policie
    .. rubric:: 照会実行時設定
 
    .. cpp:function:: int team_size() const;
+
+   .. cpp:function:: const execution_space& space() const;
+
+      戻り値: 基になる ``execution_space`` インスタンスへの const 参照。コンストラクタに実行空間インスタンスが提供されなかった場合、基になるインスタンスはデフォルトの実行空間インスタンスとなります。
 
       返し: 要求されたチームサイズ。
 

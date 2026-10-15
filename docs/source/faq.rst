@@ -42,3 +42,15 @@ FAQ
    デフォルトでは、上記のどちらのオプションも、高いオーバーヘッドのために境界チェックを有効にしません。View で「範囲外」エラーを検出するには:
 
    * **CMake フラグ:** ``-DKokkos_ENABLE_DEBUG_BOUNDS_CHECK=ON``
+
+``nvcc_wrapper`` が使用するホストコンパイラを設定するにはどうすればよいですか？
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``nvcc_wrapper`` は、特に指定しない限りデフォルトのホストコンパイラとして ``g++`` を使用します。
+``nvcc`` が使用するホストコンパイラを明示的に制御するには、``NVCC_WRAPPER_DEFAULT_COMPILER`` 環境変数を使用したいコンパイラに設定します。例:
+
+.. code-block:: sh
+
+   export NVCC_WRAPPER_DEFAULT_COMPILER=g++-12
+
+これは ``-ccbin`` を直接 ``nvcc`` に渡すのと同等ですが、ビルドの呼び出しごとに渡すのではなく、環境内で一度設定するだけで済みます。
+``nvcc_wrapper`` の背景については :ref:`nvcc_wrapper: Why do we have it and what does it do <nvcc_wrapper>` を参照してください。

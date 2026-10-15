@@ -152,6 +152,10 @@ CTAD コンストラクタ (4.3以降)
 
 メンバー関数
 ~~~~~~~~~~~~
+.. cpp:function:: const execution_space& space() const
+
+    * 内部の ``execution_space`` インスタンスへの const 参照を返します。コンストラクタに実行空間インスタンスが提供されなかった場合、内部のインスタンスはデフォルトの実行空間インスタンスになります。
+
 .. cpp:function:: tile_type tile_size_recommended() const
 
     * ``Kokkos::Array<array_index_type, rank>`` 型を返します。これは、 ``MDRangePolicy`` が内部でデフォルトで使うランクごとのタイルサイズを含みます。デフォルトのタイルサイズは静的で、指定されたバックエンドに基づいて設定されています。

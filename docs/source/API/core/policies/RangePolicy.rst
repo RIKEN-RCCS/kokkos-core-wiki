@@ -74,10 +74,10 @@ RangePolicy は、 ``begin`` から開始して、開区間で ``end`` に行く
         RangePolicy& set_chunk_size(int chunk_size_);
 
         // コンストラクタに提供された ExecSpace インスタンスを返します
-        KOKKOS_FUNCTION const execution_space & space() const;
+        const execution_space & space() const;
         // Range begin を返します
         KOKKOS_FUNCTION member_type begin() const;
-        // return Range end を返します
+        // Range end を返します
         KOKKOS_FUNCTION member_type end()   const;
     };
 
