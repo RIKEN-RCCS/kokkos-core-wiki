@@ -208,10 +208,32 @@ def fix_inline_markup_spacing(content: str, rel_path: str) -> str:
     return _INLINE_MARKUP_RE.sub(repl, content)
 
 
+# ".. note: text" (one colon) is an RST comment, not a directive: it builds
+# without any warning but the whole note silently disappears from the page.
+# Limited to directive names used in these docs whose single-colon form is
+# never intentional.
+_SINGLE_COLON_DIRECTIVE_RE = re.compile(
+    r"^(\s*\.\.\s+)"
+    r"(note|warning|important|attention|caution|danger|error|hint|tip|seealso"
+    r"|deprecated|versionadded|versionchanged|versionremoved|code-block)"
+    r":(?=\s|$)",
+    re.MULTILINE,
+)
+
+
+def fix_directive_markers(content: str, rel_path: str) -> str:
+    """Turn ``.. note: ...`` into ``.. note:: ...`` for known directives.
+    No-op for non-.rst files."""
+    if not rel_path.lower().endswith(".rst"):
+        return content
+    return _SINGLE_COLON_DIRECTIVE_RE.sub(r"\1\2::", content)
+
+
 def postprocess_rst(content: str, rel_path: str) -> str:
     """Run all deterministic, non-LLM RST fixups on translated content."""
     content = fix_underlines(content, rel_path)
     content = fix_inline_markup_spacing(content, rel_path)
+    content = fix_directive_markers(content, rel_path)
     return content
 
 
