@@ -68,8 +68,8 @@ escaped-space treatment, e.g. ":cpp:`x`\\ （例）".
 
 RST_UNDERLINE_CHARS = set("=-~^\"#+*`:./<>")
 
-# If the ratio of block counts between old_en and ja differs by more than this,
-# fall back to full-file retranslation.
+# If more than this fraction of old_en blocks can't be structurally aligned to
+# a Japanese block, fall back to full-file retranslation.
 BLOCK_DRIFT_THRESHOLD = 0.20
 
 
@@ -403,6 +403,180 @@ def translate_blocks_batch(
 
 
 # ---------------------------------------------------------------------------
+# Block alignment (old_en <-> current_ja)
+# ---------------------------------------------------------------------------
+
+# Directives whose argument is code/paths rather than prose, so it survives
+# translation unchanged and can tell e.g. overloaded cpp:function blocks apart.
+# Domain directives (anything with ":" in the name, e.g. cpp:function) are
+# included as well.
+_VERBATIM_ARG_DIRECTIVES = {
+    "code-block", "code", "sourcecode", "literalinclude", "include",
+    "image", "figure", "highlight", "role",
+}
+_DIRECTIVE_RE = re.compile(r"\.\.\s+([\w:.-]+)::\s*(.*)")
+_SUBST_DEF_RE = re.compile(r"\.\.\s+(\|[^|]+\|)")
+_LIST_MARKER_RE = re.compile(r"(?:([-*+])|\d+[.)]|#\.|\(\d+\))\s")
+_INLINE_LITERAL_RE = re.compile(r"``(?!\s)(.+?)(?<!\s)``")
+
+
+def _block_key(block: str) -> tuple[str, str]:
+    """Return (coarse, fine) structural signatures of a block that are
+    (normally) identical for an English block and its Japanese translation.
+
+    coarse is the indentation plus the block category (directive, title,
+    list, text, ...). fine adds the directive name and any verbatim parts
+    such as C++ signatures, link targets, and the set of ``literals`` in the
+    block. Prose itself is deliberately left out of both.
+    """
+    lines = block.split("\n")
+    first = lines[0]
+    indent = len(_leading_spaces(first))
+    s = first.strip()
+
+    if s == ".." or s.startswith(".. "):
+        if s.startswith(".. _"):
+            category, detail = "target", s  # hyperlink target: entirely verbatim
+        elif (m := _SUBST_DEF_RE.match(s)):
+            category, detail = "subst", m.group(1)
+        elif (m := _DIRECTIVE_RE.match(s)):
+            name, arg = m.groups()
+            verbatim = ":" in name or name in _VERBATIM_ARG_DIRECTIVES
+            category, detail = "directive", name + (f" {arg}" if verbatim else "")
+        else:
+            category, detail = "comment", ""
+    elif len(lines) > 1 and _is_title(first) and _is_underline(lines[1]):
+        category, detail = "title", lines[1][0]
+    elif len(lines) > 2 and _is_underline(first) and _is_underline(lines[2]):
+        category, detail = "overtitle", first[0]
+    elif s.startswith("#"):  # Markdown heading
+        category, detail = "md-heading", s.split(" ", 1)[0]
+    elif s.startswith("```"):  # Markdown code fence
+        category, detail = "md-fence", s
+    else:
+        m = _LIST_MARKER_RE.match(s)
+        category = "list" if m else "text"
+        detail = (m.group(1) or "enum") if m else ""
+        # Translation reflows lines, so collect literals from the whole block.
+        literals = sorted(set(_INLINE_LITERAL_RE.findall(block)))
+        if literals:
+            detail += " " + " ".join(literals)
+
+    coarse = f"{indent}|{category}"
+    return coarse, f"{coarse} {detail}"
+
+
+def align_blocks(
+    old_blocks: list[str], ja_blocks: list[str]
+) -> tuple[list[list[int]], list[int]]:
+    """Map each old_en block to the Japanese block(s) that translate it.
+
+    Blocks are matched by _block_key with difflib, rather than by position:
+    a manually edited translation can merge or split blocks (e.g. a missing
+    or extra blank line), and a positional mapping silently shifts every
+    later block by one.
+
+    Returns (groups, prefix). groups[i] lists the ja block indices owned by
+    old block i: the ja block structurally matched to it, followed by any
+    unmatched ja blocks up to the next match. groups[i] is empty when old
+    block i matched nothing. prefix lists unmatched ja blocks before the
+    first match.
+    """
+    old_keys = [_block_key(b) for b in old_blocks]
+    ja_keys = [_block_key(b) for b in ja_blocks]
+    sm = difflib.SequenceMatcher(
+        None, [k[1] for k in old_keys], [k[1] for k in ja_keys], autojunk=False
+    )
+    owner_of_ja: dict[int, int] = {}
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag == "equal":
+            pairs = zip(range(i1, i2), range(j1, j2))
+        elif (
+            tag == "replace"
+            and i2 - i1 == j2 - j1
+            and all(old_keys[i1 + k][0] == ja_keys[j1 + k][0] for k in range(i2 - i1))
+        ):
+            # Same number and kinds of blocks whose details differ (e.g. a
+            # stale or hand-edited translation): pair them up in order.
+            pairs = zip(range(i1, i2), range(j1, j2))
+        else:
+            continue
+        for i, j in pairs:
+            owner_of_ja[j] = i
+
+    groups: list[list[int]] = [[] for _ in old_blocks]
+    prefix: list[int] = []
+    current: Optional[int] = None
+    for j in range(len(ja_blocks)):
+        if j in owner_of_ja:
+            current = owner_of_ja[j]
+        (prefix if current is None else groups[current]).append(j)
+    return groups, prefix
+
+
+def build_diff_plan(
+    old_blocks: list[str], new_blocks: list[str], ja_blocks: list[str]
+) -> "tuple[list[str | int], list[tuple[str, Optional[str]]]] | str":
+    """Plan the Japanese output for a diff-based translation.
+
+    Returns (plan, to_translate): plan items are either a Japanese block to
+    keep verbatim or an index into to_translate, whose entries are
+    (new_en_block, prev_ja_block | None). Returns a reason string instead
+    when the change can't be applied safely and the caller should
+    retranslate the whole file.
+    """
+    groups, prefix = align_blocks(old_blocks, ja_blocks)
+
+    unmatched = sum(1 for g in groups if not g)
+    if old_blocks and unmatched / len(old_blocks) > BLOCK_DRIFT_THRESHOLD:
+        return (
+            f"block structure mismatch ({unmatched} of {len(old_blocks)} "
+            "old_en blocks have no Japanese counterpart)"
+        )
+
+    def is_clean(i: int) -> bool:
+        """Old block i corresponds to exactly one Japanese block."""
+        return len(groups[i]) == 1
+
+    def is_safe_change(i1: int, i2: int) -> bool:
+        """Whether old[i1:i2] can be replaced (or a block inserted at i1)
+        without touching Japanese text that belongs to other blocks."""
+        if i1 == 0 and prefix:
+            return False
+        # The changed blocks and the block just before them must each map to
+        # exactly one Japanese block: a removed block may otherwise share its
+        # Japanese text with a kept neighbour, or the change may land on the
+        # wrong side of an unmatched Japanese block.
+        if not all(is_clean(i) for i in range(max(i1 - 1, 0), i2)):
+            return False
+        # The block just after only needs a counterpart of its own, i.e. it
+        # wasn't merged into the Japanese text of a changed block.
+        return i2 == len(old_blocks) or bool(groups[i2])
+
+    sm = difflib.SequenceMatcher(None, old_blocks, new_blocks, autojunk=False)
+
+    to_translate: list[tuple[str, Optional[str]]] = []
+    plan: list[str | int] = [ja_blocks[j] for j in prefix]
+
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag == "equal":
+            for i in range(i1, i2):
+                plan.extend(ja_blocks[j] for j in groups[i])
+            continue
+
+        if not is_safe_change(i1, i2):
+            return f"cannot locate changed old_en blocks {i1}-{i2} in the Japanese file"
+
+        for k in range(j2 - j1):
+            prev_ja = ja_blocks[groups[i1 + k][0]] if i1 + k < i2 else None
+            plan.append(len(to_translate))
+            to_translate.append((new_blocks[j1 + k], prev_ja))
+        # tag == "delete": the Japanese blocks of old[i1:i2] are dropped
+
+    return plan, to_translate
+
+
+# ---------------------------------------------------------------------------
 # Core: diff-based translation
 # ---------------------------------------------------------------------------
 
@@ -417,50 +591,16 @@ def translate_with_diff(
     Translate only the blocks that changed between old_en and new_en.
     Unchanged blocks are taken directly from current_ja.
 
-    Falls back to full-file retranslation when the block structure of old_en
-    and current_ja diverge by more than BLOCK_DRIFT_THRESHOLD.
+    Falls back to full-file retranslation when the changed blocks can't be
+    located safely in current_ja (see build_diff_plan).
     """
-    old_blocks = split_blocks(old_en)
     new_blocks = split_blocks(new_en)
-    ja_blocks = split_blocks(current_ja)
-
-    # Structural alignment check
-    if old_blocks:
-        drift = abs(len(old_blocks) - len(ja_blocks)) / len(old_blocks)
-        if drift > BLOCK_DRIFT_THRESHOLD:
-            print(
-                f"    [warn] block count mismatch "
-                f"(old_en={len(old_blocks)}, ja={len(ja_blocks)}, drift={drift:.0%}) "
-                "→ full retranslation"
-            )
-            result = translate_whole_file(client, new_en, current_ja, rel_path)
-            return postprocess_rst(result, rel_path)
-
-    # Diff old_en blocks vs new_en blocks
-    sm = difflib.SequenceMatcher(None, old_blocks, new_blocks, autojunk=False)
-
-    # Build a plan: either a literal block string or an index into to_translate
-    to_translate: list[tuple[str, Optional[str]]] = []  # (new_en_block, prev_ja_block|None)
-    plan: list[str | int] = []
-
-    for tag, i1, i2, j1, j2 in sm.get_opcodes():
-        if tag == "equal":
-            for k in range(i2 - i1):
-                ja_idx = i1 + k
-                plan.append(ja_blocks[ja_idx] if ja_idx < len(ja_blocks) else new_blocks[j1 + k])
-
-        elif tag in ("replace", "insert"):
-            for k in range(j2 - j1):
-                new_block = new_blocks[j1 + k]
-                prev_ja = (
-                    ja_blocks[i1 + k]
-                    if tag == "replace" and (i1 + k) < len(ja_blocks)
-                    else None
-                )
-                plan.append(len(to_translate))
-                to_translate.append((new_block, prev_ja))
-
-        # tag == "delete": omit those ja blocks
+    built = build_diff_plan(split_blocks(old_en), new_blocks, split_blocks(current_ja))
+    if isinstance(built, str):
+        print(f"    [warn] {built} → full retranslation")
+        result = translate_whole_file(client, new_en, current_ja, rel_path)
+        return postprocess_rst(result, rel_path)
+    plan, to_translate = built
 
     if not to_translate:
         print("    no changed blocks detected")
