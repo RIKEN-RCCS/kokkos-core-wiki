@@ -142,7 +142,7 @@
 .. cpp:function:: template <class Space, class ViewType> ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const& src);
 
    ``std::is_same<typename Space::memory_space, typename ViewType::memory_space>::value`` が ``false`` であれば、
-   ``src`` と同じレイアウトおよびパディングを使いますが、 ``Space::device_type`` のデバイス型を使って、作成し、作成されれば、  ``deep_copy`` を``src`` から新たなビューに実行します。 そうでない場合には、 ``src`` を返します。
+   ``src`` と同じレイアウトおよびパディングを使いますが、 ``Space::device_type`` のデバイス型を使って、作成し、作成されれば、  ``deep_copy`` を\ ``src`` から新たなビューに実行します。 そうでない場合には、 ``src`` を返します。
 
    - ``src``: ``Kokkos::View``.
 

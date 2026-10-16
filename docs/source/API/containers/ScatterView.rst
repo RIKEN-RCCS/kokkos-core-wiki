@@ -176,7 +176,7 @@
 .. cpp:function:: template <typename Operation, typename Duplication, typename Contribution> create_scatter_view(const View<DT1, VP...>& view)
 
    ``view`` をインターフェースとする新しい ScatterView を作成します。
-   `Operation`` のデフォルト値は、 is ``Kokkos::Experimental::ScatterSum`` であり、 ``Duplication`` および ``Contribution`` は、ScatterView が``ExecSpace`` 上で動作する際に可能な限り効率的になるよう選択されます。
+   `Operation`` のデフォルト値は、 is ``Kokkos::Experimental::ScatterSum`` であり、 ``Duplication`` および ``Contribution`` は、ScatterView が\ ``ExecSpace`` 上で動作する際に可能な限り効率的になるよう選択されます。
 
 .. _contribute:
 

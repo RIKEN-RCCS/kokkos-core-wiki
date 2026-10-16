@@ -26,7 +26,7 @@
 
   * :cpp:any:`T` を、 ``const`` および/または ``volatile`` により修飾されることはできません。
 
-  * 特定のバックエンド(CUDA または SYCL の``long double`` 等）では動作しないタイプもあります。
+  * 特定のバックエンド(CUDA または SYCL の\ ``long double`` 等）では動作しないタイプもあります。
 
   .. rubric:: Public Types:
 

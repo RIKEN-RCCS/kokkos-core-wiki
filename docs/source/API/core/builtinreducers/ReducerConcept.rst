@@ -85,7 +85,7 @@
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
-    * 適切な初期値を使って、 ``val`` を初期化する省略可能なコールバックです。 例えば、 'Add' は、 ``val = 0;``を代入しますが、 Prod は、 ``val = 1;`` を代入します。
+    * 適切な初期値を使って、 ``val`` を初期化する省略可能なコールバックです。 例えば、 'Add' は、 ``val = 0;``\ を代入しますが、 Prod は、 ``val = 1;`` を代入します。
       デフォルトはデフォルトコンストラクタの呼び出しです。
 
 .. cpp:function:: KOKKOS_INLINE_FUNCTION void final(value_type& val) const;
@@ -118,7 +118,7 @@
 組み込みリデューサー
 ~~~~~~~~~~~~~~~~~~~~
 
-Kokkos は、C++ の組み込み型および``Kokkos::complex``に対して自動的に動作する、複数の組み込みリデューサーを提供しております。 組み込みリデューサーをカスタム型で使用するために、   ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。いかに簡単な例を示し、詳細については、 `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_ において閲覧可能です。
+Kokkos は、C++ の組み込み型および\ ``Kokkos::complex``\ に対して自動的に動作する、複数の組み込みリデューサーを提供しております。 組み込みリデューサーをカスタム型で使用するために、   ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。いかに簡単な例を示し、詳細については、 `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_ において閲覧可能です。
 
 * `Kokkos::BAnd <BAnd.html>`_
 * `Kokkos::BOr <BOr.html>`_

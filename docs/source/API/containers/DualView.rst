@@ -69,7 +69,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:type:: typename t_dev::host_mirror_type t_host
 
-        ``t_dev`` の``Kokkos::View`` ホストミラーの型。
+        ``t_dev`` の\ ``Kokkos::View`` ホストミラーの型。
 
     .. cpp:type:: View<typename traits::const_data_type, Arg1Type, Arg2Type, Arg3Type> t_dev_const
 
@@ -147,7 +147,7 @@ realloc、resize、capacityなどの便利なメソッドも提供します。
 
     .. cpp:function:: DualView(ALLOC_PROP const& arg_prop, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-       ホストとデバイスの両方でViewオブジェクトを割り当てるコンストラクタ。最初の引数として``Kokkos::view_alloc`` で作成されたオブジェクトを渡すことを可能にします。例えば、ラベルを提供し、初期化を回避し、または実行空間インスタンスを指定します。
+       ホストとデバイスの両方でViewオブジェクトを割り当てるコンストラクタ。最初の引数として\ ``Kokkos::view_alloc`` で作成されたオブジェクトを渡すことを可能にします。例えば、ラベルを提供し、初期化を回避し、または実行空間インスタンスを指定します。
        以下の引数は、View オブジェクトの次元です。
        例えば、Viewが3次元であれば、最初の3つの整数引数はゼロ以外になり、また、続く整数引数は省略できます。
 

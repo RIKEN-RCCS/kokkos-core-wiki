@@ -142,7 +142,7 @@
 
 .. cpp:function:: void frobrnicator(CoolerView &v) noexcept
 
-  :param: v the :cpp:class: 意味不明化のための`CoolerView` 
+  :param: v the :cpp:class: 意味不明化のための\ `CoolerView` 
 
   CoolerView を意味不明化
 

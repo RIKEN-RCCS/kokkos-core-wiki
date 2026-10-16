@@ -93,7 +93,7 @@
 
   - ``ExecPolicy::work_tag`` が ``void`` または ``ExecPolicy`` が ``IntegerType`` である場合、 ``WorkTag`` 引数を使わないオーバーロードが使用されます。
   - ``HandleType`` は、 ``ExecPolicy`` が ``IntegerType`` の場合、 ``IntegerType`` であり、そうでない場合は ``ExecPolicy::member_type`` です。
-* ``ExecPolicy`` が ``MDRangePolicy``である場合、 ``functor`` は、 ``operator() (const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const`` または ``operator() (const WorkTag, const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const`` の形式のメンバー関数を持ちます。
+* ``ExecPolicy`` が ``MDRangePolicy``\ である場合、 ``functor`` は、 ``operator() (const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const`` または ``operator() (const WorkTag, const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const`` の形式のメンバー関数を持ちます。
 
   - ``ExecPolicy::work_tag`` が ``void`` の場合,  ``WorkTag`` 引数を持たないオーバーロードが使用されます。
   - ``N`` は ``ExecPolicy::rank`` と一致する必要があります。

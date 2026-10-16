@@ -179,7 +179,7 @@
 
 * ``const char* name() const;``: メモリ空間のインスタンスのラベルを返します。
 * ``void * allocate(ptrdiff_t size) const;``: ``MemorySpaceConcept`` が表すメモリリソースを使用して、少なくとも ``size`` バイトのバッファを割り当てます。
-* ``void deallocate(void* ptr, ptrdiff_t size) const;``: 以前、正確に `allocate(size)` で割り当てられた、`ptr`（型 `void*`）から始まるバッファを解放します。
+* ``void deallocate(void* ptr, ptrdiff_t size) const;``: 以前、正確に `allocate(size)` で割り当てられた、`ptr`\ （型 `void*`）から始まるバッファを解放します。
 
 非メンバーファシリティ
 ~~~~~~~~~~~~~~~~~~~~~~

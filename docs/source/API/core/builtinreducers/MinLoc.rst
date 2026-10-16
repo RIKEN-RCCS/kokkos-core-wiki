@@ -81,7 +81,7 @@
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
-      ``dest``:  ``dest = (src.val < dest.val) ? src :dest;``に、 ``src`` および ``dest`` のインデックスを持つ最小値を格納します。
+      ``dest``:  ``dest = (src.val < dest.val) ? src :dest;``\ に、 ``src`` および ``dest`` のインデックスを持つ最小値を格納します。
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
@@ -107,7 +107,7 @@
 
 * 必要条件: ``Index`` は、定義された ``operator =`` を持ちます。 ``Kokkos::reduction_identity<Index>::min()`` は有効な式です。
 
-*  ``Scalar`` または ``Index``のいずれかのカスタム型で  MinLoc を使用するために、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
+*  ``Scalar`` または ``Index``\ のいずれかのカスタム型で  MinLoc を使用するために、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
 
 例
 --

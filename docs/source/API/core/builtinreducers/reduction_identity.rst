@@ -73,7 +73,7 @@ Kokkosは、:cpp:`complex<T>` だけでなく、すべての算術型（つま�
    ``Kokkos::reduction_identity`` は、アプリケーションコードでの直接使用することを
    目的としたものではありません。その代わりに、 これは、Kokkos フレームワーク内の
    カスタマイズポイントとして機能します。
-   Kokkosの組み込みリデューサー（``Kokkos::Sum``、 ``Kokkos::Min``、 ``Kokkos::Max``等）
+   Kokkosの組み込みリデューサー（``Kokkos::Sum``、 ``Kokkos::Min``、 ``Kokkos::Max``\ 等）
    をユーザー定義のデータ型とシームレスに動作させる必要がある場合のみ、
    ``reduction_identity`` を特化させる必要があります。これにより、
    Kokkosは並列削減処理中に
@@ -83,7 +83,7 @@ Kokkosは、:cpp:`complex<T>` だけでなく、すべての算術型（つま�
 ------------------
 
 Kokkosの組み込みリデューサーで使用するカスタム（ユーザー定義）
-``ScalarType``については、 ``Kokkos::reduction_identity<CustomType>``
+``ScalarType``\ については、 ``Kokkos::reduction_identity<CustomType>``
 のテンプレート特化型を定義する必要があります。  この
 特殊化により、要求される削減演算に対応する
 静的メンバー関数を提供しなければならない。 これらの関数は、適切な識別値で初期化された

@@ -167,4 +167,4 @@
 
   .. cpp:function:: template <typename DstDevice, typename SrcDevice> void deep_copy(Bitset<DstDevice>& dst, ConstBitset<SrcDevice> const& src)
 
-     ``SrcDevice`` 上の ``src`` から ``DstDevice`` 上の ``Bitset`` ``dst``に ``ConstBitset`` をコピーします。
+     ``SrcDevice`` 上の ``src`` から ``DstDevice`` 上の ``Bitset`` ``dst``\ に ``ConstBitset`` をコピーします。

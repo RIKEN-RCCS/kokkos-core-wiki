@@ -108,7 +108,7 @@ Kokkos は、以下のリストを使用して2つのスペースを選択しま
 構造体による初期化
 ------------------
 
- `Kokkos::initialize() <../API/core/initialize_finalize/initialize.html>`_ command-line 引数を提供する代わりに、  `Kokkos::InitializationSettings` 構造体を使用して、初期化パラメータにおいて直接引き渡すことができます。  構造体を使用してオプションを設定したい場合、ダッシュがアンダースコアに置換されている  :ref:`Table 4.1 <Table_cli-opts>` における引数に、`xxx` が同一である関数 `set_xxx` を使用できます。 変数が設定されているかどうかを確認するには、`has_xxx`関数を使用できます。最終的に、設定された値を取得するには、`get_xxx` 関数を使用できます。
+ `Kokkos::initialize() <../API/core/initialize_finalize/initialize.html>`_ command-line 引数を提供する代わりに、  `Kokkos::InitializationSettings` 構造体を使用して、初期化パラメータにおいて直接引き渡すことができます。  構造体を使用してオプションを設定したい場合、ダッシュがアンダースコアに置換されている  :ref:`Table 4.1 <Table_cli-opts>` における引数に、`xxx` が同一である関数 `set_xxx` を使用できます。 変数が設定されているかどうかを確認するには、`has_xxx`\ 関数を使用できます。最終的に、設定された値を取得するには、`get_xxx` 関数を使用できます。
 
  `num_threads` を設定しない場合、Kokkos は可能な限りデフォルト値を決定しようと試み、それが不可能な場合には、1に設定します。 特に、Kokkos は、 `hwloc` ライブラリを使用して、プロセスバインディングマスクが一意である、つまり、本プロセスは、別のプロセスとコアを共有しないという仮定のもとで、デフォルト設定を決定できます。各パラメータのデフォルト値が、 -1であることに注意してください。
 

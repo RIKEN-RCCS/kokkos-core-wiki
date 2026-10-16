@@ -424,7 +424,7 @@
 さらに、 ``DstType::array_layout`` が ``SrcType::array_layout`` と同じでない場合、充足すべきルールもあります。これらのルールは、両方のレイアウトが、 ``LayoutLeft`` , ``LayoutRight`` or ``LayoutStride`` 、 ``LayoutRight`` または ``LayoutStride`` のいずれかの場合のみを対象としています。
 
 * ``DstType::array_layout`` も ``SrcType::array_layout`` も ``LayoutStride`` ではない場合:
-    - ``DstType::array_layout`` よりも``DstType::rank > 1`` である場合、 ``SrcType::array_layout`` と同じである必要があります。
+    - ``DstType::array_layout`` よりも\ ``DstType::rank > 1`` である場合、 ``SrcType::array_layout`` と同じである必要があります。
 
 * ``DstType::array_layout`` または ``SrcType::array_layout`` が ``LayoutStride`` である場合:
     - 各ディメンション ``k`` については、その ``dst_view.extent(k) == src_view.extent(k)`` を保持する必要があります。

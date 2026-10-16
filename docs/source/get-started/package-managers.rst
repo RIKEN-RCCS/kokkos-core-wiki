@@ -45,7 +45,7 @@ Spack による Kokkos のインストール
 
     spack install kokkos +cuda cuda_arch=90
 
-`cuda_arch`オプションが、ターゲット GPU アーキテクチャ専用であることに注意してください。  ここでの `cuda_arch` 値 `90` は、NVIDIA Hopper アーキテクチャに対応しています。 Spack ではアーキテクチャを明示的に指定する必要があります (自動検出なし)。
+`cuda_arch`\ オプションが、ターゲット GPU アーキテクチャ専用であることに注意してください。  ここでの `cuda_arch` 値 `90` は、NVIDIA Hopper アーキテクチャに対応しています。 Spack ではアーキテクチャを明示的に指定する必要があります (自動検出なし)。
 
 AMD GPU に関しては、従来の Spack のキーワードはKokkosのCMakeでは `hip` ではなく、`rocm` です。HIP バックエンドを有効にした Kokkos をインストールするには、以下を実行してください:
 

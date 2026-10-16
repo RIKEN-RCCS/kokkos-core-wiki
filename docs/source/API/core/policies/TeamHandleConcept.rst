@@ -64,7 +64,7 @@ TeamHandleConcept は、 ``TeamPolicy`` の ``member_type`` の概念を定義�
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION int league_rank() const noexcept ;
 
-      戻り値: ``0 <= i < league_size()``を使って、リーグ内の呼び出しスレッドのインデックス  ``i``
+      戻り値: ``0 <= i < league_size()``\ を使って、リーグ内の呼び出しスレッドのインデックス  ``i``
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION int league_size() const noexcept ;
 
@@ -79,7 +79,7 @@ TeamHandleConcept は、 ``TeamPolicy`` の ``member_type`` の概念を定義�
    .. cpp:function:: KOKKOS_INLINE_FUNCTION const scratch_memory_space & team_scratch(int level) const ;
 
       この関数はチーム内のすべてのスレッドが共有するスクラッチメモリのハンドルを返し、スクラッチメモリへのアクセスを可能にします。
-      本ハンドルは、 ``Kokkos::View``の最初の引数として与えられ、スクラッチメモリとして使用することができます。
+      本ハンドルは、 ``Kokkos::View``\ の最初の引数として与えられ、スクラッチメモリとして使用することができます。
       ハンドルは、 ``Kokkos::View`` 割り当てのサイズに応じて、自動的に増加します。
 
       - ``level``: 要求されたスクラッチメモリのレベルは、 ``0`` または ``1`` のいずれかです。

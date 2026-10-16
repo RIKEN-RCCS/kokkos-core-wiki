@@ -96,7 +96,7 @@ SYCL バックエンドが有効化され、 GPU アーキテクチャが指定�
 ``Kokkos::ExecutionSpaceConcept``
 ---------------------------------
 
-``ExecutionSpace`` の概念は、Kokkos における実行の "場所" と "方法" を表すための、基本的な抽象化です。Kokkos を使用するコードの大半は、特定のインスタンスよりもむしろ、 `` 実行空間`` という *汎用的な概念* について、記述される必要があります。 このページでは、Kokkos の実行空間の一般的な機能を 実際にどのように*使用* するかを説明しています；より正式で理論的な処理については、 |KokkosConcepts|_ を参照してください。
+``ExecutionSpace`` の概念は、Kokkos における実行の "場所" と "方法" を表すための、基本的な抽象化です。Kokkos を使用するコードの大半は、特定のインスタンスよりもむしろ、 `` 実行空間`` という *汎用的な概念* について、記述される必要があります。 このページでは、Kokkos の実行空間の一般的な機能を 実際にどのように\ *使用* するかを説明しています；より正式で理論的な処理については、 |KokkosConcepts|_ を参照してください。
 
   *免責事項*: C++における "概念" という用語に目新しい点はありません; C++でテンプレートを使ったことがある人は
   知っていようといまいと、コンセプトを使っています。「概念」という言葉自体に惑わされないでください。
@@ -205,7 +205,7 @@ Kokkos の並列パターンが実行されているかを明示的に記述す�
 
 *効果:* 戻りの際に、インスタンス ``ex`` に対して実行されたすべての並列パターンおよび deep_copy 呼び出しは、完了していることが保証され、その効果は呼び出し元スレッドに確実に反映されます。省略可能な ``str`` 引数により、Kokkos Tools に報告されるイベントをカスタマイズできます。
 *戻り値:* 無し。
-*注意事項:* これは並列パターン内部から呼び出すことは*できません*。 そうすると不特定の影響が生じる可能性があります（つまり、動作する可能性はあるものの、特定の実行空間でのみ有効となるため、特に注意して実行しないようにしてください）。
+*注意事項:* これは並列パターン内部から呼び出すことは\ *できません*。 そうすると不特定の影響が生じる可能性があります（つまり、動作する可能性はあるものの、特定の実行空間でのみ有効となるため、特に注意して実行しないようにしてください）。
 
 .. code-block:: cpp
 
@@ -283,7 +283,7 @@ Kokkos は、利便性型特性 ``Kokkos::is_execution_space<T>`` を提供し�
 
 * ``execution_space``: 自己型;
 
-* ``memory_space``:  |ExecutionSpaceConcept|_ で実行する際に使用するデフォルトの |MemorySpace|_ 。 Kokkos は、 ``Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible`` が``true`` となることを保証します（|KokkosSpaceAccessibility|_ を参照）。
+* ``memory_space``:  |ExecutionSpaceConcept|_ で実行する際に使用するデフォルトの |MemorySpace|_ 。 Kokkos は、 ``Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible`` が\ ``true`` となることを保証します（|KokkosSpaceAccessibility|_ を参照）。
 
 * ``device_type``: ``DeviceType<execution_space,memory_space>``.
 

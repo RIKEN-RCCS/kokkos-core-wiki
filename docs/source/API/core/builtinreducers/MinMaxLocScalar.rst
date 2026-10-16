@@ -7,7 +7,7 @@
 :cpp:struct:`MinMaxLocScalar` は、最小値・最大値およびそれぞれの保存先を一つの単位として格納するクラステンプレートです。 :cpp:class:`MinMaxLoc` 組み込みリデューサーを使った :cpp:func:`parallel_reduce` 演算の結果を保持するために設計されています。
 
 
-正しいテンプレートパラメータが使用されていることを確認するために、一般的には、リデューサーの``::value_type`` メンバー (例えば、 ``MinMaxLoc<Scalar,Index,Space>::value_type``) を使って、本タイプを取得することが推奨されています
+正しいテンプレートパラメータが使用されていることを確認するために、一般的には、リデューサーの\ ``::value_type`` メンバー (例えば、 ``MinMaxLoc<Scalar,Index,Space>::value_type``) を使って、本タイプを取得することが推奨されています
 
 
 

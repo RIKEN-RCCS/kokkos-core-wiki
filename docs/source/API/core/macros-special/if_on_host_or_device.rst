@@ -9,7 +9,7 @@
 
 概要
 ====
-``KOKKOS_IF_ON_HOST`` 及び``KOKKOS_IF_ON_DEVICE`` マクロは、 
+``KOKKOS_IF_ON_HOST`` 及び\ ``KOKKOS_IF_ON_DEVICE`` マクロは、 
 3.6 で導入された関数のようなマクロのペアであり、
 **single ``KOKKOS_FUNCTION`` body** 内で、**portable conditional compilation** を可能にします。
 それらにより関数がホスト（CPU）上で実行されるか、
