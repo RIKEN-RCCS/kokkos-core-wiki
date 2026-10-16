@@ -7,7 +7,8 @@
 1. `main` に `docs/source/**/*.rst` または `*.md` の変更が push される
 2. `.github/workflows/auto-translate.yml` が起動し、`main` と `Japanese` を別ディレクトリにチェックアウト
 3. `.github/scripts/translate_changes.py` が `before_sha`〜`after_sha` 間で変更されたブロック(空行区切りの段落単位)のみを Claude(AWS Bedrock 経由)で翻訳し、未変更ブロックは既存の日本語訳をそのまま流用する
-4. 結果を `Japanese` ブランチ上でコミットし、`auto-translate/main-<after_sha>` ブランチを作成・push し、`Japanese` 向けに PR を自動作成する
+4. 翻訳後の `Japanese` ツリーを `sphinx-build -W` でビルド検証する(`GITHUB_TOKEN` で作った PR では `pull_request` トリガーのワークフローが起動しないため、同じジョブ内で行う)
+5. 結果を `Japanese` ブランチ上でコミットし、`auto-translate/main-<after_sha>` ブランチを作成・push し、`Japanese` 向けに PR を自動作成する。ビルドに失敗した場合は PR を **draft** で作成し、本文に警告一覧を載せる(既に open な PR がある場合はコメントで通知)
 
 `translate_changes.py` は `main` と `Japanese` の両ブランチに同一内容で存在する。スクリプト自体の修正は原則として両ブランチに反映する。
 
