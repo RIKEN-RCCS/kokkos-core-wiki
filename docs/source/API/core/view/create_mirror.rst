@@ -158,7 +158,7 @@
 
    - ``arg_prop``:  |View|_ コンストラクタ特性、例えば、 ``Kokkos::view_alloc(Kokkos::HostSpace{}, Kokkos::WithoutInitializing)``.
 
-     .. ::
+     .. important::
 
 	``arg_prop`` は、メモリまたはラベルへのポインタを含んではならず、 またはパディングを認めてはなりません。そして、 ``arg_prop`` は、メモリ空間を含まなければなりません。
 

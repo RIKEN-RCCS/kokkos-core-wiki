@@ -160,13 +160,13 @@ CTAD コンストラクタ (4.3以降)
 
     * ``Kokkos::Array<array_index_type, rank>`` 型を返します。これは、 ``MDRangePolicy`` が内部でデフォルトで使うランクごとのタイルサイズを含みます。デフォルトのタイルサイズは静的で、指定されたバックエンドに基づいて設定されています。
 
-    .. note: ``tile_size_recommended()`` は、 Kokkos 4.5以降利用可能です。
+    .. note:: ``tile_size_recommended()`` は、 Kokkos 4.5以降利用可能です。
 
 .. cpp:function:: int max_total_tile_size() const
 
     * すべてのタイルサイズの積の上限を表す値を返します。
 
-    .. note: ``max_total_tile_size()`` は、 Kokkos 4.5以降利用可能です。
+    .. note:: ``max_total_tile_size()`` は、 Kokkos 4.5以降利用可能です。
 
 注意事項
 ~~~~~~~~

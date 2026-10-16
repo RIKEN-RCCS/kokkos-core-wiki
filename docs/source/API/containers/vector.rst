@@ -61,13 +61,13 @@ Kokkos Vector は意味的に std::vector に似ていますが、異なるメ�
 
       アクセサー
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION reference operator[](int i) const;
 
       アクセサー
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. rubric:: コンストラクタ
 
@@ -101,7 +101,7 @@ Kokkos Vector は意味的に std::vector に似ていますが、異なるメ�
 
       ベクトルをsize() + 1 にサイズ変更し、最後の値を  val に設定します。
 
-      .. warning: ホストのみ、 デバイスを自動的に同期
+      .. warning:: ホストのみ、 デバイスを自動的に同期
 
    .. cpp:function:: void pop_back();
 
@@ -131,49 +131,49 @@ Kokkos Vector は意味的に std::vector に似ていますが、異なるメ�
 
       基盤となる配列に、ポインタを返します。
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: iterator begin() const;
 
       先頭から始まるイテレータを返します。
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: iterator end() const;
 
       最後の要素を超えたイテレータを返します。
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: reference front();
 
       リストの先頭への参照を返します。
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: reference back();
 
       リスト内の最後のエレメントに参照を返します。
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: const_reference front() const;
 
       リストの先頭への定数参照を返します。
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: const_reference back() const;
 
       リスト内の最後のエレメントに定数参照を返します。
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: size_t lower_bound(const size_t& start, const size_t& theEnd, const Scalar& comp_val) const;
 
       範囲 start-theEnd 内で val < comp_val を満たす最大値のインデックスを返します。
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: bool is_sorted();
 

@@ -39,13 +39,13 @@ Kokkos の無順序マップは、数万件の同時挿入を効率的に処理�
 
       少なくとも capacity_hint 数のオブジェクトを収容できる十分なスペースを確保するマップを作成します。
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: UnorderedMap(const ALLOC_PROP &prop, uint32_t capacity_hint);
 
       少なくとも capacity_hint 数のオブジェクトを収容できる十分なスペースをを持つプロパティを使用しているマップを作成します。
 
-      .. warning: 
+      .. warning:: ホストのみ
 
       .. versionadded:: 4.2
       
@@ -57,19 +57,19 @@ Kokkos の無順序マップは、数万件の同時挿入を効率的に処理�
 
       マップをクリアします。
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: bool rehash(uint32_t requested_capacity);
 
       指定された容量に合わせてマップを再構成します。現在のサイズは、下限０ （容量）として使用されます。
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: uint32_t size() const;
 
       マップの現在のサイズ、０（容量）
 
-      .. warning: ホストのみ
+      .. warning:: ホストのみ
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION uint32_t capacity() const;
 
@@ -126,7 +126,7 @@ Kokkos の無順序マップは、数万件の同時挿入を効率的に処理�
 
       ``src`` から ``dst`` に ``UnorderedMap`` をコピーします。
 
-      .. warning:  Kokkos 4.4 から、 ``src.capacity() == dst.capacity()`` が必要です。
+      .. warning::  Kokkos 4.4 から、 ``src.capacity() == dst.capacity()`` が必要です。
 
    .. cpp:function:: UnorderedMap<Key, ValueType, Device, Hasher, EqualTo>::host_mirror_type create_mirror(const UnorderedMap<Key, ValueType, Device, Hasher, EqualTo> &src)
 
