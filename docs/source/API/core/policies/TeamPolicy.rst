@@ -27,7 +27,7 @@
 
    .. rubric:: テンプレート引数
 
-TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ に説明されています。
+   TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_ に説明されています。
 
    .. rubric:: パブリックネスト型定義
 
@@ -132,11 +132,11 @@ TeamPolicy の有効なテンプレート引数は `ここ <../Execution-Policie
 
    .. rubric:: 照会実行時設定
 
-   .. cpp:function:: int team_size() const;
-
    .. cpp:function:: const execution_space& space() const;
 
       戻り値: 基になる ``execution_space`` インスタンスへの const 参照。コンストラクタに実行空間インスタンスが提供されなかった場合、基になるインスタンスはデフォルトの実行空間インスタンスとなります。
+
+   .. cpp:function:: int team_size() const;
 
       返し: 要求されたチームサイズ。
 
