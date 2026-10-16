@@ -63,10 +63,32 @@ jobs:
             --before-sha ${{ steps.shas.outputs.before }} \
             --after-sha ${{ steps.shas.outputs.after }}
 
+      # PRs opened with GITHUB_TOKEN don't trigger pull_request workflows, so
+      # check here that the translated docs still build (with -W, like
+      # deploy_docs_ja.yml) and flag the PR if they don't.
+      - name: Install docs build dependencies
+        run: |
+          pip install -r japanese-repo/build_requirements.txt
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends graphviz
+
+      - name: Build translated docs
+        id: build
+        continue-on-error: true
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          set -o pipefail
+          # Build outside japanese-repo so nothing ends up in the commit.
+          sphinx-build -b html japanese-repo/docs/source "$RUNNER_TEMP/ja-html" -W --keep-going \
+            2>&1 | tee "$RUNNER_TEMP/sphinx.log"
+
       - name: Create pull request
         working-directory: japanese-repo
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
+          BUILD_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -82,15 +104,32 @@ jobs:
           # after_sha as a previous run must overwrite that run's branch, e.g.
           # to regenerate a PR after fixing a bug in translate_changes.py.
           git push origin "$BRANCH" --force
+
+          BODY="Triggered by [${{ steps.shas.outputs.after }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.shas.outputs.after }})"
+          DRAFT=()
+          if [ "$BUILD_OUTCOME" != "success" ]; then
+            echo "::warning::Translated docs fail to build; opening the PR as a draft."
+            BUILD_REPORT=$(printf '%s\n\n%s\n\n```\n%s\n```\n' \
+              ":warning: **The translated docs fail to build** (\`sphinx-build -W\`). Fix these before merging; see [the workflow run]($BUILD_RUN_URL) for the full log." \
+              "Warnings/errors:" \
+              "$(grep -E 'WARNING|ERROR|build finished' "$RUNNER_TEMP/sphinx.log" | sed "s|$GITHUB_WORKSPACE/japanese-repo/||" | head -n 50)")
+            BODY="$BODY"$'\n\n'"$BUILD_REPORT"
+            DRAFT=(--draft)
+          fi
+
           # gh pr view finds PRs regardless of state, so check state explicitly:
           # a closed/merged PR for this branch must not block creating a new one.
           STATE=$(gh pr view "$BRANCH" --json state -q .state 2>/dev/null || true)
           if [ "$STATE" = "OPEN" ]; then
             echo "Open PR already exists for $BRANCH; branch updated in place."
+            if [ "$BUILD_OUTCOME" != "success" ]; then
+              gh pr comment "$BRANCH" --body "$BUILD_REPORT"
+            fi
             exit 0
           fi
           gh pr create \
             --base Japanese \
             --head "$BRANCH" \
             --title "Auto-translate: sync with main $(date -u +%Y-%m-%d)" \
-            --body "Triggered by [${{ steps.shas.outputs.after }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.shas.outputs.after }})"
+            --body "$BODY" \
+            "${DRAFT[@]}"
