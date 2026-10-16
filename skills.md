@@ -76,3 +76,9 @@ Kokkos は、**3 月**、**7 月**、**11 月**\ にリリースを行う、...
 ### 検証方法
 
 `build_diff_plan()` は API を呼ばない純粋関数なので、`anthropic` をスタブして import すれば過去の `Auto-translate: sync with main <sha>` コミットをリプレイして挙動を確かめられる(英語旧版 = 前回 sync の `<sha>`、英語新版 = 今回の `<sha>`、日本語版 = sync コミットの親)。
+
+## コメント化して消えるディレクティブ(`fix_directive_markers`)
+
+`.. note: 本文`(コロン1つ)や `.. ::`(ディレクティブ名なし)は RST では**コメント**として扱われる。ビルドは警告なしで通るが、注記や警告の中身ごと日本語サイトから消える。
+`-W` ビルドでは検出できないので、英語版とディレクティブの数を比べるか、`^\s*\.\.\s+(note|warning|…):(?!:)` で日本語ツリーを grep して探す。
+`postprocess_rst()` の `fix_directive_markers()` が、既知のディレクティブ名(note / warning / important / deprecated / versionadded / code-block など)について `:` を `::` に直す。ディレクティブ名が抜けた `.. ::` は機械的には直せないので、英語版を見て手で直す。
