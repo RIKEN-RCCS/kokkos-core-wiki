@@ -61,25 +61,6 @@ Kokkos_ で始まるヘッダーファイルの作成/削除/変更は避けて�
     // Core API
     Kokkos_Core.hpp
 
-    Kokkos_Abort.hpp                     // Kokkos 4.2以降
-    Kokkos_Array.hpp
-    Kokkos_Assert.hpp                    // Kokkos 4.2以降
-    Kokkos_Atomic.hpp
-    Kokkos_BitManipulation.hpp           // Kokkos 4.1以降
-    Kokkos_Clamp.hpp                     // Kokkos 4.3以降
-    Kokkos_Complex.hpp
-    Kokkos_DetectionIdiom.hpp
-    Kokkos_Macros.hpp
-    Kokkos_MathematicalConstants.hpp
-    Kokkos_MathematicalFunctions.hpp
-    Kokkos_MinMax.hpp                    // Kokkos 4.3以降
-    Kokkos_Pair.hpp
-    Kokkos_Printf.hpp                    // Kokkos 4.2以降
-    Kokkos_Profiling_ProfileSection.hpp
-    Kokkos_Profiling_ScopedRegion.hpp
-    Kokkos_Swap.hpp                      // Kokkos 4.3以降
-    Kokkos_Timer.hpp
-
     Kokkos_Abort.hpp                     // Kokkos 4.2 以降
     Kokkos_Array.hpp
     Kokkos_Assert.hpp                    // Kokkos 4.2 以降
@@ -100,6 +81,15 @@ Kokkos_ で始まるヘッダーファイルの作成/削除/変更は避けて�
     Kokkos_ScopeGuard.hpp                // Kokkos 5.3 以降
     Kokkos_Swap.hpp                      // Kokkos 4.3 以降
     Kokkos_Timer.hpp
+
+    // Containers API
+    Kokkos_Bitset.hpp
+    Kokkos_DualView.hpp
+    Kokkos_DynamicView.hpp
+    Kokkos_DynRankView.hpp
+    Kokkos_OffsetView.hpp
+    Kokkos_ScatterView.hpp
+    Kokkos_UnorderedMap.hpp
 
     // Algorithms API
     Kokkos_NestedSort.hpp
@@ -128,6 +118,3 @@ Kokkos_ で始まるヘッダーファイルの作成/削除/変更は避けて�
 
 *  `namespace Kokkos` 内の関数や変数のアドレスは避けてください
 *  `using namespace` 宣言 (`using namespace Kokkos;`, `using namespace Kokkos::Experimental;`) を避けてください
-
-* Avoid taking the address of a function or variable in `namespace Kokkos`
-* Avoid `using namespace` declarations (`using namespace Kokkos;`, `using namespace Kokkos::Experimental;`)

@@ -104,6 +104,8 @@
     
     ``MemoryManaged`` エイリアスは非推奨です。代わりに ``MemoryTraits<>`` を使用してください。以前のバージョンのKokkosでは、明示的な ``0`` テンプレート引数が必要であることに注意してください。
 
+  .. versionremoved:: 5.3
+
      
 .. cpp:type:: MemoryUnmanaged = MemoryTraits<Unmanaged>;
 .. cpp:type:: MemoryRandomAccess = MemoryTraits<Unmanaged | RandomAccess>;

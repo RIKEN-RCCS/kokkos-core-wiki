@@ -48,6 +48,9 @@
         ホストアクセス可能メモリ空間に格納された、同一の ``DataType`` および ``LayoutType`` を持つ互換性のあるビュータイプ。
 
         .. deprecated:: 5.0
+           代わりに :cpp:type:`host_mirror_type` を使用してください。
+
+        .. versionremoved:: 5.3
 
     .. rubric:: パブリックデータハンドル型
 

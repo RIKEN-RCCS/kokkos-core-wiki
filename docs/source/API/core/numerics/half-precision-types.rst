@@ -13,10 +13,10 @@ Kokkos はポータブルな半精度型を、 ``Kokkos::Experimental::half_t`` 
  - ``half_t`` は、標準の半精度浮動小数点数を表し、1ビットの符号ビット、5ビットの指数部、10ビットの小数部で構成されます。
  - ``bhalf_t`` は、'brain half' として知られる型に対応し、1ビットの符号ビット、8ビットの指数部、7ビットの小数部を持ちます。
 
+これらの型は、現在のバックエンド固有の型(例えば Cuda では ``__half``)にマッピングされるか、そのような型が利用できない場合は ``float`` にマッピングされます。
+
 マクロ ``KOKKOS_HALF_T_IS_FLOAT`` および ``KOKKOS_BHALF_T_IS_FLOAT`` は、 ``half_t`` と ``bhalf_t`` が ``float`` にマッピングされる場合に ``true`` に設定され、それ以外の場合は ``false`` に設定されます。
 Kokkos 5.3以降では、 ``KOKKOS_HAS_NATIVE_HALF_TYPE`` および ``KOKKOS_HAS_NATIVE_BHALF_TYPE`` が同じ条件下で定義されるか、または定義されません。後者のマクロにより、下流のプロジェクトにおいて、例えばCMakeの ``check_cxx_symbol_exists`` を介して、コンフィグ時にサポートを検出することがより容易になります。
-
-マクロ ``KOKKOS_HALF_T_IS_FLOAT`` および ``KOKKOS_BHALF_T_IS_FLOAT`` は、 ``half_t`` および ``bhalf_t`` が ``float`` にマッピングされる場合は ``true`` に、それ以外の場合は ``false`` に設定されます。
 
 関数
 ----
@@ -78,59 +78,11 @@ Kokkos 5.3以降では、 ``KOKKOS_HAS_NATIVE_HALF_TYPE`` および ``KOKKOS_HAS
    "isnan", "X", "X", "X", "X", "X", "X"
    "signbit", , , "X", 
 
-   "abs", "X", "X", "X", 
-   "fabs","X", "X", "X", "X"
-   "fmod", , , "X", 
-   "remainder", , , "X", 
-   "fmax","X¹", "X¹", "X", "X"
-   "fmin","X¹", "X¹", "X", "X"
-   "fdim", "X", "X", "X", 
-   "exp", "X", "X", "X", "X"
-   "exp2", "X", "X", "X", "X"
-   "expm1", , , "X", 
-   "log", "X", "X", "X", "X"
-   "log10", "X", "X", "X", "X"
-   "log2", "X", "X", "X", "X"
-   "log1p", , , "X", 
-   "pow", , , "X", 
-   "sqrt", "X", "X", "X", "X"
-   "cbrt", , , "X", 
-   "hypot", , , "X", 
-   "sin", "X", "X", "X", "X"
-   "cos", "X", "X", "X", "X"
-   "tan", , , "X", 
-   "asin", , , "X", 
-   "acos", , , "X", 
-   "atan", , , "X", 
-   "atan2", , , "X", 
-   "sinh", , , "X", 
-   "cosh", , , "X", 
-   "tanh", , , "X", 
-   "asinh", , , "X", 
-   "acosh", , , "X", 
-   "atanh", , , "X", 
-   "erf", , , "X", 
-   "erfc", , , "X", 
-   "tgamma", , , "X", 
-   "lgamma", , , "X", 
-   "ceil", "X", "X", "X", "X"
-   "floor", "X", "X", "X", "X"
-   "trunc", "X", "X", "X", "X"
-   "round", , , "X", 
-   "nearbyint", "X", "X", , 
-   "logb", , , "X", 
-   "nextafter", , , "X", 
-   "copysign", , , "X", 
-   "isfinite", , , "X", 
-   "isinf", "X²", "X²", "X", 
-   "isnan", "X", "X", "X", "X"
-   "signbit", , , "X", 
+¹ GPU_ARCH >= 80 の場合のみ
 
 ² MSVC ではサポートされていません
 
 ³ --std=c++20 でコンパイルする際、nvcc-12.2 に対しては適用されません (https://docs.nvidia.com/cuda/archive/12.3.2/cuda-toolkit-release-notes/index.html#cuda-math-release-12-3)
-
-² --std=c++20 (https://docs.nvidia.com/cuda/archive/12.3.2/cuda-toolkit-release-notes/index.html#cuda-math-release-12-3) を使ってコンパイルする際、nvcc-12.2 に対して、ではありません。
 
 例
 ~~
@@ -176,3 +128,13 @@ Kokkos 5.3以降では、 ``KOKKOS_HAS_NATIVE_HALF_TYPE`` および ``KOKKOS_HAS
 例
 ~~
 .. code-block:: cpp
+
+    #include<Kokkos_Core.hpp>
+    #include<iostream>
+
+    int main(int argc, char* argv[]) {
+        Kokkos::ScopeGuard guard(argc, argv);
+
+        // KOKKOS_HALF_T_IS_FLOAT の値に応じて 24 または 11 を出力します
+        std::cout << Kokkos::Experimental::digits_v<Kokkos::Experimental::half_t> << std::endl;
+    }

@@ -165,6 +165,8 @@
 .. cpp:function:: template <class ViewType> ImplMirrorType create_mirror_view_and_copy(ViewType const& src);
 
    ``create_mirror_view_and_copy(typename ViewType::host_mirror_type::memory_space{}, src)`` を呼び出すことと同等です。つまり、元の |View|_ と同じ値を含むホストからアクセス可能な View を返します。|View|_ がすでにホストからアクセス可能な場合、元の |View|_ の（浅い）コピーが返されます。
-   それ以外の場合は、新しい |View|_ が割り当てられます。:sup:`since Kokkos 5.2`
+   それ以外の場合は、新しい |View|_ が割り当てられます。
+
+   .. versionadded:: 5.2
 
    - ``src``: ``Kokkos::View``。

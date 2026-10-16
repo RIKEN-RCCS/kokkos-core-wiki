@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
-ヘッダー ``<Kokkos_Core.hpp>`` で定義されています
+ヘッダー ``<Kokkos_InitializeFinalize.hpp>``:sup:`Kokkos 5.3 以降` に定義されており、これは ``<Kokkos_Core.hpp>`` からインクルードされます。
 
 使い方
 ------
@@ -14,7 +14,7 @@
   if(Kokkos::is_initialized()) {
     // do work
   }
-  if(!Kokkos::is_initialized() && Kokkos::is_finalized()) {
+  if(!Kokkos::is_initialized() && !Kokkos::is_finalized()) {
     // may initialize Kokkos
   }
 

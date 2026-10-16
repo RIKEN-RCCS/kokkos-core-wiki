@@ -728,14 +728,6 @@ View の標準的イディオムとしては、可能な限り少ないテンプ
 
    .. code-block:: c++
 
-    Kokkos::View<int*> -> Kokkos::View<int*,HostSpace> // ok if default memory space is HostSpace
+    Kokkos::View<int*> -> Kokkos::View<int*,HostSpace> // デフォルトのメモリ空間が HostSpace であれば ok
 
 #. メモリ特性
-
-#. Memory Spaces must match
-
-   .. code-block:: c++
-
-    Kokkos::View<int*> -> Kokkos::View<int*,HostSpace> // ok if default memory space is HostSpace
-
-#. Memory Traits

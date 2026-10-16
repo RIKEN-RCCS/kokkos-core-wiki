@@ -127,6 +127,8 @@
         typedef MemorySpaceConcept memory_space;
         typedef ... execution_space;
         typedef Device<execution_space, memory_space> device_type;
+        typedef ... size_type;
+        typedef std::make_signed_t<size_type> index_type;
 
         MemorySpaceConcept();
         MemorySpaceConcept(const MemorySpaceConcept& src);
@@ -163,6 +165,8 @@
 * ``memory_space``: 自己型。;
 * ``execution_space``: デフォルトの |ExecutionSpace|_ は、 ``MemorySpace`` のインスタンスが提供するメモリ内でオブジェクトを構築するとき、または（場合によっては）そのようなメモリからの深部コピーまたは深部コピーを行う際に使用されます（詳細は |DeepCopyDocumentation|_ を参照）。 Kokkos は、 ``Kokkos::SpaceAccessibility<execution_space, memory_space>::accessible`` が ``true`` であることを保証します（|KokkosSpaceAccessibility|_ を参照）。
 * ``device_type``: ``DeviceType<execution_space,memory_space>``.
+* ``size_type``: このメモリ空間に関連付けられた実行空間に最も適した符号なし整数型。
+* ``index_type``: このメモリ空間に関連付けられた実行空間に最も適した符号付き整数型(Kokkos 5.2 以降)。
 
 コンストラクタ
 ~~~~~~~~~~~~~~

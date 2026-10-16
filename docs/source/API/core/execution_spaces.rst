@@ -250,7 +250,8 @@ Kokkos は、利便性型特性 ``Kokkos::is_execution_space<T>`` を提供し�
         typedef Device<execution_space, memory_space> device_type;
         typedef ... scratch_memory_space;
         typedef ... array_layout;
-        typedef ... size_type;
+        typedef memory_space::size_type size_type;
+        typedef memory_space::index_type index_type;
 
         ExecutionSpaceConcept();
         ExecutionSpaceConcept(const ExecutionSpaceConcept& src);
@@ -290,7 +291,9 @@ Kokkos は、利便性型特性 ``Kokkos::is_execution_space<T>`` を提供し�
 
 * ``scratch_memory_space``: 並列パターンがスクラッチメモリの割り当てに使用する ``ScratchMemorySpace`` （例： |KokkosTeamPolicy|_ で要求される場合）。このメモリ空間を使用して作成できるのは、管理対象外ビューのみです。
 
-* ``size_type`` : このスペースに関連付けられたデフォルトの整数型。符号付きまたは符号なし、32ビットまたは64ビットの整数型で、インデックス付けの優先型として使用されます。
+* ``size_type``: この実行空間での計算に最も適した 32 ビットまたは 64 ビットの符号なし整数型。
+
+* ``index_type``: この実行空間での計算に最も適した 32 ビットまたは 64 ビットの符号付き整数型(Kokkos 5.2 以降)。
 
 コンストラクタ
 ~~~~~~~~~~~~~~
@@ -316,3 +319,5 @@ Kokkos は、利便性型特性 ``Kokkos::is_execution_space<T>`` を提供し�
 * ``template<class MS> struct is_execution_space;``: クラスが実行空間であるかどうかを確認するための型特性。
 
 * ``template<class S1, class S2> struct SpaceAccessibility;``: 2つのスペースが互換性があるか（割り当て可能、deep_copy可能、アクセス可能）を確認するための型特性。 ( |KokkosSpaceAccessibility|_ を参照。)
+
+* ``bool operator==(const execution_space& lhs, const execution_space& rhs)``: 2つの空間インスタンス(同じ型)が同一であるかどうかを判定します。

@@ -23,7 +23,7 @@
 
    :tparam DataType: ``DynRankView`` の基本的なスカラー型を定義します。
 
-		     .. note:: 本パラメータは、必須です。
+		     .. attention:: 本パラメータは、必須です。
 
 		     基本構造は、 ``ScalarType`` です。
 		     
@@ -132,7 +132,7 @@
 
    .. cpp:type:: host_mirror_space
 
-       ``HostMirror`` に使用されるホストがアクセス可能なメモリ空間。
+       ``host_mirror_type`` に使用されるホストがアクセス可能なメモリ空間。
 
    .. rubric:: パブリックビュー型定義
 
@@ -144,9 +144,20 @@
 
       本ビュータイプでは、 ``const`` データ型を使用してすべてのテンプレートパラメータを明示的に定義。
 
+   .. cpp:type:: host_mirror_type
+
+      ホストアクセス可能メモリ空間に格納された、同一の ``DataType`` および ``LayoutType`` を持つ互換ビュー型。
+
+      .. versionadded:: 5.0
+
    .. cpp:type:: HostMirror
 
       ホストアクセス可能メモリ空間に格納された、同一の ``DataType`` および ``LayoutType`` を持つ互換ビュー型。
+
+      .. deprecated:: 5.0
+         代わりに :cpp:type:`host_mirror_type` を使用してください。
+
+      .. versionremoved:: 5.3
 
    .. rubric:: パブリックデータハンドル型定義。
 
@@ -174,7 +185,9 @@
 
    .. cpp:type:: specialize
 
-       ``DynRankView``.Kokkosの ``DynRankView`` の基盤となるマッピング構造の部分的な特殊化に使用される特殊化タグ。
+       Kokkos の ``DynRankView`` の基盤となるマッピング構造の部分的な特殊化に使用される特殊化タグ。
+
+       .. versionremoved:: 5.3
 
    .. rubric:: constructors
 

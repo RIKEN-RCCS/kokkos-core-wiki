@@ -30,9 +30,8 @@ Spack は HPC 向けの広く使われているパッケージマネージャー
 Spackを使用する場合、Kokkos のハードウェア自動検出は無効です。 つまり、ユーザーが、常に手動でアーキテクチャを指定しなければならないということです。 しかしながら、CPU の場合、Spack はすでに CPU マイクロアーキテクチャを指定しているため、再度指定する必要はありません。
 GPUに関しては、Spack にはそのような仕組みは存在せず、ユーザーは専用のバックエンドキーワードを使って、正しいアーキテクチャを指定する必要があります(次の節参照)。
 
-Spack で Kokkos インストール
-
-++++++++++++++++++++++++++++
+Spack による Kokkos のインストール
+++++++++++++++++++++++++++++++++++
 
 デフォルトのオプションを使って、 Spack で Kokkos をインストールするには、以下を実行してください:
 
@@ -73,16 +72,16 @@ Kokkosモジュールをロードするだけで、インストール済みの K
 
 これにより Kokkos 環境がシェルセッションに注入されます。
 
+.. note::
+   Spack の `deprecated_code` variant は、インストールされたメジャーバージョンに対して非推奨コードを自動的に有効化します（例：バージョン 5.2.0 の場合は `Kokkos_ENABLE_DEPRECATED_CODE_5`）。異なるメジャーバージョンごとの個別の variant は提供されていません。
+
 Spack で自分だけの Kokkos 依存プロジェクトをパッケージ化する方法
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 例えば、プロジェクト `Foo` が  `Kokkos` に依存しているとしましょう。 プロジェクトを Spack でパッケージ化し、 `Kokkos` を依存関係として含めることもできます。
 
-.. note::
-   Spack の `deprecated_code` variant は、インストールされたメジャーバージョンに対して非推奨コードを自動的に有効化します（例：バージョン 5.2.0 の場合は `Kokkos_ENABLE_DEPRECATED_CODE_5`）。異なるメジャーバージョンごとの個別の variant は提供されていません。
-
 レシピリポジトリの `foo` ディレクトリにある  `package.py` というファイルにレシピを作成する必要があります。
-通常通りSpackでパッケージ化できます(例えば,  <https://spack-tutorial.readthedocs.io/en/latest/tutorial_packaging.html>`_ に従うことができます)が、特定のバックエンドでは、それを考慮に入れる必要があり、使用するコンパイラを指定する必要がある場合もあります。
+通常通りSpackでパッケージ化できます(例えば、 `パッケージングのチュートリアル <https://spack-tutorial.readthedocs.io/en/latest/tutorial_packaging.html>`_ に従うことができます)が、特定のバックエンドでは、それを考慮に入れる必要があり、使用するコンパイラを指定する必要がある場合もあります。
 
 コンパイラは、CUDA の `nvcc_wrapper` のようなラッパーかもしれません。 Kokkosパッケージでは、`kokkos_cxx` 属性としてエクスポートされます。
 
@@ -105,10 +104,6 @@ Spack で自分だけの Kokkos 依存プロジェクトをパッケージ化す
             return args
 
 より完全な例としては、`Kokkos Spack recipe <https://packages.spack.io/package.html?name=kokkos>`_ の *Required by* セクション内にある既存のレシピを参照するか、以下を実行してください:
-
-.. code-block::
-
-    spack dependents kokkos
 
 .. code-block::
 

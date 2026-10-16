@@ -177,6 +177,9 @@
    同じ :cpp:type:`data_type` を持つ、互換性のあるビュー型、およびホストアクセスっ可能なメモリ空間内に格納された :cpp:type:`array_layout` 。
 
    .. deprecated:: 5.0
+      代わりに :cpp:type:`host_mirror_type` を使用してください。
+
+   .. versionremoved:: 5.3
 
 データハンドル
 ^^^^^^^^^^^^^^
@@ -233,9 +236,6 @@
 
    :cpp:type:`value_type` へのポインタ。
 
-他の型
-^^^^^^
-
 .. cpp:type:: data_handle_type
 
    :cpp:`std::mdspan` の規約に従うデータハンドル型です。
@@ -243,7 +243,8 @@
 
    .. versionadded:: 4.5
 
-.. cpp:type:: array_layout
+他の型
+^^^^^^
 
 .. cpp:type:: traits
 
@@ -251,11 +252,11 @@
    :cpp:type:`data_type`、:cpp:type:`array_layout`、:cpp:type:`memory_space`、:cpp:type:`memory_traits` など、
    すべてのコンパイル時プロパティへのアクセスを提供します。
 
+.. cpp:type:: array_layout
+
    :cpp:class:`View` の :cpp:any:`LayoutType`。
 
 .. cpp:type:: size_type
-
-   本 :cpp:class:`View` のメモリ空間に関するインデックス型。
 
    :cpp:`std::mdspan` の規約に従う :cpp:type:`index_type` の符号なし版です。
    デフォルトは :cpp:`std::size_t` です。
@@ -274,11 +275,15 @@
 
    .. versionadded:: 4.5
 
+.. cpp:type:: dimension
+
    :cpp:class:`View` の範囲を表すことができる整数配列のような型。
 
 .. cpp:type:: specialize
 
    :cpp:class:`View` の基盤となるマッピング構造の部分的な特殊化に使用される特殊化タグ。
+
+   .. versionremoved:: 5.3
 
 コンストラクタ
 ^^^^^^^^^^^^^^

@@ -15,8 +15,8 @@
 
 .. _keywords_backends:
 
-バックエンドセクション
-======================
+バックエンドの選択
+==================
 
 **デフォルト状態:**
 すべてのバックエンドはデフォルトで無効化されます。 これにより、
@@ -35,7 +35,7 @@
   相互排斥: 同時に有効にできるデバイスバックエンド（例：CUDA、HIP、SYCL）とホスト並列バックエンド（例：OpenMP、C++スレッド）は、それぞれ1つずつに限られます。なぜなら、これらのバックエンドが並列処理を潜在的な競合が生じる方法で管理するためです。
 
   ホストバックエンド要件: 少なくとも、常に1つのホストを有効化する必要があります。
-  これは、Kokkosのコード実行が通常、ホスト（CPU）上で開始され、その後、デバイス（GPU、アクセラレータ）へオフロードされる可能性があるためです。Kokkos のコード実行が通常、ホスト（CPU）上で開始され、その後、デバイス（GPU、アクセラレータ）へオフロードされる可能性があるためです。ホストバックエンドを明示的に有効化しない場合、Kokkos は自動的にシリアルバックエンドを有効化しますが、それは順次実行モデルを提供します。
+  これは、Kokkosのコード実行が通常、ホスト（CPU）上で開始され、その後、デバイス（GPU、アクセラレータ）へオフロードされる可能性があるためです。ホストバックエンドを明示的に有効化しない場合、Kokkos は自動的にシリアルバックエンドを有効化しますが、それは順次実行モデルを提供します。
 
 シリアルバックエンド
 --------------------
@@ -88,8 +88,8 @@
     * - ``Kokkos_ENABLE_HIP``
       - AMD GPUs を対象とした HIP バックエンドを構築
 
-    * - ``Kokkos_ENABLE_OPENMPTARGET``
-      - :red:`[Experimental]` アクセラレータデバイスへのオフロードのための OpenMP ターゲットバックエンドを構築
+    * - ``Kokkos_ENABLE_SYCL``
+      - Intel GPU を対象とした SYCL バックエンドを構築
 
     * - ``Kokkos_ENABLE_OPENACC``
       - :red:`[Experimental]` アクセラレータデバイスへのオフロードのための OpenACC バックエンドを構築
@@ -119,6 +119,10 @@
       * 例を構築
       * ``OFF``
 
+    * * ``Kokkos_ENABLE_TESTS``
+      * テストを構築
+      * ``OFF``
+
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_3``
       * Kokkos 3.x 系列における非推奨のコードの有効化 :red:`[4.3 で削除]`
       * ``OFF``
@@ -135,12 +139,12 @@
       * 非推奨の Kokkos コードを使用した際にコンパイル時に警告を発生させるかどうか
       * ``ON``
 
-    * * ``Kokkos_ENABLE_DEPRECATION_WARNINGS``
-      * 非推奨のKokkos機能を使用する際、コンパイル時に警告を表示するかどうか
-      * ``ON``
-
     * * ``Kokkos_ENABLE_TUNING``
       * チューニングツール用のバインディングを作成
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION``
+      * ループを積極的にベクトル化
       * ``OFF``
 
 .. _debugging:
@@ -204,7 +208,7 @@ CMake ビルドタイプとコンパイラフラグ:
     * -
       - 説明/情報
       - デフォルト
-  
+
     * * ``Kokkos_ENABLE_CUDA_CONSTEXPR``
       * 実験的リラックス型 constexpr 関数を有効化
       * ``OFF``
@@ -321,18 +325,22 @@ CMake ビルドタイプとコンパイラフラグ:
       * HWLOC ライブラリを有効化するかどうか
       * ``OFF``
       *
+
     * * ``Kokkos_ENABLE_LIBDL``
       * LIBDL ライブラリを有効化するかどうか
       * ``ON``
       *
+
     * * ``Kokkos_ENABLE_LIBQUADMATH``
       * GCC のクワッド精度数学ライブラリによる、128ビット浮動小数点型のサポートを有効化するかどうか 
       * ``OFF``
       *
+
     * * ``Kokkos_ENABLE_ONEDPL``
       * SYCLバックエンドを使用する際、oneDPL ライブラリを有効化するかどうか
       * ``ON``
       *
+
     * * ``Kokkos_ENABLE_ROCTHRUST``
       * HIPバックエンドを使用する際、rocThrust ライブラリを有効にするかどうか
       * ``ON``
@@ -450,55 +458,15 @@ Kokkos は、特定の CPU アーキテクチャ向けに最適化するため�
       - 例
       - 注意事項
 
-    * - ``Kokkos_ARCH_ARMV9_GRACE``
-      - ARMv9-A/A64/neoverse-v2
-      - GH200 @ CSCS ALPS
-      - (since Kokkos 4.4.1)
-
-    * - ``Kokkos_ARCH_A64FX``
-      - ARMv8.2/A64
-      - A64FX @ Fugaku
-      -
-
-    * - ``Kokkos_ARCH_ARMV8_THUNDERX2``
-      - ARMv8/A64
-      - ThunderX2 @ SNL Astra
-        ThunderX2 @ CEA BullSequana
-      -
-
     * - ``Kokkos_ARCH_ARMV9_VERA``
       - ARMv9.2-A/A64
       - Vera CPUs @ LANL Vision
       - (Kokkos 5.3 以降)
 
-    * - ``Kokkos_ARCH_ARMV81``
-      - ARMv8.1/A64,A32
-      -
-      -
-
-    * - ``Kokkos_ARCH_ARMV8_THUNDERX``
-      - ARMv8/A64
-      -
-      -
-
-    * - ``Kokkos_ARCH_ARMV80``
-      - ARMv8.0/A64,A32
-      -
-      -
-.. list-table:: ARM CPU アーキテクチャ
-    :widths: 30 30 30 30
-    :header-rows: 1
-    :align: left
-
-    * - CMake キーワード
-      - アーキテクチャ/インストラクションセット
-      - 例
-      - 注意事項
-
     * - ``Kokkos_ARCH_ARMV9_GRACE``
       - ARMv9-A/A64/neoverse-v2
       - GH200 @ CSCS ALPS
-      - ( Kokkos 4.4.1以降)
+      - (since Kokkos 4.4.1)
 
     * - ``Kokkos_ARCH_A64FX``
       - ARMv8.2/A64
@@ -540,10 +508,6 @@ Kokkos は、特定の CPU アーキテクチャ向けに最適化するため�
       - POWER9 @ ORNL Summit
         POWER9 @ LLNL Sierra
 
-    * - ``Kokkos_ARCH_ICX``
-      - Icelake/x86-64
-      -
-
     * - ``Kokkos_ARCH_POWER8``
       - Power8/パワー ISA
       -
@@ -561,6 +525,10 @@ Kokkos は、特定の CPU アーキテクチャ向けに最適化するため�
       - Sapphire Rapids/x86-64
       - Xeon 9470C @ ANL Aurora
         Xeon @ LANL Crossroads
+
+    * - ``Kokkos_ARCH_ICX``
+      - Icelake/x86-64
+      -
 
     * - ``Kokkos_ARCH_SKX``
       - Skylake/x86-64
@@ -621,12 +589,6 @@ Kokkos の命名規則は、NVIDIA GPU マイクロアーキテクチャの名�
 
 ``Kokkos_ARCH_<MICROARCHITECTURE><COMPUTE_CAPABILITY>``
 
-    * * ``Kokkos_ARCH_BLACKWELL103``
-      * Blackwell
-      * 10.3
-      * B300
-      * (Kokkos 5.1以降)
-
 CUDAバックエンドが有効化されており、NVIDIA GPUアーキテクチャが指定されていない場合、
 Kokkos は。設定時にアーキテクチャフラグの自動検出を試みます。
 
@@ -641,11 +603,23 @@ Kokkos は。設定時にアーキテクチャフラグの自動検出を試み�
       - モデル
       - 注意事項
 
+    * * ``Kokkos_ARCH_RUBIN107``
+      * Rubin
+      * 10.7
+      * R100
+      * (Kokkos 5.3以降)
+
     * * ``Kokkos_ARCH_BLACKWELL120``
       * Blackwell
       * 12.0
       * RTX 5080
       * (Kokkos 4.7以降)
+
+    * * ``Kokkos_ARCH_BLACKWELL103``
+      * Blackwell
+      * 10.3
+      * B300
+      * (Kokkos 5.1以降)
 
     * * ``Kokkos_ARCH_BLACKWELL100``
       * Blackwell
@@ -760,11 +734,6 @@ AMD GPUs
 
 Kokkos の命名規則は、AMD\_ とアーキテクチャフラグを結合するものです。
 
-    * * ``Kokkos_ARCH_AMD_GFX950``
-      * GFX950
-      * MI355X, MI350X
-      * (Kokkos 5.1以降)
-
 ``Kokkos_ARCH_AMD_<ARCHITECTURE_FLAG>``
 
 HIP バックエンドが有効化されており、AMD GPU アーキテクチャが指定されていない場合、
@@ -779,6 +748,11 @@ Kokkos は設定時にアーキテクチャフラグの自動検出を試みま�
       - アーキテクチャフラッグ
       - モデル
       - 注意事項
+
+    * * ``Kokkos_ARCH_AMD_GFX950``
+      * GFX950
+      * MI355X, MI350X
+      * (Kokkos 5.1以降)
 
     * * ``Kokkos_ARCH_AMD_GFX942_APU``
       * GFX942
@@ -795,29 +769,14 @@ Kokkos は設定時にアーキテクチャフラグの自動検出を試みま�
       * MI300A (プリプロダクション)
       * (Kokkos 4.2.1以降)
 
-    * * ``Kokkos_ARCH_AMD_GFX1152``
-      * GFX1152
-      * Radeon 860M
-      * (Kokkos 5.2以降)
-
-    * * ``Kokkos_ARCH_AMD_GFX1151``
-      * GFX1151
-      * Strix Halo
-      * (Kokkos 5.2以降)
-
     * * ``Kokkos_ARCH_AMD_GFX90A``
       * GFX90A
       * MI200 series
       * (Kokkos 4.2以降)
 
-    * * ``Kokkos_ARCH_AMD_GFX1101``
-      * GFX1101
-      * Radeon RX 7800 XT, RX 7700 XT, RX 7700
-      * (Kokkos 5.2以降)
-
-    * * ``Kokkos_ARCH_AMD_GFX1100``
-      * GFX1100
-      * Radeon RX 7900 XT
+    * * ``Kokkos_ARCH_AMD_GFX908``
+      * GFX908
+      * MI100
       * (Kokkos 4.2以降)
 
     * * ``Kokkos_ARCH_AMD_GFX906``
@@ -829,6 +788,36 @@ Kokkos は設定時にアーキテクチャフラグの自動検出を試みま�
       * GFX1201
       * Radeon AI PRO R9700, Radeon RX 9070 XT
       * (Kokkos 5.0以降)
+
+    * * ``Kokkos_ARCH_AMD_GFX1152``
+      * GFX1152
+      * Radeon 860M
+      * (Kokkos 5.2以降)
+
+    * * ``Kokkos_ARCH_AMD_GFX1151``
+      * GFX1151
+      * Strix Halo
+      * (Kokkos 5.2以降)
+
+    * * ``Kokkos_ARCH_AMD_GFX1103``
+      * GFX1103
+      * Ryzen 8000G Phoenix シリーズ APU
+      * (Kokkos 4.5以降)
+
+    * * ``Kokkos_ARCH_AMD_GFX1101``
+      * GFX1101
+      * Radeon RX 7800 XT, RX 7700 XT, RX 7700
+      * (Kokkos 5.2以降)
+
+    * * ``Kokkos_ARCH_AMD_GFX1100``
+      * GFX1100
+      * Radeon RX 7900 XT
+      * (Kokkos 4.2以降)
+
+    * * ``Kokkos_ARCH_AMD_GFX1030``
+      * GFX1030
+      * V620, W6800
+      * (Kokkos 4.2以降)
 
     * * ``Kokkos_ARCH_VEGA90A``
       * GFX90A
@@ -849,21 +838,6 @@ Kokkos は設定時にアーキテクチャフラグの自動検出を試みま�
       * GFX900
       * MI25
       * (Kokkos 4.0で削除)
-
-    * * ``Kokkos_ARCH_VEGA908``
-      * GFX908
-      * MI100
-      * ``Kokkos_ARCH_AMD_GFX908`` 優先
-
-    * * ``Kokkos_ARCH_VEGA906``
-      * GFX906
-      * MI50, MI60
-      * ``Kokkos_ARCH_AMD_GFX906`` 優先
-
-    * * ``Kokkos_ARCH_VEGA900``
-      * GFX900
-      * MI25
-      * 4.0において削除
 
 Intel GPUs
 ~~~~~~~~~~
@@ -923,3 +897,9 @@ Intel GPUs
       *
 
 .. [#arch_intel_gen] ``Kokkos_ARCH_INTEL_GEN`` は、Intel GPU 向けにジャストインタイムコンパイルを有効化しますが、他の Intel コンパイラ向けフラグはすべて Ahead-Of-Time コンパイルを要求します。
+
+  ジャストインタイム (JIT) コンパイルとは、作成されたバイナリが実際に実行されるときにコンパイラが再度呼び出され、
+  その時点で初めてコンパイル対象のアーキテクチャが決定される方式です。
+
+  一方、アヘッドオブタイム (AOT) コンパイルは、コンパイラがバイナリを作成するために一度だけ呼び出され、
+  プログラムの実行前にコンパイル対象のアーキテクチャが決定される標準的なモデルを指します。
