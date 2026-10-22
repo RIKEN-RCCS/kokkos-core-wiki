@@ -609,6 +609,12 @@ Kokkos は。設定時にアーキテクチャフラグの自動検出を試み�
       * R100
       * (Kokkos 5.3以降)
 
+    * * ``Kokkos_ARCH_BLACKWELL121``
+      * Blackwell
+      * 12.1
+      * DGX Spark
+      * (Kokkos 5.1 以降)
+
     * * ``Kokkos_ARCH_BLACKWELL120``
       * Blackwell
       * 12.0
