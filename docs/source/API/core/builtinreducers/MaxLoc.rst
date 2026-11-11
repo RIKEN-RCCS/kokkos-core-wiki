@@ -105,6 +105,55 @@
 
 * 必要条件:  ``Scalar`` には、 定義した ``operator =`` および  ``operator >``  が定義されます。 ``Kokkos::reduction_identity<Scalar>::max()`` は、有効な式です。
 
-* 必要条件: ``Index`` は、定義した ``operator =`` を持ちます。 ``Kokkos::reduction_identity<Index>::min()``  は、有効な式です。
+* 必要条件: ``Index`` は、定義した ``operator =`` および ``operator ==`` を持ちます。 ``Kokkos::reduction_identity<Index>::min()`` は、有効な式です。
 
 * MaxLoc を ``Scalar`` または ``Index`` いずれかのカスタム型で使用するために、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、`Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください
+
+例
+--
+
+.. code-block:: cpp
+
+  #include <Kokkos_Core.hpp>
+  // Custom 3D index type for MaxLoc example
+  // Can also use Kokkos::Array<int, 3>
+  struct Idx3D_t {
+    int value[3];
+    KOKKOS_FUNCTION int& operator[](int i) { return value[i]; }
+    KOKKOS_FUNCTION const int& operator[](int i) const { return value[i]; }
+    KOKKOS_FUNCTION bool operator==(const Idx3D_t& other) const {
+      return this->value[0] == other.value[0] &&
+             this->value[1] == other.value[1] &&
+             this->value[2] == other.value[2];
+    }
+  };
+  // This struct should also be specialized for Kokkos::Array<int, 3> if used.
+  template <>
+  struct Kokkos::reduction_identity<Idx3D_t> {
+    KOKKOS_FUNCTION static constexpr Idx3D_t min() { return {0, 0, 0}; }
+  };
+  int main(int argc, char* argv[]) {
+    Kokkos::initialize(argc, argv);
+    {
+      Kokkos::View<double***> a("A", 5, 5, 5);
+      Kokkos::deep_copy(a, 10);
+      a(2, 3, 1)        = 15;
+      using MaxLoc_t    = Kokkos::MaxLoc<double, Idx3D_t>;
+      using MaxLocVal_t = typename MaxLoc_t::value_type;
+      MaxLocVal_t result;
+      Kokkos::parallel_reduce(
+          Kokkos::MDRangePolicy<Kokkos::Rank<3>>({0, 0, 0}, {5, 5, 5}),
+          KOKKOS_LAMBDA(int i, int j, int k, MaxLocVal_t& val) {
+            if (a(i, j, k) > val.val) {
+              val.val    = a(i, j, k);
+              val.loc[0] = i;
+              val.loc[1] = j;
+              val.loc[2] = k;
+            }
+          },
+          MaxLoc_t(result));
+      printf("%lf %i %i %i\n", result.val, result.loc[0], result.loc[1],
+             result.loc[2]);
+    }
+    Kokkos::finalize();
+  }

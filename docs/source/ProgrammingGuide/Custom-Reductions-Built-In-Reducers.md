@@ -19,7 +19,6 @@ Kokkos は最も一般的なリダプションタイプ用のリデューサー�
 
 以下は、たとえ話の離散化における最小値を求める単純な最小縮約を行う例です。
 
-
 ```c++
 double min;
 
@@ -63,56 +62,75 @@ printf("Min: %lf at %i\n", minloc.val, minloc.loc);
 リデューサーは、ネスト型リダクションにおいて、使用できます。本例では、マトリクスの最小値と最大値、そしてそれらのインデックス求めるために、2次元インデックス型も用いています。
 
 ```c++
-Kokkos::View<double**> A("A",N,M);
-//  A を満たします
+using MinMaxLoc2D = Kokkos::MinMaxLoc<double, Kokkos::pair<int, int>>;
 
-// 結果の変数を作成します
-typedef Kokkos::MinMaxLoc<double, Kokkos::pair<int,int>> reducer_type;
-typedef reducer_type::value_type value_type;
-value_type minmaxloc
-
-typedef Kokkos::TeamPolicy<>::member_type team_type;
-
-// チーム並列縮約を開始します
-Kokkos::parallel_reduce( "MinLocReduce", Kokkos::TeamPolicy<>(N,AUTO), 
-    KOKKOS_LAMBDA (const team_type& team, value_type& team_minmaxloc) {
-
-  // 列の縮約値を保存するための一時的なインスタンスを作成します
-  value_type row_minmaxloc;
-  int n = team.league_rank();
-
-  // 列全体で、チームを使って、ネスト並行縮約を実行します
-  Kokkos::parallel_reduce( Kokkos::TeamThreadRange(team, M), 
-      [=] (const int& m, value_type& thread_minmaxloc) {
-    double val = A(n,m);
-    
-    // これが新しい最小値か最大値かを確認します
-    if(val < thread_minmaxloc.min_val) {
-      thread_minmaxloc.min_val = val;
-      thread_minmaxloc.min_loc = Kokkos::pair<int,int>(n,m);
-    }
-    if(val > thread_minmaxloc.max_val) {
-      thread_minmaxloc.max_val = val;
-      thread_minmaxloc.max_loc = Kokkos::pair<int,int>(n,m);
-    }
-
-  }, reducer_type(row_minmaxloc));
-  
-  // チームの一人が全体に貢献すべきです
-  // 注意事項: 最小または最大縮約について、
-  // あらゆるチームメンバーがこれを行った場合、それは損なわれません
-  Kokkos::single(Kokkos::PerTeam(team), [=] () {
-    if( row_minmaxloc.min_val < team_minmaxloc.min_val ) {
-      team_minmaxloc.min_val = row_minmaxloc.min_val;
-      team_minmaxloc.min_loc = row_minmaxloc.min_loc;
-    }
-    if( row_minmaxloc.max_val > team_minmax.max_val ) {
-      team_minmaxloc.max_val = row_minmaxloc.max_val;
-      team_minmaxloc.max_loc = row_minmaxloc.max_loc;
-    }
+template <>
+struct Kokkos::reduction_identity<Kokkos::pair<int, int>> {
+  KOKKOS_FUNCTION static constexpr Kokkos::pair<int, int> min() {
+    return {0, 0};
   }
-}, reducer_type(minmaxloc));
+};
 
-printf("Min %lf at (%i, %i)\n",minmaxloc.min_val, minmaxloc.min_loc.first, minmaxloc.min_loc.second);
-printf("Max %lf at (%i, %i)\n",minmaxloc.max_val, minmaxloc.max_loc.first, minmaxloc.max_loc.second);
+int main(int argc, char* argv[]) {
+  Kokkos::ScopeGuard guard(argc, argv);
+
+  int M = 10;
+  int N = 10;
+
+  Kokkos::View<double**> A("A", N, M);
+  // A を満たします
+
+  // 結果の変数を作成します
+  using value_type = typename MinMaxLoc2D::value_type;
+  value_type minmaxloc;
+
+  using team_type = typename Kokkos::TeamPolicy<>::member_type;
+
+  // チーム並列縮約を開始します
+  Kokkos::parallel_reduce(
+      "MinMaxLocReduce", Kokkos::TeamPolicy<>(N, Kokkos::AUTO),
+      KOKKOS_LAMBDA(const team_type& team, value_type& team_minmaxloc) {
+        // 列の縮約値を保存するための一時的なインスタンスを作成します
+        value_type row_minmaxloc;
+        int n = team.league_rank();
+
+        // 列全体で、チームを使って、ネスト並列縮約を実行します
+        Kokkos::parallel_reduce(
+            Kokkos::TeamThreadRange(team, M),
+            [=](const int& m, value_type& thread_minmaxloc) {
+              double val = A(n, m);
+
+              // これが新しい最小値か最大値かを確認します
+              if (val < thread_minmaxloc.min_val) {
+                thread_minmaxloc.min_val = val;
+                thread_minmaxloc.min_loc = Kokkos::pair<int, int>(n, m);
+              }
+              if (val > thread_minmaxloc.max_val) {
+                thread_minmaxloc.max_val = val;
+                thread_minmaxloc.max_loc = Kokkos::pair<int, int>(n, m);
+              }
+            },
+            MinMaxLoc2D(row_minmaxloc));
+
+        // チームの一人が全体に貢献すべきです
+        // 注意事項: 最小または最大縮約について、
+        //           あらゆるチームメンバーがこれを行った場合でも損なわれません
+        Kokkos::single(Kokkos::PerTeam(team), [=, &team_minmaxloc]() {
+          if (row_minmaxloc.min_val < team_minmaxloc.min_val) {
+            team_minmaxloc.min_val = row_minmaxloc.min_val;
+            team_minmaxloc.min_loc = row_minmaxloc.min_loc;
+          }
+          if (row_minmaxloc.max_val > team_minmaxloc.max_val) {
+            team_minmaxloc.max_val = row_minmaxloc.max_val;
+            team_minmaxloc.max_loc = row_minmaxloc.max_loc;
+          }
+        });
+      },
+      MinMaxLoc2D(minmaxloc));
+
+  printf("Min %lf at (%i, %i)\n", minmaxloc.min_val, minmaxloc.min_loc.first,
+         minmaxloc.min_loc.second);
+  printf("Max %lf at (%i, %i)\n", minmaxloc.max_val, minmaxloc.max_loc.first,
+         minmaxloc.max_loc.second);
+}
 ```
