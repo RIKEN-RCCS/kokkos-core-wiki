@@ -66,6 +66,24 @@ escaped-space treatment, e.g. ":cpp:`x`\\ （例）".
 - Output only the translated RST content.\
 """
 
+# Fixed English -> Japanese term translations, appended to SYSTEM_PROMPT.
+# New files have no existing Japanese translation to borrow terms from, so
+# without this the model picks its own wording and drifts from the rest of
+# the docs. Extend this list as new inconsistencies are found.
+GLOSSARY = [
+    ("Configuration Guide", "設定ガイド"),
+    ("configure / configuration (of a Kokkos build)", "設定"),
+    ("execution space", "実行空間"),
+    ("memory space", "メモリ空間"),
+    ("dimension (of a View or an array)", "次元"),
+]
+
+SYSTEM_PROMPT += (
+    "\n\nGlossary: always translate these terms as follows, even if the "
+    "existing Japanese translation uses a different word.\n"
+    + "\n".join(f"- {en} -> {ja}" for en, ja in GLOSSARY)
+)
+
 RST_UNDERLINE_CHARS = set("=-~^\"#+*`:./<>")
 
 # If more than this fraction of old_en blocks can't be structurally aligned to
