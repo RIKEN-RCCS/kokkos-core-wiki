@@ -26,6 +26,14 @@
 
 .. |ExecutionSpaceTypes| replace:: :cpp:func:`ExecutionSpace` 型
 
+.. _DefaultExecutionSpaceType: ./execution_spaces.html#kokkos-defaultexecutionspace
+
+.. |DefaultExecutionSpaceType| replace:: :cpp:func:`DefaultExecutionSpace` type
+
+.. _DefaultHostExecutionSpaceType: ./execution_spaces.html#kokkos-defaulthostexecutionspace
+
+.. |DefaultHostExecutionSpaceType| replace:: :cpp:func:`DefaultHostExecutionSpace` type
+
 ``Kokkos::CudaSpace``
 ---------------------
 
@@ -105,6 +113,16 @@
 * HIP -> ``HIPHostPinnedSpace``
 * SYCL -> ``SYCLHostUSMSpace``
 * Only backends running on host -> ``HostSpace``
+
+``Kokkos::DefaultMemorySpace``
+------------------------------
+
+``Kokkos::DefaultMemorySpace`` :sup:`since 5.3` は、 |DefaultExecutionSpaceType|_ に対応する ``MemorySpace`` の |MemorySpaceType|_ エイリアスです。これは ``Kokkos::DefaultExecutionSpace::memory_space`` のエイリアスです。
+
+``Kokkos::DefaultHostMemorySpace``
+----------------------------------
+
+``Kokkos::DefaultHostMemorySpace`` :sup:`since 5.3` は、 |DefaultHostExecutionSpaceType|_ に対応する ``MemorySpace`` の |MemorySpaceType|_ エイリアスです。これは ``Kokkos::DefaultHostExecutionSpace::memory_space`` のエイリアスです。
 
 ``Kokkos::MemorySpaceConcept``
 ------------------------------
