@@ -59,10 +59,10 @@ template <class T, class Space, int N>
 struct SumMyArray {
  public:
   // 必要とされます
-  typedef SumMyArray reducer;
-  typedef array_type<T, N> value_type;
-  typedef Kokkos::View<value_type*, Space, Kokkos::MemoryUnmanaged>
-      result_view_type;
+  using reducer    = SumMyArray;
+  using value_type = array_type<T, N>;
+  using result_view_type =
+      Kokkos::View<value_type*, Space, Kokkos::MemoryUnmanaged>;
 
  private:
   value_type& value;
@@ -73,9 +73,7 @@ struct SumMyArray {
 
   // 必要とされます
   KOKKOS_INLINE_FUNCTION
-  void join(value_type& dest, const value_type& src) const {
-    dest += src;
-  }
+  void join(value_type& dest, const value_type& src) const { dest += src; }
 
   KOKKOS_INLINE_FUNCTION
   void init(value_type& val) const { val.init(); }
@@ -96,8 +94,8 @@ int main(int argc, char* argv[]) {
   {
     int E = 1024;
 
-    typedef sample::array_type<int, 4> ValueType;
-    typedef sample::SumMyArray<int, Kokkos::HostSpace, 4> ArraySumResult;
+    using ValueType      = sample::array_type<int, 4>;
+    using ArraySumResult = sample::SumMyArray<int, Kokkos::HostSpace, 4>;
 
     ValueType tr;
 

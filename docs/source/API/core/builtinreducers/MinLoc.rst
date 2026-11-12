@@ -105,7 +105,7 @@
 
 * 必要条件: ``Scalar`` には、 ``operator =`` および ``operator <`` が定義されます。 ``Kokkos::reduction_identity<Scalar>::min()``  は有効な式です。
 
-* 必要条件: ``Index`` は、定義された ``operator =`` を持ちます。 ``Kokkos::reduction_identity<Index>::min()`` は有効な式です。
+* 必要条件: ``Index`` は、定義された ``operator =`` および ``operator ==`` を持ちます。 ``Kokkos::reduction_identity<Index>::min()`` は有効な式です。
 
 *  ``Scalar`` または ``Index``\ のいずれかのカスタム型で  MinLoc を使用するために、 ``Kokkos::reduction_identity<CustomType>`` のテンプレート特殊化を定義する必要があります。 詳細については、 `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ を参照してください。
 
@@ -115,14 +115,22 @@
 .. code-block:: cpp
 
   #include <Kokkos_Core.hpp>
+  // MinLoc の例のためのカスタム 3D インデックス型
+  // Kokkos::Array<int, 3> を使用することもできます
   struct Idx3D_t {
     int value[3];
-    int& operator[](int i) { return value[i]; }
-    const int& operator[](int i) const { return value[i]; }
+    KOKKOS_FUNCTION int& operator[](int i) { return value[i]; }
+    KOKKOS_FUNCTION const int& operator[](int i) const { return value[i]; }
+    KOKKOS_FUNCTION bool operator==(const Idx3D_t& other) const {
+      return this->value[0] == other.value[0] &&
+             this->value[1] == other.value[1] &&
+             this->value[2] == other.value[2];
+    }
   };
+  // この構造体は、Kokkos::Array<int, 3> を使用する場合はそれに対しても特殊化する必要があります。
   template <>
   struct Kokkos::reduction_identity<Idx3D_t> {
-    static constexpr Idx3D_t min() { return {0, 0, 0}; }
+    KOKKOS_FUNCTION static constexpr Idx3D_t min() { return {0, 0, 0}; }
   };
   int main(int argc, char* argv[]) {
     Kokkos::initialize(argc, argv);
