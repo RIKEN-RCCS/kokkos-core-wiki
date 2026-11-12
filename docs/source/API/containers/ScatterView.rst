@@ -92,7 +92,7 @@
 
     .. cpp:type:: data_type_info
 
-        DuplicatedDataType で、指定されたビューデータ型から新たなランタイム次元を持つ、新規作成されたデータ型。この新たなディメンションが最大ストライドディメンションとなります。
+        DuplicatedDataType で、指定されたビューデータ型から新たなランタイム次元を持つ、新規作成されたデータ型。この新たな次元が最大ストライド次元となります。
 
     .. cpp:type:: internal_data_type
 
@@ -114,11 +114,11 @@
 
     .. cpp:function:: ScatterView(std::string const& name, Dims ... dims)
 
-        可変長のディメンション引数パックからのコンストラクタ。 ``internal_view`` member を構築します。
+        可変長の次元引数パックからのコンストラクタ。 ``internal_view`` member を構築します。
 
     .. cpp:function:: ScatterView(ALLOC_PROP const& arg_prop, Dims... dims)
 
-        可変長のディメンション引数パックからのコンストラクタ。 ``internal_view`` メンバーを構築します。
+        可変長の次元引数パックからのコンストラクタ。 ``internal_view`` メンバーを構築します。
         このコンストラクタは、最初の引数として、 ``Kokkos::view_alloc`` で作成されたオブジェクトを渡すことを可能にします。例えば、実行空間を指定するために ``Kokkos::view_alloc(exec_space, "label" )`` のように使用します。
         
         ``Kokkos::view_alloc(exec_space, )``.

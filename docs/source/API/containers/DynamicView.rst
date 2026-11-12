@@ -94,7 +94,7 @@
 
         :return: それ自身が参照可能であるか否かに関わらず、 ``reference_type`` 型の値。 インデックス引数の数は 1 である必要があります (非推奨ではないコードについて)。
 
-    .. rubric:: データリサイズ、ディメンション、ストライド
+    .. rubric:: データリサイズ、次元、ストライド
 
     .. cpp:function:: template< typename IntType > inline void resize_serial(IntType const & n)
 
@@ -117,68 +117,68 @@
 
     .. cpp:function:: template< typename iType > KOKKOS_INLINE_FUNCTION size_t extent(const iType& dim) const;
 
-        :return: 特定ディメンションの範囲。 ``iType`` は整数型でなければならず、 ``dim`` は、 ``rank`` よりも小さくなければなりません。 rank > 1については、1を返してください。
+        :return: 特定次元の範囲。 ``iType`` は整数型でなければならず、 ``dim`` は、 ``rank`` よりも小さくなければなりません。 rank > 1については、1を返してください。
 
     .. cpp:function:: template< typename iType > KOKKOS_INLINE_FUNCTION int extent_int(const iType& dim) const;
 
-        :return: ``int`` としての特定ディメンションの範囲。 ``iType`` は整数型でなければならず、 ``dim`` は、 ``rank`` よりも小さくなければなりません。  ``extent`` と比較して、この関数は ``int`` 演算が ``size_t`` よりも効率的なアーキテクチャにおいて有用です。また、そうでなければすべてのインデックス操作を ``int`` で行っているアプリケーションにおいて、型キャストの必要性を排除する可能性があります。rank > 1については、1 を返してください。
+        :return: ``int`` としての特定次元の範囲。 ``iType`` は整数型でなければならず、 ``dim`` は、 ``rank`` よりも小さくなければなりません。  ``extent`` と比較して、この関数は ``int`` 演算が ``size_t`` よりも効率的なアーキテクチャにおいて有用です。また、そうでなければすべてのインデックス操作を ``int`` で行っているアプリケーションにおいて、型キャストの必要性を排除する可能性があります。rank > 1については、1 を返してください。
 
     .. cpp:function:: template< typename iType > KOKKOS_INLINE_FUNCTION void stride(const iType& dim) const;
 
-        :return: 特定ディメンションのストライドは、常に ``DynamicView`` については、0 を返します。
+        :return: 特定次元のストライドは、常に ``DynamicView`` については、0 を返します。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_0() const;
 
-        :return: ディメンション 0 のストライドは、常に  ``DynamicView`` については、0 を返します。
+        :return: 次元 0 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynamicView::stride` を使用してください。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_1() const;
 
-        :return: ディメンション 1 のストライドは、常に  ``DynamicView`` については、0 を返します。
+        :return: 次元 1 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynamicView::stride` を使用してください。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_2() const;
 
-        :return: ディメンション 2 のストライドは、常に  ``DynamicView`` については、0 を返します。
+        :return: 次元 2 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynamicView::stride` を使用してください。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_3() const;
 
-        :return: ディメンション 3 のストライドは、常に  ``DynamicView`` については、0 を返します。
+        :return: 次元 3 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynamicView::stride` を使用してください。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_4() const;
 
-        :return: ディメンション 4 のストライドは、常に  ``DynamicView`` については、0 を返します。
+        :return: 次元 4 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynamicView::stride` を使用してください。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_5() const;
 
-        :return: ディメンション 5 のストライドは、常に  ``DynamicView`` については、0 を返します。
+        :return: 次元 5 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynamicView::stride` を使用してください。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_6() const;
 
-        :return: ディメンション 6 のストライドは、常に  ``DynamicView`` については、0 を返します。
+        :return: 次元 6 のストライドは、常に  ``DynamicView`` については、0 を返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynamicView::stride` を使用してください。
 
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_7() const;
 
-        :return: ディメンション 7 のストライドは、常に  ``DynamicView`` については、0 を返します
+        :return: 次元 7 のストライドは、常に  ``DynamicView`` については、0 を返します
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynamicView::stride` を使用してください。

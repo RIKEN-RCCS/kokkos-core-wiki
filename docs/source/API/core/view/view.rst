@@ -53,7 +53,7 @@
    
    :tparam MemorySpace: ビューの保存場所を、管理します。
 
-      省略された場合、デフォルトの実行スペースのデフォルトのメモリ領域が使用されます (つまり、:cpp:expr:`DefaultExecutionSpace::memory_space`)。
+      省略された場合、デフォルトの実行空間のデフォルトのメモリ領域が使用されます (つまり、:cpp:expr:`DefaultExecutionSpace::memory_space`)。
 
    :tparam MemoryTraits: 構造体テンプレート :cpp:struct:`MemoryTraits` の列挙型パラメータを介して、アクセスプロパティを設定します。可能なテンプレート引数は、以下のフラグの bitwise OR です: 
 

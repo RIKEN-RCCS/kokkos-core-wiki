@@ -20,7 +20,7 @@
 
 * ``View::memory_space`` 型のメモリ空間インスタンス。
 
-*  ``View::memory_space`` にアクセス可能な実行スペースインスタンス。
+*  ``View::memory_space`` にアクセス可能な実行空間インスタンス。
 
 * 要素の初期化および破棄を回避するための ``Kokkos::WithoutInitializing`` 。
 

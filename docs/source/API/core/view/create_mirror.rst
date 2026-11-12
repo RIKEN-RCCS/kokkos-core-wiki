@@ -80,7 +80,7 @@
 .. cpp:function:: template <class ViewType, class ALLOC_PROP> auto create_mirror(ALLOC_PROP const& arg_prop, ViewType const& src);
 
    |View|_ コンストラクタのプロパティ ``arg_prop`` (例えば ``Kokkos::view_alloc(Kokkos::WithoutInitializing)`` ) を使って、 ``src`` と同じレイアウトとパディングを持つ新たな |View|_ を生成します。
-    ``arg_prop`` がメモリスペースを含んでいれば、 そのスペース内の |View|_ が作成されます。そうでない場合、 ホストアクセス可能なメモリ内の |View|_  を返します。
+    ``arg_prop`` がメモリ空間を含んでいれば、 そのスペース内の |View|_ が作成されます。そうでない場合、 ホストアクセス可能なメモリ内の |View|_  を返します。
 
    - ``src``: ``Kokkos::View``.
 

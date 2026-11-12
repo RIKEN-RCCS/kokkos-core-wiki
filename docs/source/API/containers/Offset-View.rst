@@ -7,7 +7,7 @@
 ----
 
 :cpp:class:`OffsetView` は、配列の添字が0以外から始まる場合に使用できます。
-その添字は、各ディメンションについて開始インデックス（含む）から終了インデックス（含まない）までの範囲をとります。
+その添字は、各次元について開始インデックス（含む）から終了インデックス（含まない）までの範囲をとります。
 
 .. warning::
 
@@ -18,7 +18,7 @@
 
 .. cpp:class:: template <class DataType, class... Properties> OffsetView
 
-  :cpp:class:`OffsetView` は、ディメンションごとに任意の値から添字が始まる :cpp:class:`View` です。
+  :cpp:class:`OffsetView` は、次元ごとに任意の値から添字が始まる :cpp:class:`View` です。
   :cpp:class:`View` から派生しており、同じテンプレートパラメータを持ちます。
 
   .. rubric:: コンストラクタ:
@@ -36,21 +36,21 @@
 
   .. cpp:function:: template <class RT, class... RP> OffsetView(const View<RT, RP...>& aview, const begins_type& begins)
 
-    :cpp:any:`aview` のデータを参照し、ディメンション :cpp:`r` の添字が :cpp:`[begin(r),begin(r) + extent(r))` の範囲をとる :cpp:class:`OffsetView` を構築します。
+    :cpp:any:`aview` のデータを参照し、次元 :cpp:`r` の添字が :cpp:`[begin(r),begin(r) + extent(r))` の範囲をとる :cpp:class:`OffsetView` を構築します。
 
     :param aview: 参照する :cpp:class:`View`。
-    :param begins: 各ディメンションの最初の添字。
+    :param begins: 各次元の最初の添字。
 
   .. cpp:function:: template <class Begins, class Ends> explicit OffsetView(const std::string& name, const Begins& begins, const Ends& ends)
 
-    ディメンション :cpp:`r` の添字が :cpp:`[begin(r),end(r))` の範囲をとる :cpp:class:`OffsetView` を構築します。
+    次元 :cpp:`r` の添字が :cpp:`[begin(r),end(r))` の範囲をとる :cpp:class:`OffsetView` を構築します。
 
     :tparam Begins: :cpp:`std::initializer_list<int64_t>`、:cpp:`Kokkos::Array`、:cpp:`std::array`、または静的エクステントを持つ :cpp:`std::span`。
     :tparam Ends: :cpp:`std::initializer_list<int64_t>`、:cpp:`Kokkos::Array`、:cpp:`std::array`、または静的エクステントを持つ :cpp:`std::span`。
 
     :param name: :cpp:class:`View` と同じです。
-    :param begins: 各ディメンションの最初の添字（含む）。
-    :param ends: 各ディメンションの終了添字（含まない）。
+    :param begins: 各次元の最初の添字（含む）。
+    :param ends: 各次元の終了添字（含まない）。
 
     .. rubric:: 要件:
 
@@ -65,20 +65,20 @@
     :tparam Ends: :cpp:`std::initializer_list<int64_t>`、:cpp:`Kokkos::Array`、:cpp:`std::array`、または静的エクステントを持つ :cpp:`std::span`。
 
     :param prop: :cpp:class:`View` と同じです。
-    :param begins: 各ディメンションの最初の添字（含む）。
-    :param ends: 各ディメンションの終了添字（含まない）。
+    :param begins: 各次元の最初の添字（含む）。
+    :param ends: 各次元の終了添字（含まない）。
 
   .. cpp:function:: template <class Begins, class Ends> OffsetView(const pointer_type& ptr, const Begins& begins, const Ends& ends)
 
     非管理データをラップするコンストラクタです。
-    ディメンション :cpp:`r` の添字は :cpp:`[begin(r),end(r))` の範囲をとります。
+    次元 :cpp:`r` の添字は :cpp:`[begin(r),end(r))` の範囲をとります。
 
     :tparam Begins: :cpp:`std::initializer_list<int64_t>`、:cpp:`Kokkos::Array`、:cpp:`std::array`、または静的エクステントを持つ :cpp:`std::span`。
     :tparam Ends: :cpp:`std::initializer_list<int64_t>`、:cpp:`Kokkos::Array`、:cpp:`std::array`、または静的エクステントを持つ :cpp:`std::span`。
 
     :param ptr: ユーザが提供するメモリ割り当てへのポインタ。
-    :param begins: 各ディメンションの最初の添字（含む）。
-    :param ends: 各ディメンションの終了添字（含まない）。
+    :param begins: 各次元の最初の添字（含む）。
+    :param ends: 各次元の終了添字（含まない）。
 
     .. rubric:: 要件:
 
@@ -91,22 +91,22 @@
 
     :tparam OtherIndexTypes: :cpp:type:`index_type` に変換可能な型。
 
-    :param indices: 参照を取得する要素の添字。各ディメンションの :cpp:func:`begin` から始まります。
+    :param indices: 参照を取得する要素の添字。各次元の :cpp:func:`begin` から始まります。
     :return: 指定された添字の要素への参照。
 
   .. cpp:function:: template <class iType> int64_t begin(const iType dim) const
 
     :tparam iType: 整数型。
 
-    :param dim: 最初の添字を取得するディメンション。
-    :return: ディメンション :cpp:any:`dim` の最初の添字。
+    :param dim: 最初の添字を取得する次元。
+    :return: 次元 :cpp:any:`dim` の最初の添字。
 
   .. cpp:function:: template <class iType> int64_t end(const iType dim) const
 
     :tparam iType: 整数型。
 
-    :param dim: 終了添字を取得するディメンション。
-    :return: :cpp:expr:`begin(dim) + extent(dim)`。すなわち、ディメンション :cpp:any:`dim` の最後の添字より1大きい値。
+    :param dim: 終了添字を取得する次元。
+    :return: :cpp:expr:`begin(dim) + extent(dim)`。すなわち、次元 :cpp:any:`dim` の最後の添字より1大きい値。
 
   .. cpp:function:: view_type view() const
 
@@ -128,9 +128,9 @@
   :cpp:any:`src` のデータの部分集合を参照する :cpp:class:`OffsetView` を作成します。
 
   :param src: サブビューを取得する :cpp:class:`OffsetView`。
-  :param args: :cpp:any:`src` のディメンションごとに1つのスライス。:cpp:any:`src` の添字で指定します。
+  :param args: :cpp:any:`src` の次元ごとに1つのスライス。:cpp:any:`src` の添字で指定します。
     整数の添字、:cpp:`Kokkos::ALL()`、または整数型 :cpp:`T` を用いた :cpp:`Kokkos::pair<T, T>` もしくは :cpp:`std::pair<T, T>` を受け付けます。
-  :return: :cpp:class:`OffsetView`。:cpp:`Kokkos::ALL()` でスライスされたディメンションは開始添字を保持し、それ以外のすべてのディメンションの添字は :cpp:`0` から始まります。
+  :return: :cpp:class:`OffsetView`。:cpp:`Kokkos::ALL()` でスライスされた次元は開始添字を保持し、それ以外のすべての次元の添字は :cpp:`0` から始まります。
 
   .. seealso:: :doc:`../core/view/subview`
 

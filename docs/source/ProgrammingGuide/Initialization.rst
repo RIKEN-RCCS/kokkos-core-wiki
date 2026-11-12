@@ -25,7 +25,7 @@ Kokkos を初期化する最も簡単な方法は、以下の関数を呼び出�
 
 `MPI_Init` と同様に、この関数は、コマンドライン引数を解釈して要求された設定を決定します。 また、 `MPI_Init` と同様に、入力リストからコマンドライン引数を削除する権利を留保します。 これが、 `argc` を値ではなく参照で受け取る理由です。
 
-初期化の間に、 1つ以上の実行スペースが初期化され、以下の別名のいずれかに割り当てられます。
+初期化の間に、 1つ以上の実行空間が初期化され、以下の別名のいずれかに割り当てられます。
 
 .. code-block:: cpp
 
@@ -35,7 +35,7 @@ Kokkos を初期化する最も簡単な方法は、以下の関数を呼び出�
 
     Kokkos::DefaultHostExecutionSpace;
 
-`DefaultExecutionSpace` は、ポリシーやビューで明示的に指定されていない場合に使用される実行スペースです。 主に、Kokkosはビルド構成で有効化されている場合、異種バックエンド（CUDA、HIP、OpenACC、SYCL）のいずれかをデフォルト実行空間として初期化します。 さらに、Kokkosでは、 `DefaultHostExecutionSpace` が必要です。 `DefaultHostExecutionSpace` は、ホスト演算が必要な場合に使用される、デフォルト実行空間です。 ビルド環境で並列ホスト実行スペースのいずれか一つが有効化されている場合、`Kokkos::Serial` はビルド構成で明示的に有効化されている場合にのみ初期化されます。 ビルド構成で並列ホスト実行空間が有効化されていない場合、`Kokkos::Serial` が `DefaultHostExecutionSpace` として初期化されます。
+`DefaultExecutionSpace` は、ポリシーやビューで明示的に指定されていない場合に使用される実行空間です。 主に、Kokkosはビルド構成で有効化されている場合、異種バックエンド（CUDA、HIP、OpenACC、SYCL）のいずれかをデフォルト実行空間として初期化します。 さらに、Kokkosでは、 `DefaultHostExecutionSpace` が必要です。 `DefaultHostExecutionSpace` は、ホスト演算が必要な場合に使用される、デフォルト実行空間です。 ビルド環境で並列ホスト実行空間のいずれか一つが有効化されている場合、`Kokkos::Serial` はビルド構成で明示的に有効化されている場合にのみ初期化されます。 ビルド構成で並列ホスト実行空間が有効化されていない場合、`Kokkos::Serial` が `DefaultHostExecutionSpace` として初期化されます。
 Kokkos は、以下のリストを使用して2つのスペースを選択します:
 
 1. `Kokkos::Cuda`

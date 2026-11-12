@@ -74,7 +74,7 @@
 
     * * ExecutionSpace
       * ``Serial``, ``OpenMP``, ``Threads``, ``Cuda``, ``HIP``, ``SYCL``, ``HPX``
-      * カーネルを実行する実行スペースを指定します。デフォルトは ``Kokkos::DefaultExecutionSpace`` です。
+      * カーネルを実行する実行空間を指定します。デフォルトは ``Kokkos::DefaultExecutionSpace`` です。
 
     * * スケジュール
       * ``Schedule<Dynamic>``, ``Schedule<Static>``

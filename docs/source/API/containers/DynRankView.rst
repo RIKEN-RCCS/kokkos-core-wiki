@@ -214,7 +214,7 @@
        標準割り当てコンストラクタ。
 
        * ``name``: ユーザーが提供したラベル。プロファイリングおよびデバッグ目的で使用されます。名前は、ユニークである必要はありません。
-       * ``indices``: ビューの実行時ディメンション。
+       * ``indices``: ビューの実行時次元。
 
    .. cpp:function:: DynRankView(const std::string& name, const array_layout& layout)
 
@@ -229,7 +229,7 @@
 
        割り当てプロパティを持つ割り当てコンストラクタ。 割り当てプロパティオブジェクトは、 ``view_alloc`` 関数によって返されます。
 
-       * ``indices``: ビューの実行時ディメンション。
+       * ``indices``: ビューの実行時次元。
 
    .. cpp:function:: DynRankView(const AllocProperties& prop, const array_layout& layout)
 
@@ -244,7 +244,7 @@
        管理対象外データのラップコンストラクタ。
 
        * ``ptr``: ユーザーが提供したメモリ割り当てへのポインタ。``DynRankView::required_allocation_size(n0,...,nR)`` のストレージを提供する必要があります。
-       * ``indices``: ビューの実行時ディメンション。
+       * ``indices``: ビューの実行時次元。
 
    .. cpp:function:: DynRankView(const pointer_type& ptr, const array_layout& layout)
 
@@ -260,7 +260,7 @@
        スクラッチメモリハンドルからメモリを取得するコンストラクタ。
 
        * ``space``: スクラッチメモリハンドル。通常、 ``TeamPolicy`` カーネルの ``team_handles`` から返されます。
-       * ``indices``: ビューの実行時ディメンション。
+       * ``indices``: ビューの実行時次元。
 
    .. cpp:function:: DynRankView(const ScratchSpace& space, const array_layout& layout)
 
@@ -289,77 +289,77 @@
        ``rank`` を超えるインデックス引数は ``0`` でなければならず、 ``KOKKOS_DEBUG`` が定義されている場合に有効になります。
        戻り値の型の特性については、 ``reference_type`` の注記を参照してください。
 
-   .. rubric:: データレイアウト、ディメンション、ストライド
+   .. rubric:: データレイアウト、次元、ストライド
 
    .. cpp:function:: constexpr array_layout layout() const
 
-      レイアウトオブジェクトを返します。 同じディメンションを持つ他のビューを構築するために使用可能です。
+      レイアウトオブジェクトを返します。 同じ次元を持つ他のビューを構築するために使用可能です。
 
    .. cpp:function:: template<class iType> constexpr size_t extent(const iType& dim) const
 
-      指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、 ``dim`` は ``rank`` より小さくなければなりません。
+      指定された次元の範囲を返します。 ``iType`` は整数型でなければならず、 ``dim`` は ``rank`` より小さくなければなりません。
 
    .. cpp:function:: template<class iType> constexpr int extent_int(const iType& dim) const
 
-      ``int`` として、指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、 ``dim`` は ``rank`` より小さくなければならない。``extent`` と比較して、この関数は ``int`` 演算が ``size_t`` よりも効率的なアーキテクチャで有用である。
+      ``int`` として、指定された次元の範囲を返します。 ``iType`` は整数型でなければならず、 ``dim`` は ``rank`` より小さくなければならない。``extent`` と比較して、この関数は ``int`` 演算が ``size_t`` よりも効率的なアーキテクチャで有用である。
       また、そうでなければすべてのインデックス操作を ``int`` で行っているアプリケーションにおいて、型キャストの必要性を排除する可能性があります。
 
    .. cpp:function:: template<class iType> constexpr size_t stride(const iType& dim) const
 
-       指定されたディメンションの範囲を返します。 ``iType`` は整数型でなければならず、 ``dim`` は ``rank`` より小さくなければなりません。 例: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
+       指定された次元の範囲を返します。 ``iType`` は整数型でなければならず、 ``dim`` は ``rank`` より小さくなければなりません。 例: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
 
    .. cpp:function:: constexpr size_t stride_0() const
 
-       ディメンション 0 の範囲を返します。
+       次元 0 の範囲を返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynRankView::stride` を使用してください。
 
    .. cpp:function:: constexpr size_t stride_1() const
 
-       ディメンション 1 のストライドを返します。
+       次元 1 のストライドを返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynRankView::stride` を使用してください。
 
    .. cpp:function:: constexpr size_t stride_2() const
 
-       ディメンション 2 のストライドを返します。
+       次元 2 のストライドを返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynRankView::stride` を使用してください。
 
    .. cpp:function:: constexpr size_t stride_3() const
 
-       ディメンション 3 のストライドを返します。
+       次元 3 のストライドを返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynRankView::stride` を使用してください。
 
    .. cpp:function:: constexpr size_t stride_4() const
 
-       ディメンション 4 のストライドを返します。
+       次元 4 のストライドを返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynRankView::stride` を使用してください。
 
    .. cpp:function:: constexpr size_t stride_5() const
 
-       ディメンション 5 のストライドを返します。
+       次元 5 のストライドを返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynRankView::stride` を使用してください。
 
    .. cpp:function:: constexpr size_t stride_6() const
 
-       ディメンション 6 のストライドを返します。
+       次元 6 のストライドを返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynRankView::stride` を使用してください。
 
    .. cpp:function:: constexpr size_t stride_7() const
 
-       ディメンション 7 のストライドを返します。
+       次元 7 のストライドを返します。
 
        .. deprecated:: 5.0
           代わりに :cpp:func:`DynRankView::stride` を使用してください。
@@ -427,7 +427,7 @@
     - ``DstType::array_layout`` よりも\ ``DstType::rank > 1`` である場合、 ``SrcType::array_layout`` と同じである必要があります。
 
 * ``DstType::array_layout`` または ``SrcType::array_layout`` が ``LayoutStride`` である場合:
-    - 各ディメンション ``k`` については、その ``dst_view.extent(k) == src_view.extent(k)`` を保持する必要があります。
+    - 各次元 ``k`` については、その ``dst_view.extent(k) == src_view.extent(k)`` を保持する必要があります。
 
 例
 --
