@@ -117,7 +117,7 @@ Kokkos を依存関係として宣言すれば、自分のプロジェクト内�
 
 .. note::
 
-   NVIDIA GPU をターゲットにしたい場合は、上記の cmake コマンドに、追加の ``-DKokkos_ENABLE_CUDA=ON`` 引数を渡す必要があります。AMD または Intel GPU については、それぞれ ``-DKokkos_ENABLE_HIP=ON`` または ``-DKokkos_ENABLE_SYCL=ON`` と表記します。 設定時に利用可能なオプションや変数の一覧については、:doc:'configuration-guide' を参照してください。
+   NVIDIA GPU をターゲットにしたい場合は、上記の cmake コマンドに、追加の ``-DKokkos_ENABLE_CUDA=ON`` 引数を渡す必要があります。AMD または Intel GPU については、それぞれ ``-DKokkos_ENABLE_HIP=ON`` または ``-DKokkos_ENABLE_SYCL=ON`` と表記します。 設定時に利用可能なオプションや変数の一覧については、:doc:`設定ガイド <configuration-guide>` を参照してください。
 
 次に、その構築システムを呼び出して、実際にプロジェクトをコンパイル/リンクします:
 

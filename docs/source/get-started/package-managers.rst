@@ -20,7 +20,7 @@ Spack は HPC 向けの広く使われているパッケージマネージャー
  
 `Kokkos レシピウェブページ <https://packages.spack.io/package.html?name=kokkos>`_ には  、Kokkosの利用可能なバージョンとそのオプションがまとめられています。
 
-ほとんどの場合、Spack Kokkos のバリアントは、Kokkosの `CMake options <./configuration-guide.html>`_. と同じオプションに従っています。
+ほとんどの場合、Spack Kokkos のバリアントは、Kokkos の `CMake オプション <./configuration-guide.html>`_ と同じオプションに従っています。
 利用可能なバリアントのリストは、以下の実行により、見つけることができます
 
 .. code-block::
