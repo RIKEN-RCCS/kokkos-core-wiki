@@ -22,10 +22,10 @@
    * - :doc:`バージョン <macros/version>`
      - ``KOKKOS_VERSION`` と比較ヘルパーで、使用中の Kokkos のバージョンを確認します。
 
-構成マクロ
+設定マクロ
 ----------
 
-これらのマクロを使用すると、Kokkos がどのように構成されたか、例えばどのバックエンドが有効化されているかを確認できます。上記のマクロとは異なり、これらは対応するオプションが有効化されている場合にのみ定義されるため、``#ifdef`` または ``#if defined(...)`` でテストしてください。
+これらのマクロを使用すると、Kokkos がどのように設定されたか、例えばどのバックエンドが有効化されているかを確認できます。上記のマクロとは異なり、これらは対応するオプションが有効化されている場合にのみ定義されるため、``#ifdef`` または ``#if defined(...)`` でテストしてください。
 
 .. list-table::
    :header-rows: 1
@@ -39,14 +39,14 @@
    * - :doc:`バックエンド <macros/backends>`
      - どの実行空間が有効化されているか、およびバックエンド固有のオプション。
    * - :doc:`アーキテクチャ <macros/architectures>`
-     - ``KOKKOS_ARCH_*``: Kokkos が構成されたハードウェア。あなたのコードはこれらに依存すべきではありません。
+     - ``KOKKOS_ARCH_*``: Kokkos が設定されたハードウェア。アプリケーションコードはこれらに依存すべきではありません。
 
 .. _macros_configuration_relationship:
 
-CMake 構成オプションとの関係
+CMake 設定オプションとの関係
 ----------------------------
 
-``KOKKOS_ENABLE_*`` および ``KOKKOS_ARCH_*`` マクロは、ほとんどの場合、:doc:`構成ガイド <../../get-started/configuration-guide>` に記載されている CMake オプションに対応しています。名前は単純なルールに従います:
+``KOKKOS_ENABLE_*`` および ``KOKKOS_ARCH_*`` マクロは、ほとんどの場合、:doc:`設定ガイド <../../get-started/configuration-guide>` に記載されている CMake オプションに対応しています。名前は単純なルールに従います:
 
 .. list-table::
    :header-rows: 1
@@ -69,7 +69,7 @@ CMake 構成オプションとの関係
    #include <Kokkos_Core.hpp>
 
    #ifdef KOKKOS_ENABLE_CUDA
-   // Kokkos は -DKokkos_ENABLE_CUDA=ON で構成されました
+   // Kokkos は -DKokkos_ENABLE_CUDA=ON で設定されました
    #endif
 
 .. toctree::

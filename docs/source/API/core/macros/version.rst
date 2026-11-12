@@ -30,7 +30,7 @@ Kokkos のバージョンマクロは整数として定義されています。
    static_assert(KOKKOS_VERSION_MINOR == KOKKOS_VERSION / 100 % 100);
    static_assert(KOKKOS_VERSION_PATCH == KOKKOS_VERSION % 100);
    #if KOKKOS_VERSION >= 30700
-   // Kokkos version is at least 3.7
+   // Kokkos のバージョンが 3.7 以上
    #endif
    int main() {
      if (KOKKOS_VERSION_PATCH == 99)
@@ -38,7 +38,7 @@ Kokkos のバージョンマクロは整数として定義されています。
      // ...
    }
 
-.. warning:: Kokkos 4.1 までは、``KOKKOS_VERSION_MINOR`` と ``KOKKOS_VERSION_PATCH`` は ``0`` となるべき場合に定義されていませんでした。
+.. warning:: Kokkos 4.1 より前は、``KOKKOS_VERSION_MINOR`` と ``KOKKOS_VERSION_PATCH`` は ``0`` となるべき場合に定義されていませんでした。
 
 比較ヘルパー
 ------------
@@ -61,17 +61,17 @@ Kokkos のバージョンマクロは整数として定義されています。
 .. code-block:: c++
 
    #include <Kokkos_Core.hpp>
-   // sanity check for illustration
+   // 説明のための自明なチェック
    static_assert(KOKKOS_VERSION_EQUAL(KOKKOS_VERSION_MAJOR,
                                       KOKKOS_VERSION_MINOR,
                                       KOKKOS_VERSION_PATCH));
-   // set the minimum required version of Kokkos for a project or a file
+   // プロジェクトまたはファイルで必要とする Kokkos の最小バージョンを指定
    static_assert(KOKKOS_VERSION_GREATER_EQUAL(4, 5, 0));
 
    void do_work() {
      #if KOKKOS_VERSION_GREATER_EQUAL(4, 3, 0)
-     // using the new rad functionality
+     // 新しくて便利な機能を使用
      #else
-     // falling back to the old boring stuff
+     // 古くて退屈な方法にフォールバック
      #endif
    }

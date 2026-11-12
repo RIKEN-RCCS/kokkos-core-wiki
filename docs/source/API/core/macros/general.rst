@@ -1,7 +1,7 @@
 一般設定
 ========
 
-このページのマクロは、Kokkos がどのように構成されたかを示します。それぞれのマクロは、対応する
+このページのマクロは、Kokkos がどのように設定されたかを示します。それぞれのマクロは、対応する
 :doc:`CMake オプション <../../../get-started/configuration-guide>`
 が有効になっているときに定義されます（:ref:`macros_configuration_relationship`\ を参照）。
 
@@ -20,8 +20,8 @@
    * - ``KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK``
      - 追加の境界チェックが有効化されます。
 
-Kokkos はこれらのチェックを自身で適用するため、主に情報提供を目的としています。
-対応するオプションについては、構成ガイドの :ref:`debugging` を参照してください。
+Kokkos はこれらのチェックを自身で適用するため、これらのマクロは主に情報提供用です。
+対応するオプションについては、設定ガイドの :ref:`debugging` を参照してください。
 
 非推奨コード
 ------------
@@ -45,7 +45,7 @@ Kokkos はこれらのチェックを自身で適用するため、主に情報�
    #include <Kokkos_Core.hpp>
 
    #ifdef KOKKOS_ENABLE_DEPRECATED_CODE_4
-   // Kokkos 4.x deprecated features are still available
+   // Kokkos 4.x で非推奨となった機能がまだ利用可能
    #endif
 
 チューニングとパフォーマンス
@@ -97,7 +97,7 @@ Kokkos がコンパイルされた C++ 標準に一致する、ちょうど 1 �
 ------------------------
 
 これらのマクロは、Kokkos がどのサードパーティライブラリでコンパイルされたかについての情報を提供します。
-これらは、構成ガイドの :ref:`keywords_tpls` にリストされている ``Kokkos_ENABLE_<TPL>`` オプションに対応します。
+これらは、設定ガイドの :ref:`keywords_tpls` にリストされている ``Kokkos_ENABLE_<TPL>`` オプションに対応します。
 
 .. list-table::
    :header-rows: 1

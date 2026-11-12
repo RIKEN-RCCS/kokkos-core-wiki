@@ -1,21 +1,21 @@
 バックエンド
 ============
 
-``KOKKOS_ENABLE_<BACKEND>`` マクロは、構成時に対応するバックエンドが
+``KOKKOS_ENABLE_<BACKEND>`` マクロは、設定時に対応するバックエンドが
 ``-DKokkos_ENABLE_<BACKEND>=ON`` で有効化されている場合に定義されます。
-このページでは、それらのマクロをバックエンド固有のメモリスペースおよびオプションとともに一覧します。
+このページでは、それらのマクロをバックエンド固有のメモリ空間およびオプションとともに一覧します。
 
 .. note::
 
-   アプリケーションコードでこれらのマクロが必要になることはほとんどありません。``Kokkos::Cuda`` や ``Kokkos::OpenMP`` のような具体的な実行スペースを指定する代わりに、``Kokkos::DefaultExecutionSpace`` および ``Kokkos::DefaultHostExecutionSpace`` を使用してください。
-   同様に、バックエンド固有のメモリスペースよりも ``Kokkos::DefaultExecutionSpace::memory_space`` および ``Kokkos::HostSpace`` を優先してください。これにより、コードがバックエンド間で移植可能に保たれます。
+   アプリケーションコードでこれらのマクロが必要になることはほとんどありません。``Kokkos::Cuda`` や ``Kokkos::OpenMP`` のような具体的な実行空間を指定する代わりに、``Kokkos::DefaultExecutionSpace`` および ``Kokkos::DefaultHostExecutionSpace`` を使用してください。
+   同様に、バックエンド固有のメモリ空間よりも ``Kokkos::DefaultExecutionSpace::memory_space`` および ``Kokkos::HostSpace`` を優先してください。これにより、コードがバックエンド間で移植可能に保たれます。
 
    これらのマクロの正当な用途は、:ref:`以下に示す <macros_backends_interoperability>` ように、基盤となるプログラミングモデルとの相互運用です。
 
-実行スペースとメモリスペース
+実行空間とメモリ空間
 ----------------------------
 
-これらのマクロの存在をテストしてください。例: ``#ifdef KOKKOS_ENABLE_SERIAL``。バックエンドを組み合わせる際の制約については、構成ガイドの :ref:`keywords_backends` を参照してください。デバイスバックエンドは独自のメモリスペースも提供しますが、これらはバックエンドが有効化されている場合にのみ存在します。
+これらのマクロの存在をテストしてください。例: ``#ifdef KOKKOS_ENABLE_SERIAL``。バックエンドを組み合わせる際の制約については、設定ガイドの :ref:`keywords_backends` を参照してください。デバイスバックエンドは独自のメモリ空間も提供しますが、これらはバックエンドが有効化されている場合にのみ存在します。
 
 .. list-table::
    :header-rows: 1
@@ -23,8 +23,8 @@
    :widths: 30 25 45
 
    * - マクロ
-     - 実行スペース
-     - バックエンド固有のメモリスペース
+     - 実行空間
+     - バックエンド固有のメモリ空間
    * - ``KOKKOS_ENABLE_SERIAL``
      - :cpp:class:`Serial`
      -
@@ -74,7 +74,7 @@
 バックエンド固有のオプション
 ----------------------------
 
-これらは同じ命名規則に従っており、構成ガイドの :ref:`keywords_enable_backend_specific_options` にある対応する CMake オプションとともに文書化されています。
+これらは同じ命名規則に従っており、設定ガイドの :ref:`keywords_enable_backend_specific_options` にある対応する CMake オプションとともに文書化されています。
 
 .. list-table::
    :header-rows: 1
