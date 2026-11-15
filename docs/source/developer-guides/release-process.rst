@@ -323,7 +323,20 @@ GitHub CI Action が実行されたら、生成されたアーティファクト
 
   sha256sum -c kokkos-X.Y.Z-SHA-256.txt
 
-3. チェックサムファイルに署名します:
+3. SLSA provenance を検証します:
+
+リリースページから ``kokkos-X.Y.Z.intoto.jsonl`` provenance ファイルをダウンロードし、
+`slsa-verifier <https://github.com/slsa-framework/slsa-verifier>`_ を使ってソースアーカイブに対して検証します:
+
+.. code-block:: console
+
+  slsa-verifier verify-artifact \
+    --provenance-path kokkos-X.Y.Z.intoto.jsonl \
+    --source-uri github.com/kokkos/kokkos \
+    --source-tag X.Y.Z \
+    kokkos-X.Y.Z.zip kokkos-X.Y.Z.tar.gz
+
+4. チェックサムファイルに署名します:
 
 .. code-block:: console
 
@@ -331,7 +344,7 @@ GitHub CI Action が実行されたら、生成されたアーティファクト
 
 **リリースの公開**
 
-4. GitHub のリリースページに移動します
+5. GitHub のリリースページに移動します
 (https://github.com/kokkos/kokkos/releases/latest):
 
 - "Edit" ボタンをクリックします
