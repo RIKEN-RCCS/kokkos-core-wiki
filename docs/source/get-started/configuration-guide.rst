@@ -845,6 +845,29 @@ Kokkos は設定時にアーキテクチャフラグの自動検出を試みま�
       * MI25
       * (Kokkos 4.0で削除)
 
+HYGON DCUs
+~~~~~~~~~~
+
+:red:`[実験的]` HYGON DCU（Deep Computing Units）のサポートは HIP バックエンドを通じて提供されます。
+Kokkos の命名規則では、AMD GPU と同様に HYGON\_ とアーキテクチャフラグを結合します。
+
+``Kokkos_ARCH_HYGON_<ARCHITECTURE_FLAG>``
+
+.. list-table::
+    :widths: 30 15 25 30
+    :header-rows: 1
+    :align: left
+
+    * - **HYGON DCUs**
+      - Architecture flags
+      - Models
+      - Notes
+
+    * * ``Kokkos_ARCH_HYGON_GFX936``
+      * GFX936
+      * BW1000
+      * （Kokkos 5.3 以降）
+
 Intel GPUs
 ~~~~~~~~~~
 .. list-table::
