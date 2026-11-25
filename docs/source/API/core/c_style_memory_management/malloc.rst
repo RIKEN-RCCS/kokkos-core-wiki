@@ -22,7 +22,7 @@
 
 割り当てが成功した場合、任意のスカラー型に適したアラインメントを持つ割り当てメモリブロック内で、最下位（最初の）バイトへのポインタを返す。
 
-割り当てに失敗した場合、 ``Kokkos::Experimental::RawMemoryAllocationFailure`` 型の例外がスローされます。
+割り当てに失敗した場合、例外がスローされます。Kokkos 5.2以降では :cpp:class:`Experimental::BadAlloc`\ （``std::runtime_error`` から派生）、それ以前のバージョン（4.4以降）では ``std::runtime_error`` がスローされます。
 
 .. warning::
 
@@ -43,4 +43,4 @@
 
     :returns: 成功した場合、新たに割り当てられたメモリの先頭へのポインタを返します。 メモリリークを避けるため、返されたポインタは |Kokkos_kokkos_free|_ または |Kokkos_realloc|_ で解放する必要があります。
 
-    :throws: 失敗した場合、 ``Kokkos::Experimental::RawMemoryAllocationFailure`` をスローします。
+    :throws: 失敗した場合、 :cpp:class:`Experimental::BadAlloc`\ （Kokkos 5.2以降。``std::runtime_error`` から派生）、またはそれ以前のバージョンでは ``std::runtime_error`` をスローします。

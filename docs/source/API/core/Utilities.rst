@@ -16,6 +16,8 @@ Kokkos は、ホストコードとデバイスコードの両方で一貫して�
        動作は ``NDEBUG`` および ``KOKKOS_ENABLE_DEBUG`` マクロに依存します。
    * - :doc:`utilities/printf`
      - 標準出力ストリームにフォーマット済みの出力を表示します。
+   * - :doc:`utilities/BadAlloc`
+     - メモリ割り当てが失敗したときにスローされる例外型です。
 
 .. toctree::
    :hidden:
@@ -24,6 +26,7 @@ Kokkos は、ホストコードとデバイスコードの両方で一貫して�
    ./utilities/abort
    ./utilities/assert
    ./utilities/printf
+   ./utilities/BadAlloc
 
 実行時とデバイスの情報
 ----------------------
