@@ -42,4 +42,4 @@
 
   :returns: 成功した場合、新たに割り当てられたメモリの先頭へのポインタを返します。 メモリリークを避けるため、返されたポインタは |Kokkos_kokkos_free|_ で解放する必要があり、元のポインタ  ``ptr`` は無効化され、それへのアクセスは未定義動作となります（再割り当てがインプレースで行われた場合でも）。失敗した場合には、ヌルポインタを返します。 元のポインタ ptr は有効なままですが、 |Kokkos_kokkos_free|_ で解放する必要があるかもしれません。
 
-  :throws: 失敗した場合、 ``Kokkos::Experimental::RawMemoryAllocationFailure`` をスローします。
+  :throws: 失敗した場合、 :cpp:class:`Experimental::BadAlloc` （Kokkos 5.2 以降。 ``std::runtime_error`` から派生）、またはそれ以前のバージョンでは ``std::runtime_error`` をスローします。

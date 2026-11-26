@@ -21,6 +21,20 @@
    * - `fence <parallel-dispatch/fence.html>`__
      - 実行領域をフェンス
 
+Special Dispatch
+----------------
+
+特定の実行空間でファンクタを一度だけ実行する
+
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+
+   * - Function
+     - Description
+   * - `single <parallel-dispatch/single.html>`__
+     - ファンクタまたはラムダを正確に一度だけ実行します
+
 チームポリシー計算用タグ
 ------------------------
 
@@ -46,6 +60,7 @@
    ./parallel-dispatch/parallel_for
    ./parallel-dispatch/parallel_reduce
    ./parallel-dispatch/parallel_scan
+   ./parallel-dispatch/single
    ./parallel-dispatch/fence
    ./parallel-dispatch/ParallelForTag
    ./parallel-dispatch/ParallelReduceTag

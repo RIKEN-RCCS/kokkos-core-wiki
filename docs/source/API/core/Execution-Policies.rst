@@ -23,6 +23,9 @@
     * * `TeamPolicy <policies/TeamPolicy.html>`__
       * 連続した範囲の各イテレート処理にスレッドのチームを割り当てます。
 
+    * * `SinglePolicy <policies/SinglePolicy.html>`__
+      * 単一の処理ユニット上でカーネルを起動します
+
 ネストされた実行ポリシー
 ========================
 
@@ -100,6 +103,7 @@
    ./policies/MDRangePolicy
    ./policies/NestedPolicies
    ./policies/RangePolicy
+   ./policies/SinglePolicy
    ./policies/TeamHandleConcept
    ./policies/TeamPolicy
    ./policies/TeamThreadMDRange
